@@ -1,0 +1,87 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.dot</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.dot"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">dot</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>out=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">两个数组的点积。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">对于2-D数组，其等效于矩阵乘法，对于1-D数组等效于向量的内积（无共轭复数）。</span><span class="yiyi-st" id="yiyi-16">对于N维，它是<em class="xref py py-obj">a</em>的最后一个轴和<em class="xref py py-obj">b</em>的倒数第二个轴的积的和：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,:]</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">,:,</span><span class="n">m</span><span class="p">])</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">第一个参数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>b</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">第二个参数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">输出参数。</span><span class="yiyi-st" id="yiyi-24">如果没有使用，返回必须有确切的类型。</span><span class="yiyi-st" id="yiyi-25">特别地，它必须具有正确的类型，必须是C连续的，并且其dtype必须是<em class="xref py py-obj">dot(a,b)</em>将返回的dtype。</span><span class="yiyi-st" id="yiyi-26">这是一个性能特性。</span><span class="yiyi-st" id="yiyi-27">因此，如果不满足这些条件，则引发异常，而不是试图灵活。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>输出</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">返回<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>的点积。</span><span class="yiyi-st" id="yiyi-31">如果<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>都是标量或都是1-D数组，则返回标量；否则返回一个数组。</span><span class="yiyi-st" id="yiyi-32">如果给出<em class="xref py py-obj">out</em>，则返回。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-33">引发：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-34"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-35">如果<em class="xref py py-obj">a</em>的最后一个维度大小与<em class="xref py py-obj">b</em>的倒数第二个维度的大小不同。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-36">另见</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.vdot.html#numpy.vdot" title="numpy.vdot"><code class="xref py py-obj docutils literal"><span class="pre">vdot</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-38">复共轭点积。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="numpy.tensordot.html#numpy.tensordot" title="numpy.tensordot"><code class="xref py py-obj docutils literal"><span class="pre">tensordot</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-40">任意轴上的和。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="numpy.einsum.html#numpy.einsum" title="numpy.einsum"><code class="xref py py-obj docutils literal"><span class="pre">einsum</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-42">爱因斯坦求和约定。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="numpy.matmul.html#numpy.matmul" title="numpy.matmul"><code class="xref py py-obj docutils literal"><span class="pre">matmul</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-44">&apos;@&apos;操作符作为带out参数的方法。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-45">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">12</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">两个参数都不是复共轭的：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">([</span><span class="mi">2</span><span class="n">j</span><span class="p">,</span> <span class="mi">3</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="n">j</span><span class="p">,</span> <span class="mi">3</span><span class="n">j</span><span class="p">])</span>
+<span class="go">(-13+0j)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-47">对于2-D数组，它是矩阵积：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([[4, 1],</span>
+<span class="go">       [2, 2]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="o">*</span><span class="mi">5</span><span class="o">*</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="o">*</span><span class="mi">5</span><span class="o">*</span><span class="mi">6</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">499128</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,:,</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">499128</span>
+</pre></div>
+</div>
+</dd></dl>

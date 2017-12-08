@@ -1,0 +1,39 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.generic.newbyteorder</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.generic.newbyteorder.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.generic.newbyteorder.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.generic.newbyteorder"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">generic.</code><code class="descname">newbyteorder</code><span class="sig-paren">(</span><em>new_order=&apos;S&apos;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">以不同的字节顺序返回新的<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">还在数据类型的所有字段和子数组中进行更改。</span></p>
+<p><span class="yiyi-st" id="yiyi-17"><em class="xref py py-obj">new_order</em>代码可以是以下任何一种：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-18">&apos;s&apos; - 将dtype从当前值切换到对端字节序</span></li>
+<li><span class="yiyi-st" id="yiyi-19">{&apos;</span></li>
+<li><span class="yiyi-st" id="yiyi-20">{&apos;&gt;&apos;，&apos;B&apos;}  -  big endian</span></li>
+<li><span class="yiyi-st" id="yiyi-21">{&apos;=&apos;，&apos;N&apos;}  - 本地顺序</span></li>
+<li><span class="yiyi-st" id="yiyi-22">{&apos;|&apos;，&apos;I&apos;}  - 忽略（字节顺序没有改变）</span></li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>new_order</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">字节命令强制；一个值从字节顺序规范上面。</span><span class="yiyi-st" id="yiyi-26">默认值（&apos;S&apos;）导致交换当前字节顺序。</span><span class="yiyi-st" id="yiyi-27">代码对<em class="xref py py-obj">new_order</em>的第一个字母执行不区分大小写的检查，以检查上述替代方法。</span><span class="yiyi-st" id="yiyi-28">例如，&apos;B&apos;或&apos;b&apos;或&apos;biggish&apos;中的任何一个都适用于指定big-endian。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>new_dtype</strong>：dtype</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">新的<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>对象，给定的更改为字节顺序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

@@ -1,0 +1,352 @@
+
+<span id="arrays-classes"></span><h1><span class="yiyi-st" id="yiyi-25">Standard array subclasses</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/arrays.classes.html">https://docs.scipy.org/doc/numpy/reference/arrays.classes.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-26">NumPy中的<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>是一种“新式”Python内置类型。</span><span class="yiyi-st" id="yiyi-27">因此，如果需要，它可以继承（在Python或C中）。</span><span class="yiyi-st" id="yiyi-28">因此，它可以形成许多有用类的基础。</span><span class="yiyi-st" id="yiyi-29">通常是否将数组对象子类化或简单地使用核心数组组件作为新类的内部部分是一个困难的决定，可能只是一个选择。</span><span class="yiyi-st" id="yiyi-30">NumPy有几个工具可以简化新对象与其他数组对象的交互方式，所以选择结果可能不太重要。</span><span class="yiyi-st" id="yiyi-31">简化问题的一种方法是询问自己是否感兴趣的对象可以替换为单个数组，或者它的核心是真正需要两个或更多数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-32">请注意，<a class="reference internal" href="generated/numpy.asarray.html#numpy.asarray" title="numpy.asarray"><code class="xref py py-func docutils literal"><span class="pre">asarray</span></code></a>总是返回基类ndarray。</span><span class="yiyi-st" id="yiyi-33">如果你确信你使用数组对象可以处理ndarray的任何子类，那么<a class="reference internal" href="generated/numpy.asanyarray.html#numpy.asanyarray" title="numpy.asanyarray"><code class="xref py py-func docutils literal"><span class="pre">asanyarray</span></code></a>可以用来允许子类在你的子程序中更干净地传播。</span><span class="yiyi-st" id="yiyi-34">原则上，子类可以重新定义数组的任何方面，因此，在严格的指导下，<a class="reference internal" href="generated/numpy.asanyarray.html#numpy.asanyarray" title="numpy.asanyarray"><code class="xref py py-func docutils literal"><span class="pre">asanyarray</span></code></a>很少有用。</span><span class="yiyi-st" id="yiyi-35">但是，数组对象的大多数子类将不会重新定义数组的某些方面，例如缓冲区接口或数组的属性。</span><span class="yiyi-st" id="yiyi-36">然而，一个重要的例子是，你的子程序可能无法处理数组的任意子类，因为矩阵将“*”运算符重新定义为矩阵乘法，而不是逐个元素乘法。</span></p>
+<div class="section" id="special-attributes-and-methods">
+<h2><span class="yiyi-st" id="yiyi-37">Special attributes and methods</span></h2>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-38">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="../user/basics.subclassing.html#basics-subclassing"><span class="std std-ref">Subclassing ndarray</span></a></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">NumPy提供了几个类可以自定义的钩子：</span></p>
+<dl class="method">
+<dt id="numpy.class.__numpy_ufunc__"><span class="yiyi-st" id="yiyi-41"> <code class="descclassname">class.</code><code class="descname">__numpy_ufunc__</code><span class="sig-paren">(</span><em>ufunc</em>, <em>method</em>, <em>i</em>, <em>inputs</em>, <em>**kwargs</em><span class="sig-paren">)</span></span></dt>
+<dd><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-42"><span class="versionmodified">版本1.11中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">任何类（ndarray子类或不）可以定义此方法来覆盖NumPy的ufuncs的行为。</span><span class="yiyi-st" id="yiyi-44">这与Python的<code class="docutils literal"><span class="pre">__mul__</span></code>和其他二进制操作例程非常相似。</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-45"><em>ufunc</em>是被调用的ufunc对象。</span></li>
+<li><span class="yiyi-st" id="yiyi-46"><em>method</em> is a string indicating which Ufunc method was called (one of <code class="docutils literal"><span class="pre">&quot;__call__&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;reduce&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;reduceat&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;accumulate&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;outer&quot;</span></code>, <code class="docutils literal"><span class="pre">&quot;inner&quot;</span></code>).</span></li>
+<li><span class="yiyi-st" id="yiyi-47"><em>i</em>是<em>输入</em>中<em>self</em>的索引。</span></li>
+<li><span class="yiyi-st" id="yiyi-48"><em>输入</em>是<code class="docutils literal"><span class="pre">ufunc</span></code>的输入参数的元组，</span></li>
+<li><span class="yiyi-st" id="yiyi-49"><em>kwargs</em>是包含ufunc的可选输入参数的字典。</span><span class="yiyi-st" id="yiyi-50">如果给定，<code class="docutils literal"><span class="pre">out</span></code>参数始终包含在<em>kwargs</em>中。</span><span class="yiyi-st" id="yiyi-51">有关详细信息，请参阅<a class="reference internal" href="ufuncs.html#ufuncs"><span class="std std-ref">Universal functions (ufunc)</span></a>中的讨论。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-52">如果未执行所请求的操作，则该方法应返回操作结果，或<a class="reference external" href="https://docs.python.org/dev/library/constants.html#NotImplemented" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">NotImplemented</span></code></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-53">If one of the arguments has a <a class="reference internal" href="#numpy.class.__numpy_ufunc__" title="numpy.class.__numpy_ufunc__"><code class="xref py py-func docutils literal"><span class="pre">__numpy_ufunc__</span></code></a> method, it is executed <em>instead</em> of the ufunc. </span><span class="yiyi-st" id="yiyi-54">如果多个输入参数实现了<a class="reference internal" href="#numpy.class.__numpy_ufunc__" title="numpy.class.__numpy_ufunc__"><code class="xref py py-func docutils literal"><span class="pre">__numpy_ufunc__</span></code></a>，则会按照以下顺序尝试：子类之前的父类，否则从左到右。</span><span class="yiyi-st" id="yiyi-55">返回<a class="reference external" href="https://docs.python.org/dev/library/constants.html#NotImplemented" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">NotImplemented</span></code></a>以外的第一个例程确定结果。</span><span class="yiyi-st" id="yiyi-56">如果所有<a class="reference internal" href="#numpy.class.__numpy_ufunc__" title="numpy.class.__numpy_ufunc__"><code class="xref py py-func docutils literal"><span class="pre">__numpy_ufunc__</span></code></a>操作返回<a class="reference external" href="https://docs.python.org/dev/library/constants.html#NotImplemented" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">NotImplemented</span></code></a>，则会引发<a class="reference external" href="https://docs.python.org/dev/library/exceptions.html#TypeError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-57">如果<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>子类定义<a class="reference internal" href="#numpy.class.__numpy_ufunc__" title="numpy.class.__numpy_ufunc__"><code class="xref py py-func docutils literal"><span class="pre">__numpy_ufunc__</span></code></a>方法，则禁用<a class="reference internal" href="#numpy.class.__array_wrap__" title="numpy.class.__array_wrap__"><code class="xref py py-func docutils literal"><span class="pre">__array_wrap__</span></code></a>，<a class="reference internal" href="#numpy.class.__array_prepare__" title="numpy.class.__array_prepare__"><code class="xref py py-func docutils literal"><span class="pre">__array_prepare__</span></code></a>，<a class="reference internal" href="#numpy.class.__array_priority__" title="numpy.class.__array_priority__"><code class="xref py py-data docutils literal"><span class="pre">__array_priority__</span></code></a></span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-58">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-59">除了ufuncs，<a class="reference internal" href="#numpy.class.__numpy_ufunc__" title="numpy.class.__numpy_ufunc__"><code class="xref py py-func docutils literal"><span class="pre">__numpy_ufunc__</span></code></a>也会覆盖<a class="reference internal" href="generated/numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-func docutils literal"><span class="pre">numpy.dot</span></code></a>的行为，即使它不是Ufunc。</span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-60">注意</span></p>
+<p><span class="yiyi-st" id="yiyi-61">如果你还定义了类中的右边二元操作符覆盖方法（例如<code class="docutils literal"><span class="pre">__rmul__</span></code>）或比较操作（例如<code class="docutils literal"><span class="pre">__gt__</span></code>），它们优先于<a class="reference internal" href="#numpy.class.__numpy_ufunc__" title="numpy.class.__numpy_ufunc__"><code class="xref py py-func docutils literal"><span class="pre">__numpy_ufunc__</span></code></a>机制在解析二进制运算结果（例如<code class="docutils literal"><span class="pre">ndarray_obj</span> <span class="pre">*</span> <span class="pre">your_obj</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-62">技术特殊情况是：<code class="docutils literal"><span class="pre">ndarray.__mul__</span></code>如果另一个对象是<em>而不是</em> <a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>的子类，则返回<code class="docutils literal"><span class="pre">NotImplemented</span></code>并定义<code class="docutils literal"><span class="pre">__numpy_ufunc__</span></code>和<code class="docutils literal"><span class="pre">__rmul__</span></code>。</span><span class="yiyi-st" id="yiyi-63">类似的例外适用于除乘法之外的其他操作。</span></p>
+<p><span class="yiyi-st" id="yiyi-64">In such a case, when computing a binary operation such as <code class="docutils literal"><span class="pre">ndarray_obj</span> <span class="pre">*</span> <span class="pre">your_obj</span></code>, your <code class="docutils literal"><span class="pre">__numpy_ufunc__</span></code> method <em>will not</em> be called. </span><span class="yiyi-st" id="yiyi-65">相反，执行会按照标准的Python操作符覆盖规则传递到右侧的<code class="docutils literal"><span class="pre">__rmul__</span></code>操作。</span></p>
+<p><span class="yiyi-st" id="yiyi-66">类似的特殊情况适用于<em>就地操作</em>：如果您定义<code class="docutils literal"><span class="pre">__rmul__</span></code>，则<code class="docutils literal"><span class="pre">ndarray_obj</span> <span class="pre">* =  <span class="pre">your_obj</span></span></code> <em>不会</em>呼叫您的<code class="docutils literal"><span class="pre">__numpy_ufunc__</span></code>实作。</span><span class="yiyi-st" id="yiyi-67">而是默认的Python行为<code class="docutils literal"><span class="pre">ndarray_obj</span> <span class="pre">=</span> <span class="pre">ndarray_obj</span> <span class="pre">*</span> <span class="pre">your_obj</span> 。</code></span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-68">注意上面的讨论仅适用于Python的内建二进制操作机制。</span><span class="yiyi-st" id="yiyi-69"><code class="docutils literal"><span class="pre">np.multiply（ndarray_obj，</span> <span class="pre">your_obj）</span></code>总是只按照预期调用您的<code class="docutils literal"><span class="pre">__numpy_ufunc__</span></code>。</span></p>
+</div>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.class.__array_finalize__"><span class="yiyi-st" id="yiyi-70"> <code class="descclassname">class.</code><code class="descname">__array_finalize__</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-71">每当系统在内部从<em>obj</em>分配一个新的数组，其中<em>obj</em>是<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>的子类</span><span class="yiyi-st" id="yiyi-72">它可以用于在构造之后改变<em>self</em>的属性（以便例如确保2-d矩阵），或者更新来自“父”的元信息。子类继承默认实现这个方法什么也不做。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.class.__array_prepare__"><span class="yiyi-st" id="yiyi-73"> <code class="descclassname">class.</code><code class="descname">__array_prepare__</code><span class="sig-paren">(</span><em>array</em>, <em>context=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-74">在每个<a class="reference internal" href="ufuncs.html#ufuncs-output-type"><span class="std std-ref">ufunc</span></a>开始时，对具有最高数组优先级的输入对象或输出对象（如果指定了一个）调用此方法。</span><span class="yiyi-st" id="yiyi-75">输出数组被传入，并且返回的任何内容都传递给ufunc。</span><span class="yiyi-st" id="yiyi-76">子类继承此方法的默认实现，它只返回未修改的数组。</span><span class="yiyi-st" id="yiyi-77">子类可以选择使用此方法将输出数组转换为子类的实例，并在将数组返回到ufunc之前更新元数据以进行计算。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.class.__array_wrap__"><span class="yiyi-st" id="yiyi-78"> <code class="descclassname">class.</code><code class="descname">__array_wrap__</code><span class="sig-paren">(</span><em>array</em>, <em>context=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-79">在每个<a class="reference internal" href="ufuncs.html#ufuncs-output-type"><span class="std std-ref">ufunc</span></a>结束时，对具有最高数组优先级的输入对象或输出对象（如果指定了一个）调用此方法。</span><span class="yiyi-st" id="yiyi-80">ufunc计算的数组被传入，并且返回的任何内容都传递给用户。</span><span class="yiyi-st" id="yiyi-81">子类继承此方法的默认实现，它将数组转换为对象类的新实例。</span><span class="yiyi-st" id="yiyi-82">子类可以选择使用此方法将输出数组转换为子类的实例，并在将数组返回给用户之前更新元数据。</span></p>
+</dd></dl>
+<dl class="data">
+<dt id="numpy.class.__array_priority__"><span class="yiyi-st" id="yiyi-83"> <code class="descclassname">class.</code><code class="descname">__array_priority__</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-84">此属性的值用于确定在返回对象的Python类型有多种可能性的情况下要返回的对象类型。</span><span class="yiyi-st" id="yiyi-85">子类继承此属性的默认值0.0。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.class.__array__"><span class="yiyi-st" id="yiyi-86"> <code class="descclassname">class.</code><code class="descname">__array__</code><span class="sig-paren">(</span><span class="optional">[</span><em>dtype</em><span class="optional">]</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-87">如果将具有<a class="reference internal" href="#numpy.class.__array__" title="numpy.class.__array__"><code class="xref py py-func docutils literal"><span class="pre">__array__</span></code></a>方法的类（ndarray子类）用作<a class="reference internal" href="ufuncs.html#ufuncs-output-type"><span class="std std-ref">ufunc</span></a>的输出对象，则结果将写入由<a class="reference internal" href="#numpy.class.__array__" title="numpy.class.__array__"><code class="xref py py-func docutils literal"><span class="pre">__array__</span></code></a>。</span><span class="yiyi-st" id="yiyi-88">类似的转换是对输入数组进行的。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="matrix-objects">
+<h2><span class="yiyi-st" id="yiyi-89">Matrix objects</span></h2>
+<p id="index-0"><span class="yiyi-st" id="yiyi-90"><a class="reference internal" href="generated/numpy.matrix.html#numpy.matrix" title="numpy.matrix"><code class="xref py py-class docutils literal"><span class="pre">matrix</span></code></a>对象继承自ndarray，因此，它们具有与ndarrays相同的属性和方法。</span><span class="yiyi-st" id="yiyi-91">但是，矩阵对象有六个重要的区别，当你使用矩阵时，可能会导致意想不到的结果，但是希望它们像数组一样工作：</span></p>
+<ol class="arabic">
+<li><p class="first"><span class="yiyi-st" id="yiyi-92">Matrix对象可以使用字符串符号创建，以允许使用Matlab风格的语法，其中空格分隔列和分号（&apos;；&apos;）分隔行。</span></p>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-93">矩阵对象总是二维的。</span><span class="yiyi-st" id="yiyi-94">这具有深远的影响，因为m.ravel()仍然是二维的（在第一维中具有1），并且项选择返回二维对象，使得序列行为从根本上不同于数组。</span></p>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-95">矩阵对象覆盖乘法为矩阵乘法。</span><span class="yiyi-st" id="yiyi-96"><strong>确保你理解这个你可能想要接收矩阵的函数。特别是考虑到当m是矩阵时asanyarray（m）返回矩阵的事实。</strong></span></p>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-97">矩阵对象覆盖功率以将矩阵提升到功率。</span><span class="yiyi-st" id="yiyi-98">关于在使用asanyarray（...）获取数组对象的函数内部使用权力的相同警告对于这个事实保持。</span></p>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-99">矩阵对象的默认__array_priority__是10.0，因此与ndarrays的混合运算总是产生矩阵。</span></p>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-100">矩阵具有使计算更容易的特殊属性。</span><span class="yiyi-st" id="yiyi-101">这些是</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-102"><a class="reference internal" href="generated/numpy.matrix.T.html#numpy.matrix.T" title="numpy.matrix.T"><code class="xref py py-obj docutils literal"><span class="pre">matrix.T</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-103">返回矩阵的转置。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-104"><a class="reference internal" href="generated/numpy.matrix.H.html#numpy.matrix.H" title="numpy.matrix.H"><code class="xref py py-obj docutils literal"><span class="pre">matrix.H</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-105">返回<em class="xref py py-obj">self</em>的（复数）共轭转置。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-106"><a class="reference internal" href="generated/numpy.matrix.I.html#numpy.matrix.I" title="numpy.matrix.I"><code class="xref py py-obj docutils literal"><span class="pre">matrix.I</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-107">返回可逆<em class="xref py py-obj">self</em>的（乘法）逆。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-108"><a class="reference internal" href="generated/numpy.matrix.A.html#numpy.matrix.A" title="numpy.matrix.A"><code class="xref py py-obj docutils literal"><span class="pre">matrix.A</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-109">将<em class="xref py py-obj">self</em>作为<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a>对象返回。</span></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-110">警告</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-111">矩阵对象覆盖乘法，&apos;*&apos;和幂，&apos;**&apos;分别为矩阵乘法和矩阵功率。</span><span class="yiyi-st" id="yiyi-112">如果你的子程序可以接受子类并且你不转换为基类数组，那么你必须使用ufuncs乘法和幂来确保你对所有输入执行正确的操作。</span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-113">矩阵类是ndarray的Python子类，可以用作如何构建自己的ndarray子类的参考。</span><span class="yiyi-st" id="yiyi-114">矩阵可以从其他矩阵，字符串和任何可以转换为<code class="docutils literal"><span class="pre">ndarray</span></code>的其他内容创建。</span><span class="yiyi-st" id="yiyi-115">名称“mat”是NumPy中“matrix”的别名。</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-116"><a class="reference internal" href="generated/numpy.matrix.html#numpy.matrix" title="numpy.matrix"><code class="xref py py-obj docutils literal"><span class="pre">matrix</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-117">从数组类对象或数据字符串返回一个矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-118"><a class="reference internal" href="generated/numpy.asmatrix.html#numpy.asmatrix" title="numpy.asmatrix"><code class="xref py py-obj docutils literal"><span class="pre">asmatrix</span></code></a>（data [，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-119">将输入解释为矩阵。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-120"><a class="reference internal" href="generated/numpy.bmat.html#numpy.bmat" title="numpy.bmat"><code class="xref py py-obj docutils literal"><span class="pre">bmat</span></code></a>（obj [，ldict，gdict]）</span></td>
+<td><span class="yiyi-st" id="yiyi-121">从字符串，嵌套序列或数组构建一个矩阵对象。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-122">示例1：从字符串创建矩阵</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="n">mat</span><span class="p">(</span><span class="s1">&apos;1 2 3; 4 5 3&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">I</span>
+<span class="go">[[ 0.2924 -0.1345]</span>
+<span class="go"> [-0.1345  0.0819]]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-123">示例2：从嵌套序列创建矩阵</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">],[</span><span class="mf">1.0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="n">j</span><span class="p">]])</span>
+<span class="go">matrix([[  1.+0.j,   5.+0.j,  10.+0.j],</span>
+<span class="go">        [  1.+0.j,   3.+0.j,   0.+4.j]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-124">示例3：从数组创建矩阵</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mat</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+<span class="go">matrix([[ 0.7699,  0.7922,  0.3294],</span>
+<span class="go">        [ 0.2792,  0.0101,  0.9219],</span>
+<span class="go">        [ 0.3398,  0.7571,  0.8197]])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="memory-mapped-file-arrays">
+<h2><span class="yiyi-st" id="yiyi-125">Memory-mapped file arrays</span></h2>
+<p id="index-1"><span class="yiyi-st" id="yiyi-126">内存映射文件对于以常规布局读取和/或修改大文件的小段很有用，无需将整个文件读入内存。</span><span class="yiyi-st" id="yiyi-127">ndarray的一个简单子类使用一个内存映射文件作为数组的数据缓冲区。</span><span class="yiyi-st" id="yiyi-128">对于小文件，将整个文件读入内存的开销通常不重要，但对于使用内存映射的大文件，可以节省大量资源。</span></p>
+<p><span class="yiyi-st" id="yiyi-129">内存映射文件数组有一个额外的方法（除了它们从ndarray继承）：<a class="reference internal" href="generated/numpy.memmap.flush.html#numpy.memmap.flush" title="numpy.memmap.flush"><code class="xref py py-meth docutils literal"><span class="pre">.flush()</span></code></a>它必须由用户手动调用，以确保对数组的任何更改实际写入到磁盘。</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-130"><a class="reference internal" href="generated/numpy.memmap.html#numpy.memmap" title="numpy.memmap"><code class="xref py py-obj docutils literal"><span class="pre">memmap</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-131">创建存储在磁盘上的<em>二进制</em>文件中的数组的内存映射。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-132"><a class="reference internal" href="generated/numpy.memmap.flush.html#numpy.memmap.flush" title="numpy.memmap.flush"><code class="xref py py-obj docutils literal"><span class="pre">memmap.flush</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-133">将数组中的任何更改写入磁盘上的文件。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-134">例：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">memmap</span><span class="p">(</span><span class="s1">&apos;newfile.dat&apos;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&apos;w+&apos;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span> <span class="o">=</span> <span class="mf">30.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">fromfile</span><span class="p">(</span><span class="s1">&apos;newfile.dat&apos;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">b</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span>
+<span class="go">10.0 30.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">memmap</span><span class="p">(</span><span class="s1">&apos;newfile.dat&apos;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span>
+<span class="go">10.0 30.0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="character-arrays-numpy-char">
+<h2><span class="yiyi-st" id="yiyi-135">Character arrays (<code class="xref py py-mod docutils literal"><span class="pre">numpy.char</span></code>)</span></h2>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-136">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-137"><a class="reference internal" href="routines.array-creation.html#routines-array-creation-char"><span class="std std-ref">Creating character arrays (numpy.char)</span></a></span></p>
+</div>
+<div class="admonition note" id="index-2">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-138">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-139">存在<a class="reference internal" href="generated/numpy.chararray.html#numpy.chararray" title="numpy.chararray"><code class="xref py py-obj docutils literal"><span class="pre">chararray</span></code></a>类以向后兼容Numarray，因此不推荐用于新开发。</span><span class="yiyi-st" id="yiyi-140">Starting from numpy 1.4, if one needs arrays of strings, it is recommended to use arrays of <a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a> <code class="xref py py-obj docutils literal"><span class="pre">object_</span></code>, <code class="xref py py-obj docutils literal"><span class="pre">string_</span></code> or <code class="xref py py-obj docutils literal"><span class="pre">unicode_</span></code>, and use the free functions in the <code class="xref py py-obj docutils literal"><span class="pre">numpy.char</span></code> module for fast vectorized string operations.</span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-141">这些是<code class="xref py py-class docutils literal"><span class="pre">string_</span></code>类型或<code class="xref py py-class docutils literal"><span class="pre">unicode_</span></code>类型的增强数组。</span><span class="yiyi-st" id="yiyi-142">这些数组继承自<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>，但特别定义了a()的<code class="docutils literal"><span class="pre">+</span></code>，<code class="docutils literal"><span class="pre">*</span></code>和<code class="docutils literal"><span class="pre">%</span></code>广播）。</span><span class="yiyi-st" id="yiyi-143">这些操作不适用于字符类型的标准<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>。</span><span class="yiyi-st" id="yiyi-144">此外，<a class="reference internal" href="generated/numpy.chararray.html#numpy.chararray" title="numpy.chararray"><code class="xref py py-class docutils literal"><span class="pre">chararray</span></code></a>具有所有标准的<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">string</span></code></a>（和<code class="xref py py-class docutils literal"><span class="pre">unicode</span></code>）方法，在逐个元素的基础上执行它们。</span><span class="yiyi-st" id="yiyi-145">也许最简单的创建chararray的方法是使用<a class="reference internal" href="generated/numpy.ndarray.view.html#numpy.ndarray.view" title="numpy.ndarray.view"><code class="xref py py-meth docutils literal"><span class="pre">self.view(chararray)</span></code></a>其中<em>self</em>是str或unicode数据类型的ndarray。</span><span class="yiyi-st" id="yiyi-146">但是，也可以使用<a class="reference internal" href="generated/numpy.chararray.html#numpy.chararray" title="numpy.chararray"><code class="xref py py-meth docutils literal"><span class="pre">numpy.chararray</span></code></a>构造函数或通过<a class="reference internal" href="generated/numpy.core.defchararray.array.html#numpy.core.defchararray.array" title="numpy.core.defchararray.array"><code class="xref py py-func docutils literal"><span class="pre">numpy.char.array</span></code></a>函数创建chararray：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-147"><a class="reference internal" href="generated/numpy.chararray.html#numpy.chararray" title="numpy.chararray"><code class="xref py py-obj docutils literal"><span class="pre">chararray</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-148">提供了一个方便的查看数组的字符串和unicode值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-149"><a class="reference internal" href="generated/numpy.core.defchararray.array.html#numpy.core.defchararray.array" title="numpy.core.defchararray.array"><code class="xref py py-obj docutils literal"><span class="pre">core.defchararray.array</span></code></a>（obj [，itemsize，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-150">创建<a class="reference internal" href="generated/numpy.chararray.html#numpy.chararray" title="numpy.chararray"><code class="xref py py-obj docutils literal"><span class="pre">chararray</span></code></a>。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-151">与str数据类型的标准ndarray的另一个区别是，chararray继承了Numarray引入的特性，即数组中任何元素末尾的白色空间将在项检索和比较操作中被忽略。</span></p>
+</div>
+<div class="section" id="record-arrays-numpy-rec">
+<span id="arrays-classes-rec"></span><h2><span class="yiyi-st" id="yiyi-152">Record arrays (<code class="xref py py-mod docutils literal"><span class="pre">numpy.rec</span></code>)</span></h2>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-153">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-154"><a class="reference internal" href="routines.array-creation.html#routines-array-creation-rec"><span class="std std-ref">Creating record arrays (numpy.rec)</span></a>，<a class="reference internal" href="routines.dtype.html#routines-dtype"><span class="std std-ref">Data type routines</span></a>，<a class="reference internal" href="arrays.dtypes.html#arrays-dtypes"><span class="std std-ref">Data type objects (dtype)</span></a>。</span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-155">NumPy提供了允许访问作为属性的结构化数组的字段和对应的标量数据类型对象<a class="reference internal" href="generated/numpy.record.html#numpy.record" title="numpy.record"><code class="xref py py-class docutils literal"><span class="pre">record</span></code></a>的<a class="reference internal" href="generated/numpy.recarray.html#numpy.recarray" title="numpy.recarray"><code class="xref py py-class docutils literal"><span class="pre">recarray</span></code></a>类。</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-156"><a class="reference internal" href="generated/numpy.recarray.html#numpy.recarray" title="numpy.recarray"><code class="xref py py-obj docutils literal"><span class="pre">recarray</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-157">构造一个允许使用属性进行字段访问的ndarray。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-158"><a class="reference internal" href="generated/numpy.record.html#numpy.record" title="numpy.record"><code class="xref py py-obj docutils literal"><span class="pre">record</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-159">允许字段访问作为属性查找的数据类型标量。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="masked-arrays-numpy-ma">
+<h2><span class="yiyi-st" id="yiyi-160">Masked arrays (<code class="xref py py-mod docutils literal"><span class="pre">numpy.ma</span></code>)</span></h2>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-161">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-162"><a class="reference internal" href="maskedarray.html#maskedarray"><span class="std std-ref">Masked arrays</span></a></span></p>
+</div>
+</div>
+<div class="section" id="standard-container-class">
+<h2><span class="yiyi-st" id="yiyi-163">Standard container class</span></h2>
+<p><span class="yiyi-st" id="yiyi-164">为了向后兼容和作为标准的“容器”类，Numeric中的UserArray已经转换到NumPy并命名为<a class="reference internal" href="generated/numpy.lib.user_array.container.html#numpy.lib.user_array.container" title="numpy.lib.user_array.container"><code class="xref py py-class docutils literal"><span class="pre">numpy.lib.user_array.container</span></code></a>容器类是一个Python类，其self.array属性是一个ndarray。</span><span class="yiyi-st" id="yiyi-165">使用numpy.lib.user_array.container比使用ndarray本身更容易多重继承，因此它默认包含在内。</span><span class="yiyi-st" id="yiyi-166">这里没有提到它的存在，因为你被鼓励直接使用ndarray类，如果你可以。</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-167"><a class="reference internal" href="generated/numpy.lib.user_array.container.html#numpy.lib.user_array.container" title="numpy.lib.user_array.container"><code class="xref py py-obj docutils literal"><span class="pre">numpy.lib.user_array.container</span></code></a>（data [，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-168">用于容易多继承的标准容器类。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="array-iterators">
+<span id="index-3"></span><h2><span class="yiyi-st" id="yiyi-169">Array Iterators</span></h2>
+<p id="index-4"><span class="yiyi-st" id="yiyi-170">迭代器是数组处理的强大概念。</span><span class="yiyi-st" id="yiyi-171">基本上，迭代器实现广义for循环。</span><span class="yiyi-st" id="yiyi-172">如果<em>myiter</em>是一个迭代器对象，那么Python代码：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">myiter</span><span class="p">:</span>
+    <span class="o">...</span>
+    <span class="n">some</span> <span class="n">code</span> <span class="n">involving</span> <span class="n">val</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-173">重复调用<code class="docutils literal"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">myiter.next()</span></code>，直到<a class="reference external" href="https://docs.python.org/dev/library/exceptions.html#StopIteration" title="(in Python v3.7)"><code class="xref py py-exc docutils literal"><span class="pre">StopIteration</span></code></a>迭代器。</span><span class="yiyi-st" id="yiyi-174">有几种方法可以在数组上进行迭代，这可能是有用的：默认迭代，平面迭代和<img alt="N" class="math" src="../_images/math/10f77f12438cb385098c4d2344aaa427d0a462a8.png" style="vertical-align: 0px">  - 维度枚举。</span></p>
+<div class="section" id="default-iteration">
+<h3><span class="yiyi-st" id="yiyi-175">Default iteration</span></h3>
+<p><span class="yiyi-st" id="yiyi-176">ndarray对象的默认迭代器是序列类型的默认Python迭代器。</span><span class="yiyi-st" id="yiyi-177">因此，当数组对象本身用作迭代器时。</span><span class="yiyi-st" id="yiyi-178">默认行为等效于：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-179">此默认迭代器从数组中选择维度<img alt="N-1" class="math" src="../_images/math/d062a127ede35244ac17c5e277e07ccbeaa4174e.png" style="vertical-align: -1px">的子数组。</span><span class="yiyi-st" id="yiyi-180">这可以是定义递归算法的有用结构。</span><span class="yiyi-st" id="yiyi-181">要遍历整个数组，需要<img alt="N" class="math" src="../_images/math/10f77f12438cb385098c4d2344aaa427d0a462a8.png" style="vertical-align: 0px"> for-loops。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="o">+</span><span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="s1">&apos;item:&apos;</span><span class="p">,</span> <span class="n">val</span>
+<span class="go">item: [[10 11 12 13]</span>
+<span class="go"> [14 15 16 17]]</span>
+<span class="go">item: [[18 19 20 21]</span>
+<span class="go"> [22 23 24 25]]</span>
+<span class="go">item: [[26 27 28 29]</span>
+<span class="go"> [30 31 32 33]]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="flat-iteration">
+<h3><span class="yiyi-st" id="yiyi-182">Flat iteration</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-183"><a class="reference internal" href="generated/numpy.ndarray.flat.html#numpy.ndarray.flat" title="numpy.ndarray.flat"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.flat</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-184">数组上的1-D迭代器。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-185">如前所述，ndarray对象的flat属性返回一个迭代器，它将以C样式连续顺序遍历整个数组。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="nb">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span>
+<span class="go">0 10</span>
+<span class="go">5 15</span>
+<span class="go">10 20</span>
+<span class="go">15 25</span>
+<span class="go">20 30</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-186">在这里，我使用内置的枚举迭代器返回迭代器索引以及值。</span></p>
+</div>
+<div class="section" id="n-dimensional-enumeration">
+<h3><span class="yiyi-st" id="yiyi-187">N-dimensional enumeration</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-188"><a class="reference internal" href="generated/numpy.ndenumerate.html#numpy.ndenumerate" title="numpy.ndenumerate"><code class="xref py py-obj docutils literal"><span class="pre">ndenumerate</span></code></a>（arr）</span></td>
+<td><span class="yiyi-st" id="yiyi-189">多维索引迭代器。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-190">有时，在迭代时获得N维索引可能是有用的。</span><span class="yiyi-st" id="yiyi-191">ndenumerate迭代器可以实现这一点。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">ndenumerate</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">%</span><span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="nb">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span>
+<span class="go">(0, 0, 0) 10</span>
+<span class="go">(1, 1, 3) 25</span>
+<span class="go">(2, 0, 3) 29</span>
+<span class="go">(2, 1, 2) 32</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="iterator-for-broadcasting">
+<h3><span class="yiyi-st" id="yiyi-192">Iterator for broadcasting</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-193"><a class="reference internal" href="generated/numpy.broadcast.html#numpy.broadcast" title="numpy.broadcast"><code class="xref py py-obj docutils literal"><span class="pre">broadcast</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-194">产生模仿广播的对象。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-195">广播的一般概念也可以从Python使用<a class="reference internal" href="generated/numpy.broadcast.html#numpy.broadcast" title="numpy.broadcast"><code class="xref py py-class docutils literal"><span class="pre">broadcast</span></code></a>迭代器。</span><span class="yiyi-st" id="yiyi-196">此对象将<img alt="N" class="math" src="../_images/math/10f77f12438cb385098c4d2344aaa427d0a462a8.png" style="vertical-align: 0px">对象作为输入，并返回一个迭代器，返回提供广播结果中每个输入序列元素的元组。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">broadcast</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">val</span>
+<span class="go">(1, 0)</span>
+<span class="go">(0, 1)</span>
+<span class="go">(2, 0)</span>
+<span class="go">(3, 1)</span>
+</pre></div>
+</div>
+</div>
+</div>

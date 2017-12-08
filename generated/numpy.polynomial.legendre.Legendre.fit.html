@@ -1,0 +1,71 @@
+
+<h1><span class="yiyi-st" id="yiyi-15">numpy.polynomial.legendre.Legendre.fit</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.legendre.Legendre.fit.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.legendre.Legendre.fit.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.polynomial.legendre.Legendre.fit"><span class="yiyi-st" id="yiyi-16"> <code class="descclassname">Legendre.</code><code class="descname">fit</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>deg</em>, <em>domain=None</em>, <em>rcond=None</em>, <em>full=False</em>, <em>w=None</em>, <em>window=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/_polybase.py#L724-L810"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-17">最小二乘拟合数据。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">返回与在<em class="xref py py-obj">x</em>采样的数据<em class="xref py py-obj">y</em>的最小二乘拟合的系列实例。</span><span class="yiyi-st" id="yiyi-19">返回的实例的域可以被指定，并且这将经常导致优越的适合，较少的病况调节的机会。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>x</strong>：array_like，shape（M，）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">M个采样点<code class="docutils literal"><span class="pre">（x [i]，</span> <span class="pre">y [i]）</span></code>的x坐标。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>y</strong>：array_like，shape（M，）或（M，K）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">y坐标。</span><span class="yiyi-st" id="yiyi-25">通过传递每列包含一个数据集的2D阵列，可以一次拟合共享相同x坐标的样本点的若干数据集。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>deg</strong>：int或1-D array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">拟合多项式的度（s）。</span><span class="yiyi-st" id="yiyi-28">如果<em class="xref py py-obj">deg</em>是单个整数，则包括<em class="xref py py-obj">deg</em>项的所有项包括在拟合中。</span><span class="yiyi-st" id="yiyi-29">对于Numpy版本&gt; = 1.11，可以使用指定要包括的术语的度数的整数列表。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>domain</strong>：{None，[beg，end]，[]}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">用于返回的系列的域。</span><span class="yiyi-st" id="yiyi-32">如果<code class="docutils literal"><span class="pre">None</span></code>，则选择覆盖点<em class="xref py py-obj">x</em>的最小域。</span><span class="yiyi-st" id="yiyi-33">如果<code class="docutils literal"><span class="pre">[]</span></code>使用类域。</span><span class="yiyi-st" id="yiyi-34">默认值为NumPy 1.4中的类域和更高版本中的<code class="docutils literal"><span class="pre">None</span></code>。</span><span class="yiyi-st" id="yiyi-35">在numpy 1.5.0中添加了<code class="docutils literal"><span class="pre">[]</span></code>选项。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-36"><strong>rcond</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-37">相对条件编号。</span><span class="yiyi-st" id="yiyi-38">相对于最大奇异值小于该值的奇异值将被忽略。</span><span class="yiyi-st" id="yiyi-39">默认值为len（x）* eps，其中eps是float类型的相对精度，在大多数情况下约为2e-16。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-40"><strong>full</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-41">开关确定返回值的性质。</span><span class="yiyi-st" id="yiyi-42">当它为False（默认值）时，只返回系数，当来自奇异值分解的True诊断信息也返回时。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-43"><strong>w</strong>：array_like，shape（M，），可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-44">重量。</span><span class="yiyi-st" id="yiyi-45">如果不是无，则每个点<code class="docutils literal"><span class="pre">(x[i],y[i])</span></code>对拟合的贡献由<em class="xref py py-obj">w [i]</em>加权。</span><span class="yiyi-st" id="yiyi-46">理想地，选择权重使得乘积<code class="docutils literal"><span class="pre">w[i]*y[i]</span></code>的误差都具有相同的方差。</span><span class="yiyi-st" id="yiyi-47">默认值为“无”。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-48"><span class="versionmodified">版本1.5.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-49"><strong>窗口</strong>：{[beg，end]}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-50">用于返回系列的窗口。</span><span class="yiyi-st" id="yiyi-51">默认值为默认类域</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-52"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-53">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-54"><strong>new_series</strong>：series</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-55">表示最小二乘法拟合数据并具有调用中指定的域的序列。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-56"><strong>[resid，rank，sv，rcond]</strong>：list</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-57">只有<em class="xref py py-obj">full</em> = True时，才会返回这些值</span></p>
+<p><span class="yiyi-st" id="yiyi-58">resid – sum of squared residuals of the least squares fit rank – the numerical rank of the scaled Vandermonde matrix sv – singular values of the scaled Vandermonde matrix rcond – value of <em class="xref py py-obj">rcond</em>.</span></p>
+<p><span class="yiyi-st" id="yiyi-59">有关详细信息，请参阅<em class="xref py py-obj">linalg.lstsq</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

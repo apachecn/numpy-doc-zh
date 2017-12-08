@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.argmax</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.argmax.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.argmax.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ma.argmax"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">argmax</code><span class="sig-paren">(</span><em>self</em>, <em>axis=None</em>, <em>fill_value=None</em>, <em>out=None</em><span class="sig-paren">)</span><em class="property"> = &lt;numpy.ma.core._frommethod instance&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回沿给定轴的最大值的索引的数组。</span><span class="yiyi-st" id="yiyi-16">掩码值被视为具有值fill_value。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>axis</strong>：{None，integer}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">如果为None，则索引将位于展平的数组中，否则沿着指定的轴</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>fill_value</strong>：{var}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">用于填充屏蔽值的值。</span><span class="yiyi-st" id="yiyi-22">如果为None，则使用maximum_fill_value（self._data）的输出。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：{无，数组}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">数组，其中可以放置结果。</span><span class="yiyi-st" id="yiyi-25">它的类型被保留，并且它必须是保持输出的正确形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-27"><strong>index_array</strong>：{integer_array}</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([1, 1, 1])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([2, 2])</span>
+</pre></div>
+</div>
+</dd></dl>

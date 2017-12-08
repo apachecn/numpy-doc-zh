@@ -1,0 +1,122 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.vectorize</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.vectorize.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.vectorize.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.vectorize"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">vectorize</code><span class="sig-paren">(</span><em>pyfunc</em>, <em>otypes=&apos;&apos;</em>, <em>doc=None</em>, <em>excluded=None</em>, <em>cache=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L2047-L2295"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">广义函数类。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">定义一个矢量化函数，它将嵌套的对象序列或numpy数组作为输入，并返回一个numpy数组作为输出。</span><span class="yiyi-st" id="yiyi-16">向量化函数对输入数组的连续元组评价<em class="xref py py-obj">pyfunc</em>就像python映射函数，只不过它使用numpy的广播规则。</span></p>
+<p><span class="yiyi-st" id="yiyi-17"><em class="xref py py-obj">向量化</em>的输出的数据类型通过调用具有输入的第一个元素的函数来确定。</span><span class="yiyi-st" id="yiyi-18">这可以通过指定<em class="xref py py-obj">otypes</em>参数来避免。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>pyfunc</strong>：callable</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">python函数或方法。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>otypes</strong>：str或dtypes列表，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">输出数据类型。</span><span class="yiyi-st" id="yiyi-24">它必须指定为类型代码字符串或数据类型说明符列表。</span><span class="yiyi-st" id="yiyi-25">每个输出应该有一个数据类型说明符。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>doc</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">函数的docstring。</span><span class="yiyi-st" id="yiyi-28">如果<em class="xref py py-obj">无</em>，docstring将是<code class="docutils literal"><span class="pre">pyfunc.__doc__</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>排除</strong>：set，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">表示函数不会被矢量化的位置或关键字参数的字符串或整数集合。</span><span class="yiyi-st" id="yiyi-31">这些将直接传递到未经修改的<em class="xref py py-obj">pyfunc</em>。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-32"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>缓存</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">如果<em class="xref py py-obj">True</em>，则缓存第一个函数调用，如果未提供<em class="xref py py-obj">otypes</em>，则确定输出数量。</span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-35"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-36">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-37"><strong>vectorized</strong>：callable</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-38">矢量化函数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-40">提供<a class="reference internal" href="#numpy.vectorize" title="numpy.vectorize"><code class="xref py py-obj docutils literal"><span class="pre">vectorize</span></code></a>函数主要是为了方便，而不是为了性能。</span><span class="yiyi-st" id="yiyi-41">实现本质上是一个for循环。</span></p>
+<p><span class="yiyi-st" id="yiyi-42">如果未指定<em class="xref py py-obj">otypes</em>，则将调用具有第一个参数的函数来确定输出数。</span><span class="yiyi-st" id="yiyi-43">如果<em class="xref py py-obj">缓存</em>为<em class="xref py py-obj">True</em>，则此调用的结果将被缓存，以防止调用该函数两次。</span><span class="yiyi-st" id="yiyi-44">但是，要实现缓存，原始函数必须包装，这将减慢后续调用，所以只有这样做，如果你的功能是昂贵的。</span></p>
+<p><span class="yiyi-st" id="yiyi-45">新的关键字参数接口和<em class="xref py py-obj">排除</em>参数支持进一步降低性能。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-46">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="s2">&quot;Return a-b if a&gt;b, otherwise return a+b&quot;</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vfunc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">myfunc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vfunc</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([3, 4, 1, 2])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-47">除非指定，否则docstring取自输入函数<a class="reference internal" href="#numpy.vectorize" title="numpy.vectorize"><code class="xref py py-obj docutils literal"><span class="pre">vectorize</span></code></a></span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vfunc</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="go">&apos;Return a-b if a&gt;b, otherwise return a+b&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vfunc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">myfunc</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s1">&apos;Vectorized `myfunc`&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vfunc</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="go">&apos;Vectorized `myfunc`&apos;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-48">通过评估输入的第一个元素确定输出类型，除非指定</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">vfunc</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&lt;type &apos;numpy.int32&apos;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vfunc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">myfunc</span><span class="p">,</span> <span class="n">otypes</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">vfunc</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&lt;type &apos;numpy.float64&apos;&gt;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-49"><em class="xref py py-obj">排除</em>参数可用于防止对某些参数进行向量化。</span><span class="yiyi-st" id="yiyi-50">这可以用于固定长度的类似数组的参数，例如多项式的系数，如<a class="reference internal" href="numpy.polyval.html#numpy.polyval" title="numpy.polyval"><code class="xref py py-obj docutils literal"><span class="pre">polyval</span></code></a>：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">mypolyval</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">_p</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">res</span> <span class="o">=</span> <span class="n">_p</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">while</span> <span class="n">_p</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">_p</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">res</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vpolyval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">mypolyval</span><span class="p">,</span> <span class="n">excluded</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;p&apos;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vpolyval</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">array([3, 6])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-51">位置参数也可以通过指定它们的位置来排除：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vpolyval</span><span class="o">.</span><span class="n">excluded</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vpolyval</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">array([3, 6])</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-52">方法</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="numpy.vectorize.__call__.html#numpy.vectorize.__call__" title="numpy.vectorize.__call__"><code class="xref py py-obj docutils literal"><span class="pre">__call__</span></code></a>（\ * args，\ * \ * kwargs）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">在<em class="xref py py-obj">args</em>和<em class="xref py py-obj">kwargs</em>中不在<em class="xref py py-obj">排除</em>中返回<em class="xref py py-obj">pyfunc</em>广播（向量化）的结果的数组。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

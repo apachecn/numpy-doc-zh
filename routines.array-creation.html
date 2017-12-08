@@ -1,0 +1,229 @@
+
+<span id="routines-array-creation"></span><h1><span class="yiyi-st" id="yiyi-20">Array creation routines</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.array-creation.html">https://docs.scipy.org/doc/numpy/reference/routines.array-creation.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-21">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="../user/basics.creation.html#arrays-creation"><span class="std std-ref">Array creation</span></a></span></p>
+</div>
+<div class="section" id="ones-and-zeros">
+<h2><span class="yiyi-st" id="yiyi-23">Ones and zeros</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="generated/numpy.empty.html#numpy.empty" title="numpy.empty"><code class="xref py py-obj docutils literal"><span class="pre">empty</span></code></a>（shape [，dtype，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-25">返回给定形状和类型的新数组，而不初始化条目。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="generated/numpy.empty_like.html#numpy.empty_like" title="numpy.empty_like"><code class="xref py py-obj docutils literal"><span class="pre">empty_like</span></code></a>（a [，dtype，order，subok]）</span></td>
+<td><span class="yiyi-st" id="yiyi-27">返回具有与给定数组相同的形状和类型的新数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="generated/numpy.eye.html#numpy.eye" title="numpy.eye"><code class="xref py py-obj docutils literal"><span class="pre">eye</span></code></a>（N [，M，k，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-29">返回一个2-D数组，其中一个在对角线上，零在其他地方。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.identity.html#numpy.identity" title="numpy.identity"><code class="xref py py-obj docutils literal"><span class="pre">identity</span></code></a>（n [，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-31">返回身份数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="generated/numpy.ones.html#numpy.ones" title="numpy.ones"><code class="xref py py-obj docutils literal"><span class="pre">ones</span></code></a>（shape [，dtype，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-33">返回给定形状和类型的新数组，用数字填充。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="generated/numpy.ones_like.html#numpy.ones_like" title="numpy.ones_like"><code class="xref py py-obj docutils literal"><span class="pre">ones_like</span></code></a>（a [，dtype，order，subok]）</span></td>
+<td><span class="yiyi-st" id="yiyi-35">返回与给定数组具有相同形状和类型的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="generated/numpy.zeros.html#numpy.zeros" title="numpy.zeros"><code class="xref py py-obj docutils literal"><span class="pre">zeros</span></code></a>（shape [，dtype，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-37">返回给定形状和类型的新数组，用零填充。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="generated/numpy.zeros_like.html#numpy.zeros_like" title="numpy.zeros_like"><code class="xref py py-obj docutils literal"><span class="pre">zeros_like</span></code></a>（a [，dtype，order，subok]）</span></td>
+<td><span class="yiyi-st" id="yiyi-39">返回具有与给定数组相同的形状和类型的零数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="generated/numpy.full.html#numpy.full" title="numpy.full"><code class="xref py py-obj docutils literal"><span class="pre">full</span></code></a>（shape，fill_value [，dtype，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-41">返回给定形状和类型的新数组，用<em class="xref py py-obj">fill_value</em>填充。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="generated/numpy.full_like.html#numpy.full_like" title="numpy.full_like"><code class="xref py py-obj docutils literal"><span class="pre">full_like</span></code></a>（a，fill_value [，dtype，order，subok]）</span></td>
+<td><span class="yiyi-st" id="yiyi-43">返回与给定数组相同形状和类型的完整数组。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="from-existing-data">
+<h2><span class="yiyi-st" id="yiyi-44">From existing data</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.array.html#numpy.array" title="numpy.array"><code class="xref py py-obj docutils literal"><span class="pre">array</span></code></a>(object[, dtype, copy, order, subok, ndmin])</span></td>
+<td><span class="yiyi-st" id="yiyi-46">创建数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.asarray.html#numpy.asarray" title="numpy.asarray"><code class="xref py py-obj docutils literal"><span class="pre">asarray</span></code></a>(a[, dtype, order])</span></td>
+<td><span class="yiyi-st" id="yiyi-48">将输入转换为数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.asanyarray.html#numpy.asanyarray" title="numpy.asanyarray"><code class="xref py py-obj docutils literal"><span class="pre">asanyarray</span></code></a>(a[, dtype, order])</span></td>
+<td><span class="yiyi-st" id="yiyi-50">将输入转换为ndarray，但传递ndarray子类。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.ascontiguousarray.html#numpy.ascontiguousarray" title="numpy.ascontiguousarray"><code class="xref py py-obj docutils literal"><span class="pre">ascontiguousarray</span></code></a>（a [，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">返回内存中的连续数组（C order）。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="generated/numpy.asmatrix.html#numpy.asmatrix" title="numpy.asmatrix"><code class="xref py py-obj docutils literal"><span class="pre">asmatrix</span></code></a>（data [，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">将输入解释为矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="generated/numpy.copy.html#numpy.copy" title="numpy.copy"><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code></a>（a [，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-56">返回给定对象的数组副本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="generated/numpy.frombuffer.html#numpy.frombuffer" title="numpy.frombuffer"><code class="xref py py-obj docutils literal"><span class="pre">frombuffer</span></code></a>（buffer [，dtype，count，offset]）</span></td>
+<td><span class="yiyi-st" id="yiyi-58">将缓冲区解释为1维数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="generated/numpy.fromfile.html#numpy.fromfile" title="numpy.fromfile"><code class="xref py py-obj docutils literal"><span class="pre">fromfile</span></code></a>（file [，dtype，count，sep]）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">从文本或二进制文件中的数据构造数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="generated/numpy.fromfunction.html#numpy.fromfunction" title="numpy.fromfunction"><code class="xref py py-obj docutils literal"><span class="pre">fromfunction</span></code></a>（function，shape，\ * \ * kwargs）</span></td>
+<td><span class="yiyi-st" id="yiyi-62">通过在每个坐标上执行函数来构造数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="generated/numpy.fromiter.html#numpy.fromiter" title="numpy.fromiter"><code class="xref py py-obj docutils literal"><span class="pre">fromiter</span></code></a>（iterable，dtype [，count]）</span></td>
+<td><span class="yiyi-st" id="yiyi-64">从可迭代对象创建新的1维数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="generated/numpy.fromstring.html#numpy.fromstring" title="numpy.fromstring"><code class="xref py py-obj docutils literal"><span class="pre">fromstring</span></code></a>（string [，dtype，count，sep]）</span></td>
+<td><span class="yiyi-st" id="yiyi-66">根据字符串中的原始二进制或文本数据初始化的新1-D数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="generated/numpy.loadtxt.html#numpy.loadtxt" title="numpy.loadtxt"><code class="xref py py-obj docutils literal"><span class="pre">loadtxt</span></code></a>（fname [，dtype，comments，delimiter，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-68">从文本文件加载数据。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="creating-record-arrays-numpy-rec">
+<span id="routines-array-creation-rec"></span><h2><span class="yiyi-st" id="yiyi-69">Creating record arrays (<code class="xref py py-mod docutils literal"><span class="pre">numpy.rec</span></code>)</span></h2>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-70">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-71"><code class="xref py py-mod docutils literal"><span class="pre">numpy.rec</span></code>是<code class="xref py py-mod docutils literal"><span class="pre">numpy.core.records</span></code>的首选别名。</span></p>
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="generated/numpy.core.records.array.html#numpy.core.records.array" title="numpy.core.records.array"><code class="xref py py-obj docutils literal"><span class="pre">core.records.array</span></code></a>（obj [，dtype，shape，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-73">从各种各样的对象构造一个记录数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="generated/numpy.core.records.fromarrays.html#numpy.core.records.fromarrays" title="numpy.core.records.fromarrays"><code class="xref py py-obj docutils literal"><span class="pre">core.records.fromarrays</span></code></a>（arrayList [，dtype，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-75">从数组的（平面）列表创建一个记录数组</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-76"><a class="reference internal" href="generated/numpy.core.records.fromrecords.html#numpy.core.records.fromrecords" title="numpy.core.records.fromrecords"><code class="xref py py-obj docutils literal"><span class="pre">core.records.fromrecords</span></code></a>（recList [，dtype，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-77">从文本形式的记录列表创建一个recarray</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-78"><a class="reference internal" href="generated/numpy.core.records.fromstring.html#numpy.core.records.fromstring" title="numpy.core.records.fromstring"><code class="xref py py-obj docutils literal"><span class="pre">core.records.fromstring</span></code></a>（datastring [，dtype，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-79">从包含在中的二进制数据创建（只读）记录数组</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="generated/numpy.core.records.fromfile.html#numpy.core.records.fromfile" title="numpy.core.records.fromfile"><code class="xref py py-obj docutils literal"><span class="pre">core.records.fromfile</span></code></a>（fd [，dtype，shape，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-81">从二进制文件数据创建数组</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="creating-character-arrays-numpy-char">
+<span id="routines-array-creation-char"></span><h2><span class="yiyi-st" id="yiyi-82">Creating character arrays (<code class="xref py py-mod docutils literal"><span class="pre">numpy.char</span></code>)</span></h2>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-83">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-84"><code class="xref py py-mod docutils literal"><span class="pre">numpy.char</span></code>是<code class="xref py py-mod docutils literal"><span class="pre">numpy.core.defchararray</span></code>的首选别名。</span></p>
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-85"><a class="reference internal" href="generated/numpy.core.defchararray.array.html#numpy.core.defchararray.array" title="numpy.core.defchararray.array"><code class="xref py py-obj docutils literal"><span class="pre">core.defchararray.array</span></code></a>（obj [，itemsize，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-86">创建<a class="reference internal" href="generated/numpy.chararray.html#numpy.chararray" title="numpy.chararray"><code class="xref py py-obj docutils literal"><span class="pre">chararray</span></code></a>。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-87"><a class="reference internal" href="generated/numpy.core.defchararray.asarray.html#numpy.core.defchararray.asarray" title="numpy.core.defchararray.asarray"><code class="xref py py-obj docutils literal"><span class="pre">core.defchararray.asarray</span></code></a>（obj [，itemsize，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-88">将输入转换为<a class="reference internal" href="generated/numpy.chararray.html#numpy.chararray" title="numpy.chararray"><code class="xref py py-obj docutils literal"><span class="pre">chararray</span></code></a>，只有在必要时才复制数据。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="numerical-ranges">
+<h2><span class="yiyi-st" id="yiyi-89">Numerical ranges</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-90"><a class="reference internal" href="generated/numpy.arange.html#numpy.arange" title="numpy.arange"><code class="xref py py-obj docutils literal"><span class="pre">arange</span></code></a>（[start，] stop [，step，] [，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-91">在给定间隔内返回均匀间隔的值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-92"><a class="reference internal" href="generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace"><code class="xref py py-obj docutils literal"><span class="pre">linspace</span></code></a>（start，stop [，num，endpoint，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-93">在指定的间隔内返回均匀间隔的数字。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-94"><a class="reference internal" href="generated/numpy.logspace.html#numpy.logspace" title="numpy.logspace"><code class="xref py py-obj docutils literal"><span class="pre">logspace</span></code></a>（start，stop [，num，endpoint，base，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-95">返回以对数刻度均匀分布的数字。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-96"><code class="xref py py-obj docutils literal"><span class="pre">geomspace</span></code></span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-97"><a class="reference internal" href="generated/numpy.meshgrid.html#numpy.meshgrid" title="numpy.meshgrid"><code class="xref py py-obj docutils literal"><span class="pre">meshgrid</span></code></a>（\ * xi，\ * \ * kwargs）</span></td>
+<td><span class="yiyi-st" id="yiyi-98">从坐标向量返回坐标矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-99"><a class="reference internal" href="generated/numpy.mgrid.html#numpy.mgrid" title="numpy.mgrid"><code class="xref py py-obj docutils literal"><span class="pre">mgrid</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-100"><em class="xref py py-obj">nd_grid</em>实例，返回密集的多维“网格网格”。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-101"><a class="reference internal" href="generated/numpy.ogrid.html#numpy.ogrid" title="numpy.ogrid"><code class="xref py py-obj docutils literal"><span class="pre">ogrid</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-102"><em class="xref py py-obj">nd_grid</em>实例，返回一个打开的多维“meshgrid”。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="building-matrices">
+<h2><span class="yiyi-st" id="yiyi-103">Building matrices</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-104"><a class="reference internal" href="generated/numpy.diag.html#numpy.diag" title="numpy.diag"><code class="xref py py-obj docutils literal"><span class="pre">diag</span></code></a>（v [，k]）</span></td>
+<td><span class="yiyi-st" id="yiyi-105">提取对角线或构造对角数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-106"><a class="reference internal" href="generated/numpy.diagflat.html#numpy.diagflat" title="numpy.diagflat"><code class="xref py py-obj docutils literal"><span class="pre">diagflat</span></code></a>（v [，k]）</span></td>
+<td><span class="yiyi-st" id="yiyi-107">创建一个二维数组，将扁平输入作为对角线。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-108"><a class="reference internal" href="generated/numpy.tri.html#numpy.tri" title="numpy.tri"><code class="xref py py-obj docutils literal"><span class="pre">tri</span></code></a>（N [，M，k，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-109">数组，其中一个在给定的对角线和在其他地方零。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-110"><a class="reference internal" href="generated/numpy.tril.html#numpy.tril" title="numpy.tril"><code class="xref py py-obj docutils literal"><span class="pre">tril</span></code></a>（m [，k]）</span></td>
+<td><span class="yiyi-st" id="yiyi-111">数组的下三角形。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-112"><a class="reference internal" href="generated/numpy.triu.html#numpy.triu" title="numpy.triu"><code class="xref py py-obj docutils literal"><span class="pre">triu</span></code></a>（m [，k]）</span></td>
+<td><span class="yiyi-st" id="yiyi-113">数组的上三角形。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-114"><a class="reference internal" href="generated/numpy.vander.html#numpy.vander" title="numpy.vander"><code class="xref py py-obj docutils literal"><span class="pre">vander</span></code></a>（x [，N，increasing]）</span></td>
+<td><span class="yiyi-st" id="yiyi-115">生成Vandermonde矩阵。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="the-matrix-class">
+<h2><span class="yiyi-st" id="yiyi-116">The Matrix class</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-117"><a class="reference internal" href="generated/numpy.mat.html#numpy.mat" title="numpy.mat"><code class="xref py py-obj docutils literal"><span class="pre">mat</span></code></a>（data [，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-118">将输入解释为矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-119"><a class="reference internal" href="generated/numpy.bmat.html#numpy.bmat" title="numpy.bmat"><code class="xref py py-obj docutils literal"><span class="pre">bmat</span></code></a>（obj [，ldict，gdict]）</span></td>
+<td><span class="yiyi-st" id="yiyi-120">从字符串，嵌套序列或数组构建一个矩阵对象。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

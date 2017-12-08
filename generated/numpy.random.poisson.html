@@ -1,0 +1,74 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.poisson</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.poisson.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.poisson.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.poisson"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">poisson</code><span class="sig-paren">(</span><em>lam=1.0</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从泊松分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">泊松分布是大N的二项分布的极限。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>lam</strong>：float或float的顺序</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">期望间隔，应为&gt; = 0。</span><span class="yiyi-st" id="yiyi-19">期望间隔序列必须在所请求的大小上可广播。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">输出形状。</span><span class="yiyi-st" id="yiyi-22">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-23">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>samples</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">绘制的样本，如果提供的话，形状<em>大小</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">泊松分布</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-29">对于具有预期间隔<img alt="\lambda" class="math" src="../../_images/math/e77607a19744406310c093481c802d45bc53f674.png" style="vertical-align: 0px">的事件，泊松分布<img alt="f(k; \lambda)" class="math" src="../../_images/math/ac6bc89219971cdae7996125804a02abc36a2438.png" style="vertical-align: -4px">描述在观察间隔<img alt="\lambda" class="math" src="../../_images/math/e77607a19744406310c093481c802d45bc53f674.png" style="vertical-align: 0px">内发生的<img alt="k" class="math" src="../../_images/math/c8ff6dc362a9a07153582909d5a26898fae59569.png" style="vertical-align: 0px">事件的概率。</span></p>
+<p><span class="yiyi-st" id="yiyi-30">因为输出限制在C long类型的范围内，当<em class="xref py py-obj">lam</em>在最大可表示值的10 sigma内时，会引发ValueError。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r255" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-32"><a class="fn-backref" href="#id1">[R255]</a></span></td><td><span class="yiyi-st" id="yiyi-33">Weisstein，Eric W.“Poisson Distribution。”来自MathWorld-Wolfram Web资源。</span><span class="yiyi-st" id="yiyi-34"><a class="reference external" href="http://mathworld.wolfram.com/PoissonDistribution.html">http://mathworld.wolfram.com/PoissonDistribution.html</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r256" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-35"><a class="fn-backref" href="#id2">[R256]</a></span></td><td><span class="yiyi-st" id="yiyi-36">维基百科，“泊松分布”，<a class="reference external" href="http://en.wikipedia.org/wiki/Poisson_distribution">http://en.wikipedia.org/wiki/Poisson_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-38">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">显示样本的直方图：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">（<a class="reference external" href="../../reference/generated/numpy-random-poisson-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-poisson-1_00_00.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-poisson-1_00_00.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-poisson-1_00_00.png" src="../../_images/numpy-random-poisson-1_00_00.png">
+</div>
+<p><span class="yiyi-st" id="yiyi-41">绘制lambda 100和500的每100个值：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">lam</span><span class="o">=</span><span class="p">(</span><span class="mf">100.</span><span class="p">,</span> <span class="mf">500.</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>

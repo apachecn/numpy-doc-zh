@@ -1,0 +1,84 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.amax</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.amax.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.amax.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.amax"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">amax</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em>, <em>out=None</em>, <em>keepdims=&lt;class numpy._globals._NoValue&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L2200-L2297"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回沿轴的数组或最大值的最大值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数据。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>axis</strong>：无或int或tuple ints，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">要进行操作的轴或轴。</span><span class="yiyi-st" id="yiyi-20">默认情况下，使用平展输入。</span></p>
+<p><span class="yiyi-st" id="yiyi-21">如果这是一个ints的元组，则选择多个轴的最大值，而不是单个轴或所有轴，如前所述。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">用于放置结果的替代输出数组。</span><span class="yiyi-st" id="yiyi-24">必须与预期输出具有相同的形状和缓冲区长度。</span><span class="yiyi-st" id="yiyi-25">有关更多详细信息，请参阅<code class="xref py py-obj docutils literal"><span class="pre">doc.ufuncs</span></code>（“输出参数”部分）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>keepdims</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">如果设置为True，则缩小的轴在结果中保留为尺寸为1的尺寸。</span><span class="yiyi-st" id="yiyi-28">使用此选项，结果将相对于原始<em class="xref py py-obj">arr</em>正确广播。</span></p>
+<p><span class="yiyi-st" id="yiyi-29">如果传递默认值，则<em class="xref py py-obj">keepdims</em>将不会传递到<a class="reference internal" href="numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a>的子类的<a class="reference internal" href="#numpy.amax" title="numpy.amax"><code class="xref py py-obj docutils literal"><span class="pre">amax</span></code></a>方法，默认值为。</span><span class="yiyi-st" id="yiyi-30">如果子类<a class="reference internal" href="numpy.sum.html#numpy.sum" title="numpy.sum"><code class="xref py py-obj docutils literal"><span class="pre">sum</span></code></a>方法不实现<em class="xref py py-obj">keepdims</em>，则会引发任何异常。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>amax</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-33">最大<em class="xref py py-obj">a</em>。</span><span class="yiyi-st" id="yiyi-34">如果<em class="xref py py-obj">axis</em>为None，则结果为标量值。</span><span class="yiyi-st" id="yiyi-35">如果给出<em class="xref py py-obj">axis</em>，则结果是尺寸<code class="docutils literal"><span class="pre">a.ndim</span> <span class="pre"> - </span> <span class="pre">1</span> t1&gt;。</code></span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-36">也可以看看</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.amin.html#numpy.amin" title="numpy.amin"><code class="xref py py-obj docutils literal"><span class="pre">amin</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-38">沿着给定轴的数组的最小值，传播任何NaN。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="numpy.nanmax.html#numpy.nanmax" title="numpy.nanmax"><code class="xref py py-obj docutils literal"><span class="pre">nanmax</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-40">沿给定轴的数组的最大值，忽略任何NaN。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="numpy.maximum.html#numpy.maximum" title="numpy.maximum"><code class="xref py py-obj docutils literal"><span class="pre">maximum</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-42">元素最大值为两个数组，传播任何NaN。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="numpy.fmax.html#numpy.fmax" title="numpy.fmax"><code class="xref py py-obj docutils literal"><span class="pre">fmax</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-44">元素最大两个数组，忽略任何NaN。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="numpy.argmax.html#numpy.argmax" title="numpy.argmax"><code class="xref py py-obj docutils literal"><span class="pre">argmax</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-46">返回最大值的索引。</span></dd>
+</dl>
+<p class="last"><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="numpy.nanmin.html#numpy.nanmin" title="numpy.nanmin"><code class="xref py py-obj docutils literal"><span class="pre">nanmin</span></code></a>，<a class="reference internal" href="numpy.minimum.html#numpy.minimum" title="numpy.minimum"><code class="xref py py-obj docutils literal"><span class="pre">minimum</span></code></a>，<a class="reference internal" href="numpy.fmin.html#numpy.fmin" title="numpy.fmin"><code class="xref py py-obj docutils literal"><span class="pre">fmin</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-49">NaN值被传播，即如果至少一个项是NaN，则相应的最大值也将是NaN。</span><span class="yiyi-st" id="yiyi-50">要忽略NaN值（MATLAB行为），请使用nanmax。</span></p>
+<p><span class="yiyi-st" id="yiyi-51">不要使用<a class="reference internal" href="#numpy.amax" title="numpy.amax"><code class="xref py py-obj docutils literal"><span class="pre">amax</span></code></a>来比较2数组；当<code class="docutils literal"><span class="pre">a.shape[0]</span></code>为2，<code class="docutils literal"><span class="pre">最大值（a [0]，</span> <span class="pre">a [1]）</span>快于<code class="docutils literal"><span class="pre">amax（a，</span> <span class="pre">axis = 0）</span></code>。</code></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-52">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0, 1],</span>
+<span class="go">       [2, 3]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>           <span class="c1"># Maximum of the flattened array</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># Maxima along the first axis</span>
+<span class="go">array([2, 3])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># Maxima along the second axis</span>
+<span class="go">array([1, 3])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="go">nan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="go">4.0</span>
+</pre></div>
+</div>
+</dd></dl>

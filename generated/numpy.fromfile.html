@@ -1,0 +1,77 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fromfile</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fromfile.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fromfile.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fromfile"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">fromfile</code><span class="sig-paren">(</span><em>file</em>, <em>dtype=float</em>, <em>count=-1</em>, <em>sep=&apos;&apos;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从文本或二进制文件中的数据构造数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">一种以已知数据类型读取二进制数据的高效方法，以及解析简单格式化的文本文件。</span><span class="yiyi-st" id="yiyi-16">使用<em class="xref py py-obj">tofile</em>方法写入的数据可以使用此函数读取。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>文件</strong>：文件或str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">打开文件对象或文件名。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>dtype</strong>：数据类型</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">返回数组的数据类型。</span><span class="yiyi-st" id="yiyi-22">对于二进制文件，它用于确定文件中项目的大小和字节顺序。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>count</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">要读取的项目数。</span><span class="yiyi-st" id="yiyi-25"><code class="docutils literal"><span class="pre">-1</span></code>表示所有项目（即完整文件）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>sep</strong>：str</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">如果文件是文本文件，则项目之间的分隔符。</span><span class="yiyi-st" id="yiyi-28">空（“”）分隔符表示该文件应被视为二进制。</span><span class="yiyi-st" id="yiyi-29">分隔符中的空格（“”）匹配零个或多个空格字符。</span><span class="yiyi-st" id="yiyi-30">仅由空格组成的分隔符必须匹配至少一个空格。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<p><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.load.html#numpy.load" title="numpy.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>，<a class="reference internal" href="numpy.save.html#numpy.save" title="numpy.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>，<a class="reference internal" href="numpy.ndarray.tofile.html#numpy.ndarray.tofile" title="numpy.ndarray.tofile"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.tofile</span></code></a></span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.loadtxt.html#numpy.loadtxt" title="numpy.loadtxt"><code class="xref py py-obj docutils literal"><span class="pre">loadtxt</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">从文本文件加载数据的更灵活的方式。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-36">对于数据存储，不要依赖<em class="xref py py-obj">tofile</em>和<a class="reference internal" href="#numpy.fromfile" title="numpy.fromfile"><code class="xref py py-obj docutils literal"><span class="pre">fromfile</span></code></a>的组合，因为生成的二进制文件不是平台独立的。</span><span class="yiyi-st" id="yiyi-37">特别地，不保存字节顺序或数据类型信息。</span><span class="yiyi-st" id="yiyi-38">数据可以使用<a class="reference internal" href="numpy.save.html#numpy.save" title="numpy.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>和<a class="reference internal" href="numpy.load.html#numpy.load" title="numpy.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>存储在独立于<code class="docutils literal"><span class="pre">.npy</span></code>的平台中。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-40">构造一个ndarray：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&apos;time&apos;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&apos;min&apos;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;sec&apos;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)]),</span>
+<span class="gp">... </span>               <span class="p">(</span><span class="s1">&apos;temp&apos;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="s1">&apos;time&apos;</span><span class="p">][</span><span class="s1">&apos;min&apos;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">x</span><span class="p">[</span><span class="s1">&apos;temp&apos;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">98.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([((10, 0), 98.25)],</span>
+<span class="go">      dtype=[(&apos;time&apos;, [(&apos;min&apos;, &apos;&lt;i4&apos;), (&apos;sec&apos;, &apos;&lt;i4&apos;)]), (&apos;temp&apos;, &apos;&lt;f8&apos;)])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-41">将原始数据保存到磁盘：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">tmpnam</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">tofile</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">从磁盘读取原始数据：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+<span class="go">array([((10, 0), 98.25)],</span>
+<span class="go">      dtype=[(&apos;time&apos;, [(&apos;min&apos;, &apos;&lt;i4&apos;), (&apos;sec&apos;, &apos;&lt;i4&apos;)]), (&apos;temp&apos;, &apos;&lt;f8&apos;)])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">建议的存储和加载数据的方式：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fname</span> <span class="o">+</span> <span class="s1">&apos;.npy&apos;</span><span class="p">)</span>
+<span class="go">array([((10, 0), 98.25)],</span>
+<span class="go">      dtype=[(&apos;time&apos;, [(&apos;min&apos;, &apos;&lt;i4&apos;), (&apos;sec&apos;, &apos;&lt;i4&apos;)]), (&apos;temp&apos;, &apos;&lt;f8&apos;)])</span>
+</pre></div>
+</div>
+</dd></dl>

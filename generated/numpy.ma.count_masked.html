@@ -1,0 +1,69 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.count_masked</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.count_masked.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.count_masked.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.count_masked"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">count_masked</code><span class="sig-paren">(</span><em>arr</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/extras.py#L52-L104"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">计算沿给定轴的蒙版元素的数量。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>arr</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">具有（可能）屏蔽元素的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">要计数的轴。</span><span class="yiyi-st" id="yiyi-21">如果为无（默认值），则使用数组的展平版本。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>count</strong>：int，ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">屏蔽元素的总数（轴=无）或沿给定轴的每个切片的屏蔽元素的数量。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.ma.MaskedArray.count.html#numpy.ma.MaskedArray.count" title="numpy.ma.MaskedArray.count"><code class="xref py py-obj docutils literal"><span class="pre">MaskedArray.count</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-27">计数非屏蔽元素。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[0 1 2]</span>
+<span class="go"> [-- 4 --]</span>
+<span class="go"> [6 -- 8]],</span>
+<span class="go">      mask =</span>
+<span class="go"> [[False False False]</span>
+<span class="go"> [ True False  True]</span>
+<span class="go"> [False  True False]],</span>
+<span class="go">      fill_value=999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">count_masked</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-29">当使用<em class="xref py py-obj">axis</em>关键字时，返回一个数组。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">count_masked</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([1, 1, 1])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">count_masked</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([0, 2, 1])</span>
+</pre></div>
+</div>
+</dd></dl>

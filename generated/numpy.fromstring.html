@@ -1,0 +1,63 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fromstring</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fromstring.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fromstring.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fromstring"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">fromstring</code><span class="sig-paren">(</span><em>string</em>, <em>dtype=float</em>, <em>count=-1</em>, <em>sep=&apos;&apos;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">根据字符串中的原始二进制或文本数据初始化的新1-D数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>string</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">包含数据的字符串。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">数组的数据类型； default：float。</span><span class="yiyi-st" id="yiyi-20">对于二进制输入数据，数据必须采用此格式。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>count</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">从数据中读取此数量的<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>元素。</span><span class="yiyi-st" id="yiyi-23">如果这是负数（默认值），则计数将根据数据的长度确定。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>sep</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">如果没有提供或等效地，空字符串，数据将被解释为二进制数据；否则，为带十进制数字的ASCII文本。</span><span class="yiyi-st" id="yiyi-26">在后一种情况下，该参数被解释为在数据中分隔数字的字符串；元素之间的多余空格也被忽略。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>arr</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">构造的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">如果字符串不是满足请求的<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>和<em class="xref py py-obj">计数</em>的正确大小。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-33">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.frombuffer.html#numpy.frombuffer" title="numpy.frombuffer"><code class="xref py py-obj docutils literal"><span class="pre">frombuffer</span></code></a>，<a class="reference internal" href="numpy.fromfile.html#numpy.fromfile" title="numpy.fromfile"><code class="xref py py-obj docutils literal"><span class="pre">fromfile</span></code></a>，<a class="reference internal" href="numpy.fromiter.html#numpy.fromiter" title="numpy.fromiter"><code class="xref py py-obj docutils literal"><span class="pre">fromiter</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&apos;</span><span class="se">\x01\x02</span><span class="s1">&apos;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="go">array([1, 2], dtype=uint8)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&apos;1 2&apos;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&apos; &apos;</span><span class="p">)</span>
+<span class="go">array([1, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&apos;1, 2&apos;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&apos;,&apos;</span><span class="p">)</span>
+<span class="go">array([1, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&apos;</span><span class="se">\x01\x02\x03\x04\x05</span><span class="s1">&apos;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([1, 2, 3], dtype=uint8)</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,98 @@
+
+<h1><span class="yiyi-st" id="yiyi-16">Sorting, searching, and counting</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.sort.html">https://docs.scipy.org/doc/numpy/reference/routines.sort.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="sorting">
+<h2><span class="yiyi-st" id="yiyi-17">Sorting</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="generated/numpy.sort.html#numpy.sort" title="numpy.sort"><code class="xref py py-obj docutils literal"><span class="pre">sort</span></code></a>（a [，axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-19">返回数组的排序副本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="generated/numpy.lexsort.html#numpy.lexsort" title="numpy.lexsort"><code class="xref py py-obj docutils literal"><span class="pre">lexsort</span></code></a>（keys [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-21">使用键序列执行间接排序。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="generated/numpy.argsort.html#numpy.argsort" title="numpy.argsort"><code class="xref py py-obj docutils literal"><span class="pre">argsort</span></code></a>（a [，axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-23">返回将数组分类的索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="generated/numpy.ndarray.sort.html#numpy.ndarray.sort" title="numpy.ndarray.sort"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.sort</span></code></a>（[axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-25">就地对数组进行排序。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="generated/numpy.msort.html#numpy.msort" title="numpy.msort"><code class="xref py py-obj docutils literal"><span class="pre">msort</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-27">返回沿第一个轴排序的数组的副本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="generated/numpy.sort_complex.html#numpy.sort_complex" title="numpy.sort_complex"><code class="xref py py-obj docutils literal"><span class="pre">sort_complex</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-29">使用实部，然后是虚部对复数数组进行排序。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.partition.html#numpy.partition" title="numpy.partition"><code class="xref py py-obj docutils literal"><span class="pre">partition</span></code></a>（a，kth [，axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-31">返回数组的分区副本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="generated/numpy.argpartition.html#numpy.argpartition" title="numpy.argpartition"><code class="xref py py-obj docutils literal"><span class="pre">argpartition</span></code></a>（a，kth [，axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-33">使用<em class="xref py py-obj">种</em>关键字指定的算法沿给定轴执行间接分区。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="searching">
+<h2><span class="yiyi-st" id="yiyi-34">Searching</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="generated/numpy.argmax.html#numpy.argmax" title="numpy.argmax"><code class="xref py py-obj docutils literal"><span class="pre">argmax</span></code></a>（a [，axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-36">返回沿轴的最大值的索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="generated/numpy.nanargmax.html#numpy.nanargmax" title="numpy.nanargmax"><code class="xref py py-obj docutils literal"><span class="pre">nanargmax</span></code></a>（a [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-38">返回指定轴中忽略NaNs的最大值的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="generated/numpy.argmin.html#numpy.argmin" title="numpy.argmin"><code class="xref py py-obj docutils literal"><span class="pre">argmin</span></code></a>（a [，axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-40">返回沿轴的最小值的索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="generated/numpy.nanargmin.html#numpy.nanargmin" title="numpy.nanargmin"><code class="xref py py-obj docutils literal"><span class="pre">nanargmin</span></code></a>（a [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-42">返回指定轴中忽略NaN的最小值的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="generated/numpy.argwhere.html#numpy.argwhere" title="numpy.argwhere"><code class="xref py py-obj docutils literal"><span class="pre">argwhere</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-44">找到非零的数组元素的索引，按元素分组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.nonzero.html#numpy.nonzero" title="numpy.nonzero"><code class="xref py py-obj docutils literal"><span class="pre">nonzero</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">返回非零元素的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.flatnonzero.html#numpy.flatnonzero" title="numpy.flatnonzero"><code class="xref py py-obj docutils literal"><span class="pre">flatnonzero</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-48">在a的扁平版本中返回非零的索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.where.html#numpy.where" title="numpy.where"><code class="xref py py-obj docutils literal"><span class="pre">where</span></code></a>（条件，[x，y]）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">根据<em class="xref py py-obj">条件</em>，从<em class="xref py py-obj">x</em>或<em class="xref py py-obj">y</em>返回元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.searchsorted.html#numpy.searchsorted" title="numpy.searchsorted"><code class="xref py py-obj docutils literal"><span class="pre">searchsorted</span></code></a>（a，v [，side，sorter]）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">查找要插入元素以维持顺序的索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="generated/numpy.extract.html#numpy.extract" title="numpy.extract"><code class="xref py py-obj docutils literal"><span class="pre">extract</span></code></a>（condition，arr）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">返回满足某些条件的数组的元素。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="counting">
+<h2><span class="yiyi-st" id="yiyi-55">Counting</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="generated/numpy.count_nonzero.html#numpy.count_nonzero" title="numpy.count_nonzero"><code class="xref py py-obj docutils literal"><span class="pre">count_nonzero</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-57">计算数组<code class="docutils literal"><span class="pre">a</span></code>中非零值的数量。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

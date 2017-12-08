@@ -1,0 +1,87 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.choice</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.choice.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.choice.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.choice"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">choice</code><span class="sig-paren">(</span><em>a</em>, <em>size=None</em>, <em>replace=True</em>, <em>p=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从给定的1-D数组生成随机样本</span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-15"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：1-D array-like或int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">如果是一个ndarray，从它的元素生成一个随机样本。</span><span class="yiyi-st" id="yiyi-19">如果是int，则生成随机样本，如同a是np.arange(n)</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">输出的形状。</span><span class="yiyi-st" id="yiyi-22">如果给定形状是例如<code class="docutils literal"><span class="pre">(m,</span> <span class="pre">n,</span> <span class="pre">k)</span></code>，则抽取<code class="docutils literal"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code>个样本。</span><span class="yiyi-st" id="yiyi-23">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>replace</strong>：boolean，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">采样是否有重复</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>p</strong>：1-D array-like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">与a中的每个条目相关联的概率。</span><span class="yiyi-st" id="yiyi-28">如果没有给出样本，则假设在a中的所有条目均匀分布。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>samples</strong>：1-D字符串，形状(size,)</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">生成的随机样本</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-32">引发：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-33"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-34">如果a是int并且小于零，如果a或p不是一维的，如果a是大小为0的数组类型，如果p不是概率向量，如果a和p具有不同的长度，或者如果replace = False，并且样本大小大于种群大小</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-35">另见</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="numpy.random.randint.html#numpy.random.randint" title="numpy.random.randint"><code class="xref py py-obj docutils literal"><span class="pre">randint</span></code></a>，<a class="reference internal" href="numpy.random.shuffle.html#numpy.random.shuffle" title="numpy.random.shuffle"><code class="xref py py-obj docutils literal"><span class="pre">shuffle</span></code></a>，<a class="reference internal" href="numpy.random.permutation.html#numpy.random.permutation" title="numpy.random.permutation"><code class="xref py py-obj docutils literal"><span class="pre">permutation</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-38">从np.arange(5)生成大小为3的均匀随机样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">array([0, 3, 4])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#This is equivalent to np.random.randint(0,5,3)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">从np.arange(5)生成大小为3的非均匀随机样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">array([3, 3, 0])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">从np.arange(5)生成大小为3的均匀随机样本，没有重复：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">array([3,1,0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#This is equivalent to np.random.permutation(np.arange(5))[:3]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-41">从np.arange(5)生成大小为3的非均匀随机样本，没有重复：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">array([2, 3, 0])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">上述任何一个例子都可以使用一个类似数组的对象重新运行，而不是只是用整数。</span><span class="yiyi-st" id="yiyi-43">例如：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">aa_milne_arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&apos;pooh&apos;</span><span class="p">,</span> <span class="s1">&apos;rabbit&apos;</span><span class="p">,</span> <span class="s1">&apos;piglet&apos;</span><span class="p">,</span> <span class="s1">&apos;Christopher&apos;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">aa_milne_arr</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span>
+<span class="go">array([&apos;pooh&apos;, &apos;pooh&apos;, &apos;pooh&apos;, &apos;Christopher&apos;, &apos;piglet&apos;],</span>
+<span class="go">      dtype=&apos;|S11&apos;)</span>
+</pre></div>
+</div>
+</dd></dl>

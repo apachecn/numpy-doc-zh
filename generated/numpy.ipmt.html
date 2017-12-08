@@ -1,0 +1,98 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.ipmt</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ipmt.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ipmt.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ipmt"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">ipmt</code><span class="sig-paren">(</span><em>rate</em>, <em>per</em>, <em>nper</em>, <em>pv</em>, <em>fv=0.0</em>, <em>when=&apos;end&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/financial.py#L286-L379"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算付款的利息部分。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>rate</strong>：标量或array_like的形状（M，）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">利率作为十进制（不是百分比）每期</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>per</strong>：标量或array_like形状（M，）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">对贷款支付的利息在生活或贷款期间改变。</span><span class="yiyi-st" id="yiyi-20"><em class="xref py py-obj">每</em>是计算利息金额的付款期间。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>nper</strong>：标量或array_like的形状（M，）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">复合周期数</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>pv</strong>：形状（M，）的标量或数组类</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">目前价值</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>fv</strong>：标量或array_like形状（M，），可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">未来价值</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>时</strong>：{{&apos;begin&apos;，1}，{&apos;end&apos;，0}}，{string，int}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">付款到期时（“开始”（1）或“结束”（0））。</span><span class="yiyi-st" id="yiyi-29">默认为{&apos;end&apos;，0}。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">付款利息部分。</span><span class="yiyi-st" id="yiyi-33">如果所有输入是标量，则返回标量浮点。</span><span class="yiyi-st" id="yiyi-34">如果任何输入是array_like，返回每个输入元素的利息支付。</span><span class="yiyi-st" id="yiyi-35">如果多个输入是array_like，它们都必须具有相同的形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-36">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.ppmt.html#numpy.ppmt" title="numpy.ppmt"><code class="xref py py-obj docutils literal"><span class="pre">ppmt</span></code></a>，<a class="reference internal" href="numpy.pmt.html#numpy.pmt" title="numpy.pmt"><code class="xref py py-obj docutils literal"><span class="pre">pmt</span></code></a>，<a class="reference internal" href="numpy.pv.html#numpy.pv" title="numpy.pv"><code class="xref py py-obj docutils literal"><span class="pre">pv</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-39">总付款是由本金加利息支付。</span></p>
+<p><span class="yiyi-st" id="yiyi-40"><code class="docutils literal"><span class="pre">pmt</span> <span class="pre">=</span> <span class="pre">ppmt</span> <span class="pre">+</span> <span class="pre">ipmt</span> </code></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-42">什么是1年期贷款2500美元的摊销时间表，每年8.24％的利率？</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">principal</span> <span class="o">=</span> <span class="mf">2500.00</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">&apos;per&apos;变量表示贷款的期间。</span><span class="yiyi-st" id="yiyi-44">记住，财务方程开始周期计数在1！</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">per</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="o">*</span><span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ipmt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ipmt</span><span class="p">(</span><span class="mf">0.0824</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="mi">12</span><span class="p">,</span> <span class="n">principal</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ppmt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ppmt</span><span class="p">(</span><span class="mf">0.0824</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span> <span class="n">per</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="mi">12</span><span class="p">,</span> <span class="n">principal</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">&apos;ipmt&apos;和&apos;ppmt&apos;数组的总和的每个元素应等于&apos;pmt&apos;。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pmt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pmt</span><span class="p">(</span><span class="mf">0.0824</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="mi">12</span><span class="p">,</span> <span class="n">principal</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">ipmt</span> <span class="o">+</span> <span class="n">ppmt</span><span class="p">,</span> <span class="n">pmt</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fmt</span> <span class="o">=</span> <span class="s1">&apos;</span><span class="si">{0:2d}</span><span class="s1"> </span><span class="si">{1:8.2f}</span><span class="s1"> </span><span class="si">{2:8.2f}</span><span class="s1"> </span><span class="si">{3:8.2f}</span><span class="s1">&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">payment</span> <span class="ow">in</span> <span class="n">per</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">index</span> <span class="o">=</span> <span class="n">payment</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="gp">... </span>    <span class="n">principal</span> <span class="o">=</span> <span class="n">principal</span> <span class="o">+</span> <span class="n">ppmt</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">payment</span><span class="p">,</span> <span class="n">ppmt</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">ipmt</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">principal</span><span class="p">))</span>
+<span class="go"> 1  -200.58   -17.17  2299.42</span>
+<span class="go"> 2  -201.96   -15.79  2097.46</span>
+<span class="go"> 3  -203.35   -14.40  1894.11</span>
+<span class="go"> 4  -204.74   -13.01  1689.37</span>
+<span class="go"> 5  -206.15   -11.60  1483.22</span>
+<span class="go"> 6  -207.56   -10.18  1275.66</span>
+<span class="go"> 7  -208.99    -8.76  1066.67</span>
+<span class="go"> 8  -210.42    -7.32   856.25</span>
+<span class="go"> 9  -211.87    -5.88   644.38</span>
+<span class="go">10  -213.32    -4.42   431.05</span>
+<span class="go">11  -214.79    -2.96   216.26</span>
+<span class="go">12  -216.26    -1.49    -0.00</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">interestpd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ipmt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">interestpd</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">-112.98</span>
+</pre></div>
+</div>
+</dd></dl>

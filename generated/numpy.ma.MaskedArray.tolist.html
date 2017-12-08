@@ -1,0 +1,39 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.tolist</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.tolist.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.tolist.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.tolist"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">tolist</code><span class="sig-paren">(</span><em>fill_value=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L5669-L5718"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将掩码数组的数据部分作为分层Python列表返回。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">数据项转换为最近的兼容Python类型。</span><span class="yiyi-st" id="yiyi-17">屏蔽值转换为<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.MaskedArray.fill_value" title="numpy.ma.MaskedArray.fill_value"><code class="xref py py-obj docutils literal"><span class="pre">fill_value</span></code></a>。</span><span class="yiyi-st" id="yiyi-18">如果<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.MaskedArray.fill_value" title="numpy.ma.MaskedArray.fill_value"><code class="xref py py-obj docutils literal"><span class="pre">fill_value</span></code></a>为None，则输出列表中的相应条目将为<code class="docutils literal"><span class="pre">None</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>fill_value</strong>：标量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">用于无效条目的值。</span><span class="yiyi-st" id="yiyi-22">默认值为None。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>result</strong>：list</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">掩码数组的Python列表表示形式。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]],</span> <span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[[1, None, 3], [None, 5, None], [7, None, 9]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">(</span><span class="o">-</span><span class="mi">999</span><span class="p">)</span>
+<span class="go">[[1, -999, 3], [-999, 5, -999], [7, -999, 9]]</span>
+</pre></div>
+</div>
+</dd></dl>

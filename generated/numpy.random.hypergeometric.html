@@ -1,0 +1,92 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.hypergeometric</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.hypergeometric.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.hypergeometric.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.hypergeometric"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">hypergeometric</code><span class="sig-paren">(</span><em>ngood</em>, <em>nbad</em>, <em>nsample</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从超几何分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">样本是从具有指定参数的超几何分布绘制的，ngood（做出良好选择的方法），nbad（做出错误选择的方法）和nsample =抽样项目数，小于或等于总和ngood + nbad。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>ngood</strong>：int或array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">做出良好选择的方法数。</span><span class="yiyi-st" id="yiyi-19">必须为非负数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>nbad</strong>：int或array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">进行错误选择的方式数。</span><span class="yiyi-st" id="yiyi-22">必须为非负数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>nsample</strong>：int或array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">采样项目数。</span><span class="yiyi-st" id="yiyi-25">必须至少为1，且最多<code class="docutils literal"><span class="pre">ngood</span> <span class="pre">+</span> <span class="pre">nbad</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">输出形状。</span><span class="yiyi-st" id="yiyi-28">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-29">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>samples</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">这些值都是[0，n]中的整数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-33">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-34"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.hypergeom</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">概率密度函数，分布或累积密度函数等。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-37">超几何分布的概率密度为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-38">其中<img alt="0 \le x \le m" class="math" src="../../_images/math/253f7d505acb498bc601700e27b2ab3b790586c2.png" style="vertical-align: -2px">和</span></p>
+<p><span class="yiyi-st" id="yiyi-39">对于P（x）x成功的概率，n = ngood，m = nbad，N =样本数。</span></p>
+<p><span class="yiyi-st" id="yiyi-40">考虑一个有黑色和白色大理石的缸，它们的颜色是黑色的，而nbad是白色的。</span><span class="yiyi-st" id="yiyi-41">如果你绘制没有替换的nsample球，那么超几何分布描述了绘制的样本中的黑球的分布。</span></p>
+<p><span class="yiyi-st" id="yiyi-42">注意，这种分布与二项分布非常相似，除了在这种情况下，绘制样本而不替换，而在二项式情况下，样本用替换来绘制（或者样本空间是无限的）。</span><span class="yiyi-st" id="yiyi-43">随着样本空间变大，该分布接近二项式。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r225" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-45"><a class="fn-backref" href="#id1">[R225]</a></span></td><td><span class="yiyi-st" id="yiyi-46">Lentner，Marvin，“Elementary Applied Statistics”，Bogden和Quigley，1972。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r226" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-47"><a class="fn-backref" href="#id2">[R226]</a></span></td><td><span class="yiyi-st" id="yiyi-48">Weisstein，Eric W.“超几何分布”。来自MathWorld-Wolfram Web资源。</span><span class="yiyi-st" id="yiyi-49"><a class="reference external" href="http://mathworld.wolfram.com/HypergeometricDistribution.html">http://mathworld.wolfram.com/HypergeometricDistribution.html</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r227" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-50"><a class="fn-backref" href="#id3">[R227]</a></span></td><td><span class="yiyi-st" id="yiyi-51">维基百科，“超几何分布”，<a class="reference external" href="http://en.wikipedia.org/wiki/Hypergeometric_distribution">http://en.wikipedia.org/wiki/Hypergeometric_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-52">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-53">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ngood</span><span class="p">,</span> <span class="n">nbad</span><span class="p">,</span> <span class="n">nsamp</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span>
+<span class="go"># number of good, number of bad, and number of samples</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">hypergeometric</span><span class="p">(</span><span class="n">ngood</span><span class="p">,</span> <span class="n">nbad</span><span class="p">,</span> <span class="n">nsamp</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">#   note that it is very unlikely to grab both bad items</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-54">假设你有一个15白色和15黑色大理石的缸。</span><span class="yiyi-st" id="yiyi-55">如果你随机拉15个大理石，12个或更多的是一种颜色的可能性有多大？</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">hypergeometric</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="o">&gt;=</span><span class="mi">12</span><span class="p">)</span><span class="o">/</span><span class="mf">100000.</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="o">&lt;=</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mf">100000.</span>
+<span class="go">#   answer = 0.003 ... pretty unlikely!</span>
+</pre></div>
+</div>
+</dd></dl>

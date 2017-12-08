@@ -1,0 +1,51 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.ndenumerate</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndenumerate.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndenumerate.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.ndenumerate"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">ndenumerate</code><span class="sig-paren">(</span><em>arr</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/index_tricks.py#L475-L522"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">多维索引迭代器。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回迭代器产生数组坐标和值的对。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>arr</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-18">输入数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-19">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="numpy.ndindex.html#numpy.ndindex" title="numpy.ndindex"><code class="xref py py-obj docutils literal"><span class="pre">ndindex</span></code></a>，<a class="reference internal" href="numpy.flatiter.html#numpy.flatiter" title="numpy.flatiter"><code class="xref py py-obj docutils literal"><span class="pre">flatiter</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-21">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">ndenumerate</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">(0, 0) 1</span>
+<span class="go">(0, 1) 2</span>
+<span class="go">(1, 0) 3</span>
+<span class="go">(1, 1) 4</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">方法</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="numpy.ndenumerate.next.html#numpy.ndenumerate.next" title="numpy.ndenumerate.next"><code class="xref py py-obj docutils literal"><span class="pre">next</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-24">标准迭代器方法，返回索引元组和数组值。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

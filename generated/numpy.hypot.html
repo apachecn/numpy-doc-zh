@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.hypot</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.hypot.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.hypot.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.hypot"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">hypot</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;hypot&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">给定直角三角形的“腿”，返回其斜边。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">Equivalent to <code class="docutils literal"><span class="pre">sqrt(x1**2</span> <span class="pre">+</span> <span class="pre">x2**2)</span></code>, element-wise. </span><span class="yiyi-st" id="yiyi-16">如果<em class="xref py py-obj">x1</em>或<em class="xref py py-obj">x2</em>是标量类型的（即，可以明确地转换为标量类型），则广播它用于另一个参数的每个元素。</span><span class="yiyi-st" id="yiyi-17">（参见实施例）</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>x1，x2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">三角形的腿。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">数组，其中放置输出。</span><span class="yiyi-st" id="yiyi-23">它的类型被保留，并且它必须是保持输出的正确形状。</span><span class="yiyi-st" id="yiyi-24">请参阅doc.ufuncs。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>z</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">三角形的斜边。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="go">array([[ 5.,  5.,  5.],</span>
+<span class="go">       [ 5.,  5.,  5.],</span>
+<span class="go">       [ 5.,  5.,  5.]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-29">示例广播的scalar_like参数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+<span class="go">array([[ 5.,  5.,  5.],</span>
+<span class="go">       [ 5.,  5.,  5.],</span>
+<span class="go">       [ 5.,  5.,  5.]])</span>
+</pre></div>
+</div>
+</dd></dl>

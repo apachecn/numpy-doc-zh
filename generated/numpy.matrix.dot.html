@@ -1,0 +1,34 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.matrix.dot</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.dot.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.dot.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.matrix.dot"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">matrix.</code><code class="descname">dot</code><span class="sig-paren">(</span><em>b</em>, <em>out=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">两个数组的点积。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">有关完整文档，请参阅<a class="reference internal" href="numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-obj docutils literal"><span class="pre">numpy.dot</span></code></a>。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-17">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-obj docutils literal"><span class="pre">numpy.dot</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-19">等效函数</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-20">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="go">array([[ 2.,  2.],</span>
+<span class="go">       [ 2.,  2.]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-21">这个数组方法可以方便地链接：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="go">array([[ 8.,  8.],</span>
+<span class="go">       [ 8.,  8.]])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,75 @@
+
+<h1><span class="yiyi-st" id="yiyi-12"><a class="reference internal" href="#numpy-r">numpy.r</a></span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.r_.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.r_.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.r_"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">r_</code><em class="property"> = &lt;numpy.lib.index_tricks.RClass object&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将切片对象翻译为沿第一轴的连接。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">这是一个快速构建数组的简单方法。</span><span class="yiyi-st" id="yiyi-16">有两个用例。</span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-17">如果索引表达式包含逗号分隔的数组，则沿着它们的第一个轴将它们堆叠。</span></li>
+<li><span class="yiyi-st" id="yiyi-18">如果索引表达式包含切片符号或标量，则创建具有由切片符号指示的范围的1-D数组。</span></li>
+</ol>
+<p><span class="yiyi-st" id="yiyi-19">如果使用切片符号，则语法<code class="docutils literal"><span class="pre">start:stop:step</span></code>等效于<code class="docutils literal"><span class="pre">np.arange（start，</span> <span class="pre">stop，</span> <span class="pre"> step）</span></code>。</span><span class="yiyi-st" id="yiyi-20">然而，如果<code class="docutils literal"><span class="pre">step</span></code>是虚数（即100j），则其整数部分被解释为期望的点数，并且开始和停止包括在内。</span><span class="yiyi-st" id="yiyi-21">换句话说，<code class="docutils literal"><span class="pre">start:stop:stepj</span></code>被解释为<code class="docutils literal"><span class="pre">np.linspace（start，</span> <span class="pre">stop，</span> <span class="pre">t5&gt; <span class="pre">endpoint = 1）</span></span></code>。</span><span class="yiyi-st" id="yiyi-22">在切片符号扩展之后，所有逗号分隔的序列被连接在一起。</span></p>
+<p><span class="yiyi-st" id="yiyi-23">作为索引表达式的第一个元素放置的可选字符串可用于更改输出。</span><span class="yiyi-st" id="yiyi-24">字符串&apos;r&apos;或&apos;c&apos;导致矩阵输出。</span><span class="yiyi-st" id="yiyi-25">如果结果是1-D并且指定“r”，则产生1&#xD7;N（行）矩阵。</span><span class="yiyi-st" id="yiyi-26">如果结果是1-D并且指定“c”，则产生N&#xD7;1（列）矩阵。</span><span class="yiyi-st" id="yiyi-27">如果结果是2-D，则两者提供相同的矩阵结果。</span></p>
+<p><span class="yiyi-st" id="yiyi-28">字符串整数指定哪个轴将多个逗号分隔的数组堆栈。</span><span class="yiyi-st" id="yiyi-29">两个逗号分隔的整数的字符串允许指示最小维数以强制每个条目作为第二个整数（沿着连接的轴仍然是第一个整数）。</span></p>
+<p><span class="yiyi-st" id="yiyi-30">具有三个逗号分隔的整数的字符串允许指定要连接的轴，强制条目的最小维数，以及哪个轴应包含小于指定维数的数组的开始。</span><span class="yiyi-st" id="yiyi-31">换句话说，第三个整数允许你指定1的位置应放置在数组的形状中，其形状已升级。</span><span class="yiyi-st" id="yiyi-32">默认情况下，它们放在形状元组的前面。</span><span class="yiyi-st" id="yiyi-33">第三个参数允许你指定数组的开始位置。</span><span class="yiyi-st" id="yiyi-34">因此，第三个参数&apos;0&apos;会将1放在数组形状的末尾。</span><span class="yiyi-st" id="yiyi-35">负整数指定新形状元组中应放置升级数组的最后一个维度的位置，因此默认值为“-1”。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-36">参数：</span></th><td class="field-body"><span class="yiyi-st" id="yiyi-37"><strong>不是函数，因此不需要参数</strong></span></td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-38">返回：</span></th><td class="field-body"><span class="yiyi-st" id="yiyi-39">连接的ndarray或矩阵。</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-40">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="numpy.concatenate.html#numpy.concatenate" title="numpy.concatenate"><code class="xref py py-obj docutils literal"><span class="pre">concatenate</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-42">沿现有轴连接数组序列。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="numpy.c_.html#numpy.c_" title="numpy.c_"><code class="xref py py-obj docutils literal"><span class="pre">c_</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-44">将切片对象转换为沿第二轴的连接。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-45">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])]</span>
+<span class="go">array([1, 2, 3, 0, 0, 4, 5, 6])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="n">j</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="go">array([-1. , -0.6, -0.2,  0.2,  0.6,  1. ,  0. ,  0. ,  0. ,  5. ,  6. ])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">字符串整数指定要连接的轴或要强制输入的维的最小数量。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&apos;-1&apos;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span> <span class="c1"># concatenate along last axis</span>
+<span class="go">array([[0, 1, 2, 0, 1, 2],</span>
+<span class="go">       [3, 4, 5, 3, 4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&apos;0,2&apos;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span> <span class="c1"># concatenate along first axis, dim&gt;=2</span>
+<span class="go">array([[1, 2, 3],</span>
+<span class="go">       [4, 5, 6]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&apos;0,2,0&apos;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>
+<span class="go">array([[1],</span>
+<span class="go">       [2],</span>
+<span class="go">       [3],</span>
+<span class="go">       [4],</span>
+<span class="go">       [5],</span>
+<span class="go">       [6]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&apos;1,2,0&apos;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>
+<span class="go">array([[1, 4],</span>
+<span class="go">       [2, 5],</span>
+<span class="go">       [3, 6]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-47">使用&apos;r&apos;或&apos;c&apos;作为第一个字符串参数创建一个矩阵。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="s1">&apos;r&apos;</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>
+<span class="go">matrix([[1, 2, 3, 4, 5, 6]])</span>
+</pre></div>
+</div>
+</dd></dl>

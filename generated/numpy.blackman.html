@@ -1,0 +1,85 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.blackman</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.blackman.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.blackman.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.blackman"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">blackman</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L2582-L2677"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回Blackman窗口。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">布莱克曼窗口是通过使用余弦的和的前三个项形成的锥形。</span><span class="yiyi-st" id="yiyi-16">它被设计成具有接近可能的最小泄漏。</span><span class="yiyi-st" id="yiyi-17">它接近最佳，只是略差于凯泽窗口。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>M</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输出窗口中的点数。</span><span class="yiyi-st" id="yiyi-21">如果为零或更小，则返回一个空数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">窗口，最大值归一化为1（仅当样本数为奇数时才显示该值）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.bartlett.html#numpy.bartlett" title="numpy.bartlett"><code class="xref py py-obj docutils literal"><span class="pre">bartlett</span></code></a>，<a class="reference internal" href="numpy.hamming.html#numpy.hamming" title="numpy.hamming"><code class="xref py py-obj docutils literal"><span class="pre">hamming</span></code></a>，<a class="reference internal" href="numpy.hanning.html#numpy.hanning" title="numpy.hanning"><code class="xref py py-obj docutils literal"><span class="pre">hanning</span></code></a>，<a class="reference internal" href="numpy.kaiser.html#numpy.kaiser" title="numpy.kaiser"><code class="xref py py-obj docutils literal"><span class="pre">kaiser</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">Blackman窗口定义为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-29">大多数对Blackman窗口的引用来自信号处理文献，其中它被用作用于平滑值的许多窗口函数之一。</span><span class="yiyi-st" id="yiyi-30">它也称为变迹（意指“去除脚”，即在采样信号的开始和结束处的平滑不连续性）或渐变函数。</span><span class="yiyi-st" id="yiyi-31">它被称为“接近最优”渐缩函数，几乎与kaiser窗口一样好（通过一些措施）。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">参考文献</span></p>
+<p><span class="yiyi-st" id="yiyi-33">布莱克曼</span><span class="yiyi-st" id="yiyi-34">和Tukey，J.W。，（1958）The measurement of power spectra，Dover Publications，New York。</span></p>
+<p><span class="yiyi-st" id="yiyi-35">Oppenheim，A.V.，and R.W.</span><span class="yiyi-st" id="yiyi-36">Schafer。</span><span class="yiyi-st" id="yiyi-37">离散时间信号处理。</span><span class="yiyi-st" id="yiyi-38">Upper Saddle River，NJ：Prentice-Hall，1999，</span><span class="yiyi-st" id="yiyi-39">468-471。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-40">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">blackman</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="go">array([ -1.38777878e-17,   3.26064346e-02,   1.59903635e-01,</span>
+<span class="go">         4.14397981e-01,   7.36045180e-01,   9.67046769e-01,</span>
+<span class="go">         9.67046769e-01,   7.36045180e-01,   4.14397981e-01,</span>
+<span class="go">         1.59903635e-01,   3.26064346e-02,  -1.38777878e-17])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-41">绘制窗口和频率响应：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.fft</span> <span class="k">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">fftshift</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">blackman</span><span class="p">(</span><span class="mi">51</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Blackman window&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Sample&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="go">&lt;matplotlib.figure.Figure object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="mi">2048</span><span class="p">)</span> <span class="o">/</span> <span class="mf">25.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fftshift</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mag</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Frequency response of Blackman window&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitude [dB]&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Normalized frequency [cycles per sample]&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&apos;tight&apos;</span><span class="p">)</span>
+<span class="go">(-0.5, 0.5, -100.0, ...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>

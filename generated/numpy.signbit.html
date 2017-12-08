@@ -1,0 +1,41 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.signbit</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.signbit.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.signbit.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.signbit"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">signbit</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;signbit&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">以元素为单位返回True，其中signbit已设置（小于零）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入值（s）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">数组，其中放置输出。</span><span class="yiyi-st" id="yiyi-20">它的类型被保留，并且它必须是保持输出的正确形状。</span><span class="yiyi-st" id="yiyi-21">请参见<code class="xref py py-obj docutils literal"><span class="pre">doc.ufuncs</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>result</strong>：ndarray的bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">输出数组或引用<em class="xref py py-obj">输出</em>（如果提供）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">signbit</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">signbit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.3</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">]))</span>
+<span class="go">array([False,  True, False], dtype=bool)</span>
+</pre></div>
+</div>
+</dd></dl>

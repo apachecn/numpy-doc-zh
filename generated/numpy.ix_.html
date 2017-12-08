@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-12"><a class="reference internal" href="#numpy-ix">numpy.ix</a></span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ix_.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ix_.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ix_"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">ix_</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/index_tricks.py#L28-L85"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从多个序列构造一个打开的网格。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">该函数采用N 1-D序列并返回N个输出，每个具有N维，使得除了一个维度之外的所有形状均为1，并且具有非单位形状值的维度遍历所有N维。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">使用<a class="reference internal" href="#numpy.ix_" title="numpy.ix_"><code class="xref py py-obj docutils literal"><span class="pre">ix_</span></code></a>可以快速构建将索引交叉乘积的索引数组。</span><span class="yiyi-st" id="yiyi-17"><code class="docutils literal"><span class="pre">a[np.ix_([1,3],[2,5])]</span></code> returns the array <code class="docutils literal"><span class="pre">[[a[1,2]</span> <span class="pre">a[1,5]],</span> <span class="pre">[a[3,2]</span> <span class="pre">a[3,5]]]</span></code>.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>args</strong>：1-D序列</span></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：ndarrays的元组</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">N数组，每个具有N维，其中N是输入序列的数目。</span><span class="yiyi-st" id="yiyi-23">这些数组一起形成一个开放的网格。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.ogrid.html#numpy.ogrid" title="numpy.ogrid"><code class="xref py py-obj docutils literal"><span class="pre">ogrid</span></code></a>，<a class="reference internal" href="numpy.mgrid.html#numpy.mgrid" title="numpy.mgrid"><code class="xref py py-obj docutils literal"><span class="pre">mgrid</span></code></a>，<a class="reference internal" href="numpy.meshgrid.html#numpy.meshgrid" title="numpy.meshgrid"><code class="xref py py-obj docutils literal"><span class="pre">meshgrid</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0, 1, 2, 3, 4],</span>
+<span class="go">       [5, 6, 7, 8, 9]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ixgrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ixgrid</span>
+<span class="go">(array([[0],</span>
+<span class="go">       [1]]), array([[2, 4]]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ixgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">ixgrid</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">((2, 1), (1, 2))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="n">ixgrid</span><span class="p">]</span>
+<span class="go">array([[2, 4],</span>
+<span class="go">       [7, 9]])</span>
+</pre></div>
+</div>
+</dd></dl>

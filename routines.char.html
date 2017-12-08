@@ -1,0 +1,192 @@
+
+<h1><span class="yiyi-st" id="yiyi-17">String operations</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.char.html">https://docs.scipy.org/doc/numpy/reference/routines.char.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-18">此模块为<code class="xref py py-obj docutils literal"><span class="pre">numpy.string_</span></code>或<code class="xref py py-obj docutils literal"><span class="pre">numpy.unicode_</span></code>类型的数组提供一组向量化字符串操作。</span><span class="yiyi-st" id="yiyi-19">所有这些都基于Python标准库中的字符串方法。</span></p>
+<div class="section" id="id1">
+<h2><span class="yiyi-st" id="yiyi-20">String operations</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="generated/numpy.core.defchararray.add.html#numpy.core.defchararray.add" title="numpy.core.defchararray.add"><code class="xref py py-obj docutils literal"><span class="pre">add</span></code></a>（x1，x2）</span></td>
+<td><span class="yiyi-st" id="yiyi-22"></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="generated/numpy.core.defchararray.multiply.html#numpy.core.defchararray.multiply" title="numpy.core.defchararray.multiply"><code class="xref py py-obj docutils literal"><span class="pre">multiply</span></code></a>（a，i）</span></td>
+<td><span class="yiyi-st" id="yiyi-24">返回（a * i），即字符串多连接，逐元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="generated/numpy.core.defchararray.mod.html#numpy.core.defchararray.mod" title="numpy.core.defchararray.mod"><code class="xref py py-obj docutils literal"><span class="pre">mod</span></code></a>（a，values）</span></td>
+<td><span class="yiyi-st" id="yiyi-26">返回（a％i），这是Python 2.6之前的字符串格式化（iterpolation），对于一个array_likes的str或unicode的元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="generated/numpy.core.defchararray.capitalize.html#numpy.core.defchararray.capitalize" title="numpy.core.defchararray.capitalize"><code class="xref py py-obj docutils literal"><span class="pre">capitalize</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-28">返回<em class="xref py py-obj">a</em>的副本，只有每个元素的第一个字符大写。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="generated/numpy.core.defchararray.center.html#numpy.core.defchararray.center" title="numpy.core.defchararray.center"><code class="xref py py-obj docutils literal"><span class="pre">center</span></code></a>（a，width [，fillchar]）</span></td>
+<td><span class="yiyi-st" id="yiyi-30">返回<em class="xref py py-obj">a</em>的副本，其元素居中在长度<em class="xref py py-obj">宽度</em>的字符串中。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="generated/numpy.core.defchararray.decode.html#numpy.core.defchararray.decode" title="numpy.core.defchararray.decode"><code class="xref py py-obj docutils literal"><span class="pre">decode</span></code></a>（a [，encoding，errors]）</span></td>
+<td><span class="yiyi-st" id="yiyi-32">逐个调用<em class="xref py py-obj">str.decode</em>。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="generated/numpy.core.defchararray.encode.html#numpy.core.defchararray.encode" title="numpy.core.defchararray.encode"><code class="xref py py-obj docutils literal"><span class="pre">encode</span></code></a>（a [，encoding，errors]）</span></td>
+<td><span class="yiyi-st" id="yiyi-34">逐个调用<em class="xref py py-obj">str.encode</em>。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="generated/numpy.core.defchararray.join.html#numpy.core.defchararray.join" title="numpy.core.defchararray.join"><code class="xref py py-obj docutils literal"><span class="pre">join</span></code></a>（sep，seq）</span></td>
+<td><span class="yiyi-st" id="yiyi-36">返回一个字符串，它是序列<em class="xref py py-obj">seq</em>中字符串的并置。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="generated/numpy.core.defchararray.ljust.html#numpy.core.defchararray.ljust" title="numpy.core.defchararray.ljust"><code class="xref py py-obj docutils literal"><span class="pre">ljust</span></code></a>（a，width [，fillchar]）</span></td>
+<td><span class="yiyi-st" id="yiyi-38">在长度<em class="xref py py-obj">宽度</em>的字符串中返回一个数组，其元素为<em class="xref py py-obj">a</em>左对齐。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="generated/numpy.core.defchararray.lower.html#numpy.core.defchararray.lower" title="numpy.core.defchararray.lower"><code class="xref py py-obj docutils literal"><span class="pre">lower</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-40">返回一个数组，将元素转换为小写。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="generated/numpy.core.defchararray.lstrip.html#numpy.core.defchararray.lstrip" title="numpy.core.defchararray.lstrip"><code class="xref py py-obj docutils literal"><span class="pre">lstrip</span></code></a>（a [，chars]）</span></td>
+<td><span class="yiyi-st" id="yiyi-42">对于<em class="xref py py-obj">a</em>中的每个元素，返回前导字符已删除的副本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="generated/numpy.core.defchararray.partition.html#numpy.core.defchararray.partition" title="numpy.core.defchararray.partition"><code class="xref py py-obj docutils literal"><span class="pre">partition</span></code></a>（a，sep）</span></td>
+<td><span class="yiyi-st" id="yiyi-44">分隔<em class="xref py py-obj">中的每个元素</em> <em class="xref py py-obj">sep</em>。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.core.defchararray.replace.html#numpy.core.defchararray.replace" title="numpy.core.defchararray.replace"><code class="xref py py-obj docutils literal"><span class="pre">replace</span></code></a>（a，old，new [，count]）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">对于<em class="xref py py-obj">a</em>中的每个元素，返回一个字符串的副本，其中所有出现的子字符串<em class="xref py py-obj">old</em>被<code class="xref py py-obj docutils literal"><span class="pre">new</span></code>替换。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.core.defchararray.rjust.html#numpy.core.defchararray.rjust" title="numpy.core.defchararray.rjust"><code class="xref py py-obj docutils literal"><span class="pre">rjust</span></code></a>（a，width [，fillchar]）</span></td>
+<td><span class="yiyi-st" id="yiyi-48">返回一个数组，其元素为<em class="xref py py-obj">a</em>在长度<em class="xref py py-obj">宽度</em>的字符串中右对齐。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.core.defchararray.rpartition.html#numpy.core.defchararray.rpartition" title="numpy.core.defchararray.rpartition"><code class="xref py py-obj docutils literal"><span class="pre">rpartition</span></code></a>（a，sep）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">分割（拆分）最右侧分隔符周围的每个元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.core.defchararray.rsplit.html#numpy.core.defchararray.rsplit" title="numpy.core.defchararray.rsplit"><code class="xref py py-obj docutils literal"><span class="pre">rsplit</span></code></a>（a [，sep，maxsplit]）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">对于<em class="xref py py-obj">a</em>中的每个元素，使用<em class="xref py py-obj">sep</em>作为定界符字符串返回字符串中的单词列表。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="generated/numpy.core.defchararray.rstrip.html#numpy.core.defchararray.rstrip" title="numpy.core.defchararray.rstrip"><code class="xref py py-obj docutils literal"><span class="pre">rstrip</span></code></a>（a [，chars]）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">对于<em class="xref py py-obj">a</em>中的每个元素，返回一个删除了尾随字符的副本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="generated/numpy.core.defchararray.split.html#numpy.core.defchararray.split" title="numpy.core.defchararray.split"><code class="xref py py-obj docutils literal"><span class="pre">split</span></code></a>（a [，sep，maxsplit]）</span></td>
+<td><span class="yiyi-st" id="yiyi-56">对于<em class="xref py py-obj">a</em>中的每个元素，使用<em class="xref py py-obj">sep</em>作为定界符字符串返回字符串中的单词列表。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="generated/numpy.core.defchararray.splitlines.html#numpy.core.defchararray.splitlines" title="numpy.core.defchararray.splitlines"><code class="xref py py-obj docutils literal"><span class="pre">splitlines</span></code></a>（a [，keepends]）</span></td>
+<td><span class="yiyi-st" id="yiyi-58">对于<em class="xref py py-obj">a</em>中的每个元素，返回元素中的行的列表，在行边界处断开。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="generated/numpy.core.defchararray.strip.html#numpy.core.defchararray.strip" title="numpy.core.defchararray.strip"><code class="xref py py-obj docutils literal"><span class="pre">strip</span></code></a>（a [，chars]）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">对于<em class="xref py py-obj">a</em>中的每个元素，返回删除前导和尾随字符的副本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="generated/numpy.core.defchararray.swapcase.html#numpy.core.defchararray.swapcase" title="numpy.core.defchararray.swapcase"><code class="xref py py-obj docutils literal"><span class="pre">swapcase</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-62">返回单元格的字符串的副本，大写字符转换为小写，反之亦然。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="generated/numpy.core.defchararray.title.html#numpy.core.defchararray.title" title="numpy.core.defchararray.title"><code class="xref py py-obj docutils literal"><span class="pre">title</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-64">返回单元格标题字符串或unicode的套装版本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="generated/numpy.core.defchararray.translate.html#numpy.core.defchararray.translate" title="numpy.core.defchararray.translate"><code class="xref py py-obj docutils literal"><span class="pre">translate</span></code></a>（a，table [，deletechars]）</span></td>
+<td><span class="yiyi-st" id="yiyi-66">对于<em class="xref py py-obj">a</em>中的每个元素，返回一个字符串的副本，其中可选参数<em class="xref py py-obj">deletechars</em>中出现的所有字符都将被删除，其余字符已通过给定的转换表。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="generated/numpy.core.defchararray.upper.html#numpy.core.defchararray.upper" title="numpy.core.defchararray.upper"><code class="xref py py-obj docutils literal"><span class="pre">upper</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-68">返回一个数组，将元素转换为大写。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="generated/numpy.core.defchararray.zfill.html#numpy.core.defchararray.zfill" title="numpy.core.defchararray.zfill"><code class="xref py py-obj docutils literal"><span class="pre">zfill</span></code></a>（a，width）</span></td>
+<td><span class="yiyi-st" id="yiyi-70">返回以零填充的数字字符串</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="comparison">
+<h2><span class="yiyi-st" id="yiyi-71">Comparison</span></h2>
+<p><span class="yiyi-st" id="yiyi-72">与标准numpy比较运算符不同，在执行比较之前，<em class="xref py py-obj">char</em>模块中的运算符将空格字符结尾。</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-73"><a class="reference internal" href="generated/numpy.core.defchararray.equal.html#numpy.core.defchararray.equal" title="numpy.core.defchararray.equal"><code class="xref py py-obj docutils literal"><span class="pre">equal</span></code></a>（x1，x2）</span></td>
+<td><span class="yiyi-st" id="yiyi-74">元素方式返回（x1 == x2）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-75"><a class="reference internal" href="generated/numpy.core.defchararray.not_equal.html#numpy.core.defchararray.not_equal" title="numpy.core.defchararray.not_equal"><code class="xref py py-obj docutils literal"><span class="pre">not_equal</span></code></a>（x1，x2）</span></td>
+<td><span class="yiyi-st" id="yiyi-76">元素方式返回（x1！= x2）。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-77"><a class="reference internal" href="generated/numpy.core.defchararray.greater_equal.html#numpy.core.defchararray.greater_equal" title="numpy.core.defchararray.greater_equal"><code class="xref py py-obj docutils literal"><span class="pre">greater_equal</span></code></a>（x1，x2）</span></td>
+<td><span class="yiyi-st" id="yiyi-78">元素方式返回（x1&gt; = x2）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-79"><a class="reference internal" href="generated/numpy.core.defchararray.less_equal.html#numpy.core.defchararray.less_equal" title="numpy.core.defchararray.less_equal"><code class="xref py py-obj docutils literal"><span class="pre">less_equal</span></code></a>（x1，x2）</span></td>
+<td><span class="yiyi-st" id="yiyi-80">返回（x1</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-81"><a class="reference internal" href="generated/numpy.core.defchararray.greater.html#numpy.core.defchararray.greater" title="numpy.core.defchararray.greater"><code class="xref py py-obj docutils literal"><span class="pre">greater</span></code></a>（x1，x2）</span></td>
+<td><span class="yiyi-st" id="yiyi-82">元素方式返回（x1&gt; x2）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-83"><a class="reference internal" href="generated/numpy.core.defchararray.less.html#numpy.core.defchararray.less" title="numpy.core.defchararray.less"><code class="xref py py-obj docutils literal"><span class="pre">less</span></code></a>（x1，x2）</span></td>
+<td><span class="yiyi-st" id="yiyi-84">返回（x1</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="string-information">
+<h2><span class="yiyi-st" id="yiyi-85">String information</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-86"><a class="reference internal" href="generated/numpy.core.defchararray.count.html#numpy.core.defchararray.count" title="numpy.core.defchararray.count"><code class="xref py py-obj docutils literal"><span class="pre">count</span></code></a>（a，sub [，start，end]）</span></td>
+<td><span class="yiyi-st" id="yiyi-87">返回一个数组，其中在[<em class="xref py py-obj">开始</em>，<em class="xref py py-obj">结束</em>]范围内具有子串<em class="xref py py-obj">sub</em>的不重叠出现次数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-88"><a class="reference internal" href="generated/numpy.core.defchararray.find.html#numpy.core.defchararray.find" title="numpy.core.defchararray.find"><code class="xref py py-obj docutils literal"><span class="pre">find</span></code></a>（a，sub [，start，end]）</span></td>
+<td><span class="yiyi-st" id="yiyi-89">对于每个元素，返回字符串中找到子字符串<em class="xref py py-obj">sub</em>的最低索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-90"><a class="reference internal" href="generated/numpy.core.defchararray.index.html#numpy.core.defchararray.index" title="numpy.core.defchararray.index"><code class="xref py py-obj docutils literal"><span class="pre">index</span></code></a>（a，sub [，start，end]）</span></td>
+<td><span class="yiyi-st" id="yiyi-91">像<a class="reference internal" href="generated/numpy.core.defchararray.find.html#numpy.core.defchararray.find" title="numpy.core.defchararray.find"><code class="xref py py-obj docutils literal"><span class="pre">find</span></code></a>，但在找不到子字符串时引发<em class="xref py py-obj">ValueError</em>。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-92"><a class="reference internal" href="generated/numpy.core.defchararray.isalpha.html#numpy.core.defchararray.isalpha" title="numpy.core.defchararray.isalpha"><code class="xref py py-obj docutils literal"><span class="pre">isalpha</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-93">如果字符串中的所有字符都是字母并且至少有一个字符，则为每个元素返回true，否则返回false。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-94"><a class="reference internal" href="generated/numpy.core.defchararray.isdecimal.html#numpy.core.defchararray.isdecimal" title="numpy.core.defchararray.isdecimal"><code class="xref py py-obj docutils literal"><span class="pre">isdecimal</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-95">对于每个元素，如果元素中只有十进制字符，则返回True。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-96"><a class="reference internal" href="generated/numpy.core.defchararray.isdigit.html#numpy.core.defchararray.isdigit" title="numpy.core.defchararray.isdigit"><code class="xref py py-obj docutils literal"><span class="pre">isdigit</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-97">如果字符串中的所有字符都是数字，并且至少有一个字符，则返回true，否则返回false。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-98"><a class="reference internal" href="generated/numpy.core.defchararray.islower.html#numpy.core.defchararray.islower" title="numpy.core.defchararray.islower"><code class="xref py py-obj docutils literal"><span class="pre">islower</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-99">如果字符串中的所有封装字符都是小写字符，并且至少有一个套接字符，则返回true，否则返回false。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-100"><a class="reference internal" href="generated/numpy.core.defchararray.isnumeric.html#numpy.core.defchararray.isnumeric" title="numpy.core.defchararray.isnumeric"><code class="xref py py-obj docutils literal"><span class="pre">isnumeric</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-101">对于每个元素，如果元素中只有数字字符，则返回True。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-102"><a class="reference internal" href="generated/numpy.core.defchararray.isspace.html#numpy.core.defchararray.isspace" title="numpy.core.defchararray.isspace"><code class="xref py py-obj docutils literal"><span class="pre">isspace</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-103">如果字符串中只有空格字符并且至少有一个字符，则为每个元素返回true，否则返回false。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-104"><a class="reference internal" href="generated/numpy.core.defchararray.istitle.html#numpy.core.defchararray.istitle" title="numpy.core.defchararray.istitle"><code class="xref py py-obj docutils literal"><span class="pre">istitle</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-105">如果元素是一个已滴定的字符串并且至少有一个字符，则为每个元素返回true，否则返回false。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-106"><a class="reference internal" href="generated/numpy.core.defchararray.isupper.html#numpy.core.defchararray.isupper" title="numpy.core.defchararray.isupper"><code class="xref py py-obj docutils literal"><span class="pre">isupper</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-107">如果字符串中所有包含字符的字符都是大写且至少有一个字符，则返回true，否则返回false。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-108"><a class="reference internal" href="generated/numpy.core.defchararray.rfind.html#numpy.core.defchararray.rfind" title="numpy.core.defchararray.rfind"><code class="xref py py-obj docutils literal"><span class="pre">rfind</span></code></a>（a，sub [，start，end]）</span></td>
+<td><span class="yiyi-st" id="yiyi-109">For each element in <em class="xref py py-obj">a</em>, return the highest index in the string where substring <em class="xref py py-obj">sub</em> is found, such that <em class="xref py py-obj">sub</em> is contained within [<em class="xref py py-obj">start</em>, <em class="xref py py-obj">end</em>].</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-110"><a class="reference internal" href="generated/numpy.core.defchararray.rindex.html#numpy.core.defchararray.rindex" title="numpy.core.defchararray.rindex"><code class="xref py py-obj docutils literal"><span class="pre">rindex</span></code></a>（a，sub [，start，end]）</span></td>
+<td><span class="yiyi-st" id="yiyi-111">像<a class="reference internal" href="generated/numpy.core.defchararray.rfind.html#numpy.core.defchararray.rfind" title="numpy.core.defchararray.rfind"><code class="xref py py-obj docutils literal"><span class="pre">rfind</span></code></a>，但当找不到子字符串<em class="xref py py-obj">sub</em>时，会引发<em class="xref py py-obj">ValueError</em>。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-112"><a class="reference internal" href="generated/numpy.core.defchararray.startswith.html#numpy.core.defchararray.startswith" title="numpy.core.defchararray.startswith"><code class="xref py py-obj docutils literal"><span class="pre">startswith</span></code></a>（a，prefix [，start，end]）</span></td>
+<td><span class="yiyi-st" id="yiyi-113">返回<em class="xref py py-obj">True</em>的布尔数组，其中<em class="xref py py-obj">a</em>中的字符串元素以<em class="xref py py-obj">前缀</em>开头，否则为<em class="xref py py-obj">False</em>。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="convenience-class">
+<h2><span class="yiyi-st" id="yiyi-114">Convenience class</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-115"><a class="reference internal" href="generated/numpy.core.defchararray.chararray.html#numpy.core.defchararray.chararray" title="numpy.core.defchararray.chararray"><code class="xref py py-obj docutils literal"><span class="pre">chararray</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-116">提供了一个方便的查看数组的字符串和unicode值。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

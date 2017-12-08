@@ -1,0 +1,58 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.matrix.squeeze</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.squeeze.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.squeeze.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.matrix.squeeze"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">matrix.</code><code class="descname">squeeze</code><span class="sig-paren">(</span><em>axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/matrixlib/defmatrix.py#L461-L510"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回一个可能的重新整形矩阵。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">有关更多文档，请参阅<a class="reference internal" href="numpy.squeeze.html#numpy.squeeze" title="numpy.squeeze"><code class="xref py py-obj docutils literal"><span class="pre">numpy.squeeze</span></code></a>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>axis</strong>：无或int或tuple ints，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">选择形状中单维条目的子集。</span><span class="yiyi-st" id="yiyi-20">如果选择形状输入大于1的轴，则会出现错误。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>挤压</strong>：矩阵</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">矩阵，但如果它具有形状（N，1），则作为（1，N）矩阵。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.squeeze.html#numpy.squeeze" title="numpy.squeeze"><code class="xref py py-obj docutils literal"><span class="pre">numpy.squeeze</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-26">相关功能</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">如果<em class="xref py py-obj">m</em>具有单个列，那么该列作为矩阵的单个行返回。</span><span class="yiyi-st" id="yiyi-29">否则，返回<em class="xref py py-obj">m</em>。</span><span class="yiyi-st" id="yiyi-30">返回的矩阵总是<em class="xref py py-obj">m</em>本身或到<em class="xref py py-obj">m</em>的视图。提供一个axis关键字参数不会影响返回的矩阵，但它可能会导致错误。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">matrix([[1],</span>
+<span class="go">        [2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="go">matrix([[1, 2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
+<span class="go">matrix([[1, 2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="go">matrix([[1, 2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="go">matrix([[1, 2],</span>
+<span class="go">        [3, 4]])</span>
+</pre></div>
+</div>
+</dd></dl>

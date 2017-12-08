@@ -1,0 +1,21 @@
+
+<h1><span class="yiyi-st" id="yiyi-11">Mathematical functions with automatic domain (<code class="xref py py-mod docutils literal"><span class="pre">numpy.emath</span></code>)</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.emath.html">https://docs.scipy.org/doc/numpy/reference/routines.emath.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-12">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-13"><code class="xref py py-mod docutils literal"><span class="pre">numpy.emath</span></code>是导入<a class="reference internal" href="index.html#module-numpy" title="numpy"><code class="xref py py-mod docutils literal"><span class="pre">numpy</span></code></a>之后可用的<a class="reference internal" href="#module-numpy.lib.scimath" title="numpy.lib.scimath"><code class="xref py py-mod docutils literal"><span class="pre">numpy.lib.scimath</span></code></a>的首选别名。</span></p>
+</div>
+<span class="target" id="module-numpy.lib.scimath"></span><p><span class="yiyi-st" id="yiyi-14">包装器的功能是更为用户友好地调用某些数学函数，其输出数据类型不同于输入的某些域中的输入数据类型。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">例如，对于具有分支切割的函数，如<code class="xref py py-obj docutils literal"><span class="pre">log</span></code>，此模块中的版本在复平面中提供了数学有效的答案：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">math</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.lib</span> <span class="k">import</span> <span class="n">scimath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scimath</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-16">类似地，正确处理<code class="xref py py-obj docutils literal"><span class="pre">sqrt</span></code>，其他基本对数，<code class="xref py py-obj docutils literal"><span class="pre">power</span></code>和trig函数。</span><span class="yiyi-st" id="yiyi-17">有关具体示例，请参阅各自的docstrings。</span></p>

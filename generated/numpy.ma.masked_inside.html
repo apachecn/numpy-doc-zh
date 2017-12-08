@@ -1,0 +1,38 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.masked_inside</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.masked_inside.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.masked_inside.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.masked_inside"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">masked_inside</code><span class="sig-paren">(</span><em>x</em>, <em>v1</em>, <em>v2</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L2082-L2119"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">屏蔽给定间隔内的数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">Shortcut to <code class="docutils literal"><span class="pre">masked_where</span></code>, where <em class="xref py py-obj">condition</em> is True for <em class="xref py py-obj">x</em> inside the interval [v1,v2] (v1 <= x="" <="v2)." span=""><span class="yiyi-st" id="yiyi-17">边界<em class="xref py py-obj">v1</em>和<em class="xref py py-obj">v2</em>可以按任意顺序给出。</span></=></span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-18">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="numpy.ma.masked_where.html#numpy.ma.masked_where" title="numpy.ma.masked_where"><code class="xref py py-obj docutils literal"><span class="pre">masked_where</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-20">满足条件的掩码。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-21">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-22">数组<em class="xref py py-obj">x</em>预填充其填充值。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.31</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">masked_inside</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="go">masked_array(data = [0.31 1.2 -- -- -0.4 -1.1],</span>
+<span class="go">      mask = [False False  True  True False False],</span>
+<span class="go">      fill_value=1e+20)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-24"><em class="xref py py-obj">v1</em>和<em class="xref py py-obj">v2</em>的顺序无关紧要。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">masked_inside</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="go">masked_array(data = [0.31 1.2 -- -- -0.4 -1.1],</span>
+<span class="go">      mask = [False False  True  True False False],</span>
+<span class="go">      fill_value=1e+20)</span>
+</pre></div>
+</div>
+</dd></dl>

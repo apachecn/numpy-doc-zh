@@ -1,0 +1,69 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.multinomial</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.multinomial.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.multinomial.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.multinomial"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">multinomial</code><span class="sig-paren">(</span><em>n</em>, <em>pvals</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从多项分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">多项分布是二项分布的多元泛化。</span><span class="yiyi-st" id="yiyi-17">进行<code class="docutils literal"><span class="pre">p</span></code>可能结果之一的实验。</span><span class="yiyi-st" id="yiyi-18">这样的实验的一个例子是投掷骰子，其中结果可以是1到6。</span><span class="yiyi-st" id="yiyi-19">Each sample drawn from the distribution represents <em class="xref py py-obj">n</em> such experiments. </span><span class="yiyi-st" id="yiyi-20">其值<code class="docutils literal"><span class="pre">X_i</span> <span class="pre">=</span> <span class="pre">[X_0，</span> <span class="pre">X_1，</span> <span class="pre">t5&gt; <span class="pre">X_p]</span></span></code>表示结果的次数<code class="docutils literal"><span class="pre">i</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>n</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">实验次数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>pvals</strong>：浮点数，长度p</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">每个<code class="docutils literal"><span class="pre">p</span></code>不同结果的概率。</span><span class="yiyi-st" id="yiyi-26">这些应该总和为1（然而，只要<code class="docutils literal"><span class="pre">sum（pvals [：-1]）</span> <span class="pre"> <span class="pre">1）</span></span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">输出形状。</span><span class="yiyi-st" id="yiyi-29">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-30">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-33">绘制的样本，如果提供的话，形状<em>大小</em>。</span><span class="yiyi-st" id="yiyi-34">如果不是，则形状为<code class="docutils literal"><span class="pre">(N,)</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-35">换句话说，每个条目<code class="docutils literal"><span class="pre">out[i,j,...,:]</span></code>是从分布绘制的N维值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-37">投掷骰子20次：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mf">6.</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[4, 1, 7, 5, 2, 1]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">它在1次降落4次，在2次降落1次。</span></p>
+<p><span class="yiyi-st" id="yiyi-39">现在，投掷骰子20次，再次20次：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mf">6.</span><span class="p">]</span><span class="o">*</span><span class="mi">6</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([[3, 4, 3, 3, 4, 3],</span>
+<span class="go">       [2, 4, 3, 4, 0, 7]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">对于第一次，我们投掷3次1，4次2等。</span><span class="yiyi-st" id="yiyi-41">第二，我们投了2次1，4次2等。</span></p>
+<p><span class="yiyi-st" id="yiyi-42">加载的模具更有可能着陆在数字6：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mf">7.</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span> <span class="o">+</span> <span class="p">[</span><span class="mi">2</span><span class="o">/</span><span class="mf">7.</span><span class="p">])</span>
+<span class="go">array([11, 16, 14, 17, 16, 26])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">概率输入应该归一化。</span><span class="yiyi-st" id="yiyi-44">作为实现细节，忽略最后一个条目的值，并假设它占用任何剩余概率质量，但这不应该依赖。</span><span class="yiyi-st" id="yiyi-45">一个偏好的硬币在一侧的重量是另一侧的两倍，应该这样取样：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="mi">3</span><span class="p">])</span>  <span class="c1"># RIGHT</span>
+<span class="go">array([38, 62])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">不喜欢：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>  <span class="c1"># WRONG</span>
+<span class="go">array([100,   0])</span>
+</pre></div>
+</div>
+</dd></dl>

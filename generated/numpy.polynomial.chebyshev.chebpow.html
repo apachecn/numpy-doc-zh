@@ -1,0 +1,43 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.chebyshev.chebpow</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.chebpow.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.chebpow.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.chebyshev.chebpow"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.chebyshev.</code><code class="descname">chebpow</code><span class="sig-paren">(</span><em>c</em>, <em>pow</em>, <em>maxpower=16</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/chebyshev.py#L816-L865"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">提高切比雪夫系列的力量。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">返回提升到power <em class="xref py py-obj">pow</em>的切比雪夫系列<em class="xref py py-obj">c</em>。</span><span class="yiyi-st" id="yiyi-18">参数<em class="xref py py-obj">c</em>是从低到高排序的系数序列。</span><span class="yiyi-st" id="yiyi-19">i.e., [1,2,3] is the series <code class="docutils literal"><span class="pre">T_0</span> <span class="pre">+</span> <span class="pre">2*T_1</span> <span class="pre">+</span> <span class="pre">3*T_2.</span></code></span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>c</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">1-D数组的切比雪夫系数系数从低到高排序。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>pow</strong>：integer</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">将提高系列的功率</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>maxpower</strong>：integer，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">允许的最大功率。</span><span class="yiyi-st" id="yiyi-27">这主要是将该系列的生长限制到难以控制的尺寸。</span><span class="yiyi-st" id="yiyi-28">默认值为16</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>coef</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">切比雪夫系列电源。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-32">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.polynomial.chebyshev.chebadd.html#numpy.polynomial.chebyshev.chebadd" title="numpy.polynomial.chebyshev.chebadd"><code class="xref py py-obj docutils literal"><span class="pre">chebadd</span></code></a>，<a class="reference internal" href="numpy.polynomial.chebyshev.chebsub.html#numpy.polynomial.chebyshev.chebsub" title="numpy.polynomial.chebyshev.chebsub"><code class="xref py py-obj docutils literal"><span class="pre">chebsub</span></code></a>，<a class="reference internal" href="numpy.polynomial.chebyshev.chebmul.html#numpy.polynomial.chebyshev.chebmul" title="numpy.polynomial.chebyshev.chebmul"><code class="xref py py-obj docutils literal"><span class="pre">chebmul</span></code></a>，<a class="reference internal" href="numpy.polynomial.chebyshev.chebdiv.html#numpy.polynomial.chebyshev.chebdiv" title="numpy.polynomial.chebyshev.chebdiv"><code class="xref py py-obj docutils literal"><span class="pre">chebdiv</span></code></a></span></p>
+</div>
+</dd></dl>

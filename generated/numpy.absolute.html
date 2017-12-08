@@ -1,0 +1,61 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.absolute</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.absolute.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.absolute.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.absolute"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">absolute</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;absolute&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">逐个计算绝对值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>absolute</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20">包含<em class="xref py py-obj">x</em>中每个元素的绝对值的ndarray。</span><span class="yiyi-st" id="yiyi-21">对于复合输入，<code class="docutils literal"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">ib</span></code>，绝对值为<img alt="\sqrt{ a^2 + b^2 }" class="math" src="../../_images/math/8b6ef2b164339550990ba09fa5314d2d8e3c9daf.png" style="vertical-align: -3px">。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([ 1.2,  1.2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="mf">1.2</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="p">)</span>
+<span class="go">1.5620499351813308</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-23">在<code class="docutils literal"><span class="pre">[ -  10，</span> <span class="pre">10]</span></code>上绘制函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">101</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-24">（<a class="reference external" href="../../reference/generated/numpy-absolute-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-absolute-1_00_00.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-absolute-1_00_00.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-absolute-1_00_00.png" src="../../_images/numpy-absolute-1_00_00.png">
+</div>
+<p><span class="yiyi-st" id="yiyi-25">在复平面上绘制函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-26">（<a class="reference external" href="../../reference/generated/numpy-absolute-1_01_00.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-absolute-1_01_00.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-absolute-1_01_00.png" src="../../_images/numpy-absolute-1_01_00.png">
+</div>
+</dd></dl>

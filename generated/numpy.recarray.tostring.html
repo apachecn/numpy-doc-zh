@@ -1,0 +1,42 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.recarray.tostring</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.tostring.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.tostring.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.recarray.tostring"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">recarray.</code><code class="descname">tostring</code><span class="sig-paren">(</span><em>order=&apos;C&apos;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">在数组中构造包含原始数据字节的Python字节。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">构造Python字节，显示数据存储器的原始内容的副本。</span><span class="yiyi-st" id="yiyi-17">字节对象可以以“C”或“Fortran”或“任何”顺序（默认为“C”顺序）生成。</span><span class="yiyi-st" id="yiyi-18">“任何”顺序意味着C顺序，除非数组中的F_CONTIGUOUS标志被设置，在这种情况下它意味着“Fortran”顺序。</span></p>
+<p><span class="yiyi-st" id="yiyi-19">此函数是tobytes的兼容性别名。</span><span class="yiyi-st" id="yiyi-20">尽管它的名称，它返回字节不是字符串。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;，None}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">多维数组的数据顺序：C，Fortran或与原数组相同。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>s</strong>：字节</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">表示<em class="xref py py-obj">a</em>的原始数据副本的Python字节。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
+<span class="go">b&apos;\x00\x00\x00\x00\x01\x00\x00\x00\x02\x00\x00\x00\x03\x00\x00\x00&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">tobytes</span><span class="p">(</span><span class="s1">&apos;C&apos;</span><span class="p">)</span> <span class="o">==</span> <span class="n">x</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">tobytes</span><span class="p">(</span><span class="s1">&apos;F&apos;</span><span class="p">)</span>
+<span class="go">b&apos;\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\x00\x00\x03\x00\x00\x00&apos;</span>
+</pre></div>
+</div>
+</dd></dl>

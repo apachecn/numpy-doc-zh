@@ -1,0 +1,44 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.reciprocal</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.reciprocal.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.reciprocal.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.reciprocal"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">reciprocal</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;reciprocal&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">元素方式返回参数的倒数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">计算<code class="docutils literal"><span class="pre">1/x</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">返回数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">笔记</span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-24">此函数不适用于整数。</span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-25">对于绝对值大于1的整数参数，由于Python处理整数除法的方式，结果总是为零。</span><span class="yiyi-st" id="yiyi-26">对于整数零，结果是溢出。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">(</span><span class="mf">2.</span><span class="p">)</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.33</span><span class="p">])</span>
+<span class="go">array([ 1.       ,  0.5      ,  0.3003003])</span>
+</pre></div>
+</div>
+</dd></dl>

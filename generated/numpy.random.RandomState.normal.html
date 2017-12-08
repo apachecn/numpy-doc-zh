@@ -1,0 +1,88 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.normal</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.normal.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.normal.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.normal"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">normal</code><span class="sig-paren">(</span><em>loc=0.0</em>, <em>scale=1.0</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从正态（高斯）分布绘制随机样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">正态分布的概率密度函数，首先由De Moivre推导，200年后由高斯和拉普拉斯独立地<a class="reference internal" href="#r179" id="id1">[R179]</a>导出，通常称为钟形曲线，因为其特征形状下面）。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">正态分布本质上经常发生。</span><span class="yiyi-st" id="yiyi-18">例如，它描述了受大量微小随机干扰影响的样本的常见分布，每种干扰具有其自己的独特分布<a class="reference internal" href="#r179" id="id2">[R179]</a>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>loc</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">平均值（“中心”）的分布。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>scale</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">分布的标准偏差（展布或“宽度”）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">输出形状。</span><span class="yiyi-st" id="yiyi-26">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-27">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-29"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.norm</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">概率密度函数，分布或累积密度函数等。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-32">高斯分布的概率密度为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-33">其中<img alt="\mu" class="math" src="../../_images/math/fb6d665bbe0c01fc1af5c5f5fa7df40dc71331d7.png" style="vertical-align: -3px">是平均值，<img alt="\sigma" class="math" src="../../_images/math/bb6e1902efeb0b3704c6191ddce1f02707ab7d4b.png" style="vertical-align: 0px">标准偏差。</span><span class="yiyi-st" id="yiyi-34">标准偏差的平方，<img alt="\sigma^2" class="math" src="../../_images/math/dd3f23ceebfef553bff1607f84667d5cc6af7587.png" style="vertical-align: 0px">，称为方差。</span></p>
+<p><span class="yiyi-st" id="yiyi-35">该函数在平均值处具有峰值，其“扩展”随标准偏差（在<img alt="x + \sigma" class="math" src="../../_images/math/ad6d5400fce43a299a35b53a9661e54a284f1bad.png" style="vertical-align: -2px">和<img alt="x - \sigma" class="math" src="../../_images/math/fa3af8846dae3eb1c8913dace238ff110abb64b2.png" style="vertical-align: 0px"> <a class="reference internal" href="#r179" id="id3">[R179]</a>时达到其最大值的0.607倍）。</span><span class="yiyi-st" id="yiyi-36">这意味着<a class="reference internal" href="numpy.random.normal.html#numpy.random.normal" title="numpy.random.normal"><code class="xref py py-obj docutils literal"><span class="pre">numpy.random.normal</span></code></a>更可能返回接近平均值的样本，而不是那些远离平均值的样本。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r178" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-38"><a class="fn-backref" href="#id4">[R178]</a></span></td><td><span class="yiyi-st" id="yiyi-39">维基百科，“正态分布”，<a class="reference external" href="http://en.wikipedia.org/wiki/Normal_distribution">http://en.wikipedia.org/wiki/Normal_distribution</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r179" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-40">[R179]</span></td><td><span class="yiyi-st" id="yiyi-41"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>，<a class="fn-backref" href="#id3">3</a>，<a class="fn-backref" href="#id5">4</a>）</em> PR Peebles Jr.， Central Limit Theorem“in”Probability，Random Variables and Random Signal Principles“，4th ed。，2001，pp。</span><span class="yiyi-st" id="yiyi-42">51，51，125。</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-44">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span> <span class="c1"># mean and standard deviation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">验证平均值和方差：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">0.01</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="n">sigma</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">0.01</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">显示样本的直方图，以及概率密度函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span>
+<span class="gp">... </span>               <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="o">-</span> <span class="p">(</span><span class="n">bins</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="p">),</span>
+<span class="gp">... </span>         <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-47">（<a class="reference external" href="../../reference/generated/numpy-random-RandomState-normal-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-normal-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-normal-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-RandomState-normal-1.png" src="../../_images/numpy-random-RandomState-normal-1.png">
+</div>
+</dd></dl>

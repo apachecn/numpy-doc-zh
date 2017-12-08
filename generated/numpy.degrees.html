@@ -1,0 +1,55 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.degrees</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.degrees.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.degrees.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.degrees"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">degrees</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;degrees&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将角度从弧度转换为度。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组，以弧度表示。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输出与x形状相同的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>y</strong>：ndarray的浮点数</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">相应的度值；如果提供了<em class="xref py py-obj">out</em>，那么它是对它的引用。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="numpy.rad2deg.html#numpy.rad2deg" title="numpy.rad2deg"><code class="xref py py-obj docutils literal"><span class="pre">rad2deg</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-25">等效函数</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-27">将弧度数组转换为度数</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">12.</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span>
+<span class="go">array([   0.,   30.,   60.,   90.,  120.,  150.,  180.,  210.,  240.,</span>
+<span class="go">        270.,  300.,  330.])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rad</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">(</span><span class="n">rad</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">r</span> <span class="o">==</span> <span class="n">out</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

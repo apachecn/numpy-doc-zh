@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.laguerre.lagpow</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.laguerre.lagpow.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.laguerre.lagpow.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.laguerre.lagpow"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.laguerre.</code><code class="descname">lagpow</code><span class="sig-paren">(</span><em>c</em>, <em>pow</em>, <em>maxpower=16</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/laguerre.py#L580-L631"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">提升Laguerre系列的力量。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">返回增加到power <em class="xref py py-obj">pow</em>的Laguerre系列<em class="xref py py-obj">c</em>。</span><span class="yiyi-st" id="yiyi-18">参数<em class="xref py py-obj">c</em>是从低到高排序的系数序列。</span><span class="yiyi-st" id="yiyi-19">i.e., [1,2,3] is the series <code class="docutils literal"><span class="pre">P_0</span> <span class="pre">+</span> <span class="pre">2*P_1</span> <span class="pre">+</span> <span class="pre">3*P_2.</span></code></span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>c</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">Laguerre系数的1-D数组从低到高排序。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>pow</strong>：integer</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">将提高系列的功率</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>maxpower</strong>：integer，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">允许的最大功率。</span><span class="yiyi-st" id="yiyi-27">这主要是将该系列的生长限制到难以控制的尺寸。</span><span class="yiyi-st" id="yiyi-28">默认值为16</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>coef</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">Laguerre系列电源。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-32">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.polynomial.laguerre.lagadd.html#numpy.polynomial.laguerre.lagadd" title="numpy.polynomial.laguerre.lagadd"><code class="xref py py-obj docutils literal"><span class="pre">lagadd</span></code></a>，<a class="reference internal" href="numpy.polynomial.laguerre.lagsub.html#numpy.polynomial.laguerre.lagsub" title="numpy.polynomial.laguerre.lagsub"><code class="xref py py-obj docutils literal"><span class="pre">lagsub</span></code></a>，<a class="reference internal" href="numpy.polynomial.laguerre.lagmul.html#numpy.polynomial.laguerre.lagmul" title="numpy.polynomial.laguerre.lagmul"><code class="xref py py-obj docutils literal"><span class="pre">lagmul</span></code></a>，<a class="reference internal" href="numpy.polynomial.laguerre.lagdiv.html#numpy.polynomial.laguerre.lagdiv" title="numpy.polynomial.laguerre.lagdiv"><code class="xref py py-obj docutils literal"><span class="pre">lagdiv</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial.laguerre</span> <span class="k">import</span> <span class="n">lagpow</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lagpow</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([ 14., -16.,  56., -72.,  54.])</span>
+</pre></div>
+</div>
+</dd></dl>

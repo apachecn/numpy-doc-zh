@@ -1,0 +1,39 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.isscalar</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.isscalar.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.isscalar.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.isscalar"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">isscalar</code><span class="sig-paren">(</span><em>num</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L2064-L2091"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">如果<em class="xref py py-obj">num</em>的类型是标量类型，则返回True。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>num</strong>：any</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入参数，可以是任何类型和形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>val</strong>：bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20">如果<em class="xref py py-obj">num</em>是标量类型，则为True，否则为False。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-21">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="mf">3.1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">([</span><span class="mf">3.1</span><span class="p">])</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.common_type</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.common_type.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.common_type.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.common_type"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">common_type</code><span class="sig-paren">(</span><em>*arrays</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/type_check.py#L544-L596"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回输入数组常见的标量类型。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回类型将始终是不精确（即浮点）标量类型，即使所有数组都是整数数组。</span><span class="yiyi-st" id="yiyi-16">如果其中一个输入是整数数组，则返回的最小精度类型是64位浮点数dtype。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">所有输入数组可以安全地转换为返回的dtype，而不会丢失信息。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>array1，array2，...</strong>：ndarrays</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输入数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>out</strong>：数据类型代码</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">数据类型代码。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，<a class="reference internal" href="numpy.mintypecode.html#numpy.mintypecode" title="numpy.mintypecode"><code class="xref py py-obj docutils literal"><span class="pre">mintypecode</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">common_type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+<span class="go">&lt;type &apos;numpy.float32&apos;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">common_type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">&lt;type &apos;numpy.float64&apos;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">common_type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">45</span><span class="p">,</span> <span class="mf">6.</span><span class="n">j</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">45.0</span><span class="p">]))</span>
+<span class="go">&lt;type &apos;numpy.complex128&apos;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>

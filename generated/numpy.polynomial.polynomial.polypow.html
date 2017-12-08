@@ -1,0 +1,43 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.polynomial.polypow</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.polypow.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.polypow.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.polynomial.polypow"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.polynomial.</code><code class="descname">polypow</code><span class="sig-paren">(</span><em>c</em>, <em>pow</em>, <em>maxpower=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/polynomial.py#L426-L474"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">将多项式提升为幂。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">返回增加到power <em class="xref py py-obj">pow</em>的多项式<em class="xref py py-obj">c</em>。</span><span class="yiyi-st" id="yiyi-18">参数<em class="xref py py-obj">c</em>是从低到高排序的系数序列。</span><span class="yiyi-st" id="yiyi-19">i.e., [1,2,3] is the series <code class="docutils literal"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">2*x</span> <span class="pre">+</span> <span class="pre">3*x**2.</span></code></span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>c</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">1-D数组从低到高排列的系数系数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>pow</strong>：integer</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">将提高系列的功率</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>maxpower</strong>：integer，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">允许的最大功率。</span><span class="yiyi-st" id="yiyi-27">这主要是将该系列的生长限制到难以控制的尺寸。</span><span class="yiyi-st" id="yiyi-28">默认值为16</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>coef</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">功率系列电源。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-32">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.polynomial.polynomial.polyadd.html#numpy.polynomial.polynomial.polyadd" title="numpy.polynomial.polynomial.polyadd"><code class="xref py py-obj docutils literal"><span class="pre">polyadd</span></code></a>，<a class="reference internal" href="numpy.polynomial.polynomial.polysub.html#numpy.polynomial.polynomial.polysub" title="numpy.polynomial.polynomial.polysub"><code class="xref py py-obj docutils literal"><span class="pre">polysub</span></code></a>，<a class="reference internal" href="numpy.polynomial.polynomial.polymul.html#numpy.polynomial.polynomial.polymul" title="numpy.polynomial.polynomial.polymul"><code class="xref py py-obj docutils literal"><span class="pre">polymul</span></code></a>，<a class="reference internal" href="numpy.polynomial.polynomial.polydiv.html#numpy.polynomial.polynomial.polydiv" title="numpy.polynomial.polynomial.polydiv"><code class="xref py py-obj docutils literal"><span class="pre">polydiv</span></code></a></span></p>
+</div>
+</dd></dl>

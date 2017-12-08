@@ -1,0 +1,62 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.chararray.setfield</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.chararray.setfield.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.chararray.setfield.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.chararray.setfield"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">chararray.</code><code class="descname">setfield</code><span class="sig-paren">(</span><em>val</em>, <em>dtype</em>, <em>offset=0</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将值放入由数据类型定义的字段中的指定位置。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">将<em class="xref py py-obj">val</em>放入<em class="xref py py-obj">由<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>定义的</em>字段，并将<em class="xref py py-obj">offset</em>字节插入字段。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>val</strong>：object</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">要放在字段中的值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>dtype</strong>：dtype对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">放置<em class="xref py py-obj">val</em>的字段的数据类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>offset</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">放入<em class="xref py py-obj">val</em>字段的字节数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-25">没有</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.chararray.getfield.html#numpy.chararray.getfield" title="numpy.chararray.getfield"><code class="xref py py-obj docutils literal"><span class="pre">getfield</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">getfield</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="go">array([[ 1.,  0.,  0.],</span>
+<span class="go">       [ 0.,  1.,  0.],</span>
+<span class="go">       [ 0.,  0.,  1.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">setfield</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">getfield</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="go">array([[3, 3, 3],</span>
+<span class="go">       [3, 3, 3],</span>
+<span class="go">       [3, 3, 3]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[  1.00000000e+000,   1.48219694e-323,   1.48219694e-323],</span>
+<span class="go">       [  1.48219694e-323,   1.00000000e+000,   1.48219694e-323],</span>
+<span class="go">       [  1.48219694e-323,   1.48219694e-323,   1.00000000e+000]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">setfield</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[ 1.,  0.,  0.],</span>
+<span class="go">       [ 0.,  1.,  0.],</span>
+<span class="go">       [ 0.,  0.,  1.]])</span>
+</pre></div>
+</div>
+</dd></dl>

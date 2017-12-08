@@ -1,0 +1,40 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.core.defchararray.partition</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.partition.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.partition.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.core.defchararray.partition"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.core.defchararray.</code><code class="descname">partition</code><span class="sig-paren">(</span><em>a</em>, <em>sep</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/defchararray.py#L1008-L1040"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">分隔<em class="xref py py-obj">中的每个元素</em> <em class="xref py py-obj">sep</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">逐个调用<em class="xref py py-obj">str.partition</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">对于<em class="xref py py-obj">a</em>中的每个元素，将元素拆分为第一次出现的<em class="xref py py-obj">sep</em>，并返回包含分隔符之前的部分，分隔符本身和分隔器。</span><span class="yiyi-st" id="yiyi-17">如果找不到分隔符，则返回包含字符串本身的3个字符串，后跟两个空字符串。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：array_like，{str，unicode}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输入数组</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>sep</strong>：{str，unicode}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">分隔符用于分割<em class="xref py py-obj">a</em>中的每个字符串元素。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>out</strong>：ndarray，{str，unicode}</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">输出str或unicode的数组，取决于输入类型。</span><span class="yiyi-st" id="yiyi-26">输出数组将有一个额外的维度，每个输入元素有3个元素。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-28"><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str.partition" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">str.partition</span></code></a></span></p>
+</div>
+</dd></dl>

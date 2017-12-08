@@ -1,0 +1,65 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.standard_cauchy</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.standard_cauchy.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.standard_cauchy.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.standard_cauchy"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">standard_cauchy</code><span class="sig-paren">(</span><em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从模式= 0的标准Cauchy分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">也称为洛仑兹分布。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输出形状。</span><span class="yiyi-st" id="yiyi-20">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-21">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>samples</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">绘制样本。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-26">完全柯西分布的概率密度函数是</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-27">并且标准Cauchy分布只设置<img alt="x_0=0" class="math" src="../../_images/math/b86b4320b7fbbf2081b05c648c0468212092d555.png" style="vertical-align: -2px">和</span></p>
+<p><span class="yiyi-st" id="yiyi-28">Cauchy分布出现在对驱动谐波振荡器问题的解决方案中，并且还描述了谱线变宽。</span><span class="yiyi-st" id="yiyi-29">它还描述了以任意角度倾斜的线将切割x轴的值的分布。</span></p>
+<p><span class="yiyi-st" id="yiyi-30">当研究假设检验假设正态性时，看看测试对于Cauchy分布的数据是如何执行的，这是它们对重尾分布的敏感性的一个很好的指示，因为Cauchy看起来非常像高斯分布，但是更重尾。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r191" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-32"><a class="fn-backref" href="#id1">[R191]</a></span></td><td><span class="yiyi-st" id="yiyi-33">NIST / SEMATECH e-Handbook of Statistical Methods，“Cauchy Distribution”，<a class="reference external" href="http://www.itl.nist.gov/div898/handbook/eda/section3/eda3663.htm">http://www.itl.nist.gov/div898/handbook/eda/section3/eda3663.htm</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r192" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-34"><a class="fn-backref" href="#id2">[R192]</a></span></td><td><span class="yiyi-st" id="yiyi-35">Weisstein，Eric W.“Cauchy Distribution。”来自MathWorld-Wolfram Web资源。</span><span class="yiyi-st" id="yiyi-36"><a class="reference external" href="http://mathworld.wolfram.com/CauchyDistribution.html">http://mathworld.wolfram.com/CauchyDistribution.html</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r193" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-37"><a class="fn-backref" href="#id3">[R193]</a></span></td><td><span class="yiyi-st" id="yiyi-38">维基百科，“Cauchy分布”<a class="reference external" href="http://en.wikipedia.org/wiki/Cauchy_distribution">http://en.wikipedia.org/wiki/Cauchy_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-40">绘制样本并绘制分布：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_cauchy</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[(</span><span class="n">s</span><span class="o">&gt;-</span><span class="mi">25</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">s</span><span class="o">&lt;</span><span class="mi">25</span><span class="p">)]</span>  <span class="c1"># truncate distribution so it plots well</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>

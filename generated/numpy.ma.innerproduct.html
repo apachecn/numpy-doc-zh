@@ -1,0 +1,72 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.innerproduct</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.innerproduct.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.innerproduct.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.innerproduct"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">innerproduct</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L7311-L7329"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">两个数组的内积。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">用于1-D数组（没有复共轭）的向量的普通内积，在较高维度上是最后轴上的和积。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a，b</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">如果<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>为非标量，则其最后一个维度必须匹配。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22"><em class="xref py py-obj">out.shape = a.shape [： -  1] + b.shape [： -  1]</em></span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">如果<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>的最后一个维度具有不同的大小。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-27"><code class="xref py py-obj docutils literal"><span class="pre">tensordot</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28">任意轴上的和。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.ma.dot.html#numpy.ma.dot" title="numpy.ma.dot"><code class="xref py py-obj docutils literal"><span class="pre">dot</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">使用<em class="xref py py-obj">b</em>的最后一个维度的广义矩阵积。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-31"><code class="xref py py-obj docutils literal"><span class="pre">einsum</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">爱因斯坦求和约定。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-34">屏蔽值由0替换。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-36">向量的普通内积：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37">多维示例：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([[ 14,  38,  62],</span>
+<span class="go">       [ 86, 110, 134]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">其中<em class="xref py py-obj">b</em>是标量的示例：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">7</span><span class="p">)</span>
+<span class="go">array([[ 7.,  0.],</span>
+<span class="go">       [ 0.,  7.]])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.save</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.save.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.save.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.save"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">save</code><span class="sig-paren">(</span><em>file</em>, <em>arr</em>, <em>allow_pickle=True</em>, <em>fix_imports=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/npyio.py#L422-L494"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将数组以NumPy <code class="docutils literal"><span class="pre">.npy</span></code>格式保存到二进制文件。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>文件</strong>：文件或str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">保存数据的文件或文件名。</span><span class="yiyi-st" id="yiyi-18">如果file是一个文件对象，则文件名不变。</span><span class="yiyi-st" id="yiyi-19">如果file是一个字符串，则<code class="docutils literal"><span class="pre">.npy</span></code>扩展名将附加到文件名后面，如果它还没有。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>allow_pickle</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">允许使用Python pickles保存对象数组。</span><span class="yiyi-st" id="yiyi-22">禁止pickles的原因包括安全性（加载pickled数据可以执行任意代码）和可移植性（pickled对象可能无法在不同的Python安装上加载，例如，如果存储的对象需要不可用的库，并且并非所有pickled数据都兼容Python 2和Python 3）。</span><span class="yiyi-st" id="yiyi-23">默认值：True</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>fix_imports</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">只有在强制Python 3中的对象数组中的对象以Python 2兼容的方式被pickle时才有用。</span><span class="yiyi-st" id="yiyi-26">如果<em class="xref py py-obj">fix_imports</em>为True，pickle将尝试将新的Python 3名称映射到Python 2中使用的旧模块名称，以便使用Python 2可读取pickle数据流。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>arr</strong>：array_like</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">要保存的数组数据。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.savez.html#numpy.savez" title="numpy.savez"><code class="xref py py-obj docutils literal"><span class="pre">savez</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">将多个数组保存到<code class="docutils literal"><span class="pre">.npz</span></code>存档中</span></dd>
+</dl>
+<p class="last"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.savetxt.html#numpy.savetxt" title="numpy.savetxt"><code class="xref py py-obj docutils literal"><span class="pre">savetxt</span></code></a>，<a class="reference internal" href="numpy.load.html#numpy.load" title="numpy.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-34">有关<code class="docutils literal"><span class="pre">.npy</span></code>格式的说明，请参阅<code class="xref py py-obj docutils literal"><span class="pre">numpy.lib.format</span></code>的模块docstring或Numpy增强提议<a class="reference external" href="http://docs.scipy.org/doc/numpy/neps/npy-format.html">http://docs.scipy.org /doc/numpy/neps/npy-format.html</a></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryFile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">outfile</span> <span class="o">=</span> <span class="n">TemporaryFile</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">outfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Only needed here to simulate closing &amp; reopening file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
+<span class="go">array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span>
+</pre></div>
+</div>
+</dd></dl>

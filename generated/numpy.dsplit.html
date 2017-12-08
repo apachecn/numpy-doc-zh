@@ -1,0 +1,48 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.dsplit</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dsplit.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.dsplit.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.dsplit"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">dsplit</code><span class="sig-paren">(</span><em>ary</em>, <em>indices_or_sections</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/shape_base.py#L617-L660"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将数组沿着第3轴（深度）拆分成多个子数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">请参阅<a class="reference internal" href="numpy.split.html#numpy.split" title="numpy.split"><code class="xref py py-obj docutils literal"><span class="pre">split</span></code></a>文档。</span><span class="yiyi-st" id="yiyi-16"><a class="reference internal" href="#numpy.dsplit" title="numpy.dsplit"><code class="xref py py-obj docutils literal"><span class="pre">dsplit</span></code></a> is equivalent to <a class="reference internal" href="numpy.split.html#numpy.split" title="numpy.split"><code class="xref py py-obj docutils literal"><span class="pre">split</span></code></a> with <code class="docutils literal"><span class="pre">axis=2</span></code>, the array is always split along the third axis provided the array dimension is greater than or equal to 3.</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-17">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="numpy.split.html#numpy.split" title="numpy.split"><code class="xref py py-obj docutils literal"><span class="pre">split</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-19">将数组拆分为多个大小相等的子数组。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-20">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">16.0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[[  0.,   1.,   2.,   3.],</span>
+<span class="go">        [  4.,   5.,   6.,   7.]],</span>
+<span class="go">       [[  8.,   9.,  10.,  11.],</span>
+<span class="go">        [ 12.,  13.,  14.,  15.]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dsplit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">[array([[[  0.,   1.],</span>
+<span class="go">        [  4.,   5.]],</span>
+<span class="go">       [[  8.,   9.],</span>
+<span class="go">        [ 12.,  13.]]]),</span>
+<span class="go"> array([[[  2.,   3.],</span>
+<span class="go">        [  6.,   7.]],</span>
+<span class="go">       [[ 10.,  11.],</span>
+<span class="go">        [ 14.,  15.]]])]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dsplit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]))</span>
+<span class="go">[array([[[  0.,   1.,   2.],</span>
+<span class="go">        [  4.,   5.,   6.]],</span>
+<span class="go">       [[  8.,   9.,  10.],</span>
+<span class="go">        [ 12.,  13.,  14.]]]),</span>
+<span class="go"> array([[[  3.],</span>
+<span class="go">        [  7.]],</span>
+<span class="go">       [[ 11.],</span>
+<span class="go">        [ 15.]]]),</span>
+<span class="go"> array([], dtype=float64)]</span>
+</pre></div>
+</div>
+</dd></dl>

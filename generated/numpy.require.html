@@ -1,0 +1,79 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.require</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.require.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.require.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.require"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">require</code><span class="sig-paren">(</span><em>a</em>, <em>dtype=None</em>, <em>requirements=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L607-L700"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回满足要求的所提供类型的数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">此函数用于确保返回具有正确标志的数组以传递给编译代码（可能通过ctypes）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">要转换为满足类型和要求的数组的对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>dtype</strong>：数据类型</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">所需的数据类型。</span><span class="yiyi-st" id="yiyi-21">如果无保留当前dtype。</span><span class="yiyi-st" id="yiyi-22">如果您的应用程序要求数据采用原生字节顺序，请将字节序规范作为dtype规范的一部分。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>需求</strong>：str或str的列表</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">需求列表可以是以下任何一个</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-25">&apos;F_CONTIGUOUS&apos;（&apos;F&apos;） - 确保Fortran连续数组</span></li>
+<li><span class="yiyi-st" id="yiyi-26">&apos;C_CONTIGUOUS&apos;（&apos;C&apos;） - 确保一个C连续的数组</span></li>
+<li><span class="yiyi-st" id="yiyi-27">&apos;ALIGNED&apos;（&apos;A&apos;） - 确保数据类型对齐数组</span></li>
+<li><span class="yiyi-st" id="yiyi-28">&apos;WRITEABLE&apos;（&apos;W&apos;） - 确保可写数组</span></li>
+<li><span class="yiyi-st" id="yiyi-29">&apos;OWNDATA&apos;（&apos;O&apos;） - 确保数组拥有自己的数据</span></li>
+<li><span class="yiyi-st" id="yiyi-30">&apos;ENSUREARRAY&apos;，（&apos;E&apos;） - 确保基数组，而不是子类</span></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.asarray.html#numpy.asarray" title="numpy.asarray"><code class="xref py py-obj docutils literal"><span class="pre">asarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">将输入转换为ndarray。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.asanyarray.html#numpy.asanyarray" title="numpy.asanyarray"><code class="xref py py-obj docutils literal"><span class="pre">asanyarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">转换为ndarray，但通过ndarray子类。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="numpy.ascontiguousarray.html#numpy.ascontiguousarray" title="numpy.ascontiguousarray"><code class="xref py py-obj docutils literal"><span class="pre">ascontiguousarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-37">将输入转换为连续数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="numpy.asfortranarray.html#numpy.asfortranarray" title="numpy.asfortranarray"><code class="xref py py-obj docutils literal"><span class="pre">asfortranarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-39">将输入转换为具有列主存储器顺序的ndarray。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.ndarray.flags.html#numpy.ndarray.flags" title="numpy.ndarray.flags"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.flags</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-41">有关数组的内存布局的信息。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-42">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-43">如果需要，返回的数组将保证具有列出的需求。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">flags</span>
+<span class="go">  C_CONTIGUOUS : True</span>
+<span class="go">  F_CONTIGUOUS : False</span>
+<span class="go">  OWNDATA : False</span>
+<span class="go">  WRITEABLE : True</span>
+<span class="go">  ALIGNED : True</span>
+<span class="go">  UPDATEIFCOPY : False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">requirements</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;A&apos;</span><span class="p">,</span> <span class="s1">&apos;O&apos;</span><span class="p">,</span> <span class="s1">&apos;W&apos;</span><span class="p">,</span> <span class="s1">&apos;F&apos;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">flags</span>
+<span class="go">  C_CONTIGUOUS : False</span>
+<span class="go">  F_CONTIGUOUS : True</span>
+<span class="go">  OWNDATA : True</span>
+<span class="go">  WRITEABLE : True</span>
+<span class="go">  ALIGNED : True</span>
+<span class="go">  UPDATEIFCOPY : False</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,88 @@
+
+<h1><span class="yiyi-st" id="yiyi-11">numpy.seterrcall</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.seterrcall.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.seterrcall.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.seterrcall"><span class="yiyi-st" id="yiyi-12"> <code class="descclassname">numpy.</code><code class="descname">seterrcall</code><span class="sig-paren">(</span><em>func</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L2761-L2850"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-13">设置浮点错误回调函数或日志对象。</span></p>
+<p><span class="yiyi-st" id="yiyi-14">有两种方法来捕获浮点错误消息。</span><span class="yiyi-st" id="yiyi-15">第一种是使用<a class="reference internal" href="numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>将错误处理程序设置为“call”。</span><span class="yiyi-st" id="yiyi-16">然后，使用此功能将函数设置为调用。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">第二个是使用<a class="reference internal" href="numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>将错误处理程序设置为“log”。</span><span class="yiyi-st" id="yiyi-18">浮点错误然后触发对所提供对象的&apos;write&apos;方法的调用。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>func</strong>：可调用的f（err，flag）或带写方法的对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">调用浮点错误（“调用”模式）或使用“写入”方法来记录此类消息（“日志”模式）的对象的函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-22">调用函数接受两个参数。</span><span class="yiyi-st" id="yiyi-23">第一个是描述错误类型的字符串（例如“除零”，“溢出”，“下溢”或“无效值”），第二个是状态标志。</span><span class="yiyi-st" id="yiyi-24">该标志是一个字节，其四个最低有效位指示错误的类型，“除”，“上”，“下”，“无效”之一：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="n">divide</span> <span class="n">over</span> <span class="n">under</span> <span class="n">invalid</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-25">In other words, <code class="docutils literal"><span class="pre">flags</span> <span class="pre">=</span> <span class="pre">divide</span> <span class="pre">+</span> <span class="pre">2*over</span> <span class="pre">+</span> <span class="pre">4*under</span> <span class="pre">+</span> <span class="pre">8*invalid</span></code>.</span></p>
+<p><span class="yiyi-st" id="yiyi-26">如果提供了一个对象，它的write方法应该有一个参数，一个字符串。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>h</strong>：callable，log instance或None</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">旧的错误处理程序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>，<a class="reference internal" href="numpy.geterr.html#numpy.geterr" title="numpy.geterr"><code class="xref py py-obj docutils literal"><span class="pre">geterr</span></code></a>，<a class="reference internal" href="numpy.geterrcall.html#numpy.geterrcall" title="numpy.geterrcall"><code class="xref py py-obj docutils literal"><span class="pre">geterrcall</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-33">错误时回调：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">err_handler</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Floating point error (</span><span class="si">%s</span><span class="s2">), with flag </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">flag</span><span class="p">))</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">saved_handler</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterrcall</span><span class="p">(</span><span class="n">err_handler</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">save_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s1">&apos;call&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">/</span> <span class="mf">0.0</span>
+<span class="go">Floating point error (divide by zero), with flag 1</span>
+<span class="go">array([ Inf,  Inf,  Inf])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">seterrcall</span><span class="p">(</span><span class="n">saved_handler</span><span class="p">)</span>
+<span class="go">&lt;function err_handler at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="o">**</span><span class="n">save_err</span><span class="p">)</span>
+<span class="go">{&apos;over&apos;: &apos;call&apos;, &apos;divide&apos;: &apos;call&apos;, &apos;invalid&apos;: &apos;call&apos;, &apos;under&apos;: &apos;call&apos;}</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-34">日志错误消息：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Log</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LOG: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">msg</span><span class="p">)</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log</span> <span class="o">=</span> <span class="n">Log</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">saved_handler</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterrcall</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">save_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s1">&apos;log&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">/</span> <span class="mf">0.0</span>
+<span class="go">LOG: Warning: divide by zero encountered in divide</span>
+
+<span class="go">array([ Inf,  Inf,  Inf])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">seterrcall</span><span class="p">(</span><span class="n">saved_handler</span><span class="p">)</span>
+<span class="go">&lt;__main__.Log object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="o">**</span><span class="n">save_err</span><span class="p">)</span>
+<span class="go">{&apos;over&apos;: &apos;log&apos;, &apos;divide&apos;: &apos;log&apos;, &apos;invalid&apos;: &apos;log&apos;, &apos;under&apos;: &apos;log&apos;}</span>
+</pre></div>
+</div>
+</dd></dl>

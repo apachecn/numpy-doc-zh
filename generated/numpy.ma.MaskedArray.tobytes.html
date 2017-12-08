@@ -1,0 +1,50 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.tobytes</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.tobytes.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.tobytes.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.tobytes"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">tobytes</code><span class="sig-paren">(</span><em>fill_value=None</em>, <em>order=&apos;C&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L5728-L5766"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将数组数据作为包含数组中原始字节的字符串返回。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">数组在字符串转换之前用填充值填充。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-17"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>fill_value</strong>：标量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">用于填充屏蔽值的值。</span><span class="yiyi-st" id="yiyi-21">Deafult为None，在这种情况下使用<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.MaskedArray.fill_value" title="numpy.ma.MaskedArray.fill_value"><code class="xref py py-obj docutils literal"><span class="pre">MaskedArray.fill_value</span></code></a>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;}，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">副本中数据项的顺序。</span><span class="yiyi-st" id="yiyi-24">默认值为“C”。</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-25"></span></li>
+<li><span class="yiyi-st" id="yiyi-26">&apos;F&apos; -  Fortran order（column major）。</span></li>
+<li><span class="yiyi-st" id="yiyi-27">&apos;A&apos; - 数组的任何当前顺序。</span></li>
+<li><span class="yiyi-st" id="yiyi-28">无 - 与“A”相同。</span></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-30"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.tobytes</span></code>，<a class="reference internal" href="numpy.ma.MaskedArray.tolist.html#numpy.ma.MaskedArray.tolist" title="numpy.ma.MaskedArray.tolist"><code class="xref py py-obj docutils literal"><span class="pre">tolist</span></code></a>，<a class="reference internal" href="numpy.ma.MaskedArray.tofile.html#numpy.ma.MaskedArray.tofile" title="numpy.ma.MaskedArray.tofile"><code class="xref py py-obj docutils literal"><span class="pre">tofile</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-32">对于<em class="xref py py-obj">ndarray.tobytes</em>，关于形状，dtype等的信息，而且关于<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.MaskedArray.fill_value" title="numpy.ma.MaskedArray.fill_value"><code class="xref py py-obj docutils literal"><span class="pre">fill_value</span></code></a>的信息将丢失。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]),</span> <span class="n">mask</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
+<span class="go">&apos;\x01\x00\x00\x00?B\x0f\x00?B\x0f\x00\x04\x00\x00\x00&apos;</span>
+</pre></div>
+</div>
+</dd></dl>

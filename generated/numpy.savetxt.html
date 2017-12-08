@@ -1,0 +1,139 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.savetxt</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.savetxt.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.savetxt.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.savetxt"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">savetxt</code><span class="sig-paren">(</span><em>fname</em>, <em>X</em>, <em>fmt=&apos;%.18e&apos;</em>, <em>delimiter=&apos; &apos;</em>, <em>newline=&apos;\n&apos;</em>, <em>header=&apos;&apos;</em>, <em>footer=&apos;&apos;</em>, <em>comments=&apos;# &apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/npyio.py#L969-L1168"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将数组保存到文本文件。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>fname</strong>：文件名或文件句柄</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">如果文件名以<code class="docutils literal"><span class="pre">.gz</span></code>结尾，则文件将自动以压缩gzip格式保存。</span><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="numpy.loadtxt.html#numpy.loadtxt" title="numpy.loadtxt"><code class="xref py py-obj docutils literal"><span class="pre">loadtxt</span></code></a>透明地理解gzip压缩的文件。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>X</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">要保存到文本文件的数据。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>fmt</strong>：str或strs序列，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">单一格式（％10.5f），一系列格式或多格式字符串，例如。 &apos;迭代％d  - ％10.5f&apos;，在这种情况下忽略<em class="xref py py-obj">分隔符</em>。</span><span class="yiyi-st" id="yiyi-23">对于复杂的<em class="xref py py-obj">X</em>，<em class="xref py py-obj">fmt</em>的合法选项为：</span></p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><dl class="first docutils">
+<dt><span class="yiyi-st" id="yiyi-24">单个说明符，<em class="xref py py-obj">fmt =&apos;％。4e&apos;</em>，导致数字格式化</span></dt>
+<dd><span class="yiyi-st" id="yiyi-25">像<em class="xref py py-obj">&apos;（％s +％sj）&apos;％（fmt，fmt）</em></span></dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><span class="yiyi-st" id="yiyi-26">指定每个实部和虚部的完整字符串，例如</span></dt>
+<dd><span class="yiyi-st" id="yiyi-27">3列的<em class="xref py py-obj">&apos;％.4e％+ .4j％.4e％+ .4j％.4e％+。4j&apos;</em></span></dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><span class="yiyi-st" id="yiyi-28">一个说明符列表，每列一个 - 在这种情况下，真正的</span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">和虚部必须具有单独的指示符，例如。 2列的<em class="xref py py-obj">[&apos;％。3e +％.3ej&apos;，&apos;（％.15e％+。15ej）&apos;]</em></span></dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>分隔符</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">分隔列的字符串或字符。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>换行符</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">字符串或字符分隔线。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-34"><span class="versionmodified">版本1.5.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35"><strong>header</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-36">将写入文件开头的字符串。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-37"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-38"><strong>footer</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-39">将写入文件末尾的字符串。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-40"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-41"><strong>注释</strong>：str，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-42">将添加到<code class="docutils literal"><span class="pre">header</span></code>和<code class="docutils literal"><span class="pre">footer</span></code>字符串的字符串，以将它们标记为注释。</span><span class="yiyi-st" id="yiyi-43">默认值：&apos;＃&apos;，正如例如<code class="docutils literal"><span class="pre">numpy.loadtxt</span></code>。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-44"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-45">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.save.html#numpy.save" title="numpy.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-47">将数组以NumPy <code class="docutils literal"><span class="pre">.npy</span></code>格式保存到二进制文件</span></dd>
+<dt><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="numpy.savez.html#numpy.savez" title="numpy.savez"><code class="xref py py-obj docutils literal"><span class="pre">savez</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-49">将多个数组保存到未压缩的<code class="docutils literal"><span class="pre">.npz</span></code>存档中</span></dd>
+<dt><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="numpy.savez_compressed.html#numpy.savez_compressed" title="numpy.savez_compressed"><code class="xref py py-obj docutils literal"><span class="pre">savez_compressed</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-51">将几个数组保存到压缩的<code class="docutils literal"><span class="pre">.npz</span></code>存档中</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-52">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-53">参数<em class="xref py py-obj">fmt</em>（<code class="docutils literal"><span class="pre">%[flag]width[.precision]specifier</span></code>）的进一步说明：</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-54">标志：</span></dt>
+<dd><p class="first"><span class="yiyi-st" id="yiyi-55"><code class="docutils literal"><span class="pre">-</span></code>：左对齐</span></p>
+<p><span class="yiyi-st" id="yiyi-56"><code class="docutils literal"><span class="pre">+</span></code>：强制使用+或 - 。</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-57"><code class="docutils literal"><span class="pre">0</span></code>：左边用零填充数字，而不是空格（见宽度）。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-58">宽度：</span></dt>
+<dd><span class="yiyi-st" id="yiyi-59">要打印的最小字符数。</span><span class="yiyi-st" id="yiyi-60">如果值具有更多字符，则不会截断该值。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-61">精确：</span></dt>
+<dd><ul class="first last simple">
+<li><span class="yiyi-st" id="yiyi-62">对于整数指示符（例如。</span><span class="yiyi-st" id="yiyi-63"><code class="docutils literal"><span class="pre">d,i,o,x</span></code>），最小位数。</span></li>
+<li><span class="yiyi-st" id="yiyi-64">对于<code class="docutils literal"><span class="pre">e，</span> <span class="pre">E</span></code>和<code class="docutils literal"><span class="pre">f</span></code>说明符，小数点后打印的位数。</span></li>
+<li><span class="yiyi-st" id="yiyi-65">对于<code class="docutils literal"><span class="pre">g</span></code>和<code class="docutils literal"><span class="pre">G</span></code>，有效数字的最大数。</span></li>
+<li><span class="yiyi-st" id="yiyi-66">对于<code class="docutils literal"><span class="pre">s</span></code>，最大字符数。</span></li>
+</ul>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-67">说明符：</span></dt>
+<dd><p class="first"><span class="yiyi-st" id="yiyi-68"><code class="docutils literal"><span class="pre">c</span></code>：字符</span></p>
+<p><span class="yiyi-st" id="yiyi-69"><code class="docutils literal"><span class="pre">d</span></code>或<code class="docutils literal"><span class="pre">i</span></code>：带符号的十进制整数</span></p>
+<p><span class="yiyi-st" id="yiyi-70"><code class="docutils literal"><span class="pre">e</span></code>或<code class="docutils literal"><span class="pre">E</span></code>：使用<code class="docutils literal"><span class="pre">e</span></code>或<code class="docutils literal"><span class="pre">E</span></code>的科学记数法。</span></p>
+<p><span class="yiyi-st" id="yiyi-71"><code class="docutils literal"><span class="pre">f</span></code>：十进制浮点</span></p>
+<p><span class="yiyi-st" id="yiyi-72"><code class="docutils literal"><span class="pre">g,G</span></code>：使用<code class="docutils literal"><span class="pre">e,E</span></code>或<code class="docutils literal"><span class="pre">f</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-73"><code class="docutils literal"><span class="pre">o</span></code>：带符号的八进制</span></p>
+<p><span class="yiyi-st" id="yiyi-74"><code class="docutils literal"><span class="pre">s</span></code>：字符串</span></p>
+<p><span class="yiyi-st" id="yiyi-75"><code class="docutils literal"><span class="pre">u</span></code>：无符号十进制整数</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-76"><code class="docutils literal"><span class="pre">x,X</span></code>：无符号十六进制整数</span></p>
+</dd>
+</dl>
+<p><span class="yiyi-st" id="yiyi-77"><code class="docutils literal"><span class="pre">fmt</span></code>的解释不完整，详细说明请参见<a class="reference internal" href="#r280" id="id1">[R280]</a>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-78">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r280" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-79">[R280]</span></td><td><span class="yiyi-st" id="yiyi-80"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em> <a class="reference external" href="http://docs.python.org/library/string.html#format-specification-mini-language">Format Specification Mini-Language</a>，Python文档。</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-81">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">=</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&apos;test.out&apos;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&apos;,&apos;</span><span class="p">)</span>   <span class="c1"># X is an array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&apos;test.out&apos;</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">))</span>   <span class="c1"># x,y,z equal sized 1D arrays</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&apos;test.out&apos;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&apos;</span><span class="si">%1.4e</span><span class="s1">&apos;</span><span class="p">)</span>   <span class="c1"># use exponential notation</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.geometric</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.geometric.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.geometric.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.geometric"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">geometric</code><span class="sig-paren">(</span><em>p</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从几何分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">伯努利试验是两个结果之一的实验：成功或失败（这样的实验的一个例子是翻转硬币）。</span><span class="yiyi-st" id="yiyi-16">几何分布模型为了获得成功必须运行的试验次数。</span><span class="yiyi-st" id="yiyi-17">因此，它支持正整数，<code class="docutils literal"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">1，</span> <span class="pre">2，</span> <span class="pre">。 ..</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">几何分布的概率质量函数为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-19">其中<em class="xref py py-obj">p</em>是单个试验成功的概率。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>p</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">个别试验的成功概率。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">输出形状。</span><span class="yiyi-st" id="yiyi-25">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-26">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">样品来自几何分布，根据<em class="xref py py-obj">尺寸</em>成形。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-31">从几何分布绘制一万个值，个体成功的概率等于0.35：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">geometric</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.35</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-32">一次运行后，多少次试验成功了？</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">z</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mf">10000.</span>
+<span class="go">0.34889999999999999 #random</span>
+</pre></div>
+</div>
+</dd></dl>

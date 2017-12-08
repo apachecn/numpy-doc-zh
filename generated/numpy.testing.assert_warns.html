@@ -1,0 +1,51 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.assert_warns</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_warns.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_warns.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.assert_warns"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.</code><code class="descname">assert_warns</code><span class="sig-paren">(</span><em>warning_class</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/utils.py#L1684-L1725"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">失败，除非给定的callable引发指定的警告。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">当使用参数args和关键字参数kwargs调用时，callable类应该抛出警告类warning_class。</span><span class="yiyi-st" id="yiyi-16">如果抛出不同类型的警告，它将不会被捕获，并且测试用例将被认为已经遇到错误。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">如果使用除了警告类别之外的所有参数进行调用，可以用作上下文管理器：</span></p>
+<blockquote>
+<div><dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-18">with assert_warns（SomeWarning）：</span></dt>
+<dd><span class="yiyi-st" id="yiyi-19">做一点事()</span></dd>
+</dl>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20">用作上下文管理器的能力是NumPy v1.11.0中的新功能。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-21"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>warning_class</strong>：class</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">定义<em class="xref py py-obj">func</em>预期抛出的警告的类。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>func</strong>：callable</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">可调用的测试。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>* args</strong>：参数</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">参数传递给<em class="xref py py-obj">func</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>** kwargs</strong>：Kwargs</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">将关键字参数传递给<em class="xref py py-obj">func</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-32">由<em class="xref py py-obj">func</em>返回的值。</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

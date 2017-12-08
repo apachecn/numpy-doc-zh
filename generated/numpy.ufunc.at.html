@@ -1,0 +1,58 @@
+
+<h1><span class="yiyi-st" id="yiyi-11">numpy.ufunc.at</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ufunc.at.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ufunc.at.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ufunc.at"><span class="yiyi-st" id="yiyi-12"> <code class="descclassname">ufunc.</code><code class="descname">at</code><span class="sig-paren">(</span><em>a</em>, <em>indices</em>, <em>b=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-13">对由&apos;indices&apos;指定的元素，对操作数&apos;a&apos;执行无缓冲的就地操作。</span><span class="yiyi-st" id="yiyi-14">对于加法ufunc，此方法等效于<em class="xref py py-obj">a [indices] + = b</em>，除了对被索引多于一次的元素累积结果。</span><span class="yiyi-st" id="yiyi-15">例如，<em class="xref py py-obj">a [[0,0]] + = 1</em>将仅由于缓冲而将第一个元素递增一次，而<em class="xref py py-obj">add.at（a，[0,0]，1） </em>将增加第一个元素两次。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-16"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">要对其执行就地操作的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>indices</strong>：array_like或tuple</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">数组像索引对象或切片对象，用于索引到第一个操作数。</span><span class="yiyi-st" id="yiyi-22">如果第一个操作数具有多个维度，索引可以是数组的一个元组，如索引对象或切片对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>b</strong>：array_like</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">需要两个操作数的ufuncs的第二个操作数。</span><span class="yiyi-st" id="yiyi-25">操作数必须在索引或切片之后通过第一个操作数进行广播。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-27">将项目0和1设置为其负值：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">negative</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([-1, -2, 3, 4])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-28">增加项目0和1，并增加项目2两次：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([2, 3, 5, 4])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-29">将第一个数组中的项目0和1添加到第二个数组，并将结果存储在第一个数组中：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([2, 4, 3, 4])</span>
+</pre></div>
+</div>
+</dd></dl>

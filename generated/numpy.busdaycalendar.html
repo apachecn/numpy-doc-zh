@@ -1,0 +1,91 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.busdaycalendar</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.busdaycalendar.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.busdaycalendar.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.busdaycalendar"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">busdaycalendar</code><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/__init__.py"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">一个工作日日历对象，有效地存储定义工作日家庭功能的有效日期的信息。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">默认有效天数为周一至周五（“工作日”）。</span><span class="yiyi-st" id="yiyi-16">busdaycalendar对象可以用任何一组每周有效天数加上可选的“假日”日期来指定，这些日期总是无效的。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">创建busdaycalendar对象后，无法修改周密码和假日。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-18"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>weekmask</strong>：str或array_like of bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">一个七元素数组，表示星期一到星期日是有效日期。</span><span class="yiyi-st" id="yiyi-22">可以指定为长度为七的列表或数组，如[1,1,1,1,1,0,0]；一个长度为七的字符串，如&apos;1111100&apos;；或像“星期二星期三星期三星期五”的字符串，由工作日的3个字符的缩写组成，可选地由空格分隔。</span><span class="yiyi-st" id="yiyi-23">有效的缩写是：周一周二周三周四周五周六周日</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>节假日</strong>：array_like of datetime64 [D]，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">将数字组视为无效日期，无论它们属于哪个工作日。</span><span class="yiyi-st" id="yiyi-26">假日日期可以按任何顺序指定，NaT（非一次性）日期将被忽略。</span><span class="yiyi-st" id="yiyi-27">此列表以适用于快速计算有效天数的规范化形式保存。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>out</strong>：busdaycalendar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">包含指定的周掩码和假日值的工作日日历对象。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.is_busday.html#numpy.is_busday" title="numpy.is_busday"><code class="xref py py-obj docutils literal"><span class="pre">is_busday</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">返回指示有效天数的布尔数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.busday_offset.html#numpy.busday_offset" title="numpy.busday_offset"><code class="xref py py-obj docutils literal"><span class="pre">busday_offset</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">应用在有效日计数的偏移量。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="numpy.busday_count.html#numpy.busday_count" title="numpy.busday_count"><code class="xref py py-obj docutils literal"><span class="pre">busday_count</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-37">计算半天开放日期范围内有多少有效天数。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Some important days in July</span>
+<span class="gp">... </span><span class="n">bdd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">busdaycalendar</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">holidays</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;2011-07-01&apos;</span><span class="p">,</span> <span class="s1">&apos;2011-07-04&apos;</span><span class="p">,</span> <span class="s1">&apos;2011-07-17&apos;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Default is Monday to Friday weekdays</span>
+<span class="gp">... </span><span class="n">bdd</span><span class="o">.</span><span class="n">weekmask</span>
+<span class="go">array([ True,  True,  True,  True,  True, False, False], dtype=&apos;bool&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Any holidays already on the weekend are removed</span>
+<span class="gp">... </span><span class="n">bdd</span><span class="o">.</span><span class="n">holidays</span>
+<span class="go">array([&apos;2011-07-01&apos;, &apos;2011-07-04&apos;], dtype=&apos;datetime64[D]&apos;)</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">属性</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.busdaycalendar.weekmask.html#numpy.busdaycalendar.weekmask" title="numpy.busdaycalendar.weekmask"><code class="xref py py-obj docutils literal"><span class="pre">weekmask</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-41">指示有效天数的七元素布尔掩码的副本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.busdaycalendar.holidays.html#numpy.busdaycalendar.holidays" title="numpy.busdaycalendar.holidays"><code class="xref py py-obj docutils literal"><span class="pre">holidays</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-43">假日数组的副本，表示额外的无效天数。</span></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="87%">
+<col width="13%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-44">注意：一旦创建了busdaycalendar对象，您就无法修改</span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-45">周罩或假日。</span><span class="yiyi-st" id="yiyi-46">属性返回内部数据的副本。</span></td>
+<td>&#xA0;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

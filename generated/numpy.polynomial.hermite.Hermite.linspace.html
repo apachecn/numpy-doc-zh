@@ -1,0 +1,38 @@
+
+<h1><span class="yiyi-st" id="yiyi-15">numpy.polynomial.hermite.Hermite.linspace</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.hermite.Hermite.linspace.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.hermite.Hermite.linspace.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.polynomial.hermite.Hermite.linspace"><span class="yiyi-st" id="yiyi-16"> <code class="descclassname">Hermite.</code><code class="descname">linspace</code><span class="sig-paren">(</span><em>n=100</em>, <em>domain=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/_polybase.py#L692-L722"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-17">在域中的等间隔点处返回x，y值。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">返回跨域的<em class="xref py py-obj">n</em>线性间隔点的x，y值。</span><span class="yiyi-st" id="yiyi-19">这里y是点x处的多项式的值。</span><span class="yiyi-st" id="yiyi-20">默认情况下，域与系列实例的域相同。</span><span class="yiyi-st" id="yiyi-21">该方法主要用作绘图辅助。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-22"><span class="versionmodified">版本1.5.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>n</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">要返回的点对数。</span><span class="yiyi-st" id="yiyi-26">默认值为100。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>domain</strong>：{None，array_like}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">如果不是无，则使用指定的域而不是调用实例的域。</span><span class="yiyi-st" id="yiyi-29">它应该是<code class="docutils literal"><span class="pre">[beg,end]</span></code>的形式。</span><span class="yiyi-st" id="yiyi-30">默认值为None，这种情况下使用类域。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>x，y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-33">x等于linspace（self.domain [0]，self.domain [1]，n），y是在x元素处估计的序列。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

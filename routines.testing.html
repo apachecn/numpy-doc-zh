@@ -1,0 +1,109 @@
+
+<h1><span class="yiyi-st" id="yiyi-16">Test Support (<code class="xref py py-mod docutils literal"><span class="pre">numpy.testing</span></code>)</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.testing.html">https://docs.scipy.org/doc/numpy/reference/routines.testing.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-17">所有numpy测试脚本的常见测试支持。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">这个单个模块应该在单个位置提供numpy测试的所有通用功能，以便测试脚本可以立即导入它并立即工作。</span></p>
+<div class="section" id="asserts">
+<h2><span class="yiyi-st" id="yiyi-19">Asserts</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="generated/numpy.testing.assert_almost_equal.html#numpy.testing.assert_almost_equal" title="numpy.testing.assert_almost_equal"><code class="xref py py-obj docutils literal"><span class="pre">assert_almost_equal</span></code></a>（actual，desired [，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-21">如果两个项目不等于所需精度，则引发AssertionError。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="generated/numpy.testing.assert_approx_equal.html#numpy.testing.assert_approx_equal" title="numpy.testing.assert_approx_equal"><code class="xref py py-obj docutils literal"><span class="pre">assert_approx_equal</span></code></a>（actual，desired [，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-23">如果两个项不等于有效数字，则引发AssertionError。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="generated/numpy.testing.assert_array_almost_equal.html#numpy.testing.assert_array_almost_equal" title="numpy.testing.assert_array_almost_equal"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_almost_equal</span></code></a>（x，y [，decimal，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-25">如果两个对象不等于所需精度，则引发AssertionError。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="generated/numpy.testing.assert_allclose.html#numpy.testing.assert_allclose" title="numpy.testing.assert_allclose"><code class="xref py py-obj docutils literal"><span class="pre">assert_allclose</span></code></a>（actual，desired [，rtol，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-27">如果两个对象不等于所需的容差，则引发AssertionError。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="generated/numpy.testing.assert_array_almost_equal_nulp.html#numpy.testing.assert_array_almost_equal_nulp" title="numpy.testing.assert_array_almost_equal_nulp"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_almost_equal_nulp</span></code></a>（x，y [，nulp]）</span></td>
+<td><span class="yiyi-st" id="yiyi-29">比较两个数组与它们的间距。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.testing.assert_array_max_ulp.html#numpy.testing.assert_array_max_ulp" title="numpy.testing.assert_array_max_ulp"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_max_ulp</span></code></a>（a，b [，maxulp，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-31">检查数组的所有项目在最后一个位置的最多N个单位不同。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="generated/numpy.testing.assert_array_equal.html#numpy.testing.assert_array_equal" title="numpy.testing.assert_array_equal"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_equal</span></code></a>（x，y [，err_msg，verbose]）</span></td>
+<td><span class="yiyi-st" id="yiyi-33">如果两个array_like对象不相等，则引发AssertionError。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="generated/numpy.testing.assert_array_less.html#numpy.testing.assert_array_less" title="numpy.testing.assert_array_less"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_less</span></code></a>（x，y [，err_msg，verbose]）</span></td>
+<td><span class="yiyi-st" id="yiyi-35">如果两个array_like对象的排序不小于，则引发AssertionError。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="generated/numpy.testing.assert_equal.html#numpy.testing.assert_equal" title="numpy.testing.assert_equal"><code class="xref py py-obj docutils literal"><span class="pre">assert_equal</span></code></a>（actual，desired [，err_msg，verbose]）</span></td>
+<td><span class="yiyi-st" id="yiyi-37">如果两个对象不相等，则引发AssertionError。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="generated/numpy.testing.assert_raises.html#numpy.testing.assert_raises" title="numpy.testing.assert_raises"><code class="xref py py-obj docutils literal"><span class="pre">assert_raises</span></code></a>（exception_class，callable，...）</span></td>
+<td><span class="yiyi-st" id="yiyi-39">失败，除非在使用参数args和关键字参数kwargs调用时，callable抛出类exception_class的异常。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="generated/numpy.testing.assert_raises_regex.html#numpy.testing.assert_raises_regex" title="numpy.testing.assert_raises_regex"><code class="xref py py-obj docutils literal"><span class="pre">assert_raises_regex</span></code></a>（exception_class，... [，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-41">失败，除非在使用参数args和关键字参数kwargs调用时，callable抛出类exception_class和与expected_regexp匹配的消息的异常。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="generated/numpy.testing.assert_warns.html#numpy.testing.assert_warns" title="numpy.testing.assert_warns"><code class="xref py py-obj docutils literal"><span class="pre">assert_warns</span></code></a>（warning_class，\ * args，\ * \ * kwargs）</span></td>
+<td><span class="yiyi-st" id="yiyi-43">失败，除非给定的callable引发指定的警告。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="generated/numpy.testing.assert_string_equal.html#numpy.testing.assert_string_equal" title="numpy.testing.assert_string_equal"><code class="xref py py-obj docutils literal"><span class="pre">assert_string_equal</span></code></a>（actual，desired）</span></td>
+<td><span class="yiyi-st" id="yiyi-45">测试两个字符串是否相等。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="decorators">
+<h2><span class="yiyi-st" id="yiyi-46">Decorators</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.testing.decorators.deprecated.html#numpy.testing.decorators.deprecated" title="numpy.testing.decorators.deprecated"><code class="xref py py-obj docutils literal"><span class="pre">decorators.deprecated</span></code></a>（[conditional]）</span></td>
+<td><span class="yiyi-st" id="yiyi-48">在运行测试套件时过滤弃用警告。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.testing.decorators.knownfailureif.html#numpy.testing.decorators.knownfailureif" title="numpy.testing.decorators.knownfailureif"><code class="xref py py-obj docutils literal"><span class="pre">decorators.knownfailureif</span></code></a>（fail_condition [，msg]）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">如果给定条件为true，则使函数raise KnownFailureException异常。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.testing.decorators.setastest.html#numpy.testing.decorators.setastest" title="numpy.testing.decorators.setastest"><code class="xref py py-obj docutils literal"><span class="pre">decorators.setastest</span></code></a>（[tf]）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">信号到鼻子，这个函数是或不是一个测试。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="generated/numpy.testing.decorators.skipif.html#numpy.testing.decorators.skipif" title="numpy.testing.decorators.skipif"><code class="xref py py-obj docutils literal"><span class="pre">decorators.skipif</span></code></a>（skip_condition [，msg]）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">如果给定条件为true，则使函数提高SkipTest异常。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="generated/numpy.testing.decorators.slow.html#numpy.testing.decorators.slow" title="numpy.testing.decorators.slow"><code class="xref py py-obj docutils literal"><span class="pre">decorators.slow</span></code></a>（t）</span></td>
+<td><span class="yiyi-st" id="yiyi-56">将测试标记为“慢”。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="generated/numpy.testing.decorate_methods.html#numpy.testing.decorate_methods" title="numpy.testing.decorate_methods"><code class="xref py py-obj docutils literal"><span class="pre">decorate_methods</span></code></a>（cls，decorator [，testmatch]）</span></td>
+<td><span class="yiyi-st" id="yiyi-58">对与正则表达式匹配的类中的所有方法应用装饰器。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="test-running">
+<h2><span class="yiyi-st" id="yiyi-59">Test Running</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-60"><a class="reference internal" href="generated/numpy.testing.Tester.html#numpy.testing.Tester" title="numpy.testing.Tester"><code class="xref py py-obj docutils literal"><span class="pre">Tester</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-61"><code class="xref py py-class docutils literal"><span class="pre">NoseTester</span></code>的别名</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-62"><a class="reference internal" href="generated/numpy.testing.run_module_suite.html#numpy.testing.run_module_suite" title="numpy.testing.run_module_suite"><code class="xref py py-obj docutils literal"><span class="pre">run_module_suite</span></code></a>（[file_to_run，argv]）</span></td>
+<td><span class="yiyi-st" id="yiyi-63">运行测试模块。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="generated/numpy.testing.rundocs.html#numpy.testing.rundocs" title="numpy.testing.rundocs"><code class="xref py py-obj docutils literal"><span class="pre">rundocs</span></code></a>（[filename，raise_on_error]）</span></td>
+<td><span class="yiyi-st" id="yiyi-65">运行在给定文件中找到的doctests。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

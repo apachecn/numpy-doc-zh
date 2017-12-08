@@ -1,0 +1,62 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fft.fftshift</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fftshift.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fftshift.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fft.fftshift"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.fft.</code><code class="descname">fftshift</code><span class="sig-paren">(</span><em>x</em>, <em>axes=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/fft/helper.py#L19-L75"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将零频率分量移动到频谱的中心。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">此函数为所有列出的轴交换半角空格（默认为全部）。</span><span class="yiyi-st" id="yiyi-16">注意，只有<code class="docutils literal"><span class="pre">len(x)</span></code>是偶数时，<code class="docutils literal"><span class="pre">y[0]</span></code>才是奈奎斯特分量。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>axes</strong>：int或shape tuple，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">要移动的轴。</span><span class="yiyi-st" id="yiyi-22"></span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">移位的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.fft.ifftshift.html#numpy.fft.ifftshift" title="numpy.fft.ifftshift"><code class="xref py py-obj docutils literal"><span class="pre">ifftshift</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="#numpy.fft.fftshift" title="numpy.fft.fftshift"><code class="xref py py-obj docutils literal"><span class="pre">fftshift</span></code></a>的逆。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">freqs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freqs</span>
+<span class="go">array([ 0.,  1.,  2.,  3.,  4., -5., -4., -3., -2., -1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">freqs</span><span class="p">)</span>
+<span class="go">array([-5., -4., -3., -2., -1.,  0.,  1.,  2.,  3.,  4.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-30">仅沿着第二轴移动零频率分量：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">freqs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">1.</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freqs</span>
+<span class="go">array([[ 0.,  1.,  2.],</span>
+<span class="go">       [ 3.,  4., -4.],</span>
+<span class="go">       [-3., -2., -1.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">freqs</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
+<span class="go">array([[ 2.,  0.,  1.],</span>
+<span class="go">       [-4.,  3.,  4.],</span>
+<span class="go">       [-1., -3., -2.]])</span>
+</pre></div>
+</div>
+</dd></dl>

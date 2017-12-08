@@ -1,0 +1,34 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.rundocs</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.rundocs.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.rundocs.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.rundocs"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.</code><code class="descname">rundocs</code><span class="sig-paren">(</span><em>filename=None</em>, <em>raise_on_error=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/utils.py#L1065-L1108"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">运行在给定文件中找到的doctests。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">默认情况下，<a class="reference internal" href="#numpy.testing.rundocs" title="numpy.testing.rundocs"><code class="xref py py-obj docutils literal"><span class="pre">rundocs</span></code></a>会在失败时引发AssertionError。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>filename</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">运行doctests的文件的路径。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>raise_on_error</strong>：bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20">是否在doctest失败时引发AssertionError。</span><span class="yiyi-st" id="yiyi-21">默认值为True。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-23">用户/开发人员可以通过向<code class="docutils literal"><span class="pre">test()</span></code>调用添加<code class="docutils literal"><span class="pre">doctests</span></code>参数来运行doctests。</span><span class="yiyi-st" id="yiyi-24">例如，要运行<code class="xref py py-obj docutils literal"><span class="pre">numpy.lib</span></code>的所有测试（包括doctests）：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">doctests</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+</pre></div>
+</div>
+</dd></dl>

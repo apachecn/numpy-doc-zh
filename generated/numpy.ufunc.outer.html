@@ -1,0 +1,73 @@
+
+<h1><span class="yiyi-st" id="yiyi-11">numpy.ufunc.outer</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ufunc.outer.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ufunc.outer.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ufunc.outer"><span class="yiyi-st" id="yiyi-12"> <code class="descclassname">ufunc.</code><code class="descname">outer</code><span class="sig-paren">(</span><em>A</em>, <em>B</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-13">将ufunc <em class="xref py py-obj">op</em>应用于所有对（a，b），其中a在<em class="xref py py-obj">A</em>和b在<em class="xref py py-obj">B</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-14">让<code class="docutils literal"><span class="pre">M</span> <span class="pre">=</span> <span class="pre">A.ndim</span></code>，<code class="docutils literal"><span class="pre">N</span> <span class="pre"></span> <span class="pre">B.ndim</span></code>。</span><span class="yiyi-st" id="yiyi-15">然后，<code class="docutils literal"><span class="pre">op.outer（A，</span> <span class="pre">B）</span></code>的结果<em class="xref py py-obj">C</em>是维度M + N，使得：</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-16">对于<em class="xref py py-obj">A</em>和<em class="xref py py-obj">B</em>一维，这等价于：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)):</span>
+        <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">op</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="c1"># op = ufunc in question</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>A</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">第一数组</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>B</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">第二数组</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>r</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">输出数组</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.outer.html#numpy.outer" title="numpy.outer"><code class="xref py py-obj docutils literal"><span class="pre">numpy.outer</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="o">.</span><span class="n">outer</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="go">array([[ 4,  5,  6],</span>
+<span class="go">       [ 8, 10, 12],</span>
+<span class="go">       [12, 15, 18]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-28">多维例子：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1, 4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">;</span> <span class="n">C</span>
+<span class="go">(2, 3, 1, 4)</span>
+<span class="go">array([[[[ 1,  2,  3,  4]],</span>
+<span class="go">        [[ 2,  4,  6,  8]],</span>
+<span class="go">        [[ 3,  6,  9, 12]]],</span>
+<span class="go">       [[[ 4,  8, 12, 16]],</span>
+<span class="go">        [[ 5, 10, 15, 20]],</span>
+<span class="go">        [[ 6, 12, 18, 24]]]])</span>
+</pre></div>
+</div>
+</dd></dl>

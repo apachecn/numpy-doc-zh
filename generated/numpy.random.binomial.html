@@ -1,0 +1,96 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.binomial</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.binomial.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.binomial.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.binomial"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">binomial</code><span class="sig-paren">(</span><em>n</em>, <em>p</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从二项分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">样本从具有指定参数，n个试验和p成功概率的二项分布中得到，其中n是&gt; = 0的整数，并且p在区间[0,1]中。</span><span class="yiyi-st" id="yiyi-16">（n可以作为float输入，但在使用中被截断为整数）</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>n</strong>：float（但截断为整数）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">参数，&gt; = 0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>p</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">参数，&gt; = 0和</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">输出形状。</span><span class="yiyi-st" id="yiyi-24">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-25">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>samples</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">其中值是[0，n]中的所有整数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.binom</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">概率密度函数，分布或累积密度函数等。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-33">二项分布的概率密度为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-34">其中<img alt="n" class="math" src="../../_images/math/b1f5ca5a538abe6036ed478902bb5a03ef05f0c2.png" style="vertical-align: 0px">是试验次数，<img alt="p" class="math" src="../../_images/math/c5b47cd114d1cd218d587260b667ed59b7ace4a0.png" style="vertical-align: -3px">是成功的概率，<img alt="N" class="math" src="../../_images/math/10f77f12438cb385098c4d2344aaa427d0a462a8.png" style="vertical-align: 0px">是成功次数。</span></p>
+<p><span class="yiyi-st" id="yiyi-35">当通过使用随机样本估计群体中的比例的标准误差时，正态分布工作良好，除非产物p * n</span><span class="yiyi-st" id="yiyi-36">例如，15个人的样本显示4个左手，11个右手。</span><span class="yiyi-st" id="yiyi-37">然后p = 4/15 = 27％。</span><span class="yiyi-st" id="yiyi-38">0.27 * 15 = 4，因此在这种情况下应使用二项分布。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r208" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-40"><a class="fn-backref" href="#id1">[R208]</a></span></td><td><span class="yiyi-st" id="yiyi-41">Dalgaard，Peter，“Introductory Statistics with R”，Springer-Verlag，2002。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r209" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-42"><a class="fn-backref" href="#id2">[R209]</a></span></td><td><span class="yiyi-st" id="yiyi-43">Glantz，Stanton A.</span><span class="yiyi-st" id="yiyi-44">“Primer of Biostatistics。”，McGraw-Hill，第五版，2002。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r210" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-45"><a class="fn-backref" href="#id3">[R210]</a></span></td><td><span class="yiyi-st" id="yiyi-46">Lentner，Marvin，“Elementary Applied Statistics”，Bogden和Quigley，1972。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r211" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-47"><a class="fn-backref" href="#id4">[R211]</a></span></td><td><span class="yiyi-st" id="yiyi-48">Weisstein，Eric W.“二项分布”，来自MathWorld-Wolfram Web资源。</span><span class="yiyi-st" id="yiyi-49"><a class="reference external" href="http://mathworld.wolfram.com/BinomialDistribution.html">http://mathworld.wolfram.com/BinomialDistribution.html</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r212" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-50"><a class="fn-backref" href="#id5">[R212]</a></span></td><td><span class="yiyi-st" id="yiyi-51">维基百科，“二项分布”，<a class="reference external" href="http://en.wikipedia.org/wiki/Binomial_distribution">http://en.wikipedia.org/wiki/Binomial_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-52">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-53">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span>  <span class="c1"># number of trials, probability of each trial</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="go"># result of flipping a coin 10 times, tested 1000 times.</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-54">一个现实世界的例子。</span><span class="yiyi-st" id="yiyi-55">一家公司钻探9个野生猫油勘探井，每个井的估计成功概率为0.1。</span><span class="yiyi-st" id="yiyi-56">所有九口井都失败了。</span><span class="yiyi-st" id="yiyi-57">发生这种情况的概率是多少？</span></p>
+<p><span class="yiyi-st" id="yiyi-58">让我们做模型的20,000个试验，并计数产生零个阳性结果的数量。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">20000</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mf">20000.</span>
+<span class="go"># answer = 0.38885, or 38%.</span>
+</pre></div>
+</div>
+</dd></dl>

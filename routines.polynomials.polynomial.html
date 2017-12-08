@@ -1,0 +1,162 @@
+
+<h1><span class="yiyi-st" id="yiyi-21">Polynomial Module (<code class="xref py py-mod docutils literal"><span class="pre">numpy.polynomial.polynomial</span></code>)</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.polynomials.polynomial.html">https://docs.scipy.org/doc/numpy/reference/routines.polynomials.polynomial.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-22"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-23">该模块提供了许多对于处理多项式序列有用的对象（主要是函数），包括封装了通常的算术运算的<a class="reference internal" href="generated/numpy.polynomial.polynomial.Polynomial.html#numpy.polynomial.polynomial.Polynomial" title="numpy.polynomial.polynomial.Polynomial"><code class="xref py py-obj docutils literal"><span class="pre">Polynomial</span></code></a>类。</span><span class="yiyi-st" id="yiyi-24">（关于此模块如何表示和使用这样的多项式的一般信息在其“父”子包的文档字符串中，<code class="xref py py-obj docutils literal"><span class="pre">numpy.polynomial</span></code>）。</span></p>
+<div class="section" id="polynomial-class">
+<h2><span class="yiyi-st" id="yiyi-25">Polynomial Class</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="generated/numpy.polynomial.polynomial.Polynomial.html#numpy.polynomial.polynomial.Polynomial" title="numpy.polynomial.polynomial.Polynomial"><code class="xref py py-obj docutils literal"><span class="pre">Polynomial</span></code></a>（coef [，domain，window]）</span></td>
+<td><span class="yiyi-st" id="yiyi-27">功率级类。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="basics">
+<h2><span class="yiyi-st" id="yiyi-28">Basics</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyval.html#numpy.polynomial.polynomial.polyval" title="numpy.polynomial.polynomial.polyval"><code class="xref py py-obj docutils literal"><span class="pre">polyval</span></code></a>（x，c [，张量]）</span></td>
+<td><span class="yiyi-st" id="yiyi-30">在点x处评估多项式。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyval2d.html#numpy.polynomial.polynomial.polyval2d" title="numpy.polynomial.polynomial.polyval2d"><code class="xref py py-obj docutils literal"><span class="pre">polyval2d</span></code></a>（x，y，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-32">在点（x，y）评估2-D多项式。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyval3d.html#numpy.polynomial.polynomial.polyval3d" title="numpy.polynomial.polynomial.polyval3d"><code class="xref py py-obj docutils literal"><span class="pre">polyval3d</span></code></a>（x，y，z，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-34">在点（x，y，z）评估3-D多项式。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polygrid2d.html#numpy.polynomial.polynomial.polygrid2d" title="numpy.polynomial.polynomial.polygrid2d"><code class="xref py py-obj docutils literal"><span class="pre">polygrid2d</span></code></a>（x，y，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-36">在x和y的笛卡尔乘积上评估2-D多项式。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polygrid3d.html#numpy.polynomial.polynomial.polygrid3d" title="numpy.polynomial.polynomial.polygrid3d"><code class="xref py py-obj docutils literal"><span class="pre">polygrid3d</span></code></a>（x，y，z，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-38">在x，y和z的笛卡尔乘积上评估3-D多项式。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyroots.html#numpy.polynomial.polynomial.polyroots" title="numpy.polynomial.polynomial.polyroots"><code class="xref py py-obj docutils literal"><span class="pre">polyroots</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-40">计算多项式的根。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyfromroots.html#numpy.polynomial.polynomial.polyfromroots" title="numpy.polynomial.polynomial.polyfromroots"><code class="xref py py-obj docutils literal"><span class="pre">polyfromroots</span></code></a>（根）</span></td>
+<td><span class="yiyi-st" id="yiyi-42">生成具有给定根的monic多项式。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-43"><code class="xref py py-obj docutils literal"><span class="pre">polyvalfromroots</span></code></span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fitting">
+<h2><span class="yiyi-st" id="yiyi-44">Fitting</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyfit.html#numpy.polynomial.polynomial.polyfit" title="numpy.polynomial.polynomial.polyfit"><code class="xref py py-obj docutils literal"><span class="pre">polyfit</span></code></a>（x，y，deg [，rcond，full，w]）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">多项式与数据的最小二乘拟合。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyvander.html#numpy.polynomial.polynomial.polyvander" title="numpy.polynomial.polynomial.polyvander"><code class="xref py py-obj docutils literal"><span class="pre">polyvander</span></code></a>（x，deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-48">给定程度的Vandermonde矩阵。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyvander2d.html#numpy.polynomial.polynomial.polyvander2d" title="numpy.polynomial.polynomial.polyvander2d"><code class="xref py py-obj docutils literal"><span class="pre">polyvander2d</span></code></a>（x，y，deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">给定度的伪Vandermonde矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyvander3d.html#numpy.polynomial.polynomial.polyvander3d" title="numpy.polynomial.polynomial.polyvander3d"><code class="xref py py-obj docutils literal"><span class="pre">polyvander3d</span></code></a>（x，y，z，deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">给定度的伪Vandermonde矩阵。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="calculus">
+<h2><span class="yiyi-st" id="yiyi-53">Calculus</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyder.html#numpy.polynomial.polynomial.polyder" title="numpy.polynomial.polynomial.polyder"><code class="xref py py-obj docutils literal"><span class="pre">polyder</span></code></a>（c [，m，scl，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-55">区分多项式。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyint.html#numpy.polynomial.polynomial.polyint" title="numpy.polynomial.polynomial.polyint"><code class="xref py py-obj docutils literal"><span class="pre">polyint</span></code></a>（c [，m，k，lbnd，scl，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-57">积分多项式。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="algebra">
+<h2><span class="yiyi-st" id="yiyi-58">Algebra</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyadd.html#numpy.polynomial.polynomial.polyadd" title="numpy.polynomial.polynomial.polyadd"><code class="xref py py-obj docutils literal"><span class="pre">polyadd</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">向另一个多项式添加一个多项式。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polysub.html#numpy.polynomial.polynomial.polysub" title="numpy.polynomial.polynomial.polysub"><code class="xref py py-obj docutils literal"><span class="pre">polysub</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-62">从另一个中减去一个多项式。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polymul.html#numpy.polynomial.polynomial.polymul" title="numpy.polynomial.polynomial.polymul"><code class="xref py py-obj docutils literal"><span class="pre">polymul</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-64">将一个多项式乘以另一个。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polymulx.html#numpy.polynomial.polynomial.polymulx" title="numpy.polynomial.polynomial.polymulx"><code class="xref py py-obj docutils literal"><span class="pre">polymulx</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-66">将多项式乘以x。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polydiv.html#numpy.polynomial.polynomial.polydiv" title="numpy.polynomial.polynomial.polydiv"><code class="xref py py-obj docutils literal"><span class="pre">polydiv</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-68">将一个多项式除以另一个多项式。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polypow.html#numpy.polynomial.polynomial.polypow" title="numpy.polynomial.polynomial.polypow"><code class="xref py py-obj docutils literal"><span class="pre">polypow</span></code></a>（c，pow [，maxpower]）</span></td>
+<td><span class="yiyi-st" id="yiyi-70">将多项式提升为幂。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="miscellaneous">
+<h2><span class="yiyi-st" id="yiyi-71">Miscellaneous</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polycompanion.html#numpy.polynomial.polynomial.polycompanion" title="numpy.polynomial.polynomial.polycompanion"><code class="xref py py-obj docutils literal"><span class="pre">polycompanion</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-73">返回c的伴随矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polydomain.html#numpy.polynomial.polynomial.polydomain" title="numpy.polynomial.polynomial.polydomain"><code class="xref py py-obj docutils literal"><span class="pre">polydomain</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-75"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyzero.html#numpy.polynomial.polynomial.polyzero" title="numpy.polynomial.polynomial.polyzero"><code class="xref py py-obj docutils literal"><span class="pre">polyzero</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-76"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyone.html#numpy.polynomial.polynomial.polyone" title="numpy.polynomial.polynomial.polyone"><code class="xref py py-obj docutils literal"><span class="pre">polyone</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-77"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyx.html#numpy.polynomial.polynomial.polyx" title="numpy.polynomial.polynomial.polyx"><code class="xref py py-obj docutils literal"><span class="pre">polyx</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-78"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polytrim.html#numpy.polynomial.polynomial.polytrim" title="numpy.polynomial.polynomial.polytrim"><code class="xref py py-obj docutils literal"><span class="pre">polytrim</span></code></a>（c [，tol]）</span></td>
+<td><span class="yiyi-st" id="yiyi-79">从多项式中删除“小”“拖尾”系数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="generated/numpy.polynomial.polynomial.polyline.html#numpy.polynomial.polynomial.polyline" title="numpy.polynomial.polynomial.polyline"><code class="xref py py-obj docutils literal"><span class="pre">polyline</span></code></a>（off，scl）</span></td>
+<td><span class="yiyi-st" id="yiyi-81">返回表示线性多项式的数组。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

@@ -1,0 +1,91 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.weibull</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.weibull.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.weibull.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.weibull"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">weibull</code><span class="sig-paren">(</span><em>a</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从威布尔分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">从具有给定形状参数<em class="xref py py-obj">a</em>的1参数Weibull分布绘制样本。</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-16">这里，U是从（0,1]上的均匀分布绘制的。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">更常见的2参数Weibull，包括比例参数<img alt="\lambda" class="math" src="../../_images/math/e77607a19744406310c093481c802d45bc53f674.png" style="vertical-align: 0px">只是<img alt="X = \lambda(-ln(U))^{1/a}" class="math" src="../../_images/math/5e4b84ea77a6121fafcbd1b2c65645cdf237d193.png" style="vertical-align: -4px">。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">形状的分布。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">输出形状。</span><span class="yiyi-st" id="yiyi-23">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-24">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-26"><strong>samples</strong>：ndarray</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-28"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.weibull_max</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.weibull_min</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.genextreme</span></code>，<a class="reference internal" href="numpy.random.gumbel.html#numpy.random.gumbel" title="numpy.random.gumbel"><code class="xref py py-obj docutils literal"><span class="pre">gumbel</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-30">Weibull（或最小值的III型渐近极值分布，SEV III型或Rosin-Rammler分布）是用于建模极值问题的一类广义极值分布（GEV）分布之一。</span><span class="yiyi-st" id="yiyi-31">这个类包括Gumbel和Frechet分发。</span></p>
+<p><span class="yiyi-st" id="yiyi-32">Weibull分布的概率密度为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-33">其中<img alt="a" class="math" src="../../_images/math/d54327e6a802a38385738bc7c146cadefa43d3f3.png" style="vertical-align: 0px">是形状，<img alt="\lambda" class="math" src="../../_images/math/e77607a19744406310c093481c802d45bc53f674.png" style="vertical-align: 0px">刻度。</span></p>
+<p><span class="yiyi-st" id="yiyi-34">该函数的峰值（模式）在<img alt="\lambda(\frac{a-1}{a})^{1/a}" class="math" src="../../_images/math/9c40d8f4d851598074686c7f6db5eb6e8f3b10d2.png" style="vertical-align: -5px">。</span></p>
+<p><span class="yiyi-st" id="yiyi-35">当<code class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">1</span></code>时，威布尔分布减小到指数分布。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r275" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-37"><a class="fn-backref" href="#id1">[R275]</a></span></td><td><span class="yiyi-st" id="yiyi-38">Walddi Weibull，皇家技术大学，斯德哥尔摩，1939年“材料强度的统计理论”，Ingeniorsvetenskapsakademiens Handlingar Nr 151,1939，Generalstabens Litografiska Anstalts Forlag，Stockholm。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r276" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-39"><a class="fn-backref" href="#id2">[R276]</a></span></td><td><span class="yiyi-st" id="yiyi-40">Waloddi Weibull，“A Statistical Distribution Function of Wide Applicability”，Journal of Applied Mechanics ASME Paper 1951。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r277" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-41"><a class="fn-backref" href="#id3">[R277]</a></span></td><td><span class="yiyi-st" id="yiyi-42">维基百科，“Weibull分布”，<a class="reference external" href="http://en.wikipedia.org/wiki/Weibull_distribution">http://en.wikipedia.org/wiki/Weibull_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-44">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mf">5.</span> <span class="c1"># shape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">weibull</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">显示样本的直方图，以及概率密度函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mf">100.</span><span class="p">)</span><span class="o">/</span><span class="mf">50.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">weib</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span><span class="o">**</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">weibull</span><span class="p">(</span><span class="mf">5.</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mf">100.</span><span class="p">)</span><span class="o">/</span><span class="mf">50.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scale</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">/</span><span class="n">weib</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">weib</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">)</span><span class="o">*</span><span class="n">scale</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">（<a class="reference external" href="../../reference/generated/numpy-random-weibull-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-weibull-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-weibull-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-weibull-1.png" src="../../_images/numpy-random-weibull-1.png">
+</div>
+</dd></dl>

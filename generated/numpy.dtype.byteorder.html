@@ -1,0 +1,59 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.dtype.byteorder</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.byteorder.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.byteorder.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="attribute">
+<dt id="numpy.dtype.byteorder"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">dtype.</code><code class="descname">byteorder</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">指示此数据类型对象的字节顺序的字符。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">之一：</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%">
+<col width="82%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-16">&apos;=&apos;</span></td>
+<td><span class="yiyi-st" id="yiyi-17">本机</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-18">&apos;&apos;</span></td>
+<td><span class="yiyi-st" id="yiyi-19">小端</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-20">&apos;&gt;&apos;</span></td>
+<td><span class="yiyi-st" id="yiyi-21">大端</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-22">&apos;|&apos;</span></td>
+<td><span class="yiyi-st" id="yiyi-23">不适用</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-24">所有内置数据类型对象都具有字节序“=”或“|”。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;i2&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">byteorder</span>
+<span class="go">&apos;=&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># endian is not relevant for 8 bit numbers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;i1&apos;</span><span class="p">)</span><span class="o">.</span><span class="n">byteorder</span>
+<span class="go">&apos;|&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># or ASCII strings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;S2&apos;</span><span class="p">)</span><span class="o">.</span><span class="n">byteorder</span>
+<span class="go">&apos;|&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Even if specific code is given, and it is native</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># &apos;=&apos; is the byteorder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys_is_le</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">byteorder</span> <span class="o">==</span> <span class="s1">&apos;little&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">native_code</span> <span class="o">=</span> <span class="n">sys_is_le</span> <span class="ow">and</span> <span class="s1">&apos;&lt;&apos;</span> <span class="ow">or</span> <span class="s1">&apos;&gt;&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">swapped_code</span> <span class="o">=</span> <span class="n">sys_is_le</span> <span class="ow">and</span> <span class="s1">&apos;&gt;&apos;</span> <span class="ow">or</span> <span class="s1">&apos;&lt;&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">native_code</span> <span class="o">+</span> <span class="s1">&apos;i2&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">byteorder</span>
+<span class="go">&apos;=&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Swapped code shows up as itself</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">swapped_code</span> <span class="o">+</span> <span class="s1">&apos;i2&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">byteorder</span> <span class="o">==</span> <span class="n">swapped_code</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

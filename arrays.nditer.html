@@ -1,0 +1,545 @@
+
+<span id="arrays-nditer"></span><h1><span class="yiyi-st" id="yiyi-25">Iterating Over Arrays</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/arrays.nditer.html">https://docs.scipy.org/doc/numpy/reference/arrays.nditer.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-26">在NumPy 1.6中引入的迭代器对象<a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>提供了以系统方式访问一个或多个数组的所有元素的许多灵活方式。</span><span class="yiyi-st" id="yiyi-27">本页介绍了使用对象在Python中的数组计算的一些基本方法，然后得出结论，如何加速Cython中的内循环。</span><span class="yiyi-st" id="yiyi-28">由于<a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>的Python暴露是C数组迭代器API的相对直接的映射，这些想法还将提供帮助处理C或C ++的数组迭代。</span></p>
+<div class="section" id="single-array-iteration">
+<h2><span class="yiyi-st" id="yiyi-29">Single Array Iteration</span></h2>
+<p><span class="yiyi-st" id="yiyi-30">使用<a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>可以完成的最基本的任务是访问数组的每个元素。</span><span class="yiyi-st" id="yiyi-31">使用标准的Python迭代器接口逐个提供每个元素。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-32">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span>
+<span class="gp">...</span>
+<span class="go">0 1 2 3 4 5</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-33">对于这个迭代，要注意的一个重要的事情是，选择顺序以匹配数组的存储器布局，而不是使用标准C或Fortran排序。</span><span class="yiyi-st" id="yiyi-34">这是为了访问效率，反映这样的想法，默认情况下，只是想访问每个元素，而不关心特定的顺序。</span><span class="yiyi-st" id="yiyi-35">我们可以通过迭代我们以前的数组的转置来看到这一点，与以C顺序取转置的副本相比。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-36">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span>
+<span class="gp">...</span>
+<span class="go">0 1 2 3 4 5</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&apos;C&apos;</span><span class="p">)):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span>
+<span class="gp">...</span>
+<span class="go">0 3 1 4 2 5</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37"><em class="xref py py-obj">a</em>和<em class="xref py py-obj">aT</em>的元素以相同的顺序遍历，即它们存储在内存中的顺序，而<em class="xref py py-obj">元素aTcopy（order = C&apos;）</em>以不同的顺序访问，因为它们已被放入不同的内存布局。</span></p>
+<div class="section" id="controlling-iteration-order">
+<h3><span class="yiyi-st" id="yiyi-38">Controlling Iteration Order</span></h3>
+<p><span class="yiyi-st" id="yiyi-39">有时，以特定顺序访问数组的元素很重要，而不考虑内存中元素的布局。</span><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>对象提供<em class="xref py py-obj">顺序</em>参数以控制迭代的此方面。</span><span class="yiyi-st" id="yiyi-41">具有上述行为的默认值是order =&apos;K&apos;以保持现有顺序。</span><span class="yiyi-st" id="yiyi-42">对于C order，可以用order =&apos;C&apos;；对于Fortran order，可以覆盖order =&apos;F&apos;。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-43">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span>
+<span class="gp">...</span>
+<span class="go">0 3 1 4 2 5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;C&apos;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span>
+<span class="gp">...</span>
+<span class="go">0 3 1 4 2 5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="modifying-array-values">
+<h3><span class="yiyi-st" id="yiyi-44">Modifying Array Values</span></h3>
+<p><span class="yiyi-st" id="yiyi-45">默认情况下，<a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>将输入数组视为只读对象。</span><span class="yiyi-st" id="yiyi-46">要修改数组元素，您必须指定读写或只写模式。</span><span class="yiyi-st" id="yiyi-47">这由每操作数标志控制。</span></p>
+<p><span class="yiyi-st" id="yiyi-48">在Python中的常规赋值只是改变局部或全局变量字典中的引用，而不是原地修改现有变量。</span><span class="yiyi-st" id="yiyi-49">这意味着，简单地赋值给<em class="xref py py-obj">x</em>不会将该值放入数组的元素，而是将<em class="xref py py-obj">x</em>从数组元素引用切换为引用该值你分配。</span><span class="yiyi-st" id="yiyi-50">要实际修改数组的元素，应将<em class="xref py py-obj">x</em>与省略号建立索引。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-51">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0, 1, 2],</span>
+<span class="go">       [3, 4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">op_flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;readwrite&apos;</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="n">x</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[ 0,  2,  4],</span>
+<span class="go">       [ 6,  8, 10]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-an-external-loop">
+<h3><span class="yiyi-st" id="yiyi-52">Using an External Loop</span></h3>
+<p><span class="yiyi-st" id="yiyi-53">在到目前为止的所有示例中，<em class="xref py py-obj">a</em>的元素由迭代器一次提供一个，因为所有循环逻辑都在迭代器内部。</span><span class="yiyi-st" id="yiyi-54">虽然这是简单和方便，它不是很有效率。</span><span class="yiyi-st" id="yiyi-55">一个更好的方法是将一维最内层循环移到你的代码中，在迭代器外部。</span><span class="yiyi-st" id="yiyi-56">这样，NumPy的矢量化操作可以用在被访问的元素的更大的块上。</span></p>
+<p><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>将尝试向内部循环提供尽可能大的块。</span><span class="yiyi-st" id="yiyi-58">通过强制&apos;C&apos;和&apos;F&apos;顺序，我们得到不同的外部循环大小。</span><span class="yiyi-st" id="yiyi-59">通过指定迭代器标志来启用此模式。</span></p>
+<p><span class="yiyi-st" id="yiyi-60">观察到默认情况下保持原生内存顺序，迭代器能够提供单个一维块，而当强制Fortran顺序时，它必须提供三个块的两个元素。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-61">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;external_loop&apos;</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span>
+<span class="gp">...</span>
+<span class="go">[0 1 2 3 4 5]</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;external_loop&apos;</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span>
+<span class="gp">...</span>
+<span class="go">[0 3] [1 4] [2 5]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="tracking-an-index-or-multi-index">
+<h3><span class="yiyi-st" id="yiyi-62">Tracking an Index or Multi-Index</span></h3>
+<p><span class="yiyi-st" id="yiyi-63">在迭代期间，您可能想在计算中使用当前元素的索引。</span><span class="yiyi-st" id="yiyi-64">例如，您可能希望按内存顺序访问数组的元素，但使用C顺序，Fortran顺序或多维索引来查找不同数组中的值。</span></p>
+<p><span class="yiyi-st" id="yiyi-65">Python迭代器协议没有从迭代器查询这些附加值的自然方式，因此我们引入了一个用于使用<a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>进行迭代的替代语法。</span><span class="yiyi-st" id="yiyi-66">此语法显式地与迭代器对象本身一起使用，因此其属性在迭代期间可以轻松访问。</span><span class="yiyi-st" id="yiyi-67">使用这个循环结构，可以通过索引到迭代器来访问当前值，并且正在跟踪的索引是属性<em class="xref py py-obj">index</em>或<em class="xref py py-obj">multi_index</em>，具体取决于请求的内容。</span></p>
+<p><span class="yiyi-st" id="yiyi-68">Python交互式解释器不幸地在循环的每次迭代期间在while循环中打印出表达式的值。</span><span class="yiyi-st" id="yiyi-69">我们使用这个循环结构修改了示例中的输出，以便更加可读。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-70">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;f_index&apos;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="ow">not</span> <span class="n">it</span><span class="o">.</span><span class="n">finished</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> &lt;</span><span class="si">%d</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">it</span><span class="o">.</span><span class="n">index</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">it</span><span class="o">.</span><span class="n">iternext</span><span class="p">()</span>
+<span class="gp">...</span>
+<span class="go">0 &lt;0&gt; 1 &lt;2&gt; 2 &lt;4&gt; 3 &lt;1&gt; 4 &lt;3&gt; 5 &lt;5&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;multi_index&apos;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="ow">not</span> <span class="n">it</span><span class="o">.</span><span class="n">finished</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> &lt;</span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">it</span><span class="o">.</span><span class="n">multi_index</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">it</span><span class="o">.</span><span class="n">iternext</span><span class="p">()</span>
+<span class="gp">...</span>
+<span class="go">0 &lt;(0, 0)&gt; 1 &lt;(0, 1)&gt; 2 &lt;(0, 2)&gt; 3 &lt;(1, 0)&gt; 4 &lt;(1, 1)&gt; 5 &lt;(1, 2)&gt;</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;multi_index&apos;</span><span class="p">],</span> <span class="n">op_flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;writeonly&apos;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="ow">not</span> <span class="n">it</span><span class="o">.</span><span class="n">finished</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">multi_index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">it</span><span class="o">.</span><span class="n">multi_index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">it</span><span class="o">.</span><span class="n">iternext</span><span class="p">()</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[ 0,  1,  2],</span>
+<span class="go">       [-1,  0,  1]])</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-71">跟踪索引或多索引与使用外部循环不兼容，因为它需要每个元素有不同的索引值。</span><span class="yiyi-st" id="yiyi-72">如果你尝试合并这些标志，<a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>对象将引发异常</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-73">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;c_index&apos;</span><span class="p">,</span> <span class="s1">&apos;external_loop&apos;</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ValueError</span>: <span class="n">Iterator flag EXTERNAL_LOOP cannot be used if an index or multi-index is being tracked</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="buffering-the-array-elements">
+<h3><span class="yiyi-st" id="yiyi-74">Buffering the Array Elements</span></h3>
+<p><span class="yiyi-st" id="yiyi-75">当强制迭代顺序时，我们观察到外部循环选项可以提供较小块中的元素，因为不能以恒定的步长以适当的顺序访问元素。</span><span class="yiyi-st" id="yiyi-76">当编写C代码时，这通常很好，但是在纯Python代码中，这可能导致性能的显着降低。</span></p>
+<p><span class="yiyi-st" id="yiyi-77">通过启用缓冲模式，迭代器提供给内部循环的块可以做得更大，从而显着降低Python解释器的开销。</span><span class="yiyi-st" id="yiyi-78">在强制Fortran迭代顺序的示例中，内部循环在启用缓冲时可以一次查看所有元素。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-79">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;external_loop&apos;</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span>
+<span class="gp">...</span>
+<span class="go">[0 3] [1 4] [2 5]</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;external_loop&apos;</span><span class="p">,</span><span class="s1">&apos;buffered&apos;</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span>
+<span class="gp">...</span>
+<span class="go">[0 3 1 4 2 5]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="iterating-as-a-specific-data-type">
+<h3><span class="yiyi-st" id="yiyi-80">Iterating as a Specific Data Type</span></h3>
+<p><span class="yiyi-st" id="yiyi-81">有时，有必要将数组视为与存储为不同的数据类型。</span><span class="yiyi-st" id="yiyi-82">例如，可能想对64位浮点数执行所有计算，即使正在操作的数组是32位浮点数。</span><span class="yiyi-st" id="yiyi-83">除了编写低级C代码之外，通常最好让迭代器处理复制或缓冲，而不是自己在内循环中转换数据类型。</span></p>
+<p><span class="yiyi-st" id="yiyi-84">有两种机制允许这样做，临时副本和缓冲模式。</span><span class="yiyi-st" id="yiyi-85">使用临时副本，使用新数据类型创建整个数组的副本，然后在副本中进行迭代。</span><span class="yiyi-st" id="yiyi-86">允许通过在所有迭代完成后更新原始数组的模式进行写访问。</span><span class="yiyi-st" id="yiyi-87">临时副本的主要缺点是临时副本可能消耗大量的内存，特别是如果迭代数据类型具有比原始数据类型更大的项目大小。</span></p>
+<p><span class="yiyi-st" id="yiyi-88">缓冲模式减少了内存使用问题，并且比临时副本更容易缓存。</span><span class="yiyi-st" id="yiyi-89">除了特殊情况，其中整个数组一次在迭代器外部需要，建议在临时复制时进行缓冲。</span><span class="yiyi-st" id="yiyi-90">在NumPy中，缓冲由ufuncs和其他函数使用，以最小的内存开销支持灵活的输入。</span></p>
+<p><span class="yiyi-st" id="yiyi-91">在我们的例子中，我们将使用复杂数据类型来处理输入数组，以便我们可以取负数的平方根。</span><span class="yiyi-st" id="yiyi-92">如果不启用复制或缓冲模式，如果数据类型不精确匹配，迭代器将引发异常。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-93">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">op_dtypes</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;complex128&apos;</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+<span class="gp">...</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">Iterator operand required copying or buffering, but neither copying nor buffering was enabled</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-94">在复制模式下，&apos;copy&apos;被指定为每操作数标志。</span><span class="yiyi-st" id="yiyi-95">这是为了以操作数方式提供控制。</span><span class="yiyi-st" id="yiyi-96">缓冲模式被指定为迭代器标志。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-97">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">op_flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;readonly&apos;</span><span class="p">,</span><span class="s1">&apos;copy&apos;</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">op_dtypes</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;complex128&apos;</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+<span class="gp">...</span>
+<span class="go">1.73205080757j 1.41421356237j 1j 0j (1+0j) (1.41421356237+0j)</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;buffered&apos;</span><span class="p">],</span> <span class="n">op_dtypes</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;complex128&apos;</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+<span class="gp">...</span>
+<span class="go">1.73205080757j 1.41421356237j 1j 0j (1+0j) (1.41421356237+0j)</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-98">迭代器使用NumPy的投射规则来确定是否允许特定的转化。</span><span class="yiyi-st" id="yiyi-99">默认情况下，它强制执行“安全”转换。</span><span class="yiyi-st" id="yiyi-100">这意味着，例如，如果您尝试将64位浮点数组视为32位浮点数组，它将引发异常。</span><span class="yiyi-st" id="yiyi-101">在许多情况下，规则“same_kind”是使用的最合理的规则，因为它将允许从64位转换为32位浮点，但不能从float转换为int或从complex转换为float。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-102">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">6.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;buffered&apos;</span><span class="p">],</span> <span class="n">op_dtypes</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;float32&apos;</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span>
+<span class="gp">...</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">Iterator operand 0 dtype could not be cast from dtype(&apos;float64&apos;) to dtype(&apos;float32&apos;) according to the rule &apos;safe&apos;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;buffered&apos;</span><span class="p">],</span> <span class="n">op_dtypes</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;float32&apos;</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">casting</span><span class="o">=</span><span class="s1">&apos;same_kind&apos;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span>
+<span class="gp">...</span>
+<span class="go">0.0 1.0 2.0 3.0 4.0 5.0</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;buffered&apos;</span><span class="p">],</span> <span class="n">op_dtypes</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;int32&apos;</span><span class="p">],</span> <span class="n">casting</span><span class="o">=</span><span class="s1">&apos;same_kind&apos;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="n">x</span><span class="p">,</span>
+<span class="gp">...</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">Iterator operand 0 dtype could not be cast from dtype(&apos;float64&apos;) to dtype(&apos;int32&apos;) according to the rule &apos;same_kind&apos;</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-103">需要注意的一点是，当使用读写或只写操作数时，转换回原始数据类型。</span><span class="yiyi-st" id="yiyi-104">一种常见的情况是以64位浮点数实现内部循环，并使用“same_kind”转换来允许处理其他浮点类型。</span><span class="yiyi-st" id="yiyi-105">在只读模式下，可以提供一个整数数组，读写模式将引发异常，因为转换回数组将违反转换规则。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-106">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;buffered&apos;</span><span class="p">],</span> <span class="n">op_flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;readwrite&apos;</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">op_dtypes</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;float64&apos;</span><span class="p">],</span> <span class="n">casting</span><span class="o">=</span><span class="s1">&apos;same_kind&apos;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">x</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="gp">...</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">2</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">Iterator requested dtype could not be cast from dtype(&apos;float64&apos;) to dtype(&apos;int64&apos;), the operand 0 dtype, according to the rule &apos;same_kind&apos;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="broadcasting-array-iteration">
+<h2><span class="yiyi-st" id="yiyi-107">Broadcasting Array Iteration</span></h2>
+<p><span class="yiyi-st" id="yiyi-108">NumPy有一组用于处理数组的规则，它们具有不同的形状，每当函数采用多个以元素方式组合的操作数时。</span><span class="yiyi-st" id="yiyi-109">这称为<a class="reference internal" href="ufuncs.html#ufuncs-broadcasting"><span class="std std-ref">broadcasting</span></a>。</span><span class="yiyi-st" id="yiyi-110">当你需要写这样的函数时，<a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>对象可以应用这些规则给你。</span></p>
+<p><span class="yiyi-st" id="yiyi-111">作为示例，我们打印出一个一维和二维数组一起广播的结果。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-112">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">:</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span>
+<span class="gp">...</span>
+<span class="go">0:0 1:1 2:2 0:3 1:4 2:5</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-113">当发生广播错误时，迭代器引发包括输入形状的异常，以帮助诊断问题。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-114">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">:</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span>
+<span class="gp">...</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ValueError</span>: <span class="n">operands could not be broadcast together with shapes (2) (2,3)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="iterator-allocated-output-arrays">
+<h3><span class="yiyi-st" id="yiyi-115">Iterator-Allocated Output Arrays</span></h3>
+<p><span class="yiyi-st" id="yiyi-116">NumPy函数中的一个常见情况是具有基于输入的广播分配的输出，并且另外具有称为“out”的可选参数，其中当提供结果时将其放置。</span><span class="yiyi-st" id="yiyi-117"><a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>对象提供了一个方便的习语，使其非常容易支持此机制。</span></p>
+<p><span class="yiyi-st" id="yiyi-118">我们将通过创建一个平方其输入的函数<a class="reference internal" href="generated/numpy.square.html#numpy.square" title="numpy.square"><code class="xref py py-obj docutils literal"><span class="pre">square</span></code></a>来显示这是如何工作的。</span><span class="yiyi-st" id="yiyi-119">让我们从一个最小的函数定义开始，不包括&apos;out&apos;参数支持。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-120">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+<span class="gp">... </span>         <span class="n">y</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">square</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="go">array([1, 4, 9])</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-121">默认情况下，<a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>对于作为None传入的操作数使用标志“allocate”和“writeonly”。</span><span class="yiyi-st" id="yiyi-122">这意味着我们能够为迭代器提供两个操作数，并处理其余的操作数。</span></p>
+<p><span class="yiyi-st" id="yiyi-123">当添加&apos;out&apos;参数时，我们必须显式提供这些标志，因为如果有人传入一个数组作为&apos;out&apos;，迭代器将默认为&apos;readonly&apos;，我们的内循环将失败。</span><span class="yiyi-st" id="yiyi-124">“readonly”的原因是输入数组的默认值是为了防止关于无意触发归约操作的混淆。</span><span class="yiyi-st" id="yiyi-125">如果默认值为“readwrite”，则任何广播操作都将触发缩减，本文档后面将介绍一个主题。</span></p>
+<p><span class="yiyi-st" id="yiyi-126">虽然我们在这里，我们还介绍了“no_broadcast”标志，这将防止输出的广播。</span><span class="yiyi-st" id="yiyi-127">这很重要，因为每个输出只需要一个输入值。</span><span class="yiyi-st" id="yiyi-128">聚合多个输入值是需要特殊处理的缩减操作。</span><span class="yiyi-st" id="yiyi-129">它已经引起一个错误，因为必须在迭代器标志中显式地启用缩减，但是禁用广播导致的错误消息对于最终用户来说更容易理解。</span><span class="yiyi-st" id="yiyi-130">要了解如何将平方函数泛化为简化，请参阅有关Cython的部分中的平方和函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-131">为了完整性，我们还将添加“external_loop”和“buffered”标志，因为这些是你通常因为性能原因而需要的。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-132">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">out</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="n">flags</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&apos;external_loop&apos;</span><span class="p">,</span> <span class="s1">&apos;buffered&apos;</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="n">op_flags</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&apos;readonly&apos;</span><span class="p">],</span>
+<span class="gp">... </span>                        <span class="p">[</span><span class="s1">&apos;writeonly&apos;</span><span class="p">,</span> <span class="s1">&apos;allocate&apos;</span><span class="p">,</span> <span class="s1">&apos;no_broadcast&apos;</span><span class="p">]])</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">y</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">square</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="go">array([1, 4, 9])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">square</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">out</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
+<span class="go">array([ 1.,  4.,  9.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">array([ 1.,  4.,  9.])</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">out</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">4</span>, in <span class="n">square</span>
+<span class="gr">ValueError</span>: <span class="n">non-broadcastable output operand with shape (3) doesn&apos;t match the broadcast shape (2,3)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="outer-product-iteration">
+<h3><span class="yiyi-st" id="yiyi-133">Outer Product Iteration</span></h3>
+<p><span class="yiyi-st" id="yiyi-134">任何二进制操作都可以以外部乘积方式扩展到数组操作，如<a class="reference internal" href="generated/numpy.outer.html#numpy.outer" title="numpy.outer"><code class="xref py py-func docutils literal"><span class="pre">outer</span></code></a>，而<a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>对象提供了一种实现方法，操作数。</span><span class="yiyi-st" id="yiyi-135">也可以使用<a class="reference internal" href="arrays.indexing.html#numpy.newaxis" title="numpy.newaxis"><code class="xref py py-const docutils literal"><span class="pre">newaxis</span></code></a>索引来实现这一点，但是我们将告诉你如何直接使用nditer <em class="xref py py-obj">op_axes</em>参数来实现这一点，没有中间视图。</span></p>
+<p><span class="yiyi-st" id="yiyi-136">我们将做一个简单的外部产品，将第一个操作数的维度放在第二个操作数的维度之前。</span><span class="yiyi-st" id="yiyi-137"><em class="xref py py-obj">op_axes</em>参数需要每个操作数的一个轴列表，并提供从迭代器轴到操作数轴的映射。</span></p>
+<p><span class="yiyi-st" id="yiyi-138">假设第一操作数是一维的，而第二操作数是二维的。</span><span class="yiyi-st" id="yiyi-139">迭代器将有三个维度，因此<em class="xref py py-obj">op_axes</em>将有两个3元素列表。</span><span class="yiyi-st" id="yiyi-140">第一个列表选取第一个操作数的一个轴，对于其余的迭代器轴为-1，最终结果为[0，-1，-1]。</span><span class="yiyi-st" id="yiyi-141">第二个列表拾取第二个操作数的两个轴，但不应与第一个操作数中拾取的轴重叠。</span><span class="yiyi-st" id="yiyi-142">它的列表是[-1,0,1]。</span><span class="yiyi-st" id="yiyi-143">输出操作数以标准方式映射到迭代器轴，因此我们可以提供None而不是构造另一个列表。</span></p>
+<p><span class="yiyi-st" id="yiyi-144">内循环中的操作是直接乘法。</span><span class="yiyi-st" id="yiyi-145">与外部产品相关的一切都由迭代器设置来处理。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-146">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;external_loop&apos;</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="n">op_axes</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="kc">None</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">z</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">array([[[ 0,  0,  0,  0],</span>
+<span class="go">        [ 0,  0,  0,  0]],</span>
+<span class="go">       [[ 0,  1,  2,  3],</span>
+<span class="go">        [ 4,  5,  6,  7]],</span>
+<span class="go">       [[ 0,  2,  4,  6],</span>
+<span class="go">        [ 8, 10, 12, 14]]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="reduction-iteration">
+<h3><span class="yiyi-st" id="yiyi-147">Reduction Iteration</span></h3>
+<p><span class="yiyi-st" id="yiyi-148">每当可写操作数具有比完全迭代空间少的元素时，该操作数正在经历减少。</span><span class="yiyi-st" id="yiyi-149"><a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>对象要求将任何还原操作数标记为读写，并且仅当“reduce_ok”作为迭代器标志提供时才允许减少。</span></p>
+<p><span class="yiyi-st" id="yiyi-150">对于一个简单的例子，考虑数组中所有元素的和。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-151">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;reduce_ok&apos;</span><span class="p">,</span> <span class="s1">&apos;external_loop&apos;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="n">op_flags</span><span class="o">=</span><span class="p">[[</span><span class="s1">&apos;readonly&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;readwrite&apos;</span><span class="p">]]):</span>
+<span class="gp">... </span>    <span class="n">y</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">array(276)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">276</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-152">当组合缩减和分配的操作数时，事情有点棘手。</span><span class="yiyi-st" id="yiyi-153">在开始迭代之前，任何归约操作数必须初始化为其起始值。</span><span class="yiyi-st" id="yiyi-154">我们可以这样做，沿着<em class="xref py py-obj">a</em>的最后一个轴取和。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-155">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;reduce_ok&apos;</span><span class="p">,</span> <span class="s1">&apos;external_loop&apos;</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="n">op_flags</span><span class="o">=</span><span class="p">[[</span><span class="s1">&apos;readonly&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;readwrite&apos;</span><span class="p">,</span> <span class="s1">&apos;allocate&apos;</span><span class="p">]],</span>
+<span class="gp">... </span>            <span class="n">op_axes</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">y</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">array([[ 6, 22, 38],</span>
+<span class="go">       [54, 70, 86]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([[ 6, 22, 38],</span>
+<span class="go">       [54, 70, 86]])</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-156">要进行缓冲减少，需要在设置期间进行另一个调整。</span><span class="yiyi-st" id="yiyi-157">通常，迭代器构造涉及将数据的第一缓冲器从可读数组复制到缓冲器中。</span><span class="yiyi-st" id="yiyi-158">任何缩减操作数是可读的，因此它可以被读入缓冲器。</span><span class="yiyi-st" id="yiyi-159">不幸的是，在这个缓冲操作完成之后，操作数的初始化将不会反映在迭代开始的缓冲器中，并且将产生垃圾结果。</span></p>
+<p><span class="yiyi-st" id="yiyi-160"></span><span class="yiyi-st" id="yiyi-161">当设置此标志时，迭代器将保持其缓冲区未初始化，直到它接收到复位，之后它将准备好进行常规迭代。</span><span class="yiyi-st" id="yiyi-162">如果我们也启用缓冲，上面的例子看起来如下。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-163">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;reduce_ok&apos;</span><span class="p">,</span> <span class="s1">&apos;external_loop&apos;</span><span class="p">,</span>
+<span class="gp">... </span>                                 <span class="s1">&apos;buffered&apos;</span><span class="p">,</span> <span class="s1">&apos;delay_bufalloc&apos;</span><span class="p">],</span>
+<span class="gp">... </span>            <span class="n">op_flags</span><span class="o">=</span><span class="p">[[</span><span class="s1">&apos;readonly&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;readwrite&apos;</span><span class="p">,</span> <span class="s1">&apos;allocate&apos;</span><span class="p">]],</span>
+<span class="gp">... </span>            <span class="n">op_axes</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">it</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">y</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">array([[ 6, 22, 38],</span>
+<span class="go">       [54, 70, 86]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="putting-the-inner-loop-in-cython">
+<h2><span class="yiyi-st" id="yiyi-164">Putting the Inner Loop in Cython</span></h2>
+<p><span class="yiyi-st" id="yiyi-165">那些想要在低级操作中表现出色的用户应该强烈地考虑直接使用C中提供的迭代API，但是对于那些对C或C ++不熟悉的用户来说，Cython是一个很好的中间点，并且有着合理的性能权衡。</span><span class="yiyi-st" id="yiyi-166">对于<a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-class docutils literal"><span class="pre">nditer</span></code></a>对象，这意味着让迭代器处理广播，dtype转换和缓冲，同时给Cython提供内循环。</span></p>
+<p><span class="yiyi-st" id="yiyi-167">在我们的例子中，我们将创建一个平方和函数。</span><span class="yiyi-st" id="yiyi-168">首先，让我们使用简单的Python实现这个函数。</span><span class="yiyi-st" id="yiyi-169">我们要支持类似于numpy <a class="reference internal" href="generated/numpy.sum.html#numpy.sum" title="numpy.sum"><code class="xref py py-func docutils literal"><span class="pre">sum</span></code></a>函数的“axis”参数，因此我们需要为<em class="xref py py-obj">op_axes</em>参数构造一个列表。</span><span class="yiyi-st" id="yiyi-170">这是这个样子。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-171">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">axis_to_axeslist</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">ndim</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">ndim</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="n">axis</span> <span class="o">=</span> <span class="p">(</span><span class="n">axis</span><span class="p">,)</span>
+<span class="gp">... </span>        <span class="n">axeslist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">ndim</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">axis</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="n">axeslist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="gp">... </span>        <span class="n">ax</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">):</span>
+<span class="gp">... </span>            <span class="k">if</span> <span class="n">axeslist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+<span class="gp">... </span>                <span class="n">axeslist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax</span>
+<span class="gp">... </span>                <span class="n">ax</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">axeslist</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">sum_squares_py</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">axeslist</span> <span class="o">=</span> <span class="n">axis_to_axeslist</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">arr</span><span class="p">,</span> <span class="n">out</span><span class="p">],</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;reduce_ok&apos;</span><span class="p">,</span> <span class="s1">&apos;external_loop&apos;</span><span class="p">,</span>
+<span class="gp">... </span>                                      <span class="s1">&apos;buffered&apos;</span><span class="p">,</span> <span class="s1">&apos;delay_bufalloc&apos;</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">op_flags</span><span class="o">=</span><span class="p">[[</span><span class="s1">&apos;readonly&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;readwrite&apos;</span><span class="p">,</span> <span class="s1">&apos;allocate&apos;</span><span class="p">]],</span>
+<span class="gp">... </span>                <span class="n">op_axes</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">axeslist</span><span class="p">],</span>
+<span class="gp">... </span>                <span class="n">op_dtypes</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;float64&apos;</span><span class="p">,</span> <span class="s1">&apos;float64&apos;</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">... </span>    <span class="n">it</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">y</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sum_squares_py</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array(55.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sum_squares_py</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([  5.,  50.])</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-172">为了Cython -ize这个函数，我们用专用于float64 dtype的Cython代码替换内部循环（y [...] + = x * x）。</span><span class="yiyi-st" id="yiyi-173">如果启用了&apos;external_loop&apos;标志，提供给内循环的数组将始终是一维的，因此需要进行非常少的检查。</span></p>
+<p><span class="yiyi-st" id="yiyi-174">以下是sum_squares.pyx的列表：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">cimport</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">cimport</span> <span class="n">cython</span>
+
+<span class="k">def</span> <span class="nf">axis_to_axeslist</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">ndim</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">ndim</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">tuple</span><span class="p">:</span>
+            <span class="n">axis</span> <span class="o">=</span> <span class="p">(</span><span class="n">axis</span><span class="p">,)</span>
+        <span class="n">axeslist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">ndim</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">axis</span><span class="p">:</span>
+            <span class="n">axeslist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndim</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">axeslist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">axeslist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ax</span>
+                <span class="n">ax</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">axeslist</span>
+
+<span class="nd">@cython</span><span class="o">.</span><span class="n">boundscheck</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sum_squares_cy</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">cdef</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="n">double</span><span class="p">]</span> <span class="n">x</span>
+    <span class="n">cdef</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="n">double</span><span class="p">]</span> <span class="n">y</span>
+    <span class="n">cdef</span> <span class="nb">int</span> <span class="n">size</span>
+    <span class="n">cdef</span> <span class="n">double</span> <span class="n">value</span>
+
+    <span class="n">axeslist</span> <span class="o">=</span> <span class="n">axis_to_axeslist</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+    <span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">arr</span><span class="p">,</span> <span class="n">out</span><span class="p">],</span> <span class="n">flags</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;reduce_ok&apos;</span><span class="p">,</span> <span class="s1">&apos;external_loop&apos;</span><span class="p">,</span>
+                                      <span class="s1">&apos;buffered&apos;</span><span class="p">,</span> <span class="s1">&apos;delay_bufalloc&apos;</span><span class="p">],</span>
+                <span class="n">op_flags</span><span class="o">=</span><span class="p">[[</span><span class="s1">&apos;readonly&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;readwrite&apos;</span><span class="p">,</span> <span class="s1">&apos;allocate&apos;</span><span class="p">]],</span>
+                <span class="n">op_axes</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="n">axeslist</span><span class="p">],</span>
+                <span class="n">op_dtypes</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;float64&apos;</span><span class="p">,</span> <span class="s1">&apos;float64&apos;</span><span class="p">])</span>
+    <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">it</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">xarr</span><span class="p">,</span> <span class="n">yarr</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">xarr</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">yarr</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+           <span class="n">value</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+           <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">value</span> <span class="o">*</span> <span class="n">value</span>
+    <span class="k">return</span> <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-175">在这台机器上，将.pyx文件构建为一个模块看起来像下面这样，但是你可能需要找到一些Cython教程来告诉你系统配置的细节。</span><span class="yiyi-st" id="yiyi-176">：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ cython sum_squares.pyx
+$ gcc -shared -pthread -fPIC -fwrapv -O2 -Wall -I/usr/include/python2.7 -fno-strict-aliasing -o sum_squares.so sum_squares.c
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-177">从Python解释器运行它产生与我们的本地Python / NumPy代码相同的答案。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-178">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sum_squares</span> <span class="k">import</span> <span class="n">sum_squares_cy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sum_squares_cy</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array(55.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sum_squares_cy</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([  5.,  50.])</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-179">在IPython中做一点时间表明，减少的Cython内部循环的开销和内存分配提供了一个非常好的加速，超过直接的Python代码和使用NumPy的内置sum函数的表达式。</span><span class="yiyi-st" id="yiyi-180">：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timeit</span> <span class="n">sum_squares_py</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">10 loops, best of 3: 37.1 ms per loop</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timeit</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">10 loops, best of 3: 20.9 ms per loop</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timeit</span> <span class="n">sum_squares_cy</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">100 loops, best of 3: 11.8 ms per loop</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">sum_squares_cy</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">sum_squares_py</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>

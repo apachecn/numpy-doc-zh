@@ -1,0 +1,91 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.var</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.var.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.var.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ma.var"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">var</code><span class="sig-paren">(</span><em>self</em>, <em>axis=None</em>, <em>dtype=None</em>, <em>out=None</em>, <em>ddof=0</em>, <em>keepdims=&lt;class numpy._globals._NoValue at 0x7faefc173ef0&gt;</em><span class="sig-paren">)</span><em class="property"> = &lt;numpy.ma.core._frommethod instance&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">计算沿指定轴的方差。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">返回数组元素的方差，衡量分布的扩展。</span><span class="yiyi-st" id="yiyi-17">默认情况下为展开的数组计算方差，否则在指定的轴上。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">包含需要方差的数字的数组。</span><span class="yiyi-st" id="yiyi-21">如果<em class="xref py py-obj">a</em>不是数组，则尝试进行转换。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>axis</strong>：无或int或tuple ints，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">计算方差的轴或轴。</span><span class="yiyi-st" id="yiyi-24">默认值是计算展平数组的方差。</span></p>
+<p><span class="yiyi-st" id="yiyi-25">如果这是一个ints的元组，则在多个轴上执行方差，而不是如前所述的单个轴或所有轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">用于计算方差的类型。</span><span class="yiyi-st" id="yiyi-28">对于整数类型的数组，默认值为<em class="xref py py-obj">float32</em>；对于float类型的数组，它与数组类型相同。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">备用输出放置结果的数组。</span><span class="yiyi-st" id="yiyi-31">它必须具有与预期输出相同的形状，但是如果必要，将类型转换。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>ddof</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">“Delta Degrees of Freedom”：在计算中使用的除数是<code class="docutils literal"><span class="pre">N</span> <span class="pre"> - </span> <span class="pre">ddof</span></code>，其中<code class="docutils literal"><span class="pre">N</span></code>表示元素的数量。</span><span class="yiyi-st" id="yiyi-34">默认情况下，<em class="xref py py-obj">ddof</em>为零。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35"><strong>keepdims</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-36">如果设置为True，则缩小的轴将作为尺寸为1的尺寸留在结果中。</span><span class="yiyi-st" id="yiyi-37">使用此选项，结果将相对于原始<em class="xref py py-obj">arr</em>正确广播。</span></p>
+<p><span class="yiyi-st" id="yiyi-38">如果传递默认值，则<em class="xref py py-obj">keepdims</em>将不会传递到<em class="xref py py-obj">ndarray</em>的子类的<a class="reference internal" href="#numpy.ma.var" title="numpy.ma.var"><code class="xref py py-obj docutils literal"><span class="pre">var</span></code></a>方法，默认值为。</span><span class="yiyi-st" id="yiyi-39">如果子类<a class="reference internal" href="numpy.ma.sum.html#numpy.ma.sum" title="numpy.ma.sum"><code class="xref py py-obj docutils literal"><span class="pre">sum</span></code></a>方法不实现<em class="xref py py-obj">keepdims</em>，则会引发任何异常。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-40">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-41"><strong>方差</strong>：ndarray，请参阅上面的dtype参数</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-42">如果<code class="docutils literal"><span class="pre">out=None</span></code>，则返回包含方差的新数组；否则返回对输出数组的引用。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-43">也可以看看</span></p>
+<p><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.ma.std.html#numpy.ma.std" title="numpy.ma.std"><code class="xref py py-obj docutils literal"><span class="pre">std</span></code></a>，<a class="reference internal" href="numpy.ma.mean.html#numpy.ma.mean" title="numpy.ma.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a>，<code class="xref py py-obj docutils literal"><span class="pre">nanmean</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">nanstd</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">nanvar</span></code></span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-45"><code class="xref py py-obj docutils literal"><span class="pre">numpy.doc.ufuncs</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-46">节“输出参数”</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-47">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-48">The variance is the average of the squared deviations from the mean, i.e., <code class="docutils literal"><span class="pre">var</span> <span class="pre">=</span> <span class="pre">mean(abs(x</span> <span class="pre">-</span> <span class="pre">x.mean())**2)</span></code>.</span></p>
+<p><span class="yiyi-st" id="yiyi-49">平均值通常计算为<code class="docutils literal"><span class="pre">x.sum()</span> <span class="pre">/</span> <span class="pre">N</span></code>，其中<code class="docutils literal"><span class="pre">N </span> <span class="pre">=</span> <span class="pre">len（x）</span></code>。</span><span class="yiyi-st" id="yiyi-50">但是，如果指定<em class="xref py py-obj">ddof</em>，则使用除数<code class="docutils literal"><span class="pre">N</span> <span class="pre"> - </span> <span class="pre">ddof</span> 代替。</code></span><span class="yiyi-st" id="yiyi-51">在标准统计实践中，<code class="docutils literal"><span class="pre">ddof=1</span></code>提供了假设无限总体方差的无偏估计量。</span><span class="yiyi-st" id="yiyi-52"><code class="docutils literal"><span class="pre">ddof=0</span></code>提供正态分布变量的方差的最大似然估计。</span></p>
+<p><span class="yiyi-st" id="yiyi-53">请注意，对于复数，绝对值在平方之前进行，因此结果始终为实数和非负数。</span></p>
+<p><span class="yiyi-st" id="yiyi-54">对于浮点输入，使用输入具有的相同精度计算方差。</span><span class="yiyi-st" id="yiyi-55">根据输入数据，这可能导致结果不准确，特别是对于<em class="xref py py-obj">float32</em>（请参见下面的示例）。</span><span class="yiyi-st" id="yiyi-56">使用<code class="docutils literal"><span class="pre">dtype</span></code>关键字指定更高精度的累加器可以缓解此问题。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-57">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">1.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([ 1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 0.25,  0.25])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-58">在单精度中，var()可能不准确：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">512</span><span class="o">*</span><span class="mi">512</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">0.20250003</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-59">计算float64中的方差更准确：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="go">0.20249999932944759</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.55</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.1</span><span class="o">-</span><span class="mf">0.55</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="go">0.2025</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,61 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.pinv</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.pinv.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.pinv.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.pinv"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">pinv</code><span class="sig-paren">(</span><em>a</em>, <em>rcond=1e-15</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L1551-L1627"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算矩阵的（Moore-Penrose）伪逆。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">使用奇异值分解（SVD）并包括所有<em>大</em>奇异值计算矩阵的广义逆。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：（M，N）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">要进行伪反转的矩阵。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>rcond</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">小奇异值的截止值。</span><span class="yiyi-st" id="yiyi-21">比<em class="xref py py-obj">rcond</em> * highest_singular_value（再次，以模数）更小的（模数）奇异值被设置为零。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>B</strong>：（N，M）ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24"><em class="xref py py-obj">a</em>的伪逆。</span><span class="yiyi-st" id="yiyi-25">如果<em class="xref py py-obj">a</em>是<em class="xref py py-obj">矩阵</em>实例，则<em class="xref py py-obj">B</em>也是矩阵实例。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>LinAlgError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">如果SVD计算不收敛。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-30">表示为<img alt="A^+" class="math" src="../../_images/math/c36fb0deb8a7c7db4c8b8ff4dfad03e40150c756.png" style="vertical-align: 0px">的矩阵A的伪逆定义为：“求解&apos;[最小二乘问题] <img alt="Ax = b" class="math" src="../../_images/math/836bea12aabbc1e64e6f47057cca0e30e76968ec.png" style="vertical-align: 0px">的矩阵，即，如果<img alt="\bar{x}" class="math" src="../../_images/math/2ef405fabb35c56f6831fc0d7da77b44f39dd52d.png" style="vertical-align: 0px">是所述解，那么<img alt="A^+" class="math" src="../../_images/math/c36fb0deb8a7c7db4c8b8ff4dfad03e40150c756.png" style="vertical-align: 0px">是<img alt="\bar{x} = A^+b" class="math" src="../../_images/math/8a927953157641e1a0e422de6ed62c3dd142c3ab.png" style="vertical-align: 0px">的矩阵。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">可以表明，如果<img alt="Q_1 \Sigma Q_2^T = A" class="math" src="../../_images/math/e985856f5a67699b320fd6c1920efc5512a40bd7.png" style="vertical-align: -4px">是A的奇异值分解，则<img alt="A^+ = Q_2 \Sigma^+ Q_1^T" class="math" src="../../_images/math/ba61f05aa6c753e0816b3cbff7063f9a6728d4a7.png" style="vertical-align: -5px">，其中<img alt="Q_{1,2}" class="math" src="../../_images/math/c41c0833b6729dc530ec01afec55a667221a56ff.png" style="vertical-align: -4px">是正交矩阵，<img alt="\Sigma" class="math" src="../../_images/math/d96c898e14704738c2a866adff83537ba4a6b1f4.png" style="vertical-align: 0px">是由A的所谓奇异值组成的对角矩阵， （通常由零），然后<img alt="\Sigma^+" class="math" src="../../_images/math/47e8dd462a4e8572401586ac4e8cdbd2766ac8d1.png" style="vertical-align: 0px">仅仅是由A的奇异值的倒数（再次，之后是零）组成的对角矩阵。</span><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="#r42" id="id1">[R42]</a></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r42" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-34">[R42]</span></td><td><span class="yiyi-st" id="yiyi-35"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em> G. Strang，<em>线性代数及其应用</em>，第2版，Orlando，FL ，Academic Press，Inc.，1980，pp。</span><span class="yiyi-st" id="yiyi-36">139-142。</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-38">The following example checks that <code class="docutils literal"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">a+</span> <span class="pre">*</span> <span class="pre">a</span> <span class="pre">==</span> <span class="pre">a</span></code> and <code class="docutils literal"><span class="pre">a+</span> <span class="pre">*</span> <span class="pre">a</span> <span class="pre">*</span> <span class="pre">a+</span> <span class="pre">==</span> <span class="pre">a+</span></code>:</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">a</span><span class="p">)))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">B</span><span class="p">)))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

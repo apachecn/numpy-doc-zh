@@ -1,0 +1,66 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.chisquare</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.chisquare.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.chisquare.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.chisquare"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">chisquare</code><span class="sig-paren">(</span><em>df</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从卡方分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">当<em class="xref py py-obj">df</em>独立随机变量，每个具有标准正态分布（平均值0，方差1），被平方和相加，得到的分布是卡方（见注释）。</span><span class="yiyi-st" id="yiyi-17">这种分布通常用于假设检验。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>df</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">自由度数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">输出形状。</span><span class="yiyi-st" id="yiyi-23">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-24">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>输出</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">从分布绘制的样本，包装在<em class="xref py py-obj">大小</em>形数组中。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">When <em class="xref py py-obj">df</em> <= 0="" or="" when="" an="" inappropriate="" <em="" class="xref py py-obj">size (e.g. <code class="docutils literal"><span class="pre">size=-1</span></code>) is given.</=></span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-32">通过对<em class="xref py py-obj">df</em>独立，标准正态分布随机变量的平方求和而获得的变量：</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-33">是卡方分布的，表示</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-34">卡方分布的概率密度函数为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-35">其中<img alt="\Gamma" class="math" src="../../_images/math/d71c74078e709f44826135f99abda79dc6926cbe.png" style="vertical-align: -1px">是伽马函数，</span></p>
+<div class="math">
+<p></p>
+</div><p class="rubric"><span class="yiyi-st" id="yiyi-36">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r142" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-37"><a class="fn-backref" href="#id1"> [R142]</a></span></td><td><span class="yiyi-st" id="yiyi-38">NIST“工程统计手册”<a class="reference external" href="http://www.itl.nist.gov/div898/handbook/eda/section3/eda3666.htm">http://www.itl.nist.gov/div898/handbook/eda/section3/eda3666.htm</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">chisquare</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">array([ 1.89920014,  9.00867716,  3.13710533,  5.62318272])</span>
+</pre></div>
+</div>
+</dd></dl>

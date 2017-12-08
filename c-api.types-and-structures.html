@@ -1,0 +1,640 @@
+
+<h1><span class="yiyi-st" id="yiyi-27">Python Types and C-Structures</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/c-api.types-and-structures.html">https://docs.scipy.org/doc/numpy/reference/c-api.types-and-structures.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-28">在C代码中定义了几种新类型。</span><span class="yiyi-st" id="yiyi-29">其中大部分都可以从Python访问，但有些不会暴露，由于他们有限的使用。</span><span class="yiyi-st" id="yiyi-30">每个新的Python类型都有一个关联的<code class="xref c c-type docutils literal"><span class="pre">PyObject</span> <span class="pre">*</span></code>，其内部结构包含一个指向“方法表”的指针，在Python中行为。</span><span class="yiyi-st" id="yiyi-31">当你收到一个Python对象到C代码，你总是得到一个<a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)"><code class="xref c c-type docutils literal"><span class="pre">PyObject</span></code></a>结构的指针。</span><span class="yiyi-st" id="yiyi-32">因为<a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)"><code class="xref c c-type docutils literal"><span class="pre">PyObject</span></code></a>结构非常通用，只定义了<a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject_HEAD" title="(in Python v3.7)"><code class="xref c c-macro docutils literal"><span class="pre">PyObject_HEAD</span></code></a>，它本身并不是很有趣。</span><span class="yiyi-st" id="yiyi-33">但是，不同的对象在<a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject_HEAD" title="(in Python v3.7)"><code class="xref c c-macro docutils literal"><span class="pre">PyObject_HEAD</span></code></a>之后包含更多细节（但是你必须转换为正确的类型来访问它们 - 或者使用访问器函数或宏）。</span></p>
+<div class="section" id="new-python-types-defined">
+<h2><span class="yiyi-st" id="yiyi-34">New Python Types Defined</span></h2>
+<p><span class="yiyi-st" id="yiyi-35">Python类型是Python中的C类的函数等价物。</span><span class="yiyi-st" id="yiyi-36">通过构造一个新的Python类型，你可以为Python提供一个新的对象。</span><span class="yiyi-st" id="yiyi-37">ndarray对象是在C中定义的新类型的示例。新类型在C中通过两个基本步骤来定义：</span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-38">创建与<a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)"><code class="xref c c-type docutils literal"><span class="pre">PyObject</span></code></a>结构本身二进制兼容的C结构（通常命名为<code class="xref c c-type docutils literal"><span class="pre">Py{Name}Object</span></code>），但保存该特定对象所需的附加信息；</span></li>
+<li><span class="yiyi-st" id="yiyi-39">使用指向实现所期望的类型行为的函数的指针来填充<a class="reference external" href="https://docs.python.org/dev/c-api/type.html#c.PyTypeObject" title="(in Python v3.7)"><code class="xref c c-type docutils literal"><span class="pre">PyTypeObject</span></code></a>表（由<a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)"><code class="xref c c-type docutils literal"><span class="pre">PyObject</span></code></a>结构的ob_type成员指向）。</span></li>
+</ol>
+<p><span class="yiyi-st" id="yiyi-40">而不是为Python类定义行为的特殊方法名称，有“函数表”指向实现所需结果的函数。</span><span class="yiyi-st" id="yiyi-41">自Python 2.2以来，PyTypeObject本身已经变成动态的，允许C类型可以从C中的其他C类型“子类型化”，并在Python中进行子类化。</span><span class="yiyi-st" id="yiyi-42">子类型从其父类继承属性和方法。</span></p>
+<p><span class="yiyi-st" id="yiyi-43">有两种主要的新类型：ndarray（<code class="xref c c-data docutils literal"><span class="pre">PyArray_Type</span></code>）和ufunc（<code class="xref c c-data docutils literal"><span class="pre">PyUFunc_Type</span></code>）。</span><span class="yiyi-st" id="yiyi-44">其他类型发挥了支持作用：<code class="xref c c-data docutils literal"><span class="pre">PyArrayIter_Type</span></code>，<code class="xref c c-data docutils literal"><span class="pre">PyArrayMultiIter_Type</span></code>和<code class="xref c c-data docutils literal"><span class="pre">PyArrayDescr_Type</span></code>。</span><span class="yiyi-st" id="yiyi-45"><code class="xref c c-data docutils literal"><span class="pre">PyArrayIter_Type</span></code>是用于ndarray（获取平面属性时返回的对象）的平面迭代器的类型。</span><span class="yiyi-st" id="yiyi-46"><code class="xref c c-data docutils literal"><span class="pre">PyArrayMultiIter_Type</span></code>是调用<code class="docutils literal"><span class="pre">broadcast</span></code>()时返回的对象的类型。</span><span class="yiyi-st" id="yiyi-47">它处理迭代和广播通过嵌套序列的集合。</span><span class="yiyi-st" id="yiyi-48">此外，<code class="xref c c-data docutils literal"><span class="pre">PyArrayDescr_Type</span></code>是数据类型描述符类型，其实例描述数据。</span><span class="yiyi-st" id="yiyi-49">最后，有21个新的标量数组类型是对应于数组可用的每个基本数据类型的新的Python标量。</span><span class="yiyi-st" id="yiyi-50">另外10种其他类型是占位符，允许数组标量适合实际Python类型的层次结构。</span></p>
+<div class="section" id="pyarray-type">
+<h3><span class="yiyi-st" id="yiyi-51">PyArray_Type</span></h3>
+<dl class="type">
+<dt id="c.PyArrayObject"><span class="yiyi-st" id="yiyi-52"> <code class="descname">PyArrayObject</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="#c.PyArrayObject" title="PyArrayObject"><code class="xref c c-type docutils literal"><span class="pre">PyArrayObject</span></code></a> C结构包含数组的所有必需信息。</span><span class="yiyi-st" id="yiyi-54">ndarray（及其子类）的所有实例都将具有此结构。</span><span class="yiyi-st" id="yiyi-55">为了将来兼容性，这些结构成员通常应使用提供的宏访问。</span><span class="yiyi-st" id="yiyi-56">如果你需要一个更短的名字，那么你可以使用<code class="xref c c-type docutils literal"><span class="pre">NPY_AO</span></code>，它被定义为等同于<a class="reference internal" href="#c.PyArrayObject" title="PyArrayObject"><code class="xref c c-type docutils literal"><span class="pre">PyArrayObject</span></code></a>。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="n">PyArrayObject</span> <span class="p">{</span>
+    <span class="n">PyObject_HEAD</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">nd</span><span class="p">;</span>
+    <span class="n">npy_intp</span> <span class="o">*</span><span class="n">dimensions</span><span class="p">;</span>
+    <span class="n">npy_intp</span> <span class="o">*</span><span class="n">strides</span><span class="p">;</span>
+    <span class="n">PyObject</span> <span class="o">*</span><span class="n">base</span><span class="p">;</span>
+    <span class="n">PyArray_Descr</span> <span class="o">*</span><span class="n">descr</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">flags</span><span class="p">;</span>
+    <span class="n">PyObject</span> <span class="o">*</span><span class="n">weakreflist</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">PyArrayObject</span><span class="p">;</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayObject.data"><span class="yiyi-st" id="yiyi-57"> char *<code class="descname">PyArrayObject.data</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-58">指向数组的第一个元素的指针。</span><span class="yiyi-st" id="yiyi-59">这个指针可以（通常应该）重写为数组的数据类型。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayObject.nd"><span class="yiyi-st" id="yiyi-60"> int <code class="descname">PyArrayObject.nd</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-61">一个整数，提供此数组的维数。</span><span class="yiyi-st" id="yiyi-62">当nd为0时，数组有时称为秩0数组。</span><span class="yiyi-st" id="yiyi-63">这样的数组具有未定义的尺寸和步幅，并且不能被访问。</span><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="c-api.array.html#c.NPY_MAXDIMS" title="NPY_MAXDIMS"><code class="xref c c-data docutils literal"><span class="pre">NPY_MAXDIMS</span></code></a>是任何数组的最大维数。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayObject.dimensions"><span class="yiyi-st" id="yiyi-65"> npy_intp <code class="descname">PyArrayObject.dimensions</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-66">整数的数组，只要nd <img alt="\geq" class="math" src="../_images/math/6560e69a1c35eb96c2addf52b0a1355a36dbf412.png" style="vertical-align: -2px"> 1，就提供每个维度的形状。</span><span class="yiyi-st" id="yiyi-67">整数总是足够大以在平台上保存指针，因此维度大小仅受内存限制。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayObject.strides"><span class="yiyi-st" id="yiyi-68"> npy_intp *<code class="descname">PyArrayObject.strides</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-69">整数数组，为每个维度提供必须跳过以获取该维度中下一个元素的字节数。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayObject.base"><span class="yiyi-st" id="yiyi-70"> <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a> *<code class="descname">PyArrayObject.base</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-71">此成员用于保存指向与此数组相关的另一个Python对象的指针。</span><span class="yiyi-st" id="yiyi-72">有两种使用情况：1）如果这个数组不拥有自己的内存，那么base指向拥有它的Python对象（也许是另一个数组对象），2）如果这个数组有<a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_UPDATEIFCOPY" title="NPY_ARRAY_UPDATEIFCOPY"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_UPDATEIFCOPY</span></code></a>标志集，则此数组是“错误”数组的工作副本。</span><span class="yiyi-st" id="yiyi-73">一旦删除此数组，由base指向的数组将使用此数组的内容进行更新。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayObject.descr"><span class="yiyi-st" id="yiyi-74"> <a class="reference internal" href="#c.PyArray_Descr" title="PyArray_Descr">PyArray_Descr</a> *<code class="descname">PyArrayObject.descr</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-75">指向数据类型描述符对象的指针（见下文）。</span><span class="yiyi-st" id="yiyi-76">数据类型描述符对象是新的内置类型的实例，其允许对存储器的通用描述。</span><span class="yiyi-st" id="yiyi-77">每个支持的数据类型都有一个描述符结构。</span><span class="yiyi-st" id="yiyi-78">这个描述符结构包含有关类型的有用信息以及指向实现特定功能的函数指针表的指针。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayObject.flags"><span class="yiyi-st" id="yiyi-79"> int <code class="descname">PyArrayObject.flags</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-80">指示如何解释由数据指向的存储器的标志。</span><span class="yiyi-st" id="yiyi-81">Possible flags are <a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_C_CONTIGUOUS" title="NPY_ARRAY_C_CONTIGUOUS"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_C_CONTIGUOUS</span></code></a>, <a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_F_CONTIGUOUS" title="NPY_ARRAY_F_CONTIGUOUS"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_F_CONTIGUOUS</span></code></a>, <a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_OWNDATA" title="NPY_ARRAY_OWNDATA"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_OWNDATA</span></code></a>, <a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_ALIGNED" title="NPY_ARRAY_ALIGNED"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_ALIGNED</span></code></a>, <a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_WRITEABLE" title="NPY_ARRAY_WRITEABLE"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_WRITEABLE</span></code></a>, and <a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_UPDATEIFCOPY" title="NPY_ARRAY_UPDATEIFCOPY"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_UPDATEIFCOPY</span></code></a>.</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayObject.weakreflist"><span class="yiyi-st" id="yiyi-82"> <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a> *<code class="descname">PyArrayObject.weakreflist</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-83">此成员允许数组对象具有弱引用（使用weakref模块）。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="pyarraydescr-type">
+<h3><span class="yiyi-st" id="yiyi-84">PyArrayDescr_Type</span></h3>
+<dl class="type">
+<dt id="c.PyArray_Descr"><span class="yiyi-st" id="yiyi-85"> <code class="descname">PyArray_Descr</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-86">位于<code class="xref c c-data docutils literal"><span class="pre">PyArrayDescr_Type</span></code>中心的<a class="reference internal" href="#c.PyArray_Descr" title="PyArray_Descr"><code class="xref c c-type docutils literal"><span class="pre">PyArray_Descr</span></code></a>结构的格式为</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">PyObject_HEAD</span>
+    <span class="n">PyTypeObject</span> <span class="o">*</span><span class="n">typeobj</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">kind</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">type</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">byteorder</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">unused</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">flags</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">type_num</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">elsize</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">alignment</span><span class="p">;</span>
+    <span class="n">PyArray_ArrayDescr</span> <span class="o">*</span><span class="n">subarray</span><span class="p">;</span>
+    <span class="n">PyObject</span> <span class="o">*</span><span class="n">fields</span><span class="p">;</span>
+    <span class="n">PyArray_ArrFuncs</span> <span class="o">*</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">PyArray_Descr</span><span class="p">;</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Descr.typeobj"><span class="yiyi-st" id="yiyi-87"> <a class="reference external" href="https://docs.python.org/dev/c-api/type.html#c.PyTypeObject" title="(in Python v3.7)">PyTypeObject</a> *<code class="descname">PyArray_Descr.typeobj</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-88">指向类型对象的指针，该对象是此数组元素的相应Python类型。</span><span class="yiyi-st" id="yiyi-89">对于内置类型，这指向相应的数组标量。</span><span class="yiyi-st" id="yiyi-90">对于用户定义的类型，这应该指向一个用户定义的类型对象。</span><span class="yiyi-st" id="yiyi-91">此类型对象可以继承数组标量，也可以不继承。</span><span class="yiyi-st" id="yiyi-92">如果它不继承数组标量，则应在<code class="docutils literal"><span class="pre">flags</span></code>成员中设置<code class="xref c c-data docutils literal"><span class="pre">NPY_USE_GETITEM</span></code>和<code class="xref c c-data docutils literal"><span class="pre">NPY_USE_SETITEM</span></code>标志。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Descr.kind"><span class="yiyi-st" id="yiyi-93"> char <code class="descname">PyArray_Descr.kind</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-94">指示数组种类的字符代码（使用数组接口typestring符号）。</span><span class="yiyi-st" id="yiyi-95">A&apos;b&apos;表示布尔值，a&apos;i表示有符号整数，&apos;u&apos;表示无符号整数，&apos;f&apos;表示浮点，&apos;c&apos;表示复数浮点，&apos;S&apos;表示8位字符串，&apos;U &apos;表示32位/字符Unicode字符串，&apos;V&apos;表示任意。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Descr.type"><span class="yiyi-st" id="yiyi-96"> char <code class="descname">PyArray_Descr.type</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-97">指示数据类型的传统字符代码。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Descr.byteorder"><span class="yiyi-st" id="yiyi-98"> char <code class="descname">PyArray_Descr.byteorder</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-99">表示字节顺序的字符：&apos;&gt;&apos;（big-endian），&apos;</span><span class="yiyi-st" id="yiyi-100">所有内置数据类型都具有字节序“=”。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Descr.flags"><span class="yiyi-st" id="yiyi-101"> int <code class="descname">PyArray_Descr.flags</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-102">数据类型位标志，用于确定数据类型是否显示对象数组行为。</span><span class="yiyi-st" id="yiyi-103">此成员中的每个位都是一个标志，命名为：</span></p>
+<dl class="function">
+<dt id="c.PyDataType_FLAGCHK"><span class="yiyi-st" id="yiyi-104"> <code class="descname">PyDataType_FLAGCHK</code><span class="sig-paren">(</span><a class="reference internal" href="#c.PyArray_Descr" title="PyArray_Descr">PyArray_Descr</a><em> *dtype</em>, int<em> flags</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-105">如果为数据类型对象设置了所有给定的标志，则返回true。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.PyDataType_REFCHK"><span class="yiyi-st" id="yiyi-106"> <code class="descname">PyDataType_REFCHK</code><span class="sig-paren">(</span><a class="reference internal" href="#c.PyArray_Descr" title="PyArray_Descr">PyArray_Descr</a><em> *dtype</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-107">等效于<a class="reference internal" href="#c.PyDataType_FLAGCHK" title="PyDataType_FLAGCHK"><code class="xref c c-func docutils literal"><span class="pre">PyDataType_FLAGCHK</span></code></a>（<em>dtype</em>，<code class="xref c c-data docutils literal"><span class="pre">NPY_ITEM_REFCOUNT</span></code>）。</span></p>
+</dd></dl>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Descr.type_num"><span class="yiyi-st" id="yiyi-108"> int <code class="descname">PyArray_Descr.type_num</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-109">唯一标识数据类型的数字。</span><span class="yiyi-st" id="yiyi-110">对于新的数据类型，此数字在注册数据类型时分配。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Descr.elsize"><span class="yiyi-st" id="yiyi-111"> int <code class="descname">PyArray_Descr.elsize</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-112">对于始终具有相同大小（例如长）的数据类型，这将保存数据类型的大小。</span><span class="yiyi-st" id="yiyi-113">对于不同数组可以有不同元素大小的灵活数据类型，这应该是0。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Descr.alignment"><span class="yiyi-st" id="yiyi-114"> int <code class="descname">PyArray_Descr.alignment</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-115">为此数据类型提供对齐信息的数字。</span><span class="yiyi-st" id="yiyi-116">具体来说，它显示了从2元素结构（其第一个元素是<code class="docutils literal"><span class="pre">char</span></code>）开始多远，编译器放置一个这种类型的项：<code class="docutils literal"><span class="pre">offsetof（struct  <span class="pre">{char</span> <span class="pre">c；</span> <span class="pre">type</span> <span class="pre">v；}，</span> <span class="pre">v）</span> / t2&gt;</span></code></span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Descr.subarray"><span class="yiyi-st" id="yiyi-117"> PyArray_ArrayDescr *<code class="descname">PyArray_Descr.subarray</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-118">如果这是非<code class="docutils literal"><span class="pre">NULL</span></code>，则该数据类型描述符是另一数据类型描述符的C样式连续数组。</span><span class="yiyi-st" id="yiyi-119">换句话说，该描述符描述的每个元素实际上是一些其他基本描述符的数组。</span><span class="yiyi-st" id="yiyi-120">这对于另一个数据类型描述符中的字段是最有用的。</span><span class="yiyi-st" id="yiyi-121">如果这是非<code class="docutils literal"><span class="pre">NULL</span></code>（基础描述符的fields成员可以是非<code class="docutils literal"><span class="pre">NULL</span></code>），则fields成员应为<code class="docutils literal"><span class="pre">NULL</span></code>。</span><span class="yiyi-st" id="yiyi-122"><code class="xref c c-type docutils literal"><span class="pre">PyArray_ArrayDescr</span></code>结构是使用定义的</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">PyArray_Descr</span> <span class="o">*</span><span class="n">base</span><span class="p">;</span>
+    <span class="n">PyObject</span> <span class="o">*</span><span class="n">shape</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">PyArray_ArrayDescr</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-123">这个结构的元素是：</span></p>
+<dl class="member">
+<dt id="c.PyArray_ArrayDescr.base"><span class="yiyi-st" id="yiyi-124"> <a class="reference internal" href="#c.PyArray_Descr" title="PyArray_Descr">PyArray_Descr</a> *<code class="descname">PyArray_ArrayDescr.base</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-125">base-type的数据类型描述符对象。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrayDescr.shape"><span class="yiyi-st" id="yiyi-126"> <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a> *<code class="descname">PyArray_ArrayDescr.shape</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-127">子数组的形状（总是C型连续）作为Python元组。</span></p>
+</dd></dl>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Descr.fields"><span class="yiyi-st" id="yiyi-128"> <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a> *<code class="descname">PyArray_Descr.fields</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-129">如果这是非NULL，那么这个数据类型描述符具有由Python字典描述的字段，其键是名称（以及标题，如果给出的话），并且其值是描述字段的元组。</span><span class="yiyi-st" id="yiyi-130">回想一下，数据类型描述符总是描述固定长度的字节集合。</span><span class="yiyi-st" id="yiyi-131">字段是该总长度固定长度集合的命名子区域。</span><span class="yiyi-st" id="yiyi-132">字段由由另一个数据类型描述符和字节偏移组成的元组描述。</span><span class="yiyi-st" id="yiyi-133">可选地，元组可以包含通常是Python字符串的标题。</span><span class="yiyi-st" id="yiyi-134">这些元组被放在这个字典键入的名称（以及标题，如果给定）。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Descr.f"><span class="yiyi-st" id="yiyi-135"> <a class="reference internal" href="#c.PyArray_ArrFuncs" title="PyArray_ArrFuncs">PyArray_ArrFuncs</a> *<code class="descname">PyArray_Descr.f</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-136">指向包含类型需要实现内部要素的函数的结构的指针。</span><span class="yiyi-st" id="yiyi-137">这些函数与后面描述的通用函数（ufunc）不同。</span><span class="yiyi-st" id="yiyi-138">他们的签名可以任意变化。</span></p>
+</dd></dl>
+<dl class="type">
+<dt id="c.PyArray_ArrFuncs"><span class="yiyi-st" id="yiyi-139"> <code class="descname">PyArray_ArrFuncs</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-140">实现内部功能的功能。</span><span class="yiyi-st" id="yiyi-141">不是所有这些函数指针必须为给定类型定义。</span><span class="yiyi-st" id="yiyi-142">所需成员为<code class="docutils literal"><span class="pre">nonzero</span></code>，<code class="docutils literal"><span class="pre">copyswap</span></code>，<code class="docutils literal"><span class="pre">copyswapn</span></code>，<code class="docutils literal"><span class="pre">setitem</span></code>，<code class="docutils literal"><span class="pre">getitem</span></code> <code class="docutils literal"><span class="pre">cast</span></code>。</span><span class="yiyi-st" id="yiyi-143">这些假设为非<code class="docutils literal"><span class="pre">NULL</span></code>和<code class="docutils literal"><span class="pre">NULL</span></code>条目会导致程序崩溃。</span><span class="yiyi-st" id="yiyi-144">其他函数可以是<code class="docutils literal"><span class="pre">NULL</span></code>，这将意味着该数据类型的减少的功能。</span><span class="yiyi-st" id="yiyi-145">（此外，如果在注册用户定义的数据类型时<code class="docutils literal"><span class="pre">NULL</span></code>，则非零函数将使用默认函数填充）。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">PyArray_VectorUnaryFunc</span> <span class="o">*</span><span class="n">cast</span><span class="p">[</span><span class="n">NPY_NTYPES</span><span class="p">];</span>
+    <span class="n">PyArray_GetItemFunc</span> <span class="o">*</span><span class="n">getitem</span><span class="p">;</span>
+    <span class="n">PyArray_SetItemFunc</span> <span class="o">*</span><span class="n">setitem</span><span class="p">;</span>
+    <span class="n">PyArray_CopySwapNFunc</span> <span class="o">*</span><span class="n">copyswapn</span><span class="p">;</span>
+    <span class="n">PyArray_CopySwapFunc</span> <span class="o">*</span><span class="n">copyswap</span><span class="p">;</span>
+    <span class="n">PyArray_CompareFunc</span> <span class="o">*</span><span class="n">compare</span><span class="p">;</span>
+    <span class="n">PyArray_ArgFunc</span> <span class="o">*</span><span class="n">argmax</span><span class="p">;</span>
+    <span class="n">PyArray_DotFunc</span> <span class="o">*</span><span class="n">dotfunc</span><span class="p">;</span>
+    <span class="n">PyArray_ScanFunc</span> <span class="o">*</span><span class="n">scanfunc</span><span class="p">;</span>
+    <span class="n">PyArray_FromStrFunc</span> <span class="o">*</span><span class="n">fromstr</span><span class="p">;</span>
+    <span class="n">PyArray_NonzeroFunc</span> <span class="o">*</span><span class="n">nonzero</span><span class="p">;</span>
+    <span class="n">PyArray_FillFunc</span> <span class="o">*</span><span class="n">fill</span><span class="p">;</span>
+    <span class="n">PyArray_FillWithScalarFunc</span> <span class="o">*</span><span class="n">fillwithscalar</span><span class="p">;</span>
+    <span class="n">PyArray_SortFunc</span> <span class="o">*</span><span class="n">sort</span><span class="p">[</span><span class="n">NPY_NSORTS</span><span class="p">];</span>
+    <span class="n">PyArray_ArgSortFunc</span> <span class="o">*</span><span class="n">argsort</span><span class="p">[</span><span class="n">NPY_NSORTS</span><span class="p">];</span>
+    <span class="n">PyObject</span> <span class="o">*</span><span class="n">castdict</span><span class="p">;</span>
+    <span class="n">PyArray_ScalarKindFunc</span> <span class="o">*</span><span class="n">scalarkind</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="o">**</span><span class="n">cancastscalarkindto</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">cancastto</span><span class="p">;</span>
+    <span class="n">PyArray_FastClipFunc</span> <span class="o">*</span><span class="n">fastclip</span><span class="p">;</span>
+    <span class="n">PyArray_FastPutmaskFunc</span> <span class="o">*</span><span class="n">fastputmask</span><span class="p">;</span>
+    <span class="n">PyArray_FastTakeFunc</span> <span class="o">*</span><span class="n">fasttake</span><span class="p">;</span>
+    <span class="n">PyArray_ArgFunc</span> <span class="o">*</span><span class="n">argmin</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">PyArray_ArrFuncs</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-146">行为段的概念用于函数指针的描述。</span><span class="yiyi-st" id="yiyi-147">行为段是对齐的，并且以数据类型的本机机器字节顺序。</span><span class="yiyi-st" id="yiyi-148"><code class="docutils literal"><span class="pre">nonzero</span></code>，<code class="docutils literal"><span class="pre">copyswap</span></code>，<code class="docutils literal"><span class="pre">copyswapn</span></code>，<code class="docutils literal"><span class="pre">getitem</span></code>和<code class="docutils literal"><span class="pre">setitem</span></code>必须）处理误操作的数组。</span><span class="yiyi-st" id="yiyi-149">其他功能需要行为存储器段。</span></p>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.cast"><span class="yiyi-st" id="yiyi-150"> void <code class="descname">cast</code><span class="sig-paren">(</span>void<em> *from</em>, void<em> *to</em>, npy_intp<em> n</em>, void<em> *fromarr</em>, void<em> *toarr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-151">一个数组的函数指针，从当前类型转换为所有其他内建类型。</span><span class="yiyi-st" id="yiyi-152">每个函数将<em>指向的连续，对齐和未交换缓冲区从</em>转换为<em>指向的连续，对齐和未交换的缓冲区到</em>给出的项目数量由<em>n</em>，参数<em>fromarr</em>和<em>toarr</em>被解释为PyArrayObjects，用于灵活数组获取itemsize信息。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.getitem"><span class="yiyi-st" id="yiyi-153"> <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a> *<code class="descname">getitem</code><span class="sig-paren">(</span>void<em> *data</em>, void<em> *arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-154">指向从<em>数据</em>指向的数组对象<em>arr</em>的单个元素返回标准Python对象的函数的指针。</span><span class="yiyi-st" id="yiyi-155">此功能必须能够正确处理“错误”（未对齐和/或交换）数组。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.setitem"><span class="yiyi-st" id="yiyi-156"> int <code class="descname">setitem</code><span class="sig-paren">(</span><a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a><em> *item</em>, void<em> *data</em>, void<em> *arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-157">指向在<em>数据</em>指向的位置将Python对象<em>项</em>设置为数组<em>arr</em>的函数的指针。</span><span class="yiyi-st" id="yiyi-158">此函数处理“misbehaved”数组。</span><span class="yiyi-st" id="yiyi-159">如果成功，则返回零，否则返回负数（并设置Python错误）。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.copyswapn"><span class="yiyi-st" id="yiyi-160"> void <code class="descname">copyswapn</code><span class="sig-paren">(</span>void<em> *dest</em>, npy_intp<em> dstride</em>, void<em> *src</em>, npy_intp<em> sstride</em>, npy_intp<em> n</em>, int<em> swap</em>, void<em> *arr</em><span class="sig-paren">)</span></span></dt>
+<dd></dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.copyswap"><span class="yiyi-st" id="yiyi-161"> void <code class="descname">copyswap</code><span class="sig-paren">(</span>void<em> *dest</em>, void<em> *src</em>, int<em> swap</em>, void<em> *arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-162">这些成员都是指向从<em>src</em>到<em>dest</em>和<em>交换</em>（如果指示）复制数据的函数的指针。</span><span class="yiyi-st" id="yiyi-163">arr的值仅用于灵活（<a class="reference internal" href="c-api.dtype.html#c.NPY_STRING" title="NPY_STRING"><code class="xref c c-data docutils literal"><span class="pre">NPY_STRING</span></code></a>，<a class="reference internal" href="c-api.dtype.html#c.NPY_UNICODE" title="NPY_UNICODE"><code class="xref c c-data docutils literal"><span class="pre">NPY_UNICODE</span></code></a>和<a class="reference internal" href="c-api.dtype.html#c.NPY_VOID" title="NPY_VOID"><code class="xref c c-data docutils literal"><span class="pre">NPY_VOID</span></code></a>）数组（并且从<code class="docutils literal"><span class="pre">arr-&gt;descr-&gt;elsize</span></code>）。</span><span class="yiyi-st" id="yiyi-164">第二个函数复制单个值，而第一个函数使用提供的步长循环n个值。</span><span class="yiyi-st" id="yiyi-165">这些函数可以处理错误的<em>src</em>数据。</span><span class="yiyi-st" id="yiyi-166">如果<em>src</em>为NULL，则不执行复制。</span><span class="yiyi-st" id="yiyi-167">如果<em>swap</em>为0，则不会发生字节交换。</span><span class="yiyi-st" id="yiyi-168">假设<em>dest</em>和<em>src</em>不重叠。</span><span class="yiyi-st" id="yiyi-169">如果它们重叠，则首先使用<code class="docutils literal"><span class="pre">memmove</span></code>（...），然后使用NULL值<code class="docutils literal"><span class="pre">src</span></code>跟随<code class="docutils literal"><span class="pre">copyswap(n)</span></code>。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.compare"><span class="yiyi-st" id="yiyi-170"> int <code class="descname">compare</code><span class="sig-paren">(</span>const void*<em> d1</em>, const void*<em> d2</em>, void*<em> arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-171">指向比较由<code class="docutils literal"><span class="pre">d1</span></code>和<code class="docutils literal"><span class="pre">d2</span></code>指向的数组的两个元素<code class="docutils literal"><span class="pre">arr</span></code>的函数的指针。</span><span class="yiyi-st" id="yiyi-172">此函数需要行为（对齐和不交换）数组。</span><span class="yiyi-st" id="yiyi-173">The return value is 1 if * <code class="docutils literal"><span class="pre">d1</span></code> &gt; * <code class="docutils literal"><span class="pre">d2</span></code>, 0 if * <code class="docutils literal"><span class="pre">d1</span></code> == * <code class="docutils literal"><span class="pre">d2</span></code>, and -1 if * <code class="docutils literal"><span class="pre">d1</span></code> &lt; * <code class="docutils literal"><span class="pre">d2</span></code>. </span><span class="yiyi-st" id="yiyi-174">数组对象<code class="docutils literal"><span class="pre">arr</span></code>用于检索灵活数组的项目大小和字段信息。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.argmax"><span class="yiyi-st" id="yiyi-175"> int <code class="descname">argmax</code><span class="sig-paren">(</span>void*<em> data</em>, npy_intp<em> n</em>, npy_intp*<em> max_ind</em>, void*<em> arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-176">指向<code class="docutils literal"><span class="pre">arr</span></code>中从<code class="docutils literal"><span class="pre">data</span></code>指向的元素开始检索<code class="docutils literal"><span class="pre">n</span></code>中最大元素的索引的函数的指针。</span><span class="yiyi-st" id="yiyi-177">这个函数要求内存段是连续的和行为的。</span><span class="yiyi-st" id="yiyi-178">返回值始终为0。</span><span class="yiyi-st" id="yiyi-179">最大元素的索引在<code class="docutils literal"><span class="pre">max_ind</span></code>中返回。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.dotfunc"><span class="yiyi-st" id="yiyi-180"> void <code class="descname">dotfunc</code><span class="sig-paren">(</span>void*<em> ip1</em>, npy_intp<em> is1</em>, void*<em> ip2</em>, npy_intp<em> is2</em>, void*<em> op</em>, npy_intp<em> n</em>, void*<em> arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-181">指向一个将两个<code class="docutils literal"><span class="pre">n</span></code>长序列相乘的函数的指针，将它们添加，并将结果放在<code class="docutils literal"><span class="pre">arr</span></code>的<code class="docutils literal"><span class="pre">op</span></code> 。</span><span class="yiyi-st" id="yiyi-182">两个序列的开始由<code class="docutils literal"><span class="pre">ip1</span></code>和<code class="docutils literal"><span class="pre">ip2</span></code>指向。</span><span class="yiyi-st" id="yiyi-183">要到达每个序列中的下一个元素，需要分别跳过<code class="docutils literal"><span class="pre">is1</span></code>和<code class="docutils literal"><span class="pre">is2</span></code> <em>字节</em>。</span><span class="yiyi-st" id="yiyi-184">此函数需要行为（但不一定是连续的）内存。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.scanfunc"><span class="yiyi-st" id="yiyi-185"> int <code class="descname">scanfunc</code><span class="sig-paren">(</span>FILE*<em> fd</em>, void*<em> ip</em>, void*<em> sep</em>, void*<em> arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-186">指向一个函数的指针，该函数将相应类型的一个元素从文件描述符<code class="docutils literal"><span class="pre">fd</span></code>扫描（scanf style）到<code class="docutils literal"><span class="pre">ip</span></code>指向的数组内存。</span><span class="yiyi-st" id="yiyi-187">数组被假定为行为。</span><span class="yiyi-st" id="yiyi-188">如果<code class="docutils literal"><span class="pre">sep</span></code>不为NULL，则在返回之前还会从文件中扫描分隔符字符串。</span><span class="yiyi-st" id="yiyi-189">最后一个参数<code class="docutils literal"><span class="pre">arr</span></code>是要扫描的数组。</span><span class="yiyi-st" id="yiyi-190">如果扫描成功，返回0。</span><span class="yiyi-st" id="yiyi-191">负数表示发生错误：-1表示在扫描分隔符字符串之前到达文件结尾，-4表示在扫描元素之前到达文件结尾，-3表示该元素可以不能从格式字符串中解释。</span><span class="yiyi-st" id="yiyi-192">需要一个behaved数组。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.fromstr"><span class="yiyi-st" id="yiyi-193"> int <code class="descname">fromstr</code><span class="sig-paren">(</span>char*<em> str</em>, void*<em> ip</em>, char**<em> endptr</em>, void*<em> arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-194">指向一个函数的指针，该函数将由<code class="docutils literal"><span class="pre">str</span></code>指向的字符串转换为相应类型的一个元素，并将它放在<code class="docutils literal"><span class="pre">ip</span></code>指向的内存位置。</span><span class="yiyi-st" id="yiyi-195">转换完成后，<code class="docutils literal"><span class="pre">*endptr</span></code>指向字符串的其余部分。</span><span class="yiyi-st" id="yiyi-196">最后一个参数<code class="docutils literal"><span class="pre">arr</span></code>是ip指向的数组（可变大小数据类型所需）。</span><span class="yiyi-st" id="yiyi-197">成功返回0或失败返回-1。</span><span class="yiyi-st" id="yiyi-198">需要一个behaved数组。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.nonzero"><span class="yiyi-st" id="yiyi-199"> Bool <code class="descname">nonzero</code><span class="sig-paren">(</span>void*<em> data</em>, void*<em> arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-200">指向<code class="docutils literal"><span class="pre">data</span></code>指向的<code class="docutils literal"><span class="pre">arr</span></code>项目为非零的函数的指针。</span><span class="yiyi-st" id="yiyi-201">这个函数可以处理不正确的数组。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.fill"><span class="yiyi-st" id="yiyi-202"> void <code class="descname">fill</code><span class="sig-paren">(</span>void*<em> data</em>, npy_intp<em> length</em>, void*<em> arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-203">指向一个函数的指针，该函数用数据填充给定长度的连续数组。</span><span class="yiyi-st" id="yiyi-204">数组的前两个元素必须已填充。</span><span class="yiyi-st" id="yiyi-205">从这两个值，将计算增量，并且将通过重复地添加该计算的增量来计算从项3到结束的值。</span><span class="yiyi-st" id="yiyi-206">数据缓冲器必须是良好的。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.fillwithscalar"><span class="yiyi-st" id="yiyi-207"> void <code class="descname">fillwithscalar</code><span class="sig-paren">(</span>void*<em> buffer</em>, npy_intp<em> length</em>, void*<em> value</em>, void*<em> arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-208">指向一个函数的指针，该函数使用给定地址的单个标量<code class="docutils literal"><span class="pre">value</span></code>填充给定<code class="docutils literal"><span class="pre">length</span></code>的连续<code class="docutils literal"><span class="pre">buffer</span></code></span><span class="yiyi-st" id="yiyi-209">最后一个参数是获取可变长度数组的itemsize所需的数组。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.sort"><span class="yiyi-st" id="yiyi-210"> int <code class="descname">sort</code><span class="sig-paren">(</span>void*<em> start</em>, npy_intp<em> length</em>, void*<em> arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-211">指向特定排序算法的函数指针的数组。</span><span class="yiyi-st" id="yiyi-212">使用键（到目前为止定义了<code class="xref c c-data docutils literal"><span class="pre">NPY_QUICKSORT</span></code>，<code class="xref c c-data docutils literal"><span class="pre">NPY_HEAPSORT</span></code>和<code class="xref c c-data docutils literal"><span class="pre">NPY_MERGESORT</span></code>）获得特定的排序算法。</span><span class="yiyi-st" id="yiyi-213">这些排序是在现场完成的，假设连续和对齐的数据。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.argsort"><span class="yiyi-st" id="yiyi-214"> int <code class="descname">argsort</code><span class="sig-paren">(</span>void*<em> start</em>, npy_intp*<em> result</em>, npy_intp<em> length</em>, void<em> *arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-215">用于此数据类型的排序算法的函数指针数组。</span><span class="yiyi-st" id="yiyi-216">可以使用与sort相同的排序算法。</span><span class="yiyi-st" id="yiyi-217">产生排序的索引在<code class="docutils literal"><span class="pre">result</span></code>（其必须用索引0到<code class="docutils literal"><span class="pre">length-1</span></code>）中返回。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.castdict"><span class="yiyi-st" id="yiyi-218"> <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a> *<code class="descname">castdict</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-219"><code class="docutils literal"><span class="pre">NULL</span></code>或包含用户定义数据类型的低级别转换函数的字典。</span><span class="yiyi-st" id="yiyi-220">每个函数包裹在<code class="xref c c-type docutils literal"><span class="pre">PyCObject</span> <span class="pre">*</span></code>中，并由数据类型数字键入。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.scalarkind"><span class="yiyi-st" id="yiyi-221"> <a class="reference internal" href="c-api.array.html#c.NPY_SCALARKIND" title="NPY_SCALARKIND">NPY_SCALARKIND</a> <code class="descname">scalarkind</code><span class="sig-paren">(</span><a class="reference internal" href="#c.PyArrayObject" title="PyArrayObject">PyArrayObject</a>*<em> arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-222">用于确定如何解释此类型的标量的函数。</span><span class="yiyi-st" id="yiyi-223">参数是<code class="docutils literal"><span class="pre">NULL</span></code>或包含数据的0维数组（如果需要确定标量的种类）。</span><span class="yiyi-st" id="yiyi-224">返回值的类型必须为<a class="reference internal" href="c-api.array.html#c.NPY_SCALARKIND" title="NPY_SCALARKIND"><code class="xref c c-type docutils literal"><span class="pre">NPY_SCALARKIND</span></code></a>。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.cancastscalarkindto"><span class="yiyi-st" id="yiyi-225"> int **<code class="descname">cancastscalarkindto</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-226"><code class="docutils literal"><span class="pre">NULL</span></code>或数组<a class="reference internal" href="c-api.array.html#c.NPY_NSCALARKINDS" title="NPY_NSCALARKINDS"><code class="xref c c-type docutils literal"><span class="pre">NPY_NSCALARKINDS</span></code></a>指针。</span><span class="yiyi-st" id="yiyi-227">这些指针应该是<code class="docutils literal"><span class="pre">NULL</span></code>或指向整数数组（由<a class="reference internal" href="c-api.dtype.html#c.NPY_NOTYPE" title="NPY_NOTYPE"><code class="xref c c-data docutils literal"><span class="pre">NPY_NOTYPE</span></code></a>终止）的指针，指示指定类型的此数据类型的标量的数据类型可以安全地（这通常意味着不丧失精度）。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.cancastto"><span class="yiyi-st" id="yiyi-228"> int *<code class="descname">cancastto</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-229"><code class="docutils literal"><span class="pre">NULL</span></code>或整数数组（由<a class="reference internal" href="c-api.dtype.html#c.NPY_NOTYPE" title="NPY_NOTYPE"><code class="xref c c-data docutils literal"><span class="pre">NPY_NOTYPE</span></code></a>终止）表示此数据类型可以安全转换的数据类型（这通常意味着不会丢失精度）。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.fastclip"><span class="yiyi-st" id="yiyi-230"> void <code class="descname">fastclip</code><span class="sig-paren">(</span>void<em> *in</em>, npy_intp<em> n_in</em>, void<em> *min</em>, void<em> *max</em>, void<em> *out</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-231">A function that reads <code class="docutils literal"><span class="pre">n_in</span></code> items from <code class="docutils literal"><span class="pre">in</span></code>, and writes to <code class="docutils literal"><span class="pre">out</span></code> the read value if it is within the limits pointed to by <code class="docutils literal"><span class="pre">min</span></code> and <code class="docutils literal"><span class="pre">max</span></code>, or the corresponding limit if outside. </span><span class="yiyi-st" id="yiyi-232">存储器段必须是连续的并且表现的，并且<code class="docutils literal"><span class="pre">min</span></code>或<code class="docutils literal"><span class="pre">max</span></code>可以是<code class="docutils literal"><span class="pre">NULL</span></code>，但不能两者。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.fastputmask"><span class="yiyi-st" id="yiyi-233"> void <code class="descname">fastputmask</code><span class="sig-paren">(</span>void<em> *in</em>, void<em> *mask</em>, npy_intp<em> n_in</em>, void<em> *values</em>, npy_intp<em> nv</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-234">A function that takes a pointer <code class="docutils literal"><span class="pre">in</span></code> to an array of <code class="docutils literal"><span class="pre">n_in</span></code> items, a pointer <code class="docutils literal"><span class="pre">mask</span></code> to an array of <code class="docutils literal"><span class="pre">n_in</span></code> boolean values, and a pointer <code class="docutils literal"><span class="pre">vals</span></code> to an array of <code class="docutils literal"><span class="pre">nv</span></code> items. </span><span class="yiyi-st" id="yiyi-235">Items from <code class="docutils literal"><span class="pre">vals</span></code> are copied into <code class="docutils literal"><span class="pre">in</span></code> wherever the value in <code class="docutils literal"><span class="pre">mask</span></code> is non-zero, tiling <code class="docutils literal"><span class="pre">vals</span></code> as needed if <code class="docutils literal"><span class="pre">nv</span> <span class="pre">&lt;</span> <span class="pre">n_in</span></code>. </span><span class="yiyi-st" id="yiyi-236">所有数组必须是连续的和行为的。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.fasttake"><span class="yiyi-st" id="yiyi-237"> void <code class="descname">fasttake</code><span class="sig-paren">(</span>void<em> *dest</em>, void<em> *src</em>, npy_intp<em> *indarray</em>, npy_intp<em> nindarray</em>, npy_intp<em> n_outer</em>, npy_intp<em> m_middle</em>, npy_intp<em> nelem</em>, <a class="reference internal" href="c-api.array.html#c.NPY_CLIPMODE" title="NPY_CLIPMODE">NPY_CLIPMODE</a><em> clipmode</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-238">A function that takes a pointer <code class="docutils literal"><span class="pre">src</span></code> to a C contiguous, behaved segment, interpreted as a 3-dimensional array of shape <code class="docutils literal"><span class="pre">(n_outer,</span> <span class="pre">nindarray,</span> <span class="pre">nelem)</span></code>, a pointer <code class="docutils literal"><span class="pre">indarray</span></code> to a contiguous, behaved segment of <code class="docutils literal"><span class="pre">m_middle</span></code> integer indices, and a pointer <code class="docutils literal"><span class="pre">dest</span></code> to a C contiguous, behaved segment, interpreted as a 3-dimensional array of shape <code class="docutils literal"><span class="pre">(n_outer,</span> <span class="pre">m_middle,</span> <span class="pre">nelem)</span></code>. </span><span class="yiyi-st" id="yiyi-239"><code class="docutils literal"><span class="pre">indarray</span></code>中的索引用于沿着第二维度索引<code class="docutils literal"><span class="pre">src</span></code>，并将<code class="docutils literal"><span class="pre">nelem</span></code>项目的相应块拷贝到<code class="docutils literal"><span class="pre">dest</span></code></span><span class="yiyi-st" id="yiyi-240"><code class="docutils literal"><span class="pre">clipmode</span></code>（可以取值<a class="reference internal" href="c-api.array.html#c.NPY_RAISE" title="NPY_RAISE"><code class="xref c c-data docutils literal"><span class="pre">NPY_RAISE</span></code></a>，<a class="reference internal" href="c-api.array.html#c.NPY_WRAP" title="NPY_WRAP"><code class="xref c c-data docutils literal"><span class="pre">NPY_WRAP</span></code></a>或<a class="reference internal" href="c-api.array.html#c.NPY_CLIP" title="NPY_CLIP"><code class="xref c c-data docutils literal"><span class="pre">NPY_CLIP</span></code></a>）决定索引小于0或大于<code class="docutils literal"><span class="pre">nindarray</span></code>将被处理。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_ArrFuncs.argmin"><span class="yiyi-st" id="yiyi-241"> int <code class="descname">argmin</code><span class="sig-paren">(</span>void*<em> data</em>, npy_intp<em> n</em>, npy_intp*<em> min_ind</em>, void*<em> arr</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-242">指向<code class="docutils literal"><span class="pre">arr</span></code>中<code class="docutils literal"><span class="pre">data</span></code>指向的元素开始检索<code class="docutils literal"><span class="pre">n</span></code>中最小元素的索引的函数的指针。</span><span class="yiyi-st" id="yiyi-243">这个函数要求内存段是连续的和行为的。</span><span class="yiyi-st" id="yiyi-244">返回值始终为0。</span><span class="yiyi-st" id="yiyi-245">最小元素的索引在<code class="docutils literal"><span class="pre">min_ind</span></code>中返回。</span></p>
+</dd></dl>
+</dd></dl>
+<p><span class="yiyi-st" id="yiyi-246"><code class="xref c c-data docutils literal"><span class="pre">PyArray_Type</span></code> typeobject实现Python对象的许多功能，包括tp_as_number，tp_as_sequence，tp_as_mapping和tp_as_buffer接口。</span><span class="yiyi-st" id="yiyi-247">丰富比较（tp_richcompare）也与方法（tp_methods）和属性（tp_getset）的新样式属性查找一起使用。</span><span class="yiyi-st" id="yiyi-248"><code class="xref c c-data docutils literal"><span class="pre">PyArray_Type</span></code>也可以是子类型。</span></p>
+<div class="admonition tip">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-249">小费</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-250">tp_as_number方法使用通用方法调用已注册的任何函数来处理操作。</span><span class="yiyi-st" id="yiyi-251">函数PyNumeric_SetOps（..）可用于注册函数以处理特定的数学运算（对于所有数组）。</span><span class="yiyi-st" id="yiyi-252">当导入umath模块时，它将所有数组的数字操作设置为相应的ufuncs。</span><span class="yiyi-st" id="yiyi-253">tp_str和tp_repr方法也可以使用PyString_SetStringFunction（...）来改变。</span></p>
+</div>
+</div>
+<div class="section" id="pyufunc-type">
+<h3><span class="yiyi-st" id="yiyi-254">PyUFunc_Type</span></h3>
+<dl class="type">
+<dt id="c.PyUFuncObject"><span class="yiyi-st" id="yiyi-255"> <code class="descname">PyUFuncObject</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-256">ufunc的核心是<a class="reference internal" href="#c.PyUFuncObject" title="PyUFuncObject"><code class="xref c c-type docutils literal"><span class="pre">PyUFuncObject</span></code></a>，其中包含调用执行实际工作的底层C代码循环所需的所有信息。</span><span class="yiyi-st" id="yiyi-257">它具有以下结构：</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">PyObject_HEAD</span>
+    <span class="kt">int</span> <span class="n">nin</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">nout</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">nargs</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">identity</span><span class="p">;</span>
+    <span class="n">PyUFuncGenericFunction</span> <span class="o">*</span><span class="n">functions</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="o">**</span><span class="n">data</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ntypes</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">reserved1</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">types</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">doc</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="n">PyObject</span> <span class="o">*</span><span class="n">obj</span><span class="p">;</span>
+    <span class="n">PyObject</span> <span class="o">*</span><span class="n">userloops</span><span class="p">;</span>
+    <span class="n">npy_uint32</span> <span class="o">*</span><span class="n">op_flags</span><span class="p">;</span>
+    <span class="n">npy_uint32</span> <span class="o">*</span><span class="n">iter_flags</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">PyUFuncObject</span><span class="p">;</span>
+</pre></div>
+</div>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.nin"><span class="yiyi-st" id="yiyi-258"> int <code class="descname">PyUFuncObject.nin</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-259">输入参数的数量。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.nout"><span class="yiyi-st" id="yiyi-260"> int <code class="descname">PyUFuncObject.nout</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-261">输出参数的数量。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.nargs"><span class="yiyi-st" id="yiyi-262"> int <code class="descname">PyUFuncObject.nargs</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-263">参数的总数（<em>nin</em> + <em>nout</em>）。</span><span class="yiyi-st" id="yiyi-264">此值必须小于<code class="xref c c-data docutils literal"><span class="pre">NPY_MAXARGS</span></code>。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.identity"><span class="yiyi-st" id="yiyi-265"> int <code class="descname">PyUFuncObject.identity</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-266"><code class="xref c c-data docutils literal"><span class="pre">PyUFunc_One</span></code>，<code class="xref c c-data docutils literal"><span class="pre">PyUFunc_Zero</span></code>，<code class="xref c c-data docutils literal"><span class="pre">PyUFunc_None</span></code>或<code class="xref c c-data docutils literal"><span class="pre">PyUFunc_AllOnes</span></code>以指示此操作的身份。</span><span class="yiyi-st" id="yiyi-267">它只用于对空数组的reduce类调用。</span></p>
+</dd></dl>
+<dl class="member">
+<dt><span class="yiyi-st" id="yiyi-268"><code class="descname">void PyUFuncObject.functions（char ** args，npy_intp * dims，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-269"><code class="descname">npy_intp * steps，void * extradata）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-270">函数指针的数组 - 一个用于ufunc支持的每个数据类型。</span><span class="yiyi-st" id="yiyi-271">这是被调用来实现底层函数<em>dims</em> [0]次的向量循环。</span><span class="yiyi-st" id="yiyi-272">第一个参数<em>args</em>是<em>nargs</em>指向行为内存的指针的数组。</span><span class="yiyi-st" id="yiyi-273">指向输入参数数据的指针是第一个，后跟指向输出参数数据的指针。</span><span class="yiyi-st" id="yiyi-274">必须跳过多少字节才能到达序列中的下一个元素，由<em>步骤</em>数组中的相应条目指定。</span><span class="yiyi-st" id="yiyi-275">最后一个参数允许循环接收额外的信息。</span><span class="yiyi-st" id="yiyi-276">这是通常使用的，使得单个通用向量循环可以用于多个函数。</span><span class="yiyi-st" id="yiyi-277">在这种情况下，要调用的实际标量函数以<em>extradata</em>形式传递。</span><span class="yiyi-st" id="yiyi-278">此函数指针数组的大小为ntypes。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.data"><span class="yiyi-st" id="yiyi-279"> void **<code class="descname">PyUFuncObject.data</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-280">如果不需要额外数据，则将额外数据传递到1-d向量循环或<code class="docutils literal"><span class="pre">NULL</span></code>。</span><span class="yiyi-st" id="yiyi-281">此C阵列必须与函数数组相同大小（<em>，即</em> ntypes）。</span><span class="yiyi-st" id="yiyi-282">如果不需要extra_data，则使用<code class="docutils literal"><span class="pre">NULL</span></code>。</span><span class="yiyi-st" id="yiyi-283">对UFunc的几个C-API调用只是1-d向量循环，它使用这个额外的数据来接收指向实际调用的函数的指针。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.ntypes"><span class="yiyi-st" id="yiyi-284"> int <code class="descname">PyUFuncObject.ntypes</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-285">ufunc支持的数据类型数。</span><span class="yiyi-st" id="yiyi-286">此数字指定（内置数据类型的）多少个不同的1-d循环可用。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.name"><span class="yiyi-st" id="yiyi-287"> char *<code class="descname">PyUFuncObject.name</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-288">ufunc的字符串名称。</span><span class="yiyi-st" id="yiyi-289">这被动态地用于构建ufuncs的__doc__属性。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.types"><span class="yiyi-st" id="yiyi-290"> char *<code class="descname">PyUFuncObject.types</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-291"><img alt="nargs \times ntypes" class="math" src="../_images/math/891443578b70571bea9686e168f40f798e5f9f9a.png" style="vertical-align: -3px"> 8位类型数的数组，其包含每种受支持（内置）数据类型的函数的类型签名。</span><span class="yiyi-st" id="yiyi-292">对于每个<em>ntypes</em>函数，此数组中相应的类型数集合显示如何在1-d向量循环中解释<em>args</em>参数。</span><span class="yiyi-st" id="yiyi-293">这些类型数字不必是相同的类型，并且支持混合型ufunc。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.doc"><span class="yiyi-st" id="yiyi-294"> char *<code class="descname">PyUFuncObject.doc</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-295">ufunc的文档。</span><span class="yiyi-st" id="yiyi-296">不应该包含函数签名，因为这是在检索__doc__时动态生成的。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.ptr"><span class="yiyi-st" id="yiyi-297"> void *<code class="descname">PyUFuncObject.ptr</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-298">任何动态分配的内存。</span><span class="yiyi-st" id="yiyi-299">目前，这用于从一个python函数创建的动态ufuncs，为类型，数据和名称成员存储空间。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.obj"><span class="yiyi-st" id="yiyi-300"> <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a> *<code class="descname">PyUFuncObject.obj</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-301">对于从python函数动态创建的ufuncs，此成员持有对底层Python函数的引用。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.userloops"><span class="yiyi-st" id="yiyi-302"> <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a> *<code class="descname">PyUFuncObject.userloops</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-303">用户定义的1-d向量循环（存储为CObject ptrs）的字典。</span><span class="yiyi-st" id="yiyi-304">用户可以为任何用户定义的类型注册循环。</span><span class="yiyi-st" id="yiyi-305">它按类型号检索。</span><span class="yiyi-st" id="yiyi-306">用户定义的类型数字始终大于<a class="reference internal" href="c-api.dtype.html#c.NPY_USERDEF" title="NPY_USERDEF"><code class="xref c c-data docutils literal"><span class="pre">NPY_USERDEF</span></code></a>。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.op_flags"><span class="yiyi-st" id="yiyi-307"> npy_uint32 <code class="descname">PyUFuncObject.op_flags</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-308">覆盖每个ufunc操作数的默认操作数标志。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyUFuncObject.PyUFuncObject.iter_flags"><span class="yiyi-st" id="yiyi-309"> npy_uint32 <code class="descname">PyUFuncObject.iter_flags</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-310">覆盖ufunc的默认nditer标志。</span></p>
+</dd></dl>
+</dd></dl>
+</div>
+<div class="section" id="pyarrayiter-type">
+<h3><span class="yiyi-st" id="yiyi-311">PyArrayIter_Type</span></h3>
+<dl class="type">
+<dt id="c.PyArrayIterObject"><span class="yiyi-st" id="yiyi-312"> <code class="descname">PyArrayIterObject</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-313">对应于<code class="xref c c-data docutils literal"><span class="pre">PyArrayIter_Type</span></code>的对象的C结构是<a class="reference internal" href="#c.PyArrayIterObject" title="PyArrayIterObject"><code class="xref c c-type docutils literal"><span class="pre">PyArrayIterObject</span></code></a>。</span><span class="yiyi-st" id="yiyi-314"><a class="reference internal" href="#c.PyArrayIterObject" title="PyArrayIterObject"><code class="xref c c-type docutils literal"><span class="pre">PyArrayIterObject</span></code></a>用于跟踪指向N维数组的指针。</span><span class="yiyi-st" id="yiyi-315">它包含用于快速穿过数组的相关信息。</span><span class="yiyi-st" id="yiyi-316">指针可以以三种基本方式进行调整：1）以C形连续方式前进到数组中的“下一个”位置，2）前进到数组中的任意N维坐标，以及3）前进到到数组的任意一维索引。</span><span class="yiyi-st" id="yiyi-317">在这些计算中使用<a class="reference internal" href="#c.PyArrayIterObject" title="PyArrayIterObject"><code class="xref c c-type docutils literal"><span class="pre">PyArrayIterObject</span></code></a>结构的成员。</span><span class="yiyi-st" id="yiyi-318">迭代器对象保留自己的维度并跨越数组的信息。</span><span class="yiyi-st" id="yiyi-319">这可以根据“广播”的需要进行调整，或者仅循环特定尺寸。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">PyObject_HEAD</span>
+    <span class="kt">int</span>   <span class="n">nd_m1</span><span class="p">;</span>
+    <span class="n">npy_intp</span>  <span class="n">index</span><span class="p">;</span>
+    <span class="n">npy_intp</span>  <span class="n">size</span><span class="p">;</span>
+    <span class="n">npy_intp</span>  <span class="n">coordinates</span><span class="p">[</span><span class="n">NPY_MAXDIMS</span><span class="p">];</span>
+    <span class="n">npy_intp</span>  <span class="n">dims_m1</span><span class="p">[</span><span class="n">NPY_MAXDIMS</span><span class="p">];</span>
+    <span class="n">npy_intp</span>  <span class="n">strides</span><span class="p">[</span><span class="n">NPY_MAXDIMS</span><span class="p">];</span>
+    <span class="n">npy_intp</span>  <span class="n">backstrides</span><span class="p">[</span><span class="n">NPY_MAXDIMS</span><span class="p">];</span>
+    <span class="n">npy_intp</span>  <span class="n">factors</span><span class="p">[</span><span class="n">NPY_MAXDIMS</span><span class="p">];</span>
+    <span class="n">PyArrayObject</span> <span class="o">*</span><span class="n">ao</span><span class="p">;</span>
+    <span class="kt">char</span>  <span class="o">*</span><span class="n">dataptr</span><span class="p">;</span>
+    <span class="n">Bool</span>  <span class="n">contiguous</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">PyArrayIterObject</span><span class="p">;</span>
+</pre></div>
+</div>
+<dl class="member">
+<dt id="c.PyArrayIterObject.PyArrayIterObject.nd_m1"><span class="yiyi-st" id="yiyi-320"> int <code class="descname">PyArrayIterObject.nd_m1</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-321"><img alt="N-1" class="math" src="../_images/math/d062a127ede35244ac17c5e277e07ccbeaa4174e.png" style="vertical-align: -1px">其中<img alt="N" class="math" src="../_images/math/10f77f12438cb385098c4d2344aaa427d0a462a8.png" style="vertical-align: 0px">是底层数组中的维数。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayIterObject.PyArrayIterObject.index"><span class="yiyi-st" id="yiyi-322"> npy_intp <code class="descname">PyArrayIterObject.index</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-323">到数组的当前1-d索引。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayIterObject.PyArrayIterObject.size"><span class="yiyi-st" id="yiyi-324"> npy_intp <code class="descname">PyArrayIterObject.size</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-325">底层数组的总大小。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayIterObject.PyArrayIterObject.coordinates"><span class="yiyi-st" id="yiyi-326"> npy_intp *<code class="descname">PyArrayIterObject.coordinates</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-327">到数组的<img alt="N" class="math" src="../_images/math/10f77f12438cb385098c4d2344aaa427d0a462a8.png" style="vertical-align: 0px">维索引。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayIterObject.PyArrayIterObject.dims_m1"><span class="yiyi-st" id="yiyi-328"> npy_intp *<code class="descname">PyArrayIterObject.dims_m1</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-329">数组的大小在每个维度中减1。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayIterObject.PyArrayIterObject.strides"><span class="yiyi-st" id="yiyi-330"> npy_intp *<code class="descname">PyArrayIterObject.strides</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-331">数组的步幅。</span><span class="yiyi-st" id="yiyi-332">需要多少字节来跳转到每个维度中的下一个元素。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayIterObject.PyArrayIterObject.backstrides"><span class="yiyi-st" id="yiyi-333"> npy_intp *<code class="descname">PyArrayIterObject.backstrides</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-334">需要多少字节从维度的结尾跳回到它的开始。</span><span class="yiyi-st" id="yiyi-335">注意，<code class="docutils literal"><span class="pre">背面[k]</span> <span class="pre">==</span> <span class="pre">strides [k]</span> <span class="pre">*</span> <span class="pre">dims_m1 [k ]</span></code>，但它在此处存储为优化。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayIterObject.PyArrayIterObject.factors"><span class="yiyi-st" id="yiyi-336"> npy_intp *<code class="descname">PyArrayIterObject.factors</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-337">该数组用于从1-d索引计算N-d索引。</span><span class="yiyi-st" id="yiyi-338">它包含所需的尺寸产品。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayIterObject.PyArrayIterObject.ao"><span class="yiyi-st" id="yiyi-339"> <a class="reference internal" href="#c.PyArrayObject" title="PyArrayObject">PyArrayObject</a> *<code class="descname">PyArrayIterObject.ao</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-340">指向底层的ndarray的指针这个迭代器被创建来表示。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayIterObject.PyArrayIterObject.dataptr"><span class="yiyi-st" id="yiyi-341"> char *<code class="descname">PyArrayIterObject.dataptr</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-342">此成员指向由索引指示的ndarray中的元素。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayIterObject.PyArrayIterObject.contiguous"><span class="yiyi-st" id="yiyi-343"> Bool <code class="descname">PyArrayIterObject.contiguous</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-344">如果基础数组为<a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_C_CONTIGUOUS" title="NPY_ARRAY_C_CONTIGUOUS"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_C_CONTIGUOUS</span></code></a>，则此标志为真。</span><span class="yiyi-st" id="yiyi-345">如果可能，它用于简化计算。</span></p>
+</dd></dl>
+</dd></dl>
+<p><span class="yiyi-st" id="yiyi-346">如何在C级使用数组迭代器将在后面的章节中详细解释。</span><span class="yiyi-st" id="yiyi-347">通常，你不需要关心迭代器对象的内部结构，只需使用宏<a class="reference internal" href="c-api.array.html#c.PyArray_ITER_NEXT" title="PyArray_ITER_NEXT"><code class="xref c c-func docutils literal"><span class="pre">PyArray_ITER_NEXT</span></code></a>（it），<a class="reference internal" href="c-api.array.html#c.PyArray_ITER_GOTO" title="PyArray_ITER_GOTO"><code class="xref c c-func docutils literal"><span class="pre">PyArray_ITER_GOTO</span></code></a> it，dest）或<a class="reference internal" href="c-api.array.html#c.PyArray_ITER_GOTO1D" title="PyArray_ITER_GOTO1D"><code class="xref c c-func docutils literal"><span class="pre">PyArray_ITER_GOTO1D</span></code></a>（it，index）。</span><span class="yiyi-st" id="yiyi-348">所有这些宏都需要参数<em>it</em>为<a class="reference internal" href="#c.PyArrayIterObject" title="PyArrayIterObject"><code class="xref c c-type docutils literal"><span class="pre">PyArrayIterObject</span> <span class="pre">*</span></code></a>。</span></p>
+</div>
+<div class="section" id="pyarraymultiiter-type">
+<h3><span class="yiyi-st" id="yiyi-349">PyArrayMultiIter_Type</span></h3>
+<dl class="type">
+<dt id="c.PyArrayMultiIterObject"><span class="yiyi-st" id="yiyi-350"> <code class="descname">PyArrayMultiIterObject</code></span></dt>
+<dd><div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">PyObject_HEAD</span>
+    <span class="kt">int</span> <span class="n">numiter</span><span class="p">;</span>
+    <span class="n">npy_intp</span> <span class="n">size</span><span class="p">;</span>
+    <span class="n">npy_intp</span> <span class="n">index</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">nd</span><span class="p">;</span>
+    <span class="n">npy_intp</span> <span class="n">dimensions</span><span class="p">[</span><span class="n">NPY_MAXDIMS</span><span class="p">];</span>
+    <span class="n">PyArrayIterObject</span> <span class="o">*</span><span class="n">iters</span><span class="p">[</span><span class="n">NPY_MAXDIMS</span><span class="p">];</span>
+<span class="p">}</span> <span class="n">PyArrayMultiIterObject</span><span class="p">;</span>
+</pre></div>
+</div>
+<dl class="member">
+<dt id="c.PyArrayMultiIterObject.PyArrayMultiIterObject.numiter"><span class="yiyi-st" id="yiyi-351"> int <code class="descname">PyArrayMultiIterObject.numiter</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-352">需要广播到相同形状的数组的数量。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayMultiIterObject.PyArrayMultiIterObject.size"><span class="yiyi-st" id="yiyi-353"> npy_intp <code class="descname">PyArrayMultiIterObject.size</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-354">总广播尺寸。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayMultiIterObject.PyArrayMultiIterObject.index"><span class="yiyi-st" id="yiyi-355"> npy_intp <code class="descname">PyArrayMultiIterObject.index</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-356">当前（1-d）索引到广播结果中。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayMultiIterObject.PyArrayMultiIterObject.nd"><span class="yiyi-st" id="yiyi-357"> int <code class="descname">PyArrayMultiIterObject.nd</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-358">广播结果中的维度数。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayMultiIterObject.PyArrayMultiIterObject.dimensions"><span class="yiyi-st" id="yiyi-359"> npy_intp *<code class="descname">PyArrayMultiIterObject.dimensions</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-360">广播结果的形状（仅使用<code class="docutils literal"><span class="pre">nd</span></code>个时隙）。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayMultiIterObject.PyArrayMultiIterObject.iters"><span class="yiyi-st" id="yiyi-361"> <a class="reference internal" href="#c.PyArrayIterObject" title="PyArrayIterObject">PyArrayIterObject</a> **<code class="descname">PyArrayMultiIterObject.iters</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-362">一个迭代器对象的数组，它保存要一起广播的数组的迭代器。</span><span class="yiyi-st" id="yiyi-363">返回时，迭代器被调整用于广播。</span></p>
+</dd></dl>
+</dd></dl>
+</div>
+<div class="section" id="pyarrayneighborhooditer-type">
+<h3><span class="yiyi-st" id="yiyi-364">PyArrayNeighborhoodIter_Type</span></h3>
+<dl class="type">
+<dt id="c.PyArrayNeighborhoodIterObject"><span class="yiyi-st" id="yiyi-365"> <code class="descname">PyArrayNeighborhoodIterObject</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-366">对应于<code class="xref c c-data docutils literal"><span class="pre">PyArrayNeighborhoodIter_Type</span></code>的对象的C结构是<a class="reference internal" href="#c.PyArrayNeighborhoodIterObject" title="PyArrayNeighborhoodIterObject"><code class="xref c c-type docutils literal"><span class="pre">PyArrayNeighborhoodIterObject</span></code></a>。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="pyarrayflags-type">
+<h3><span class="yiyi-st" id="yiyi-367">PyArrayFlags_Type</span></h3>
+</div>
+<div class="section" id="scalararraytypes">
+<h3><span class="yiyi-st" id="yiyi-368">ScalarArrayTypes</span></h3>
+<p><span class="yiyi-st" id="yiyi-369">对于可以出现在数组中的每个不同的内置数据类型，都有一个Python类型。大多数这些类型是C中相应数据类型的简单包装器。这些类型的C名称是<code class="xref c c-data docutils literal"><span class="pre">Py{TYPE}ArrType_Type</span></code>其中<code class="docutils literal"><span class="pre">{TYPE}</span></code>可以</span></p>
+<blockquote>
+<div><span class="yiyi-st" id="yiyi-370"><strong>Bool</strong>, <strong>Byte</strong>, <strong>Short</strong>, <strong>Int</strong>, <strong>Long</strong>, <strong>LongLong</strong>, <strong>UByte</strong>, <strong>UShort</strong>, <strong>UInt</strong>, <strong>ULong</strong>, <strong>ULongLong</strong>, <strong>Half</strong>, <strong>Float</strong>, <strong>Double</strong>, <strong>LongDouble</strong>, <strong>CFloat</strong>, <strong>CDouble</strong>, <strong>CLongDouble</strong>, <strong>String</strong>, <strong>Unicode</strong>, <strong>Void</strong>, and <strong>Object</strong>.</span></div></blockquote>
+<p><span class="yiyi-st" id="yiyi-371">这些类型名称是C-API的一部分，因此可以在扩展C代码中创建。</span><span class="yiyi-st" id="yiyi-372">还有一个<code class="xref c c-data docutils literal"><span class="pre">PyIntpArrType_Type</span></code>和<code class="xref c c-data docutils literal"><span class="pre">PyUIntpArrType_Type</span></code>，它们是可以在平台上保存指针的整数类型之一的简单替换。</span><span class="yiyi-st" id="yiyi-373">这些标量对象的结构不暴露给C代码。</span><span class="yiyi-st" id="yiyi-374">函数<a class="reference internal" href="c-api.array.html#c.PyArray_ScalarAsCtype" title="PyArray_ScalarAsCtype"><code class="xref c c-func docutils literal"><span class="pre">PyArray_ScalarAsCtype</span></code></a>（..）可用于从数组标量提取C类型值，函数<a class="reference internal" href="c-api.array.html#c.PyArray_Scalar" title="PyArray_Scalar"><code class="xref c c-func docutils literal"><span class="pre">PyArray_Scalar</span></code></a>（...）可用于构造数组标量从C值。</span></p>
+</div>
+</div>
+<div class="section" id="other-c-structures">
+<h2><span class="yiyi-st" id="yiyi-375">Other C-Structures</span></h2>
+<p><span class="yiyi-st" id="yiyi-376">发现一些新的C结构在NumPy的开发中是有用的。</span><span class="yiyi-st" id="yiyi-377">这些C结构用在至少一个C-API调用中，因此在这里被记录。</span><span class="yiyi-st" id="yiyi-378">这些结构被定义的主要原因是使得使用Python ParseTuple C-API将Python对象转换为有用的C对象变得容易。</span></p>
+<div class="section" id="pyarray-dims">
+<h3><span class="yiyi-st" id="yiyi-379">PyArray_Dims</span></h3>
+<dl class="type">
+<dt id="c.PyArray_Dims"><span class="yiyi-st" id="yiyi-380"> <code class="descname">PyArray_Dims</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-381">当想要解释形状和/或步幅信息时，这种结构是非常有用的。</span><span class="yiyi-st" id="yiyi-382">结构是：</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">npy_intp</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">PyArray_Dims</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-383">这个结构的成员是</span></p>
+<dl class="member">
+<dt id="c.PyArray_Dims.PyArray_Dims.ptr"><span class="yiyi-st" id="yiyi-384"> npy_intp *<code class="descname">PyArray_Dims.ptr</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-385">指向通常表示数组形状或数组步长的（<code class="xref c c-type docutils literal"><span class="pre">npy_intp</span></code>）整数列表的指针。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Dims.PyArray_Dims.len"><span class="yiyi-st" id="yiyi-386"> int <code class="descname">PyArray_Dims.len</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-387">整数列表的长度。</span><span class="yiyi-st" id="yiyi-388">假定安全地访问<em>ptr</em> [0]到<em>ptr</em> [len-1]。</span></p>
+</dd></dl>
+</dd></dl>
+</div>
+<div class="section" id="pyarray-chunk">
+<h3><span class="yiyi-st" id="yiyi-389">PyArray_Chunk</span></h3>
+<dl class="type">
+<dt id="c.PyArray_Chunk"><span class="yiyi-st" id="yiyi-390"> <code class="descname">PyArray_Chunk</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-391">这相当于Python中的缓冲区对象结构，直到ptr成员。</span><span class="yiyi-st" id="yiyi-392">在32位平台上（<em>，即</em> if <a class="reference internal" href="c-api.config.html#c.NPY_SIZEOF_INT" title="NPY_SIZEOF_INT"><code class="xref c c-data docutils literal"><span class="pre">NPY_SIZEOF_INT</span></code></a> == <code class="xref c c-data docutils literal"><span class="pre">NPY_SIZEOF_INTP</span></code>），len成员还与缓冲区对象的等效成员匹配。</span><span class="yiyi-st" id="yiyi-393">表示通用的单段内存块是有用的。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">PyObject_HEAD</span>
+    <span class="n">PyObject</span> <span class="o">*</span><span class="n">base</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="n">npy_intp</span> <span class="n">len</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">flags</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">PyArray_Chunk</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-394">会员是</span></p>
+<dl class="member">
+<dt id="c.PyArray_Chunk.PyArray_Chunk.base"><span class="yiyi-st" id="yiyi-395"> <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a> *<code class="descname">PyArray_Chunk.base</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-396">Python对象这个内存块来自。</span><span class="yiyi-st" id="yiyi-397">需要，以便内存可以正确地解决。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Chunk.PyArray_Chunk.ptr"><span class="yiyi-st" id="yiyi-398"> void *<code class="descname">PyArray_Chunk.ptr</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-399">指向单段内存块的开始的指针。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Chunk.PyArray_Chunk.len"><span class="yiyi-st" id="yiyi-400"> npy_intp <code class="descname">PyArray_Chunk.len</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-401">段的长度（以字节为单位）。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArray_Chunk.PyArray_Chunk.flags"><span class="yiyi-st" id="yiyi-402"> int <code class="descname">PyArray_Chunk.flags</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-403">应用于解释内存的任何数据标志（<em>例如</em> <a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_WRITEABLE" title="NPY_ARRAY_WRITEABLE"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_WRITEABLE</span></code></a>）。</span></p>
+</dd></dl>
+</dd></dl>
+</div>
+<div class="section" id="pyarrayinterface">
+<h3><span class="yiyi-st" id="yiyi-404">PyArrayInterface</span></h3>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-405">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-406"><a class="reference internal" href="arrays.interface.html#arrays-interface"><span class="std std-ref">The Array Interface</span></a></span></p>
+</div>
+<dl class="type">
+<dt id="c.PyArrayInterface"><span class="yiyi-st" id="yiyi-407"> <code class="descname">PyArrayInterface</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-408">定义<a class="reference internal" href="#c.PyArrayInterface" title="PyArrayInterface"><code class="xref c c-type docutils literal"><span class="pre">PyArrayInterface</span></code></a>结构，使NumPy和其他扩展模块可以使用快速数组接口协议。</span><span class="yiyi-st" id="yiyi-409">支持快速数组接口协议的对象的<code class="xref py py-obj docutils literal"><span class="pre">__array_struct__</span></code>方法应返回包含指向<a class="reference internal" href="#c.PyArrayInterface" title="PyArrayInterface"><code class="xref c c-type docutils literal"><span class="pre">PyArrayInterface</span></code></a>结构的指针的<code class="xref c c-type docutils literal"><span class="pre">PyCObject</span></code>的数组。</span><span class="yiyi-st" id="yiyi-410">创建新数组后，属性应为<code class="docutils literal"><span class="pre">DECREF</span></code>&apos;d，它将释放<a class="reference internal" href="#c.PyArrayInterface" title="PyArrayInterface"><code class="xref c c-type docutils literal"><span class="pre">PyArrayInterface</span></code></a>结构。</span><span class="yiyi-st" id="yiyi-411">请记住<code class="docutils literal"><span class="pre">INCREF</span></code>对象（检索其<code class="xref py py-obj docutils literal"><span class="pre">__array_struct__</span></code>属性），并将新<a class="reference internal" href="#c.PyArrayObject" title="PyArrayObject"><code class="xref c c-type docutils literal"><span class="pre">PyArrayObject</span></code></a>的基础成员指向同一个对象。</span><span class="yiyi-st" id="yiyi-412">这样，数组的内存将被正确管理。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">two</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">nd</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">typekind</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">itemsize</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">flags</span><span class="p">;</span>
+    <span class="n">npy_intp</span> <span class="o">*</span><span class="n">shape</span><span class="p">;</span>
+    <span class="n">npy_intp</span> <span class="o">*</span><span class="n">strides</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+    <span class="n">PyObject</span> <span class="o">*</span><span class="n">descr</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">PyArrayInterface</span><span class="p">;</span>
+</pre></div>
+</div>
+<dl class="member">
+<dt id="c.PyArrayInterface.PyArrayInterface.two"><span class="yiyi-st" id="yiyi-413"> int <code class="descname">PyArrayInterface.two</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-414">整数2作为健全性检查。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayInterface.PyArrayInterface.nd"><span class="yiyi-st" id="yiyi-415"> int <code class="descname">PyArrayInterface.nd</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-416">数组中的维数。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayInterface.PyArrayInterface.typekind"><span class="yiyi-st" id="yiyi-417"> char <code class="descname">PyArrayInterface.typekind</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-418">根据typestring约定用&apos;t&apos; - &gt;位字段，&apos;b&apos; - &gt;布尔，&apos;i&apos; - &gt;有符号整数，&apos;u&apos; - &gt;无符号整数，&apos;f&apos; - &gt;浮点，&apos;c&apos; - &gt;复杂浮点，&apos;O&apos; - &gt;对象，&apos;S&apos; - &gt;（字节 - ）字符串，&apos;U&apos; - &gt; unicode，&apos;V&apos;</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayInterface.PyArrayInterface.itemsize"><span class="yiyi-st" id="yiyi-419"> int <code class="descname">PyArrayInterface.itemsize</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-420">数组中每个项目所需的字节数。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayInterface.PyArrayInterface.flags"><span class="yiyi-st" id="yiyi-421"> int <code class="descname">PyArrayInterface.flags</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-422"><a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_C_CONTIGUOUS" title="NPY_ARRAY_C_CONTIGUOUS"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_C_CONTIGUOUS</span></code></a>（1），<a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_F_CONTIGUOUS" title="NPY_ARRAY_F_CONTIGUOUS"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_F_CONTIGUOUS</span></code></a>（2），<a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_ALIGNED" title="NPY_ARRAY_ALIGNED"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_ALIGNED</span></code></a>（0x100），<a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_NOTSWAPPED" title="NPY_ARRAY_NOTSWAPPED"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_NOTSWAPPED</span></code></a> ）或<a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_WRITEABLE" title="NPY_ARRAY_WRITEABLE"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_WRITEABLE</span></code></a>（0x400）来表示数据。</span><span class="yiyi-st" id="yiyi-423"><a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_ALIGNED" title="NPY_ARRAY_ALIGNED"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_ALIGNED</span></code></a>，<a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_C_CONTIGUOUS" title="NPY_ARRAY_C_CONTIGUOUS"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_C_CONTIGUOUS</span></code></a>和<a class="reference internal" href="c-api.array.html#c.NPY_ARRAY_F_CONTIGUOUS" title="NPY_ARRAY_F_CONTIGUOUS"><code class="xref c c-data docutils literal"><span class="pre">NPY_ARRAY_F_CONTIGUOUS</span></code></a>标志实际上可以从其他参数确定。</span><span class="yiyi-st" id="yiyi-424">还可以设置标志<code class="xref c c-data docutils literal"><span class="pre">NPY_ARR_HAS_DESCR</span></code>（0x800）以指示使用版本3数组接口的对象存在结构的descr成员（它将被消耗版本2的数组接口的对象忽略） ）。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayInterface.PyArrayInterface.shape"><span class="yiyi-st" id="yiyi-425"> npy_intp *<code class="descname">PyArrayInterface.shape</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-426">包含每个维中数组大小的数组。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayInterface.PyArrayInterface.strides"><span class="yiyi-st" id="yiyi-427"> npy_intp *<code class="descname">PyArrayInterface.strides</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-428">包含要跳到每个维度中的下一个元素的字节数的数组。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayInterface.PyArrayInterface.data"><span class="yiyi-st" id="yiyi-429"> void *<code class="descname">PyArrayInterface.data</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-430">指针<em>到</em>数组的第一个元素。</span></p>
+</dd></dl>
+<dl class="member">
+<dt id="c.PyArrayInterface.PyArrayInterface.descr"><span class="yiyi-st" id="yiyi-431"> <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a> *<code class="descname">PyArrayInterface.descr</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-432">更详细地描述数据类型的Python对象（与<a class="reference internal" href="arrays.interface.html#__array_interface__" title="__array_interface__"><code class="xref py py-obj docutils literal"><span class="pre">__array_interface__</span></code></a>中的<em>descr</em>键相同）。</span><span class="yiyi-st" id="yiyi-433">如果<em>typekind</em>和<em>itemize</em>提供足够的信息，则可以<code class="docutils literal"><span class="pre">NULL</span></code>。</span><span class="yiyi-st" id="yiyi-434">除非<em>标志</em>中的<code class="xref c c-data docutils literal"><span class="pre">ARR_HAS_DESCR</span></code>标志为开，因此也会忽略此字段。</span></p>
+</dd></dl>
+</dd></dl>
+</div>
+<div class="section" id="internally-used-structures">
+<h3><span class="yiyi-st" id="yiyi-435">Internally used structures</span></h3>
+<p><span class="yiyi-st" id="yiyi-436">在内部，代码使用一些额外的Python对象主要用于内存管理。</span><span class="yiyi-st" id="yiyi-437">这些类型不能直接从Python访问，并且不暴露给C-API。</span><span class="yiyi-st" id="yiyi-438">它们在这里只是为了完整性和帮助理解代码。</span></p>
+<dl class="type">
+<dt id="c.PyUFuncLoopObject"><span class="yiyi-st" id="yiyi-439"> <code class="descname">PyUFuncLoopObject</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-440">用于包含循环所需信息的C结构的松散包装器。</span><span class="yiyi-st" id="yiyi-441">如果你想了解ufunc循环代码，这是有用的。</span><span class="yiyi-st" id="yiyi-442"><a class="reference internal" href="#c.PyUFuncLoopObject" title="PyUFuncLoopObject"><code class="xref c c-type docutils literal"><span class="pre">PyUFuncLoopObject</span></code></a>是关联的C结构。</span><span class="yiyi-st" id="yiyi-443">它在<code class="docutils literal"><span class="pre">ufuncobject.h</span></code>头中定义。</span></p>
+</dd></dl>
+<dl class="type">
+<dt id="c.PyUFuncReduceObject"><span class="yiyi-st" id="yiyi-444"> <code class="descname">PyUFuncReduceObject</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-445">C结构的松散包装，包含ufuncs的reduce类方法所需的信息。</span><span class="yiyi-st" id="yiyi-446">如果你想要理解reduce，accumulate和reduce-at代码，这很有用。</span><span class="yiyi-st" id="yiyi-447"><a class="reference internal" href="#c.PyUFuncReduceObject" title="PyUFuncReduceObject"><code class="xref c c-type docutils literal"><span class="pre">PyUFuncReduceObject</span></code></a>是关联的C结构。</span><span class="yiyi-st" id="yiyi-448">它在<code class="docutils literal"><span class="pre">ufuncobject.h</span></code>头中定义。</span></p>
+</dd></dl>
+<dl class="type">
+<dt id="c.PyUFunc_Loop1d"><span class="yiyi-st" id="yiyi-449"> <code class="descname">PyUFunc_Loop1d</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-450">包含为用户定义的数据类型的每个定义的签名定义用于ufunc的1-d循环所需的信息的C结构的简单链接列表。</span></p>
+</dd></dl>
+</div>
+</div>

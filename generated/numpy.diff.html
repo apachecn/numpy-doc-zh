@@ -1,0 +1,58 @@
+
+<h1><span class="yiyi-st" id="yiyi-9">numpy.diff</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.diff.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.diff.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.diff"><span class="yiyi-st" id="yiyi-10"> <code class="descclassname">numpy.</code><code class="descname">diff</code><span class="sig-paren">(</span><em>a</em>, <em>n=1</em>, <em>axis=-1</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L1518-L1578"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><blockquote>
+<div><p><span class="yiyi-st" id="yiyi-11">计算沿给定轴的第n个离散差分。</span></p>
+<p><span class="yiyi-st" id="yiyi-12">The first difference is given by <code class="docutils literal"><span class="pre">out[n]</span> <span class="pre">=</span> <span class="pre">a[n+1]</span> <span class="pre">-</span> <span class="pre">a[n]</span></code> along the given axis, higher differences are calculated by using <a class="reference internal" href="#numpy.diff" title="numpy.diff"><code class="xref py py-obj docutils literal"><span class="pre">diff</span></code></a> recursively.</span></p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-13">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-14"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><blockquote>
+<div><p><span class="yiyi-st" id="yiyi-15">输入数组</span></p>
+</div></blockquote>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-16">n</span></dt><span class="yiyi-st" id="yiyi-20"><span class="classifier-delimiter">：</span> <span class="classifier">int，可选</span></span><dd><p class="first last"><span class="yiyi-st" id="yiyi-17">差值的次数。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-18">轴</span></dt><span class="yiyi-st" id="yiyi-21"><span class="classifier-delimiter">：</span> <span class="classifier">int，可选</span></span><dd><p class="first last"><span class="yiyi-st" id="yiyi-19">采用差值的轴，默认值为最后一个轴。</span></p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>diff</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">第n个差异。</span><span class="yiyi-st" id="yiyi-25">除了<em class="xref py py-obj">轴</em>，输出形状与<em class="xref py py-obj">a</em>相同，其中尺寸小于<em class="xref py py-obj">n</em>。</span></p>
+</div></blockquote>
+<p class="last"><span class="yiyi-st" id="yiyi-26">。</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([ 1,  2,  3, -7])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([  1,   1, -10])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([[2, 3, 4],</span>
+<span class="go">       [5, 1, 2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[-1,  2,  0, -2]])</span>
+</pre></div>
+</div>
+</dd></dl>

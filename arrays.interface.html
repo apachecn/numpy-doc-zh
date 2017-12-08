@@ -1,0 +1,218 @@
+
+<span id="arrays-interface"></span><span id="index-0"></span><h1><span class="yiyi-st" id="yiyi-17">The Array Interface</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/arrays.interface.html">https://docs.scipy.org/doc/numpy/reference/arrays.interface.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-18">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-19">本页描述了用于从其他C扩展访问numpy数组的内容的numpy特定API。</span><span class="yiyi-st" id="yiyi-20"><span class="target" id="index-1"></span> <a class="pep reference external" href="https://www.python.org/dev/peps/pep-3118"><strong>PEP 3118</strong></a>  -  <a class="reference external" href="https://docs.python.org/dev/c-api/buffer.html#c.PyObject_GetBuffer" title="(in Python v3.7)"><code class="xref c c-func docutils literal"><span class="pre">The</span> <span class="pre">Revised</span> <span class="pre">Buffer</span> <span class="pre">Protocol</span></code></a>向Python 2.6和3.0引入类似的标准化API，以便使用任何扩展模块。</span><span class="yiyi-st" id="yiyi-21"><a class="reference external" href="http://cython.org/">Cython</a>的缓冲区数组支持使用<span class="target" id="index-2"></span> <a class="pep reference external" href="https://www.python.org/dev/peps/pep-3118"><strong>PEP 3118</strong></a> API；请参阅<a class="reference external" href="http://wiki.cython.org/tutorials/numpy">Cython numpy教程</a>。</span><span class="yiyi-st" id="yiyi-22">Cython提供了一种编写代码的方法，该代码支持使用2.6以前的Python版本的缓冲区协议，因为它有一个使用这里描述的数组接口的向后兼容的实现。</span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">版：</span></th><td class="field-body"><span class="yiyi-st" id="yiyi-24">3</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-25">数组接口（有时称为数组协议）是在2005年创建的，作为数组类Python对象的一种手段，在可能的情况下智能重用对方的数据缓冲区。</span><span class="yiyi-st" id="yiyi-26">同构N维数组接口是对象共享N维数组存储器和信息的默认机制。</span><span class="yiyi-st" id="yiyi-27">该接口由一个Python端和一个C端使用两个属性组成。</span><span class="yiyi-st" id="yiyi-28">希望在应用程序代码中被视为N维数组的对象应当支持这些属性中的至少一个。</span><span class="yiyi-st" id="yiyi-29">希望在应用程序代码中支持N维数组的对象应该查找这些属性中的至少一个并使用适当提供的信息。</span></p>
+<p><span class="yiyi-st" id="yiyi-30">此接口描述同质数组，在数组的每个项目具有相同的“类型”的意义上。</span><span class="yiyi-st" id="yiyi-31">这种类型可以非常简单，或者它可以是相当任意和复杂的C样结构。</span></p>
+<p><span class="yiyi-st" id="yiyi-32">有两种方式使用接口：Python端和C端。</span><span class="yiyi-st" id="yiyi-33">两者都是单独的属性。</span></p>
+<div class="section" id="python-side">
+<h2><span class="yiyi-st" id="yiyi-34">Python side</span></h2>
+<p><span class="yiyi-st" id="yiyi-35">这种接口方法由具有<a class="reference internal" href="#__array_interface__" title="__array_interface__"><code class="xref py py-data docutils literal"><span class="pre">__array_interface__</span></code></a>属性的对象组成。</span></p>
+<dl class="data">
+<dt id="__array_interface__"><span class="yiyi-st" id="yiyi-36"> <code class="descname">__array_interface__</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-37">项目字典（需要3个，可选5个）。</span><span class="yiyi-st" id="yiyi-38">如果未提供字典中的可选键，则默认值为默认值。</span></p>
+<p><span class="yiyi-st" id="yiyi-39">键是：</span></p>
+<p><span class="yiyi-st" id="yiyi-40"><strong>形状</strong>（必填）</span></p>
+<blockquote>
+<div><span class="yiyi-st" id="yiyi-41">元组是每个维中的数组大小的元组。</span><span class="yiyi-st" id="yiyi-42">每个条目是一个整数（Python int或long）。</span><span class="yiyi-st" id="yiyi-43">注意，这些整数可能比平台“int”或“long”可能更大（Python int是C长）。</span><span class="yiyi-st" id="yiyi-44">它取决于使用此属性的代码适当地处理这个属性；或者通过使用<code class="xref c c-data docutils literal"><span class="pre">Py_LONG_LONG</span></code>作为形状的C类型，通过在出现溢出时产生错误。</span></div></blockquote>
+<p><span class="yiyi-st" id="yiyi-45"><strong>typestr</strong>（必填）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-46">A string providing the basic type of the homogenous array The basic string format consists of 3 parts: a character describing the byteorder of the data (<code class="docutils literal"><span class="pre">&lt;</span></code>: little-endian, <code class="docutils literal"><span class="pre">&gt;</span></code>: big-endian, <code class="docutils literal"><span class="pre">|</span></code>: not-relevant), a character code giving the basic type of the array, and an integer providing the number of bytes the type uses.</span></p>
+<p><span class="yiyi-st" id="yiyi-47">基本类型字符代码为：</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%">
+<col width="93%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-48"><code class="docutils literal"><span class="pre">t</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-49">位字段（以下整数表示位字段中的位数）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-50"><code class="docutils literal"><span class="pre">b</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-51">Boolean（整数类型，其中所有值只有True或False）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-52"><code class="docutils literal"><span class="pre">i</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-53">整数</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-54"><code class="docutils literal"><span class="pre">u</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-55">无符号整数</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-56"><code class="docutils literal"><span class="pre">f</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-57">浮点</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-58"><code class="docutils literal"><span class="pre">c</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-59">复杂浮点</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-60"><code class="docutils literal"><span class="pre">m</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-61">Timedelta</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-62"><code class="docutils literal"><span class="pre">M</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-63">约会时间</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-64"><code class="docutils literal"><span class="pre">O</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-65">对象（即内存包含指向<a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)"><code class="xref c c-type docutils literal"><span class="pre">PyObject</span></code></a>的指针）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-66"><code class="docutils literal"><span class="pre">S</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-67">字符串（char的固定长度序列）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-68"><code class="docutils literal"><span class="pre">U</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-69">Unicode（固定长度序列<a class="reference external" href="https://docs.python.org/dev/c-api/unicode.html#c.Py_UNICODE" title="(in Python v3.7)"><code class="xref c c-type docutils literal"><span class="pre">Py_UNICODE</span></code></a>）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-70"><code class="docutils literal"><span class="pre">V</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-71">其他（void *  - 每个项目是一个固定大小的内存块）</span></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-72"><strong>descr</strong>（可选）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-73">提供同质数组中每个项目的内存布局的更详细描述的元组列表。</span><span class="yiyi-st" id="yiyi-74">列表中的每个元组都有两个或三个元素。</span><span class="yiyi-st" id="yiyi-75">通常，当<em>typestr</em>为<code class="docutils literal"><span class="pre">V[0-9]+</span></code>时，将使用此属性，但这不是必需的。</span><span class="yiyi-st" id="yiyi-76">唯一的要求是在<em>typestr</em>键中表示的字节数与此处表示的总字节数相同。</span><span class="yiyi-st" id="yiyi-77">这个想法是支持组成数组元素的类C结构的描述。</span><span class="yiyi-st" id="yiyi-78">列表中每个元组的元素是</span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-79">提供与数据类型的此部分相关联的名称的字符串。</span><span class="yiyi-st" id="yiyi-80">这也可以是元组的<code class="docutils literal"><span class="pre">（&apos;full</span> <span class="pre">name&apos;，</span> <span class="pre">&apos;basic_name&apos;）</span></code>一个有效的Python变量名称，表示字段的全名。</span></li>
+<li><span class="yiyi-st" id="yiyi-81">可以是<em>typestr</em>中的基本类型描述字符串或另一个列表（用于嵌套结构类型）</span></li>
+<li><span class="yiyi-st" id="yiyi-82">一个可选的形状元组，提供结构的这部分应该重复多少次。</span><span class="yiyi-st" id="yiyi-83">如果未给出重复，则不假定重复。</span><span class="yiyi-st" id="yiyi-84">可以使用该通用接口来描述非常复杂的结构。</span><span class="yiyi-st" id="yiyi-85">但是，请注意，数组的每个元素仍然是相同的数据类型。</span><span class="yiyi-st" id="yiyi-86">使用此接口的一些示例如下所示。</span></li>
+</ol>
+<p><span class="yiyi-st" id="yiyi-87"><strong>预设</strong>：<code class="docutils literal"><span class="pre">[（&apos;&apos;，</span> <span class="pre">typestr]]</span> </code></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-88"><strong>数据</strong>（可选）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-89">一个2元组，其第一个参数是一个指向存储数组内容的数据区的整数（如果需要，一个长整数）。</span><span class="yiyi-st" id="yiyi-90">这个指针必须指向数据的第一个元素（换句话说，在这种情况下，任何偏移总是被忽略）。</span><span class="yiyi-st" id="yiyi-91">元组中的第二个条目是只读标志（true表示数据区是只读的）。</span></p>
+<p><span class="yiyi-st" id="yiyi-92">此属性也可以是暴露将用于共享数据的<a class="reference external" href="https://docs.python.org/dev/c-api/objbuffer.html#c.PyObject_AsCharBuffer" title="(in Python v3.7)"><code class="xref c c-func docutils literal"><span class="pre">buffer</span> <span class="pre">interface</span></code></a>的对象。</span><span class="yiyi-st" id="yiyi-93">如果此键不存在（或返回<code class="xref py py-class docutils literal"><span class="pre">None</span></code>），则内存共享将通过对象本身的缓冲区接口完成。</span><span class="yiyi-st" id="yiyi-94">在这种情况下，偏移键可以用于指示缓冲区的开始。</span><span class="yiyi-st" id="yiyi-95">如果要保护存储器区域，则对暴露数组接口的对象的引用必须由新对象存储。</span></p>
+<p><span class="yiyi-st" id="yiyi-96"><strong>默认</strong>：<code class="xref py py-const docutils literal"><span class="pre">None</span></code></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-97"><strong>步幅</strong>（可选）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-98"><code class="xref py py-const docutils literal"><span class="pre">None</span></code>可指示C样式连续数组或提供跳转到相应维中下一个数组所需的字节数的步长的元组。</span><span class="yiyi-st" id="yiyi-99">每个条目必须是整数（Python <code class="xref py py-const docutils literal"><span class="pre">int</span></code>或<code class="xref py py-const docutils literal"><span class="pre">long</span></code>）。</span><span class="yiyi-st" id="yiyi-100">与形状一样，值可以大于可以由C“int”或“long”表示的值；调用代码应该通过提高错误或使用C中的<code class="xref c c-type docutils literal"><span class="pre">Py_LONG_LONG</span></code>来适当地处理这个错误。默认是<code class="xref py py-const docutils literal"><span class="pre">None</span></code>，这意味着一个C型连续内存缓冲区。</span><span class="yiyi-st" id="yiyi-101">在此模型中，数组的最后一个维度变化最快。</span><span class="yiyi-st" id="yiyi-102">例如，对于其数组条目长度为8个字节且形状为（10,20,30）的对象的默认步长元组将为（4800,240,8）</span></p>
+<p><span class="yiyi-st" id="yiyi-103"><strong>默认</strong>：<code class="xref py py-const docutils literal"><span class="pre">None</span></code>（C样式连续）</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-104"><strong>掩码</strong>（可选）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-105"><code class="xref py py-const docutils literal"><span class="pre">None</span></code>或暴露数组界面的对象。</span><span class="yiyi-st" id="yiyi-106">掩码数组的所有元素应仅解释为true或不为true，表示此数组的哪些元素有效。</span><span class="yiyi-st" id="yiyi-107">此对象的形状应为<em class="xref py py-obj">“broadcastable”</em>到原数字组的形状。</span></p>
+<p><span class="yiyi-st" id="yiyi-108"><strong>默认</strong>：<code class="xref py py-const docutils literal"><span class="pre">None</span></code>（所有数组的值都有效）</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-109"><strong>偏移</strong>（可选）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-110">到数组数据区域的整数偏移量。</span><span class="yiyi-st" id="yiyi-111">这只能在数据<code class="xref py py-const docutils literal"><span class="pre">None</span></code>或返回<code class="xref py py-class docutils literal"><span class="pre">buffer</span></code>对象时使用。</span></p>
+<p><span class="yiyi-st" id="yiyi-112"><strong>默认</strong>：0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-113"><strong>版本</strong>（必填）</span></p>
+<blockquote>
+<div><span class="yiyi-st" id="yiyi-114">显示界面版本的整数（即此版本的3）。</span><span class="yiyi-st" id="yiyi-115">注意不要使用此操作来使展示未来版本的界面的对象无效。</span></div></blockquote>
+</dd></dl>
+</div>
+<div class="section" id="c-struct-access">
+<h2><span class="yiyi-st" id="yiyi-116">C-struct access</span></h2>
+<p><span class="yiyi-st" id="yiyi-117">对于数组接口的这种方法允许仅使用一个属性查找和良好定义的C结构来更快地访问数组。</span></p>
+<dl class="var">
+<dt id="c.__array_struct__"><span class="yiyi-st" id="yiyi-118"> <code class="descname">__array_struct__</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-119">A：c：type：<em class="xref py py-obj">PyCObject</em>其<code class="xref c c-data docutils literal"><span class="pre">voidptr</span></code>成员包含指向填充的<a class="reference internal" href="c-api.types-and-structures.html#c.PyArrayInterface" title="PyArrayInterface"><code class="xref c c-type docutils literal"><span class="pre">PyArrayInterface</span></code></a>结构的指针。</span><span class="yiyi-st" id="yiyi-120">动态创建结构的内存，并使用适当的析构函数创建<code class="xref c c-type docutils literal"><span class="pre">PyCObject</span></code>，因此此属性的检索器只需要将<a class="reference external" href="https://docs.python.org/dev/c-api/refcounting.html#c.Py_DECREF" title="(in Python v3.7)"><code class="xref c c-func docutils literal"><span class="pre">Py_DECREF</span></code></a>应用于此属性返回的对象它完成了。</span><span class="yiyi-st" id="yiyi-121">此外，要么需要将数据复制出去，要么必须保留对暴露此属性的对象的引用，以确保数据不会被释放。</span><span class="yiyi-st" id="yiyi-122">暴露<code class="xref py py-obj docutils literal"><span class="pre">__array_struct__</span></code>接口的对象也不得重新分配其内存，如果其他对象引用它们。</span></p>
+</dd></dl>
+<p><span class="yiyi-st" id="yiyi-123">PyArrayInterface结构在<code class="docutils literal"><span class="pre">numpy/ndarrayobject.h</span></code>中定义为：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">typedef</span> <span class="n">struct</span> <span class="p">{</span>
+  <span class="nb">int</span> <span class="n">two</span><span class="p">;</span>              <span class="o">/*</span> <span class="n">contains</span> <span class="n">the</span> <span class="n">integer</span> <span class="mi">2</span> <span class="o">--</span> <span class="n">simple</span> <span class="n">sanity</span> <span class="n">check</span> <span class="o">*/</span>
+  <span class="nb">int</span> <span class="n">nd</span><span class="p">;</span>               <span class="o">/*</span> <span class="n">number</span> <span class="n">of</span> <span class="n">dimensions</span> <span class="o">*/</span>
+  <span class="n">char</span> <span class="n">typekind</span><span class="p">;</span>        <span class="o">/*</span> <span class="n">kind</span> <span class="ow">in</span> <span class="n">array</span> <span class="o">---</span> <span class="n">character</span> <span class="n">code</span> <span class="n">of</span> <span class="n">typestr</span> <span class="o">*/</span>
+  <span class="nb">int</span> <span class="n">itemsize</span><span class="p">;</span>         <span class="o">/*</span> <span class="n">size</span> <span class="n">of</span> <span class="n">each</span> <span class="n">element</span> <span class="o">*/</span>
+  <span class="nb">int</span> <span class="n">flags</span><span class="p">;</span>            <span class="o">/*</span> <span class="n">flags</span> <span class="n">indicating</span> <span class="n">how</span> <span class="n">the</span> <span class="n">data</span> <span class="n">should</span> <span class="n">be</span> <span class="n">interpreted</span> <span class="o">*/</span>
+                        <span class="o">/*</span>   <span class="n">must</span> <span class="nb">set</span> <span class="n">ARR_HAS_DESCR</span> <span class="n">bit</span> <span class="n">to</span> <span class="n">validate</span> <span class="n">descr</span> <span class="o">*/</span>
+  <span class="n">Py_intptr_t</span> <span class="o">*</span><span class="n">shape</span><span class="p">;</span>   <span class="o">/*</span> <span class="n">A</span> <span class="n">length</span><span class="o">-</span><span class="n">nd</span> <span class="n">array</span> <span class="n">of</span> <span class="n">shape</span> <span class="n">information</span> <span class="o">*/</span>
+  <span class="n">Py_intptr_t</span> <span class="o">*</span><span class="n">strides</span><span class="p">;</span> <span class="o">/*</span> <span class="n">A</span> <span class="n">length</span><span class="o">-</span><span class="n">nd</span> <span class="n">array</span> <span class="n">of</span> <span class="n">stride</span> <span class="n">information</span> <span class="o">*/</span>
+  <span class="n">void</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>           <span class="o">/*</span> <span class="n">A</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">the</span> <span class="n">first</span> <span class="n">element</span> <span class="n">of</span> <span class="n">the</span> <span class="n">array</span> <span class="o">*/</span>
+  <span class="n">PyObject</span> <span class="o">*</span><span class="n">descr</span><span class="p">;</span>      <span class="o">/*</span> <span class="n">NULL</span> <span class="ow">or</span> <span class="n">data</span><span class="o">-</span><span class="n">description</span> <span class="p">(</span><span class="n">same</span> <span class="k">as</span> <span class="n">descr</span> <span class="n">key</span>
+                                <span class="n">of</span> <span class="n">__array_interface__</span><span class="p">)</span> <span class="o">--</span> <span class="n">must</span> <span class="nb">set</span> <span class="n">ARR_HAS_DESCR</span>
+                                <span class="n">flag</span> <span class="ow">or</span> <span class="n">this</span> <span class="n">will</span> <span class="n">be</span> <span class="n">ignored</span><span class="o">.</span> <span class="o">*/</span>
+<span class="p">}</span> <span class="n">PyArrayInterface</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-124">标志成员可以由5位组成，表示如何解释数据，一位示出如何解释接口。</span><span class="yiyi-st" id="yiyi-125">数据位为<code class="xref py py-const docutils literal"><span class="pre">CONTIGUOUS</span></code>（0x1），<code class="xref py py-const docutils literal"><span class="pre">FORTRAN</span></code>（0x2），<code class="xref py py-const docutils literal"><span class="pre">ALIGNED</span></code>（0x100），<code class="xref py py-const docutils literal"><span class="pre">NOTSWAPPED</span></code> 0x200）和<code class="xref py py-const docutils literal"><span class="pre">WRITEABLE</span></code>（0x400）。</span><span class="yiyi-st" id="yiyi-126">最终标志<code class="xref py py-const docutils literal"><span class="pre">ARR_HAS_DESCR</span></code>（0x800）指示此结构是否具有arrdescr字段。</span><span class="yiyi-st" id="yiyi-127">除非该标志存在，否则不应访问该字段。</span></p>
+<div class="admonition-new-since-june-16-2006 admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-128">2006年6月16日新增：</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-129">在过去，大多数实现使用<code class="xref c c-type docutils literal"><span class="pre">PyCObject</span></code>本身的“desc”成员（不要将其与上面<a class="reference internal" href="c-api.types-and-structures.html#c.PyArrayInterface" title="PyArrayInterface"><code class="xref c c-type docutils literal"><span class="pre">PyArrayInterface</span></code></a>结构的“descr”成员混淆 - 事物）来保持指向暴露接口的对象的指针。</span><span class="yiyi-st" id="yiyi-130">这现在是接口的一个明确的部分。</span><span class="yiyi-st" id="yiyi-131">当使用<code class="xref c c-type docutils literal"><span class="pre">PyCObject_FromVoidPtrAndDesc</span></code>创建<code class="xref c c-type docutils literal"><span class="pre">PyCObject</span></code>时，请确保拥有对对象的引用。</span></p>
+</div>
+</div>
+<div class="section" id="type-description-examples">
+<h2><span class="yiyi-st" id="yiyi-132">Type description examples</span></h2>
+<p><span class="yiyi-st" id="yiyi-133">为了清楚起见，提供类型描述和对应的<a class="reference internal" href="#__array_interface__" title="__array_interface__"><code class="xref py py-data docutils literal"><span class="pre">__array_interface__</span></code></a>&apos;descr&apos;条目的一些示例是有用的。</span><span class="yiyi-st" id="yiyi-134">感谢Scott Gilbert这些例子：</span></p>
+<p><span class="yiyi-st" id="yiyi-135">在每种情况下，&apos;descr&apos;键是可选的，但是当然提供了对于各种应用可能重要的更多信息：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">Float</span> <span class="n">data</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&apos;&gt;f4&apos;</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&apos;&apos;</span><span class="p">,</span><span class="s1">&apos;&gt;f4&apos;</span><span class="p">)]</span>
+
+<span class="o">*</span> <span class="n">Complex</span> <span class="n">double</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&apos;&gt;c8&apos;</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&apos;real&apos;</span><span class="p">,</span><span class="s1">&apos;&gt;f4&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;imag&apos;</span><span class="p">,</span><span class="s1">&apos;&gt;f4&apos;</span><span class="p">)]</span>
+
+<span class="o">*</span> <span class="n">RGB</span> <span class="n">Pixel</span> <span class="n">data</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&apos;|V3&apos;</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&apos;r&apos;</span><span class="p">,</span><span class="s1">&apos;|u1&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;g&apos;</span><span class="p">,</span><span class="s1">&apos;|u1&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;b&apos;</span><span class="p">,</span><span class="s1">&apos;|u1&apos;</span><span class="p">)]</span>
+
+<span class="o">*</span> <span class="n">Mixed</span> <span class="n">endian</span> <span class="p">(</span><span class="n">weird</span> <span class="n">but</span> <span class="n">could</span> <span class="n">happen</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&apos;|V8&apos;</span> <span class="p">(</span><span class="ow">or</span> <span class="s1">&apos;&gt;u8&apos;</span><span class="p">)</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&apos;big&apos;</span><span class="p">,</span><span class="s1">&apos;&gt;i4&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;little&apos;</span><span class="p">,</span><span class="s1">&apos;&lt;i4&apos;</span><span class="p">)]</span>
+
+<span class="o">*</span> <span class="n">Nested</span> <span class="n">structure</span>
+    <span class="n">struct</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">ival</span><span class="p">;</span>
+        <span class="n">struct</span> <span class="p">{</span>
+            <span class="n">unsigned</span> <span class="n">short</span> <span class="n">sval</span><span class="p">;</span>
+            <span class="n">unsigned</span> <span class="n">char</span> <span class="n">bval</span><span class="p">;</span>
+            <span class="n">unsigned</span> <span class="n">char</span> <span class="n">cval</span><span class="p">;</span>
+        <span class="p">}</span> <span class="n">sub</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&apos;|V8&apos;</span> <span class="p">(</span><span class="ow">or</span> <span class="s1">&apos;&lt;u8&apos;</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span><span class="p">)</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&apos;ival&apos;</span><span class="p">,</span><span class="s1">&apos;&lt;i4&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;sub&apos;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&apos;sval&apos;</span><span class="p">,</span><span class="s1">&apos;&lt;u2&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;bval&apos;</span><span class="p">,</span><span class="s1">&apos;|u1&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;cval&apos;</span><span class="p">,</span><span class="s1">&apos;|u1&apos;</span><span class="p">)</span> <span class="p">])</span> <span class="p">]</span>
+
+<span class="o">*</span> <span class="n">Nested</span> <span class="n">array</span>
+    <span class="n">struct</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">ival</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">data</span><span class="p">[</span><span class="mi">16</span><span class="o">*</span><span class="mi">4</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&apos;|V516&apos;</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&apos;ival&apos;</span><span class="p">,</span><span class="s1">&apos;&gt;i4&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;data&apos;</span><span class="p">,</span><span class="s1">&apos;&gt;f8&apos;</span><span class="p">,(</span><span class="mi">16</span><span class="p">,</span><span class="mi">4</span><span class="p">))]</span>
+
+<span class="o">*</span> <span class="n">Padded</span> <span class="n">structure</span>
+    <span class="n">struct</span> <span class="p">{</span>
+        <span class="nb">int</span> <span class="n">ival</span><span class="p">;</span>
+        <span class="n">double</span> <span class="n">dval</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">typestr</span> <span class="o">==</span> <span class="s1">&apos;|V16&apos;</span>
+    <span class="n">descr</span> <span class="o">==</span> <span class="p">[(</span><span class="s1">&apos;ival&apos;</span><span class="p">,</span><span class="s1">&apos;&gt;i4&apos;</span><span class="p">),(</span><span class="s1">&apos;&apos;</span><span class="p">,</span><span class="s1">&apos;|V4&apos;</span><span class="p">),(</span><span class="s1">&apos;dval&apos;</span><span class="p">,</span><span class="s1">&apos;&gt;f8&apos;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-136">应该清楚的是，任何结构化类型都可以使用这个接口来描述。</span></p>
+</div>
+<div class="section" id="differences-with-array-interface-version-2">
+<h2><span class="yiyi-st" id="yiyi-137">Differences with Array interface (Version 2)</span></h2>
+<p><span class="yiyi-st" id="yiyi-138">版本2界面非常相似。</span><span class="yiyi-st" id="yiyi-139">差异主要在于美学。</span><span class="yiyi-st" id="yiyi-140">尤其是：</span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-141">PyArrayInterface结构在结尾没有descr成员（因此没有标志ARR_HAS_DESCR）</span></li>
+<li><span class="yiyi-st" id="yiyi-142">未指定从__array_struct__返回的PyCObject的desc成员。</span><span class="yiyi-st" id="yiyi-143">通常，它是暴露数组的对象（因此，当C对象被销毁时，它的引用可以被保留和销毁）。</span><span class="yiyi-st" id="yiyi-144">现在它必须是一个元组，其第一个元素是具有“PyArrayInterface Version＃”的字符串，其第二个元素是暴露数组的对象。</span></li>
+<li><span class="yiyi-st" id="yiyi-145">从__array_interface __ [&apos;data&apos;]返回的元组过去是一个十六进制字符串（现在它是一个整数或一个长整数）。</span></li>
+<li><span class="yiyi-st" id="yiyi-153">没有__array_interface__属性，而是__array_interface__字典中的所有键（版本除外）都是自己的属性：因此，要获取Python端信息，您必须单独访问属性：</span><ul>
+<li><span class="yiyi-st" id="yiyi-146">__array_data__</span></li>
+<li><span class="yiyi-st" id="yiyi-147">__array_shape__</span></li>
+<li><span class="yiyi-st" id="yiyi-148">__array_strides__</span></li>
+<li><span class="yiyi-st" id="yiyi-149">__array_typestr__</span></li>
+<li><span class="yiyi-st" id="yiyi-150">__array_descr__</span></li>
+<li><span class="yiyi-st" id="yiyi-151">__array_offset__</span></li>
+<li><span class="yiyi-st" id="yiyi-152">__array_mask__</span></li>
+</ul>
+</li>
+</ol>
+</div>

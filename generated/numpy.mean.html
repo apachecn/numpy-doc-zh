@@ -1,0 +1,83 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.mean</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.mean"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">mean</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em>, <em>dtype=None</em>, <em>out=None</em>, <em>keepdims=&lt;class numpy._globals._NoValue&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L2843-L2942"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">沿指定轴计算算术平均值。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回数组元素的平均值。</span><span class="yiyi-st" id="yiyi-16">默认情况下，平均数取平展数组，否则在指定轴上。</span><span class="yiyi-st" id="yiyi-17"><code class="xref py py-obj docutils literal"><span class="pre">float64</span></code>中间和返回值用于整数输入。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">数组包含需要平均值的数字。</span><span class="yiyi-st" id="yiyi-21">如果<em class="xref py py-obj">a</em>不是数组，则尝试进行转换。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>axis</strong>：无或int或tuple ints，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">计算平均值的轴或轴。</span><span class="yiyi-st" id="yiyi-24">默认值是计算平展数组的平均值。</span></p>
+<p><span class="yiyi-st" id="yiyi-25">如果这是一个ints的元组，平均值在多个轴上执行，而不是像以前一样执行单个轴或所有轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">用于计算平均值的类型。</span><span class="yiyi-st" id="yiyi-28">对于整数输入，默认值为<code class="xref py py-obj docutils literal"><span class="pre">float64</span></code>；对于浮点输入，它与输入dtype相同。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">备用输出放置结果的数组。</span><span class="yiyi-st" id="yiyi-31">默认值为<code class="docutils literal"><span class="pre">None</span></code>；如果提供，它必须具有与预期输出相同的形状，但如果必要，将投射类型。</span><span class="yiyi-st" id="yiyi-32">有关详细信息，请参阅<code class="xref py py-obj docutils literal"><span class="pre">doc.ufuncs</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>keepdims</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">如果设置为True，则缩小的轴在结果中保留为尺寸为1的尺寸。</span><span class="yiyi-st" id="yiyi-35">使用此选项，结果将相对于原始<em class="xref py py-obj">arr</em>正确广播。</span></p>
+<p><span class="yiyi-st" id="yiyi-36">如果传递默认值，则<em class="xref py py-obj">keepdims</em>将不会传递到<a class="reference internal" href="numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a>的子类的<a class="reference internal" href="#numpy.mean" title="numpy.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a></span><span class="yiyi-st" id="yiyi-37">如果子类<a class="reference internal" href="numpy.sum.html#numpy.sum" title="numpy.sum"><code class="xref py py-obj docutils literal"><span class="pre">sum</span></code></a>方法不实现<em class="xref py py-obj">keepdims</em>，则会引发任何异常。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-38">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-39"><strong>m</strong>：ndarray，请参阅上面的dtype参数</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-40">如果<em class="xref py py-obj">out = None</em>，则返回包含平均值的新数组，否则将返回对输出数组的引用。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-41">也可以看看</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.average.html#numpy.average" title="numpy.average"><code class="xref py py-obj docutils literal"><span class="pre">average</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">加权平均</span></dd>
+</dl>
+<p class="last"><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.std.html#numpy.std" title="numpy.std"><code class="xref py py-obj docutils literal"><span class="pre">std</span></code></a>，<a class="reference internal" href="numpy.var.html#numpy.var" title="numpy.var"><code class="xref py py-obj docutils literal"><span class="pre">var</span></code></a>，<a class="reference internal" href="numpy.nanmean.html#numpy.nanmean" title="numpy.nanmean"><code class="xref py py-obj docutils literal"><span class="pre">nanmean</span></code></a>，<a class="reference internal" href="numpy.nanstd.html#numpy.nanstd" title="numpy.nanstd"><code class="xref py py-obj docutils literal"><span class="pre">nanstd</span></code></a>，<a class="reference internal" href="numpy.nanvar.html#numpy.nanvar" title="numpy.nanvar"><code class="xref py py-obj docutils literal"><span class="pre">nanvar</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-45">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-46">算术平均值是沿着轴的元素的总和除以元素的数量。</span></p>
+<p><span class="yiyi-st" id="yiyi-47">请注意，对于浮点输入，使用输入具有的相同精度计算平均值。</span><span class="yiyi-st" id="yiyi-48">根据输入数据，这可能导致结果不准确，特别是对于<code class="xref py py-obj docutils literal"><span class="pre">float32</span></code>（请参见下面的示例）。</span><span class="yiyi-st" id="yiyi-49">使用<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>关键字指定更高精度的累加器可以缓解此问题。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-50">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">2.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([ 2.,  3.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 1.5,  3.5])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-51">在单精度中，<a class="reference internal" href="#numpy.mean" title="numpy.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a>可能不准确：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">512</span><span class="o">*</span><span class="mi">512</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">0.546875</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-52">在float64中计算均值更准确：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="go">0.55000000074505806</span>
+</pre></div>
+</div>
+</dd></dl>

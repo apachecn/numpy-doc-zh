@@ -1,0 +1,51 @@
+
+<span id="maskedarray-generic"></span><h1><span class="yiyi-st" id="yiyi-32">The <code class="xref py py-mod docutils literal"><span class="pre">numpy.ma</span></code> module</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/maskedarray.generic.html">https://docs.scipy.org/doc/numpy/reference/maskedarray.generic.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="rationale">
+<h2><span class="yiyi-st" id="yiyi-33">Rationale</span></h2>
+<p><span class="yiyi-st" id="yiyi-34">屏蔽数组是可能具有缺失或无效条目的数组。</span><span class="yiyi-st" id="yiyi-35"><code class="xref py py-mod docutils literal"><span class="pre">numpy.ma</span></code>模块为numpy提供了几乎与工作相似的替换，支持带有掩码的数据数组。</span></p>
+</div>
+<div class="section" id="what-is-a-masked-array">
+<h2><span class="yiyi-st" id="yiyi-36">What is a masked array?</span></h2>
+<p><span class="yiyi-st" id="yiyi-37">在许多情况下，数据集可能由于无效数据的存在而不完整或受到污染。</span><span class="yiyi-st" id="yiyi-38">例如，传感器可能无法记录数据，或记录无效值。</span><span class="yiyi-st" id="yiyi-39"><code class="xref py py-mod docutils literal"><span class="pre">numpy.ma</span></code>模块提供了一种方便的方法来解决这个问题，通过引入masked数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-40">掩码数组是标准<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>和掩码的组合。</span><span class="yiyi-st" id="yiyi-41">掩码是<a class="reference internal" href="maskedarray.baseclass.html#numpy.ma.nomask" title="numpy.ma.nomask"><code class="xref py py-attr docutils literal"><span class="pre">nomask</span></code></a>，表示相关数组的值无效，或者为相关数组的每个元素确定该值是否有效的布尔数组。</span><span class="yiyi-st" id="yiyi-42">当掩码的元素为<code class="docutils literal"><span class="pre">False</span></code>时，关联数组的相应元素有效，称为未掩蔽。</span><span class="yiyi-st" id="yiyi-43">当掩码的元素<code class="docutils literal"><span class="pre">True</span></code>时，相关数组的相应元素称为被掩蔽（无效）。</span></p>
+<p><span class="yiyi-st" id="yiyi-44">该包确保在计算中不使用屏蔽条目。</span></p>
+<p><span class="yiyi-st" id="yiyi-45">作为例子，让我们考虑下面的数据集：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">我们希望将第四个条目标记为无效。</span><span class="yiyi-st" id="yiyi-47">最简单的是创建一个蒙版数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mx</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-48">我们现在可以计算数据集的平均值，而不考虑无效数据：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mx</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="go">2.75</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2><span class="yiyi-st" id="yiyi-49">The <code class="xref py py-mod docutils literal"><span class="pre">numpy.ma</span></code> module</span></h2>
+<p><span class="yiyi-st" id="yiyi-50"><code class="xref py py-mod docutils literal"><span class="pre">numpy.ma</span></code>模块的主要特征是<a class="reference internal" href="maskedarray.baseclass.html#numpy.ma.MaskedArray" title="numpy.ma.MaskedArray"><code class="xref py py-class docutils literal"><span class="pre">MaskedArray</span></code></a>类，它是<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>的子类。</span><span class="yiyi-st" id="yiyi-51">类，其属性和方法在<a class="reference internal" href="maskedarray.baseclass.html#maskedarray-baseclass"><span class="std std-ref">MaskedArray class</span></a>部分中有更详细的描述。</span></p>
+<p><span class="yiyi-st" id="yiyi-52"><code class="xref py py-mod docutils literal"><span class="pre">numpy.ma</span></code>模块可用作<a class="reference internal" href="index.html#module-numpy" title="numpy"><code class="xref py py-mod docutils literal"><span class="pre">numpy</span></code></a>的补充：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-53">要创建一个具有第二个元素无效的数组，我们将：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-54">要创建一个蒙版的数组，其中所有接近1.e20的值都是无效的，我们会这样做：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">masked_values</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.e20</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span> <span class="mf">1.e20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-55">有关屏蔽数组的创建方法的完整讨论，请参见<a class="reference internal" href="#maskedarray-generic-constructing"><span class="std std-ref">Constructing masked arrays</span></a>一节。</span></p>
+</div>

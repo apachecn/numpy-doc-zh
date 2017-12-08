@@ -1,0 +1,24 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.assert_raises</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_raises.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_raises.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.assert_raises"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.</code><code class="descname">assert_raises</code><span class="sig-paren">(</span><em>exception_class</em>, <em>callable</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/utils.py#L1116-L1142"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">失败，除非在使用参数args和关键字参数kwargs调用时，callable抛出类exception_class的异常。</span><span class="yiyi-st" id="yiyi-15">如果抛出不同类型的异常，它不会被捕获，并且测试用例将被视为已经遭遇错误，正如异常意外。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">或者，<a class="reference internal" href="#numpy.testing.assert_raises" title="numpy.testing.assert_raises"><code class="xref py py-obj docutils literal"><span class="pre">assert_raises</span></code></a>可用作上下文管理器：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.testing</span> <span class="k">import</span> <span class="n">assert_raises</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">assert_raises</span><span class="p">(</span><span class="ne">ZeroDivisionError</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-17">相当于</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">assert_raises</span><span class="p">(</span><span class="ne">ZeroDivisionError</span><span class="p">,</span> <span class="n">div</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>

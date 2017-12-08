@@ -1,0 +1,109 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fft.fftn</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fftn.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fftn.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fft.fftn"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.fft.</code><code class="descname">fftn</code><span class="sig-paren">(</span><em>a</em>, <em>s=None</em>, <em>axes=None</em>, <em>norm=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/fft/fftpack.py#L627-L720"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算N维离散傅里叶变换。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">该函数通过快速傅里叶变换（FFT）计算<em>M  t&gt;维数组中任何数量的轴上的<em>N</em>离散傅里叶变换。</em></span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入数组，可以复杂。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>s</strong>：ints序列，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输出（<em class="xref py py-obj">s [0]</em>指代轴0，<em class="xref py py-obj">s [1]</em>到轴1等）的形状（每个变换轴的长度）。</span><span class="yiyi-st" id="yiyi-21">这对于<em class="xref py py-obj">fft（x，n）</em>对应于<em class="xref py py-obj">n</em>。</span><span class="yiyi-st" id="yiyi-22">沿任何轴，如果给定的形状小于输入的形状，则输入被裁剪。</span><span class="yiyi-st" id="yiyi-23">如果它较大，输入将用零填充。</span><span class="yiyi-st" id="yiyi-24">如果未给出<em class="xref py py-obj">s</em>，则使用沿<em class="xref py py-obj">轴</em>指定的轴的输入形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>axes</strong>：ints序列，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">计算FFT的轴。</span><span class="yiyi-st" id="yiyi-27">如果未给出，则使用最后的<code class="docutils literal"><span class="pre">len(s)</span></code>轴，如果<em class="xref py py-obj">s</em>也未指定，则使用所有轴。</span><span class="yiyi-st" id="yiyi-28"><em class="xref py py-obj">轴</em>中的重复索引表示该轴上的变换执行多次。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>norm</strong>：{None，“ortho”}，可选</span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-30"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-31">规范化模式（参见<a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a>）。</span><span class="yiyi-st" id="yiyi-32">默认值为None。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-33">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-34"><strong>out</strong>：complex ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-35">沿着<em class="xref py py-obj">轴</em>指示的轴或者通过<em class="xref py py-obj">s</em>和<em class="xref py py-obj">a</em>的组合变换的截断或补零输入，如参数部分。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-36">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-37"><strong>ValueError</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-38">如果<em class="xref py py-obj">s</em>和<em class="xref py py-obj">轴</em>具有不同的长度。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-39"><strong>IndexError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-40">如果<em class="xref py py-obj">axes</em>的元素大于<em class="xref py py-obj">a</em>的轴数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-41">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">离散傅立叶变换的总体视图，使用定义和约定。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.fft.ifftn.html#numpy.fft.ifftn" title="numpy.fft.ifftn"><code class="xref py py-obj docutils literal"><span class="pre">ifftn</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="#numpy.fft.fftn" title="numpy.fft.fftn"><code class="xref py py-obj docutils literal"><span class="pre">fftn</span></code></a>的逆，逆<em>n</em>维FFT。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.fft.fft.html#numpy.fft.fft" title="numpy.fft.fft"><code class="xref py py-obj docutils literal"><span class="pre">fft</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-47">一维FFT，使用定义和约定。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="numpy.fft.rfftn.html#numpy.fft.rfftn" title="numpy.fft.rfftn"><code class="xref py py-obj docutils literal"><span class="pre">rfftn</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-49">实输入的<em>n</em>维FFT。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="numpy.fft.fft2.html#numpy.fft.fft2" title="numpy.fft.fft2"><code class="xref py py-obj docutils literal"><span class="pre">fft2</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-51">二维FFT。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="numpy.fft.fftshift.html#numpy.fft.fftshift" title="numpy.fft.fftshift"><code class="xref py py-obj docutils literal"><span class="pre">fftshift</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-53">将零频率项转移到数组的中心</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-54">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-55">类似于<a class="reference internal" href="numpy.fft.fft.html#numpy.fft.fft" title="numpy.fft.fft"><code class="xref py py-obj docutils literal"><span class="pre">fft</span></code></a>的输出包含所有轴的低阶角中的零频率项，所有轴的前半部分中的正频率项，所有轴中的奈奎斯特频率的项所有轴的中间和所有轴的后半部分中的负频率项，以负频率的减小的顺序。</span></p>
+<p><span class="yiyi-st" id="yiyi-56">有关详细信息，定义和使用的约定，请参见<a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-57">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftn</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">array([[[  0.+0.j,   0.+0.j,   0.+0.j],</span>
+<span class="go">        [  0.+0.j,   0.+0.j,   0.+0.j],</span>
+<span class="go">        [  0.+0.j,   0.+0.j,   0.+0.j]],</span>
+<span class="go">       [[  9.+0.j,   0.+0.j,   0.+0.j],</span>
+<span class="go">        [  0.+0.j,   0.+0.j,   0.+0.j],</span>
+<span class="go">        [  0.+0.j,   0.+0.j,   0.+0.j]],</span>
+<span class="go">       [[ 18.+0.j,   0.+0.j,   0.+0.j],</span>
+<span class="go">        [  0.+0.j,   0.+0.j,   0.+0.j],</span>
+<span class="go">        [  0.+0.j,   0.+0.j,   0.+0.j]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftn</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">array([[[ 2.+0.j,  2.+0.j,  2.+0.j],</span>
+<span class="go">        [ 0.+0.j,  0.+0.j,  0.+0.j]],</span>
+<span class="go">       [[-2.+0.j, -2.+0.j, -2.+0.j],</span>
+<span class="go">        [ 0.+0.j,  0.+0.j,  0.+0.j]]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="o">/</span> <span class="mi">12</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="o">/</span> <span class="mi">34</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftn</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">FS</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">&lt;matplotlib.image.AxesImage object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-58">（<a class="reference external" href="../../reference/generated/numpy-fft-fftn-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-fft-fftn-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-fft-fftn-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-fft-fftn-1.png" src="../../_images/numpy-fft-fftn-1.png">
+</div>
+</dd></dl>

@@ -1,0 +1,50 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.argmin</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.argmin.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.argmin.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.argmin"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">argmin</code><span class="sig-paren">(</span><em>axis=None</em>, <em>fill_value=None</em>, <em>out=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L5259-L5298"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将指数的数组返回给定轴的最小值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>axis</strong>：{None，integer}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">如果为None，则索引将位于展平的数组中，否则沿着指定的轴</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>fill_value</strong>：{var}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">用于填充屏蔽值的值。</span><span class="yiyi-st" id="yiyi-21">如果为None，则使用minimum_fill_value（self._data）的输出。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>out</strong>：{无，数组}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">数组，其中可以放置结果。</span><span class="yiyi-st" id="yiyi-24">它的类型被保留，并且它必须是保持输出的正确形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26">ndarray或标量</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">如果多维输入，则返回一个新的指数ndarray到给定轴的最小值。</span><span class="yiyi-st" id="yiyi-28">否则，返回一个索引的标量到给定轴的最小值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">[[-- --]</span>
+<span class="go"> [2 3]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">[0 0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">9</span><span class="p">))</span>
+<span class="go">[1 1]</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,41 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.matrix.H</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.H.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.H.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="attribute">
+<dt id="numpy.matrix.H"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">matrix.</code><code class="descname">H</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回<em class="xref py py-obj">self</em>的（复数）共轭转置。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">等于<code class="docutils literal"><span class="pre">np.transpose(self)</span></code>如果<em class="xref py py-obj">self</em>是实值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>无</strong></span></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>ret</strong>：matrix对象</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20">复共轭转置<em class="xref py py-obj">self</em></span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-21">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">x</span><span class="p">;</span> <span class="n">z</span>
+<span class="go">matrix([[  0. +0.j,   1. -1.j,   2. -2.j,   3. -3.j],</span>
+<span class="go">        [  4. -4.j,   5. -5.j,   6. -6.j,   7. -7.j],</span>
+<span class="go">        [  8. -8.j,   9. -9.j,  10.-10.j,  11.-11.j]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span><span class="o">.</span><span class="n">getH</span><span class="p">()</span>
+<span class="go">matrix([[  0. +0.j,   4. +4.j,   8. +8.j],</span>
+<span class="go">        [  1. +1.j,   5. +5.j,   9. +9.j],</span>
+<span class="go">        [  2. +2.j,   6. +6.j,  10.+10.j],</span>
+<span class="go">        [  3. +3.j,   7. +7.j,  11.+11.j]])</span>
+</pre></div>
+</div>
+</dd></dl>

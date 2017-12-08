@@ -1,0 +1,59 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.set_string_function</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.set_string_function.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.set_string_function.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.set_string_function"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">set_string_function</code><span class="sig-paren">(</span><em>f</em>, <em>repr=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L1871-L1928"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">设置当漂亮打印数组时使用的Python函数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>f</strong>：function或None</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">用于漂亮打印数组的函数。</span><span class="yiyi-st" id="yiyi-18">函数应该期望单个数组参数，并返回数组的表示形式的字符串。</span><span class="yiyi-st" id="yiyi-19">如果为无，则将该函数重置为默认NumPy函数以打印数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>repr</strong>：bool，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">如果为True（默认），则设置漂亮打印的函数（<code class="docutils literal"><span class="pre">__repr__</span></code>），如果为False，则设置返回默认字符串表示形式（<code class="docutils literal"><span class="pre">__str__</span></code>）的函数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-22">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="numpy.set_printoptions.html#numpy.set_printoptions" title="numpy.set_printoptions"><code class="xref py py-obj docutils literal"><span class="pre">set_printoptions</span></code></a>，<a class="reference internal" href="numpy.get_printoptions.html#numpy.get_printoptions" title="numpy.get_printoptions"><code class="xref py py-obj docutils literal"><span class="pre">get_printoptions</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">pprint</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="s1">&apos;HA! - What are you going to do now?&apos;</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_string_function</span><span class="p">(</span><span class="n">pprint</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">HA! - What are you going to do now?</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">[0 1 2 3 4 5 6 7 8 9]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-25">我们可以将该函数重置为默认值：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_string_function</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-26"><a class="reference external" href="https://docs.python.org/dev/library/functions.html#repr" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">repr</span></code></a>会影响漂亮的打印或正常的字符串表示。</span><span class="yiyi-st" id="yiyi-27">请注意，<code class="docutils literal"><span class="pre">__repr__</span></code>仍然受设置<code class="docutils literal"><span class="pre">__str__</span></code>的影响，因为返回的字符串中每个数组元素的宽度等于<code class="docutils literal"><span class="pre">__str__()</span></code></span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_string_function</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="s1">&apos;random&apos;</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
+<span class="go">&apos;random&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">__repr__</span><span class="p">()</span>
+<span class="go">&apos;array([     0,      1,      2,      3])&apos;</span>
+</pre></div>
+</div>
+</dd></dl>

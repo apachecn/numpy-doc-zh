@@ -1,0 +1,89 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.noncentral_chisquare</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.noncentral_chisquare.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.noncentral_chisquare.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.noncentral_chisquare"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">noncentral_chisquare</code><span class="sig-paren">(</span><em>df</em>, <em>nonc</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从非中心卡方分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">非中心<img alt="\chi^2" class="math" src="../../_images/math/143d854fb865a4fb5147d3cc5d31426941bdd597.png" style="vertical-align: -3px">分布是<img alt="\chi^2" class="math" src="../../_images/math/143d854fb865a4fb5147d3cc5d31426941bdd597.png" style="vertical-align: -3px">分布的一般化。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>df</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">自由度，从Numpy 1.10起应该&gt; 0，对于早期版本应该&gt; 1。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>nonc</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">非中心性，应该是非负的。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">输出形状。</span><span class="yiyi-st" id="yiyi-24">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-25">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">非中心卡方分布的概率密度函数为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-28">其中<img alt="Y_{q}" class="math" src="../../_images/math/7effaa0673ea0ebcb95bb820f69a73e3fe584e53.png" style="vertical-align: -4px">是具有q个自由度的卡方。</span></p>
+<p><span class="yiyi-st" id="yiyi-29">在德里（2007年），注意到非中心卡方可用于轰炸和覆盖问题，杀死由非中心卡方分布给出的点目标的概率。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r174" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-31"><a class="fn-backref" href="#id1">[R174]</a></span></td><td><span class="yiyi-st" id="yiyi-32">德里</span><span class="yiyi-st" id="yiyi-33">Holla，“关于武器系统有效性分析中的非中心卡方分布”，Metrika，第15卷，第1/1970年12月。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r175" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-34"><a class="fn-backref" href="#id2">[R175]</a></span></td><td><span class="yiyi-st" id="yiyi-35">维基百科，“非中心卡方分布”<a class="reference external" href="http://en.wikipedia.org/wiki/Noncentral_chi-square_distribution">http://en.wikipedia.org/wiki/Noncentral_chi-square_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-37">从分布中绘制值并绘制直方图</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">noncentral_chisquare</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100000</span><span class="p">),</span>
+<span class="gp">... </span>                  <span class="n">bins</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">（<a class="reference external" href="../../reference/generated/numpy-random-RandomState-noncentral_chisquare-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-noncentral_chisquare-1_00_00.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-noncentral_chisquare-1_00_00.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-RandomState-noncentral_chisquare-1_00_00.png" src="../../_images/numpy-random-RandomState-noncentral_chisquare-1_00_00.png">
+</div>
+<p><span class="yiyi-st" id="yiyi-39">从非中心chisquare绘制非常小非中心的值，并与chisquare相比。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">noncentral_chisquare</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">.</span><span class="mi">0000001</span><span class="p">,</span> <span class="mi">100000</span><span class="p">),</span>
+<span class="gp">... </span>                  <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">chisquare</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">100000</span><span class="p">),</span>
+<span class="gp">... </span>                   <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">values2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&apos;ob&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">（<a class="reference external" href="../../reference/generated/numpy-random-RandomState-noncentral_chisquare-1_01_00.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-noncentral_chisquare-1_01_00.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-RandomState-noncentral_chisquare-1_01_00.png" src="../../_images/numpy-random-RandomState-noncentral_chisquare-1_01_00.png">
+</div>
+<p><span class="yiyi-st" id="yiyi-41">演示非中心性的大值如何导致更对称的分布。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">noncentral_chisquare</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100000</span><span class="p">),</span>
+<span class="gp">... </span>                  <span class="n">bins</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">（<a class="reference external" href="../../reference/generated/numpy-random-RandomState-noncentral_chisquare-1_02_00.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-noncentral_chisquare-1_02_00.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-RandomState-noncentral_chisquare-1_02_00.png" src="../../_images/numpy-random-RandomState-noncentral_chisquare-1_02_00.png">
+</div>
+</dd></dl>

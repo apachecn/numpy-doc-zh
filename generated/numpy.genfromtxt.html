@@ -1,0 +1,187 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.genfromtxt</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.genfromtxt.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.genfromtxt.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.genfromtxt"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">genfromtxt</code><span class="sig-paren">(</span><em>fname</em>, <em>dtype=&lt;type &apos;float&apos;&gt;</em>, <em>comments=&apos;#&apos;</em>, <em>delimiter=None</em>, <em>skip_header=0</em>, <em>skip_footer=0</em>, <em>converters=None</em>, <em>missing_values=None</em>, <em>filling_values=None</em>, <em>usecols=None</em>, <em>names=None</em>, <em>excludelist=None</em>, <em>deletechars=None</em>, <em>replace_space=&apos;_&apos;</em>, <em>autostrip=False</em>, <em>case_sensitive=True</em>, <em>defaultfmt=&apos;f%i&apos;</em>, <em>unpack=None</em>, <em>usemask=False</em>, <em>loose=True</em>, <em>invalid_raise=True</em>, <em>max_rows=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/npyio.py#L1259-L1891"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从文本文件加载数据，缺少值按指定处理。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">第一个<em class="xref py py-obj">skip_header</em>行之后的每一行在<em class="xref py py-obj">分隔符</em>字符处分割，且<em class="xref py py-obj">注释</em>字符后面的字符将被丢弃。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>fname</strong>：file，str，str，generator的列表</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">要读取的文件，文件名，列表或生成器。</span><span class="yiyi-st" id="yiyi-19">如果文件扩展名为<em class="xref py py-obj">gz</em>或<a class="reference external" href="https://docs.python.org/dev/library/bz2.html#module-bz2" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">bz2</span></code></a>，则首先解压缩文件。</span><span class="yiyi-st" id="yiyi-20">注意，生成器必须在Python 3k中返回字节字符串。</span><span class="yiyi-st" id="yiyi-21">列表中的字符串或生成器生成的字符串被视为行。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">生成的数组的数据类型。</span><span class="yiyi-st" id="yiyi-24">如果为None，那么dtype将由每列的内容单独确定。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>注释</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">用于指示注释开始的字符。</span><span class="yiyi-st" id="yiyi-27">在注释后的一行上出现的所有字符都将被丢弃</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>分隔符</strong>：str，int或sequence，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">用于分隔值的字符串。</span><span class="yiyi-st" id="yiyi-30">默认情况下，任何连续的空格作为分隔符。</span><span class="yiyi-st" id="yiyi-31">整数或整数序列也可以被提供为每个字段的宽度。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>skiprows</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">已在numpy 1.10中删除<em class="xref py py-obj">skiprows</em>。</span><span class="yiyi-st" id="yiyi-34">请改用<em class="xref py py-obj">skip_header</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35"><strong>skip_header</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-36">要在文件开头处跳过的行数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-37"><strong>skip_footer</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-38">在文件结尾处跳过的行数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-39"><strong>转换器</strong>：变量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-40">将列的数据转换为值的函数集。</span><span class="yiyi-st" id="yiyi-41">转换器还可用于为缺失的数据提供默认值：<code class="docutils literal"><span class="pre">转换器</span> <span class="pre">=</span> <span class="pre">{3：</span> <span class="pre">t4&gt; <span class="pre">s：</span> <span class="pre">float（s</span> <span class="pre">或</span> <span class="pre">0）}</span></span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-42"><strong>缺少</strong>：变量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-43">在numpy 1.10中删除了<em class="xref py py-obj">缺失</em>。</span><span class="yiyi-st" id="yiyi-44">请改用<em class="xref py py-obj">missing_values</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-45"><strong>missing_values</strong>：变量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-46">对应于缺失数据的字符串集合。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-47"><strong>filling_values</strong>：变量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-48">缺少数据时用作默认值的一组值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-49"><strong>usecols</strong>：sequence，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-50">要读取哪些列，0是第一列。</span><span class="yiyi-st" id="yiyi-51">例如，<code class="docutils literal"><span class="pre">usecols</span> <span class="pre">=</span> <span class="pre">（1，</span> <span class="pre">4，</span> <span class="pre">5）</span> </code>将提取第2，第5和第6列。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-52"><strong>names</strong>：{None，True，str，sequence}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-53">如果<em class="xref py py-obj">名称</em>为True，则从第一个<em class="xref py py-obj">skip_header</em>行之后的第一个有效行读取字段名称。</span><span class="yiyi-st" id="yiyi-54">如果<em class="xref py py-obj">名称</em>是序列或逗号分隔名称的单字符串，则这些名称将用于定义结构化dtype中的字段名称。</span><span class="yiyi-st" id="yiyi-55">如果<em class="xref py py-obj">名称</em>为None，将使用dtype字段的名称（如果有）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-56"><strong>excludelist</strong>：sequence，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-57">要排除的名称列表。</span><span class="yiyi-st" id="yiyi-58">此列表附加到默认列表[&apos;return&apos;，&apos;file&apos;，&apos;print&apos;]。</span><span class="yiyi-st" id="yiyi-59">排除的名称将附加下划线：例如，<em class="xref py py-obj">文件</em>将变为<em class="xref py py-obj">file _</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-60"><strong>deletechars</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-61">必须从名称中删除的组合无效字符的字符串。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-62"><strong>defaultfmt</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-63">用于定义默认字段名称的格式，例如“f％i”或“f_％02i”。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-64"><strong>自动分页</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-65">是否自动从变量中去除空格。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-66"><strong>replace_space</strong>：char，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-67">用于替换变量名称中的空格的字符。</span><span class="yiyi-st" id="yiyi-68">默认情况下，使用“_”。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-69"><strong>case_sensitive</strong>：{True，False，&apos;upper&apos;，&apos;lower&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-70">如果为True，字段名称区分大小写。</span><span class="yiyi-st" id="yiyi-71">如果为False或&apos;upper&apos;，则字段名称将转换为大写。</span><span class="yiyi-st" id="yiyi-72">如果“lower”，字段名称将转换为小写。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-73"><strong>解包</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-74">如果为真，则返回的数组被转置，使得可以使用<code class="docutils literal"><span class="pre">x，</span> <span class="pre">y，</span> <span class="pre">z</span> <span class="pre">=  <span class="pre">loadtxt（...）</span></span></code></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-75"><strong>usemask</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-76">如果为True，返回一个屏蔽的数组。</span><span class="yiyi-st" id="yiyi-77">如果为False，返回一个常规数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-78"><strong>松散</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-79">如果为True，请不要为无效值引发错误。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-80"><strong>invalid_raise</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-81">如果为True，如果检测到列数不一致，则会引发异常。</span><span class="yiyi-st" id="yiyi-82">如果为False，则会发出警告，并跳过违规行。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-83"><strong>max_rows</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-84">要读取的最大行数。</span><span class="yiyi-st" id="yiyi-85">不得与skip_footer同时使用。</span><span class="yiyi-st" id="yiyi-86">如果给定，该值必须至少为1。</span><span class="yiyi-st" id="yiyi-87">默认是读取整个文件。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-88"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-89">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-90"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-91">从文本文件读取的数据。</span><span class="yiyi-st" id="yiyi-92">如果<em class="xref py py-obj">usemask</em>为True，则这是一个蒙版的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-93">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-94"><a class="reference internal" href="numpy.loadtxt.html#numpy.loadtxt" title="numpy.loadtxt"><code class="xref py py-obj docutils literal"><span class="pre">numpy.loadtxt</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-95">没有数据丢失时的等效函数。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-96">笔记</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-97">当使用空格作为分隔符时，或当没有给定分隔符作为输入时，两个字段之间不应有任何缺失数据。</span></li>
+<li><span class="yiyi-st" id="yiyi-98">当变量命名（通过灵活的dtype或<em class="xref py py-obj">名称</em>命名）时，文件中不能有任何头（否则会引发ValueError异常）。</span></li>
+<li><span class="yiyi-st" id="yiyi-99">默认情况下，单个值不会被删除空格。</span><span class="yiyi-st" id="yiyi-100">使用自定义转换器时，请确保该函数删除空格。</span></li>
+</ul>
+<p class="rubric"><span class="yiyi-st" id="yiyi-101">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r20" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-102"><a class="fn-backref" href="#id1">[R20]</a></span></td><td><span class="yiyi-st" id="yiyi-103">Numpy用户指南，<a class="reference external" href="http://docs.scipy.org/doc/numpy/user/basics.io.genfromtxt.html">I / O with Numpy</a>部分。</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-104">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">StringIO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-105">带有混合dtype的逗号分隔文件</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="s2">&quot;1,1.3,abcde&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&apos;myint&apos;</span><span class="p">,</span><span class="s1">&apos;i8&apos;</span><span class="p">),(</span><span class="s1">&apos;myfloat&apos;</span><span class="p">,</span><span class="s1">&apos;f8&apos;</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">(</span><span class="s1">&apos;mystring&apos;</span><span class="p">,</span><span class="s1">&apos;S5&apos;</span><span class="p">)],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>
+<span class="go">array((1, 1.3, &apos;abcde&apos;),</span>
+<span class="go">      dtype=[(&apos;myint&apos;, &apos;&lt;i8&apos;), (&apos;myfloat&apos;, &apos;&lt;f8&apos;), (&apos;mystring&apos;, &apos;|S5&apos;)])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-106">使用dtype =无</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># needed for StringIO example only</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&apos;myint&apos;</span><span class="p">,</span><span class="s1">&apos;myfloat&apos;</span><span class="p">,</span><span class="s1">&apos;mystring&apos;</span><span class="p">],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>
+<span class="go">array((1, 1.3, &apos;abcde&apos;),</span>
+<span class="go">      dtype=[(&apos;myint&apos;, &apos;&lt;i8&apos;), (&apos;myfloat&apos;, &apos;&lt;f8&apos;), (&apos;mystring&apos;, &apos;|S5&apos;)])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-107">指定dtype和名称</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;i8,f8,S5&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;myint&apos;</span><span class="p">,</span><span class="s1">&apos;myfloat&apos;</span><span class="p">,</span><span class="s1">&apos;mystring&apos;</span><span class="p">],</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>
+<span class="go">array((1, 1.3, &apos;abcde&apos;),</span>
+<span class="go">      dtype=[(&apos;myint&apos;, &apos;&lt;i8&apos;), (&apos;myfloat&apos;, &apos;&lt;f8&apos;), (&apos;mystring&apos;, &apos;|S5&apos;)])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-108">具有固定宽度列的示例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="s2">&quot;11.3abcde&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;intvar&apos;</span><span class="p">,</span><span class="s1">&apos;fltvar&apos;</span><span class="p">,</span><span class="s1">&apos;strvar&apos;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">delimiter</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>
+<span class="go">array((1, 1.3, &apos;abcde&apos;),</span>
+<span class="go">      dtype=[(&apos;intvar&apos;, &apos;&lt;i8&apos;), (&apos;fltvar&apos;, &apos;&lt;f8&apos;), (&apos;strvar&apos;, &apos;|S5&apos;)])</span>
+</pre></div>
+</div>
+</dd></dl>

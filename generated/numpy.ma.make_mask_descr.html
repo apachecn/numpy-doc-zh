@@ -1,0 +1,43 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.make_mask_descr</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.make_mask_descr.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.make_mask_descr.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.make_mask_descr"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">make_mask_descr</code><span class="sig-paren">(</span><em>ndtype</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L1303-L1336"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从给定的dtype构造dtype描述列表。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">返回一个新的dtype对象，将<em class="xref py py-obj">ndtype</em>中的所有字段类型转换为布尔类型。</span><span class="yiyi-st" id="yiyi-17">字段名称不更改。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>ndtype</strong>：dtype</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">dtype转换。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>result</strong>：dtype</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">看起来像<em class="xref py py-obj">ndtype</em>的dtype，所有字段的类型都是布尔型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">({</span><span class="s1">&apos;names&apos;</span><span class="p">:[</span><span class="s1">&apos;foo&apos;</span><span class="p">,</span> <span class="s1">&apos;bar&apos;</span><span class="p">],</span>
+<span class="go">                      &apos;formats&apos;:[np.float32, np.int]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dtype</span>
+<span class="go">dtype([(&apos;foo&apos;, &apos;&lt;f4&apos;), (&apos;bar&apos;, &apos;&lt;i4&apos;)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">make_mask_descr</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+<span class="go">dtype([(&apos;foo&apos;, &apos;|b1&apos;), (&apos;bar&apos;, &apos;|b1&apos;)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">make_mask_descr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="go">&lt;type &apos;numpy.bool_&apos;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>

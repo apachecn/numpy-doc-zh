@@ -1,0 +1,118 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.set_printoptions</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.set_printoptions.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.set_printoptions.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.set_printoptions"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">set_printoptions</code><span class="sig-paren">(</span><em>precision=None</em>, <em>threshold=None</em>, <em>edgeitems=None</em>, <em>linewidth=None</em>, <em>suppress=None</em>, <em>nanstr=None</em>, <em>infstr=None</em>, <em>formatter=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/arrayprint.py#L48-L171"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">设置打印选项。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">这些选项确定显示浮点数，数组和其他NumPy对象的方式。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>precision</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">浮点数输出的精度位数（默认为8）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>阈值</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">触发汇总而不是完全repr的数组元素的总数（默认为1000）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>edgeitems</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">在每个维度的开始和结束处的摘要中的数组项数（默认值为3）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>linewidth</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">用于插入换行符的每行字符数（默认为75）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>suppress</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">是否使用科学计数法抑制小浮点值的打印（默认值为False）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>nanstr</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">浮点数的字符串表示不是数字（默认为nan）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>infstr</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">浮点无穷大的字符串表示形式（默认inf）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>格式化程序</strong>：可调用的dict，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">如果不是无，键应该指示相应格式化功能应用的类型。</span><span class="yiyi-st" id="yiyi-33">Callables应该返回一个字符串。</span><span class="yiyi-st" id="yiyi-34">未指定的类型（通过其相应的键）由默认格式化程序处理。</span><span class="yiyi-st" id="yiyi-35">可以设置格式化程序的单个类型有：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>- &apos;bool&apos;
+- &apos;int&apos;
+- &apos;timedelta&apos; : a `numpy.timedelta64`
+- &apos;datetime&apos; : a `numpy.datetime64`
+- &apos;float&apos;
+- &apos;longfloat&apos; : 128-bit floats
+- &apos;complexfloat&apos;
+- &apos;longcomplexfloat&apos; : composed of two 128-bit floats
+- &apos;numpy_str&apos; : types `numpy.string_` and `numpy.unicode_`
+- &apos;str&apos; : all other strings
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-36">可用于一次设置一组类型的其他键有：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="s1">&apos;all&apos;</span> <span class="p">:</span> <span class="n">sets</span> <span class="nb">all</span> <span class="n">types</span>
+<span class="o">-</span> <span class="s1">&apos;int_kind&apos;</span> <span class="p">:</span> <span class="n">sets</span> <span class="s1">&apos;int&apos;</span>
+<span class="o">-</span> <span class="s1">&apos;float_kind&apos;</span> <span class="p">:</span> <span class="n">sets</span> <span class="s1">&apos;float&apos;</span> <span class="ow">and</span> <span class="s1">&apos;longfloat&apos;</span>
+<span class="o">-</span> <span class="s1">&apos;complex_kind&apos;</span> <span class="p">:</span> <span class="n">sets</span> <span class="s1">&apos;complexfloat&apos;</span> <span class="ow">and</span> <span class="s1">&apos;longcomplexfloat&apos;</span>
+<span class="o">-</span> <span class="s1">&apos;str_kind&apos;</span> <span class="p">:</span> <span class="n">sets</span> <span class="s1">&apos;str&apos;</span> <span class="ow">and</span> <span class="s1">&apos;numpystr&apos;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-37">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="numpy.get_printoptions.html#numpy.get_printoptions" title="numpy.get_printoptions"><code class="xref py py-obj docutils literal"><span class="pre">get_printoptions</span></code></a>，<a class="reference internal" href="numpy.set_string_function.html#numpy.set_string_function" title="numpy.set_string_function"><code class="xref py py-obj docutils literal"><span class="pre">set_string_function</span></code></a>，<a class="reference internal" href="numpy.array2string.html#numpy.array2string" title="numpy.array2string"><code class="xref py py-obj docutils literal"><span class="pre">array2string</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-40"><a class="reference external" href="https://docs.python.org/dev/library/formatter.html#module-formatter" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">formatter</span></code></a>始终通过调用<a class="reference internal" href="#numpy.set_printoptions" title="numpy.set_printoptions"><code class="xref py py-obj docutils literal"><span class="pre">set_printoptions</span></code></a>重置。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-42">浮点精度可设置：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.123456789</span><span class="p">]))</span>
+<span class="go">[ 1.1235]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">长数组可概括为：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="go">[0 1 2 ..., 7 8 9]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-44">小结果可以抑制：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">4.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="go">array([ -4.9304e-32,  -4.4409e-16,   0.0000e+00,   0.0000e+00])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="go">array([-0., -0.,  0.,  0.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">自定义格式化程序可用于根据需要显示数组元素：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="p">{</span><span class="s1">&apos;all&apos;</span><span class="p">:</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&apos;int: &apos;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([int: 0, int: -1, int: -2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">()</span>  <span class="c1"># formatter gets reset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([0, 1, 2])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">要恢复默认选项，您可以使用：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">edgeitems</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">infstr</span><span class="o">=</span><span class="s1">&apos;inf&apos;</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">linewidth</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">nanstr</span><span class="o">=</span><span class="s1">&apos;nan&apos;</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">suppress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">formatter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>

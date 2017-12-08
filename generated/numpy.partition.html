@@ -1,0 +1,100 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.partition</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.partition.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.partition.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.partition"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">partition</code><span class="sig-paren">(</span><em>a</em>, <em>kth</em>, <em>axis=-1</em>, <em>kind=&apos;introselect&apos;</em>, <em>order=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L559-L644"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回数组的分区副本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">创建数组的副本，其元素重新排列，使得第k个位置的元素的值在排序数组中的位置。</span><span class="yiyi-st" id="yiyi-16">小于第k个元素的所有元素在此元素之前移动，并且所有等于或大于的元素都移动到其后面。</span><span class="yiyi-st" id="yiyi-17">两个分区中的元素的顺序未定义。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-18"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">数组要排序。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>kth</strong>：int或ints序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">分区的元素索引。</span><span class="yiyi-st" id="yiyi-24">元素的第k个值将在其最终排序位置，并且所有较小的元素将在其之前移动，并且所有较小的元素将在其之后移动。</span><span class="yiyi-st" id="yiyi-25">分区中所有元素的顺序未定义。</span><span class="yiyi-st" id="yiyi-26">如果提供了第k个序列，它将把由其第k个索引的所有元素一次性分割到它们的排序位置。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>axis</strong>：int或None，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">要排序的轴。</span><span class="yiyi-st" id="yiyi-29">如果为“无”，则在排序之前将数组展平。</span><span class="yiyi-st" id="yiyi-30">默认值为-1，沿最后一个轴排序。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>kind</strong>：{&apos;introselect&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">选择算法。</span><span class="yiyi-st" id="yiyi-33">默认是&apos;introselect&apos;。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-34"><strong>order</strong>：str或str的列表，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-35">当<em class="xref py py-obj">a</em>是定义了字段的数组时，此参数指定首先，第二等比较哪些字段。</span><span class="yiyi-st" id="yiyi-36">单个字段可以指定为字符串。</span><span class="yiyi-st" id="yiyi-37">不是所有的字段都需要指定，但是未指定的字段仍然会按照它们在dtype中出现的顺序使用，以断开关系。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-38">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-39"><strong>partitioned_array</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-40">数组的类型和形状与<em class="xref py py-obj">a</em>相同。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-41">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.ndarray.partition.html#numpy.ndarray.partition" title="numpy.ndarray.partition"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.partition</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">对数组进行就地排序的方法。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.argpartition.html#numpy.argpartition" title="numpy.argpartition"><code class="xref py py-obj docutils literal"><span class="pre">argpartition</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-45">间接分区。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.sort.html#numpy.sort" title="numpy.sort"><code class="xref py py-obj docutils literal"><span class="pre">sort</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-47">完全排序</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-49">各种选择算法的特征在于它们的平均速度，最坏情况性能，工作空间大小，以及它们是否稳定。</span><span class="yiyi-st" id="yiyi-50">稳定排序使用具有相同相对顺序的相同键的项目。</span><span class="yiyi-st" id="yiyi-51">可用的算法具有以下属性：</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%">
+<col width="13%">
+<col width="23%">
+<col width="21%">
+<col width="13%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><span class="yiyi-st" id="yiyi-52">类</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-53">速度</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-54">最坏的情况下</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-55">工作空间</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-56">稳定</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-57">&apos;introselect&apos;</span></td>
+<td><span class="yiyi-st" id="yiyi-58">1</span></td>
+<td><span class="yiyi-st" id="yiyi-59">上）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">0</span></td>
+<td><span class="yiyi-st" id="yiyi-61">没有</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-62">当沿着除最后一个轴之外的任何分区时，所有分区算法都产生数据的临时副本。</span><span class="yiyi-st" id="yiyi-63">因此，沿着最后一个轴的分割更快，并且使用比沿着任何其它轴的分割更少的空间。</span></p>
+<p><span class="yiyi-st" id="yiyi-64">复数的排序顺序是字典。</span><span class="yiyi-st" id="yiyi-65">如果实部和虚部都是非纳米，则阶数由实部确定，除非它们相等，在这种情况下，阶数由虚部确定。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-66">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">array([2, 1, 3, 4])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">array([1, 2, 3, 4])</span>
+</pre></div>
+</div>
+</dd></dl>

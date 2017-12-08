@@ -1,0 +1,113 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.choose</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.choose.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.choose.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.choose"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">choose</code><span class="sig-paren">(</span><em>a</em>, <em>choices</em>, <em>out=None</em>, <em>mode=&apos;raise&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L227-L350"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从索引数组和一组数组构造数组以供选择。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">首先，如果混淆或不确定，肯定看看例子 - 在它的完全通用性，这个函数不如下面的代码描述简单（下面ndi = <code class="xref py py-obj docutils literal"><span class="pre">numpy.lib.index_tricks</span></code> ）：</span></p>
+<p><span class="yiyi-st" id="yiyi-16"><code class="docutils literal"><span class="pre">np.choose(a,c)</span> <span class="pre">==</span> <span class="pre">np.array([c[a[I]][I]</span> <span class="pre">for</span> <span class="pre">I</span> <span class="pre">in</span> <span class="pre">ndi.ndindex(a.shape)])</span></code>.</span></p>
+<p><span class="yiyi-st" id="yiyi-17">但这里省略了一些细微之处。</span><span class="yiyi-st" id="yiyi-18">这里是一个完全一般的总结：</span></p>
+<p><span class="yiyi-st" id="yiyi-19">Given an “index” array (<em class="xref py py-obj">a</em>) of integers and a sequence of <em class="xref py py-obj">n</em> arrays (<em class="xref py py-obj">choices</em>), <em class="xref py py-obj">a</em> and each choice array are first broadcast, as necessary, to arrays of a common shape; calling these <em>Ba</em> and <em>Bchoices[i], i = 0,...,n-1</em> we have that, necessarily, <code class="docutils literal"><span class="pre">Ba.shape</span> <span class="pre">==</span> <span class="pre">Bchoices[i].shape</span></code> for each <em class="xref py py-obj">i</em>. </span><span class="yiyi-st" id="yiyi-20">然后，创建形状为<code class="docutils literal"><span class="pre">Ba.shape</span></code>的新数组，如下所示：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-21">如果<code class="docutils literal"><span class="pre">mode=raise</span></code>（默认），则首先，<em class="xref py py-obj">a</em>（并且因此<em class="xref py py-obj">Ba</em>）的每个元素必须在范围<em class="xref py py-obj">[0，n-1]</em>；现在，假设<em class="xref py py-obj">i</em>（在该范围内）是<em class="xref py py-obj">中<em class="xref py py-obj">（j0，j1，...，jm）</em> - 则新数组中相同位置处的值是在相同位置的<em class="xref py py-obj">Bchoices [i]</em>中的值；</em></span></li>
+<li><span class="yiyi-st" id="yiyi-22">如果<code class="docutils literal"><span class="pre">mode=wrap</span></code>，则<em class="xref py py-obj">a</em>（因此<em class="xref py py-obj">Ba</em>）中的值可以是任何模运算用于将范围<em class="xref py py-obj">[0，n-1]</em>之外的整数映射回该范围；然后新数组如上构建；</span></li>
+<li><span class="yiyi-st" id="yiyi-23">如果<code class="docutils literal"><span class="pre">mode=clip</span></code>，则<em class="xref py py-obj">a</em>（因此<em class="xref py py-obj">Ba</em>）中的值可以是任何负整数映射到0；大于<em class="xref py py-obj">n-1</em>的值映射到<em class="xref py py-obj">n-1</em>；然后如上构造新的数组。</span></li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>a</strong>：int数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">This array must contain integers in <em class="xref py py-obj">[0, n-1]</em>, where <em class="xref py py-obj">n</em> is the number of choices, unless <code class="docutils literal"><span class="pre">mode=wrap</span></code> or <code class="docutils literal"><span class="pre">mode=clip</span></code>, in which cases any integers are permissible.</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>choices</strong>：数组的序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">选择数组。</span><span class="yiyi-st" id="yiyi-29"><em class="xref py py-obj">a</em>，所有选项必须可广播到相同的形状。</span><span class="yiyi-st" id="yiyi-30">如果<em class="xref py py-obj">选项</em>本身是数组（不推荐），则其最外面的维度（即对应于<code class="docutils literal"><span class="pre">choices.shape[0]</span></code></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>out</strong>：数组，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">如果提供，结果将被插入到此数组中。</span><span class="yiyi-st" id="yiyi-33">它应该是合适的形状和类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-34"><strong>mode</strong>：{&apos;raise&apos;（默认值），&apos;wrap&apos;，&apos;clip&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-35">指定如何处理<em class="xref py py-obj">[0，n-1]</em>之外的索引：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-36">&apos;raise&apos;：引发异常</span></li>
+<li><span class="yiyi-st" id="yiyi-37">&apos;wrap&apos;：value become value mod <em class="xref py py-obj">n</em></span></li>
+<li><span class="yiyi-st" id="yiyi-38">&apos;clip&apos;：值n-1映射到n-1</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-39">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-40"><strong>merged_array</strong>：数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-41">合并结果。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-42">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-43"><strong>ValueError：shape mismatch</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-44">如果<em class="xref py py-obj">a</em>和每个选择数组不能全部广播到相同的形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-45">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.ndarray.choose.html#numpy.ndarray.choose" title="numpy.ndarray.choose"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.choose</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-47">等效法</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-49">为了减少误解的可能性，即使下面的“滥用”被名义上支持，<em class="xref py py-obj">选择</em>既不应该也不应被认为是单个数组，即，最外层序列容器应该是列表或元组。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-50">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">choices</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span>
+<span class="gp">... </span>  <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">33</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">choose</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">choices</span>
+<span class="gp">... </span><span class="c1"># the first element of the result will be the first element of the</span>
+<span class="gp">... </span><span class="c1"># third (2+1) &quot;array&quot; in choices, namely, 20; the second element</span>
+<span class="gp">... </span><span class="c1"># will be the second element of the fourth (3+1) choice array, i.e.,</span>
+<span class="gp">... </span><span class="c1"># 31, etc.</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="go">array([20, 31, 12,  3])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">choose</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">choices</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&apos;clip&apos;</span><span class="p">)</span> <span class="c1"># 4 goes to 3 (4-1)</span>
+<span class="go">array([20, 31, 12,  3])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># because there are 4 choice arrays</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">choose</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">choices</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&apos;wrap&apos;</span><span class="p">)</span> <span class="c1"># 4 goes to (4 mod 4)</span>
+<span class="go">array([20,  1, 12,  3])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># i.e., 0</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-51">一些例子说明如何选择广播：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">choices</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">choose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">choices</span><span class="p">)</span>
+<span class="go">array([[ 10, -10,  10],</span>
+<span class="go">       [-10,  10, -10],</span>
+<span class="go">       [ 10, -10,  10]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># With thanks to Anne Archibald</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">choose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">))</span> <span class="c1"># result is 2x3x5, res[0,:,:]=c1, res[1,:,:]=c2</span>
+<span class="go">array([[[ 1,  1,  1,  1,  1],</span>
+<span class="go">        [ 2,  2,  2,  2,  2],</span>
+<span class="go">        [ 3,  3,  3,  3,  3]],</span>
+<span class="go">       [[-1, -2, -3, -4, -5],</span>
+<span class="go">        [-1, -2, -3, -4, -5],</span>
+<span class="go">        [-1, -2, -3, -4, -5]]])</span>
+</pre></div>
+</div>
+</dd></dl>

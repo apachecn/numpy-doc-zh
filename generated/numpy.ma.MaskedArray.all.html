@@ -1,0 +1,31 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.all</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.all.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.all.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.all"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">all</code><span class="sig-paren">(</span><em>axis=None</em>, <em>out=None</em>, <em>keepdims=&lt;class numpy._globals._NoValue&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L4622-L4660"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">如果所有元素均为True，则返回True。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">输出数组被屏蔽，其中给定轴上的所有值都被屏蔽：如果输出将是标量并且所有值都被屏蔽，则输出<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.masked" title="numpy.ma.masked"><code class="xref py py-obj docutils literal"><span class="pre">masked</span></code></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">有关完整文档，请参阅<a class="reference internal" href="numpy.all.html#numpy.all" title="numpy.all"><code class="xref py py-obj docutils literal"><span class="pre">numpy.all</span></code></a>。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-18">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-19"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.all</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-20">ndarrays的相应函数</span></dd>
+<dt><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="numpy.all.html#numpy.all" title="numpy.all"><code class="xref py py-obj docutils literal"><span class="pre">numpy.all</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-22">等效函数</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">mask</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

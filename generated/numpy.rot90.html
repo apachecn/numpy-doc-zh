@@ -1,0 +1,57 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.rot90</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.rot90.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.rot90.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.rot90"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">rot90</code><span class="sig-paren">(</span><em>m</em>, <em>k=1</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/twodim_base.py#L139-L189"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将数组沿逆时针方向旋转90度。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">前两个维度旋转；因此，数组必须至少是2-D。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>m</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">数组的两个或多个维度。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>k</strong>：integer</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">数组旋转90度的次数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">旋转数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.fliplr.html#numpy.fliplr" title="numpy.fliplr"><code class="xref py py-obj docutils literal"><span class="pre">fliplr</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-26">水平翻转数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.flipud.html#numpy.flipud" title="numpy.flipud"><code class="xref py py-obj docutils literal"><span class="pre">flipud</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28">垂直翻转数组。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]],</span> <span class="nb">int</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [3, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="go">array([[2, 4],</span>
+<span class="go">       [1, 3]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([[4, 3],</span>
+<span class="go">       [2, 1]])</span>
+</pre></div>
+</div>
+</dd></dl>

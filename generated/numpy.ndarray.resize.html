@@ -1,0 +1,92 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ndarray.resize</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.resize.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.resize.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ndarray.resize"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">ndarray.</code><code class="descname">resize</code><span class="sig-paren">(</span><em>new_shape</em>, <em>refcheck=True</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">就地更改数组的形状和大小。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>new_shape</strong>：ints的tuple，或<em class="xref py py-obj">n</em> ints</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">调整数组的形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>refcheck</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">如果为False，将不检查引用计数。</span><span class="yiyi-st" id="yiyi-21">默认值为True。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23">没有</span></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>ValueError</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">如果<em class="xref py py-obj">a</em>不拥有自己的数据或引用或其视图，则必须更改数据存储器。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>SystemError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">如果指定了<em class="xref py py-obj">order</em>关键字参数。</span><span class="yiyi-st" id="yiyi-29">这个行为是NumPy中的一个错误。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.resize.html#numpy.resize" title="numpy.resize"><code class="xref py py-obj docutils literal"><span class="pre">resize</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">返回具有指定形状的新数组。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-34">如果需要，为数据区重新分配空间。</span></p>
+<p><span class="yiyi-st" id="yiyi-35">只能调整连续的数组（内存中连续的数据元素）。</span></p>
+<p><span class="yiyi-st" id="yiyi-36">引用计数检查的目的是确保您不要使用此数组作为另一个Python对象的缓冲区，然后重新分配内存。</span><span class="yiyi-st" id="yiyi-37">但是，引用计数可以增加其他方式，所以如果你确定你没有与另一个Python对象共享此数组的内存，那么你可以安全地将<em class="xref py py-obj">refcheck</em>设置为False。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-39">缩减数组：数组被展平（按照数据存储在内存中的顺序），调整大小和重新形状：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;C&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0],</span>
+<span class="go">       [1]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0],</span>
+<span class="go">       [2]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">放大数组：如上所述，但缺少的条目用零填充：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># new_shape parameter doesn&apos;t have to be a tuple</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">array([[0, 1, 2],</span>
+<span class="go">       [3, 0, 0]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-41">引用数组阻止调整大小...</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">cannot resize an array that has been referenced ...</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">除非<em class="xref py py-obj">refcheck</em>为False：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">refcheck</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">array([[0]])</span>
+</pre></div>
+</div>
+</dd></dl>

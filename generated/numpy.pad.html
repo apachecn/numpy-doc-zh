@@ -1,0 +1,196 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.pad</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.pad.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.pad.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.pad"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">pad</code><span class="sig-paren">(</span><em>array</em>, <em>pad_width</em>, <em>mode</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/arraypad.py#L1117-L1494"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">填充数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>数组</strong>：array_like的秩为N</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>pad_width</strong>：{sequence，array_like，int}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">填充到每个轴边缘的值数。</span><span class="yiyi-st" id="yiyi-20">（（before_1，after_1），...（before_N，after_N））每个轴的唯一焊盘宽度。</span><span class="yiyi-st" id="yiyi-21">（（之前，之后），）对于每个轴在垫之前和之后产生相同。</span><span class="yiyi-st" id="yiyi-22">（pad，）或int是所有轴的before = after = pad宽度的快捷方式。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>模式</strong>：str或函数</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">以下字符串值之一或用户提供的函数。</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-25">&apos;不变&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-26">具有恒定值的焊盘。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-27">&apos;边缘&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-28">数组边缘值的焊盘。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-29">&apos;linear_ramp&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-30">在end_value和数组边沿值之间具有线性斜坡的焊盘。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-31">&apos;最大值&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-32">沿每个轴具有全部或部分矢量的最大值的焊盘。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-33">&apos;意思&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-34">具有沿着每个轴的矢量的全部或部分的平均值的垫。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-35">&apos;median&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-36">具有沿每个轴的向量的全部或部分的中值的焊盘。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-37">&apos;最小&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-38">沿每个轴具有所有或部分矢量的最小值的焊盘。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-39">&apos;反映&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-40">带有反射的矢量的衬垫沿着每个轴反映在矢量的第一个和最后一个值上。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-41">&apos;symmetric&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-42">具有沿着数组边缘镜像的矢量反射的焊盘。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-43">&apos;包&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-44">具有沿着轴的向量的包装的垫。</span><span class="yiyi-st" id="yiyi-45">第一个值用于填充结束，结束值用于填充开始。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-46"><function></function></span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-47">填充功能，见注释。</span></p>
+</dd>
+</dl>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-48"><strong>stat_length</strong>：sequence或int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-49">用于“最大值”，“平均值”，“中值”和“最小值”。</span><span class="yiyi-st" id="yiyi-50">用于计算统计值的每个轴边缘的值数。</span></p>
+<p><span class="yiyi-st" id="yiyi-51">（（before_1，after_1），...（before_N，after_N））每个轴的唯一统计长度。</span></p>
+<p><span class="yiyi-st" id="yiyi-52">（（之前，之后），）在每个轴的统计长度之前和之后产生相同。</span></p>
+<p><span class="yiyi-st" id="yiyi-53">（stat_length，）或int是所有轴的before = after =统计长度的快捷方式。</span></p>
+<p><span class="yiyi-st" id="yiyi-54">默认值为<code class="docutils literal"><span class="pre">None</span></code>，以使用整个轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-55"><strong>constant_values</strong>：sequence或int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-56">用于“常量”。</span><span class="yiyi-st" id="yiyi-57">用于设置每个轴的填充值的值。</span></p>
+<p><span class="yiyi-st" id="yiyi-58">（（before_1，after_1），...（before_N，after_N））每个轴的唯一垫常量。</span></p>
+<p><span class="yiyi-st" id="yiyi-59">（（之前，之后），）对于每个轴的常数之前和之后产生相同。</span></p>
+<p><span class="yiyi-st" id="yiyi-60">（常量，）或int是所有轴的before = after =常量的快捷方式。</span></p>
+<p><span class="yiyi-st" id="yiyi-61">默认值为0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-62"><strong>end_values</strong>：sequence或int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-63">用于&apos;linear_ramp&apos;。</span><span class="yiyi-st" id="yiyi-64">用于linear_ramp的结束值的值，它将形成填充数组的边。</span></p>
+<p><span class="yiyi-st" id="yiyi-65">（（before_1，after_1），...（before_N，after_N））每个轴的唯一结束值。</span></p>
+<p><span class="yiyi-st" id="yiyi-66">（（before，after），）在每个轴的结束值之前和之后产生相同。</span></p>
+<p><span class="yiyi-st" id="yiyi-67">（常量，）或int是所有轴的before = after = end值的快捷方式。</span></p>
+<p><span class="yiyi-st" id="yiyi-68">默认值为0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-69"><strong>reflect_type</strong>：{&apos;even&apos;，&apos;odd&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-70">用于“反射”和“对称”。</span><span class="yiyi-st" id="yiyi-71">“even”样式是默认值，边缘值周围没有改变的反射。</span><span class="yiyi-st" id="yiyi-72">对于“奇数”样式，数组的扩展部分通过从两倍的边缘值减去反射值来创建。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-73">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-74"><strong>pad</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-75">具有等于​​<a class="reference internal" href="numpy.array.html#numpy.array" title="numpy.array"><code class="xref py py-obj docutils literal"><span class="pre">array</span></code></a>的填充数组，其形状根据<em class="xref py py-obj">pad_width</em>而增加。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-76">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-77"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-78">对于秩大于1的数组，稍后轴的一些填充从前一个轴的填充计算。</span><span class="yiyi-st" id="yiyi-79">这是最容易想到的2数组，其中填充数组的角通过使用从第一轴的填充值计算。</span></p>
+<p><span class="yiyi-st" id="yiyi-80">如果使用填充函数，则应该返回等于1的长度等于向量参数的填充函数。</span><span class="yiyi-st" id="yiyi-81">它有以下签名：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">padding_func</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">iaxis_pad_width</span><span class="p">,</span> <span class="n">iaxis</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-82">哪里</span></p>
+<blockquote>
+<div><dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-83">向量</span></dt><span class="yiyi-st" id="yiyi-92"><span class="classifier-delimiter">：</span> <span class="classifier">ndarray</span></span><dd><span class="yiyi-st" id="yiyi-84">已用零填充的排名1数组。</span><span class="yiyi-st" id="yiyi-85">填充值是vector [：pad_tuple [0]]和vector [-pad_tuple [1]：]。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-86">iaxis_pad_width</span></dt><span class="yiyi-st" id="yiyi-93"><span class="classifier-delimiter">：</span> <span class="classifier">元组</span></span><dd><span class="yiyi-st" id="yiyi-87">int的2元组，iaxis_pad_width [0]表示在向量开始处填充的值的数量，其中iaxis_pad_width [1]表示在向量结束处填充的值的数量。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-88">iaxis</span></dt><span class="yiyi-st" id="yiyi-94"><span class="classifier-delimiter">：</span> <span class="classifier">int</span></span><dd><span class="yiyi-st" id="yiyi-89">当前正在计算的轴。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-90">kwargs</span></dt><span class="yiyi-st" id="yiyi-95"><span class="classifier-delimiter">：</span> <span class="classifier">misc</span></span><dd><span class="yiyi-st" id="yiyi-91">该函数需要的任何关键字参数。</span></dd>
+</dl>
+</div></blockquote>
+<p class="rubric"><span class="yiyi-st" id="yiyi-96">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="s1">&apos;constant&apos;</span><span class="p">,</span> <span class="n">constant_values</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="go">array([4, 4, 1, 2, 3, 4, 5, 6, 6, 6])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s1">&apos;edge&apos;</span><span class="p">)</span>
+<span class="go">array([1, 1, 1, 2, 3, 4, 5, 5, 5, 5])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s1">&apos;linear_ramp&apos;</span><span class="p">,</span> <span class="n">end_values</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">array([ 5,  3,  1,  2,  3,  4,  5,  2, -1, -4])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="s1">&apos;maximum&apos;</span><span class="p">)</span>
+<span class="go">array([5, 5, 1, 2, 3, 4, 5, 5, 5])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="s1">&apos;mean&apos;</span><span class="p">)</span>
+<span class="go">array([3, 3, 1, 2, 3, 4, 5, 3, 3])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span> <span class="s1">&apos;median&apos;</span><span class="p">)</span>
+<span class="go">array([3, 3, 1, 2, 3, 4, 5, 3, 3])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="s1">&apos;minimum&apos;</span><span class="p">)</span>
+<span class="go">array([[1, 1, 1, 2, 1, 1, 1],</span>
+<span class="go">       [1, 1, 1, 2, 1, 1, 1],</span>
+<span class="go">       [1, 1, 1, 2, 1, 1, 1],</span>
+<span class="go">       [1, 1, 1, 2, 1, 1, 1],</span>
+<span class="go">       [3, 3, 3, 4, 3, 3, 3],</span>
+<span class="go">       [1, 1, 1, 2, 1, 1, 1],</span>
+<span class="go">       [1, 1, 1, 2, 1, 1, 1]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s1">&apos;reflect&apos;</span><span class="p">)</span>
+<span class="go">array([3, 2, 1, 2, 3, 4, 5, 4, 3, 2])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s1">&apos;reflect&apos;</span><span class="p">,</span> <span class="n">reflect_type</span><span class="o">=</span><span class="s1">&apos;odd&apos;</span><span class="p">)</span>
+<span class="go">array([-1,  0,  1,  2,  3,  4,  5,  6,  7,  8])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s1">&apos;symmetric&apos;</span><span class="p">)</span>
+<span class="go">array([2, 1, 1, 2, 3, 4, 5, 5, 4, 3])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s1">&apos;symmetric&apos;</span><span class="p">,</span> <span class="n">reflect_type</span><span class="o">=</span><span class="s1">&apos;odd&apos;</span><span class="p">)</span>
+<span class="go">array([0, 1, 1, 2, 3, 4, 5, 5, 6, 7])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s1">&apos;wrap&apos;</span><span class="p">)</span>
+<span class="go">array([4, 5, 1, 2, 3, 4, 5, 1, 2, 3])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">padwithtens</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">pad_width</span><span class="p">,</span> <span class="n">iaxis</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">vector</span><span class="p">[:</span><span class="n">pad_width</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">... </span>    <span class="n">vector</span><span class="p">[</span><span class="o">-</span><span class="n">pad_width</span><span class="p">[</span><span class="mi">1</span><span class="p">]:]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">vector</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">padwithtens</span><span class="p">)</span>
+<span class="go">array([[10, 10, 10, 10, 10, 10, 10],</span>
+<span class="go">       [10, 10, 10, 10, 10, 10, 10],</span>
+<span class="go">       [10, 10,  0,  1,  2, 10, 10],</span>
+<span class="go">       [10, 10,  3,  4,  5, 10, 10],</span>
+<span class="go">       [10, 10, 10, 10, 10, 10, 10],</span>
+<span class="go">       [10, 10, 10, 10, 10, 10, 10]])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,86 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.logseries</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.logseries.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.logseries.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.logseries"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">logseries</code><span class="sig-paren">(</span><em>p</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从对数系列分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">Samples are drawn from a log series distribution with specified shape parameter, 0 &lt; <code class="docutils literal"><span class="pre">p</span></code> &lt; 1.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>loc</strong>：float</span></p>
+<p><span class="yiyi-st" id="yiyi-19"><strong>scale</strong>：float&gt; 0。</span></p>
+<p><span class="yiyi-st" id="yiyi-20"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">输出形状。</span><span class="yiyi-st" id="yiyi-22">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-23">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>samples</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">其中值是[0，n]中的所有整数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-28"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.logser</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">概率密度函数，分布或累积密度函数等。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-31">Log系列分布的概率密度为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-32">其中p =概率。</span></p>
+<p><span class="yiyi-st" id="yiyi-33">对数系列分布经常用于表示物种丰富度和发生率，首先由Fisher，Corbet和Williams在1943年提出[2]。</span><span class="yiyi-st" id="yiyi-34">它也可以用来模拟汽车中看到的乘客人数[3]。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r166" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-36"><a class="fn-backref" href="#id1">[R166]</a></span></td><td><span class="yiyi-st" id="yiyi-37">Buzas，Martin A. Culver，Stephen J.，Understanding regional species diversity through the log series distribution of occurneces：BIODIVERSITY RESEARCH Diversity＆Distributions，Volume 5，Number 5，September 1999，pp。</span><span class="yiyi-st" id="yiyi-38">187-195（9）。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r167" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-39"><a class="fn-backref" href="#id2">[R167]</a></span></td><td><span class="yiyi-st" id="yiyi-40">费舍尔Corbet和C.B.</span><span class="yiyi-st" id="yiyi-41">威廉姆斯。</span><span class="yiyi-st" id="yiyi-42">1943. </span><span class="yiyi-st" id="yiyi-43">动物种群的随机样本中物种数量和个体数量之间的关系。</span><span class="yiyi-st" id="yiyi-44">动物生态学报，12：42-58。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r168" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-45"><a class="fn-backref" href="#id3">[R168]</a></span></td><td><span class="yiyi-st" id="yiyi-46">D.J.</span><span class="yiyi-st" id="yiyi-47">Hand，F.Daly，D.Lunn，E.Ostrowski，A Handbook of Small Data Sets，CRC Press，1994。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r169" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-48"><a class="fn-backref" href="#id4">[R169]</a></span></td><td><span class="yiyi-st" id="yiyi-49">维基百科，“对数分布”，<a class="reference external" href="http://en.wikipedia.org/wiki/Logarithmic-distribution">http://en.wikipedia.org/wiki/Logarithmic-distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-50">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-51">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="o">.</span><span class="mi">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">logseries</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-52">＃图与分布</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">logseries</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="o">-</span><span class="n">p</span><span class="o">**</span><span class="n">k</span><span class="o">/</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">logseries</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">count</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">/</span>
+<span class="go">             logseries(bins, a).max(), &apos;r&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>

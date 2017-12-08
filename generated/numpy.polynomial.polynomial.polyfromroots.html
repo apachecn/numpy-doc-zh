@@ -1,0 +1,56 @@
+
+<h1><span class="yiyi-st" id="yiyi-11">numpy.polynomial.polynomial.polyfromroots</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.polyfromroots.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.polyfromroots.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.polynomial.polyfromroots"><span class="yiyi-st" id="yiyi-12"> <code class="descclassname">numpy.polynomial.polynomial.</code><code class="descname">polyfromroots</code><span class="sig-paren">(</span><em>roots</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/polynomial.py#L130-L202"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-13">生成具有给定根的monic多项式。</span></p>
+<p><span class="yiyi-st" id="yiyi-14">返回多项式的系数</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-15">其中<em class="xref py py-obj">r_n</em>是在<em class="xref py py-obj">根</em>中指定的根。</span><span class="yiyi-st" id="yiyi-16">如果零具有多重性n，则它必须出现在<em class="xref py py-obj">根</em>中n次。</span><span class="yiyi-st" id="yiyi-17">例如，如果2是多重性三的根，3是多重性2的根，则<em class="xref py py-obj">根</em>看起来像[2,2,2,3,3]。</span><span class="yiyi-st" id="yiyi-18">根可以以任何顺序出现。</span></p>
+<p><span class="yiyi-st" id="yiyi-19">如果返回的系数是<em class="xref py py-obj">c</em>，则</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-20">这种形式的单项多项式的最后一项的系数为1。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>根</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">包含根的序列。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">多项式系数的1-D数组如果所有根都是实数，则<em class="xref py py-obj">out</em>也是实数，否则是复数。</span><span class="yiyi-st" id="yiyi-27">（参见下文实施例）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-29"><code class="xref py py-obj docutils literal"><span class="pre">chebfromroots</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">legfromroots</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">lagfromroots</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">hermfromroots</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">hermefromroots</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-31">通过将形式<em class="xref py py-obj">（x-r_i）</em>的线性因子相乘来确定系数，即</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-32">其中<code class="docutils literal"><span class="pre">n</span> <span class="pre">==</span> <span class="pre">len（root）</span> <span class="pre"> - </span> <span class="pre">1</span> t0&gt;；请注意，这意味着总是返回<img alt="a_n" class="math" src="../../_images/math/ef5ce46d904acb35f7f005b9ce1756aeeba145cb.png" style="vertical-align: -2px">的<em class="xref py py-obj">1</em>。</code></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">polynomial</span> <span class="k">as</span> <span class="n">P</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span><span class="o">.</span><span class="n">polyfromroots</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># x(x - 1)(x + 1) = x^3 - x</span>
+<span class="go">array([ 0., -1.,  0.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span><span class="o">.</span><span class="n">polyfromroots</span><span class="p">((</span><span class="o">-</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">))</span> <span class="c1"># complex returned, though values are real</span>
+<span class="go">array([ 1.+0.j,  0.+0.j,  1.+0.j])</span>
+</pre></div>
+</div>
+</dd></dl>

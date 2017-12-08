@@ -1,0 +1,98 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.poly</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.poly.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.poly.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.poly"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.</code><code class="descname">poly</code><span class="sig-paren">(</span><em>seq_of_zeros</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/polynomial.py#L32-L155"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">找到具有给定的根序列的多项式的系数。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">返回多项式的系数，其前导系数对于给定的零序列为一（多个根必须包括在序列中，次数与它们的多样性一样多；参见示例）。</span><span class="yiyi-st" id="yiyi-17">还可以给出方矩阵（或数组，其将被视为矩阵），在这种情况下返回矩阵的特征多项式的系数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>seq_of_zeros</strong>：array_like，shape（N，）或（N，N）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">多项式根序列，或正方形数组或矩阵对象。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>c</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">1D多项式系数从最高到最低的数组：</span></p>
+<p><span class="yiyi-st" id="yiyi-24"><code class="docutils literal"><span class="pre">c[0]</span> <span class="pre">*</span> <span class="pre">x**(N)</span> <span class="pre">+</span> <span class="pre">c[1]</span> <span class="pre">*</span> <span class="pre">x**(N-1)</span> <span class="pre">+</span> <span class="pre">...</span> <span class="pre">+</span> <span class="pre">c[N-1]</span> <span class="pre">*</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">c[N]</span></code> where c[0] always equals 1.</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">如果输入的形状错误（输入必须是1-D或正方形2-D数组）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.polyval.html#numpy.polyval" title="numpy.polyval"><code class="xref py py-obj docutils literal"><span class="pre">polyval</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">计算多项式值。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.roots.html#numpy.roots" title="numpy.roots"><code class="xref py py-obj docutils literal"><span class="pre">roots</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">返回多项式的根。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.polyfit.html#numpy.polyfit" title="numpy.polyfit"><code class="xref py py-obj docutils literal"><span class="pre">polyfit</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">最小二乘多项式拟合。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.poly1d.html#numpy.poly1d" title="numpy.poly1d"><code class="xref py py-obj docutils literal"><span class="pre">poly1d</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">一维多项式类。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-38">指定多项式的根仍然具有一个自由度，通常由未确定的超前系数表示。</span><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="#r56" id="id1">[R56]</a>在此函数的情况下，该系数 - 返回的数组中的第一个 - 始终为1。</span><span class="yiyi-st" id="yiyi-40">（如果由于某种原因你有另外一点，目前利用该信息的唯一自动方法是使用<code class="docutils literal"><span class="pre">polyfit</span></code>。）</span></p>
+<p><span class="yiyi-st" id="yiyi-41"><em class="xref py py-obj">n</em> -by- <em class="xref py py-obj">n</em>矩阵<strong>A</strong>的特征多项式<img alt="p_a(t)" class="math" src="../../_images/math/1fb989e4d2e3a56149f88a4bd3768931192affa7.png" style="vertical-align: -4px">由下式给出：</span></p>
+<blockquote>
+<div><span class="yiyi-st" id="yiyi-42"><img alt="p_a(t) = \mathrm{det}(t\, \mathbf{I} - \mathbf{A})" class="math" src="../../_images/math/d30ddeec506e21052a8f2613a0219240077e08af.png" style="vertical-align: -4px">，</span></div></blockquote>
+<p><span class="yiyi-st" id="yiyi-43">其中<strong>I</strong>是<em class="xref py py-obj">n</em> -by- <em class="xref py py-obj">n</em>单位矩阵。</span><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="#r57" id="id2">[R57]</a></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-45">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r56" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-46">[R56]</span></td><td><span class="yiyi-st" id="yiyi-47"><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> M. Sullivan and M. Sullivan, III, “Algebra and Trignometry, Enhanced With Graphing Utilities,” Prentice-Hall, pg. </span><span class="yiyi-st" id="yiyi-48">318，1996。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r57" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-49">[R57]</span></td><td><span class="yiyi-st" id="yiyi-50"><em>（<a class="fn-backref" href="#id2">1</a>，<a class="fn-backref" href="#id4">2</a>）</em> G.Strang，“Linear Algebra and Its Applications，第2版，”Academic Press，</span><span class="yiyi-st" id="yiyi-51">182，1980。</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-52">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-53">给定多项式的零的序列：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">poly</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1"># Multiple root example</span>
+<span class="go">array([1, 0, 0, 0])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-54">上面的行代表z ** 3 + 0 * z ** 2 + 0 * z + 0。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">poly</span><span class="p">((</span><span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">array([ 1.  ,  0.  , -0.25,  0.  ])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-55">上面的行代表z ** 3  -  z / 4</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">poly</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mf">1.</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mf">1.</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="go">array([ 1.        , -0.77086955,  0.08618131,  0.        ]) #random</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-56">给定一个正方形数组对象：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.</span><span class="o">/</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="go">array([ 1.        ,  0.        ,  0.16666667])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-57">或方矩阵对象：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">poly</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">P</span><span class="p">))</span>
+<span class="go">array([ 1.        ,  0.        ,  0.16666667])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-58">注意在所有情况下，领先的系数总是1。</span></p>
+</dd></dl>

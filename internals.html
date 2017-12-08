@@ -1,0 +1,77 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">NumPy internals</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/internals.html">https://docs.scipy.org/doc/numpy/reference/internals.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="internals.code-explanations.html">NumPy C代码说明</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-15"><a class="reference internal" href="internals.code-explanations.html#memory-model">内存模型</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-16"><a class="reference internal" href="internals.code-explanations.html#data-type-encapsulation">数据类型封装</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-17"><a class="reference internal" href="internals.code-explanations.html#n-d-iterators">N-D迭代器</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="internals.code-explanations.html#broadcasting">广播</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="internals.code-explanations.html#array-scalars">数组标量</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="internals.code-explanations.html#indexing">索引</a></span><ul>
+<li class="toctree-l3"><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="internals.code-explanations.html#advanced-indexing">高级索引</a></span></li>
+</ul>
+</li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="internals.code-explanations.html#universal-functions">通用功能</a></span><ul>
+<li class="toctree-l3"><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="internals.code-explanations.html#setup">设置</a></span></li>
+<li class="toctree-l3"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="internals.code-explanations.html#function-call">函数调用</a></span><ul>
+<li class="toctree-l4"><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="internals.code-explanations.html#one-loop">单循环</a></span></li>
+<li class="toctree-l4"><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="internals.code-explanations.html#strided-loop">串联回路</a></span></li>
+<li class="toctree-l4"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="internals.code-explanations.html#buffered-loop">缓冲循环</a></span></li>
+</ul>
+</li>
+<li class="toctree-l3"><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="internals.code-explanations.html#final-output-manipulation">最终输出操作</a></span></li>
+<li class="toctree-l3"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="internals.code-explanations.html#methods">方法</a></span><ul>
+<li class="toctree-l4"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="internals.code-explanations.html#id1">设置</a></span></li>
+<li class="toctree-l4"><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="internals.code-explanations.html#reduce">缩小</a></span></li>
+<li class="toctree-l4"><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="internals.code-explanations.html#accumulate">累计</a></span></li>
+<li class="toctree-l4"><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="internals.code-explanations.html#reduceat">Reduceat</a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<span class="target" id="module-numpy.doc.internals"></span><div class="section" id="internal-organization-of-numpy-arrays">
+<h2><span class="yiyi-st" id="yiyi-35">Internal organization of numpy arrays</span></h2>
+<p><span class="yiyi-st" id="yiyi-36">它有助于理解一点关于如何处理numpy数组在封面下有助于更好地理解numpy。</span><span class="yiyi-st" id="yiyi-37">本节不会详细介绍。</span><span class="yiyi-st" id="yiyi-38">那些希望了解完整细节的人可参考Travis Oliphant的“Numpy指南”。</span></p>
+<p><span class="yiyi-st" id="yiyi-39">Numpy数组由两个主要组件组成，原始数组数据（从现在开始，称为数据缓冲区）和有关原始数组数据的信息。</span><span class="yiyi-st" id="yiyi-40">数据缓冲区通常是人们认为的C或Fortran中的数组，一个包含固定大小数据项的连续（和固定）内存块。</span><span class="yiyi-st" id="yiyi-41">Numpy还包含一组重要的数据，描述如何解释数据缓冲区中的数据。</span><span class="yiyi-st" id="yiyi-42">此额外信息包含（除其他外）：</span></p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-43">基本数据元素的大小（以字节为单位）</span></li>
+<li><span class="yiyi-st" id="yiyi-44">数据缓冲区中的数据的开始（相对于数据缓冲区的开始的偏移）。</span></li>
+<li><span class="yiyi-st" id="yiyi-45">维度的数量和每个维度的大小</span></li>
+<li><span class="yiyi-st" id="yiyi-46">每个维度的元素之间的距离（“stride”）。</span><span class="yiyi-st" id="yiyi-47">这不必是元素大小的倍数</span></li>
+<li><span class="yiyi-st" id="yiyi-48">数据的字节顺序（可能不是原生字节顺序）</span></li>
+<li><span class="yiyi-st" id="yiyi-49">缓冲区是否为只读</span></li>
+<li><span class="yiyi-st" id="yiyi-50">关于基本数据元素的解释的信息（通过dtype对象）。</span><span class="yiyi-st" id="yiyi-51">基本数据元素可以像int或float一样简单，或者它可以是复合对象（例如，结构体），固定字符字段或Python对象指针。</span></li>
+<li><span class="yiyi-st" id="yiyi-52">数组是否被解释为C阶或Fortran阶。</span></li>
+</ol>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-53">这种安排允许非常灵活地使用数组。</span><span class="yiyi-st" id="yiyi-54">它允许的一个事情是元数据的简单更改，以更改数组缓冲区的解释。</span><span class="yiyi-st" id="yiyi-55">更改数组的字节顺序是一个简单的更改，不涉及重新排列数据。</span><span class="yiyi-st" id="yiyi-56">数组的形状可以非常容易地改变，而不改变数据缓冲器中的任何东西或根本不改变任何数据复制</span></p>
+<p><span class="yiyi-st" id="yiyi-57">除此之外，使得可能的是可以创建新的数组元数据对象，其使用相同的数据缓冲器来创建该数据缓冲器的新视图，其具有缓冲器的不同解释（例如，不同的形状，偏移，字节顺序，步幅等），但共享相同的数据字节。</span><span class="yiyi-st" id="yiyi-58">numpy中的许多操作只是这样，如切片。</span><span class="yiyi-st" id="yiyi-59">其他操作（如转置）不会在数组中移动数据元素，而是更改有关形状和步长的信息，以便数组的索引更改，但数据中的数据不会移动。</span></p>
+<p><span class="yiyi-st" id="yiyi-60">通常，这些新版本的数组元数据，但相同的数据缓冲区是新的“视图”到数据缓冲区。</span><span class="yiyi-st" id="yiyi-61">有一个不同的ndarray对象，但它使用相同的数据缓冲区。</span><span class="yiyi-st" id="yiyi-62">这就是为什么有必要通过使用.copy()方法强制复制，如果真的想要一个新的和独立的数据缓冲区的副本。</span></p>
+<p><span class="yiyi-st" id="yiyi-63">将新视图转换为数组意味着数据缓冲区的对象引用计数增加。</span><span class="yiyi-st" id="yiyi-64">只要取消原来的数组对象，就不会删除数据缓冲区，如果它的其他视图仍然存在。</span></p>
+</div>
+<div class="section" id="multidimensional-array-indexing-order-issues">
+<h2><span class="yiyi-st" id="yiyi-65">Multidimensional Array Indexing Order Issues</span></h2>
+<p><span class="yiyi-st" id="yiyi-66">什么是索引多维数组的正确方法？</span><span class="yiyi-st" id="yiyi-67">在你跳到结束关于一个和真正的方式索引多维数组之前，它理解为什么这是一个混乱的问题。</span><span class="yiyi-st" id="yiyi-68">本节将尝试详细解释numpy索引如何工作，以及为什么我们采用我们为图像做的约定，以及何时采用其他约定。</span></p>
+<p><span class="yiyi-st" id="yiyi-69">首先要理解的是，有两种冲突的约定用于索引2维数组。</span><span class="yiyi-st" id="yiyi-70">矩阵符号使用第一个索引来指示正在选择哪一行，第二个索引用于指示选择哪个列。</span><span class="yiyi-st" id="yiyi-71">这与图像的几何定向约定相反，其中人们通常认为第一索引表示x位置（即，列），第二索引表示y位置（即，行）。</span><span class="yiyi-st" id="yiyi-72">这只是造成混乱的根源；面向矩阵的用户和面向图像的用户期望有关索引的两个不同的事情。</span></p>
+<p><span class="yiyi-st" id="yiyi-73">第二个要理解的问题是索引如何对应于数组存储在内存中的顺序。</span><span class="yiyi-st" id="yiyi-74">在Fortran中，当移动通过存储在存储器中的二维数组的元素时，第一索引是最快变化的索引。</span><span class="yiyi-st" id="yiyi-75">如果你采用矩阵约定索引，那么这意味着矩阵一次存储一列（因为第一个索引移动到下一行，因为它改变）。</span><span class="yiyi-st" id="yiyi-76">因此，Fortran被认为是一个列主语言。</span><span class="yiyi-st" id="yiyi-77">C只是相反的约定。</span><span class="yiyi-st" id="yiyi-78">在C中，最后的索引随着存储在存储器中的数组移动而变化最快。</span><span class="yiyi-st" id="yiyi-79">因此C是行主语言。</span><span class="yiyi-st" id="yiyi-80">矩阵按行存储。</span><span class="yiyi-st" id="yiyi-81">注意，在这两种情况下，它假定正在使用用于索引的矩阵约定，即对于Fortran和C，第一索引是行。</span><span class="yiyi-st" id="yiyi-82">注意这个约定意味着索引约定是不变的，并且数据顺序改变以保持这样。</span></p>
+<p><span class="yiyi-st" id="yiyi-83">但这不是看它的唯一方法。</span><span class="yiyi-st" id="yiyi-84">假设有一个大的二维数组（图像或矩阵）存储在数据文件中。</span><span class="yiyi-st" id="yiyi-85">假设数据是按行存储的，而不是按列存储的。</span><span class="yiyi-st" id="yiyi-86">如果我们要保留索引约定（无论是矩阵还是图像），这意味着根据我们使用的语言，如果数据被读入内存，我们可能被迫重新排序，以保留索引约定。</span><span class="yiyi-st" id="yiyi-87">例如，如果我们在没有重新排序的情况下将行顺序数据读入内存，它将匹配C的矩阵索引约定，但不匹配Fortran。</span><span class="yiyi-st" id="yiyi-88">相反，它将匹配Fortran的映像索引约定，但不匹配C.对于C，如果使用以行顺序存储的数据，并且想要保留图像索引约定，则在读取存储器时必须重新排序数据。</span></p>
+<p><span class="yiyi-st" id="yiyi-89">最后，Fortran或C所依赖的哪个更重要，不重新排序数据或保留索引约定。</span><span class="yiyi-st" id="yiyi-90">对于大图像，重新排序数据可能是昂贵的，并且通常将索引约定反转以避免这种情况。</span></p>
+<p><span class="yiyi-st" id="yiyi-91">numpy的情况使这个问题更复杂。</span><span class="yiyi-st" id="yiyi-92">numpy数组的内部机制足够灵活，可以接受任何索引排序。</span><span class="yiyi-st" id="yiyi-93">可以简单地通过操作数组的内部步长信息来重新排序索引，而不需要重新排序数据。</span><span class="yiyi-st" id="yiyi-94">Numpy将知道如何将新的索引顺序映射到数据而不移动数据。</span></p>
+<p><span class="yiyi-st" id="yiyi-95">所以如果这是真的，为什么不选择匹配你最期望的索引顺序？</span><span class="yiyi-st" id="yiyi-96">特别是，为什么不定义行有序图像使用图像约定？</span><span class="yiyi-st" id="yiyi-97">（这有时被称为Fortran约定与C约定，因此是num组中数组排序的&apos;C&apos;和&apos;FORTRAN&apos;顺序选项。）</span><span class="yiyi-st" id="yiyi-98">这样做的缺点是潜在的性能损失。</span><span class="yiyi-st" id="yiyi-99">通常在数组操作中隐式地访问数据，或者通过循环遍历图像的行来显式地访问数据。</span><span class="yiyi-st" id="yiyi-100">当完成时，将以非最佳顺序访问数据。</span><span class="yiyi-st" id="yiyi-101">随着第一索引递增，实际发生的是在存储器中间隔开的元件被顺序地访问，通常存储器访问速度较差。</span><span class="yiyi-st" id="yiyi-102">例如，对于定义为使得im [0,10]表示x = 0，y = 10处的值的二维图像&apos;im&apos;。</span><span class="yiyi-st" id="yiyi-103">为了与通常的Python行为一致，那么im [0]将表示x = 0处的列。</span><span class="yiyi-st" id="yiyi-104">然而，该数据将被分布在整个数组上，因为数据以行顺序存储。</span><span class="yiyi-st" id="yiyi-105">尽管numpy的索引的灵活性，它不能真正地考虑事实基本操作被渲染为低效，因为数据顺序或获取连续子阵列仍然尴尬（例如，im [：，0]为第一行，vs im [ 0]），因此不能使用成语，如im中的row； for col in im does work，but does not yield continuous column data。</span></p>
+<p><span class="yiyi-st" id="yiyi-106">事实证明，numpy是聪明的，当处理ufuncs确定哪个索引是最快速变化的一个在内存中，并将其用于最内层循环。</span><span class="yiyi-st" id="yiyi-107">因此，对于ufuncs，在大多数情况下，任何一种方法都没有大的内在优势。</span><span class="yiyi-st" id="yiyi-108">另一方面，使用带有FORTRAN有序数组的.flat将导致非最优的存储器访问，因为扁平数组（迭代器，实际上）中的相邻元素在存储器中不连续。</span></p>
+<p><span class="yiyi-st" id="yiyi-109">事实上，列表和其他序列上的Python索引自然导致一个从外到内的顺序（第一个索引获得最大的分组，下一个最大，最后一个获得最小的元素）。</span><span class="yiyi-st" id="yiyi-110">由于图像数据通常按行存储，这对应于作为索引的最后一个项目的行内的位置。</span></p>
+<p><span class="yiyi-st" id="yiyi-111">如果你想使用Fortran顺序意识到有两种方法要考虑：1）接受第一个索引只是不是在内存中最快速变化，并且所有的I / O例程在从内存到磁盘时重新排序数据或者反之亦然，或者使用numpy机制将第一索引映射到最快变化的数据。</span><span class="yiyi-st" id="yiyi-112">如果可能，我们建议前者。</span><span class="yiyi-st" id="yiyi-113">后者的缺点是，许多numpy的函数将产生数组没有Fortran排序，除非你仔细使用&apos;order&apos;关键字。</span><span class="yiyi-st" id="yiyi-114">这样做会非常不方便。</span></p>
+<p><span class="yiyi-st" id="yiyi-115">否则，我们建议在访问数组的元素时，简单地学习反转索引的通常顺序。</span><span class="yiyi-st" id="yiyi-116">授予，它反对谷物，但它更符合Python语义和数据的自然顺序。</span></p>
+</div>

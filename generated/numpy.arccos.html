@@ -1,0 +1,64 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.arccos</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arccos.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.arccos.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.arccos"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">arccos</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;arccos&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">三角反余弦，元素方式。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">使得如果<code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">cos（x）</span></code>，则<a class="reference internal" href="numpy.cos.html#numpy.cos" title="numpy.cos"><code class="xref py py-obj docutils literal"><span class="pre">cos</span></code></a>那么<code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">arccos（y）</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18"><em class="xref py py-obj">x</em>  - 坐标在单位圆上。</span><span class="yiyi-st" id="yiyi-19">对于实参，域是[-1，1]。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">数组形状与<em class="xref py py-obj">a</em>相同，以存储结果。</span><span class="yiyi-st" id="yiyi-22">有关更多详细信息，请参阅<code class="xref py py-obj docutils literal"><span class="pre">doc.ufuncs</span></code>（“输出参数”部分）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>angle</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">在给定的<em class="xref py py-obj">x 坐标处，以弧度[0，&#x3C0;]与单位圆相交的射线的角度。</em></span><span class="yiyi-st" id="yiyi-26">如果<em class="xref py py-obj">x</em>是标量，则返回标量，否则返回与<em class="xref py py-obj">x</em>相同形状的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.cos.html#numpy.cos" title="numpy.cos"><code class="xref py py-obj docutils literal"><span class="pre">cos</span></code></a>，<a class="reference internal" href="numpy.arctan.html#numpy.arctan" title="numpy.arctan"><code class="xref py py-obj docutils literal"><span class="pre">arctan</span></code></a>，<a class="reference internal" href="numpy.arcsin.html#numpy.arcsin" title="numpy.arcsin"><code class="xref py py-obj docutils literal"><span class="pre">arcsin</span></code></a>，<code class="xref py py-obj docutils literal"><span class="pre">emath.arccos</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="#numpy.arccos" title="numpy.arccos"><code class="xref py py-obj docutils literal"><span class="pre">arccos</span></code></a>是多值函数：对于每个<em class="xref py py-obj">x</em>，存在无限多个数字<em class="xref py py-obj">z</em>，使得<em class="xref py py-obj">cos（z）= x  t5 &gt;。</em></span><span class="yiyi-st" id="yiyi-31">惯例是返回其实部在<em class="xref py py-obj">[0，pi]</em>中的角度<em class="xref py py-obj">z</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-32">对于实值输入数据类型，<a class="reference internal" href="#numpy.arccos" title="numpy.arccos"><code class="xref py py-obj docutils literal"><span class="pre">arccos</span></code></a>始终返回实际输出。</span><span class="yiyi-st" id="yiyi-33">对于不能表示为实数或无穷大的每个值，它会产生<code class="docutils literal"><span class="pre">nan</span></code>并设置<em class="xref py py-obj">无效</em>浮点错误标志。</span></p>
+<p><span class="yiyi-st" id="yiyi-34">对于复值输入，<a class="reference internal" href="#numpy.arccos" title="numpy.arccos"><code class="xref py py-obj docutils literal"><span class="pre">arccos</span></code></a>是具有分支切割<em class="xref py py-obj">[ -  inf，-1]</em>和<em class="xref py py-obj">[1，inf]</em>的复杂分析函数，并且在前者上从上方连续，在后者上从下方连续。</span></p>
+<p><span class="yiyi-st" id="yiyi-35">反<a class="reference internal" href="numpy.cos.html#numpy.cos" title="numpy.cos"><code class="xref py py-obj docutils literal"><span class="pre">cos</span></code></a>也称为<em class="xref py py-obj">acos</em>或cos ^ -1。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">参考文献</span></p>
+<p><span class="yiyi-st" id="yiyi-37">Abramowitz和I.A.</span><span class="yiyi-st" id="yiyi-38">Stegun，“Handbook of Mathematical Functions”，10th printing，1964，pp。</span><span class="yiyi-st" id="yiyi-39">79. <a class="reference external" href="http://www.math.sfu.ca/~cbm/aands/">http://www.math.sfu.ca/~cbm/aands/</a></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-40">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-41">我们期望1的arccos为0，而-1的arccos为pi：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">array([ 0.        ,  3.14159265])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">绘图arccos：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&apos;tight&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">（<a class="reference external" href="../../reference/generated/numpy-arccos-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-arccos-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-arccos-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-arccos-1.png" src="../../_images/numpy-arccos-1.png">
+</div>
+</dd></dl>

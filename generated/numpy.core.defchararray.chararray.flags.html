@@ -1,0 +1,65 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.core.defchararray.chararray.flags</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.chararray.flags.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.chararray.flags.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="attribute">
+<dt id="numpy.core.defchararray.chararray.flags"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">chararray.</code><code class="descname">flags</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">有关数组的内存布局的信息。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-16">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-17"><a class="reference internal" href="#numpy.core.defchararray.chararray.flags" title="numpy.core.defchararray.chararray.flags"><code class="xref py py-obj docutils literal"><span class="pre">flags</span></code></a>对象可以像字典一样访问（如<code class="docutils literal"><span class="pre">a.flags[&apos;WRITEABLE&apos;]</span></code>），也可以使用低级属性名称（如<code class="docutils literal"><span class="pre">a.flags.writeable</span></code>）。</span><span class="yiyi-st" id="yiyi-18">仅在字典访问中支持短标志名称。</span></p>
+<p><span class="yiyi-st" id="yiyi-19">只有UPDATEIFCOPY，WRITEABLE和ALIGNED标志可以由用户通过直接赋值到属性或字典条目或通过调用<code class="xref py py-obj docutils literal"><span class="pre">ndarray.setflags</span></code>来更改。</span></p>
+<p><span class="yiyi-st" id="yiyi-20">数组标志不能任意设置：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-21">UPDATEIFCOPY只能设置为<code class="docutils literal"><span class="pre">False</span></code>。</span></li>
+<li><span class="yiyi-st" id="yiyi-22">如果数据真正对齐，ALIGNED只能设置为<code class="docutils literal"><span class="pre">True</span></code>。</span></li>
+<li><span class="yiyi-st" id="yiyi-23">如果数组拥有自己的内存，或者内存的最终所有者暴露了可写缓冲区接口或者是字符串，则WRITEABLE只能设置为<code class="docutils literal"><span class="pre">True</span></code>。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-24">数组可以同时是C风格和Fortran风格的。</span><span class="yiyi-st" id="yiyi-25">这对于1维数组是清楚的，但对于更高维数组也是如此。</span></p>
+<p><span class="yiyi-st" id="yiyi-26">即使对于连续数组，对于给定维度<code class="docutils literal"><span class="pre">arr.strides[dim]</span></code>的步幅可以是<em>任意</em>如果<code class="docutils literal"><span class="pre">arr.shape [dim]</span> <span class="pre">==</span> <span class="pre">1</span></code>或数组没有元素。</span><span class="yiyi-st" id="yiyi-27"><em>不</em>一般认为<code class="docutils literal"><span class="pre">self.strides [-1]</span> <span class="pre">==</span> <span class="pre">self.itemsize</span> / t1&gt;用于C型连续数组或<code class="docutils literal"><span class="pre">self.strides [0]</span> <span class="pre">==</span> <span class="pre">self.itemsize</span>  Fortran风格的连续数组是真的。</code></code></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">属性</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="2%">
+<col width="98%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-29">C_CONTIGUOUS（C）</span></td>
+<td><span class="yiyi-st" id="yiyi-30">数据位于单个C样式连续段中。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-31">F_CONTIGUOUS（F）</span></td>
+<td><span class="yiyi-st" id="yiyi-32">数据在单个Fortran风格的连续段中。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33">OWNDATA（O）</span></td>
+<td><span class="yiyi-st" id="yiyi-34">数组拥有它使用的内存或从另一个对象借用它。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-35">写（W）</span></td>
+<td><span class="yiyi-st" id="yiyi-36">数据区可以写入。</span><span class="yiyi-st" id="yiyi-37">将此设置为False将锁定数据，使其为只读。</span><span class="yiyi-st" id="yiyi-38">视图（切片等）</span><span class="yiyi-st" id="yiyi-39">在创建时从其基本数组继承WRITEABLE，但随后可写锁定数组的视图，同时基本数组保持可写。</span><span class="yiyi-st" id="yiyi-40">（相反的是不正确的，因为锁定的数组的视图可能不可写。</span><span class="yiyi-st" id="yiyi-41">但是，当前，锁定基础对象不会锁定已经引用它的任何视图，因此在这种情况下，可以通过先前创建的可写视图来更改已锁定数组的内容。）</span><span class="yiyi-st" id="yiyi-42">尝试更改不可写入的数组会引发RuntimeError异常。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-43">对齐（A）</span></td>
+<td><span class="yiyi-st" id="yiyi-44">数据和所有元素对于硬件适当地对齐。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-45">UPDATEIFCOPY（U）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">这个数组是一些其他数组的副本。</span><span class="yiyi-st" id="yiyi-47">当此数组被释放时，基数组将使用此数组的内容进行更新。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-48">FNC</span></td>
+<td><span class="yiyi-st" id="yiyi-49">F_CONTIGUOUS而不是C_CONTIGUOUS。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-50">FORC</span></td>
+<td><span class="yiyi-st" id="yiyi-51">F_CONTIGUOUS或C_CONTIGUOUS（单段测试）。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-52">BEHAVED（B）</span></td>
+<td><span class="yiyi-st" id="yiyi-53">对齐和可写。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-54">卡雷（CA）</span></td>
+<td><span class="yiyi-st" id="yiyi-55">BEHAVED和C_CONTIGUOUS。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-56">FARRAY（FA）</span></td>
+<td><span class="yiyi-st" id="yiyi-57">BEHAVED和F_CONTIGUOUS而不是C_CONTIGUOUS。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

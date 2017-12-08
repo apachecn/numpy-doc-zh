@@ -1,0 +1,87 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.sort</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.sort.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.sort.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.sort"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">sort</code><span class="sig-paren">(</span><em>a</em>, <em>axis=-1</em>, <em>kind=&apos;quicksort&apos;</em>, <em>order=None</em>, <em>endwith=True</em>, <em>fill_value=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L6490-L6517"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">就地对数组进行排序</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">数组要排序。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">要排序的轴。</span><span class="yiyi-st" id="yiyi-21">如果为“无”，则在排序之前将数组展平。</span><span class="yiyi-st" id="yiyi-22">默认值为-1，沿最后一个轴排序。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>kind</strong>：{&apos;quicksort&apos;，&apos;mergesort&apos;，&apos;heapsort&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">排序算法。</span><span class="yiyi-st" id="yiyi-25">默认值为“quicksort”。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>订单</strong>：list，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">当<em class="xref py py-obj">a</em>是结构化数组时，此参数指定首先，第二个等比较哪些字段。</span><span class="yiyi-st" id="yiyi-28">此列表不需要包括所有字段。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>endwith</strong>：{True，False}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">是否缺失值（如果有）应强制在上部索引（数组的末尾）（True）或更低的索引（在开头）。</span><span class="yiyi-st" id="yiyi-31">当数组包含数据类型的最大（或最小如果False）可表示值的未屏蔽值时，这些值和屏蔽值的排序是未定义的。</span><span class="yiyi-st" id="yiyi-32">要强制屏蔽的值是在结束（开始）在这种情况下，必须排序屏蔽。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>fill_value</strong>：{var}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">屏蔽值在内部使用的值。</span><span class="yiyi-st" id="yiyi-35">如果<code class="docutils literal"><span class="pre">fill_value</span></code>不为None，它将取代<code class="docutils literal"><span class="pre">endwith</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-36">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-37"><strong>sorted_array</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-38">数组的类型和形状与<em class="xref py py-obj">a</em>相同。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-39">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-40"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.sort</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-41">对数组进行就地排序的方法。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.ma.argsort.html#numpy.ma.argsort" title="numpy.ma.argsort"><code class="xref py py-obj docutils literal"><span class="pre">argsort</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">间接排序。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-44"><code class="xref py py-obj docutils literal"><span class="pre">lexsort</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-45">对多个键进行间接稳定排序。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-46"><code class="xref py py-obj docutils literal"><span class="pre">searchsorted</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-47">在已排序的数组中查找元素。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-49">有关不同排序算法的说明，请参见<code class="docutils literal"><span class="pre">sort</span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-50">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span><span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Default</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">[1 3 5 -- --]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span><span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Put missing values in the front</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">endwith</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">[-- -- 1 3 5]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span><span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># fill_value takes over endwith</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">endwith</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">[1 -- -- 3 5]</span>
+</pre></div>
+</div>
+</dd></dl>

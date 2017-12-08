@@ -1,0 +1,90 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.laplace</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.laplace.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.laplace.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.laplace"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">laplace</code><span class="sig-paren">(</span><em>loc=0.0</em>, <em>scale=1.0</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从拉普拉斯或指定位置（或平均值）和比例（衰减）的双指数分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">拉普拉斯分布与高斯/正态分布类似，但是在峰值处更尖锐，并且具有较窄的尾部。</span><span class="yiyi-st" id="yiyi-17">它表示两个独立的，相同分布的指数随机变量之间的差异。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>loc</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">分布峰的位置，<img alt="\mu" class="math" src="../../_images/math/fb6d665bbe0c01fc1af5c5f5fa7df40dc71331d7.png" style="vertical-align: -3px">。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>scale</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22"><img alt="\lambda" class="math" src="../../_images/math/e77607a19744406310c093481c802d45bc53f674.png" style="vertical-align: 0px">，指数衰减。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">输出形状。</span><span class="yiyi-st" id="yiyi-25">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-26">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-28"><strong>samples</strong>：ndarray或float</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-30">它具有概率密度函数</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-31">拉普拉斯的第一定律，从1774年，指出误差的频率可以表示为误差的绝对幅度的指数函数，其导致拉普拉斯分布。</span><span class="yiyi-st" id="yiyi-32">对于经济学和健康科学中的许多问题，这种分布似乎比标准高斯分布更好地建模数据。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r157" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-34"><a class="fn-backref" href="#id1">[R157]</a></span></td><td><span class="yiyi-st" id="yiyi-35">Abramowitz，M。和Stegun，I。</span><span class="yiyi-st" id="yiyi-36">一个。</span><span class="yiyi-st" id="yiyi-37">（Eds。）。</span><span class="yiyi-st" id="yiyi-38">“Handbook of Mathematical Functions with Formula，Graphs，and Mathematical Tables，9th printing，”New York：Dover，1972。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r158" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-39"><a class="fn-backref" href="#id2">[R158]</a></span></td><td><span class="yiyi-st" id="yiyi-40">Kotz，Samuel，et。</span><span class="yiyi-st" id="yiyi-41">et al。</span><span class="yiyi-st" id="yiyi-42">“拉普拉斯分布和泛化，”Birkhauser，2001年。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r159" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-43"><a class="fn-backref" href="#id3">[R159]</a></span></td><td><span class="yiyi-st" id="yiyi-44">Weisstein，Eric W.“Laplace Distribution。”来自MathWorld-Wolfram Web资源。</span><span class="yiyi-st" id="yiyi-45"><a class="reference external" href="http://mathworld.wolfram.com/LaplaceDistribution.html">http://mathworld.wolfram.com/LaplaceDistribution.html</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r160" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-46"><a class="fn-backref" href="#id4">[R160]</a></span></td><td><span class="yiyi-st" id="yiyi-47">维基百科，“拉普拉斯分布”，<a class="reference external" href="http://en.wikipedia.org/wiki/Laplace_distribution">http://en.wikipedia.org/wiki/Laplace_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-49">从分布中绘制样本</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">laplace</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-50">显示样本的直方图，以及概率密度函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">8.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">,</span> <span class="o">.</span><span class="mi">01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">loc</span><span class="p">)</span><span class="o">/</span><span class="n">scale</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">scale</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-51">绘图高斯比较：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">scale</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span>
+<span class="gp">... </span>     <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">loc</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">scale</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-52">（<a class="reference external" href="../../reference/generated/numpy-random-RandomState-laplace-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-laplace-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-laplace-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-RandomState-laplace-1.png" src="../../_images/numpy-random-RandomState-laplace-1.png">
+</div>
+</dd></dl>

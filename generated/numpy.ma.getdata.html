@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.getdata</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.getdata.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.getdata.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.getdata"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">getdata</code><span class="sig-paren">(</span><em>a</em>, <em>subok=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L672-L721"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将掩码数组的数据作为ndarray返回。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">如果<em class="xref py py-obj">a</em>是<code class="docutils literal"><span class="pre">MaskedArray</span></code>，则返回<em class="xref py py-obj">a</em>（如果有）的数据作为ndarray，否则返回<em class="xref py py-obj">a</em> ndarray或子类（取决于<em class="xref py py-obj">subok</em>）如果没有。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输入<code class="docutils literal"><span class="pre">MaskedArray</span></code>，或者ndarray或其子类。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>subok</strong>：bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">是否强制输出为<em class="xref py py-obj">pure</em> ndarray（False）或返回ndarray的子​​类（如果合适）（True，默认）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-22">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="numpy.ma.getmask.html#numpy.ma.getmask" title="numpy.ma.getmask"><code class="xref py py-obj docutils literal"><span class="pre">getmask</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-24">返回掩码数组或掩码的掩码。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.ma.getmaskarray.html#numpy.ma.getmaskarray" title="numpy.ma.getmaskarray"><code class="xref py py-obj docutils literal"><span class="pre">getmaskarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-26">返回掩码数组的掩码，或全数组的False。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_equal</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[1 --]</span>
+<span class="go"> [3 4]],</span>
+<span class="go">      mask =</span>
+<span class="go"> [[False  True]</span>
+<span class="go"> [False False]],</span>
+<span class="go">      fill_value=999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [3, 4]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-28">等同地使用<code class="docutils literal"><span class="pre">MaskedArray</span></code> <em class="xref py py-obj">数据</em>属性。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">data</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [3, 4]])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,31 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.round</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.round.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.round.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.round"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">round</code><span class="sig-paren">(</span><em>a</em>, <em>decimals=0</em>, <em>out=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L7097-L7127"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回a的副本，四舍五入为“小数”位。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">当&apos;decimals&apos;为负数时，它指定小数点左边的位置数。</span><span class="yiyi-st" id="yiyi-17">复数的实部和虚部分别进行四舍五入。</span><span class="yiyi-st" id="yiyi-18">如果数组不是浮点类型，且“小数”大于或等于0，则不会执行任何操作。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>小数</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">要舍入的小数位数。</span><span class="yiyi-st" id="yiyi-22">可能是负数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：array_like</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">用于输出的现有数组。</span><span class="yiyi-st" id="yiyi-25">如果未给出，则返回a的默认副本。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">如果给出out并且没有mask属性，a的掩码丢失！</span></p>
+</dd></dl>

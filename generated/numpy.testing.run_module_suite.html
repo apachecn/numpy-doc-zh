@@ -1,0 +1,44 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.run_module_suite</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.run_module_suite.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.run_module_suite.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.run_module_suite"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.</code><code class="descname">run_module_suite</code><span class="sig-paren">(</span><em>file_to_run=None</em>, <em>argv=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/nosetester.py#L77-L125"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">运行测试模块。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">Equivalent to calling <code class="docutils literal"><span class="pre">$</span> <span class="pre">nosetests</span> <span class="pre">&lt;argv&gt;</span> <span class="pre">&lt;file_to_run&gt;</span></code> from the command line</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>file_to_run</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">测试模块的路径，或无。</span><span class="yiyi-st" id="yiyi-19">默认情况下，运行调用此函数的模块。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>argv</strong>：字符串列表</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">参数传递给鼻子测试跑步者。</span><span class="yiyi-st" id="yiyi-22"><code class="docutils literal"><span class="pre">argv[0]</span></code>被忽略。</span><span class="yiyi-st" id="yiyi-23"><code class="docutils literal"><span class="pre">nosetests</span></code>接受的所有命令行参数都可以工作。</span><span class="yiyi-st" id="yiyi-24">如果为默认值None，则使用sys.argv。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-25"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-27">添加以下内容：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span> <span class="p">:</span>
+    <span class="n">run_module_suite</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-28">在测试模块的末端将运行测试，当该模块在python解释器中被调用。</span></p>
+<p><span class="yiyi-st" id="yiyi-29">或者，调用：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">run_module_suite</span><span class="p">(</span><span class="n">file_to_run</span><span class="o">=</span><span class="s2">&quot;numpy/tests/test_matlib.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-30">从解释器将运行所有的测试程序在&apos;test_matlib.py&apos;。</span></p>
+</dd></dl>

@@ -1,0 +1,75 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.masked_object</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.masked_object.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.masked_object.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.masked_object"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">masked_object</code><span class="sig-paren">(</span><em>x</em>, <em>value</em>, <em>copy=True</em>, <em>shrink=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L2162-L2220"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">屏蔽数组<em class="xref py py-obj">x</em>，其中数据与值完全相等。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">此函数类似于<a class="reference internal" href="numpy.ma.masked_values.html#numpy.ma.masked_values" title="numpy.ma.masked_values"><code class="xref py py-obj docutils literal"><span class="pre">masked_values</span></code></a>，但仅适用于对象数组：对于浮点，使用<a class="reference internal" href="numpy.ma.masked_values.html#numpy.ma.masked_values" title="numpy.ma.masked_values"><code class="xref py py-obj docutils literal"><span class="pre">masked_values</span></code></a>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">数组掩码</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>value</strong>：object</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">比较值</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>copy</strong>：{True，False}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">是否返回<em class="xref py py-obj">x</em>的副本。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>shrink</strong>：{True，False}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">是否折叠满了False的掩码到nomask</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>result</strong>：MaskedArray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">屏蔽<em class="xref py py-obj">x</em>的结果，其中等于<em class="xref py py-obj">值</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.ma.masked_where.html#numpy.ma.masked_where" title="numpy.ma.masked_where"><code class="xref py py-obj docutils literal"><span class="pre">masked_where</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">满足条件的掩码。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.ma.masked_equal.html#numpy.ma.masked_equal" title="numpy.ma.masked_equal"><code class="xref py py-obj docutils literal"><span class="pre">masked_equal</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">掩码等于给定值（整数）。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.ma.masked_values.html#numpy.ma.masked_values" title="numpy.ma.masked_values"><code class="xref py py-obj docutils literal"><span class="pre">masked_values</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">使用浮点平等的掩码。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">food</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;green_eggs&apos;</span><span class="p">,</span> <span class="s1">&apos;ham&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># don&apos;t eat spoiled food</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eat</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_object</span><span class="p">(</span><span class="n">food</span><span class="p">,</span> <span class="s1">&apos;green_eggs&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">eat</span><span class="p">)</span>
+<span class="go">[-- ham]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># plain ol` ham is boring</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fresh_food</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;cheese&apos;</span><span class="p">,</span> <span class="s1">&apos;ham&apos;</span><span class="p">,</span> <span class="s1">&apos;pineapple&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eat</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_object</span><span class="p">(</span><span class="n">fresh_food</span><span class="p">,</span> <span class="s1">&apos;green_eggs&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">eat</span><span class="p">)</span>
+<span class="go">[cheese ham pineapple]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37">注意，如果可能，<em class="xref py py-obj">掩码</em>设置为<code class="docutils literal"><span class="pre">nomask</span></code>。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eat</span>
+<span class="go">masked_array(data = [cheese ham pineapple],</span>
+<span class="go">      mask = False,</span>
+<span class="go">      fill_value=?)</span>
+</pre></div>
+</div>
+</dd></dl>

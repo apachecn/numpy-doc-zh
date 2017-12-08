@@ -1,0 +1,66 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.hsplit</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.hsplit.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.hsplit.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ma.hsplit"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">hsplit</code><span class="sig-paren">(</span><em>ary</em>, <em>indices_or_sections</em><span class="sig-paren">)</span><em class="property"> = &lt;numpy.ma.extras._fromnxfunction instance&gt;</em></span></dt>
+<dd><blockquote>
+<div><p><span class="yiyi-st" id="yiyi-15">将数组水平（逐列）拆分为多个子数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">请参阅<em class="xref py py-obj">拆分</em>文档。</span><span class="yiyi-st" id="yiyi-17"><a class="reference internal" href="#numpy.ma.hsplit" title="numpy.ma.hsplit"><code class="xref py py-obj docutils literal"><span class="pre">hsplit</span></code></a>等效于<code class="docutils literal"><span class="pre">axis=1</span></code>的<em class="xref py py-obj">拆分 t&gt;，数组始终沿第二轴分割，而与数组维度无关。</em></span></p>
+</div></blockquote>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-18">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-19"><code class="xref py py-obj docutils literal"><span class="pre">split</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-20">将数组拆分为多个大小相等的子数组。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-21">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-22">该函数应用于_data和_mask（如果有）。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">16.0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[  0.,   1.,   2.,   3.],</span>
+<span class="go">       [  4.,   5.,   6.,   7.],</span>
+<span class="go">       [  8.,   9.,  10.,  11.],</span>
+<span class="go">       [ 12.,  13.,  14.,  15.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">hsplit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">[array([[  0.,   1.],</span>
+<span class="go">       [  4.,   5.],</span>
+<span class="go">       [  8.,   9.],</span>
+<span class="go">       [ 12.,  13.]]),</span>
+<span class="go"> array([[  2.,   3.],</span>
+<span class="go">       [  6.,   7.],</span>
+<span class="go">       [ 10.,  11.],</span>
+<span class="go">       [ 14.,  15.]])]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">hsplit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">]))</span>
+<span class="go">[array([[  0.,   1.,   2.],</span>
+<span class="go">       [  4.,   5.,   6.],</span>
+<span class="go">       [  8.,   9.,  10.],</span>
+<span class="go">       [ 12.,  13.,  14.]]),</span>
+<span class="go"> array([[  3.],</span>
+<span class="go">       [  7.],</span>
+<span class="go">       [ 11.],</span>
+<span class="go">       [ 15.]]),</span>
+<span class="go"> array([], dtype=float64)]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-24">使用较高维数组，分割仍沿着第二轴。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[[ 0.,  1.],</span>
+<span class="go">        [ 2.,  3.]],</span>
+<span class="go">       [[ 4.,  5.],</span>
+<span class="go">        [ 6.,  7.]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">hsplit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">[array([[[ 0.,  1.]],</span>
+<span class="go">       [[ 4.,  5.]]]),</span>
+<span class="go"> array([[[ 2.,  3.]],</span>
+<span class="go">       [[ 6.,  7.]]])]</span>
+</pre></div>
+</div>
+</dd></dl>

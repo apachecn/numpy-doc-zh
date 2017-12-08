@@ -1,0 +1,54 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.broadcast_arrays</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.broadcast_arrays.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.broadcast_arrays.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.broadcast_arrays"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">broadcast_arrays</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/stride_tricks.py#L137-L200"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">相互之间广播任意数量的数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>`* args`</strong>：array_likes</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">数组广播。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>subok</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">如果为True，则子类将被传递，否则返回的数组将被强制为基类数组（默认）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>broadcasted</strong>：数组列表</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">这些数组是原数组的视图。</span><span class="yiyi-st" id="yiyi-23">它们通常不连续。</span><span class="yiyi-st" id="yiyi-24">此外，广播数组的多于一个元件可以指单个存储器位置。</span><span class="yiyi-st" id="yiyi-25">如果你需要写入数组，首先复制。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">broadcast_arrays</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">[array([[1, 2, 3],</span>
+<span class="go">       [1, 2, 3],</span>
+<span class="go">       [1, 2, 3]]), array([[1, 1, 1],</span>
+<span class="go">       [2, 2, 2],</span>
+<span class="go">       [3, 3, 3]])]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-27">这是一个有用的习惯用于获取连续副本，而不是不连续的视图。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">broadcast_arrays</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)]</span>
+<span class="go">[array([[1, 2, 3],</span>
+<span class="go">       [1, 2, 3],</span>
+<span class="go">       [1, 2, 3]]), array([[1, 1, 1],</span>
+<span class="go">       [2, 2, 2],</span>
+<span class="go">       [3, 3, 3]])]</span>
+</pre></div>
+</div>
+</dd></dl>

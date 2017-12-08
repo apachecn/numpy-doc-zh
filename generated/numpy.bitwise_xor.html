@@ -1,0 +1,59 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.bitwise_xor</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.bitwise_xor.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.bitwise_xor.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.bitwise_xor"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">bitwise_xor</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;bitwise_xor&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">按元素方式计算两个数组的逐位异或。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">计算输入数组中整数的基本二进制表示的逐位异或。</span><span class="yiyi-st" id="yiyi-16">这个ufunc实现了C / Python运算符<code class="docutils literal"><span class="pre">^</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>x1，x2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">只处理整数和布尔类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：array_like</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">结果。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">也可以看看</span></p>
+<p><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="numpy.logical_xor.html#numpy.logical_xor" title="numpy.logical_xor"><code class="xref py py-obj docutils literal"><span class="pre">logical_xor</span></code></a>，<a class="reference internal" href="numpy.bitwise_and.html#numpy.bitwise_and" title="numpy.bitwise_and"><code class="xref py py-obj docutils literal"><span class="pre">bitwise_and</span></code></a>，<a class="reference internal" href="numpy.bitwise_or.html#numpy.bitwise_or" title="numpy.bitwise_or"><code class="xref py py-obj docutils literal"><span class="pre">bitwise_or</span></code></a></span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.binary_repr.html#numpy.binary_repr" title="numpy.binary_repr"><code class="xref py py-obj docutils literal"><span class="pre">binary_repr</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-26">返回输入号码的二进制表示为字符串。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-28">数字13由<code class="docutils literal"><span class="pre">00001101</span></code>表示。</span><span class="yiyi-st" id="yiyi-29">同样，17由<code class="docutils literal"><span class="pre">00010001</span></code>表示。</span><span class="yiyi-st" id="yiyi-30">因此13和17的逐位异或为<code class="docutils literal"><span class="pre">00011100</span></code>或28：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">bitwise_xor</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+<span class="go">28</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="mi">28</span><span class="p">)</span>
+<span class="go">&apos;11100&apos;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">bitwise_xor</span><span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">26</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">bitwise_xor</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">array([26,  6])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">bitwise_xor</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="go">array([26,  5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">bitwise_xor</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span>
+<span class="go">array([ True, False], dtype=bool)</span>
+</pre></div>
+</div>
+</dd></dl>

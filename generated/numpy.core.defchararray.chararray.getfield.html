@@ -1,0 +1,46 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.core.defchararray.chararray.getfield</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.chararray.getfield.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.chararray.getfield.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.core.defchararray.chararray.getfield"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">chararray.</code><code class="descname">getfield</code><span class="sig-paren">(</span><em>dtype</em>, <em>offset=0</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将给定数组的字段返回为特定类型。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">字段是具有给定数据类型的数组数据的视图。</span><span class="yiyi-st" id="yiyi-17">视图中的值由给定类型和当前数组的偏移量（以字节为单位）确定。</span><span class="yiyi-st" id="yiyi-18">偏移量需要使得视图dtype适合数组dtype；例如dtype complex128的数组具有16字节元素。</span><span class="yiyi-st" id="yiyi-19">如果采用32位整数（4字节）的视图，则偏移量必须介于0和12字节之间。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>dtype</strong>：str或dtype</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">视图的数据类型。</span><span class="yiyi-st" id="yiyi-23">视图的dtype大小不能大于数组本身的大小。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>offset</strong>：int</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">在开始元素视图之前要跳过的字节数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1.</span><span class="o">+</span><span class="mf">1.</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">4.</span><span class="n">j</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[ 1.+1.j,  0.+0.j],</span>
+<span class="go">       [ 0.+0.j,  2.+4.j]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">getfield</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="go">array([[ 1.,  0.],</span>
+<span class="go">       [ 0.,  2.]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-27">通过选择8个字节的偏移量，我们可以选择数组的复数部分作为我们的视图：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">getfield</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="go">array([[ 1.,  0.],</span>
+<span class="go">   [ 0.,  4.]])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,135 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.histogram2d</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.histogram2d.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.histogram2d.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.histogram2d"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">histogram2d</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>bins=10</em>, <em>range=None</em>, <em>normed=False</em>, <em>weights=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/twodim_base.py#L580-L715"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算两个数据样本的二维直方图。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like，shape（N，）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">包含要被直方图化的点的x坐标的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>y</strong>：array_like，shape（N，）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">包含要被直方图化的点的y坐标的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>bins</strong>：int或array_like或[int，int]或[数组，数组]，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">bin规范：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-22">如果int，两个维度的仓的数量（nx = ny = bin）。</span></li>
+<li><span class="yiyi-st" id="yiyi-23">如果array_like，二维的二进制边（x_edges = y_edges = bins）。</span></li>
+<li><span class="yiyi-st" id="yiyi-24">如果[int，int]，每个维度中的块数（nx，ny = bin）。</span></li>
+<li><span class="yiyi-st" id="yiyi-25">如果[数组，数组]，每个维度中的bin边（x_edges，y_edges = bins）。</span></li>
+<li><span class="yiyi-st" id="yiyi-26">组合[int，数组]或[数组，int]，其中int是二进制数的数字，数组是二进制边。</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>范围</strong>：array_like，shape（2,2），可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">沿着每个维度的仓的最左边缘和最右边缘（如果未在<em class="xref py py-obj">bin</em>参数中明确指定）：<code class="docutils literal"><span class="pre">[[xmin，</span> <span class="pre">xmax] / t3&gt; <span class="pre">[ymin，</span> <span class="pre">ymax]]</span></span></code>。</span><span class="yiyi-st" id="yiyi-29">超出此范围的所有值将被视为离群值，而不在直方图中计算。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>normed</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">如果为False，则返回每个bin中的样本数。</span><span class="yiyi-st" id="yiyi-32">如果为True，则返回bin密度<code class="docutils literal"><span class="pre">bin_count</span> <span class="pre">/</span> <span class="pre">sample_count</span> <span class="pre">/</span> <span class="pre">bin_area</span> </code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>权限</strong>：array_like，shape（N，），可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">对每个样本<code class="docutils literal"><span class="pre">（x_i，</span> <span class="pre">y_i）</span></code>加权的数组<code class="docutils literal"><span class="pre">w_i</span></code>。</span><span class="yiyi-st" id="yiyi-35">如果<em class="xref py py-obj">normed</em>为True，则权重被归一化为1。</span><span class="yiyi-st" id="yiyi-36">如果<em class="xref py py-obj">normed</em>为False，则返回的直方图的值等于属于落入每个仓中的样本的权重的和。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-37">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-38"><strong>H</strong>：ndarray，shape（nx，ny）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-39">样本的二维直方图<em class="xref py py-obj">x</em>和<em class="xref py py-obj">y</em>。</span><span class="yiyi-st" id="yiyi-40"><em class="xref py py-obj">x</em>中的值沿第一个维度进行直方图，<em class="xref py py-obj">y</em>中的值沿第二个维度进行直方图。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-41"><strong>xedges</strong>：ndarray，shape（nx，）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-42">仓沿第一维的边。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-43"><strong>yedges</strong>：ndarray，shape（ny）</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-44">bin沿着第二维度。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-45">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.histogram.html#numpy.histogram" title="numpy.histogram"><code class="xref py py-obj docutils literal"><span class="pre">histogram</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-47">1D直方图</span></dd>
+<dt><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="numpy.histogramdd.html#numpy.histogramdd" title="numpy.histogramdd"><code class="xref py py-obj docutils literal"><span class="pre">histogramdd</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-49">多维直方图</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-50">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-51">When <em class="xref py py-obj">normed</em> is True, then the returned histogram is the sample density, defined such that the sum over bins of the product <code class="docutils literal"><span class="pre">bin_value</span> <span class="pre">*</span> <span class="pre">bin_area</span></code> is 1.</span></p>
+<p><span class="yiyi-st" id="yiyi-52">请注意，直方图不遵循笛卡尔约定，其中<em class="xref py py-obj">x</em>值在横坐标上，而<em class="xref py py-obj">y</em>值在纵坐标轴上。</span><span class="yiyi-st" id="yiyi-53">相反，<em class="xref py py-obj">x</em>沿数组（垂直）的第一维直方图，沿数组（水平）的第二维直方图<em class="xref py py-obj">y</em>。</span><span class="yiyi-st" id="yiyi-54">这可确保与<a class="reference internal" href="numpy.histogramdd.html#numpy.histogramdd" title="numpy.histogramdd"><code class="xref py py-obj docutils literal"><span class="pre">histogramdd</span></code></a>的兼容性。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-55">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-56">构造具有可变bin宽度的2D直方图。</span><span class="yiyi-st" id="yiyi-57">首先定义bin边缘：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xedges</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yedges</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-58">接下来我们创建一个带有随机bin内容的直方图H：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span><span class="p">,</span> <span class="n">xedges</span><span class="p">,</span> <span class="n">yedges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram2d</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="p">(</span><span class="n">xedges</span><span class="p">,</span> <span class="n">yedges</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-59">或者，我们用确定的bin内容填充直方图H：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">H</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># This shows the bin content in the order as plotted</span>
+<span class="go">[[ 13.  14.  15.  16.]</span>
+<span class="go"> [  9.  10.  11.  12.]</span>
+<span class="go"> [  5.   6.   7.   8.]</span>
+<span class="go"> [  1.   2.   3.   4.]]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-60">Imshow只能做一个等距表示的箱：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&apos;imshow: equidistant&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&apos;nearest&apos;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&apos;low&apos;</span><span class="p">,</span>
+<span class="go">                extent=[xedges[0], xedges[-1], yedges[0], yedges[-1]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-61">pcolormesh可以显示确切的边框：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&apos;pcolormesh: exact bin edges&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">xedges</span><span class="p">,</span> <span class="n">yedges</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&apos;equal&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-62">NonUniformImage通过插值显示精确边框：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&apos;NonUniformImage: interpolated&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">NonUniformImage</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&apos;bilinear&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xcenters</span> <span class="o">=</span> <span class="n">xedges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">xedges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">xedges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ycenters</span> <span class="o">=</span> <span class="n">yedges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">yedges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">yedges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">xcenters</span><span class="p">,</span> <span class="n">ycenters</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xedges</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xedges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">yedges</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">yedges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&apos;equal&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-63">（<a class="reference external" href="../../reference/generated/numpy-histogram2d-1.py">源代码</a>）</span></p>
+</dd></dl>

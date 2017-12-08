@@ -1,0 +1,104 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.arctan2</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arctan2.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.arctan2.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.arctan2"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">arctan2</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;arctan2&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14"><code class="docutils literal"><span class="pre">x1/x2</span></code>的元素平方倒圆切线正确选择象限。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">选择象限（即分支）使得<code class="docutils literal"><span class="pre">arctan2（x1，</span> <span class="pre">x2）</span></code>是以弧度原点并通过点（1,0），并且光线在原点结束并通过点（<em class="xref py py-obj">x2</em>，<em class="xref py py-obj">x1</em>）。</span><span class="yiyi-st" id="yiyi-16">（注意角色颠倒：“<em class="xref py py-obj">y</em> -coordinate”是第一个函数参数，“<em class="xref py py-obj">x</em> -coordinate”是第二个。</span><span class="yiyi-st" id="yiyi-17">根据IEEE约定，该函数定义为<em class="xref py py-obj">x2</em> = +/- 0，并且<em class="xref py py-obj">x1</em>和<em class="xref py py-obj">x2</em> = +/- inf （具体值见注）。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">这个函数没有为复值参数定义；对于复杂值的所谓参数，使用<a class="reference internal" href="numpy.angle.html#numpy.angle" title="numpy.angle"><code class="xref py py-obj docutils literal"><span class="pre">angle</span></code></a>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>x1</strong>：array_like，real-value</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21"><em class="xref py py-obj">y</em>  - 坐标。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>x2</strong>：array_like，real-valued</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23"><em class="xref py py-obj">x</em>  - 坐标。</span><span class="yiyi-st" id="yiyi-24"><em class="xref py py-obj">x2</em>必须可以广播以符合<em class="xref py py-obj">x1</em>的形状，反之亦然。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>angle</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">Array of angles in radians, in the range <code class="docutils literal"><span class="pre">[-pi,</span> <span class="pre">pi]</span></code>.</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.arctan.html#numpy.arctan" title="numpy.arctan"><code class="xref py py-obj docutils literal"><span class="pre">arctan</span></code></a>，<a class="reference internal" href="numpy.tan.html#numpy.tan" title="numpy.tan"><code class="xref py py-obj docutils literal"><span class="pre">tan</span></code></a>，<a class="reference internal" href="numpy.angle.html#numpy.angle" title="numpy.angle"><code class="xref py py-obj docutils literal"><span class="pre">angle</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-31"><em>arctan2</em>与基础C库的<em class="xref py py-obj">atan2</em>函数相同。</span><span class="yiyi-st" id="yiyi-32">在C标准中定义了以下特殊值：<a class="reference internal" href="#r6" id="id1">[R6]</a></span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%">
+<col width="21%">
+<col width="57%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><span class="yiyi-st" id="yiyi-33"><em class="xref py py-obj">x1</em></span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-34"><em class="xref py py-obj">x2</em></span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-35"><em class="xref py py-obj">arctan2（x1，x2）</em></span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-36">+/- 0</span></td>
+<td><span class="yiyi-st" id="yiyi-37">+0</span></td>
+<td><span class="yiyi-st" id="yiyi-38">+/- 0</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-39">+/- 0</span></td>
+<td><span class="yiyi-st" id="yiyi-40">-0</span></td>
+<td><span class="yiyi-st" id="yiyi-41">+/- pi</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-42">&gt; 0</span></td>
+<td><span class="yiyi-st" id="yiyi-43">+/- inf</span></td>
+<td><span class="yiyi-st" id="yiyi-44">+0 / + pi</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"></span></td>
+<td><span class="yiyi-st" id="yiyi-46">+/- inf</span></td>
+<td><span class="yiyi-st" id="yiyi-47">-0 / -pi</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-48">+/- inf</span></td>
+<td><span class="yiyi-st" id="yiyi-49">+ inf</span></td>
+<td><span class="yiyi-st" id="yiyi-50">+/-（pi / 4）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-51">+/- inf</span></td>
+<td><span class="yiyi-st" id="yiyi-52">-inf</span></td>
+<td><span class="yiyi-st" id="yiyi-53">+/-（3 * pi / 4）</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-54">注意+0和-0是不同的浮点数，如+ inf和-inf。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-55">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r6" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-56">[R6]</span></td><td><span class="yiyi-st" id="yiyi-57"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）ISO / IEC标准9899：1999，“Programming language C”</em></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-58">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-59">考虑不同象限中的四个点：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="mi">180</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="go">array([-135.,  -45.,   45.,  135.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-60">注意参数的顺序。</span><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="#numpy.arctan2" title="numpy.arctan2"><code class="xref py py-obj docutils literal"><span class="pre">arctan2</span></code></a>也在当<em class="xref py py-obj">x2</em> = 0时定义，并且在几个其他特殊点处，获得范围<code class="docutils literal"><span class="pre">[-pi，</span> <span class="pre"> pi]</span></code>：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+<span class="go">array([ 1.57079633, -1.57079633])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="p">[</span><span class="o">+</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+<span class="go">array([ 0.        ,  3.14159265,  0.78539816])</span>
+</pre></div>
+</div>
+</dd></dl>

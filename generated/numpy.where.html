@@ -1,0 +1,79 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.where</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.where"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">where</code><span class="sig-paren">(</span><em>condition</em><span class="optional">[</span>, <em>x</em>, <em>y</em><span class="optional">]</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">根据<em class="xref py py-obj">条件</em>，从<em class="xref py py-obj">x</em>或<em class="xref py py-obj">y</em>返回元素。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">如果只给出<em class="xref py py-obj">条件</em>，则返回<code class="docutils literal"><span class="pre">condition.nonzero()</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>condition</strong>：array_like，bool</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">当为True时，产量<em class="xref py py-obj">x</em>，否则产生<em class="xref py py-obj">y</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>x，y</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">要选择的值。</span><span class="yiyi-st" id="yiyi-21"><em class="xref py py-obj">x</em>和<em class="xref py py-obj">y</em>需要具有与<em class="xref py py-obj">条件</em>相同的形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray的数组或元组</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">如果指定<em class="xref py py-obj">x</em>和<em class="xref py py-obj">y</em>，则输出数组包含<em class="xref py py-obj">x</em>的元素，其中<em class="xref py py-obj">条件</em>从<em class="xref py py-obj">y</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-25">如果仅给出<em class="xref py py-obj">条件</em>，则返回元组<code class="docutils literal"><span class="pre">condition.nonzero()</span></code>，其中<em class="xref py py-obj">条件</em>为True。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.nonzero.html#numpy.nonzero" title="numpy.nonzero"><code class="xref py py-obj docutils literal"><span class="pre">nonzero</span></code></a>，<a class="reference internal" href="numpy.choose.html#numpy.choose" title="numpy.choose"><code class="xref py py-obj docutils literal"><span class="pre">choose</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-29">如果给定<em class="xref py py-obj">x</em>和<em class="xref py py-obj">y</em>且输入数组是1-D，<a class="reference internal" href="#numpy.where" title="numpy.where"><code class="xref py py-obj docutils literal"><span class="pre">where</span></code></a>等效于：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">xv</span> <span class="k">if</span> <span class="n">c</span> <span class="k">else</span> <span class="n">yv</span> <span class="k">for</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">xv</span><span class="p">,</span><span class="n">yv</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">condition</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">([[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">]],</span>
+<span class="gp">... </span>         <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span>
+<span class="gp">... </span>         <span class="p">[[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="go">array([[1, 8],</span>
+<span class="go">       [3, 4]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="go">(array([0, 1]), array([1, 0]))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">9.</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="p">)</span>
+<span class="go">(array([2, 2, 2]), array([0, 1, 2]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mf">3.0</span> <span class="p">)]</span>               <span class="c1"># Note: result is 1D.</span>
+<span class="go">array([ 4.,  5.,  6.,  7.,  8.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>               <span class="c1"># Note: broadcasting.</span>
+<span class="go">array([[ 0.,  1.,  2.],</span>
+<span class="go">       [ 3.,  4., -1.],</span>
+<span class="go">       [-1., -1., -1.]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-31">查找<em class="xref py py-obj">良好值</em>中<em class="xref py py-obj">x</em>元素的索引。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">goodvalues</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">goodvalues</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ix</span>
+<span class="go">array([[False, False, False],</span>
+<span class="go">       [ True,  True, False],</span>
+<span class="go">       [False,  True, False]], dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ix</span><span class="p">)</span>
+<span class="go">(array([1, 1, 2]), array([0, 1, 1]))</span>
+</pre></div>
+</div>
+</dd></dl>

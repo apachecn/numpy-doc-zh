@@ -1,0 +1,57 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.sctype2char</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.sctype2char.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.sctype2char.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.sctype2char"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">sctype2char</code><span class="sig-paren">(</span><em>sctype</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numerictypes.py#L797-L842"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回标量dtype的字符串表示形式。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>sctype</strong>：标量dtype或对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">如果是标量dtype，则返回相应的字符串字符。</span><span class="yiyi-st" id="yiyi-18">如果对象<a class="reference internal" href="#numpy.sctype2char" title="numpy.sctype2char"><code class="xref py py-obj docutils literal"><span class="pre">sctype2char</span></code></a>尝试推断其标量类型，然后返回相应的字符串字符。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>typechar</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">与标量类型对应的字符串字符。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">如果<em class="xref py py-obj">sctype</em>是无法推断类型的对象。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.obj2sctype.html#numpy.obj2sctype" title="numpy.obj2sctype"><code class="xref py py-obj docutils literal"><span class="pre">obj2sctype</span></code></a>，<a class="reference internal" href="numpy.issctype.html#numpy.issctype" title="numpy.issctype"><code class="xref py py-obj docutils literal"><span class="pre">issctype</span></code></a>，<a class="reference internal" href="numpy.issubsctype.html#numpy.issubsctype" title="numpy.issubsctype"><code class="xref py py-obj docutils literal"><span class="pre">issubsctype</span></code></a>，<a class="reference internal" href="numpy.mintypecode.html#numpy.mintypecode" title="numpy.mintypecode"><code class="xref py py-obj docutils literal"><span class="pre">mintypecode</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">sctype</span> <span class="ow">in</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">complex</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">string_</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sctype2char</span><span class="p">(</span><span class="n">sctype</span><span class="p">))</span>
+<span class="go">l</span>
+<span class="go">d</span>
+<span class="go">D</span>
+<span class="go">S</span>
+<span class="go">O</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">2</span><span class="o">-</span><span class="mf">1.</span><span class="n">j</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sctype2char</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">&apos;D&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sctype2char</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="go">&apos;O&apos;</span>
+</pre></div>
+</div>
+</dd></dl>

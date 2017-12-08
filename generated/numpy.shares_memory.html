@@ -1,0 +1,54 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.shares_memory</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.shares_memory.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.shares_memory.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.shares_memory"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">shares_memory</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>max_work=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">确定两个数组是否共享内存</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a，b</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>max_work</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">努力解决重叠问题（考虑的候选解决方案的最大数量）。</span><span class="yiyi-st" id="yiyi-20">可识别以下特殊值：</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-21">max_work = MAY_SHARE_EXACT（默认值）</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-22">问题解决了。</span><span class="yiyi-st" id="yiyi-23">在这种情况下，只有在数组之间共享一个元素时，该函数才返回True。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-24">max_work = MAY_SHARE_BOUNDS</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-25">只检查a和b的内存边界。</span></p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>out</strong>：bool</span></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>numpy.TooHardError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">超过max_work。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.may_share_memory.html#numpy.may_share_memory" title="numpy.may_share_memory"><code class="xref py py-obj docutils literal"><span class="pre">may_share_memory</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">may_share_memory</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]))</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,39 @@
+
+<h1><span class="yiyi-st" id="yiyi-15">numpy.polynomial.polynomial.Polynomial.fromroots</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.Polynomial.fromroots.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.Polynomial.fromroots.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.polynomial.polynomial.Polynomial.fromroots"><span class="yiyi-st" id="yiyi-16"> <code class="descclassname">Polynomial.</code><code class="descname">fromroots</code><span class="sig-paren">(</span><em>roots</em>, <em>domain=[]</em>, <em>window=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/_polybase.py#L812-L851"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-17">返回具有指定根的序列实例。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">Returns a series representing the product <code class="docutils literal"><span class="pre">(x</span> <span class="pre">-</span> <span class="pre">r[0])*(x</span> <span class="pre">-</span> <span class="pre">r[1])*...*(x</span> <span class="pre">-</span> <span class="pre">r[n-1])</span></code>, where <code class="docutils literal"><span class="pre">r</span></code> is a list of roots.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>根</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">根的列表。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>domain</strong>：{[]，None，array_like}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">结果系列的域。</span><span class="yiyi-st" id="yiyi-24">如果无，则域是从最小根到最大的间隔。</span><span class="yiyi-st" id="yiyi-25">如果[]域是类域。</span><span class="yiyi-st" id="yiyi-26">默认值为[]。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>窗口</strong>：{None，array_like}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">返回系列的窗口。</span><span class="yiyi-st" id="yiyi-29">如果为None，则使用类窗口。</span><span class="yiyi-st" id="yiyi-30">默认值为None。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>new_series</strong>：series</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-33">具有指定根的系列。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

@@ -1,0 +1,205 @@
+
+<span id="routines-random"></span><h1><span class="yiyi-st" id="yiyi-17">随机抽样（<code class="xref py py-mod docutils literal"><span class="pre">numpy.random</span></code>）</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.random.html">https://docs.scipy.org/doc/numpy/reference/routines.random.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="simple-random-data">
+<h2><span class="yiyi-st" id="yiyi-18">简单的随机数据</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="generated/numpy.random.rand.html#numpy.random.rand" title="numpy.random.rand"><code class="xref py py-obj docutils literal"><span class="pre">rand</span></code></a>(d0, d1, ..., dn)</span></td>
+<td><span class="yiyi-st" id="yiyi-20">以给定的形状返回随机值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="generated/numpy.random.randn.html#numpy.random.randn" title="numpy.random.randn"><code class="xref py py-obj docutils literal"><span class="pre">randn</span></code></a>(d0, d1, ..., dn)</span></td>
+<td><span class="yiyi-st" id="yiyi-22">从“标准正态”分布返回一个样本（或多个样本）。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="generated/numpy.random.randint.html#numpy.random.randint" title="numpy.random.randint"><code class="xref py py-obj docutils literal"><span class="pre">randint</span></code></a>(low[, high, size, dtype])</span></td>
+<td><span class="yiyi-st" id="yiyi-24">返回从<em class="xref py py-obj">low</em>（包括）到<em class="xref py py-obj">high</em>（不包括）的随机整数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="generated/numpy.random.random_integers.html#numpy.random.random_integers" title="numpy.random.random_integers"><code class="xref py py-obj docutils literal"><span class="pre">random_integers</span></code></a>(low[, high, size])</span></td>
+<td><span class="yiyi-st" id="yiyi-26"><em class="xref py py-obj">low</em>和<em class="xref py py-obj">high</em>之间的np.int类型的随机整数（含）。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="generated/numpy.random.random_sample.html#numpy.random.random_sample" title="numpy.random.random_sample"><code class="xref py py-obj docutils literal"><span class="pre">random_sample</span></code></a>([size])</span></td>
+<td><span class="yiyi-st" id="yiyi-28">在半开间隔[0.0，1.0]中返回随机浮点数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="generated/numpy.random.random.html#numpy.random.random" title="numpy.random.random"><code class="xref py py-obj docutils literal"><span class="pre">random</span></code></a>([size])</span></td>
+<td><span class="yiyi-st" id="yiyi-30">在半开间隔[0.0，1.0]中返回随机浮点数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="generated/numpy.random.ranf.html#numpy.random.ranf" title="numpy.random.ranf"><code class="xref py py-obj docutils literal"><span class="pre">ranf</span></code></a>([size])</span></td>
+<td><span class="yiyi-st" id="yiyi-32">在半开间隔[0.0，1.0]中返回随机浮点数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="generated/numpy.random.sample.html#numpy.random.sample" title="numpy.random.sample"><code class="xref py py-obj docutils literal"><span class="pre">sample</span></code></a>([size])</span></td>
+<td><span class="yiyi-st" id="yiyi-34">在半开间隔[0.0，1.0]中返回随机浮点数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="generated/numpy.random.choice.html#numpy.random.choice" title="numpy.random.choice"><code class="xref py py-obj docutils literal"><span class="pre">choice</span></code></a>(a[, size, replace, p])</span></td>
+<td><span class="yiyi-st" id="yiyi-36">从给定的1-D数组生成随机样本</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="generated/numpy.random.bytes.html#numpy.random.bytes" title="numpy.random.bytes"><code class="xref py py-obj docutils literal"><span class="pre">bytes</span></code></a>(length)</span></td>
+<td><span class="yiyi-st" id="yiyi-38">返回随机字节。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="permutations">
+<h2><span class="yiyi-st" id="yiyi-39">排列</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="generated/numpy.random.shuffle.html#numpy.random.shuffle" title="numpy.random.shuffle"><code class="xref py py-obj docutils literal"><span class="pre">shuffle</span></code></a>(x)</span></td>
+<td><span class="yiyi-st" id="yiyi-41">通过随机播放其内容来修改序列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="generated/numpy.random.permutation.html#numpy.random.permutation" title="numpy.random.permutation"><code class="xref py py-obj docutils literal"><span class="pre">permutation</span></code></a>(x)</span></td>
+<td><span class="yiyi-st" id="yiyi-43">随机置换序列，或返回置换范围。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="distributions">
+<h2><span class="yiyi-st" id="yiyi-44">分布</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.random.beta.html#numpy.random.beta" title="numpy.random.beta"><code class="xref py py-obj docutils literal"><span class="pre">beta</span></code></a>（a，b [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">从Beta分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.random.binomial.html#numpy.random.binomial" title="numpy.random.binomial"><code class="xref py py-obj docutils literal"><span class="pre">binomial</span></code></a>(n, p[, size])</span></td>
+<td><span class="yiyi-st" id="yiyi-48">从二项分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.random.chisquare.html#numpy.random.chisquare" title="numpy.random.chisquare"><code class="xref py py-obj docutils literal"><span class="pre">chisquare</span></code></a>（df [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">从卡方分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.random.dirichlet.html#numpy.random.dirichlet" title="numpy.random.dirichlet"><code class="xref py py-obj docutils literal"><span class="pre">dirichlet</span></code></a>（alpha [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">从Dirichlet分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="generated/numpy.random.exponential.html#numpy.random.exponential" title="numpy.random.exponential"><code class="xref py py-obj docutils literal"><span class="pre">exponential</span></code></a>（[scale，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">从指数分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="generated/numpy.random.f.html#numpy.random.f" title="numpy.random.f"><code class="xref py py-obj docutils literal"><span class="pre">f</span></code></a>（dfnum，dfden [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-56">从F分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="generated/numpy.random.gamma.html#numpy.random.gamma" title="numpy.random.gamma"><code class="xref py py-obj docutils literal"><span class="pre">gamma</span></code></a>（shape [，scale，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-58">从Gamma分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="generated/numpy.random.geometric.html#numpy.random.geometric" title="numpy.random.geometric"><code class="xref py py-obj docutils literal"><span class="pre">geometric</span></code></a>（p [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">从几何分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="generated/numpy.random.gumbel.html#numpy.random.gumbel" title="numpy.random.gumbel"><code class="xref py py-obj docutils literal"><span class="pre">gumbel</span></code></a>（[loc，scale，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-62">从Gumbel分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="generated/numpy.random.hypergeometric.html#numpy.random.hypergeometric" title="numpy.random.hypergeometric"><code class="xref py py-obj docutils literal"><span class="pre">hypergeometric</span></code></a>(ngood, nbad, nsample[, size])</span></td>
+<td><span class="yiyi-st" id="yiyi-64">从超几何分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="generated/numpy.random.laplace.html#numpy.random.laplace" title="numpy.random.laplace"><code class="xref py py-obj docutils literal"><span class="pre">laplace</span></code></a>（[loc，scale，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-66">从拉普拉斯或指定位置（或平均值）和比例（衰减）的双指数分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="generated/numpy.random.logistic.html#numpy.random.logistic" title="numpy.random.logistic"><code class="xref py py-obj docutils literal"><span class="pre">logistic</span></code></a>（[loc，scale，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-68">从逻辑分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="generated/numpy.random.lognormal.html#numpy.random.lognormal" title="numpy.random.lognormal"><code class="xref py py-obj docutils literal"><span class="pre">lognormal</span></code></a>（[mean，sigma，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-70">从对数正态分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-71"><a class="reference internal" href="generated/numpy.random.logseries.html#numpy.random.logseries" title="numpy.random.logseries"><code class="xref py py-obj docutils literal"><span class="pre">logseries</span></code></a>（p [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-72">从对数系列分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-73"><a class="reference internal" href="generated/numpy.random.multinomial.html#numpy.random.multinomial" title="numpy.random.multinomial"><code class="xref py py-obj docutils literal"><span class="pre">multinomial</span></code></a>（n，pvals [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-74">从多项分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-75"><a class="reference internal" href="generated/numpy.random.multivariate_normal.html#numpy.random.multivariate_normal" title="numpy.random.multivariate_normal"><code class="xref py py-obj docutils literal"><span class="pre">multivariate_normal</span></code></a>(mean, cov[, size])</span></td>
+<td><span class="yiyi-st" id="yiyi-76">从多变量正态分布绘制随机样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-77"><a class="reference internal" href="generated/numpy.random.negative_binomial.html#numpy.random.negative_binomial" title="numpy.random.negative_binomial"><code class="xref py py-obj docutils literal"><span class="pre">negative_binomial</span></code></a>(n, p[, size])</span></td>
+<td><span class="yiyi-st" id="yiyi-78">从负二项分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-79"><a class="reference internal" href="generated/numpy.random.noncentral_chisquare.html#numpy.random.noncentral_chisquare" title="numpy.random.noncentral_chisquare"><code class="xref py py-obj docutils literal"><span class="pre">noncentral_chisquare</span></code></a>（df，nonc [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-80">从非中心卡方分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-81"><a class="reference internal" href="generated/numpy.random.noncentral_f.html#numpy.random.noncentral_f" title="numpy.random.noncentral_f"><code class="xref py py-obj docutils literal"><span class="pre">noncentral_f</span></code></a>(dfnum, dfden, nonc[, size])</span></td>
+<td><span class="yiyi-st" id="yiyi-82">从非中心F分布中抽取样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-83"><a class="reference internal" href="generated/numpy.random.normal.html#numpy.random.normal" title="numpy.random.normal"><code class="xref py py-obj docutils literal"><span class="pre">normal</span></code></a>（[loc，scale，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-84">从正态（高斯）分布绘制随机样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-85"><a class="reference internal" href="generated/numpy.random.pareto.html#numpy.random.pareto" title="numpy.random.pareto"><code class="xref py py-obj docutils literal"><span class="pre">pareto</span></code></a>（a [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-86">从具有指定形状的Pareto II或Lomax分布绘制样品。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-87"><a class="reference internal" href="generated/numpy.random.poisson.html#numpy.random.poisson" title="numpy.random.poisson"><code class="xref py py-obj docutils literal"><span class="pre">poisson</span></code></a>（[lam，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-88">从泊松分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-89"><a class="reference internal" href="generated/numpy.random.power.html#numpy.random.power" title="numpy.random.power"><code class="xref py py-obj docutils literal"><span class="pre">power</span></code></a>（a [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-90">从具有正指数a-1的功率分布中在[0，1]中绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-91"><a class="reference internal" href="generated/numpy.random.rayleigh.html#numpy.random.rayleigh" title="numpy.random.rayleigh"><code class="xref py py-obj docutils literal"><span class="pre">rayleigh</span></code></a>（[scale，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-92">从瑞利分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-93"><a class="reference internal" href="generated/numpy.random.standard_cauchy.html#numpy.random.standard_cauchy" title="numpy.random.standard_cauchy"><code class="xref py py-obj docutils literal"><span class="pre">standard_cauchy</span></code></a>（[size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-94">从模式= 0的标准Cauchy分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-95"><a class="reference internal" href="generated/numpy.random.standard_exponential.html#numpy.random.standard_exponential" title="numpy.random.standard_exponential"><code class="xref py py-obj docutils literal"><span class="pre">standard_exponential</span></code></a>（[size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-96">从标准指数分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-97"><a class="reference internal" href="generated/numpy.random.standard_gamma.html#numpy.random.standard_gamma" title="numpy.random.standard_gamma"><code class="xref py py-obj docutils literal"><span class="pre">standard_gamma</span></code></a>（shape [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-98">从标准Gamma分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-99"><a class="reference internal" href="generated/numpy.random.standard_normal.html#numpy.random.standard_normal" title="numpy.random.standard_normal"><code class="xref py py-obj docutils literal"><span class="pre">standard_normal</span></code></a>（[size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-100">从标准正态分布绘制样品（平均值= 0，stdev = 1）。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-101"><a class="reference internal" href="generated/numpy.random.standard_t.html#numpy.random.standard_t" title="numpy.random.standard_t"><code class="xref py py-obj docutils literal"><span class="pre">standard_t</span></code></a>（df [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-102">从具有<em class="xref py py-obj">df</em>自由度的标准学生t分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-103"><a class="reference internal" href="generated/numpy.random.triangular.html#numpy.random.triangular" title="numpy.random.triangular"><code class="xref py py-obj docutils literal"><span class="pre">triangular</span></code></a>（left，mode，right [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-104">从三角分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-105"><a class="reference internal" href="generated/numpy.random.uniform.html#numpy.random.uniform" title="numpy.random.uniform"><code class="xref py py-obj docutils literal"><span class="pre">uniform</span></code></a>（[low，high，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-106">从均匀分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-107"><a class="reference internal" href="generated/numpy.random.vonmises.html#numpy.random.vonmises" title="numpy.random.vonmises"><code class="xref py py-obj docutils literal"><span class="pre">vonmises</span></code></a>（mu，kappa [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-108">从von Mises分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-109"><a class="reference internal" href="generated/numpy.random.wald.html#numpy.random.wald" title="numpy.random.wald"><code class="xref py py-obj docutils literal"><span class="pre">wald</span></code></a>（mean，scale [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-110">从Wald或反高斯分布绘制样本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-111"><a class="reference internal" href="generated/numpy.random.weibull.html#numpy.random.weibull" title="numpy.random.weibull"><code class="xref py py-obj docutils literal"><span class="pre">weibull</span></code></a>（a [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-112">从威布尔分布绘制样本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-113"><a class="reference internal" href="generated/numpy.random.zipf.html#numpy.random.zipf" title="numpy.random.zipf"><code class="xref py py-obj docutils literal"><span class="pre">zipf</span></code></a>（a [，size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-114">从Zipf分布绘制样本。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="random-generator">
+<h2><span class="yiyi-st" id="yiyi-115">随机数生成器</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-116"><a class="reference internal" href="generated/numpy.random.RandomState.html#numpy.random.RandomState" title="numpy.random.RandomState"><code class="xref py py-obj docutils literal"><span class="pre">RandomState</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-117">Mersenne Twister伪随机数生成器的容器。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-118"><a class="reference internal" href="generated/numpy.random.seed.html#numpy.random.seed" title="numpy.random.seed"><code class="xref py py-obj docutils literal"><span class="pre">seed</span></code></a>([seed])</span></td>
+<td><span class="yiyi-st" id="yiyi-119">种子发电机。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-120"><a class="reference internal" href="generated/numpy.random.get_state.html#numpy.random.get_state" title="numpy.random.get_state"><code class="xref py py-obj docutils literal"><span class="pre">get_state</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-121">返回表示生成器的内部状态的元组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-122"><a class="reference internal" href="generated/numpy.random.set_state.html#numpy.random.set_state" title="numpy.random.set_state"><code class="xref py py-obj docutils literal"><span class="pre">set_state</span></code></a>(state)</span></td>
+<td><span class="yiyi-st" id="yiyi-123">从元组中设置发生器的内部状态。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

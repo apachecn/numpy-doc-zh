@@ -1,0 +1,71 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.mask_indices</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.mask_indices.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.mask_indices.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.mask_indices"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">mask_indices</code><span class="sig-paren">(</span><em>n</em>, <em>mask_func</em>, <em>k=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/twodim_base.py#L718-L785"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">给定掩蔽函数，返回索引以访问（n，n）数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">Assume <em class="xref py py-obj">mask_func</em> is a function that, for a square array a of size <code class="docutils literal"><span class="pre">(n,</span> <span class="pre">n)</span></code> with a possible offset argument <em class="xref py py-obj">k</em>, when called as <code class="docutils literal"><span class="pre">mask_func(a,</span> <span class="pre">k)</span></code> returns a new array with zeros in certain locations (functions like <a class="reference internal" href="numpy.triu.html#numpy.triu" title="numpy.triu"><code class="xref py py-obj docutils literal"><span class="pre">triu</span></code></a> or <a class="reference internal" href="numpy.tril.html#numpy.tril" title="numpy.tril"><code class="xref py py-obj docutils literal"><span class="pre">tril</span></code></a> do precisely this). </span><span class="yiyi-st" id="yiyi-16">然后，此函数返回非零值将位于的索引。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>n</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">返回的索引将有效访问shape（n，n）的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>mask_func</strong>：callable</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">调用签名类似于<a class="reference internal" href="numpy.triu.html#numpy.triu" title="numpy.triu"><code class="xref py py-obj docutils literal"><span class="pre">triu</span></code></a>，<a class="reference internal" href="numpy.tril.html#numpy.tril" title="numpy.tril"><code class="xref py py-obj docutils literal"><span class="pre">tril</span></code></a>的函数。</span><span class="yiyi-st" id="yiyi-22">也就是说，<code class="docutils literal"><span class="pre">mask_func（x，</span> <span class="pre">k）</span></code>返回一个形状类似于<em class="xref py py-obj">x</em>的布尔数组。 <em class="xref py py-obj">k</em>是函数的可选参数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>k</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">一个可选参数，传递到<em class="xref py py-obj">mask_func</em>。</span><span class="yiyi-st" id="yiyi-25">像<a class="reference internal" href="numpy.triu.html#numpy.triu" title="numpy.triu"><code class="xref py py-obj docutils literal"><span class="pre">triu</span></code></a>，<a class="reference internal" href="numpy.tril.html#numpy.tril" title="numpy.tril"><code class="xref py py-obj docutils literal"><span class="pre">tril</span></code></a>的函数采用第二个参数，将其解释为偏移量。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>indices</strong>：数组的元组。</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">与<code class="docutils literal"><span class="pre">mask_func（np.ones（（n， t&gt; <span class="pre">n）），</span> <span class="pre">的位置对应的索引的<em class="xref py py-obj">n</em> k）</span></span></code>为True。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.triu.html#numpy.triu" title="numpy.triu"><code class="xref py py-obj docutils literal"><span class="pre">triu</span></code></a>，<a class="reference internal" href="numpy.tril.html#numpy.tril" title="numpy.tril"><code class="xref py py-obj docutils literal"><span class="pre">tril</span></code></a>，<a class="reference internal" href="numpy.triu_indices.html#numpy.triu_indices" title="numpy.triu_indices"><code class="xref py py-obj docutils literal"><span class="pre">triu_indices</span></code></a>，<a class="reference internal" href="numpy.tril_indices.html#numpy.tril_indices" title="numpy.tril_indices"><code class="xref py py-obj docutils literal"><span class="pre">tril_indices</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-32"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-34">这些是允许你访问任何3x3数组的上三角形部分的索引：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mask_indices</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-35">例如，如果<em class="xref py py-obj">a</em>是3x3数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0, 1, 2],</span>
+<span class="go">       [3, 4, 5],</span>
+<span class="go">       [6, 7, 8]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="n">iu</span><span class="p">]</span>
+<span class="go">array([0, 1, 2, 4, 5, 8])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-36">偏移也可以传递到掩蔽函数。</span><span class="yiyi-st" id="yiyi-37">这让我们从主要的第一对角右边开始的索引：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iu1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mask_indices</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">我们现在只提取三个元素：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="n">iu1</span><span class="p">]</span>
+<span class="go">array([1, 2, 5])</span>
+</pre></div>
+</div>
+</dd></dl>

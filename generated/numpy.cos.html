@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.cos</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.cos.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.cos.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.cos"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">cos</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;cos&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">元素方面。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组，以弧度表示。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">与<em class="xref py py-obj">x</em>形状相同的输出数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>y</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">对应的余弦值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>ValueError：invalid return数组shape</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">如果提供<em class="xref py py-obj">out</em>并且<em class="xref py py-obj">out.shape</em>！= <em class="xref py py-obj">x.shape</em></span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">如果提供<em class="xref py py-obj">out</em>，则函数将结果写入其中，并返回对<em class="xref py py-obj">out</em>的引用。</span><span class="yiyi-st" id="yiyi-28">（参见实施例）</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">参考文献</span></p>
+<p><span class="yiyi-st" id="yiyi-30">Abramowitz和I.</span><span class="yiyi-st" id="yiyi-31">A. Stegun，Handbook of Mathematical Functions。</span><span class="yiyi-st" id="yiyi-32">纽约，纽约：多佛，1972年。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">]))</span>
+<span class="go">array([  1.00000000e+00,   6.12303177e-17,  -1.00000000e+00])</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Example of providing the optional output parameter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">([</span><span class="mf">0.1</span><span class="p">],</span> <span class="n">out1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out2</span> <span class="ow">is</span> <span class="n">out1</span>
+<span class="go">True</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Example of ValueError due to provision of shape mis-matched `out`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)),</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ValueError</span>: <span class="n">invalid return array shape</span>
+</pre></div>
+</div>
+</dd></dl>

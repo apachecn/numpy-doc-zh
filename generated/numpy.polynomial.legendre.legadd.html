@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.legendre.legadd</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.legendre.legadd.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.legendre.legadd.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.legendre.legadd"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.legendre.</code><code class="descname">legadd</code><span class="sig-paren">(</span><em>c1</em>, <em>c2</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/legendre.py#L332-L379"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">添加一个Legendre系列到另一个。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">返回两个Legendre系列<em class="xref py py-obj">c1</em> + <em class="xref py py-obj">c2</em>的总和。</span><span class="yiyi-st" id="yiyi-18">参数是从最低阶项到最高阶排序的系数序列，即[1,2,3]表示系列<code class="docutils literal"><span class="pre">P_0</span> <span class="pre">+</span> <span class="pre">2 * P_1</span> <span class="pre">+</span> <span class="pre">3 * P_2</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>c1，c2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">1-D数组从低到高排序的Legendre系数系数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">数组代表它们的和的Legendre系列。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.polynomial.legendre.legsub.html#numpy.polynomial.legendre.legsub" title="numpy.polynomial.legendre.legsub"><code class="xref py py-obj docutils literal"><span class="pre">legsub</span></code></a>，<a class="reference internal" href="numpy.polynomial.legendre.legmul.html#numpy.polynomial.legendre.legmul" title="numpy.polynomial.legendre.legmul"><code class="xref py py-obj docutils literal"><span class="pre">legmul</span></code></a>，<a class="reference internal" href="numpy.polynomial.legendre.legdiv.html#numpy.polynomial.legendre.legdiv" title="numpy.polynomial.legendre.legdiv"><code class="xref py py-obj docutils literal"><span class="pre">legdiv</span></code></a>，<a class="reference internal" href="numpy.polynomial.legendre.legpow.html#numpy.polynomial.legendre.legpow" title="numpy.polynomial.legendre.legpow"><code class="xref py py-obj docutils literal"><span class="pre">legpow</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">与乘法，除法等不同，两个Legendre系列的和是一个Legendre系列（不必将结果“重新投射”到基本集上），所以与“标准”多项式的加法一样，加法只是“ “。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">legendre</span> <span class="k">as</span> <span class="n">L</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span><span class="o">.</span><span class="n">legadd</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">)</span>
+<span class="go">array([ 4.,  4.,  4.])</span>
+</pre></div>
+</div>
+</dd></dl>

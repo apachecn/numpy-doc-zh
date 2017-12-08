@@ -1,0 +1,37 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.decorators.knownfailureif</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.decorators.knownfailureif.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.decorators.knownfailureif.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.decorators.knownfailureif"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.decorators.</code><code class="descname">knownfailureif</code><span class="sig-paren">(</span><em>fail_condition</em>, <em>msg=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/decorators.py#L168-L220"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">如果给定条件为true，则使函数raise KnownFailureException异常。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">如果条件是可调用的，它在运行时用于动态做出决定。</span><span class="yiyi-st" id="yiyi-16">这对于可能需要昂贵的导入的测试是有用的，以延迟成本，直到测试套件被实际执行。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>fail_condition</strong>：bool或callable</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">用于确定是否将装饰的测试标记为已知故障（如果为真）或不是（如果为假）的标志。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>msg</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">提出KnownFailureException异常时发出的消息。</span><span class="yiyi-st" id="yiyi-22">默认值为None。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>装饰器</strong>：function</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">装饰器，当应用于某个函数时，会在<em class="xref py py-obj">fail_condition</em>为True时引发KnownFailureException，否则调用该函数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">装饰器本身用<code class="docutils literal"><span class="pre">nose.tools.make_decorator</span></code>函数装饰，以便传输函数名称和各种其他元数据。</span></p>
+</dd></dl>

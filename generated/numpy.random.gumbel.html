@@ -1,0 +1,104 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.gumbel</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.gumbel.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.gumbel.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.gumbel"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">gumbel</code><span class="sig-paren">(</span><em>loc=0.0</em>, <em>scale=1.0</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从Gumbel分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">从具有指定位置和比例的Gumbel分布绘制样本。</span><span class="yiyi-st" id="yiyi-16">有关Gumbel分发的更多信息，请参阅下面的注释和参考。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>loc</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">分布模式的位置。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>scale</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">分布的比例参数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">输出形状。</span><span class="yiyi-st" id="yiyi-24">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-25">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-27"><strong>samples</strong>：ndarray或scalar</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-29"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gumbel_l.html#scipy.stats.gumbel_l" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.gumbel_l</span></code></a>，<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gumbel_r.html#scipy.stats.gumbel_r" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.gumbel_r</span></code></a>，<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genextreme.html#scipy.stats.genextreme" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.genextreme</span></code></a>，<a class="reference internal" href="numpy.random.weibull.html#numpy.random.weibull" title="numpy.random.weibull"><code class="xref py py-obj docutils literal"><span class="pre">weibull</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-31">Gumbel（或最小极值（SEV）或最小极值类型I）分布是用于建模极值问题的一类广义极值（GEV）分布之一。</span><span class="yiyi-st" id="yiyi-32">Gumbel是极值类型I分布的特殊情况，最大值来自具有“指数样”尾部的分布。</span></p>
+<p><span class="yiyi-st" id="yiyi-33">Gumbel分布的概率密度是</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-34">其中<img alt="\mu" class="math" src="../../_images/math/fb6d665bbe0c01fc1af5c5f5fa7df40dc71331d7.png" style="vertical-align: -3px">是模式，位置参数，<img alt="\beta" class="math" src="../../_images/math/af66ae03768d95d441cd1f37a0692f006344742c.png" style="vertical-align: -3px">是缩放参数。</span></p>
+<p><span class="yiyi-st" id="yiyi-35">Gumbel（命名为德国数学家Emil Julius Gumbel）早在水文学文献中用于对洪水事件的发生进行建模。</span><span class="yiyi-st" id="yiyi-36">它也用于建模最大风速和降雨率。</span><span class="yiyi-st" id="yiyi-37">它是一个“胖尾”分布 - 在分布尾部的事件的概率大于如果使用高斯分布的概率，因此出人意料地频繁发生100年的洪水。</span><span class="yiyi-st" id="yiyi-38">洪水最初被建模为高斯过程，低估了极端事件的频率。</span></p>
+<p><span class="yiyi-st" id="yiyi-39">它是一类极端值分布，广义极值（GEV）分布，其中还包括Weibull和Frechet。</span></p>
+<p><span class="yiyi-st" id="yiyi-40">该函数的平均值为<img alt="\mu + 0.57721\beta" class="math" src="../../_images/math/efdc9203e8b3592a49d9b1f51abb4e66d91185c0.png" style="vertical-align: -3px">，方差为<img alt="\frac{\pi^2}{6}\beta^2" class="math" src="../../_images/math/516f140f378b591b0bfffabb1ae75aef1a4e52ac.png" style="vertical-align: -5px">。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r223" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-42"><a class="fn-backref" href="#id1">[R223]</a></span></td><td><span class="yiyi-st" id="yiyi-43">Gumbel，E.J。，“极端统计”，纽约：哥伦比亚大学出版社，1958。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r224" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-44"><a class="fn-backref" href="#id2">[R224]</a></span></td><td><span class="yiyi-st" id="yiyi-45">Reiss，R.-D.和Thomas，M.，“来自保险，金融，水文和其他领域的极端价值的统计分析”，巴塞尔：Birkhauser Verlag，2001。</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-46">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-47">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mu</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span> <span class="c1"># location and scale</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">gumbel</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-48">显示样本的直方图，以及概率密度函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">beta</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">bins</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span><span class="o">/</span><span class="n">beta</span><span class="p">)</span>
+<span class="gp">... </span>         <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="o">-</span><span class="p">(</span><span class="n">bins</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span><span class="n">beta</span><span class="p">)</span> <span class="p">),</span>
+<span class="gp">... </span>         <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-49">（<a class="reference external" href="../../reference/generated/numpy-random-gumbel-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-gumbel-1_00_00.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-gumbel-1_00_00.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-gumbel-1_00_00.png" src="../../_images/numpy-random-gumbel-1_00_00.png">
+</div>
+<p><span class="yiyi-st" id="yiyi-50">显示如何从高斯过程中产生极值分布，并与高斯比较：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">means</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxima</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span> <span class="p">:</span>
+<span class="gp">... </span>   <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="n">means</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="gp">... </span>   <span class="n">maxima</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">maxima</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">maxima</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">maxima</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.57721</span><span class="o">*</span><span class="n">beta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">beta</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">bins</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span><span class="o">/</span><span class="n">beta</span><span class="p">)</span>
+<span class="gp">... </span>         <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">bins</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span><span class="o">/</span><span class="n">beta</span><span class="p">)),</span>
+<span class="gp">... </span>         <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+<span class="gp">... </span>         <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">bins</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">beta</span><span class="o">**</span><span class="mi">2</span><span class="p">)),</span>
+<span class="gp">... </span>         <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&apos;g&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-51">（<a class="reference external" href="../../reference/generated/numpy-random-gumbel-1_01_00.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-gumbel-1_01_00.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-gumbel-1_01_00.png" src="../../_images/numpy-random-gumbel-1_01_00.png">
+</div>
+</dd></dl>

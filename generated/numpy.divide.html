@@ -1,0 +1,85 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.divide</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.divide.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.divide.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.divide"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">divide</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;divide&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">逐元素分割参数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x1</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">股息数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>x2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">除数数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">数组，其中放置输出。</span><span class="yiyi-st" id="yiyi-22">它的类型被保留，并且它必须是保持输出的正确形状。</span><span class="yiyi-st" id="yiyi-23">请参阅doc.ufuncs。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>y</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">商<code class="docutils literal"><span class="pre">x1/x2</span></code>，逐元素。</span><span class="yiyi-st" id="yiyi-27">如果<code class="docutils literal"><span class="pre">x1</span></code>和<code class="docutils literal"><span class="pre">x2</span></code>都是标量，则返回标量。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">设置是否在溢出，下溢和除零时提高或警告。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-32">在阵列广播方面等同于<code class="docutils literal"><span class="pre">x1</span></code> / <code class="docutils literal"><span class="pre">x2</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-33">可以使用<code class="docutils literal"><span class="pre">seterr</span></code>更改除以零的行为。</span></p>
+<p><span class="yiyi-st" id="yiyi-34">在Python 2中，当<code class="docutils literal"><span class="pre">x1</span></code>和<code class="docutils literal"><span class="pre">x2</span></code>都是整数类型时，<code class="docutils literal"><span class="pre">divide</span></code>会像<code class="docutils literal"><span class="pre">floor_divide</span></code>。</span><span class="yiyi-st" id="yiyi-35">在Python 3中，它的行为像<code class="docutils literal"><span class="pre">true_divide</span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">9.0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+<span class="go">array([[ NaN,  1. ,  1. ],</span>
+<span class="go">       [ Inf,  4. ,  2.5],</span>
+<span class="go">       [ Inf,  7. ,  4. ]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37">注意整数类型的行为（仅限Python 2）：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">4.</span><span class="p">)</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">除以零总是在整数算术中产生零（再次，仅Python 2），并且不会引发异常或警告：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">))</span>
+<span class="go">array([0, 0])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">但是，可以使用<code class="docutils literal"><span class="pre">seterr</span></code>来捕获零：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">old_err_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s1">&apos;raise&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">FloatingPointError</span>: <span class="n">divide by zero encountered in divide</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ignored_states</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="o">**</span><span class="n">old_err_state</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>

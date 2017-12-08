@@ -1,0 +1,500 @@
+
+<span id="arrays-datetime"></span><h1><span class="yiyi-st" id="yiyi-25">Datetimes and Timedeltas</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/arrays.datetime.html">https://docs.scipy.org/doc/numpy/reference/arrays.datetime.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-26"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-27">从NumPy 1.7开始，有核心数组数据类型本身支持日期时间功能。</span><span class="yiyi-st" id="yiyi-28">数据类型称为“datetime64”，因此命名是因为“datetime”已经由Python中包含的datetime库采用。</span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-30">datetime API在1.7.0中是<em>实验</em>，并且可能在未来版本的NumPy中进行更改。</span></p>
+</div>
+<div class="section" id="basic-datetimes">
+<h2><span class="yiyi-st" id="yiyi-31">Basic Datetimes</span></h2>
+<p><span class="yiyi-st" id="yiyi-32">创建数据时间的最基本的方法是使用ISO 8601日期或日期时间格式的字符串。</span><span class="yiyi-st" id="yiyi-33">内部存储单元是从字符串的形式自动选择的，可以是<a class="reference internal" href="#arrays-dtypes-dateunits"><span class="std std-ref">date unit</span></a>或<a class="reference internal" href="#arrays-dtypes-timeunits"><span class="std std-ref">time unit</span></a>。</span><span class="yiyi-st" id="yiyi-34">日期单位是年（&apos;Y&apos;），月（&apos;M&apos;），星期（&apos;W&apos;）和日（&apos;D&apos;），而时间单位是小时），秒（&apos;s&apos;），毫秒（&apos;ms&apos;）和一些附加的基于秒前缀的单位。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-35">例</span></p>
+<p><span class="yiyi-st" id="yiyi-36">简单的ISO日期：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2005-02-25&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2005-02-25&apos;)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37">使用月份为单位：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2005-02&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2005-02&apos;)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">仅指定月份，但强制使用“天”单位：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2005-02&apos;</span><span class="p">,</span> <span class="s1">&apos;D&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2005-02-01&apos;)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">从日期和时间：</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2005-02-25T03:30&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2005-02-25T03:30&apos;)</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">从字符串创建数据集的数组时，仍然可以使用带有通用单位的日期时间类型从输入中自动选择单位。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-41">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;2007-07-13&apos;</span><span class="p">,</span> <span class="s1">&apos;2006-01-13&apos;</span><span class="p">,</span> <span class="s1">&apos;2010-08-13&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;datetime64&apos;</span><span class="p">)</span>
+<span class="go">array([&apos;2007-07-13&apos;, &apos;2006-01-13&apos;, &apos;2010-08-13&apos;], dtype=&apos;datetime64[D]&apos;)</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;2001-01-01T12:00&apos;</span><span class="p">,</span> <span class="s1">&apos;2002-02-03T13:56:03.172&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;datetime64&apos;</span><span class="p">)</span>
+<span class="go">array([&apos;2001-01-01T12:00:00.000-0600&apos;, &apos;2002-02-03T13:56:03.172-0600&apos;], dtype=&apos;datetime64[ms]&apos;)</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">datetime类型适用于许多常见的NumPy函数，例如<a class="reference internal" href="generated/numpy.arange.html#numpy.arange" title="numpy.arange"><code class="xref py py-func docutils literal"><span class="pre">arange</span></code></a>可用于生成日期范围。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-43">例</span></p>
+<p><span class="yiyi-st" id="yiyi-44">所有日期一个月：</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="s1">&apos;2005-02&apos;</span><span class="p">,</span> <span class="s1">&apos;2005-03&apos;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;datetime64[D]&apos;</span><span class="p">)</span>
+<span class="go">array([&apos;2005-02-01&apos;, &apos;2005-02-02&apos;, &apos;2005-02-03&apos;, &apos;2005-02-04&apos;,</span>
+<span class="go">       &apos;2005-02-05&apos;, &apos;2005-02-06&apos;, &apos;2005-02-07&apos;, &apos;2005-02-08&apos;,</span>
+<span class="go">       &apos;2005-02-09&apos;, &apos;2005-02-10&apos;, &apos;2005-02-11&apos;, &apos;2005-02-12&apos;,</span>
+<span class="go">       &apos;2005-02-13&apos;, &apos;2005-02-14&apos;, &apos;2005-02-15&apos;, &apos;2005-02-16&apos;,</span>
+<span class="go">       &apos;2005-02-17&apos;, &apos;2005-02-18&apos;, &apos;2005-02-19&apos;, &apos;2005-02-20&apos;,</span>
+<span class="go">       &apos;2005-02-21&apos;, &apos;2005-02-22&apos;, &apos;2005-02-23&apos;, &apos;2005-02-24&apos;,</span>
+<span class="go">       &apos;2005-02-25&apos;, &apos;2005-02-26&apos;, &apos;2005-02-27&apos;, &apos;2005-02-28&apos;],</span>
+<span class="go">       dtype=&apos;datetime64[D]&apos;)</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">datetime对象表示一个时间点。</span><span class="yiyi-st" id="yiyi-46">如果两个数据时间具有不同的单位，它们可能仍然表示相同的时刻，并且从诸如月份的较大单位转换为类似天的较小单位被认为是“安全的”投射，因为时间时刻仍然被精确地表示。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-47">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2005&apos;</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2005-01-01&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2010-03-14T15Z&apos;</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2010-03-14T15:00:00.00Z&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="datetime-and-timedelta-arithmetic">
+<h2><span class="yiyi-st" id="yiyi-48">Datetime and Timedelta Arithmetic</span></h2>
+<p><span class="yiyi-st" id="yiyi-49">NumPy允许减去两个日期时间值，一个产生具有时间单位的数字的操作。</span><span class="yiyi-st" id="yiyi-50">由于NumPy在其核心中没有物理量系统，因此创建了timedelta64数据类型以补充datetime64。</span></p>
+<p><span class="yiyi-st" id="yiyi-51">Datetimes和Timedeltas一起工作，为简单的日期时间计算提供方法。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-52">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2009-01-01&apos;</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2008-01-01&apos;</span><span class="p">)</span>
+<span class="go">numpy.timedelta64(366,&apos;D&apos;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2009&apos;</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&apos;D&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2009-01-21&apos;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2011-06-15T00:00&apos;</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="s1">&apos;h&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2011-06-15T12:00-0500&apos;)</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&apos;W&apos;</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&apos;D&apos;</span><span class="p">)</span>
+<span class="go">7.0</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-53">有两个Timedelta单位（&apos;Y&apos;，年和&apos;M&apos;，月），它们被特别处理，因为它们代表的变化取决于它们被使用的时间。</span><span class="yiyi-st" id="yiyi-54">虽然timedelta天单位相当于24小时，但没有办法将月单位转换为天，因为不同的月份有不同的天数。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-55">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&apos;Y&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&apos;M&apos;</span><span class="p">)</span>
+<span class="go">numpy.timedelta64(12,&apos;M&apos;)</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">timedelta64</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&apos;D&apos;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">Cannot cast NumPy timedelta64 scalar from metadata [Y] to [D] according to the rule &apos;same_kind&apos;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="datetime-units">
+<h2><span class="yiyi-st" id="yiyi-56">Datetime Units</span></h2>
+<p><span class="yiyi-st" id="yiyi-57">Datetime和Timedelta数据类型支持大量的时间单位，以及可以基于输入数据强制转换为任何其他单位的通用单位。</span></p>
+<p><span class="yiyi-st" id="yiyi-58">数据时间总是基于POSIX时间存储（虽然具有允许计算闰秒的TAI模式），具有1970-01-01T00：00Z的时期。</span><span class="yiyi-st" id="yiyi-59">这意味着支持的日期总是围绕时期的对称间隔，在下表中称为“时间跨度”。</span></p>
+<p><span class="yiyi-st" id="yiyi-60">跨度的长度是64位整数乘以日期或单位长度的范围。</span><span class="yiyi-st" id="yiyi-61">例如，“W”（周）的时间跨度正好是“D”（天）的时间跨度的7倍，“D”（天）的时间跨度恰好是时间跨度的24倍为&apos;h&apos;（小时）。</span></p>
+<p><span class="yiyi-st" id="yiyi-62">以下是日期单位：</span></p>
+<table border="1" class="docutils" id="arrays-dtypes-dateunits">
+<colgroup>
+<col width="11%">
+<col width="22%">
+<col width="32%">
+<col width="36%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><span class="yiyi-st" id="yiyi-63">码</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-64">含义</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-65">时间跨度（相对）</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-66">时间跨度（绝对）</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-67">Y</span></td>
+<td><span class="yiyi-st" id="yiyi-68">年</span></td>
+<td><span class="yiyi-st" id="yiyi-69">+/- 9.2e18年</span></td>
+<td><span class="yiyi-st" id="yiyi-70">[公元前9.2e18，公元9.2e18]</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-71">M</span></td>
+<td><span class="yiyi-st" id="yiyi-72">月</span></td>
+<td><span class="yiyi-st" id="yiyi-73">+/- 7.6e17年</span></td>
+<td><span class="yiyi-st" id="yiyi-74">[7.6e17 BC，7.6e17 AD]</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-75">W</span></td>
+<td><span class="yiyi-st" id="yiyi-76">周</span></td>
+<td><span class="yiyi-st" id="yiyi-77">+/- 1.7e17年</span></td>
+<td><span class="yiyi-st" id="yiyi-78">[1.7e17 BC，1.7e17 AD]</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-79">D</span></td>
+<td><span class="yiyi-st" id="yiyi-80">天</span></td>
+<td><span class="yiyi-st" id="yiyi-81">+/- 2.5e16年</span></td>
+<td><span class="yiyi-st" id="yiyi-82">[2.5e16 BC，2.5e16 AD]</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-83">这里是时间单位：</span></p>
+<table border="1" class="docutils" id="arrays-dtypes-timeunits">
+<colgroup>
+<col width="11%">
+<col width="22%">
+<col width="32%">
+<col width="36%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><span class="yiyi-st" id="yiyi-84">码</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-85">含义</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-86">时间跨度（相对）</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-87">时间跨度（绝对）</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-88">H</span></td>
+<td><span class="yiyi-st" id="yiyi-89">小时</span></td>
+<td><span class="yiyi-st" id="yiyi-90">+/- 1.0e15年</span></td>
+<td><span class="yiyi-st" id="yiyi-91">[1.0e15 BC，1.0e15 AD]</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-92">m</span></td>
+<td><span class="yiyi-st" id="yiyi-93">分钟</span></td>
+<td><span class="yiyi-st" id="yiyi-94">+/- 1.7e13年</span></td>
+<td><span class="yiyi-st" id="yiyi-95">[1.7e13 BC，1.7e13 AD]</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-96">s</span></td>
+<td><span class="yiyi-st" id="yiyi-97">第二</span></td>
+<td><span class="yiyi-st" id="yiyi-98">+/- 2.9e11年</span></td>
+<td><span class="yiyi-st" id="yiyi-99">[公元前2.9e11，公元2.9e11]</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-100">女士</span></td>
+<td><span class="yiyi-st" id="yiyi-101">毫秒</span></td>
+<td><span class="yiyi-st" id="yiyi-102">+/- 2.9e8年</span></td>
+<td><span class="yiyi-st" id="yiyi-103">[公元前2.9e8年，公元2.9e8]</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-104">我们</span></td>
+<td><span class="yiyi-st" id="yiyi-105">微秒</span></td>
+<td><span class="yiyi-st" id="yiyi-106">+/- 2.9e5年</span></td>
+<td><span class="yiyi-st" id="yiyi-107">[290301 BC，294241 AD]</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-108">ns</span></td>
+<td><span class="yiyi-st" id="yiyi-109">纳秒</span></td>
+<td><span class="yiyi-st" id="yiyi-110">+/- 292年</span></td>
+<td><span class="yiyi-st" id="yiyi-111">[1678 AD，2262 AD]</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-112">ps</span></td>
+<td><span class="yiyi-st" id="yiyi-113">皮秒</span></td>
+<td><span class="yiyi-st" id="yiyi-114">+/- 106天</span></td>
+<td><span class="yiyi-st" id="yiyi-115">[1969 AD，1970 AD]</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-116">fs</span></td>
+<td><span class="yiyi-st" id="yiyi-117">飞秒</span></td>
+<td><span class="yiyi-st" id="yiyi-118">+/- 2.6小时</span></td>
+<td><span class="yiyi-st" id="yiyi-119">[1969 AD，1970 AD]</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-120">如</span></td>
+<td><span class="yiyi-st" id="yiyi-121">阿特秒</span></td>
+<td><span class="yiyi-st" id="yiyi-122">+/- 9.2秒</span></td>
+<td><span class="yiyi-st" id="yiyi-123">[1969 AD，1970 AD]</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="business-day-functionality">
+<h2><span class="yiyi-st" id="yiyi-124">Business Day Functionality</span></h2>
+<p><span class="yiyi-st" id="yiyi-125">为了允许在仅一周中的某些天有效的上下文中使用datetime，NumPy包括一组“busday”（工作日）函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-126">busday函数的默认值是，唯一有效的天数是周一到周五（通常的工作日）。</span><span class="yiyi-st" id="yiyi-127">该实现基于包含7个布尔标志以指示有效天的“周掩模”；可以指定其他组的有效天数的自定义周边掩码。</span></p>
+<p><span class="yiyi-st" id="yiyi-128">“busday”功能还可以检查“假日”日期的列表，不是有效日期的特定日期。</span></p>
+<p><span class="yiyi-st" id="yiyi-129">函数<a class="reference internal" href="generated/numpy.busday_offset.html#numpy.busday_offset" title="numpy.busday_offset"><code class="xref py py-func docutils literal"><span class="pre">busday_offset</span></code></a>允许您将以工作日指定的偏移量应用于以“D”（天）为单位的数据时间。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-130">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_offset</span><span class="p">(</span><span class="s1">&apos;2011-06-23&apos;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2011-06-24&apos;)</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_offset</span><span class="p">(</span><span class="s1">&apos;2011-06-23&apos;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2011-06-27&apos;)</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-131">当输入日期落在周末或节假日时，<a class="reference internal" href="generated/numpy.busday_offset.html#numpy.busday_offset" title="numpy.busday_offset"><code class="xref py py-func docutils literal"><span class="pre">busday_offset</span></code></a>首先应用规则将日期滚动到有效工作日，然后应用偏移量。</span><span class="yiyi-st" id="yiyi-132">默认规则是&apos;raise&apos;，它只是引发一个异常。</span><span class="yiyi-st" id="yiyi-133">最常用的规则是“向前”和“向后”。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-134">例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_offset</span><span class="p">(</span><span class="s1">&apos;2011-06-25&apos;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ValueError</span>: <span class="n">Non-business day date in busday_offset</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_offset</span><span class="p">(</span><span class="s1">&apos;2011-06-25&apos;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s1">&apos;forward&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2011-06-27&apos;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_offset</span><span class="p">(</span><span class="s1">&apos;2011-06-25&apos;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s1">&apos;forward&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2011-06-29&apos;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_offset</span><span class="p">(</span><span class="s1">&apos;2011-06-25&apos;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s1">&apos;backward&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2011-06-24&apos;)</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_offset</span><span class="p">(</span><span class="s1">&apos;2011-06-25&apos;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s1">&apos;backward&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2011-06-28&apos;)</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-135">在一些情况下，合适地使用卷和偏移量是获得期望的答案所必需的。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-136">例</span></p>
+<p><span class="yiyi-st" id="yiyi-137">日期当天或之后的第一个工作日：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_offset</span><span class="p">(</span><span class="s1">&apos;2011-03-20&apos;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s1">&apos;forward&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2011-03-21&apos;,&apos;D&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_offset</span><span class="p">(</span><span class="s1">&apos;2011-03-22&apos;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s1">&apos;forward&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2011-03-22&apos;,&apos;D&apos;)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-138">第一个工作日严格日期后：</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_offset</span><span class="p">(</span><span class="s1">&apos;2011-03-20&apos;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s1">&apos;backward&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2011-03-21&apos;,&apos;D&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_offset</span><span class="p">(</span><span class="s1">&apos;2011-03-22&apos;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s1">&apos;backward&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2011-03-23&apos;,&apos;D&apos;)</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-139">该函数还可用于计算某些类型的假日。</span><span class="yiyi-st" id="yiyi-140">在加拿大和美国，母亲节在5月的第二个星期日，可以用定制的周密计算。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-141">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_offset</span><span class="p">(</span><span class="s1">&apos;2012-05&apos;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s1">&apos;forward&apos;</span><span class="p">,</span> <span class="n">weekmask</span><span class="o">=</span><span class="s1">&apos;Sun&apos;</span><span class="p">)</span>
+<span class="go">numpy.datetime64(&apos;2012-05-13&apos;,&apos;D&apos;)</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-142">当性能对于操作许多商业日期很重要，通过一个特定的周末掩码和节假日选择，有一个对象<a class="reference internal" href="generated/numpy.busdaycalendar.html#numpy.busdaycalendar" title="numpy.busdaycalendar"><code class="xref py py-class docutils literal"><span class="pre">busdaycalendar</span></code></a>以优化的形式存储必要的数据。</span></p>
+<div class="section" id="np-is-busday">
+<h3><span class="yiyi-st" id="yiyi-143">np.is_busday():</span></h3>
+<p><span class="yiyi-st" id="yiyi-144">要测试datetime64值以查看它是否是有效的一天，请使用<a class="reference internal" href="generated/numpy.is_busday.html#numpy.is_busday" title="numpy.is_busday"><code class="xref py py-func docutils literal"><span class="pre">is_busday</span></code></a>。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-145">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">is_busday</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2011-07-15&apos;</span><span class="p">))</span>  <span class="c1"># a Friday</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">is_busday</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2011-07-16&apos;</span><span class="p">))</span> <span class="c1"># a Saturday</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">is_busday</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2011-07-16&apos;</span><span class="p">),</span> <span class="n">weekmask</span><span class="o">=</span><span class="s2">&quot;Sat Sun&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2011-07-11&apos;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2011-07-18&apos;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">is_busday</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([ True,  True,  True,  True,  True, False, False], dtype=&apos;bool&apos;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="np-busday-count">
+<h3><span class="yiyi-st" id="yiyi-146">np.busday_count():</span></h3>
+<p><span class="yiyi-st" id="yiyi-147">要查找datetime64日期的指定范围内有多少有效天数，请使用<a class="reference internal" href="generated/numpy.busday_count.html#numpy.busday_count" title="numpy.busday_count"><code class="xref py py-func docutils literal"><span class="pre">busday_count</span></code></a>：</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-148">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_count</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2011-07-11&apos;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2011-07-18&apos;</span><span class="p">))</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">busday_count</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2011-07-18&apos;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2011-07-11&apos;</span><span class="p">))</span>
+<span class="go">-5</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-149">如果你有一个datetime64 day值的数组，并且你想要一个有多少是有效日期的计数，你可以这样做：</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-150">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2011-07-11&apos;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2011-07-18&apos;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">is_busday</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="custom-weekmasks">
+<h4><span class="yiyi-st" id="yiyi-151">Custom Weekmasks</span></h4>
+<p><span class="yiyi-st" id="yiyi-152">以下是自定义周掩码值的几个示例。</span><span class="yiyi-st" id="yiyi-153">这些示例指定“busday”默认值为星期一到星期五是有效日期。</span></p>
+<p><span class="yiyi-st" id="yiyi-154">一些例子：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Positional sequences; positions are Monday through Sunday.</span>
+<span class="c1"># Length of the sequence must be exactly 7.</span>
+<span class="n">weekmask</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="c1"># list or other sequence; 0 == invalid day, 1 == valid day</span>
+<span class="n">weekmask</span> <span class="o">=</span> <span class="s2">&quot;1111100&quot;</span>
+<span class="c1"># string &apos;0&apos; == invalid day, &apos;1&apos; == valid day</span>
+
+<span class="c1"># string abbreviations from this list: Mon Tue Wed Thu Fri Sat Sun</span>
+<span class="n">weekmask</span> <span class="o">=</span> <span class="s2">&quot;Mon Tue Wed Thu Fri&quot;</span>
+<span class="c1"># any amount of whitespace is allowed; abbreviations are case-sensitive.</span>
+<span class="n">weekmask</span> <span class="o">=</span> <span class="s2">&quot;MonTue Wed  Thu</span><span class="se">\t</span><span class="s2">Fri&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="changes-with-numpy-1-11">
+<h2><span class="yiyi-st" id="yiyi-155">Changes with NumPy 1.11</span></h2>
+<p><span class="yiyi-st" id="yiyi-156">在以前的NumPy版本中，datetime64类型总是存储UTC时间。</span><span class="yiyi-st" id="yiyi-157">默认情况下，从字符串创建datetime64对象或打印datetime64对象将从或转换为本地时间：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># old behavior</span>
+<span class="o">&gt;&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2000-01-01T00:00:00&apos;</span><span class="p">)</span>
+<span class="n">numpy</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2000-01-01T00:00:00-0800&apos;</span><span class="p">)</span>  <span class="c1"># note the timezone offset -08:00</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-158">datetime64用户的一致性同意这种行为是不可取的，并且与datetime64通常使用（例如，通过<a href="#id1"><span class="problematic" id="id2">pandas_</span></a>）不一致。</span><span class="yiyi-st" id="yiyi-159">对于大多数使用情况，首选的时区naive datetime类型，类似于Python标准库中的<code class="docutils literal"><span class="pre">datetime.datetime</span></code>类型。</span><span class="yiyi-st" id="yiyi-160">因此，datetime64不再假设输入在本地时间，也不打印本地时间：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;&gt; np.datetime64(&apos;2000-01-01T00:00:00&apos;)</span>
+<span class="go">numpy.datetime64(&apos;2000-01-01T00:00:00&apos;)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-161">为了向后兼容，datetime64仍然解析时区偏移，它通过转换为UTC来处理。</span><span class="yiyi-st" id="yiyi-162">但是，生成的datetime是时区naive：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;2000-01-01T00:00:00-08&apos;</span><span class="p">)</span>
+<span class="go">DeprecationWarning: parsing timezone aware datetimes is deprecated; this will raise an error in the future</span>
+<span class="go">numpy.datetime64(&apos;2000-01-01T08:00:00&apos;)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-163">作为此更改的推论，我们不再禁止在数据时间之间使用日期单位和数据时间与时间单位进行转换。</span><span class="yiyi-st" id="yiyi-164">使用时区天真数据时，从日期到时间的转换规则不再含糊不清。</span></p>
+<p><span class="yiyi-st" id="yiyi-165"><a href="#id3"><span class="problematic" id="id4">pandas_</span></a>：<a class="reference external" href="http://pandas.pydata.org">http://pandas.pydata.org</a></span></p>
+</div>
+<div class="section" id="differences-between-1-6-and-1-7-datetimes">
+<h2><span class="yiyi-st" id="yiyi-166">Differences Between 1.6 and 1.7 Datetimes</span></h2>
+<p><span class="yiyi-st" id="yiyi-167">NumPy 1.6版本包括比1.7更原始的datetime数据类型。</span><span class="yiyi-st" id="yiyi-168">本节记录了已发生的许多变化。</span></p>
+<div class="section" id="string-parsing">
+<h3><span class="yiyi-st" id="yiyi-169">String Parsing</span></h3>
+<p><span class="yiyi-st" id="yiyi-170">NumPy 1.6中的datetime字符串解析器在它接受的内容非常自由，并且默默地允许无效输入，而不会引起错误。</span><span class="yiyi-st" id="yiyi-171">在NumPy 1.7中的解析器是非常严格的只接受ISO 8601日期，有一些方便的扩展。</span><span class="yiyi-st" id="yiyi-172">1.6总是默认创建微秒（us）单位，而1.7检测基于字符串格式的单位。</span><span class="yiyi-st" id="yiyi-173">这里是一个比较。</span><span class="yiyi-st" id="yiyi-174">：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># NumPy 1.6.1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;1979-03-22&apos;</span><span class="p">)</span>
+<span class="mi">1979</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">22</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+<span class="c1"># NumPy 1.7.0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;1979-03-22&apos;</span><span class="p">)</span>
+<span class="n">numpy</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;1979-03-22&apos;</span><span class="p">)</span>
+
+<span class="c1"># NumPy 1.6.1, unit default microseconds</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;1979-03-22&apos;</span><span class="p">)</span><span class="o">.</span><span class="n">dtype</span>
+<span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;datetime64[us]&apos;</span><span class="p">)</span>
+<span class="c1"># NumPy 1.7.0, unit of days detected from string</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;1979-03-22&apos;</span><span class="p">)</span><span class="o">.</span><span class="n">dtype</span>
+<span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;&lt;M8[D]&apos;</span><span class="p">)</span>
+
+<span class="c1"># NumPy 1.6.1, ignores invalid part of string</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;1979-03-2corruptedstring&apos;</span><span class="p">)</span>
+<span class="mi">1979</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">02</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+<span class="c1"># NumPy 1.7.0, raises error for invalid input</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;1979-03-2corruptedstring&apos;</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">ValueError</span><span class="p">:</span> <span class="n">Error</span> <span class="n">parsing</span> <span class="n">datetime</span> <span class="n">string</span> <span class="s2">&quot;1979-03-2corruptedstring&quot;</span> <span class="n">at</span> <span class="n">position</span> <span class="mi">8</span>
+
+<span class="c1"># NumPy 1.6.1, &apos;nat&apos; produces today&apos;s date</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;nat&apos;</span><span class="p">)</span>
+<span class="mi">2012</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">30</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+<span class="c1"># NumPy 1.7.0, &apos;nat&apos; produces not-a-time</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;nat&apos;</span><span class="p">)</span>
+<span class="n">numpy</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;NaT&apos;</span><span class="p">)</span>
+
+<span class="c1"># NumPy 1.6.1, &apos;garbage&apos; produces today&apos;s date</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;garbage&apos;</span><span class="p">)</span>
+<span class="mi">2012</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">30</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+<span class="c1"># NumPy 1.7.0, &apos;garbage&apos; raises an exception</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;garbage&apos;</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">ValueError</span><span class="p">:</span> <span class="n">Error</span> <span class="n">parsing</span> <span class="n">datetime</span> <span class="n">string</span> <span class="s2">&quot;garbage&quot;</span> <span class="n">at</span> <span class="n">position</span> <span class="mi">0</span>
+
+<span class="c1"># NumPy 1.6.1, can&apos;t specify unit in scalar constructor</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;1979-03-22T19:00&apos;</span><span class="p">,</span> <span class="s1">&apos;h&apos;</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">function</span> <span class="n">takes</span> <span class="n">at</span> <span class="n">most</span> <span class="mi">1</span> <span class="n">argument</span> <span class="p">(</span><span class="mi">2</span> <span class="n">given</span><span class="p">)</span>
+<span class="c1"># NumPy 1.7.0, unit in scalar constructor</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;1979-03-22T19:00&apos;</span><span class="p">,</span> <span class="s1">&apos;h&apos;</span><span class="p">)</span>
+<span class="n">numpy</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&apos;1979-03-22T19:00-0500&apos;</span><span class="p">,</span><span class="s1">&apos;h&apos;</span><span class="p">)</span>
+
+<span class="c1"># NumPy 1.6.1, reads ISO 8601 strings w/o TZ as UTC</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T19:00&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[h]&apos;</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">1979</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">22</span> <span class="mi">19</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">datetime64</span><span class="p">[</span><span class="n">h</span><span class="p">])</span>
+<span class="c1"># NumPy 1.7.0, reads ISO 8601 strings w/o TZ as local (ISO specifies this)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T19:00&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[h]&apos;</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T19-0500&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;datetime64[h]&apos;</span><span class="p">)</span>
+
+<span class="c1"># NumPy 1.6.1, doesn&apos;t parse all ISO 8601 strings correctly</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T12&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[h]&apos;</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">1979</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">22</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">datetime64</span><span class="p">[</span><span class="n">h</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T12:00&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[h]&apos;</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">1979</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">22</span> <span class="mi">12</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">datetime64</span><span class="p">[</span><span class="n">h</span><span class="p">])</span>
+<span class="c1"># NumPy 1.7.0, handles this case correctly</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T12&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[h]&apos;</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T12-0500&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;datetime64[h]&apos;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T12:00&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[h]&apos;</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T12-0500&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;datetime64[h]&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="unit-conversion">
+<h3><span class="yiyi-st" id="yiyi-175">Unit Conversion</span></h3>
+<p><span class="yiyi-st" id="yiyi-176">日期时间的1.6实现不能正确地在单位之间转换。</span><span class="yiyi-st" id="yiyi-177">：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># NumPy 1.6.1, the representation value is untouched</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[D]&apos;</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">1979</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">22</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">datetime64</span><span class="p">[</span><span class="n">D</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[D]&apos;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&apos;M8[M]&apos;</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">2250</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">01</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">datetime64</span><span class="p">[</span><span class="n">M</span><span class="p">])</span>
+<span class="c1"># NumPy 1.7.0, the representation is scaled accordingly</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[D]&apos;</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;datetime64[D]&apos;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[D]&apos;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&apos;M8[M]&apos;</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;datetime64[M]&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="datetime-arithmetic">
+<h3><span class="yiyi-st" id="yiyi-178">Datetime Arithmetic</span></h3>
+<p><span class="yiyi-st" id="yiyi-179">日期时间的1.6实现仅对算术运算的小子集正确工作。</span><span class="yiyi-st" id="yiyi-180">这里我们展示一些简单的案例。</span><span class="yiyi-st" id="yiyi-181">：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># NumPy 1.6.1, produces invalid results if units are incompatible</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T12&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[h]&apos;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="o">*</span><span class="mi">60</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;m8[m]&apos;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">1970</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.080988</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">datetime64</span><span class="p">[</span><span class="n">us</span><span class="p">])</span>
+<span class="c1"># NumPy 1.7.0, promotes to higher-resolution unit</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T12&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[h]&apos;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="o">*</span><span class="mi">60</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;m8[m]&apos;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T15:00-0500&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;datetime64[m]&apos;</span><span class="p">)</span>
+
+<span class="c1"># NumPy 1.6.1, arithmetic works if everything is microseconds</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T12:00&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[us]&apos;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">1000000</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;m8[us]&apos;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">1979</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">22</span> <span class="mi">15</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">datetime64</span><span class="p">[</span><span class="n">us</span><span class="p">])</span>
+<span class="c1"># NumPy 1.7.0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T12:00&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;M8[us]&apos;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">1000000</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;m8[us]&apos;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="n">array</span><span class="p">([</span><span class="s1">&apos;1979-03-22T15:00:00.000000-0500&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;datetime64[us]&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>

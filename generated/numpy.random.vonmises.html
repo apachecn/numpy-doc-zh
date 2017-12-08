@@ -1,0 +1,86 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.vonmises</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.vonmises.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.vonmises.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.vonmises"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">vonmises</code><span class="sig-paren">(</span><em>mu</em>, <em>kappa</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从von Mises分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">样品从具有指定模式（mu）和色散（kappa）的von Mises分布在间隔[-pi，pi]上绘制。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">von Mises分布（也称为圆形正态分布）是单位圆上的连续概率分布。</span><span class="yiyi-st" id="yiyi-17">它可以被认为是正态分布的圆形模拟。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>mu</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">模式（“中心”）的分布。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>kappa</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">分布的分散，必须&gt; = 0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">输出形状。</span><span class="yiyi-st" id="yiyi-25">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-26">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>samples</strong>：scalar或ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">返回的样本，在区间[-pi，pi]。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-31"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.vonmises</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">概率密度函数，分布或累积密度函数等。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-34">von Mises分布的概率密度为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-35">其中<img alt="\mu" class="math" src="../../_images/math/fb6d665bbe0c01fc1af5c5f5fa7df40dc71331d7.png" style="vertical-align: -3px">是模式和<img alt="\kappa" class="math" src="../../_images/math/09614184392d1d0c17c933c71030b937df2c8355.png" style="vertical-align: 0px">离散，并且<img alt="I_0(\kappa)" class="math" src="../../_images/math/5eccfce49af55eacd5ac77815cba6d2e40c43936.png" style="vertical-align: -4px">是阶数0的修改的贝塞尔函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-36">冯米塞斯以理查德&#xB7;埃德勒&#xB7;冯&#xB7;米塞斯的名字命名，他出生于奥地利 - 匈牙利，现在是乌克兰。</span><span class="yiyi-st" id="yiyi-37">他于1939年逃往美国，成为哈佛大学的教授。</span><span class="yiyi-st" id="yiyi-38">他在概率论，空气动力学，流体力学和科学哲学工作。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r270" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-40"><a class="fn-backref" href="#id1">[R270]</a></span></td><td><span class="yiyi-st" id="yiyi-41">Abramowitz，M。和Stegun，I。</span><span class="yiyi-st" id="yiyi-42">一个。</span><span class="yiyi-st" id="yiyi-43">（Eds。）。</span><span class="yiyi-st" id="yiyi-44">“Handbook of Mathematical Functions with Formula，Graphs，and Mathematical Tables，9th printing，”New York：Dover，1972。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r271" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-45"><a class="fn-backref" href="#id2">[R271]</a></span></td><td><span class="yiyi-st" id="yiyi-46">von Mises，R.，“Mathematical Theory of Probability and Statistics”，New York：Academic Press，1964。</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-47">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-48">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mu</span><span class="p">,</span> <span class="n">kappa</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span> <span class="c1"># mean and dispersion</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">vonmises</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-49">显示样本的直方图，以及概率密度函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="k">import</span> <span class="n">i0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">51</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">kappa</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">i0</span><span class="p">(</span><span class="n">kappa</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-50">（<a class="reference external" href="../../reference/generated/numpy-random-vonmises-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-vonmises-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-vonmises-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-vonmises-1.png" src="../../_images/numpy-random-vonmises-1.png">
+</div>
+</dd></dl>

@@ -1,0 +1,27 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.dtype.fields</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.fields.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.fields.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="attribute">
+<dt id="numpy.dtype.fields"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">dtype.</code><code class="descname">fields</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">为此数据类型定义的命名字段字典，或<code class="docutils literal"><span class="pre">None</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">字典由作为字段名称的键索引。</span><span class="yiyi-st" id="yiyi-17">字典中的每个条目都是一个完全描述该字段的元组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span> <span class="n">offset</span><span class="p">[,</span> <span class="n">title</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-18">如果存在，可选标题可以是任何对象（如果它是字符串或unicode，则它也将是字段字典中的键，否则它是元数据）。</span><span class="yiyi-st" id="yiyi-19">还要注意，元组的前两个元素可以作为参数直接传递给<code class="docutils literal"><span class="pre">ndarray.getfield</span></code>和<code class="docutils literal"><span class="pre">ndarray.setfield</span></code>方法。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-20">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="numpy.ndarray.getfield.html#numpy.ndarray.getfield" title="numpy.ndarray.getfield"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.getfield</span></code></a>，<a class="reference internal" href="numpy.ndarray.setfield.html#numpy.ndarray.setfield" title="numpy.ndarray.setfield"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.setfield</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&apos;name&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;grades&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span>
+<span class="go">{&apos;grades&apos;: (dtype((&apos;float64&apos;,(2,))), 16), &apos;name&apos;: (dtype(&apos;|S16&apos;), 0)}</span>
+</pre></div>
+</div>
+</dd></dl>

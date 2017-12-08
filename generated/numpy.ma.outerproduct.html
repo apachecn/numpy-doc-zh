@@ -1,0 +1,94 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.outerproduct</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.outerproduct.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.outerproduct.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.outerproduct"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">outerproduct</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L7335-L7347"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">计算两个向量的外积。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">给定两个向量<code class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">[a0，</span> <span class="pre">a1，</span> <span class="pre">/ t5&gt; <span class="pre">aM]</span></span></code>和<code class="docutils literal"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">[b0，</span> <span class="pre">b1 ，</span> <span class="pre">...，</span> <span class="pre">bN]</span></code>，外部产品<a class="reference internal" href="#r51" id="id1">[R51] </a></span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">a0</span><span class="o">*</span><span class="n">b0</span>  <span class="n">a0</span><span class="o">*</span><span class="n">b1</span> <span class="o">...</span> <span class="n">a0</span><span class="o">*</span><span class="n">bN</span> <span class="p">]</span>
+ <span class="p">[</span><span class="n">a1</span><span class="o">*</span><span class="n">b0</span>    <span class="o">.</span>
+ <span class="p">[</span> <span class="o">...</span>          <span class="o">.</span>
+ <span class="p">[</span><span class="n">aM</span><span class="o">*</span><span class="n">b0</span>            <span class="n">aM</span><span class="o">*</span><span class="n">bN</span> <span class="p">]]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：（M，）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">第一个输入向量。</span><span class="yiyi-st" id="yiyi-20">如果不是已经是1维的，则输入被展平。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>b</strong>：（N，）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">第二个输入向量。</span><span class="yiyi-st" id="yiyi-23">如果不是已经是1维的，则输入被展平。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>out</strong>：（M，N）ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">存储结果的位置</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-26"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>out</strong>：（M，N）ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29"><code class="docutils literal"><span class="pre">out [i，</span> <span class="pre">j]</span> <span class="pre">=</span> <span class="pre">a [i]</span> <span class="pre">*</span> <span class="pre">b [j]</span></code></span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.ma.inner.html#numpy.ma.inner" title="numpy.ma.inner"><code class="xref py py-obj docutils literal"><span class="pre">inner</span></code></a>，<code class="xref py py-obj docutils literal"><span class="pre">einsum</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-33">屏蔽值由0替换。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r51" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-35">[R51]</span></td><td><span class="yiyi-st" id="yiyi-36"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em>：GH Golub和CFvan Loan，<em>Matrix Computations</em>，3rd ed。，Baltimore， MD，Johns Hopkins University Press，1996，</span><span class="yiyi-st" id="yiyi-37">8.</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-39">为计算Mandelbrot集制作一个（<em>非常</em>粗略）网格：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">5</span><span class="p">,)),</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rl</span>
+<span class="go">array([[-2., -1.,  0.,  1.,  2.],</span>
+<span class="go">       [-2., -1.,  0.,  1.,  2.],</span>
+<span class="go">       [-2., -1.,  0.,  1.,  2.],</span>
+<span class="go">       [-2., -1.,  0.,  1.,  2.],</span>
+<span class="go">       [-2., -1.,  0.,  1.,  2.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">5</span><span class="p">,)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span>
+<span class="go">array([[ 0.+2.j,  0.+2.j,  0.+2.j,  0.+2.j,  0.+2.j],</span>
+<span class="go">       [ 0.+1.j,  0.+1.j,  0.+1.j,  0.+1.j,  0.+1.j],</span>
+<span class="go">       [ 0.+0.j,  0.+0.j,  0.+0.j,  0.+0.j,  0.+0.j],</span>
+<span class="go">       [ 0.-1.j,  0.-1.j,  0.-1.j,  0.-1.j,  0.-1.j],</span>
+<span class="go">       [ 0.-2.j,  0.-2.j,  0.-2.j,  0.-2.j,  0.-2.j]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span> <span class="o">=</span> <span class="n">rl</span> <span class="o">+</span> <span class="n">im</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span>
+<span class="go">array([[-2.+2.j, -1.+2.j,  0.+2.j,  1.+2.j,  2.+2.j],</span>
+<span class="go">       [-2.+1.j, -1.+1.j,  0.+1.j,  1.+1.j,  2.+1.j],</span>
+<span class="go">       [-2.+0.j, -1.+0.j,  0.+0.j,  1.+0.j,  2.+0.j],</span>
+<span class="go">       [-2.-1.j, -1.-1.j,  0.-1.j,  1.-1.j,  2.-1.j],</span>
+<span class="go">       [-2.-2.j, -1.-2.j,  0.-2.j,  1.-2.j,  2.-2.j]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">使用字母“矢量”的示例：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;a&apos;</span><span class="p">,</span> <span class="s1">&apos;b&apos;</span><span class="p">,</span> <span class="s1">&apos;c&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">array([[a, aa, aaa],</span>
+<span class="go">       [b, bb, bbb],</span>
+<span class="go">       [c, cc, ccc]], dtype=object)</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,61 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.choose</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.choose.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.choose.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.choose"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">choose</code><span class="sig-paren">(</span><em>indices</em>, <em>choices</em>, <em>out=None</em>, <em>mode=&apos;raise&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L7022-L7094"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">使用索引数组从一组选择中构造新的数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">给定一个整数的数组和一组n个选择数组，此方法将创建一个新的数组，它合并每个选择数组。</span><span class="yiyi-st" id="yiyi-17">在<em class="xref py py-obj">a</em>中的值为i的情况下，新数组将具有choice [i]包含在同一位置的值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：intar的ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">此数组必须在<code class="docutils literal"><span class="pre">[0，</span> <span class="pre">n-1]</span></code>中包含整数，其中n是选项数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>choices</strong>：数组的序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">选择数组。</span><span class="yiyi-st" id="yiyi-23">索引数组和所有选择应该可以广播到相同的形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>out</strong>：数组，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">如果提供，结果将被插入到此数组中。</span><span class="yiyi-st" id="yiyi-26">它应该是适当的形状和<em class="xref py py-obj">dtype</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>mode</strong>：{&apos;raise&apos;，&apos;wrap&apos;，&apos;clip&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">指定超越界限索引的行为。</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-29">&apos;raise&apos;：引发错误</span></li>
+<li><span class="yiyi-st" id="yiyi-30">&apos;wrap&apos;：wrap around</span></li>
+<li><span class="yiyi-st" id="yiyi-31">&apos;clip&apos;：剪辑到范围</span></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-32">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-33"><strong>merged_array</strong>：数组</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-34">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="#numpy.ma.choose" title="numpy.ma.choose"><code class="xref py py-obj docutils literal"><span class="pre">choose</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">等效函数</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">choice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">choose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">choice</span><span class="p">)</span>
+<span class="go">masked_array(data = [3 2 1],</span>
+<span class="go">      mask = False,</span>
+<span class="go">      fill_value=999999)</span>
+</pre></div>
+</div>
+</dd></dl>

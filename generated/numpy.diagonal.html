@@ -1,0 +1,99 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.diagonal</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.diagonal.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.diagonal.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.diagonal"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">diagonal</code><span class="sig-paren">(</span><em>a</em>, <em>offset=0</em>, <em>axis1=0</em>, <em>axis2=1</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L1206-L1316"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回指定的对角线。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">如果<em class="xref py py-obj">a</em>是2-D，则返回具有给定偏移的<em class="xref py py-obj">a</em>的对角线，即，形式<code class="docutils literal"><span class="pre">a [ </span> <span class="pre">i + offset]</span></code>。</span><span class="yiyi-st" id="yiyi-16">如果<em class="xref py py-obj">a</em>具有多于两个维度，则由<em class="xref py py-obj">axis1</em>和<em class="xref py py-obj">axis2</em>指定的轴用于确定2-D子阵列，返回。</span><span class="yiyi-st" id="yiyi-17">可以通过删除<em class="xref py py-obj">axis1</em>和<em class="xref py py-obj">axis2</em>并将右侧的索引添加到等于所生成的对角线的大小来确定生成的数组的形状。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">在1.7之前的NumPy版本中，此函数总是返回一个新的独立数组，其中包含对角线中的值的副本。</span></p>
+<p><span class="yiyi-st" id="yiyi-19">在NumPy 1.7和1.8中，它继续返回对角线的副本，但是根据这个事实被弃用。</span><span class="yiyi-st" id="yiyi-20">写入结果数组继续工作，就像以前一样，但发出了FutureWarning。</span></p>
+<p><span class="yiyi-st" id="yiyi-21">从NumPy 1.9开始，它返回原始数组的只读视图。</span><span class="yiyi-st" id="yiyi-22">尝试写入生成的数组将产生错误。</span></p>
+<p><span class="yiyi-st" id="yiyi-23">在将来的某个版本中，它将返回读/写视图，并且写入返回的数组将更改原始数组。</span><span class="yiyi-st" id="yiyi-24">返回的数组将具有与输入数组相同的类型。</span></p>
+<p><span class="yiyi-st" id="yiyi-25">如果你不写这个函数返回的数组，那么你可以忽略所有上面的。</span></p>
+<p><span class="yiyi-st" id="yiyi-26">如果你依赖于当前的行为，那么我们建议显式复制返回的数组，即使用<code class="docutils literal"><span class="pre">np.diagonal(a).copy()</span></code>而不是<code class="docutils literal"><span class="pre">np.diagonal(a)</span></code></span><span class="yiyi-st" id="yiyi-27">这将与过去和未来版本的NumPy工作。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">数组，从中获取对角线。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>offset</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">对角线与主对角线的偏移。</span><span class="yiyi-st" id="yiyi-33">可以是正或负。</span><span class="yiyi-st" id="yiyi-34">默认为主对角线（0）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35"><strong>axis1</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-36">用作要从中获取对角线的2-D子阵列的第一轴的轴。</span><span class="yiyi-st" id="yiyi-37">默认为第一轴（0）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-38"><strong>axis2</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-39">轴用作要从其获取对角线的2-D子阵列的第二轴。</span><span class="yiyi-st" id="yiyi-40">默认为第二轴（1）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-41">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-42"><strong>array_of_diagonals</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-43">如果<em class="xref py py-obj">a</em>是2-D而不是矩阵，则返回与包含对角线的<em class="xref py py-obj">a</em>相同类型的1-D数字组。</span><span class="yiyi-st" id="yiyi-44">如果<em class="xref py py-obj">a</em>是矩阵，则返回包含对角线的1-D数组，以保持向后兼容性。</span><span class="yiyi-st" id="yiyi-45">如果<em class="xref py py-obj">a</em>的维度大于2，则返回对角线的数组，从最左边维度到最右边“打包”（例如，如果<em class="xref py py-obj">a</em> 3-D，则对角线沿着行“包装”）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-46">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-47"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-48">如果<em class="xref py py-obj">a</em>的尺寸小于2。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-49">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="numpy.diag.html#numpy.diag" title="numpy.diag"><code class="xref py py-obj docutils literal"><span class="pre">diag</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-51">MATLAB工作类似于1-D和2-D数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="numpy.diagflat.html#numpy.diagflat" title="numpy.diagflat"><code class="xref py py-obj docutils literal"><span class="pre">diagflat</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-53">创建对角数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="numpy.trace.html#numpy.trace" title="numpy.trace"><code class="xref py py-obj docutils literal"><span class="pre">trace</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-55">沿对角线求和。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-56">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0, 1],</span>
+<span class="go">       [2, 3]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">diagonal</span><span class="p">()</span>
+<span class="go">array([0, 3])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([1])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-57">3-D示例：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span> <span class="n">a</span>
+<span class="go">array([[[0, 1],</span>
+<span class="go">        [2, 3]],</span>
+<span class="go">       [[4, 5],</span>
+<span class="go">        [6, 7]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># Main diagonals of two arrays created by skipping</span>
+<span class="gp">... </span>           <span class="mi">0</span><span class="p">,</span> <span class="c1"># across the outer(left)-most axis last and</span>
+<span class="gp">... </span>           <span class="mi">1</span><span class="p">)</span> <span class="c1"># the &quot;middle&quot; (row) axis first.</span>
+<span class="go">array([[0, 6],</span>
+<span class="go">       [1, 7]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-58">我们刚刚获得的主对角线的子阵列；注意，每个对应于固定最右（列）轴，并且对角线在行中“打包”。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># main diagonal is [0 6]</span>
+<span class="go">array([[0, 2],</span>
+<span class="go">       [4, 6]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># main diagonal is [1 7]</span>
+<span class="go">array([[1, 3],</span>
+<span class="go">       [5, 7]])</span>
+</pre></div>
+</div>
+</dd></dl>

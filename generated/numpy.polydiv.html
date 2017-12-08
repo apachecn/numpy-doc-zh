@@ -1,0 +1,54 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.polydiv</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polydiv.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polydiv.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polydiv"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.</code><code class="descname">polydiv</code><span class="sig-paren">(</span><em>u</em>, <em>v</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/polynomial.py#L847-L910"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回多项式除法的商和余数。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">输入数组分别是“分子”（被除数）和“分母”（除数）多项式的系数（包括等于零的任何系数）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>u</strong>：array_like or poly1d</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">股息多项式的系数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>v</strong>：array_like或poly1d</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">除数多项式的系数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>q</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">商的系数，包括等于零的系数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>r</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">余数的系数，包括等于零的系数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.poly.html#numpy.poly" title="numpy.poly"><code class="xref py py-obj docutils literal"><span class="pre">poly</span></code></a>, <a class="reference internal" href="numpy.polyadd.html#numpy.polyadd" title="numpy.polyadd"><code class="xref py py-obj docutils literal"><span class="pre">polyadd</span></code></a>, <a class="reference internal" href="numpy.polyder.html#numpy.polyder" title="numpy.polyder"><code class="xref py py-obj docutils literal"><span class="pre">polyder</span></code></a>, <a class="reference internal" href="#numpy.polydiv" title="numpy.polydiv"><code class="xref py py-obj docutils literal"><span class="pre">polydiv</span></code></a>, <a class="reference internal" href="numpy.polyfit.html#numpy.polyfit" title="numpy.polyfit"><code class="xref py py-obj docutils literal"><span class="pre">polyfit</span></code></a>, <a class="reference internal" href="numpy.polyint.html#numpy.polyint" title="numpy.polyint"><code class="xref py py-obj docutils literal"><span class="pre">polyint</span></code></a>, <a class="reference internal" href="numpy.polymul.html#numpy.polymul" title="numpy.polymul"><code class="xref py py-obj docutils literal"><span class="pre">polymul</span></code></a>, <a class="reference internal" href="numpy.polysub.html#numpy.polysub" title="numpy.polysub"><code class="xref py py-obj docutils literal"><span class="pre">polysub</span></code></a>, <a class="reference internal" href="numpy.polyval.html#numpy.polyval" title="numpy.polyval"><code class="xref py py-obj docutils literal"><span class="pre">polyval</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-30">Both <em class="xref py py-obj">u</em> and <em class="xref py py-obj">v</em> must be 0-d or 1-d (ndim = 0 or 1), but <em class="xref py py-obj">u.ndim</em> need not equal <em class="xref py py-obj">v.ndim</em>. </span><span class="yiyi-st" id="yiyi-31">换句话说，所有四种可能的组合 -  <code class="docutils literal"><span class="pre">u.ndim</span> <span class="pre">=</span> <span class="pre">v.ndim</span> <span class="pre">=</span> <span class="pre"> 0</span></code>，<code class="docutils literal"><span class="pre">u.ndim</span> <span class="pre">=</span> <span class="pre">v.ndim</span> <span class="pre">=</span> <span class="pre">1</span></code>，<code class="docutils literal"><span class="pre">u.ndim</span> <span class="pre">=</span> <span class="pre">1，</span> <span class="pre">v.ndim  <span class="pre">=</span> <span class="pre">0</span></span></code>和<code class="docutils literal"><span class="pre">u.ndim</span> <span class="pre">=</span> <span class="pre">0 ，</span> <span class="pre">v.ndim</span> <span class="pre">=</span> <span class="pre">1</span></code>  - 工作。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="math">
+<p></p>
+</div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polydiv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">(array([ 1.5 ,  1.75]), array([ 0.25]))</span>
+</pre></div>
+</div>
+</dd></dl>

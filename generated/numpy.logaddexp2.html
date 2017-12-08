@@ -1,0 +1,56 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.logaddexp2</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.logaddexp2.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.logaddexp2.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.logaddexp2"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">logaddexp2</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;logaddexp2&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">以2为底的输入的乘方和的对数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">Calculates <code class="docutils literal"><span class="pre">log2(2**x1</span> <span class="pre">+</span> <span class="pre">2**x2)</span></code>. </span><span class="yiyi-st" id="yiyi-16">当所计算的事件的概率可能小到超过正常浮点数的范围时，该函数在机器学习中是有用的。</span><span class="yiyi-st" id="yiyi-17">在这种情况下，可以使用计算的概率的基于2的对数。</span><span class="yiyi-st" id="yiyi-18">此函数允许以这种方式添加存储的概率。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>x1，x2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">输入值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">数组存储结果。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>result</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">Base-2 logarithm of <code class="docutils literal"><span class="pre">2**x1</span> <span class="pre">+</span> <span class="pre">2**x2</span></code>.</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.logaddexp.html#numpy.logaddexp" title="numpy.logaddexp"><code class="xref py py-obj docutils literal"><span class="pre">logaddexp</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">输入的求和的对数。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-31"><span class="versionmodified">版本1.3.0中的新功能。</span></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prob1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prob2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mf">2.5e-50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prob12</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logaddexp2</span><span class="p">(</span><span class="n">prob1</span><span class="p">,</span> <span class="n">prob2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prob1</span><span class="p">,</span> <span class="n">prob2</span><span class="p">,</span> <span class="n">prob12</span>
+<span class="go">(-166.09640474436813, -164.77447664948076, -164.28904982231052)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">2</span><span class="o">**</span><span class="n">prob12</span>
+<span class="go">3.4999999999999914e-50</span>
+</pre></div>
+</div>
+</dd></dl>

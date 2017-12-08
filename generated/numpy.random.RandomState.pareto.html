@@ -1,0 +1,88 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.pareto</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.pareto.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.pareto.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.pareto"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">pareto</code><span class="sig-paren">(</span><em>a</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从具有指定形状的Pareto II或Lomax分布绘制样品。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">Lomax或Pareto II分布是偏移的Pareto分布。</span><span class="yiyi-st" id="yiyi-17">经典的帕累托分布可以通过加上1并乘以标度参数<code class="docutils literal"><span class="pre">m</span></code>从Lomax分布获得（参见注释）。</span><span class="yiyi-st" id="yiyi-18">The smallest value of the Lomax distribution is zero while for the classical Pareto distribution it is <code class="docutils literal"><span class="pre">mu</span></code>, where the standard Pareto distribution has location <code class="docutils literal"><span class="pre">mu</span> <span class="pre">=</span> <span class="pre">1</span></code>. </span><span class="yiyi-st" id="yiyi-19">Lomax也可以被认为是广义帕累托分布的简化版本（在SciPy中可用），比例设置为1并且位置设置为零。</span></p>
+<p><span class="yiyi-st" id="yiyi-20">Pareto分布必须大于零，并且在上面是无界的。</span><span class="yiyi-st" id="yiyi-21">它也被称为“80-20规则”。</span><span class="yiyi-st" id="yiyi-22">在这种分布中，80％的权重在该范围的最低20％，而另外20％的权重在剩余的80％的范围内。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>shape</strong>：float，&gt; 0。</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">形状的分布。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">输出形状。</span><span class="yiyi-st" id="yiyi-28">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-29">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-31"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.lomax.pdf</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">概率密度函数，分布或累积密度函数等。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.genpareto.pdf</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">概率密度函数，分布或累积密度函数等。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-36">帕累托分布的概率密度为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-37">其中<img alt="a" class="math" src="../../_images/math/d54327e6a802a38385738bc7c146cadefa43d3f3.png" style="vertical-align: 0px">是形状，<img alt="m" class="math" src="../../_images/math/2a6f9b0b4119433a3eae475d163e0694af1ca408.png" style="vertical-align: 0px">刻度。</span></p>
+<p><span class="yiyi-st" id="yiyi-38">帕累托分布以意大利经济学家Vilfredo Pareto命名，是一个幂律概率分布，用于许多现实世界的问题。</span><span class="yiyi-st" id="yiyi-39">在经济学领域之外，它通常被称为布拉德福德分布。</span><span class="yiyi-st" id="yiyi-40">帕累托开发了分布来描述一个经济体中财富的分布。</span><span class="yiyi-st" id="yiyi-41">它还发现在保险，网页访问统计，油田大小和许多其他问题，包括Sourceforge <a class="reference internal" href="#r180" id="id1">[R180]</a>中项目的下载频率。</span><span class="yiyi-st" id="yiyi-42">它是所谓的“胖尾”分布之一。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r180" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-44">[R180]</span></td><td><span class="yiyi-st" id="yiyi-45"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em> Francis Hunt和Paul Johnson，On the Pareto Distribution of Sourceforge projects。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r181" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-46"><a class="fn-backref" href="#id3">[R181]</a></span></td><td><span class="yiyi-st" id="yiyi-47">Pareto，V。（1896）。</span><span class="yiyi-st" id="yiyi-48">政治经济学课程。</span><span class="yiyi-st" id="yiyi-49">洛桑。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r182" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-50"><a class="fn-backref" href="#id4">[R182]</a></span></td><td><span class="yiyi-st" id="yiyi-51">Reiss，R.D.，Thomas，M。（2001），Statistical Analysis of Extreme Values，Birkhauser Verlag，Basel，第23-30页。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r183" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-52"><a class="fn-backref" href="#id5">[R183]</a></span></td><td><span class="yiyi-st" id="yiyi-53">维基百科，“帕累托分布”，<a class="reference external" href="http://en.wikipedia.org/wiki/Pareto_distribution">http://en.wikipedia.org/wiki/Pareto_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-54">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-55">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">2.</span>  <span class="c1"># shape and mode</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">pareto</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">m</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-56">显示样本的直方图，以及概率密度函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fit</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">m</span><span class="o">**</span><span class="n">a</span> <span class="o">/</span> <span class="n">bins</span><span class="o">**</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">count</span><span class="p">)</span><span class="o">*</span><span class="n">fit</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">fit</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-57">（<a class="reference external" href="../../reference/generated/numpy-random-RandomState-pareto-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-pareto-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-pareto-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-RandomState-pareto-1.png" src="../../_images/numpy-random-RandomState-pareto-1.png">
+</div>
+</dd></dl>

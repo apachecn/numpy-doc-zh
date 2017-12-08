@@ -1,0 +1,65 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.matrix.setflags</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.setflags.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.setflags.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.matrix.setflags"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">matrix.</code><code class="descname">setflags</code><span class="sig-paren">(</span><em>write=None</em>, <em>align=None</em>, <em>uic=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">分别设置数组标志WRITEABLE，ALIGNED和UPDATEIFCOPY。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">这些布尔值标志影响numpy如何解释<em class="xref py py-obj">a</em>使用的内存区域（请参见下面的注释）。</span><span class="yiyi-st" id="yiyi-17">如果数据实际根据类型对齐，则ALIGNED标志只能设置为True。</span><span class="yiyi-st" id="yiyi-18">UPDATEIFCOPY标志永远不能设置为True。</span><span class="yiyi-st" id="yiyi-19">如果数组拥有自己的内存，或者内存的最终所有者暴露了可写缓冲区接口，或者是字符串，那么标志WRITEABLE只能设置为True。</span><span class="yiyi-st" id="yiyi-20">（字符串的例外，使得可以在不复制内存的情况下完成取消复制。）</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>写</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">描述是否可以写入<em class="xref py py-obj">a</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>align</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">描述<em class="xref py py-obj">a</em>是否与其类型正确对齐。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>uic</strong>：bool，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">描述<em class="xref py py-obj">a</em>是否是另一个“基本”数组的副本。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-29">数组标志提供关于如何解释用于数组的存储区的信息。</span><span class="yiyi-st" id="yiyi-30">有6个布尔标志在使用，其中只有三个可以由用户更改：UPDATEIFCOPY，WRITEABLE和ALIGNED。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">WRITEABLE（W）数据区可以写入；</span></p>
+<p><span class="yiyi-st" id="yiyi-32">ALIGNED（A）数据和步长适合硬件（由编译器确定）；</span></p>
+<p><span class="yiyi-st" id="yiyi-33">UPDATEIFCOPY（U）这个数组是一些其他数组的副本（由.base引用）。</span><span class="yiyi-st" id="yiyi-34">当此数组被释放时，基数组将使用此数组的内容进行更新。</span></p>
+<p><span class="yiyi-st" id="yiyi-35">所有标志可以使用它们的第一个（大写）字母以及全名来访问。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([[3, 1, 7],</span>
+<span class="go">       [2, 0, 0],</span>
+<span class="go">       [8, 5, 9]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">flags</span>
+<span class="go">  C_CONTIGUOUS : True</span>
+<span class="go">  F_CONTIGUOUS : False</span>
+<span class="go">  OWNDATA : True</span>
+<span class="go">  WRITEABLE : True</span>
+<span class="go">  ALIGNED : True</span>
+<span class="go">  UPDATEIFCOPY : False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">setflags</span><span class="p">(</span><span class="n">write</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">flags</span>
+<span class="go">  C_CONTIGUOUS : True</span>
+<span class="go">  F_CONTIGUOUS : False</span>
+<span class="go">  OWNDATA : True</span>
+<span class="go">  WRITEABLE : False</span>
+<span class="go">  ALIGNED : False</span>
+<span class="go">  UPDATEIFCOPY : False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">setflags</span><span class="p">(</span><span class="n">uic</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ValueError</span>: <span class="n">cannot set UPDATEIFCOPY flag to True</span>
+</pre></div>
+</div>
+</dd></dl>

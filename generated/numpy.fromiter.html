@@ -1,0 +1,46 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fromiter</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fromiter.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fromiter.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fromiter"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">fromiter</code><span class="sig-paren">(</span><em>iterable</em>, <em>dtype</em>, <em>count=-1</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从可迭代对象创建新的1维数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>iterable</strong>：iterable对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">为数组提供数据的可迭代对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>dtype</strong>：数据类型</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">返回的数组的数据类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>count</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">要从<em>可迭代</em>读取的项目数。</span><span class="yiyi-st" id="yiyi-22">默认值为-1，表示读取所有数据。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">输出数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">指定<em class="xref py py-obj">计数</em>可提高性能。</span><span class="yiyi-st" id="yiyi-28">它允许<code class="docutils literal"><span class="pre">fromiter</span></code>预分配输出数组，而不是按需调整大小。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iterable</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fromiter</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="go">array([  0.,   1.,   4.,   9.,  16.])</span>
+</pre></div>
+</div>
+</dd></dl>

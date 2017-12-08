@@ -1,0 +1,89 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.core.defchararray.chararray.view</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.chararray.view.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.chararray.view.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.core.defchararray.chararray.view"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">chararray.</code><code class="descname">view</code><span class="sig-paren">(</span><em>dtype=None</em>, <em>type=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">数组的新视图与相同的数据。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>dtype</strong>：data-type或ndarray子类，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">返回视图的数据类型描述符，例如float32或int16。</span><span class="yiyi-st" id="yiyi-19">默认值“无”导致视图具有与<em class="xref py py-obj">a</em>相同的数据类型。</span><span class="yiyi-st" id="yiyi-20">此参数也可以指定为ndarray子类，然后指定返回对象的类型（这相当于设置<code class="docutils literal"><span class="pre">type</span></code>参数）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>type</strong>：Python类型，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">返回视图的类型，例如，ndarray或matrix。</span><span class="yiyi-st" id="yiyi-23">再次，默认的无导致类型保存。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-25"><code class="docutils literal"><span class="pre">a.view()</span></code>使用两种不同的方式：</span></p>
+<p><span class="yiyi-st" id="yiyi-26"><code class="docutils literal"><span class="pre">a.view(some_dtype)</span></code>或<code class="docutils literal"><span class="pre">a.view(dtype=some_dtype)</span></code>使用不同的数据类型构建数组的内存视图。</span><span class="yiyi-st" id="yiyi-27">这可以导致重新解释存储器的字节。</span></p>
+<p><span class="yiyi-st" id="yiyi-28"><code class="docutils literal"><span class="pre">a.view(ndarray_subclass)</span></code>或<code class="docutils literal"><span class="pre">a.view(type=ndarray_subclass)</span></code>只是返回一个<em class="xref py py-obj">ndarray_subclass</em>的实例，形状，dtype等）</span><span class="yiyi-st" id="yiyi-29">这不会导致内存的重新解释。</span></p>
+<p><span class="yiyi-st" id="yiyi-30">对于<code class="docutils literal"><span class="pre">a.view(some_dtype)</span></code>，如果<code class="docutils literal"><span class="pre">some_dtype</span></code>每个条目具有与先前dtype不同的字节数（例如，将常规数组转换为结构化数组）那么视图的行为不能仅从<code class="docutils literal"><span class="pre">a</span></code>（由<code class="docutils literal"><span class="pre">print(a)</span></code>显示）的表面外观预测。</span><span class="yiyi-st" id="yiyi-31">它还取决于如何将<code class="docutils literal"><span class="pre">a</span></code>存储在存储器中。</span><span class="yiyi-st" id="yiyi-32">因此，如果<code class="docutils literal"><span class="pre">a</span></code>是C有序对有序的，相对于定义为切片或转置等，视图可以给出不同的结果。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&apos;a&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;b&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-34">使用不同的类型和dtype查看数组数据：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">matrix([[513]], dtype=int16)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="go">&lt;class &apos;numpy.matrixlib.defmatrix.matrix&apos;&gt;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-35">在结构化数据组上创建视图，以便可以在计算中使用</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&apos;a&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;b&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xv</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xv</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [3, 4]], dtype=int8)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xv</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([ 2.,  3.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-36">对视图进行更改会更改基础数组</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xv</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">[(1, 20) (3, 4)]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37">使用视图将数组转换为recarray：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span><span class="o">.</span><span class="n">a</span>
+<span class="go">array([1], dtype=int8)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">查看共享数据：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">(9, 10)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">通常在切片，转置，强制排序等定义的数组上避免改变dtype大小（每个条目的字节数）的视图。</span><span class="yiyi-st" id="yiyi-40">：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [4, 5]], dtype=int16)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&apos;width&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;length&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)])</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ValueError</span>: <span class="n">new type not compatible with array.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&apos;width&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;length&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)])</span>
+<span class="go">array([[(1, 2)],</span>
+<span class="go">       [(4, 5)]], dtype=[(&apos;width&apos;, &apos;&lt;i2&apos;), (&apos;length&apos;, &apos;&lt;i2&apos;)])</span>
+</pre></div>
+</div>
+</dd></dl>

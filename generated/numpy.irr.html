@@ -1,0 +1,59 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.irr</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.irr.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.irr.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.irr"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">irr</code><span class="sig-paren">(</span><em>values</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/financial.py#L591-L661"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回内部收益率（IRR）。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">这是“平均”周期性复合回报率，给出净现值0.0；有关更完整的说明，请参阅下面的注释。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>值</strong>：array_like，shape（N，）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">每个时间段输入现金流。</span><span class="yiyi-st" id="yiyi-19">按照惯例，净“存款”是负数，净“提款”是正数。</span><span class="yiyi-st" id="yiyi-20">因此，例如，代表初始投资的<em class="xref py py-obj">值</em>的至少第一元素通常将是负的。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>out</strong>：float</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">周期性输入值的内部回报率。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-25">IRR也许通过一个例子（在下面的例子部分使用np.irr说明）得到最好的理解。</span><span class="yiyi-st" id="yiyi-26">假设一个人投资100个单位，然后定期（固定）间隔进行以下提款：39，59，55，20。</span><span class="yiyi-st" id="yiyi-27">假设结束值为0，那么100的单位投资产生173个单位；然而，由于复利和周期性提款的组合，“平均”回报率既不是简单的0.73 / 4也不是（1.73）^ 0.25-1。</span><span class="yiyi-st" id="yiyi-28">相反，它是等式的解（对于<img alt="r" class="math" src="../../_images/math/93185e65576cafdf1d84242e01b880fef7a7a4d6.png" style="vertical-align: 0px">）：</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-29">通常，对于<em class="xref py py-obj">值</em> <img alt="= [v_0, v_1, ... v_M]" class="math" src="../../_images/math/bd8507d40515f1544246d62e9e7d5a66f8b5f819.png" style="vertical-align: -4px">，irr是等式的解：<a class="reference internal" href="#g32" id="id1">[G32]</a></span></p>
+<div class="math">
+<p></p>
+</div><p class="rubric"><span class="yiyi-st" id="yiyi-30">参考文献</span></p>
+<table class="docutils citation" frame="void" id="g32" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-31">[G32]</span></td><td><span class="yiyi-st" id="yiyi-32"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em> L.J.Gitman，“Principles of Managerial Finance，Brief，”3rd ed。，Addison-Wesley，</span><span class="yiyi-st" id="yiyi-33">348.</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">irr</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">20</span><span class="p">]),</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">0.28095</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">irr</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">74</span><span class="p">]),</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">-0.0955</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">irr</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">]),</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">-0.0833</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">irr</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">]),</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">0.06206</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">irr</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">0.0886</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-35">（与numpy.lib.financial.npv给出的示例进行比较）</span></p>
+</dd></dl>

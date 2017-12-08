@@ -1,0 +1,48 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.matlib.empty</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matlib.empty.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matlib.empty.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.matlib.empty"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.matlib.</code><code class="descname">empty</code><span class="sig-paren">(</span><em>shape</em>, <em>dtype=None</em>, <em>order=&apos;C&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/matlib.py#L13-L49"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回给定形状和类型的新矩阵，而不初始化条目。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>shape</strong>：int或tuple</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">空矩阵的形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">所需的输出数据类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;}，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">是否在存储器中以行主（C风格）或列主（Fortran风格）顺序存储多维数据。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-22">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-23"><code class="xref py py-obj docutils literal"><span class="pre">empty_like</span></code>，<a class="reference internal" href="numpy.matlib.zeros.html#numpy.matlib.zeros" title="numpy.matlib.zeros"><code class="xref py py-obj docutils literal"><span class="pre">zeros</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="#numpy.matlib.empty" title="numpy.matlib.empty"><code class="xref py py-obj docutils literal"><span class="pre">empty</span></code></a>与<a class="reference internal" href="numpy.matlib.zeros.html#numpy.matlib.zeros" title="numpy.matlib.zeros"><code class="xref py py-obj docutils literal"><span class="pre">zeros</span></code></a>不同，不会将矩阵值设置为零，因此可能略微更快。</span><span class="yiyi-st" id="yiyi-26">另一方面，它要求用户手动设置数组中的所有值，并且应谨慎使用。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.matlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matlib</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>    <span class="c1"># filled with random data</span>
+<span class="go">matrix([[  6.76425276e-320,   9.79033856e-307],</span>
+<span class="go">        [  7.39337286e-309,   3.22135945e-309]])        #random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matlib</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="go">matrix([[ 6600475,        0],</span>
+<span class="go">        [ 6586976, 22740995]])                          #random</span>
+</pre></div>
+</div>
+</dd></dl>

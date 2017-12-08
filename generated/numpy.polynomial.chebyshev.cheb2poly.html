@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.chebyshev.cheb2poly</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.cheb2poly.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.cheb2poly.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.chebyshev.cheb2poly"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.chebyshev.</code><code class="descname">cheb2poly</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/chebyshev.py#L377-L435"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">将切比雪夫系列转换为多项式。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">将表示从最低程度到最高程度排序的切比雪夫系数的系数转换为从最低到最高程度排序的等效多项式的系数（相对于“标准”基础）的数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>c</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">1-D数组，包含切比雪夫系数系数，从最低阶到最高阶排序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>pol</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">1-D数组，其包含从最低次项到最高次序排序的等效多项式的系数（相对于“标准”基础）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.polynomial.chebyshev.poly2cheb.html#numpy.polynomial.chebyshev.poly2cheb" title="numpy.polynomial.chebyshev.poly2cheb"><code class="xref py py-obj docutils literal"><span class="pre">poly2cheb</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">在多项式基组之间进行转换的简单方法是使用类实例的convert方法。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">polynomial</span> <span class="k">as</span> <span class="n">P</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">Chebyshev</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">Chebyshev([ 0.,  1.,  2.,  3.], [-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">P</span><span class="o">.</span><span class="n">Polynomial</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
+<span class="go">Polynomial([ -2.,  -8.,   4.,  12.], [-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span><span class="o">.</span><span class="n">cheb2poly</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">array([ -2.,  -8.,   4.,  12.])</span>
+</pre></div>
+</div>
+</dd></dl>

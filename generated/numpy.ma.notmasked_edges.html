@@ -1,0 +1,54 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.notmasked_edges</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.notmasked_edges.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.notmasked_edges.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.notmasked_edges"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">notmasked_edges</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/extras.py#L1478-L1526"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">找到沿轴的第一个和最后一个未屏蔽值的索引。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">如果所有值都被屏蔽，则返回None。</span><span class="yiyi-st" id="yiyi-17">否则，返回两个元组的列表，分别对应于第一个和最后一个未屏蔽值的索引。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">沿其执行操作的轴。</span><span class="yiyi-st" id="yiyi-23">如果为无（默认值），则适用于数组的展平版本。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>edges</strong>：ndarray或list</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">如果数组中有任何掩码数据，则指定开始和结束索引的数组。</span><span class="yiyi-st" id="yiyi-27">如果数组中没有屏蔽数据，则<em class="xref py py-obj">edges</em>是第一个和最后一个索引的列表。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.ma.flatnotmasked_contiguous.html#numpy.ma.flatnotmasked_contiguous" title="numpy.ma.flatnotmasked_contiguous"><code class="xref py py-obj docutils literal"><span class="pre">flatnotmasked_contiguous</span></code></a>，<a class="reference internal" href="numpy.ma.flatnotmasked_edges.html#numpy.ma.flatnotmasked_edges" title="numpy.ma.flatnotmasked_edges"><code class="xref py py-obj docutils literal"><span class="pre">flatnotmasked_edges</span></code></a>，<a class="reference internal" href="numpy.ma.notmasked_contiguous.html#numpy.ma.notmasked_contiguous" title="numpy.ma.notmasked_contiguous"><code class="xref py py-obj docutils literal"><span class="pre">notmasked_contiguous</span></code></a>，<a class="reference internal" href="numpy.ma.clump_masked.html#numpy.ma.clump_masked" title="numpy.ma.clump_masked"><code class="xref py py-obj docutils literal"><span class="pre">clump_masked</span></code></a>，<a class="reference internal" href="numpy.ma.clump_unmasked.html#numpy.ma.clump_unmasked" title="numpy.ma.clump_unmasked"><code class="xref py py-obj docutils literal"><span class="pre">clump_unmasked</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">am</span><span class="p">[</span><span class="o">~</span><span class="n">am</span><span class="o">.</span><span class="n">mask</span><span class="p">])</span>
+<span class="go">array([0, 1, 2, 3, 6])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">notmasked_edges</span><span class="p">(</span><span class="n">ma</span><span class="p">)</span>
+<span class="go">array([0, 6])</span>
+</pre></div>
+</div>
+</dd></dl>

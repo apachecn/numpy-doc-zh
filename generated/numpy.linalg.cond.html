@@ -1,0 +1,113 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.cond</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.cond.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.cond.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.cond"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">cond</code><span class="sig-paren">(</span><em>x</em>, <em>p=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L1375-L1459"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算矩阵的条件数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">此函数能够根据<em class="xref py py-obj">p</em>的值（参见下面的参数）使用七种不同范数中的一种返回条件编号。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>x</strong>：（...，M，N）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">要求条件数的矩阵。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>p</strong>：{None，1，-1，2，-2，inf，-inf，&apos;fro&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">规范的顺序：</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><span class="yiyi-st" id="yiyi-21">p</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-22">矩阵的范数</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-23">没有</span></td>
+<td><span class="yiyi-st" id="yiyi-24">2范数，使用<code class="docutils literal"><span class="pre">SVD</span></code>直接计算</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-25">&apos;fro&apos;</span></td>
+<td><span class="yiyi-st" id="yiyi-26">Frobenius范数</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-27">inf</span></td>
+<td><span class="yiyi-st" id="yiyi-28">max（sum（abs（x），axis = 1））</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-29">-inf</span></td>
+<td><span class="yiyi-st" id="yiyi-30">min（sum（abs（x），axis = 1））</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-31">1</span></td>
+<td><span class="yiyi-st" id="yiyi-32">max（sum（abs（x），axis = 0））</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33">-1</span></td>
+<td><span class="yiyi-st" id="yiyi-34">min（sum（abs（x），axis = 0））</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-35">2</span></td>
+<td><span class="yiyi-st" id="yiyi-36">2范数（最大唱。</span><span class="yiyi-st" id="yiyi-37">值）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-38">-2</span></td>
+<td><span class="yiyi-st" id="yiyi-39">最小奇异值</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-40">inf表示numpy.inf对象，Frobenius范数是平方和范数的根。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-41">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-42"><strong>c</strong>：{float，inf}</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-43">矩阵的条件数。</span><span class="yiyi-st" id="yiyi-44">可能是无限的。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-45">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.linalg.norm.html#numpy.linalg.norm" title="numpy.linalg.norm"><code class="xref py py-obj docutils literal"><span class="pre">numpy.linalg.norm</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-47">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-48">条件数<em class="xref py py-obj">x</em>被定义为<em class="xref py py-obj">x</em>乘以<em class="xref py py-obj">x</em> <a class="reference internal" href="#r37" id="id1">[R37]  t3的倒数范数的范数&gt;；该范数可以是通常的L2范数（平方和的根）或多个其他矩阵范数中的一个。</a></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-49">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r37" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-50">[R37]</span></td><td><span class="yiyi-st" id="yiyi-51"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em> G.Strang，<em>Linear Algebra and Its Applications</em>，Orlando，FL，Academic Press， Inc.，1980，</span><span class="yiyi-st" id="yiyi-52">285.</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-53">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">linalg</span> <span class="k">as</span> <span class="n">LA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[ 1,  0, -1],</span>
+<span class="go">       [ 0,  1,  0],</span>
+<span class="go">       [ 1,  0,  1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">1.4142135623730951</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&apos;fro&apos;</span><span class="p">)</span>
+<span class="go">3.1622776601683795</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="go">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">1.4142135623730951</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">0.70710678118654746</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">min</span><span class="p">(</span><span class="n">LA</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">compute_uv</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">*</span><span class="nb">min</span><span class="p">(</span><span class="n">LA</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">LA</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">compute_uv</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="go">0.70710678118654746</span>
+</pre></div>
+</div>
+</dd></dl>

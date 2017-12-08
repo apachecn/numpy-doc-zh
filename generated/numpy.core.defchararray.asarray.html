@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.core.defchararray.asarray</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.asarray.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.asarray.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.core.defchararray.asarray"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.core.defchararray.</code><code class="descname">asarray</code><span class="sig-paren">(</span><em>obj</em>, <em>itemsize=None</em>, <em>unicode=None</em>, <em>order=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/defchararray.py#L2640-L2689"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将输入转换为<a class="reference internal" href="numpy.core.defchararray.chararray.html#numpy.core.defchararray.chararray" title="numpy.core.defchararray.chararray"><code class="xref py py-obj docutils literal"><span class="pre">chararray</span></code></a>，只有在必要时才复制数据。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">与类型<em class="xref py py-obj">str</em>或<em class="xref py py-obj">unicode</em>的常规Numpy数组相比，此类添加了以下功能：</span></p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-16">值将在索引时自动从结尾处删除空格</span></li>
+<li><span class="yiyi-st" id="yiyi-17">比较运算符在比较值时从结尾自动删除空格</span></li>
+<li><span class="yiyi-st" id="yiyi-18">向量化字符串操作作为方法（例如<em class="xref py py-obj">str.endswith</em>）和中缀运算符（例如<code class="docutils literal"><span class="pre">+</span></code>，<code class="docutils literal"><span class="pre">*</span></code>，“％``）</span></li>
+</ol>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>obj</strong>：str或unicode样的数组</span></p>
+<p><span class="yiyi-st" id="yiyi-21"><strong>itemsize</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22"><em class="xref py py-obj">itemsize</em>是结果数组中每个标量的字符数。</span><span class="yiyi-st" id="yiyi-23">如果<em class="xref py py-obj">itemsize</em>为None，且<em class="xref py py-obj">obj</em>是对象数组或Python列表，则会自动确定<em class="xref py py-obj">itemsize</em>。</span><span class="yiyi-st" id="yiyi-24">如果提供<em class="xref py py-obj">itemsize</em>且<em class="xref py py-obj">obj</em>的类型为str或unicode，则<em class="xref py py-obj">obj</em>字符串将被分块到<em class="xref py py-obj">件。</em></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>unicode</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">为真时，生成的<a class="reference internal" href="numpy.core.defchararray.chararray.html#numpy.core.defchararray.chararray" title="numpy.core.defchararray.chararray"><code class="xref py py-obj docutils literal"><span class="pre">chararray</span></code></a>可以包含Unicode字符，而false只包含8位字符。</span><span class="yiyi-st" id="yiyi-27">如果unicode是<em class="xref py py-obj">无</em>和<em class="xref py py-obj">obj</em>是以下之一：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-28">a <a class="reference internal" href="numpy.core.defchararray.chararray.html#numpy.core.defchararray.chararray" title="numpy.core.defchararray.chararray"><code class="xref py py-obj docutils literal"><span class="pre">chararray</span></code></a>，</span></li>
+<li><span class="yiyi-st" id="yiyi-29"><em class="xref py py-obj">str</em>或&apos;unicode&apos;类型的ndarray</span></li>
+<li><span class="yiyi-st" id="yiyi-30">一个Python str或unicode对象，</span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31">那么将自动确定输出数组的unicode设置。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;}，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-33">指定数组的顺序。</span><span class="yiyi-st" id="yiyi-34">如果顺序是&apos;C&apos;（默认），那么数组将是C连续顺序（last-index变化最快）。</span><span class="yiyi-st" id="yiyi-35">如果顺序是&apos;F&apos;，则返回的数组将是Fortran连续的顺序（first-index变化最快）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

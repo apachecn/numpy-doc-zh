@@ -1,0 +1,55 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.put</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.put.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.put.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.put"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">put</code><span class="sig-paren">(</span><em>indices</em>, <em>values</em>, <em>mode=&apos;raise&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L4499-L4567"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将存储索引位置设置为相应的值。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">在索引中为每个n设置self._data.flat [n] = values [n]。</span><span class="yiyi-st" id="yiyi-17">如果<em class="xref py py-obj">值</em>短于<a class="reference internal" href="numpy.ma.indices.html#numpy.ma.indices" title="numpy.ma.indices"><code class="xref py py-obj docutils literal"><span class="pre">indices</span></code></a>，则会重复。</span><span class="yiyi-st" id="yiyi-18">如果<em class="xref py py-obj">值</em>有一些被掩码的值，则初始掩码被更新，否则相应的值被取消掩码。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>indices</strong>：1-D array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">目标索引，解释为整数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>值</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">要放在self._data中的值复制到目标索引。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>mode</strong>：{&apos;raise&apos;，&apos;wrap&apos;，&apos;clip&apos;}，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">指定超越界限索引的行为。</span><span class="yiyi-st" id="yiyi-26">&apos;raise&apos;：引发错误。</span><span class="yiyi-st" id="yiyi-27">&apos;wrap&apos;：wrap around。</span><span class="yiyi-st" id="yiyi-28">&apos;clip&apos;：剪辑到范围。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-30"><em class="xref py py-obj">值</em>可以是标量或长度1数组。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]],</span> <span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">[[1 -- 3]</span>
+<span class="go"> [-- 5 --]</span>
+<span class="go"> [7 -- 9]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">put</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">[[10 -- 3]</span>
+<span class="go"> [-- 20 --]</span>
+<span class="go"> [7 -- 30]]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">999</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">[[10 -- 3]</span>
+<span class="go"> [-- 999 --]</span>
+<span class="go"> [7 -- 30]]</span>
+</pre></div>
+</div>
+</dd></dl>

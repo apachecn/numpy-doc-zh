@@ -1,0 +1,81 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.all</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.all.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.all.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.all"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">all</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em>, <em>out=None</em>, <em>keepdims=&lt;class numpy._globals._NoValue&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L1987-L2064"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">测试沿给定轴的所有数组元素是否为True。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入可以转换为数组的数组或对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>axis</strong>：无或int或tuple ints，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">沿着其执行逻辑AND缩减的轴或轴。</span><span class="yiyi-st" id="yiyi-20">默认（<em class="xref py py-obj">轴</em> = <em class="xref py py-obj">无</em>）是对输入数组的所有维执行逻辑AND。</span><span class="yiyi-st" id="yiyi-21"><em class="xref py py-obj">轴</em>可能为负，在这种情况下，从最后一个轴计数到第一个轴。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-22"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-23">如果这是一个ints的元组，则在多个轴上执行缩减，而不是像以前一样执行单个轴或所有轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">备用输出放置结果的数组。</span><span class="yiyi-st" id="yiyi-26">它必须具有与预期输出相同的形状，并且保留其类型（例如，如果<code class="docutils literal"><span class="pre">dtype(out)</span></code>是float，则结果将由0.0和1.0组成）。</span><span class="yiyi-st" id="yiyi-27">有关更多详细信息，请参阅<code class="xref py py-obj docutils literal"><span class="pre">doc.ufuncs</span></code>（“输出参数”部分）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>keepdims</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">如果设置为True，则缩小的轴在结果中保留为尺寸为1的尺寸。</span><span class="yiyi-st" id="yiyi-30">使用此选项，结果将相对于原始<em class="xref py py-obj">arr</em>正确广播。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">如果传递默认值，则<em class="xref py py-obj">keepdims</em>将不会传递到<a class="reference internal" href="numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a>的子类的<a class="reference internal" href="#numpy.all" title="numpy.all"><code class="xref py py-obj docutils literal"><span class="pre">all</span></code></a>方法，默认值为。</span><span class="yiyi-st" id="yiyi-32">如果子类<a class="reference internal" href="numpy.sum.html#numpy.sum" title="numpy.sum"><code class="xref py py-obj docutils literal"><span class="pre">sum</span></code></a>方法不实现<em class="xref py py-obj">keepdims</em>，则会引发任何异常。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-33">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-34"><strong>all</strong>：ndarray，bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-35">除非指定<em class="xref py py-obj">out</em>，否则会返回新的布尔值或数组，在这种情况下将返回对<em class="xref py py-obj">out</em>的引用。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-36">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.ndarray.all.html#numpy.ndarray.all" title="numpy.ndarray.all"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.all</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-38">等效法</span></dd>
+<dt><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="numpy.any.html#numpy.any" title="numpy.any"><code class="xref py py-obj docutils literal"><span class="pre">any</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-40">测试沿给定轴的任何元素是否为True。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-42">不是数字（NaN），正无穷大和负无穷大计算为<em class="xref py py-obj">True</em>，因为这些不等于零。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],[</span><span class="kc">True</span><span class="p">,</span><span class="kc">True</span><span class="p">]])</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">],[</span><span class="kc">True</span><span class="p">,</span><span class="kc">True</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([ True, False], dtype=bool)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">o</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">False</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">out</span><span class="o">=</span><span class="n">o</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">o</span><span class="p">),</span> <span class="n">z</span>                             
+<span class="go">(28293632, 28293632, array([ True], dtype=bool))</span>
+</pre></div>
+</div>
+</dd></dl>

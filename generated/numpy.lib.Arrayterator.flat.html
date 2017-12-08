@@ -1,0 +1,29 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.lib.Arrayterator.flat</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.lib.Arrayterator.flat.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.lib.Arrayterator.flat.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="attribute">
+<dt id="numpy.lib.Arrayterator.flat"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">Arrayterator.</code><code class="descname">flat</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">Arrayterator对象的1-D平面迭代器。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">此迭代器返回要在<a class="reference internal" href="numpy.lib.Arrayterator.html#numpy.lib.Arrayterator" title="numpy.lib.Arrayterator"><code class="xref py py-obj docutils literal"><span class="pre">Arrayterator</span></code></a>中迭代的数组的元素。</span><span class="yiyi-st" id="yiyi-17">它类似于<em class="xref py py-obj">flatiter</em>。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-18">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="numpy.lib.Arrayterator.html#numpy.lib.Arrayterator" title="numpy.lib.Arrayterator"><code class="xref py py-obj docutils literal"><span class="pre">Arrayterator</span></code></a>，<code class="xref py py-obj docutils literal"><span class="pre">flatiter</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-20">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a_itor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">Arrayterator</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">subarr</span> <span class="ow">in</span> <span class="n">a_itor</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">subarr</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">subarr</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">subarr</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">0 &lt;type &apos;numpy.int32&apos;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>

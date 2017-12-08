@@ -1,0 +1,79 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.trapz</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.trapz.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.trapz.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.trapz"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">trapz</code><span class="sig-paren">(</span><em>y</em>, <em>x=None</em>, <em>dx=1.0</em>, <em>axis=-1</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L3853-L3940"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">使用复合梯形法则沿给定轴进行积分。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">沿给定轴集成<em class="xref py py-obj">y</em>（<em class="xref py py-obj">x</em>）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>y</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入数组进行积分。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>x</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">对应于<em class="xref py py-obj">y</em>值的采样点。</span><span class="yiyi-st" id="yiyi-21">如果<em class="xref py py-obj">x</em>为无，则假定采样点间隔为<em class="xref py py-obj">dx</em>均匀分布。</span><span class="yiyi-st" id="yiyi-22">默认值为None。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>dx</strong>：标量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24"><em class="xref py py-obj">x</em>时采样点之间的间距为无。</span><span class="yiyi-st" id="yiyi-25">默认值为1。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">沿其积分的轴。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>trapz</strong>：float</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">定义积分近似由梯形规则。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.sum.html#numpy.sum" title="numpy.sum"><code class="xref py py-obj docutils literal"><span class="pre">sum</span></code></a>，<a class="reference internal" href="numpy.cumsum.html#numpy.cumsum" title="numpy.cumsum"><code class="xref py py-obj docutils literal"><span class="pre">cumsum</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-34">图像<a class="reference internal" href="#r287" id="id1">[R287]</a>示出梯形规则 - 点的y轴位置将取自<em class="xref py py-obj">y  t&gt;数组，默认情况下点之间的x轴距离将为1.0，提供<em class="xref py py-obj">x</em>数组或<em class="xref py py-obj">dx</em>标量。</em></span><span class="yiyi-st" id="yiyi-35">返回值将等于红线下面的合并面积。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r286" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-37"><a class="fn-backref" href="#id2">[R286]</a></span></td><td><span class="yiyi-st" id="yiyi-38">维基百科页面：<a class="reference external" href="http://en.wikipedia.org/wiki/Trapezoidal_rule">http://en.wikipedia.org/wiki/Trapezoidal_rule</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r287" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-39">[R287]</span></td><td><span class="yiyi-st" id="yiyi-40"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id3">2</a>）</em>插图：<a class="reference external" href="http://en.wikipedia.org/wiki/File:Composite_trapezoidal_rule_illustration.png">http://en.wikipedia.org/wiki/File:Composite_trapezoidal_rule_illustration.png </a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="go">4.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+<span class="go">8.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">dx</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">8.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0, 1, 2],</span>
+<span class="go">       [3, 4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([ 1.5,  2.5,  3.5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 2.,  8.])</span>
+</pre></div>
+</div>
+</dd></dl>

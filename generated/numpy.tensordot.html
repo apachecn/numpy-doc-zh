@@ -1,0 +1,124 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.tensordot</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.tensordot.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.tensordot.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.tensordot"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">tensordot</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>axes=2</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L1150-L1333"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">对于数组&gt; = 1-D，沿指定轴计算张量点积。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">给定两个张量（维度大于或等于一的数组），<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>，以及包含两个array_like对象的array_like对象<code class="docutils literal"><span class="pre">（a_axes ， t&gt; <span class="pre">b_axes）</span></span></code>，将<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>的元素由<code class="docutils literal"><span class="pre">a_axes</span></code>和<code class="docutils literal"><span class="pre">b_axes</span></code>指定的轴。</span><span class="yiyi-st" id="yiyi-16">第三个参数可以是单个非负整数_样标量，<code class="docutils literal"><span class="pre">N</span></code>；如果是这样，则将<em class="xref py py-obj">a</em>的最后<code class="docutils literal"><span class="pre">N</span></code>维度和<em class="xref py py-obj">b</em>的第一<code class="docutils literal"><span class="pre">N</span></code> 。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a，b</strong>：array_like，len（shape）&gt; = 1</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">拉伸到“点”。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>axes</strong>：int或（2，）array_like</span></p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-21">integer_like如果一个int N，在<em class="xref py py-obj">a</em>的最后N个轴和<em class="xref py py-obj">b</em>的前N个轴按顺序求和。</span><span class="yiyi-st" id="yiyi-22">相应轴的大小必须匹配。</span></li>
+<li><span class="yiyi-st" id="yiyi-23">（2，）array_like或者，要求和的轴列表，第一个序列应用于<em class="xref py py-obj">a</em>，第二个应用于<em class="xref py py-obj">b</em>。</span><span class="yiyi-st" id="yiyi-24">两个元素array_like必须具有相同的长度。</span></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-obj docutils literal"><span class="pre">dot</span></code></a>，<a class="reference internal" href="numpy.einsum.html#numpy.einsum" title="numpy.einsum"><code class="xref py py-obj docutils literal"><span class="pre">einsum</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-28">三种常见的用例是：</span></dt>
+<dd><span class="yiyi-st" id="yiyi-29"><code class="docutils literal"><span class="pre">axes</span> <span class="pre">=</span> <span class="pre">0</span></code> : tensor product $aotimes b$ <code class="docutils literal"><span class="pre">axes</span> <span class="pre">=</span> <span class="pre">1</span></code> : tensor dot product $acdot b$ <code class="docutils literal"><span class="pre">axes</span> <span class="pre">=</span> <span class="pre">2</span></code> : (default) tensor double contraction $a:b$</span></dd>
+</dl>
+<p><span class="yiyi-st" id="yiyi-30">当<em class="xref py py-obj">轴</em>是整数类型时，用于评估的序列将是：首先在<em class="xref py py-obj">a</em>中的第-N个轴和在<em class="xref py py-obj">b</em>中的第0个轴，轴在<em class="xref py py-obj">a</em>和Nth轴在<em class="xref py py-obj">b</em>最后。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">当有多个轴相加时 - 并且它们不是<em class="xref py py-obj">a</em>（<em class="xref py py-obj">b</em>）的最后（第一个）轴 - 参数<em class="xref py py-obj">轴 t2 &gt;应该由具有相同长度的两个序列组成，其中第一轴在两个序列中首先给定，第二轴在第二，等等。</em></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-33">一个“传统”的例子：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">60.</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">24.</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(5, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">array([[ 4400.,  4730.],</span>
+<span class="go">       [ 4532.,  4874.],</span>
+<span class="go">       [ 4664.,  5018.],</span>
+<span class="go">       [ 4796.,  5162.],</span>
+<span class="go">       [ 4928.,  5306.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># A slower but equivalent way of computing the same...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<span class="gp">... </span>      <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">==</span> <span class="n">d</span>
+<span class="go">array([[ True,  True],</span>
+<span class="go">       [ True,  True],</span>
+<span class="go">       [ True,  True],</span>
+<span class="go">       [ True,  True],</span>
+<span class="go">       [ True,  True]], dtype=bool)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-34">利用+和*重载的扩展示例：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="s1">&apos;a&apos;</span><span class="p">,</span> <span class="s1">&apos;b&apos;</span><span class="p">,</span> <span class="s1">&apos;c&apos;</span><span class="p">,</span> <span class="s1">&apos;d&apos;</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">;</span> <span class="n">A</span>
+<span class="go">array([[[1, 2],</span>
+<span class="go">        [3, 4]],</span>
+<span class="go">       [[5, 6],</span>
+<span class="go">        [7, 8]]])</span>
+<span class="go">array([[a, b],</span>
+<span class="go">       [c, d]], dtype=object)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span> <span class="c1"># third argument default is 2 for double-contraction</span>
+<span class="go">array([abbcccdddd, aaaaabbbbbbcccccccdddddddd], dtype=object)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[[acc, bdd],</span>
+<span class="go">        [aaacccc, bbbdddd]],</span>
+<span class="go">       [[aaaaacccccc, bbbbbdddddd],</span>
+<span class="go">        [aaaaaaacccccccc, bbbbbbbdddddddd]]], dtype=object)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># tensor product (result too long to incl.)</span>
+<span class="go">array([[[[[a, b],</span>
+<span class="go">          [c, d]],</span>
+<span class="go">          ...</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">array([[[abbbbb, cddddd],</span>
+<span class="go">        [aabbbbbb, ccdddddd]],</span>
+<span class="go">       [[aaabbbbbbb, cccddddddd],</span>
+<span class="go">        [aaaabbbbbbbb, ccccdddddddd]]], dtype=object)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">array([[[abb, cdd],</span>
+<span class="go">        [aaabbbb, cccdddd]],</span>
+<span class="go">       [[aaaaabbbbbb, cccccdddddd],</span>
+<span class="go">        [aaaaaaabbbbbbbb, cccccccdddddddd]]], dtype=object)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="go">array([abbbcccccddddddd, aabbbbccccccdddddddd], dtype=object)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="go">array([acccbbdddd, aaaaacccccccbbbbbbdddddddd], dtype=object)</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,101 @@
+
+<span id="c-api-generalized-ufuncs"></span><h1><span class="yiyi-st" id="yiyi-16">Generalized Universal Function API</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/c-api.generalized-ufuncs.html">https://docs.scipy.org/doc/numpy/reference/c-api.generalized-ufuncs.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-17">通常需要不仅循环不仅是标量上的函数，而且还包括向量（或数组）上的函数。</span><span class="yiyi-st" id="yiyi-18">这个概念在NumPy中通过泛化通用函数（ufuncs）来实现。</span><span class="yiyi-st" id="yiyi-19">在常规ufuncs中，基本函数限于逐个元素操作，而广义版本（gufuncs）通过“子数组”操作支持“子数组”。</span><span class="yiyi-st" id="yiyi-20">Perl向量库PDL提供了类似的功能，其术语在下面被重复使用。</span></p>
+<p><span class="yiyi-st" id="yiyi-21">每个广义ufunc具有与其相关联的信息，其具有输入的“核心”维度以及输出的对应维度（元素方式ufunc具有零核心维度）。</span><span class="yiyi-st" id="yiyi-22">所有参数的核心维度列表称为ufunc的“签名”。</span><span class="yiyi-st" id="yiyi-23">例如，ufunc numpy.add具有定义两个标量输入和一个标量输出的签名<code class="docutils literal"><span class="pre">(),()-&gt;()</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-24">Another example is the function <code class="docutils literal"><span class="pre">inner1d(a,</span> <span class="pre">b)</span></code> with a signature of <code class="docutils literal"><span class="pre">(i),(i)-&gt;()</span></code>. </span><span class="yiyi-st" id="yiyi-25">这将沿着每个输入的最后一个轴应用内积，但保持其余索引完整。</span><span class="yiyi-st" id="yiyi-26">例如，其中<code class="docutils literal"><span class="pre">a</span></code>是形状<code class="docutils literal"><span class="pre">（3，</span> <span class="pre">5，</span> <span class="pre">N）</span></code>和<code class="docutils literal"><span class="pre">b</span></code>的形状为<code class="docutils literal"><span class="pre">（5，</span> <span class="pre">N）</span></code>，将返回形状<code class="docutils literal"><span class="pre">(3,5)</span></code>。</span><span class="yiyi-st" id="yiyi-27">底层基本函数称为<code class="docutils literal"><span class="pre">3</span> <span class="pre">*</span> <span class="pre">5</span></code>次。</span><span class="yiyi-st" id="yiyi-28">在签名中，我们为每个输入指定一个核心维度<code class="docutils literal"><span class="pre">(i)</span></code>，对于输出指定零个核心维度<code class="docutils literal"><span class="pre">()</span></code>，因为它需要两个1-d数组，标量。</span><span class="yiyi-st" id="yiyi-29">通过使用相同的名称<code class="docutils literal"><span class="pre">i</span></code>，我们指定两个相应的尺寸应具有相同的大小。</span></p>
+<p><span class="yiyi-st" id="yiyi-30">超过核心尺寸的尺寸称为“环”尺寸。</span><span class="yiyi-st" id="yiyi-31">在上述示例中，这对应于<code class="docutils literal"><span class="pre">（3，</span> <span class="pre">5）</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-32">签名确定每个输入/输出数组的尺寸如何分割为核心和环路尺寸：</span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-33">签名中的每个维度都与对应的传入数组的维度相匹配，从形状元组的结尾开始。</span><span class="yiyi-st" id="yiyi-34">这些是核心维度，它们必须存在于数组中，否则会引发错误。</span></li>
+<li><span class="yiyi-st" id="yiyi-35">Core dimensions assigned to the same label in the signature (e.g. the <code class="docutils literal"><span class="pre">i</span></code> in <code class="docutils literal"><span class="pre">inner1d</span></code>‘s <code class="docutils literal"><span class="pre">(i),(i)-&gt;()</span></code>) must have exactly matching sizes, no broadcasting is performed.</span></li>
+<li><span class="yiyi-st" id="yiyi-36">核心维度从所有输入中删除，剩余维度一起广播，定义循环维度。</span></li>
+<li><span class="yiyi-st" id="yiyi-37">每个输出的形状由回路尺寸加上输出的核心尺寸确定</span></li>
+</ol>
+<p><span class="yiyi-st" id="yiyi-38">通常，输出中所有核心维度的大小将由输入数组中具有相同标签的核心维度的大小确定。</span><span class="yiyi-st" id="yiyi-39">这不是一个要求，并且可以在输出中首次定义标签时定义签名，但是当调用这样的函数时必须采取一些预防措施。</span><span class="yiyi-st" id="yiyi-40">An example would be the function <code class="docutils literal"><span class="pre">euclidean_pdist(a)</span></code>, with signature <code class="docutils literal"><span class="pre">(n,d)-&gt;(p)</span></code>, that given an array of <code class="docutils literal"><span class="pre">n</span></code> <code class="docutils literal"><span class="pre">d</span></code>-dimensional vectors, computes all unique pairwise Euclidean distances among them. </span><span class="yiyi-st" id="yiyi-41">输出尺寸<code class="docutils literal"><span class="pre">p</span></code>因此必须等于<code class="docutils literal"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">（n</span> <span class="pre">t6&gt; <span class="pre">1）</span> <span class="pre">/</span> <span class="pre">2</span></span></code>，但是呼叫者负责传递正确大小的输出数组。</span><span class="yiyi-st" id="yiyi-42">如果不能从传入的输入或输出数组中确定输出的核心维度的大小，则会出现错误。</span></p>
+<p><span class="yiyi-st" id="yiyi-43">注意：在NumPy 1.10.0之前，不太严格的检查：缺少核心维度是通过根据需要将1预先添加到形状中创建的，具有相同标签的核心维度一起广播，未确定的维度使用大小1创建。</span></p>
+<div class="section" id="definitions">
+<h2><span class="yiyi-st" id="yiyi-44">Definitions</span></h2>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-45">基本功能</span></dt>
+<dd><span class="yiyi-st" id="yiyi-46">每个ufunc由一个基本函数组成，该函数对数组参数的最小部分执行最基本的操作（例如，添加两个数字是添加两个数组的最基本的操作）。</span><span class="yiyi-st" id="yiyi-47">ufunc在数组的不同部分上多次应用基本函数。</span><span class="yiyi-st" id="yiyi-48">基本函数的输入/输出可以是向量；例如，inner1d的基本函数采用两个向量作为输入。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-49">签名</span></dt>
+<dd><span class="yiyi-st" id="yiyi-50">签名是描述ufunc的基本函数的输入/输出维度的字符串。</span><span class="yiyi-st" id="yiyi-51">有关详细信息，请参阅下面的部分。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-52">核心维度</span></dt>
+<dd><span class="yiyi-st" id="yiyi-53">基本函数的每个输入/输出的维数由其核心维度（零核心维度对应于标量输入/输出）来定义。</span><span class="yiyi-st" id="yiyi-54">核心维度映射到输入/输出数组的最后一个维度。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-55">尺寸名称</span></dt>
+<dd><span class="yiyi-st" id="yiyi-56">维度名称表示签名中的核心维度。</span><span class="yiyi-st" id="yiyi-57">不同的维度可以共享名称，指示它们具有相同的大小。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-58">维度索引</span></dt>
+<dd><span class="yiyi-st" id="yiyi-59">维度索引是表示维度名称的整数。</span><span class="yiyi-st" id="yiyi-60">它根据签名中每个名称第一次出现的顺序枚举维名称。</span></dd>
+</dl>
+</div>
+<div class="section" id="details-of-signature">
+<h2><span class="yiyi-st" id="yiyi-61">Details of Signature</span></h2>
+<p><span class="yiyi-st" id="yiyi-62">签名定义了输入和输出变量的“核心”维度，从而也定义了维度的收缩。</span><span class="yiyi-st" id="yiyi-63">签名由以下格式的字符串表示：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-64">每个输入或输出数组的核心维度由括号中的维名称列表<code class="docutils literal"><span class="pre">(i_1,...,i_N)</span></code>表示；标量输入/输出由<code class="docutils literal"><span class="pre">()</span></code>表示。</span><span class="yiyi-st" id="yiyi-65">代替<code class="docutils literal"><span class="pre">i_1</span></code>，<code class="docutils literal"><span class="pre">i_2</span></code>等，可以使用任何有效的Python变量名称。</span></li>
+<li><span class="yiyi-st" id="yiyi-66">不同参数的维列表由<code class="docutils literal"><span class="pre">&quot;,&quot;</span></code>“分隔。</span><span class="yiyi-st" id="yiyi-67">输入/输出参数由<code class="docutils literal"><span class="pre">&quot;-&gt;&quot;</span></code>分隔。</span></li>
+<li><span class="yiyi-st" id="yiyi-68">如果在多个位置使用相同的维度名称，则会强制使用相同尺寸的相应维度。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-69">签名的形式语法如下：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Signature</span><span class="o">&gt;</span>            <span class="p">::</span><span class="o">=</span> <span class="o">&lt;</span><span class="n">Input</span> <span class="n">arguments</span><span class="o">&gt;</span> <span class="s2">&quot;-&gt;&quot;</span> <span class="o">&lt;</span><span class="n">Output</span> <span class="n">arguments</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">Input</span> <span class="n">arguments</span><span class="o">&gt;</span>      <span class="p">::</span><span class="o">=</span> <span class="o">&lt;</span><span class="n">Argument</span> <span class="nb">list</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">Output</span> <span class="n">arguments</span><span class="o">&gt;</span>     <span class="p">::</span><span class="o">=</span> <span class="o">&lt;</span><span class="n">Argument</span> <span class="nb">list</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">Argument</span> <span class="nb">list</span><span class="o">&gt;</span>        <span class="p">::</span><span class="o">=</span> <span class="n">nil</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">Argument</span><span class="o">&gt;</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">Argument</span><span class="o">&gt;</span> <span class="s2">&quot;,&quot;</span> <span class="o">&lt;</span><span class="n">Argument</span> <span class="nb">list</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">Argument</span><span class="o">&gt;</span>             <span class="p">::</span><span class="o">=</span> <span class="s2">&quot;(&quot;</span> <span class="o">&lt;</span><span class="n">Core</span> <span class="n">dimension</span> <span class="nb">list</span><span class="o">&gt;</span> <span class="s2">&quot;)&quot;</span>
+<span class="o">&lt;</span><span class="n">Core</span> <span class="n">dimension</span> <span class="nb">list</span><span class="o">&gt;</span>  <span class="p">::</span><span class="o">=</span> <span class="n">nil</span> <span class="o">|</span> <span class="o">&lt;</span><span class="n">Dimension</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">|</span>
+                           <span class="o">&lt;</span><span class="n">Dimension</span> <span class="n">name</span><span class="o">&gt;</span> <span class="s2">&quot;,&quot;</span> <span class="o">&lt;</span><span class="n">Core</span> <span class="n">dimension</span> <span class="nb">list</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">Dimension</span> <span class="n">name</span><span class="o">&gt;</span>       <span class="p">::</span><span class="o">=</span> <span class="n">valid</span> <span class="n">Python</span> <span class="n">variable</span> <span class="n">name</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-70">笔记：</span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-71">所有报价都是为了清楚。</span></li>
+<li><span class="yiyi-st" id="yiyi-72">共享相同名称的核心维度必须具有完全相同的大小。</span><span class="yiyi-st" id="yiyi-73">每个维度名称通常对应于基本函数实现中的一个循环级。</span></li>
+<li><span class="yiyi-st" id="yiyi-74">空白被忽略。</span></li>
+</ol>
+<p><span class="yiyi-st" id="yiyi-75">这里有一些签名的例子：</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%">
+<col width="33%">
+<col width="49%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-76">加</span></td>
+<td><span class="yiyi-st" id="yiyi-77"><code class="docutils literal"><span class="pre">(),()-&gt;()</span></code></span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-78">inner1d</span></td>
+<td><span class="yiyi-st" id="yiyi-79"><code class="docutils literal"><span class="pre">(i),(i)-&gt;()</span></code></span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-80">sum1d</span></td>
+<td><span class="yiyi-st" id="yiyi-81"><code class="docutils literal"><span class="pre">(i)-&gt;()</span></code></span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-82">dot2d</span></td>
+<td><span class="yiyi-st" id="yiyi-83"><code class="docutils literal"><span class="pre">(m,n),(n,p)-&gt;(m,p)</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-84">矩阵乘法</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-85">outer_inner</span></td>
+<td><span class="yiyi-st" id="yiyi-86"><code class="docutils literal"><span class="pre">(i,t),(j,t)-&gt;(i,j)</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-87">内部在最后一维，外部在第二到最后，和循环/广播在休息。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="c-api-for-implementing-elementary-functions">
+<h2><span class="yiyi-st" id="yiyi-88">C-API for implementing Elementary Functions</span></h2>
+<p><span class="yiyi-st" id="yiyi-89">当前接口保持不变，并且<code class="docutils literal"><span class="pre">PyUFunc_FromFuncAndData</span></code>仍然可以用于实现（专用）ufunc，由标量基本函数组成。</span></p>
+<p><span class="yiyi-st" id="yiyi-90">可以使用<code class="docutils literal"><span class="pre">PyUFunc_FromFuncAndDataAndSignature</span></code>来声明一个更通用的ufunc。</span><span class="yiyi-st" id="yiyi-91">参数列表与<code class="docutils literal"><span class="pre">PyUFunc_FromFuncAndData</span></code>相同，还有一个参数将签名指定为C字符串。</span></p>
+<p><span class="yiyi-st" id="yiyi-92">此外，回调函数的类型与之前相同，<code class="docutils literal"><span class="pre">void</span> <span class="pre">（* foo）（char</span> <span class="pre">** args，</span> <span class="pre"> intp</span> <span class="pre">* dimensions，</span> <span class="pre">intp</span> <span class="pre">* steps，</span> <span class="pre">void</span> <span class="pre">* func） t9&gt;</span></code>。</span><span class="yiyi-st" id="yiyi-93">当调用时，<code class="docutils literal"><span class="pre">args</span></code>是包含所有输入/输出参数的数据的长度<code class="docutils literal"><span class="pre">nargs</span></code>的列表。</span><span class="yiyi-st" id="yiyi-94">对于标量基本函数，<code class="docutils literal"><span class="pre">steps</span></code>也具有长度<code class="docutils literal"><span class="pre">nargs</span></code>，表示用于参数的步幅。</span><span class="yiyi-st" id="yiyi-95"><code class="docutils literal"><span class="pre">dimensions</span></code>是指向定义要循环的轴的大小的单个整数的指针。</span></p>
+<p><span class="yiyi-st" id="yiyi-96">对于非平凡签名，<code class="docutils literal"><span class="pre">dimensions</span></code>也将包含核心维度的大小，从第二个条目开始。</span><span class="yiyi-st" id="yiyi-97">每个唯一维度名称仅提供一个大小，并且大小根据签名中维度名称的第一次出现而给出。</span></p>
+<p><span class="yiyi-st" id="yiyi-98"><code class="docutils literal"><span class="pre">steps</span></code>的第一个<code class="docutils literal"><span class="pre">nargs</span></code>元素保持与标量ufuncs相同。</span><span class="yiyi-st" id="yiyi-99">以下元素按顺序包含所有参数的所有核心维度的步长。</span></p>
+<p><span class="yiyi-st" id="yiyi-100">例如，考虑具有签名<code class="docutils literal"><span class="pre">(i,j),(i)-&gt;()</span></code>的ufunc。</span><span class="yiyi-st" id="yiyi-101">In this case, <code class="docutils literal"><span class="pre">args</span></code> will contain three pointers to the data of the input/output arrays <code class="docutils literal"><span class="pre">a</span></code>, <code class="docutils literal"><span class="pre">b</span></code>, <code class="docutils literal"><span class="pre">c</span></code>. Furthermore, <code class="docutils literal"><span class="pre">dimensions</span></code> will be <code class="docutils literal"><span class="pre">[N,</span> <span class="pre">I,</span> <span class="pre">J]</span></code> to define the size of <code class="docutils literal"><span class="pre">N</span></code> of the loop and the sizes <code class="docutils literal"><span class="pre">I</span></code> and <code class="docutils literal"><span class="pre">J</span></code> for the core dimensions <code class="docutils literal"><span class="pre">i</span></code> and <code class="docutils literal"><span class="pre">j</span></code>. </span><span class="yiyi-st" id="yiyi-102">最后，<code class="docutils literal"><span class="pre">steps</span></code>将是<code class="docutils literal"><span class="pre">[a_N，</span> <span class="pre">b_N，</span> <span class="pre">c_N，</span> <span class="pre">a_i， t6&gt; <span class="pre">a_j，</span> <span class="pre">b_i]</span></span></code>，包含所有必要的步幅。</span></p>
+</div>

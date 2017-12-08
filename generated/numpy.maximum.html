@@ -1,0 +1,63 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.maximum</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.maximum.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.maximum.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.maximum"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">maximum</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;maximum&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">数组元素的元素最大值。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">比较两个数组并返回一个包含元素级最大值的新数组。</span><span class="yiyi-st" id="yiyi-16">如果被比较的元素之一是NaN，则返回该元素。</span><span class="yiyi-st" id="yiyi-17">如果两个元素都是NaN，则返回第一个元素。</span><span class="yiyi-st" id="yiyi-18">后者的区别对于复合NaNs是重要的，复合NaNs被定义为实部或虚部中的至少一个是NaN。</span><span class="yiyi-st" id="yiyi-19">净效应是NaNs被传播。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>x1，x2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">保存要比较的元素的数组。</span><span class="yiyi-st" id="yiyi-23">它们必须具有相同的形状，或者可以广播到单个形状的形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>y</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">元素方式的最大值<em class="xref py py-obj">x1</em>和<em class="xref py py-obj">x2</em>。</span><span class="yiyi-st" id="yiyi-27">如果<em class="xref py py-obj">x1</em>和<em class="xref py py-obj">x2</em>都是标量，则返回标量。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.minimum.html#numpy.minimum" title="numpy.minimum"><code class="xref py py-obj docutils literal"><span class="pre">minimum</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">元素最小的两个数组，传播NaN。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.fmax.html#numpy.fmax" title="numpy.fmax"><code class="xref py py-obj docutils literal"><span class="pre">fmax</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">元素最大的两个数组，忽略NaNs。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.amax.html#numpy.amax" title="numpy.amax"><code class="xref py py-obj docutils literal"><span class="pre">amax</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">沿给定轴的数组的最大值传播NaN。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.nanmax.html#numpy.nanmax" title="numpy.nanmax"><code class="xref py py-obj docutils literal"><span class="pre">nanmax</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">沿给定轴的数组的最大值忽略NaN。</span></dd>
+</dl>
+<p class="last"><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.fmin.html#numpy.fmin" title="numpy.fmin"><code class="xref py py-obj docutils literal"><span class="pre">fmin</span></code></a>，<a class="reference internal" href="numpy.amin.html#numpy.amin" title="numpy.amin"><code class="xref py py-obj docutils literal"><span class="pre">amin</span></code></a>，<a class="reference internal" href="numpy.nanmin.html#numpy.nanmin" title="numpy.nanmin"><code class="xref py py-obj docutils literal"><span class="pre">nanmin</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-39">The maximum is equivalent to <code class="docutils literal"><span class="pre">np.where(x1</span> <span class="pre">&gt;=</span> <span class="pre">x2,</span> <span class="pre">x1,</span> <span class="pre">x2)</span></code> when neither x1 nor x2 are nans, but it is faster and does proper broadcasting.</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-40">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="go">array([2, 5, 4])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> <span class="c1"># broadcasting</span>
+<span class="go">array([[ 1. ,  2. ],</span>
+<span class="go">       [ 0.5,  2. ]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+<span class="go">array([ NaN,  NaN,  NaN])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">Inf</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">inf</span>
+</pre></div>
+</div>
+</dd></dl>

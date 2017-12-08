@@ -1,0 +1,99 @@
+
+<h1><span class="yiyi-st" id="yiyi-15">System configuration</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/c-api.config.html">https://docs.scipy.org/doc/numpy/reference/c-api.config.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-16">当构建NumPy时，记录有关系统配置的信息，并使用NumPy的C API提供给扩展模块。</span><span class="yiyi-st" id="yiyi-17">这些主要在<code class="docutils literal"><span class="pre">numpyconfig.h</span></code>中定义（包括在<code class="docutils literal"><span class="pre">ndarrayobject.h</span></code>中）。</span><span class="yiyi-st" id="yiyi-18">公共符号前缀为<code class="docutils literal"><span class="pre">NPY_*</span></code>。</span><span class="yiyi-st" id="yiyi-19">NumPy还提供了一些查询有关所使用平台信息的功能。</span></p>
+<p><span class="yiyi-st" id="yiyi-20">对于私人使用，NumPy还在NumPy包含目录中构造一个<code class="docutils literal"><span class="pre">config.h</span></code>，它不是由NumPy导出的（即使用numpy C API不会看到这些符号的python扩展），避免命名空间污染。</span></p>
+<div class="section" id="data-type-sizes">
+<h2><span class="yiyi-st" id="yiyi-21">Data type sizes</span></h2>
+<p><span class="yiyi-st" id="yiyi-22">定义<code class="xref c c-data docutils literal"><span class="pre">NPY_SIZEOF_{CTYPE}</span></code>常量，以便信息sizeof可用于预处理器。</span></p>
+<dl class="var">
+<dt id="c.NPY_SIZEOF_SHORT"><span class="yiyi-st" id="yiyi-23"> <code class="descname">NPY_SIZEOF_SHORT</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_SIZEOF_INT"><span class="yiyi-st" id="yiyi-24"> <code class="descname">NPY_SIZEOF_INT</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_SIZEOF_LONG"><span class="yiyi-st" id="yiyi-25"> <code class="descname">NPY_SIZEOF_LONG</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_SIZEOF_LONGLONG"><span class="yiyi-st" id="yiyi-26"> <code class="descname">NPY_SIZEOF_LONGLONG</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-27">sizeof（longlong）其中longlong在平台上适当定义。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_SIZEOF_PY_LONG_LONG"><span class="yiyi-st" id="yiyi-28"> <code class="descname">NPY_SIZEOF_PY_LONG_LONG</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_SIZEOF_FLOAT"><span class="yiyi-st" id="yiyi-29"> <code class="descname">NPY_SIZEOF_FLOAT</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_SIZEOF_DOUBLE"><span class="yiyi-st" id="yiyi-30"> <code class="descname">NPY_SIZEOF_DOUBLE</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_SIZEOF_LONG_DOUBLE"><span class="yiyi-st" id="yiyi-31"> <code class="descname">NPY_SIZEOF_LONG_DOUBLE</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_SIZEOF_PY_INTPTR_T"><span class="yiyi-st" id="yiyi-32"> <code class="descname">NPY_SIZEOF_PY_INTPTR_T</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-33">此平台上的指针大小（sizeof（void *））（宏也定义NPY_SIZEOF_INTP）。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="platform-information">
+<h2><span class="yiyi-st" id="yiyi-34">Platform information</span></h2>
+<dl class="var">
+<dt id="c.NPY_CPU_X86"><span class="yiyi-st" id="yiyi-35"> <code class="descname">NPY_CPU_X86</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_CPU_AMD64"><span class="yiyi-st" id="yiyi-36"> <code class="descname">NPY_CPU_AMD64</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_CPU_IA64"><span class="yiyi-st" id="yiyi-37"> <code class="descname">NPY_CPU_IA64</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_CPU_PPC"><span class="yiyi-st" id="yiyi-38"> <code class="descname">NPY_CPU_PPC</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_CPU_PPC64"><span class="yiyi-st" id="yiyi-39"> <code class="descname">NPY_CPU_PPC64</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_CPU_SPARC"><span class="yiyi-st" id="yiyi-40"> <code class="descname">NPY_CPU_SPARC</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_CPU_SPARC64"><span class="yiyi-st" id="yiyi-41"> <code class="descname">NPY_CPU_SPARC64</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_CPU_S390"><span class="yiyi-st" id="yiyi-42"> <code class="descname">NPY_CPU_S390</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_CPU_PARISC"><span class="yiyi-st" id="yiyi-43"> <code class="descname">NPY_CPU_PARISC</code></span></dt>
+<dd><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-44"><span class="versionmodified">版本1.3.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">CPU平台的架构；只定义了上述之一。</span></p>
+<p><span class="yiyi-st" id="yiyi-46">在<code class="docutils literal"><span class="pre">numpy/npy_cpu.h</span></code>中定义</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_LITTLE_ENDIAN"><span class="yiyi-st" id="yiyi-47"> <code class="descname">NPY_LITTLE_ENDIAN</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_BIG_ENDIAN"><span class="yiyi-st" id="yiyi-48"> <code class="descname">NPY_BIG_ENDIAN</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_BYTE_ORDER"><span class="yiyi-st" id="yiyi-49"> <code class="descname">NPY_BYTE_ORDER</code></span></dt>
+<dd><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-50"><span class="versionmodified">版本1.3.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-51">便携式替代GNU Libc的<code class="docutils literal"><span class="pre">endian.h</span></code>宏。</span><span class="yiyi-st" id="yiyi-52">如果是big endian，<a class="reference internal" href="#c.NPY_BYTE_ORDER" title="NPY_BYTE_ORDER"><code class="xref c c-data docutils literal"><span class="pre">NPY_BYTE_ORDER</span></code></a> == <a class="reference internal" href="#c.NPY_BIG_ENDIAN" title="NPY_BIG_ENDIAN"><code class="xref c c-data docutils literal"><span class="pre">NPY_BIG_ENDIAN</span></code></a>，类似地对于小端体系结构。</span></p>
+<p><span class="yiyi-st" id="yiyi-53">在<code class="docutils literal"><span class="pre">numpy/npy_endian.h</span></code>中定义。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.PyArray_GetEndianness"><span class="yiyi-st" id="yiyi-54"> <code class="descname">PyArray_GetEndianness</code><span class="sig-paren">(</span><span class="sig-paren">)</span></span></dt>
+<dd><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-55"><span class="versionmodified">版本1.3.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-56">返回当前平台的字节顺序。</span><span class="yiyi-st" id="yiyi-57"><code class="xref c c-data docutils literal"><span class="pre">NPY_CPU_BIG</span></code>，<code class="xref c c-data docutils literal"><span class="pre">NPY_CPU_LITTLE</span></code>或<code class="xref c c-data docutils literal"><span class="pre">NPY_CPU_UNKNOWN_ENDIAN</span></code>中的一个。</span></p>
+</dd></dl>
+</div>

@@ -1,0 +1,633 @@
+
+<span id="ufuncs"></span><h1><span class="yiyi-st" id="yiyi-28">Universal functions (<code class="xref py py-class docutils literal"><span class="pre">ufunc</span></code>)</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/ufuncs.html">https://docs.scipy.org/doc/numpy/reference/ufuncs.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-29">通用函数（或简称为<a class="reference internal" href="../glossary.html#term-ufunc"><span class="xref std std-term">ufunc</span></a>）是以逐元素方式操作<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarrays</span></code></a>的函数，支持<a class="reference internal" href="#ufuncs-broadcasting"><span class="std std-ref">array broadcasting</span></a> <a class="reference internal" href="#ufuncs-casting"><span class="std std-ref">type casting</span></a>和其他几个标准功能。</span><span class="yiyi-st" id="yiyi-30">也就是说，ufunc是一个函数的“<span class="xref std std-term">向量化</span>”包装器，它接受固定数量的标量输入并产生固定数量的标量输出。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">在NumPy中，通用函数是<code class="xref py py-class docutils literal"><span class="pre">numpy.ufunc</span></code>类的实例。</span><span class="yiyi-st" id="yiyi-32">许多内置函数在编译的C代码中实现，但是<code class="xref py py-class docutils literal"><span class="pre">ufunc</span></code>实例也可以使用<a class="reference internal" href="generated/numpy.frompyfunc.html#numpy.frompyfunc" title="numpy.frompyfunc"><code class="xref py py-func docutils literal"><span class="pre">frompyfunc</span></code></a>工厂函数生成。</span></p>
+<div class="section" id="broadcasting">
+<span id="ufuncs-broadcasting"></span><h2><span class="yiyi-st" id="yiyi-33">Broadcasting</span></h2>
+<p id="index-0"><span class="yiyi-st" id="yiyi-34">每个通用函数接受数组输入，并通过对输入执行元素方面的核心功能来生成数组输出。</span><span class="yiyi-st" id="yiyi-35">应用标准广播规则，使得不共享完全相同形状的输入仍然可以被有用地操作。</span><span class="yiyi-st" id="yiyi-36">广播可以通过四个规则来理解：</span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-37">具有<a class="reference internal" href="generated/numpy.ndarray.ndim.html#numpy.ndarray.ndim" title="numpy.ndarray.ndim"><code class="xref py py-attr docutils literal"><span class="pre">ndim</span></code></a>小于输入数组最大<a class="reference internal" href="generated/numpy.ndarray.ndim.html#numpy.ndarray.ndim" title="numpy.ndarray.ndim"><code class="xref py py-attr docutils literal"><span class="pre">ndim</span></code></a>的所有输入数组在其形状前面加上1。</span></li>
+<li><span class="yiyi-st" id="yiyi-38">输出形状的每个维度中的大小是该维度中所有输入大小的最大值。</span></li>
+<li><span class="yiyi-st" id="yiyi-39">如果输入在特定维中的大小与该维中的输出大小匹配，或者其值精确为1，则可以在计算中使用该输入。</span></li>
+<li><span class="yiyi-st" id="yiyi-40">如果输入的形状为维度大小为1，则该维度中的第一个数据条目将用于沿该维度的所有计算。</span><span class="yiyi-st" id="yiyi-41">换句话说，<a class="reference internal" href="../glossary.html#term-ufunc"><span class="xref std std-term">ufunc</span></a>的步进机器将不会沿着该维度（对于该维度，<span class="xref std std-term">stride</span>将为0）。</span></li>
+</ol>
+<p><span class="yiyi-st" id="yiyi-42">广播用于整个NumPy决定如何处理不同形状的数组；例如，在<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarrays</span></code></a>之间的所有算术运算（<code class="docutils literal"><span class="pre">+</span></code>，<code class="docutils literal"><span class="pre">-</span></code>，<code class="docutils literal"><span class="pre">*</span></code>，...）操作前。</span></p>
+<span class="target" id="arrays-broadcasting-broadcastable"></span><p id="index-1"><span class="yiyi-st" id="yiyi-43">如果上述规则产生有效的结果，<em>即</em>，下列之一为真，则将一组数组称为“<span class="xref std std-term">可广播</span></span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-44">数组都有完全相同的形状。</span></li>
+<li><span class="yiyi-st" id="yiyi-45">数组都具有相同的维数，每个维的长度为公共长度或1。</span></li>
+<li><span class="yiyi-st" id="yiyi-46">具有太少维度的数组可以使用长度为1的维度来预置其形状，以满足属性2。</span></li>
+</ol>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-47">例</span></p>
+<p><span class="yiyi-st" id="yiyi-48">If <code class="docutils literal"><span class="pre">a.shape</span></code> is (5,1), <code class="docutils literal"><span class="pre">b.shape</span></code> is (1,6), <code class="docutils literal"><span class="pre">c.shape</span></code> is (6,) and <code class="docutils literal"><span class="pre">d.shape</span></code> is () so that <em>d</em> is a scalar, then <em>a</em>, <em>b</em>, <em>c</em>, and <em>d</em> are all broadcastable to dimension (5,6); and</span></p>
+<ul class="last simple">
+<li><span class="yiyi-st" id="yiyi-49"><em>a</em>类似于（5,6）数组，其中<code class="docutils literal"><span class="pre">a[:,0]</span></code>广播到其他列，</span></li>
+<li><span class="yiyi-st" id="yiyi-50"><em>b</em>就像一个（5,6）数组，其中<code class="docutils literal"><span class="pre">b[0,:]</span></code>广播到其他行，</span></li>
+<li><span class="yiyi-st" id="yiyi-51"><em>c</em>类似于（1,6）数组并因此像（5,6）数组，其中<code class="docutils literal"><span class="pre">c[:]</span></code>广播到每一行，</span></li>
+<li><span class="yiyi-st" id="yiyi-52"><em>d</em>类似于（5,6）数组，其中重复单个值。</span></li>
+</ul>
+</div>
+</div>
+<div class="section" id="output-type-determination">
+<span id="ufuncs-output-type"></span><h2><span class="yiyi-st" id="yiyi-53">Output type determination</span></h2>
+<p><span class="yiyi-st" id="yiyi-54">如果所有输入参数不是<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarrays</span></code></a>，ufunc（及其方法）的输出不一定是<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-55">所有输出数组将被传递到定义其<strong>的输入（除了<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarrays</span></code></a>和标量）的<code class="xref py py-obj docutils literal"><span class="pre">__array_prepare__</span></code>和<code class="xref py py-obj docutils literal"><span class="pre">__array_wrap__</span></code> </strong>具有通用函数的任何其他输入中最高的<code class="xref py py-obj docutils literal"><span class="pre">__array_priority__</span></code>。</span><span class="yiyi-st" id="yiyi-56">ndarray的默认<code class="xref py py-obj docutils literal"><span class="pre">__array_priority__</span></code>为0.0，子类型的默认<code class="xref py py-obj docutils literal"><span class="pre">__array_priority__</span></code>为1.0。</span><span class="yiyi-st" id="yiyi-57">矩阵具有等于10.0的<code class="xref py py-obj docutils literal"><span class="pre">__array_priority__</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-58">所有ufuncs也可以接受输出参数。</span><span class="yiyi-st" id="yiyi-59">如有必要，输出将被转换为所提供的输出数组的数据类型。</span><span class="yiyi-st" id="yiyi-60">如果将具有<code class="xref py py-obj docutils literal"><span class="pre">__array__</span></code>方法的类用于输出，结果将写入由<code class="xref py py-obj docutils literal"><span class="pre">__array__</span></code>返回的对象。</span><span class="yiyi-st" id="yiyi-61">然后，如果类也有一个<code class="xref py py-obj docutils literal"><span class="pre">__array_prepare__</span></code>方法，则它被调用，因此元数据可以基于ufunc的上下文来确定（上下文由ufunc本身，传递给ufunc的参数， ufunc域。）</span><span class="yiyi-st" id="yiyi-62">由<code class="xref py py-obj docutils literal"><span class="pre">__array_prepare__</span></code>返回的数组对象被传递到ufunc以进行计算。</span><span class="yiyi-st" id="yiyi-63">最后，如果类还有一个<code class="xref py py-obj docutils literal"><span class="pre">__array_wrap__</span></code>方法，返回的<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>结果将在传递控制权之前传递给调用者。</span></p>
+</div>
+<div class="section" id="use-of-internal-buffers">
+<h2><span class="yiyi-st" id="yiyi-64">Use of internal buffers</span></h2>
+<p id="index-2"><span class="yiyi-st" id="yiyi-65">在内部，缓冲区用于未对齐数据，交换数据和必须从一种数据类型转换为另一种数据类型的数据。</span><span class="yiyi-st" id="yiyi-66">内部缓冲区的大小可以基于每个线程设置。</span><span class="yiyi-st" id="yiyi-67">可以最多创建指定大小的<img alt="2 (n_{\mathrm{inputs}} + n_{\mathrm{outputs}})" class="math" src="../_images/math/a5fb52153321429a5267e5ca4acbed9a4501a412.png" style="vertical-align: -4px">缓冲区，以处理来自ufunc的所有输入和输出的数据。</span><span class="yiyi-st" id="yiyi-68">缓冲区的默认大小为10,000个元素。</span><span class="yiyi-st" id="yiyi-69">每当需要基于缓冲区的计算，但是所有输入数组都小于缓冲区大小时，那些错误行为或不正确类型的数组将在计算进行之前被复制。</span><span class="yiyi-st" id="yiyi-70">因此，调整缓冲器的大小可以改变各种类型的ufunc计算完成的速度。</span><span class="yiyi-st" id="yiyi-71">可以使用该函数访问用于设置此变量的简单界面</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="generated/numpy.setbufsize.html#numpy.setbufsize" title="numpy.setbufsize"><code class="xref py py-obj docutils literal"><span class="pre">setbufsize</span></code></a>（size）</span></td>
+<td><span class="yiyi-st" id="yiyi-73">设置ufuncs中使用的缓冲区的大小。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="error-handling">
+<h2><span class="yiyi-st" id="yiyi-74">Error handling</span></h2>
+<p id="index-3"><span class="yiyi-st" id="yiyi-75">通用函数可以跳过硬件中的特殊浮点状态寄存器（如除以零）。</span><span class="yiyi-st" id="yiyi-76">如果在您的平台上可用，在计算期间将定期检查这些寄存器。</span><span class="yiyi-st" id="yiyi-77">错误处理是基于每个线程控制的，并且可以使用函数进行配置</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-78"><a class="reference internal" href="generated/numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>（[all，divide，over，under，invalid]）</span></td>
+<td><span class="yiyi-st" id="yiyi-79">设置如何处理浮点错误。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="generated/numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-obj docutils literal"><span class="pre">seterrcall</span></code></a>（func）</span></td>
+<td><span class="yiyi-st" id="yiyi-81">设置浮点错误回调函数或日志对象。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="casting-rules">
+<span id="ufuncs-casting"></span><h2><span class="yiyi-st" id="yiyi-82">Casting Rules</span></h2>
+<div class="admonition note" id="index-4">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-83">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-84">在NumPy 1.6.0中，创建了一个类型提升API来封装机制以确定输出类型。</span><span class="yiyi-st" id="yiyi-85">See the functions <a class="reference internal" href="generated/numpy.result_type.html#numpy.result_type" title="numpy.result_type"><code class="xref py py-func docutils literal"><span class="pre">result_type</span></code></a>, <a class="reference internal" href="generated/numpy.promote_types.html#numpy.promote_types" title="numpy.promote_types"><code class="xref py py-func docutils literal"><span class="pre">promote_types</span></code></a>, and <a class="reference internal" href="generated/numpy.min_scalar_type.html#numpy.min_scalar_type" title="numpy.min_scalar_type"><code class="xref py py-func docutils literal"><span class="pre">min_scalar_type</span></code></a> for more details.</span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-86">每个ufunc的核心是一个一维stride循环，实现特定类型组合的实际功能。</span><span class="yiyi-st" id="yiyi-87">当创建一个ufunc时，会给出一个内部循环的静态列表，以及ufunc操作的类型签名的相应列表。</span><span class="yiyi-st" id="yiyi-88">ufunc机制使用此列表来确定对于特定情况使用哪个内循环。</span><span class="yiyi-st" id="yiyi-89">您可以检查特定ufunc的<a class="reference internal" href="generated/numpy.ufunc.types.html#numpy.ufunc.types" title="numpy.ufunc.types"><code class="xref py py-attr docutils literal"><span class="pre">.types</span></code></a>属性，以查看哪些类型组合具有定义的内部循环，以及它们产生的输出类型（<a class="reference internal" href="arrays.scalars.html#arrays-scalars-character-codes"><span class="std std-ref">character codes</span></a>用于所述输出简明）。</span></p>
+<p><span class="yiyi-st" id="yiyi-90">当ufunc没有提供的输入类型的核心循环实现时，必须在一个或多个输入上进行转换。</span><span class="yiyi-st" id="yiyi-91">如果不能找到输入类型的实现，则算法搜索具有类型签名的实现，其中所有输入可以“安全地”投射到该类型签名。在其内部循环列表中找到的第一个选择并执行，经过所有必要的型铸造。</span><span class="yiyi-st" id="yiyi-92">回想一下，在ufuncs（甚至是转换）期间的内部副本被限制为内部缓冲区（用户可设置）的大小。</span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-93">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-94">NumPy中的通用函数足够灵活，具有混合类型签名。</span><span class="yiyi-st" id="yiyi-95">因此，例如，可以定义与浮点和整数值一起工作的通用函数。</span><span class="yiyi-st" id="yiyi-96">有关示例，请参见<a class="reference internal" href="generated/numpy.ldexp.html#numpy.ldexp" title="numpy.ldexp"><code class="xref py py-func docutils literal"><span class="pre">ldexp</span></code></a>。</span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-97">通过上述描述，投射规则基本上通过何时可以将数据类型“安全地”投射到另一数据类型的问题来实现。</span><span class="yiyi-st" id="yiyi-98">这个问题的答案可以在Python中用函数调用：<a class="reference internal" href="generated/numpy.can_cast.html#numpy.can_cast" title="numpy.can_cast"><code class="xref py py-func docutils literal"><span class="pre">can_cast(fromtype,</span> <span class="pre">totype)</span></code></a>确定。</span><span class="yiyi-st" id="yiyi-99">下图显示了对作者64位系统上的24种内部支持类型的调用结果。</span><span class="yiyi-st" id="yiyi-100">你可以使用图中给出的代码为你的系统生成这个表。</span></p>
+<div class="admonition-figure admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-101">数字</span></p>
+<p><span class="yiyi-st" id="yiyi-102">代码段，显示32位系统的“可以安全转换”表。</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">print_table</span><span class="p">(</span><span class="n">ntypes</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span> <span class="s1">&apos;X&apos;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">ntypes</span><span class="p">:</span> <span class="nb">print</span> <span class="n">char</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="nb">print</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">ntypes</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span> <span class="n">row</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">ntypes</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="nb">print</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)),</span>
+<span class="gp">... </span>        <span class="nb">print</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">print_table</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">typecodes</span><span class="p">[</span><span class="s1">&apos;All&apos;</span><span class="p">])</span>
+<span class="go">X ? b h i l q p B H I L Q P e f d g F D G S U V O M m</span>
+<span class="go">? 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span>
+<span class="go">b 0 1 1 1 1 1 1 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 0 0</span>
+<span class="go">h 0 0 1 1 1 1 1 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 0 0</span>
+<span class="go">i 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 1 1 0 1 1 1 1 1 1 0 0</span>
+<span class="go">l 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 1 1 0 1 1 1 1 1 1 0 0</span>
+<span class="go">q 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 1 1 0 1 1 1 1 1 1 0 0</span>
+<span class="go">p 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 1 1 0 1 1 1 1 1 1 0 0</span>
+<span class="go">B 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0</span>
+<span class="go">H 0 0 0 1 1 1 1 0 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 0 0</span>
+<span class="go">I 0 0 0 0 1 1 1 0 0 1 1 1 1 0 0 1 1 0 1 1 1 1 1 1 0 0</span>
+<span class="go">L 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 1 1 0 1 1 1 1 1 1 0 0</span>
+<span class="go">Q 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 1 1 0 1 1 1 1 1 1 0 0</span>
+<span class="go">P 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 1 1 0 1 1 1 1 1 1 0 0</span>
+<span class="go">e 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 0 0</span>
+<span class="go">f 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 0 0</span>
+<span class="go">d 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 1 1 1 1 1 1 0 0</span>
+<span class="go">g 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 1 1 1 1 0 0</span>
+<span class="go">F 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 0 0</span>
+<span class="go">D 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 0 0</span>
+<span class="go">G 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0</span>
+<span class="go">S 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0</span>
+<span class="go">U 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0</span>
+<span class="go">V 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0</span>
+<span class="go">O 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0</span>
+<span class="go">M 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0</span>
+<span class="go">m 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-103">你应该注意，虽然包含在表中的完整性，&apos;S&apos;，&apos;U&apos;和&apos;V&apos;类型不能由ufuncs操作。</span><span class="yiyi-st" id="yiyi-104">另外，请注意，在32位系统上，整数类型可能有不同的大小，导致一个稍微更改的表。</span></p>
+<p><span class="yiyi-st" id="yiyi-105">混合标量数组操作使用一组不同的转换规则，确保标量不能“上转换”数组，除非标量是基本不同类型的数据（<em>，</em>），在数据类型层次结构）。</span><span class="yiyi-st" id="yiyi-106">此规则允许您在代码中使用标量常量（作为Python类型，在ufuncs中进行相应解释），而不必担心标量常量的精度是否会导致大型（小精度）数组上的转换。</span></p>
+</div>
+<div class="section" id="overriding-ufunc-behavior">
+<h2><span class="yiyi-st" id="yiyi-107">Overriding Ufunc behavior</span></h2>
+<p><span class="yiyi-st" id="yiyi-108">类（包括ndarray子类）可以通过定义某些特殊方法来覆盖ufuncs对它们的作用。</span><span class="yiyi-st" id="yiyi-109">有关详细信息，请参见<a class="reference internal" href="arrays.classes.html#arrays-classes"><span class="std std-ref">Standard array subclasses</span></a>。</span></p>
+</div>
+<div class="section" id="ufunc">
+<h2><span class="yiyi-st" id="yiyi-110"><code class="xref py py-class docutils literal"><span class="pre">ufunc</span></code></span></h2>
+<div class="section" id="optional-keyword-arguments">
+<h3><span class="yiyi-st" id="yiyi-111">Optional keyword arguments</span></h3>
+<p><span class="yiyi-st" id="yiyi-112">所有ufuncs接受可选的关键字参数。</span><span class="yiyi-st" id="yiyi-113">其中大多数代表高级使用，通常不会使用。</span></p>
+<p id="index-5"><span class="yiyi-st" id="yiyi-114"><em>out</em></span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-115"><span class="versionmodified">版本1.6中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-116">第一个输出可以作为位置参数或关键字参数提供。</span><span class="yiyi-st" id="yiyi-117">关键字&apos;out&apos;参数与位置不匹配。</span></p>
+<p><span class="yiyi-st" id="yiyi-118">..versionadded :: 1.10</span></p>
+<p><span class="yiyi-st" id="yiyi-119">&apos;out&apos;关键字参数应该是一个元组，每个输出有一个条目（可以<em class="xref py py-obj">None</em>用于由ufunc分配数组）。</span><span class="yiyi-st" id="yiyi-120">对于具有单个输出的ufunc，传递单个数组（而不是保存单个数组的元组）也是有效的。</span></p>
+<p><span class="yiyi-st" id="yiyi-121">将“out”关键字参数中的单个数组传递给具有多个输出的ufunc已弃用，并将在numpy 1.10中引发警告，并在将来的版本中引发错误。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-122"><em>其中</em></span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-123"><span class="versionmodified">版本1.7中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-124"></span><span class="yiyi-st" id="yiyi-125">值True表示计算该位置处的ufunc，值False表示将值留在输出中。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-126"><em>铸造</em></span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-127"><span class="versionmodified">版本1.6中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-128">可能是“不”，“等价”，“安全”，“same_kind”或“不安全”。</span><span class="yiyi-st" id="yiyi-129">有关参数值的说明，请参见<a class="reference internal" href="generated/numpy.can_cast.html#numpy.can_cast" title="numpy.can_cast"><code class="xref py py-func docutils literal"><span class="pre">can_cast</span></code></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-130">提供允许使用何种类型的投射的政策。</span><span class="yiyi-st" id="yiyi-131">为了与以前版本的NumPy兼容，这对numpy默认为“不安全”</span><span class="yiyi-st" id="yiyi-132">在numpy 1.7中，开始到&apos;same_kind&apos;的转换，其中ufuncs为“不安全”规则允许的调用产生DeprecationWarning，但不在“same_kind”规则下。</span><span class="yiyi-st" id="yiyi-133">从numpy 1.10开始，默认值为“same_kind”。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-134"><em>订单</em></span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-135"><span class="versionmodified">版本1.6中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-136">指定输出数组的计算迭代顺序/内存布局。</span><span class="yiyi-st" id="yiyi-137">默认为&apos;K&apos;。</span><span class="yiyi-st" id="yiyi-138">&apos;C&apos;表示输出应为C连续，&apos;F&apos;表示F连续，&apos;A&apos;表示F连续，如果输入是F连续的，而不是也不是C连续的，否则为C连续， &apos;意味着尽可能接近地匹配输入的元素排序。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-139"><em>dtype</em></span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-140"><span class="versionmodified">版本1.6中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-141">覆盖计算的dtype并输出数组。</span><span class="yiyi-st" id="yiyi-142">类似于<em>签名</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-143"><em>subok</em></span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-144"><span class="versionmodified">版本1.6中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-145">默认为true。</span><span class="yiyi-st" id="yiyi-146">如果设置为false，则输出将始终为严格数组，而不是子类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-147"><em>签名</em></span></p>
+<blockquote>
+<div><span class="yiyi-st" id="yiyi-148">数据类型，数据类型的元组或指示ufunc的输入和输出类型的特殊签名字符串。</span><span class="yiyi-st" id="yiyi-149">此参数允许您为1-d循环提供特定签名，以在基础计算中使用。</span><span class="yiyi-st" id="yiyi-150">如果为ufunc指定的循环不存在，则会引发TypeError。</span><span class="yiyi-st" id="yiyi-151">通常，通过将输入类型与可用的类型进行比较并搜索具有可以安全地投放所有输入的数据类型的循环，来自动地找到合适的循环。</span><span class="yiyi-st" id="yiyi-152">这个关键字参数让你绕过搜索并选择一个特定的循环。</span><span class="yiyi-st" id="yiyi-153">可用签名的列表由ufunc对象的<strong>types</strong>属性提供。</span><span class="yiyi-st" id="yiyi-154">对于向后兼容性，这个参数也可以被提供为<em>sig</em>，尽管长格式是首选。</span></div></blockquote>
+<p><span class="yiyi-st" id="yiyi-155"><em>extobj</em></span></p>
+<blockquote>
+<div><span class="yiyi-st" id="yiyi-156">长度为1，2或3的列表，指定ufunc缓冲区大小，错误模式整数和错误回调函数。</span><span class="yiyi-st" id="yiyi-157">通常，这些值在线程特定的字典中查找。</span><span class="yiyi-st" id="yiyi-158">在这里传递它们绕过了查找并使用为错误模式提供的低级规范。</span><span class="yiyi-st" id="yiyi-159">这可能是有用的，例如，作为需要在循环中的小数组上的许多ufunc调用的计算的优化。</span></div></blockquote>
+</div>
+<div class="section" id="attributes">
+<h3><span class="yiyi-st" id="yiyi-160">Attributes</span></h3>
+<p><span class="yiyi-st" id="yiyi-161">有一些通用函数拥有的信息属性。</span><span class="yiyi-st" id="yiyi-162">不能设置任何属性。</span></p>
+<table border="1" class="docutils" id="index-6">
+<colgroup>
+<col width="16%">
+<col width="84%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-163"><strong>__ doc __</strong></span></td>
+<td><span class="yiyi-st" id="yiyi-164">每个ufunc的docstring。</span><span class="yiyi-st" id="yiyi-165">docstring的第一部分是从输出的数量，名称和输入的数量动态生成的。</span><span class="yiyi-st" id="yiyi-166">docstring的第二部分在创建时提供，并与ufunc一起存储。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-167"><strong>__ name __</strong></span></td>
+<td><span class="yiyi-st" id="yiyi-168">ufunc的名称。</span></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-169"><a class="reference internal" href="generated/numpy.ufunc.nin.html#numpy.ufunc.nin" title="numpy.ufunc.nin"><code class="xref py py-obj docutils literal"><span class="pre">ufunc.nin</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-170">输入数量。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-171"><a class="reference internal" href="generated/numpy.ufunc.nout.html#numpy.ufunc.nout" title="numpy.ufunc.nout"><code class="xref py py-obj docutils literal"><span class="pre">ufunc.nout</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-172">输出数量。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-173"><a class="reference internal" href="generated/numpy.ufunc.nargs.html#numpy.ufunc.nargs" title="numpy.ufunc.nargs"><code class="xref py py-obj docutils literal"><span class="pre">ufunc.nargs</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-174">参数的数量。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-175"><a class="reference internal" href="generated/numpy.ufunc.ntypes.html#numpy.ufunc.ntypes" title="numpy.ufunc.ntypes"><code class="xref py py-obj docutils literal"><span class="pre">ufunc.ntypes</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-176">类型的数量。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-177"><a class="reference internal" href="generated/numpy.ufunc.types.html#numpy.ufunc.types" title="numpy.ufunc.types"><code class="xref py py-obj docutils literal"><span class="pre">ufunc.types</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-178">返回一个类型为input-&gt; output的列表。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-179"><a class="reference internal" href="generated/numpy.ufunc.identity.html#numpy.ufunc.identity" title="numpy.ufunc.identity"><code class="xref py py-obj docutils literal"><span class="pre">ufunc.identity</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-180">身份值。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="methods">
+<h3><span class="yiyi-st" id="yiyi-181">Methods</span></h3>
+<p><span class="yiyi-st" id="yiyi-182">所有ufuncs有四个方法。</span><span class="yiyi-st" id="yiyi-183">然而，这些方法只对接受两个输入参数并返回一个输出参数的ufunc有意义。</span><span class="yiyi-st" id="yiyi-184">尝试在其他ufuncs上调用这些方法将导致<a class="reference external" href="https://docs.python.org/dev/library/exceptions.html#ValueError" title="(in Python v3.7)"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code></a>。</span><span class="yiyi-st" id="yiyi-185">reduce-like方法都采用<em>轴</em>关键字和<em>dtype</em>关键字，并且数组必须都具有dimension&gt; = 1。</span><span class="yiyi-st" id="yiyi-186"><em>axis</em>关键字指定要在其上进行缩减的数组的轴，并且可以为负数，但必须为整数。</span><span class="yiyi-st" id="yiyi-187"><em>dtype</em>关键字允许你使用<span class="xref std std-ref">{op} .reduce</span>来处理一个非常常见的问题。</span><span class="yiyi-st" id="yiyi-188">有时候，你可能有一个数据类型的数组，并希望将其所有元素相加，但结果不适合数组的数据类型。</span><span class="yiyi-st" id="yiyi-189">如果你有一个单字节整数的数组，这通常发生。</span><span class="yiyi-st" id="yiyi-190"><em>dtype</em>关键字允许您更改发生缩减的数据类型（因此也改变输出的类型）。</span><span class="yiyi-st" id="yiyi-191">因此，你可以确保输出是一个精度足够大的数据类型来处理你的输出。</span><span class="yiyi-st" id="yiyi-192">改变reduce类型的责任主要取决于你。</span><span class="yiyi-st" id="yiyi-193">有一个例外：如果没有对“add”或“multiply”操作的减少给出<em>dtype</em>，那么如果输入类型是整数（或布尔）数据类型，大小的<code class="xref py py-class docutils literal"><span class="pre">int_</span></code>数据类型，它将在内部向上转换到<code class="xref py py-class docutils literal"><span class="pre">int_</span></code>（或<code class="xref py py-class docutils literal"><span class="pre">uint</span></code>）数据类型。</span></p>
+<p><span class="yiyi-st" id="yiyi-194">Ufuncs还有第五种方法，允许使用花样索引执行原位操作。</span><span class="yiyi-st" id="yiyi-195">在使用花式索引的维度上不使用缓冲，因此花式索引可以多次列出项目，并且将对该项目的上一个操作的结果执行操作。</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-196"><a class="reference internal" href="generated/numpy.ufunc.reduce.html#numpy.ufunc.reduce" title="numpy.ufunc.reduce"><code class="xref py py-obj docutils literal"><span class="pre">ufunc.reduce</span></code></a>（a [，axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-197">通过沿一个轴应用ufunc，将<em class="xref py py-obj">a</em>的尺寸减少一。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-198"><a class="reference internal" href="generated/numpy.ufunc.accumulate.html#numpy.ufunc.accumulate" title="numpy.ufunc.accumulate"><code class="xref py py-obj docutils literal"><span class="pre">ufunc.accumulate</span></code></a>（array [，axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-199">累加将运算符应用于所有元素的结果。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-200"><a class="reference internal" href="generated/numpy.ufunc.reduceat.html#numpy.ufunc.reduceat" title="numpy.ufunc.reduceat"><code class="xref py py-obj docutils literal"><span class="pre">ufunc.reduceat</span></code></a>（a，indices [，axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-201">使用单个轴上的指定切片执行（局部）缩减。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-202"><a class="reference internal" href="generated/numpy.ufunc.outer.html#numpy.ufunc.outer" title="numpy.ufunc.outer"><code class="xref py py-obj docutils literal"><span class="pre">ufunc.outer</span></code></a>（A，B）</span></td>
+<td><span class="yiyi-st" id="yiyi-203">将ufunc <em class="xref py py-obj">op</em>应用于所有对（a，b），其中a在<em class="xref py py-obj">A</em>和b在<em class="xref py py-obj">B</em>。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-204"><a class="reference internal" href="generated/numpy.ufunc.at.html#numpy.ufunc.at" title="numpy.ufunc.at"><code class="xref py py-obj docutils literal"><span class="pre">ufunc.at</span></code></a>（a，indices [，b]）</span></td>
+<td><span class="yiyi-st" id="yiyi-205">对由&apos;indices&apos;指定的元素，对操作数&apos;a&apos;执行无缓冲的就地操作。</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-206">警告</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-207">对具有“太小”范围以处理结果的数据类型的数组的类似于reduce的操作将静默换行。</span><span class="yiyi-st" id="yiyi-208">应该使用<a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>来增加发生减少的数据类型的大小。</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="available-ufuncs">
+<h2><span class="yiyi-st" id="yiyi-209">Available ufuncs</span></h2>
+<p><span class="yiyi-st" id="yiyi-210">目前在<a class="reference internal" href="index.html#module-numpy" title="numpy"><code class="xref py py-mod docutils literal"><span class="pre">numpy</span></code></a>中定义了一种或多种类型的超过60个通用函数，涵盖各种各样的操作。</span><span class="yiyi-st" id="yiyi-211">Some of these ufuncs are called automatically on arrays when the relevant infix notation is used (<em>e.g.</em>, <a class="reference internal" href="generated/numpy.add.html#numpy.add" title="numpy.add"><code class="xref py py-func docutils literal"><span class="pre">add(a,</span> <span class="pre">b)</span></code></a> is called internally when <code class="docutils literal"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code> is written and <em>a</em> or <em>b</em> is an <a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>). </span><span class="yiyi-st" id="yiyi-212">然而，你可能仍然想要使用ufunc调用，以便使用可选的输出参数将输出放置在所选择的对象中。</span></p>
+<p><span class="yiyi-st" id="yiyi-213">回想一下每个ufunc操作一个元素一个元素。</span><span class="yiyi-st" id="yiyi-214">因此，每个ufunc将被描述为如果作用于一组标量输入以返回一组标量输出。</span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-215">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-216">即使你使用可选的输出参数，ufunc仍然返回它的输出。</span></p>
+</div>
+<div class="section" id="math-operations">
+<h3><span class="yiyi-st" id="yiyi-217">Math operations</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-218"><a class="reference internal" href="generated/numpy.add.html#numpy.add" title="numpy.add"><code class="xref py py-obj docutils literal"><span class="pre">add</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-219">按元素添加参数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-220"><a class="reference internal" href="generated/numpy.subtract.html#numpy.subtract" title="numpy.subtract"><code class="xref py py-obj docutils literal"><span class="pre">subtract</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-221">按元素方式减去参数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-222"><a class="reference internal" href="generated/numpy.multiply.html#numpy.multiply" title="numpy.multiply"><code class="xref py py-obj docutils literal"><span class="pre">multiply</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-223">逐元素乘法参数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-224"><a class="reference internal" href="generated/numpy.divide.html#numpy.divide" title="numpy.divide"><code class="xref py py-obj docutils literal"><span class="pre">divide</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-225">逐元素分割参数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-226"><a class="reference internal" href="generated/numpy.logaddexp.html#numpy.logaddexp" title="numpy.logaddexp"><code class="xref py py-obj docutils literal"><span class="pre">logaddexp</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-227">输入的求和的对数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-228"><a class="reference internal" href="generated/numpy.logaddexp2.html#numpy.logaddexp2" title="numpy.logaddexp2"><code class="xref py py-obj docutils literal"><span class="pre">logaddexp2</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-229">以2为底的输入的乘方和的对数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-230"><a class="reference internal" href="generated/numpy.true_divide.html#numpy.true_divide" title="numpy.true_divide"><code class="xref py py-obj docutils literal"><span class="pre">true_divide</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-231">按元素方式返回输入的真正除法。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-232"><a class="reference internal" href="generated/numpy.floor_divide.html#numpy.floor_divide" title="numpy.floor_divide"><code class="xref py py-obj docutils literal"><span class="pre">floor_divide</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-233">返回小于或等于输入的除法的最大整数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-234"><a class="reference internal" href="generated/numpy.negative.html#numpy.negative" title="numpy.negative"><code class="xref py py-obj docutils literal"><span class="pre">negative</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-235">数值负，元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-236"><a class="reference internal" href="generated/numpy.power.html#numpy.power" title="numpy.power"><code class="xref py py-obj docutils literal"><span class="pre">power</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-237">第一个数组元素从第二个数组提升到权力，逐元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-238"><a class="reference internal" href="generated/numpy.remainder.html#numpy.remainder" title="numpy.remainder"><code class="xref py py-obj docutils literal"><span class="pre">remainder</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-239">返回元素的除法余数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-240"><a class="reference internal" href="generated/numpy.mod.html#numpy.mod" title="numpy.mod"><code class="xref py py-obj docutils literal"><span class="pre">mod</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-241">返回元素的除法余数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-242"><a class="reference internal" href="generated/numpy.fmod.html#numpy.fmod" title="numpy.fmod"><code class="xref py py-obj docutils literal"><span class="pre">fmod</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-243">返回除法的元素余项。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-244"><a class="reference internal" href="generated/numpy.absolute.html#numpy.absolute" title="numpy.absolute"><code class="xref py py-obj docutils literal"><span class="pre">absolute</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-245">逐个计算绝对值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-246"><a class="reference internal" href="generated/numpy.fabs.html#numpy.fabs" title="numpy.fabs"><code class="xref py py-obj docutils literal"><span class="pre">fabs</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-247">按元素计算绝对值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-248"><a class="reference internal" href="generated/numpy.rint.html#numpy.rint" title="numpy.rint"><code class="xref py py-obj docutils literal"><span class="pre">rint</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-249">数组的圆形元素到最接近的整数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-250"><a class="reference internal" href="generated/numpy.sign.html#numpy.sign" title="numpy.sign"><code class="xref py py-obj docutils literal"><span class="pre">sign</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-251">返回数字符号的逐元素指示。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-252"><a class="reference internal" href="generated/numpy.conj.html#numpy.conj" title="numpy.conj"><code class="xref py py-obj docutils literal"><span class="pre">conj</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-253">按元素方式返回复共轭。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-254"><a class="reference internal" href="generated/numpy.exp.html#numpy.exp" title="numpy.exp"><code class="xref py py-obj docutils literal"><span class="pre">exp</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-255">计算输入数组中所有元素的指数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-256"><a class="reference internal" href="generated/numpy.exp2.html#numpy.exp2" title="numpy.exp2"><code class="xref py py-obj docutils literal"><span class="pre">exp2</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-257">对于输入数组中的所有<em class="xref py py-obj">p</em>，计算<em class="xref py py-obj">2 ** p</em>。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-258"><a class="reference internal" href="generated/numpy.log.html#numpy.log" title="numpy.log"><code class="xref py py-obj docutils literal"><span class="pre">log</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-259">自然对数，逐元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-260"><a class="reference internal" href="generated/numpy.log2.html#numpy.log2" title="numpy.log2"><code class="xref py py-obj docutils literal"><span class="pre">log2</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-261"><em class="xref py py-obj">x</em>的基础2对数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-262"><a class="reference internal" href="generated/numpy.log10.html#numpy.log10" title="numpy.log10"><code class="xref py py-obj docutils literal"><span class="pre">log10</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-263">以元素为单位返回输入数组的基数10的对数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-264"><a class="reference internal" href="generated/numpy.expm1.html#numpy.expm1" title="numpy.expm1"><code class="xref py py-obj docutils literal"><span class="pre">expm1</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-265">对数组中的所有元素计算<code class="docutils literal"><span class="pre">exp（x）</span> <span class="pre"> - </span> <span class="pre">1</span> </code></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-266"><a class="reference internal" href="generated/numpy.log1p.html#numpy.log1p" title="numpy.log1p"><code class="xref py py-obj docutils literal"><span class="pre">log1p</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-267">返回一个加自然对数的输入数组，元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-268"><a class="reference internal" href="generated/numpy.sqrt.html#numpy.sqrt" title="numpy.sqrt"><code class="xref py py-obj docutils literal"><span class="pre">sqrt</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-269">按元素方式返回数组的正平方根。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-270"><a class="reference internal" href="generated/numpy.square.html#numpy.square" title="numpy.square"><code class="xref py py-obj docutils literal"><span class="pre">square</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-271">返回输入的元素平方。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-272"><a class="reference internal" href="generated/numpy.cbrt.html#numpy.cbrt" title="numpy.cbrt"><code class="xref py py-obj docutils literal"><span class="pre">cbrt</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-273">以元素方式返回数组的多维数据集根。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-274"><a class="reference internal" href="generated/numpy.reciprocal.html#numpy.reciprocal" title="numpy.reciprocal"><code class="xref py py-obj docutils literal"><span class="pre">reciprocal</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-275">元素方式返回参数的倒数。</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-276">小费</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-277">可选输出参数可用于帮助您节省大型计算的内存。</span><span class="yiyi-st" id="yiyi-278">如果您的数组大，复杂的表达式可能需要更长的时间，由于创建和（以后）销毁临时计算空间绝对必要。</span><span class="yiyi-st" id="yiyi-279">例如，表达式<code class="docutils literal"><span class="pre">G</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">*</span> <span class="pre">b</span> <span class="pre"> +</span> <span class="pre">c</span></code>等效于<code class="docutils literal"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">A</span> <span class="pre"> *</span> <span class="pre">B；</span> <span class="pre">G</span> <span class="pre">=</span> <span class="pre">T1</span> <span class="pre">+</span> <span class="pre">C；</span> <span class="pre">del</span> <span class="pre">t1</span></code>。</span><span class="yiyi-st" id="yiyi-280">将更快地执行为<code class="docutils literal"><span class="pre">G</span> <span class="pre">=</span> <span class="pre">A</span> <span class="pre">*</span> <span class="pre">B；  t5 &gt;与<code class="docutils literal"><span class="pre">G</span>相同的<span class="pre">添加（G，</span> <span class="pre">C，</span> <span class="pre">G）</span> <span class="pre">=</span> <span class="pre">A</span> <span class="pre">*</span> <span class="pre">B；</span> <span class="pre">G</span> <span class="pre">+ =</span> <span class="pre">C</span></code>。</span></code></span></p>
+</div>
+</div>
+<div class="section" id="trigonometric-functions">
+<h3><span class="yiyi-st" id="yiyi-281">Trigonometric functions</span></h3>
+<p><span class="yiyi-st" id="yiyi-282">所有三角函数在调用角度时使用弧度。</span><span class="yiyi-st" id="yiyi-283">度数与弧度的比率为</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-284"><a class="reference internal" href="generated/numpy.sin.html#numpy.sin" title="numpy.sin"><code class="xref py py-obj docutils literal"><span class="pre">sin</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-285">三角正弦，元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-286"><a class="reference internal" href="generated/numpy.cos.html#numpy.cos" title="numpy.cos"><code class="xref py py-obj docutils literal"><span class="pre">cos</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-287">元素方面。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-288"><a class="reference internal" href="generated/numpy.tan.html#numpy.tan" title="numpy.tan"><code class="xref py py-obj docutils literal"><span class="pre">tan</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-289">逐元素计算切线。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-290"><a class="reference internal" href="generated/numpy.arcsin.html#numpy.arcsin" title="numpy.arcsin"><code class="xref py py-obj docutils literal"><span class="pre">arcsin</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-291">反正弦，元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-292"><a class="reference internal" href="generated/numpy.arccos.html#numpy.arccos" title="numpy.arccos"><code class="xref py py-obj docutils literal"><span class="pre">arccos</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-293">三角反余弦，元素方式。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-294"><a class="reference internal" href="generated/numpy.arctan.html#numpy.arctan" title="numpy.arctan"><code class="xref py py-obj docutils literal"><span class="pre">arctan</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-295">三角反正切，元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-296"><a class="reference internal" href="generated/numpy.arctan2.html#numpy.arctan2" title="numpy.arctan2"><code class="xref py py-obj docutils literal"><span class="pre">arctan2</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-297"><code class="docutils literal"><span class="pre">x1/x2</span></code>的元素平方倒圆切线正确选择象限。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-298"><a class="reference internal" href="generated/numpy.hypot.html#numpy.hypot" title="numpy.hypot"><code class="xref py py-obj docutils literal"><span class="pre">hypot</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-299">给定直角三角形的“腿”，返回其斜边。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-300"><a class="reference internal" href="generated/numpy.sinh.html#numpy.sinh" title="numpy.sinh"><code class="xref py py-obj docutils literal"><span class="pre">sinh</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-301">双曲正弦，元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-302"><a class="reference internal" href="generated/numpy.cosh.html#numpy.cosh" title="numpy.cosh"><code class="xref py py-obj docutils literal"><span class="pre">cosh</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-303">双曲余弦，元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-304"><a class="reference internal" href="generated/numpy.tanh.html#numpy.tanh" title="numpy.tanh"><code class="xref py py-obj docutils literal"><span class="pre">tanh</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-305">逐元素计算双曲正切。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-306"><a class="reference internal" href="generated/numpy.arcsinh.html#numpy.arcsinh" title="numpy.arcsinh"><code class="xref py py-obj docutils literal"><span class="pre">arcsinh</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-307">逆双曲正弦元。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-308"><a class="reference internal" href="generated/numpy.arccosh.html#numpy.arccosh" title="numpy.arccosh"><code class="xref py py-obj docutils literal"><span class="pre">arccosh</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-309">逆双曲余弦，元素方式。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-310"><a class="reference internal" href="generated/numpy.arctanh.html#numpy.arctanh" title="numpy.arctanh"><code class="xref py py-obj docutils literal"><span class="pre">arctanh</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-311">逆双曲正切元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-312"><a class="reference internal" href="generated/numpy.deg2rad.html#numpy.deg2rad" title="numpy.deg2rad"><code class="xref py py-obj docutils literal"><span class="pre">deg2rad</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-313">将角度从度转换为弧度。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-314"><a class="reference internal" href="generated/numpy.rad2deg.html#numpy.rad2deg" title="numpy.rad2deg"><code class="xref py py-obj docutils literal"><span class="pre">rad2deg</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-315">将角度从弧度转换为度。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="bit-twiddling-functions">
+<h3><span class="yiyi-st" id="yiyi-316">Bit-twiddling functions</span></h3>
+<p><span class="yiyi-st" id="yiyi-317">这些函数都需要整数参数，并且它们操作这些参数的位模式。</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-318"><a class="reference internal" href="generated/numpy.bitwise_and.html#numpy.bitwise_and" title="numpy.bitwise_and"><code class="xref py py-obj docutils literal"><span class="pre">bitwise_and</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-319">计算元素方面的两个数组的逐位AND。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-320"><a class="reference internal" href="generated/numpy.bitwise_or.html#numpy.bitwise_or" title="numpy.bitwise_or"><code class="xref py py-obj docutils literal"><span class="pre">bitwise_or</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-321">计算元素方面的两个数组的逐位OR。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-322"><a class="reference internal" href="generated/numpy.bitwise_xor.html#numpy.bitwise_xor" title="numpy.bitwise_xor"><code class="xref py py-obj docutils literal"><span class="pre">bitwise_xor</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-323">按元素方式计算两个数组的逐位异或。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-324"><a class="reference internal" href="generated/numpy.invert.html#numpy.invert" title="numpy.invert"><code class="xref py py-obj docutils literal"><span class="pre">invert</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-325">逐位计算逐位反转，或逐位非单元。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-326"><a class="reference internal" href="generated/numpy.left_shift.html#numpy.left_shift" title="numpy.left_shift"><code class="xref py py-obj docutils literal"><span class="pre">left_shift</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-327">将整数的位向左移位。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-328"><a class="reference internal" href="generated/numpy.right_shift.html#numpy.right_shift" title="numpy.right_shift"><code class="xref py py-obj docutils literal"><span class="pre">right_shift</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-329">将整数的位向右移位。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="comparison-functions">
+<h3><span class="yiyi-st" id="yiyi-330">Comparison functions</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-331"><a class="reference internal" href="generated/numpy.greater.html#numpy.greater" title="numpy.greater"><code class="xref py py-obj docutils literal"><span class="pre">greater</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-332">逐元素地返回（x1&gt; x2）的真值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-333"><a class="reference internal" href="generated/numpy.greater_equal.html#numpy.greater_equal" title="numpy.greater_equal"><code class="xref py py-obj docutils literal"><span class="pre">greater_equal</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-334">逐元素地返回（x1&gt; = x2）的真值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-335"><a class="reference internal" href="generated/numpy.less.html#numpy.less" title="numpy.less"><code class="xref py py-obj docutils literal"><span class="pre">less</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-336">返回（x1的真值</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-337"><a class="reference internal" href="generated/numpy.less_equal.html#numpy.less_equal" title="numpy.less_equal"><code class="xref py py-obj docutils literal"><span class="pre">less_equal</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-338">返回（x1 =）的真值</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-339"><a class="reference internal" href="generated/numpy.not_equal.html#numpy.not_equal" title="numpy.not_equal"><code class="xref py py-obj docutils literal"><span class="pre">not_equal</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-340">元素方式返回（x1！= x2）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-341"><a class="reference internal" href="generated/numpy.equal.html#numpy.equal" title="numpy.equal"><code class="xref py py-obj docutils literal"><span class="pre">equal</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-342">元素方式返回（x1 == x2）。</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-343">警告</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-344">不要使用Python关键字<code class="docutils literal"><span class="pre">and</span></code>和<code class="docutils literal"><span class="pre">or</span></code>来组合逻辑数组表达式。</span><span class="yiyi-st" id="yiyi-345">这些关键字将测试整个数组的真值（不是逐个元素，你可能期望）。</span><span class="yiyi-st" id="yiyi-346">使用按位运算符＆和|代替。</span></p>
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-347"><a class="reference internal" href="generated/numpy.logical_and.html#numpy.logical_and" title="numpy.logical_and"><code class="xref py py-obj docutils literal"><span class="pre">logical_and</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-348">逐元素计算x1和x2的真值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-349"><a class="reference internal" href="generated/numpy.logical_or.html#numpy.logical_or" title="numpy.logical_or"><code class="xref py py-obj docutils literal"><span class="pre">logical_or</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-350">逐元素计算x1或x2的真值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-351"><a class="reference internal" href="generated/numpy.logical_xor.html#numpy.logical_xor" title="numpy.logical_xor"><code class="xref py py-obj docutils literal"><span class="pre">logical_xor</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-352">按元素方式计算x1 XOR x2的真值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-353"><a class="reference internal" href="generated/numpy.logical_not.html#numpy.logical_not" title="numpy.logical_not"><code class="xref py py-obj docutils literal"><span class="pre">logical_not</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-354">逐元素计算NOT x的真值。</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-355">警告</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-356">比特运算符＆和|是执行逐个元素数组比较的正确方法。</span><span class="yiyi-st" id="yiyi-357">确保您理解运算符优先级：<code class="docutils literal"><span class="pre">（a</span> <span class="pre">＆gt；</span> <span class="pre">2）</span> <span class="pre">＆amp；</span> <span class="pre">（a</span> <span class="pre"></span> <span class="pre">5）</span></code>是正确的语法，因为<code class="docutils literal"><span class="pre">a</span> <span class="pre">/ t10&gt; <span class="pre">2</span> <span class="pre">＆amp；</span> <span class="pre">a</span> <span class="pre"></span> <span class="pre">5</span></span></code>导致由于首先评估<code class="docutils literal"><span class="pre">2</span> <span class="pre">＆amp；</span> <span class="pre">a</span></code>的错误。</span></p>
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-358"><a class="reference internal" href="generated/numpy.maximum.html#numpy.maximum" title="numpy.maximum"><code class="xref py py-obj docutils literal"><span class="pre">maximum</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-359">数组元素的元素最大值。</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-360">小费</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-361">Python函数<code class="docutils literal"><span class="pre">max()</span></code>将找到一维数组的最大值，但它将使用较慢的序列接口。</span><span class="yiyi-st" id="yiyi-362">reduce方法的最大ufunc更快。</span><span class="yiyi-st" id="yiyi-363">此外，<code class="docutils literal"><span class="pre">max()</span></code>方法不会给出您可能期望具有大于一个维度的数组的答案。</span><span class="yiyi-st" id="yiyi-364">reduce的reduce方法还允许您计算数组上的总最小值。</span></p>
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-365"><a class="reference internal" href="generated/numpy.minimum.html#numpy.minimum" title="numpy.minimum"><code class="xref py py-obj docutils literal"><span class="pre">minimum</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-366">元素最小的数组元素。</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-367">警告</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-368">the behavior of <code class="docutils literal"><span class="pre">maximum(a,</span> <span class="pre">b)</span></code> is different than that of <code class="docutils literal"><span class="pre">max(a,</span> <span class="pre">b)</span></code>. </span><span class="yiyi-st" id="yiyi-369">As a ufunc, <code class="docutils literal"><span class="pre">maximum(a,</span> <span class="pre">b)</span></code> performs an element-by-element comparison of <em class="xref py py-obj">a</em> and <em class="xref py py-obj">b</em> and chooses each element of the result according to which element in the two arrays is larger. </span><span class="yiyi-st" id="yiyi-370">相反，<code class="docutils literal"><span class="pre">max（a，</span> <span class="pre">b）</span></code>处理对象<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>作为整体，查看<code class="docutils literal"><span class="pre">a</span> <span class="pre">&gt;</span> <span class="pre">b</span></code>的（总）真值并使用它返回<em class="xref py py-obj">a</em>或<em class="xref py py-obj">b</em>（作为一个整体）。</span><span class="yiyi-st" id="yiyi-371">在<code class="docutils literal"><span class="pre">最小（a，</span> <span class="pre">b）</span></code>和<code class="docutils literal"><span class="pre">min（a，</span> <span class="pre">b）</span></code>。</span></p>
+</div>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-372"><a class="reference internal" href="generated/numpy.fmax.html#numpy.fmax" title="numpy.fmax"><code class="xref py py-obj docutils literal"><span class="pre">fmax</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-373">数组元素的元素最大值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-374"><a class="reference internal" href="generated/numpy.fmin.html#numpy.fmin" title="numpy.fmin"><code class="xref py py-obj docutils literal"><span class="pre">fmin</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-375">元素最小的数组元素。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="floating-functions">
+<h3><span class="yiyi-st" id="yiyi-376">Floating functions</span></h3>
+<p><span class="yiyi-st" id="yiyi-377">回想一下，所有这些函数在一个数组上逐个元素地工作，返回一个数组输出。</span><span class="yiyi-st" id="yiyi-378">描述仅详细说明一次操作。</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-379"><a class="reference internal" href="generated/numpy.isfinite.html#numpy.isfinite" title="numpy.isfinite"><code class="xref py py-obj docutils literal"><span class="pre">isfinite</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-380">测试元素的有限性（不是无穷大或不是数字）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-381"><a class="reference internal" href="generated/numpy.isinf.html#numpy.isinf" title="numpy.isinf"><code class="xref py py-obj docutils literal"><span class="pre">isinf</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-382">对于正或负无穷大测试元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-383"><a class="reference internal" href="generated/numpy.isnan.html#numpy.isnan" title="numpy.isnan"><code class="xref py py-obj docutils literal"><span class="pre">isnan</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-384">测试元素方面的NaN和返回结果作为一个布尔数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-385"><a class="reference internal" href="generated/numpy.fabs.html#numpy.fabs" title="numpy.fabs"><code class="xref py py-obj docutils literal"><span class="pre">fabs</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-386">按元素计算绝对值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-387"><a class="reference internal" href="generated/numpy.signbit.html#numpy.signbit" title="numpy.signbit"><code class="xref py py-obj docutils literal"><span class="pre">signbit</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-388">以元素为单位返回True，其中signbit已设置（小于零）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-389"><a class="reference internal" href="generated/numpy.copysign.html#numpy.copysign" title="numpy.copysign"><code class="xref py py-obj docutils literal"><span class="pre">copysign</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-390">按照元素方式将x1的符号更改为x2的符号。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-391"><code class="xref py py-obj docutils literal"><span class="pre">nextafter</span></code>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-392">将x1之后的下一个浮点值返回x2，逐个元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-393"><code class="xref py py-obj docutils literal"><span class="pre">spacing</span></code>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-394">返回x和最近的相邻数字之间的距离。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-395"><a class="reference internal" href="generated/numpy.modf.html#numpy.modf" title="numpy.modf"><code class="xref py py-obj docutils literal"><span class="pre">modf</span></code></a>（x [，out1，out2]）</span></td>
+<td><span class="yiyi-st" id="yiyi-396">以元素方式返回数组的小数和整数部分。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-397"><a class="reference internal" href="generated/numpy.ldexp.html#numpy.ldexp" title="numpy.ldexp"><code class="xref py py-obj docutils literal"><span class="pre">ldexp</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-398">元素方式返回x1 * 2 ** x2。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-399"><a class="reference internal" href="generated/numpy.frexp.html#numpy.frexp" title="numpy.frexp"><code class="xref py py-obj docutils literal"><span class="pre">frexp</span></code></a>（x [，out1，out2]）</span></td>
+<td><span class="yiyi-st" id="yiyi-400">将x的元素分解为尾数和二进制指数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-401"><a class="reference internal" href="generated/numpy.fmod.html#numpy.fmod" title="numpy.fmod"><code class="xref py py-obj docutils literal"><span class="pre">fmod</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-402">返回除法的元素余项。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-403"><a class="reference internal" href="generated/numpy.floor.html#numpy.floor" title="numpy.floor"><code class="xref py py-obj docutils literal"><span class="pre">floor</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-404">逐元素地返回输入的底。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-405"><a class="reference internal" href="generated/numpy.ceil.html#numpy.ceil" title="numpy.ceil"><code class="xref py py-obj docutils literal"><span class="pre">ceil</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-406">元素方式返回输入的上限。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-407"><a class="reference internal" href="generated/numpy.trunc.html#numpy.trunc" title="numpy.trunc"><code class="xref py py-obj docutils literal"><span class="pre">trunc</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-408">按元素方式返回输入的截断值。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

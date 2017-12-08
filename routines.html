@@ -1,0 +1,234 @@
+
+<span id="id1"></span><h1><span class="yiyi-st" id="yiyi-10">Routines</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.html">https://docs.scipy.org/doc/numpy/reference/routines.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-11">在本章中，提供了常规docstrings，按功能分组。</span><span class="yiyi-st" id="yiyi-12">许多docstrings包含示例代码，它演示了例程的基本用法。</span><span class="yiyi-st" id="yiyi-13">示例假设NumPy导入：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-14">执行示例的一种方便的方法是IPython的<code class="docutils literal"><span class="pre">%doctest_mode</span></code>模式，它允许粘贴多行示例并保留缩进。</span></p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="routines.array-creation.html">数组创建例程</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-15"><a class="reference internal" href="routines.array-creation.html#ones-and-zeros">和零</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-16"><a class="reference internal" href="routines.array-creation.html#from-existing-data">从现有数据</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-17"><a class="reference internal" href="routines.array-creation.html#creating-record-arrays-numpy-rec">创建记录数组（<code class="docutils literal"><span class="pre">numpy.rec</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="routines.array-creation.html#creating-character-arrays-numpy-char">创建字符数组（<code class="docutils literal"><span class="pre">numpy.char</span></code></a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="routines.array-creation.html#numerical-ranges">数值范围</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="routines.array-creation.html#building-matrices">建立矩阵</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="routines.array-creation.html#the-matrix-class">Matrix类</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="routines.array-manipulation.html">数组操作例程</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="routines.array-manipulation.html#basic-operations">基本操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="routines.array-manipulation.html#changing-array-shape">更改数组形状</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="routines.array-manipulation.html#transpose-like-operations">类似转置的操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="routines.array-manipulation.html#changing-number-of-dimensions">更改维数</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="routines.array-manipulation.html#changing-kind-of-array">更改数组类型</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="routines.array-manipulation.html#joining-arrays">加入数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="routines.array-manipulation.html#splitting-arrays">拆分数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="routines.array-manipulation.html#tiling-arrays">平铺数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="routines.array-manipulation.html#adding-and-removing-elements">添加和删除元素</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="routines.array-manipulation.html#rearranging-elements">重新排列元素</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="routines.bitwise.html">二进制操作</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="routines.bitwise.html#elementwise-bit-operations">元素位操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="routines.bitwise.html#bit-packing">位打包</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="routines.bitwise.html#output-formatting">输出格式</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="routines.char.html">字符串操作</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="routines.char.html#id1">字符串操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="routines.char.html#comparison">比较</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="routines.char.html#string-information">字符串信息</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="routines.char.html#convenience-class">便利类</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="routines.ctypeslib.html">C类型外部函数接口（<code class="docutils literal"><span class="pre">numpy.ctypeslib</span></code>）</a></span></li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="routines.datetime.html">日期时间支持函数</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="routines.datetime.html#business-day-functions">营业日功能</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="routines.dtype.html">数据类型例程</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="generated/numpy.can_cast.html">numpy.can_cast</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.promote_types.html">numpy.promote_types</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="generated/numpy.min_scalar_type.html">numpy.min_scalar_type</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.result_type.html">numpy.result_type</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="generated/numpy.common_type.html">numpy.common_type</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.obj2sctype.html">numpy.obj2sctype</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="routines.dtype.html#creating-data-types">创建数据类型</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="routines.dtype.html#data-type-information">数据类型信息</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="routines.dtype.html#data-type-testing">数据类型测试</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="routines.dtype.html#miscellaneous">其他</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-60"><a class="reference internal" href="routines.dual.html">可选Scipy加速例程（<code class="docutils literal"><span class="pre">numpy.dual</span></code>）</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="routines.dual.html#linear-algebra">线性代数</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-58"><a class="reference internal" href="routines.dual.html#fft">FFT</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="routines.dual.html#other">其他</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="routines.emath.html">具有自动域的数学函数（<code class="docutils literal"><span class="pre">numpy.emath</span></code>）</a></span></li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="routines.err.html">浮点错误处理</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-62"><a class="reference internal" href="routines.err.html#setting-and-getting-error-handling">设置和获取错误处理</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="routines.err.html#internal-functions">内部功能</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-76"><a class="reference internal" href="routines.fft.html">离散傅里叶变换（<code class="docutils literal"><span class="pre">numpy.fft</span></code>）</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="routines.fft.html#standard-ffts">标准FFT</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-66"><a class="reference internal" href="routines.fft.html#real-ffts">实际FFT</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="routines.fft.html#hermitian-ffts">Hermitian FFT</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-68"><a class="reference internal" href="routines.fft.html#helper-routines">帮助程序</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="routines.fft.html#background-information">背景信息</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-70"><a class="reference internal" href="routines.fft.html#implementation-details">实施详细信息</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-71"><a class="reference internal" href="routines.fft.html#normalization">规范化</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="routines.fft.html#real-and-hermitian-transforms">Real和Hermitian变换</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-73"><a class="reference internal" href="routines.fft.html#higher-dimensions">较高维度</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="routines.fft.html#references">参考</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-75"><a class="reference internal" href="routines.fft.html#examples">示例</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-78"><a class="reference internal" href="routines.financial.html">财务功能</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-77"><a class="reference internal" href="routines.financial.html#simple-financial-functions">简单的财务功能</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-84"><a class="reference internal" href="routines.functional.html">功能编程</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-79"><a class="reference internal" href="generated/numpy.apply_along_axis.html">numpy.apply_along_axis</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="generated/numpy.apply_over_axes.html">numpy.apply_over_axes</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-81"><a class="reference internal" href="generated/numpy.vectorize.html">numpy.vectorize</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-82"><a class="reference internal" href="generated/numpy.frompyfunc.html">numpy.frompyfunc</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-83"><a class="reference internal" href="generated/numpy.piecewise.html">numpy.piecewise</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-87"><a class="reference internal" href="routines.help.html">NumPy特定的帮助功能</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-85"><a class="reference internal" href="routines.help.html#finding-help">查找帮助</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-86"><a class="reference internal" href="routines.help.html#reading-help">阅读帮助</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-92"><a class="reference internal" href="routines.indexing.html">索引例程</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-88"><a class="reference internal" href="routines.indexing.html#generating-index-arrays">生成索引数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-89"><a class="reference internal" href="routines.indexing.html#indexing-like-operations">类索引操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-90"><a class="reference internal" href="routines.indexing.html#inserting-data-into-arrays">将数据插入数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-91"><a class="reference internal" href="routines.indexing.html#iterating-over-arrays">迭代数组</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-101"><a class="reference internal" href="routines.io.html">输入和输出</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-93"><a class="reference internal" href="routines.io.html#numpy-binary-files-npy-npz">NumPy二进制文件（NPY，NPZ）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-94"><a class="reference internal" href="routines.io.html#text-files">文本文件</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-95"><a class="reference internal" href="routines.io.html#raw-binary-files">原始二进制文件</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-96"><a class="reference internal" href="routines.io.html#string-formatting">字符串格式</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-97"><a class="reference internal" href="routines.io.html#memory-mapping-files">内存映射文件</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-98"><a class="reference internal" href="routines.io.html#text-formatting-options">文本格式选项</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-99"><a class="reference internal" href="routines.io.html#base-n-representations">Base-n表示</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-100"><a class="reference internal" href="routines.io.html#data-sources">数据源</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-109"><a class="reference internal" href="routines.linalg.html">线性代数（<code class="docutils literal"><span class="pre">numpy.linalg</span></code>）</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-102"><a class="reference internal" href="routines.linalg.html#matrix-and-vector-products">矩阵和向量产品</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-103"><a class="reference internal" href="routines.linalg.html#decompositions">分解</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-104"><a class="reference internal" href="routines.linalg.html#matrix-eigenvalues">矩阵特征值</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-105"><a class="reference internal" href="routines.linalg.html#norms-and-other-numbers">规范和其他数字</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-106"><a class="reference internal" href="routines.linalg.html#solving-equations-and-inverting-matrices">求解方程和求逆矩阵</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-107"><a class="reference internal" href="routines.linalg.html#exceptions">例外</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-108"><a class="reference internal" href="routines.linalg.html#linear-algebra-on-several-matrices-at-once">一次在多个矩阵上的线性代数</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-115"><a class="reference internal" href="routines.logic.html">逻辑功能</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-110"><a class="reference internal" href="routines.logic.html#truth-value-testing">真值测试</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-111"><a class="reference internal" href="routines.logic.html#array-contents">数组内容</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-112"><a class="reference internal" href="routines.logic.html#array-type-testing">数组类型测试</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-113"><a class="reference internal" href="routines.logic.html#logical-operations">逻辑运算</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-114"><a class="reference internal" href="routines.logic.html#comparison">比较</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-123"><a class="reference internal" href="routines.ma.html">屏蔽数组操作</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-116"><a class="reference internal" href="routines.ma.html#constants">常量</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-117"><a class="reference internal" href="routines.ma.html#creation">创建</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-118"><a class="reference internal" href="routines.ma.html#inspecting-the-array">检查数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-119"><a class="reference internal" href="routines.ma.html#manipulating-a-maskedarray">操作MaskedArray</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-120"><a class="reference internal" href="routines.ma.html#operations-on-masks">面罩操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-121"><a class="reference internal" href="routines.ma.html#conversion-operations">转换操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-122"><a class="reference internal" href="routines.ma.html#masked-arrays-arithmetics">掩蔽数组算术</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-134"><a class="reference internal" href="routines.math.html">数学函数</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-124"><a class="reference internal" href="routines.math.html#trigonometric-functions">三角函数</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-125"><a class="reference internal" href="routines.math.html#hyperbolic-functions">双曲函数</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-126"><a class="reference internal" href="routines.math.html#rounding">舍入</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-127"><a class="reference internal" href="routines.math.html#sums-products-differences">总和，乘积，差异</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-128"><a class="reference internal" href="routines.math.html#exponents-and-logarithms">指数和对数</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-129"><a class="reference internal" href="routines.math.html#other-special-functions">其他特殊功能</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-130"><a class="reference internal" href="routines.math.html#floating-point-routines">浮点例程</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-131"><a class="reference internal" href="routines.math.html#arithmetic-operations">算术运算</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-132"><a class="reference internal" href="routines.math.html#handling-complex-numbers">处理复数</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-133"><a class="reference internal" href="routines.math.html#miscellaneous">其他</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-143"><a class="reference internal" href="routines.matlib.html">矩阵库（<code class="docutils literal"><span class="pre">numpy.matlib</span></code>）</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-135"><a class="reference internal" href="generated/numpy.matlib.empty.html">numpy.matlib.empty</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-136"><a class="reference internal" href="generated/numpy.matlib.zeros.html">numpy.matlib.zeros</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-137"><a class="reference internal" href="generated/numpy.matlib.ones.html">numpy.matlib.ones</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-138"><a class="reference internal" href="generated/numpy.matlib.eye.html">numpy.matlib.eye</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-139"><a class="reference internal" href="generated/numpy.matlib.identity.html">numpy.matlib.identity</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-140"><a class="reference internal" href="generated/numpy.matlib.repmat.html">numpy.matlib.repmat</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-141"><a class="reference internal" href="generated/numpy.matlib.rand.html">numpy.matlib.rand</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-142"><a class="reference internal" href="generated/numpy.matlib.randn.html">numpy.matlib.randn</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-148"><a class="reference internal" href="routines.other.html">其他例程</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-144"><a class="reference internal" href="routines.other.html#buffer-objects">缓冲区对象</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-145"><a class="reference internal" href="routines.other.html#performance-tuning">性能调整</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-146"><a class="reference internal" href="routines.other.html#memory-ranges">内存范围</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-147"><a class="reference internal" href="routines.other.html#numpy-version-comparison">NumPy版本比较</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-150"><a class="reference internal" href="routines.padding.html">填充数组</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-149"><a class="reference internal" href="generated/numpy.pad.html">numpy.pad</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-152"><a class="reference internal" href="routines.polynomials.html">多项式</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-151"><a class="reference internal" href="routines.polynomials.html#transition-notice">转换通知</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-157"><a class="reference internal" href="routines.random.html">随机抽样（<code class="docutils literal"><span class="pre">numpy.random</span></code>）</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-153"><a class="reference internal" href="routines.random.html#simple-random-data">简单随机数据</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-154"><a class="reference internal" href="routines.random.html#permutations">排列</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-155"><a class="reference internal" href="routines.random.html#distributions">分发</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-156"><a class="reference internal" href="routines.random.html#random-generator">随机生成器</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-160"><a class="reference internal" href="routines.set.html">设置例程</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-158"><a class="reference internal" href="routines.set.html#making-proper-sets">设置正确集</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-159"><a class="reference internal" href="routines.set.html#boolean-operations">布尔运算</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-164"><a class="reference internal" href="routines.sort.html">排序，搜索和计数</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-161"><a class="reference internal" href="routines.sort.html#sorting">排序</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-162"><a class="reference internal" href="routines.sort.html#searching">搜索</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-163"><a class="reference internal" href="routines.sort.html#counting">计数</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-169"><a class="reference internal" href="routines.statistics.html">统计</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-165"><a class="reference internal" href="routines.statistics.html#order-statistics">订单统计信息</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-166"><a class="reference internal" href="routines.statistics.html#averages-and-variances">平均值和方差</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-167"><a class="reference internal" href="routines.statistics.html#correlating">相关</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-168"><a class="reference internal" href="routines.statistics.html#histograms">直方图</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-173"><a class="reference internal" href="routines.testing.html">测试支持（<code class="docutils literal"><span class="pre">numpy.testing</span></code>）</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-170"><a class="reference internal" href="routines.testing.html#asserts">断言</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-171"><a class="reference internal" href="routines.testing.html#decorators">装饰</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-172"><a class="reference internal" href="routines.testing.html#test-running">测试运行</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-175"><a class="reference internal" href="routines.window.html">窗口函数</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-174"><a class="reference internal" href="routines.window.html#various-windows">各种窗口</a></span></li>
+</ul>
+</li>
+</ul>
+</div>

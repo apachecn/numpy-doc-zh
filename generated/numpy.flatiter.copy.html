@@ -1,0 +1,22 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.flatiter.copy</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.flatiter.copy.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.flatiter.copy.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.flatiter.copy"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">flatiter.</code><code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">获取迭代器的副本作为1-D数组。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-16">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[0, 1, 2],</span>
+<span class="go">       [3, 4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fl</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">flat</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fl</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="go">array([0, 1, 2, 3, 4, 5])</span>
+</pre></div>
+</div>
+</dd></dl>

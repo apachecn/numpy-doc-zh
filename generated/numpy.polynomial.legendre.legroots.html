@@ -1,0 +1,46 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.legendre.legroots</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.legendre.legroots.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.legendre.legroots.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.legendre.legroots"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.legendre.</code><code class="descname">legroots</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/legendre.py#L1640-L1693"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">计算一个Legendre系列的根。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">返回根（a.k.a.</span><span class="yiyi-st" id="yiyi-18">“zeros”）</span></p>
+<div class="math">
+<p></p>
+</div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>c</strong>：1-D array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">1-D数组的系数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">数组的根系。</span><span class="yiyi-st" id="yiyi-25">如果所有的根是真实的，那么<em class="xref py py-obj">out</em>也是真实的，否则它是复杂的。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-27"><code class="xref py py-obj docutils literal"><span class="pre">polyroots</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">chebroots</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">lagroots</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">hermroots</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">hermeroots</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-29">根估计被获得作为伴随矩阵的特征值。远离复平面的原点的根可能由于这样的值的序列的数值不稳定性而可能具有大的误差。</span><span class="yiyi-st" id="yiyi-30">具有大于1的根的根也将显示较大的误差，因为在这些点附近的系列的值对根中的误差相对不敏感。</span><span class="yiyi-st" id="yiyi-31">通过牛顿法的几次迭代可以改善接近原点的分离的根。</span></p>
+<p><span class="yiyi-st" id="yiyi-32">Legendre系列基础多项式不是<code class="docutils literal"><span class="pre">x</span></code>的幂，因此此函数的结果可能看起来不直观。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.polynomial.legendre</span> <span class="k">as</span> <span class="nn">leg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span><span class="o">.</span><span class="n">legroots</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="c1"># 4L_3 + 3L_2 + 2L_1 + 1L_0, all real roots</span>
+<span class="go">array([-0.85099543, -0.11407192,  0.51506735])</span>
+</pre></div>
+</div>
+</dd></dl>

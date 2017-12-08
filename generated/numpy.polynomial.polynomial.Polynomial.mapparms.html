@@ -1,0 +1,31 @@
+
+<h1><span class="yiyi-st" id="yiyi-15">numpy.polynomial.polynomial.Polynomial.mapparms</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.Polynomial.mapparms.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.Polynomial.mapparms.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.polynomial.polynomial.Polynomial.mapparms"><span class="yiyi-st" id="yiyi-16"> <code class="descclassname">Polynomial.</code><code class="descname">mapparms</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/_polybase.py#L593-L620"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-17">返回映射参数。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">返回值定义应用于系列之前的输入参数的线性映射<code class="docutils literal"><span class="pre">off</span> <span class="pre">+</span> <span class="pre">scl * x</span>  。</code></span><span class="yiyi-st" id="yiyi-19">映射取决于<code class="docutils literal"><span class="pre">domain</span></code>和<code class="docutils literal"><span class="pre">window</span></code>；如果当前<code class="docutils literal"><span class="pre">domain</span></code>等于<code class="docutils literal"><span class="pre">window</span></code>，则生成的映射是身份。</span><span class="yiyi-st" id="yiyi-20">如果系列实例的系数要由该类外部使用，则线性函数必须替换基本多项式的标准表示中的<code class="docutils literal"><span class="pre">x</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>off，scl</strong>：float或complex</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">映射函数由<code class="docutils literal"><span class="pre">off</span> <span class="pre">+</span> <span class="pre">scl * x</span></code>定义。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-25">如果当前域是间隔<code class="docutils literal"><span class="pre">[l1，</span> <span class="pre">r1]</span></code>并且窗口是<code class="docutils literal"><span class="pre">[l2，</span> <span class="pre">r2]</span></code>，则线性映射函数<code class="docutils literal"><span class="pre">L</span></code>由以下等式定义：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span> <span class="o">=</span> <span class="n">l2</span>
+<span class="n">L</span><span class="p">(</span><span class="n">r1</span><span class="p">)</span> <span class="o">=</span> <span class="n">r2</span>
+</pre></div>
+</div>
+</dd></dl>

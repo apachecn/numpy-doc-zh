@@ -1,0 +1,44 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.chebyshev.chebgauss</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.chebgauss.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.chebgauss.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.chebyshev.chebgauss"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.chebyshev.</code><code class="descname">chebgauss</code><span class="sig-paren">(</span><em>deg</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/chebyshev.py#L1894-L1936"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">高斯 - 切比雪夫正交。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">计算高斯 - 切比雪夫正交的采样点和权重。</span><span class="yiyi-st" id="yiyi-18">These sample points and weights will correctly integrate polynomials of degree <img alt="2*deg - 1" class="math" src="../../_images/math/cd15eed20fa79ee66b7e4abe2a40d9b13ab0bfc4.png" style="vertical-align: -3px"> or less over the interval <img alt="[-1, 1]" class="math" src="../../_images/math/f08b1a2f0aaf98a3ec3af1adeb1bb5b269c814d4.png" style="vertical-align: -4px"> with the weight function <img alt="f(x) = 1/\sqrt{1 - x^2}" class="math" src="../../_images/math/3d9f0f318848197effbea2131f2f22fb3e8836a4.png" style="vertical-align: -4px">.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>deg</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">采样点数和权重。</span><span class="yiyi-st" id="yiyi-22">它必须&gt; = 1。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>x</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">包含采样点的1-D阵列。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">包含权重的1-D字符串。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-29"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-30">结果只测试到100度，更高的程度可能有问题。</span><span class="yiyi-st" id="yiyi-31">对于高斯 - 切比雪夫，有样本点和权重的封闭形式解。</span><span class="yiyi-st" id="yiyi-32">如果n = <em class="xref py py-obj">deg</em>，则</span></p>
+<div class="math">
+<p></p>
+</div><div class="math">
+<p></p>
+</div></dd></dl>

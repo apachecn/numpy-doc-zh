@@ -1,0 +1,122 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.can_cast</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.can_cast.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.can_cast.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.can_cast"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">can_cast</code><span class="sig-paren">(</span><em>from</em>, <em>totype</em>, <em>casting = &apos;safe&apos;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回True如果根据转换规则可以在数据类型之间进行转换，则返回True。</span><span class="yiyi-st" id="yiyi-15">如果from是标量或数组标量，则如果可以转换标量值而不会溢出或截断为整数，则返回True。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>from</strong>：dtype，dtype说明符，标量或数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">要从中投射的数据类型，标量或数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>totype</strong>：dtype或dtype说明符</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">要投射到的数据类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>投射</strong>：{&apos;no&apos;，&apos;equiv&apos;，&apos;safe&apos;，&apos;same_kind&apos;，&apos;unsafe&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">控制可能发生的数据转换类型。</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-23">&apos;no&apos;意味着不应该转换数据类型。</span></li>
+<li><span class="yiyi-st" id="yiyi-24">&apos;equiv&apos;意味着只允许字节顺序改变。</span></li>
+<li><span class="yiyi-st" id="yiyi-25">“安全”意味着只允许保留值的转换。</span></li>
+<li><span class="yiyi-st" id="yiyi-26">&apos;same_kind&apos;表示只允许一种类型中的安全类型转换，例如float64到float32。</span></li>
+<li><span class="yiyi-st" id="yiyi-27">“不安全”表示可以进行任何数据转换。</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>out</strong>：bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">如果根据投射规则可以进行转换，则为true。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，<a class="reference internal" href="numpy.result_type.html#numpy.result_type" title="numpy.result_type"><code class="xref py py-obj docutils literal"><span class="pre">result_type</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-34">从NumPy 1.9开始，对于integer / float dtype和string dtype，can_cast函数现在以“安全”转换模式返回False，如果字符串dtype长度不够长，不能存储转换为字符串的最大整数/浮点值。</span><span class="yiyi-st" id="yiyi-35">以前在“安全”模式下的can_cast对于integer / float dtype和任何长度的字符串dtype返回True。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-37">基本示例</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">complex</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="s1">&apos;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;f8&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="s1">&apos;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;f4&apos;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="s1">&apos;i4&apos;</span><span class="p">,</span> <span class="s1">&apos;S4&apos;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">铸造标量</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="s1">&apos;i1&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="s1">&apos;i1&apos;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="s1">&apos;u1&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="mf">3.5e100</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="mf">1000.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">数组标量检查值，数组不</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mf">1000.0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">使用投射规则</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="s1">&apos;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;no&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="s1">&apos;&lt;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;&gt;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;no&apos;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="s1">&apos;&lt;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;&gt;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;equiv&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="s1">&apos;&lt;i4&apos;</span><span class="p">,</span> <span class="s1">&apos;&gt;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;equiv&apos;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="s1">&apos;&lt;i4&apos;</span><span class="p">,</span> <span class="s1">&apos;&gt;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;safe&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="s1">&apos;&lt;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;&gt;i4&apos;</span><span class="p">,</span> <span class="s1">&apos;safe&apos;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="s1">&apos;&lt;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;&gt;i4&apos;</span><span class="p">,</span> <span class="s1">&apos;same_kind&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="s1">&apos;&lt;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;&gt;u4&apos;</span><span class="p">,</span> <span class="s1">&apos;same_kind&apos;</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="s1">&apos;&lt;i8&apos;</span><span class="p">,</span> <span class="s1">&apos;&gt;u4&apos;</span><span class="p">,</span> <span class="s1">&apos;unsafe&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

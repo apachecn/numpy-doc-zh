@@ -1,0 +1,44 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.sign</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.sign.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.sign.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.sign"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">sign</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;sign&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回数字符号的逐元素指示。</span></p>
+<p><span class="yiyi-st" id="yiyi-15"><a class="reference internal" href="#numpy.sign" title="numpy.sign"><code class="xref py py-obj docutils literal"><span class="pre">sign</span></code></a>函数返回<code class="docutils literal"><span class="pre">-1</span> <span class="pre">if</span> <span class="pre">x</span> <span class="pre">＆lt；</span> <span class="pre"> 0，</span> <span class="pre">0</span> <span class="pre">if</span> <span class="pre">x == 0，</span> <span class="pre">1</span> <span class="pre">&gt; <span class="pre">x</span> <span class="pre">＆gt；</span> <span class="pre">0</span></span></code>。返回纳米输入。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">For complex inputs, the <a class="reference internal" href="#numpy.sign" title="numpy.sign"><code class="xref py py-obj docutils literal"><span class="pre">sign</span></code></a> function returns <code class="docutils literal"><span class="pre">sign(x.real)</span> <span class="pre">+</span> <span class="pre">0j</span> <span class="pre">if</span> <span class="pre">x.real</span> <span class="pre">!=</span> <span class="pre">0</span> <span class="pre">else</span> <span class="pre">sign(x.imag)</span> <span class="pre">+</span> <span class="pre">0j</span></code>.</span></p>
+<p><span class="yiyi-st" id="yiyi-17">复杂（nan，0）返回复杂的纳米输入。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输入值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23"><em class="xref py py-obj">x</em>的符号。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-25">复数的常用符号有多个定义。</span><span class="yiyi-st" id="yiyi-26">这里使用的定义等同于<img alt="x/\sqrt{x*x}" class="math" src="../../_images/math/6051a0436027516dfac0b0ba929da02912592337.png" style="vertical-align: -4px">，其与常见的替代方案<img alt="x/|x|" class="math" src="../../_images/math/b2bc0077463b67b2d2e4270a27da56a009819d70.png" style="vertical-align: -4px">不同。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">([</span><span class="o">-</span><span class="mf">5.</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">])</span>
+<span class="go">array([-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="mi">5</span><span class="o">-</span><span class="mi">2</span><span class="n">j</span><span class="p">)</span>
+<span class="go">(1+0j)</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,46 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.core.defchararray.title</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.title.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.title.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.core.defchararray.title"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.core.defchararray.</code><code class="descname">title</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/defchararray.py#L1466-L1502"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回单元格标题字符串或unicode的套装版本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">标题大写字符以大写字符开头，所有剩余的大小写字符都小写。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">逐个调用<em class="xref py py-obj">str.title</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">对于8位字符串，此方法依赖于区域设置。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：array_like，{str，unicode}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输入数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">输出str或unicode的数组，取决于输入类型</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str.title" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">str.title</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;a1b c&apos;</span><span class="p">,</span><span class="s1">&apos;1b ca&apos;</span><span class="p">,</span><span class="s1">&apos;b ca1&apos;</span><span class="p">,</span><span class="s1">&apos;ca1b&apos;</span><span class="p">],</span><span class="s1">&apos;S5&apos;</span><span class="p">);</span> <span class="n">c</span>
+<span class="go">array([&apos;a1b c&apos;, &apos;1b ca&apos;, &apos;b ca1&apos;, &apos;ca1b&apos;],</span>
+<span class="go">    dtype=&apos;|S5&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="go">array([&apos;A1B C&apos;, &apos;1B Ca&apos;, &apos;B Ca1&apos;, &apos;Ca1B&apos;],</span>
+<span class="go">    dtype=&apos;|S5&apos;)</span>
+</pre></div>
+</div>
+</dd></dl>

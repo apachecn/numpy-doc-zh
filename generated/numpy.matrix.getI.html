@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.matrix.getI</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.getI.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.getI.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.matrix.getI"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">matrix.</code><code class="descname">getI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/matrixlib/defmatrix.py#L930-L972"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回可逆<em class="xref py py-obj">self</em>的（乘法）逆。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>无</strong></span></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>ret</strong>：matrix对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">If <em class="xref py py-obj">self</em> is non-singular, <em class="xref py py-obj">ret</em> is such that <code class="docutils literal"><span class="pre">ret</span> <span class="pre">*</span> <span class="pre">self</span></code> == <code class="docutils literal"><span class="pre">self</span> <span class="pre">*</span> <span class="pre">ret</span></code> == <code class="docutils literal"><span class="pre">np.matrix(np.eye(self[0,:].size)</span></code> all return <code class="docutils literal"><span class="pre">True</span></code>.</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>numpy.linalg.LinAlgError：奇异矩阵</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">如果<em class="xref py py-obj">self</em>是奇异的。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.linalg.inv.html#numpy.linalg.inv" title="numpy.linalg.inv"><code class="xref py py-obj docutils literal"><span class="pre">linalg.inv</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="s1">&apos;[1, 2; 3, 4]&apos;</span><span class="p">);</span> <span class="n">m</span>
+<span class="go">matrix([[1, 2],</span>
+<span class="go">        [3, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">getI</span><span class="p">()</span>
+<span class="go">matrix([[-2. ,  1. ],</span>
+<span class="go">        [ 1.5, -0.5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">getI</span><span class="p">()</span> <span class="o">*</span> <span class="n">m</span>
+<span class="go">matrix([[ 1.,  0.],</span>
+<span class="go">        [ 0.,  1.]])</span>
+</pre></div>
+</div>
+</dd></dl>

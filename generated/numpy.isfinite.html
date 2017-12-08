@@ -1,0 +1,66 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.isfinite</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.isfinite.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.isfinite.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.isfinite"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">isfinite</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;isfinite&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">测试元素的有限性（不是无穷大或不是数字）。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">结果作为布尔数组返回。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">数组，其中放置输出。</span><span class="yiyi-st" id="yiyi-21">它的类型被保留，并且它必须是保持输出的正确形状。</span><span class="yiyi-st" id="yiyi-22">请参见<code class="xref py py-obj docutils literal"><span class="pre">doc.ufuncs</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>y</strong>：ndarray，bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">对于标量输入，结果是一个新的布尔值，如果输入是有限的，值为True；否则值为False（输入为正无穷大，负无穷大或不为数字）。</span></p>
+<p><span class="yiyi-st" id="yiyi-26">对于数组输入，结果是一个与输入具有相同维度的布尔数组，如果输入的相应元素是有限的，则值为True；否则值为False（元素为正无穷大，负无穷大或非数字）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.isinf.html#numpy.isinf" title="numpy.isinf"><code class="xref py py-obj docutils literal"><span class="pre">isinf</span></code></a>，<a class="reference internal" href="numpy.isneginf.html#numpy.isneginf" title="numpy.isneginf"><code class="xref py py-obj docutils literal"><span class="pre">isneginf</span></code></a>，<a class="reference internal" href="numpy.isposinf.html#numpy.isposinf" title="numpy.isposinf"><code class="xref py py-obj docutils literal"><span class="pre">isposinf</span></code></a>，<a class="reference internal" href="numpy.isnan.html#numpy.isnan" title="numpy.isnan"><code class="xref py py-obj docutils literal"><span class="pre">isnan</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-30">不是数字，正无穷和负无穷大被认为是非有限的。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">Numpy使用IEEE标准二进制浮点运算（IEEE 754）。</span><span class="yiyi-st" id="yiyi-32">这意味着不是数字不等于无穷大。</span><span class="yiyi-st" id="yiyi-33">正无穷大也不等于负无穷大。</span><span class="yiyi-st" id="yiyi-34">但是无穷大等于正无穷。</span><span class="yiyi-st" id="yiyi-35">如果在<em class="xref py py-obj">x</em>是标量输入时，或者如果第一个和第二个参数具有不同的形状时，如果还提供第二个参数，则会产生错误。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">NINF</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">),</span><span class="mf">1.</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">0</span><span class="p">)])</span>
+<span class="go">array([False,  True, False], dtype=bool)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">array([0, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([0, 1, 0])</span>
+</pre></div>
+</div>
+</dd></dl>

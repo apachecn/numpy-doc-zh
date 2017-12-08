@@ -1,0 +1,37 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.getbuffer</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.getbuffer.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.getbuffer.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.getbuffer"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">getbuffer</code><span class="sig-paren">(</span><em>obj</em><span class="optional">[</span>, <em>offset</em><span class="optional">[</span>, <em>size</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从给定对象创建一个缓冲对象，引用从偏移开始的长度大小的切片。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">默认是整个缓冲区。</span><span class="yiyi-st" id="yiyi-16">尝试读写缓冲区后跟随只读缓冲区。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>obj</strong>：object</span></p>
+<p><span class="yiyi-st" id="yiyi-19"><strong>offset</strong>：int，可选</span></p>
+<p><span class="yiyi-st" id="yiyi-20"><strong>size</strong>：int，可选</span></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-22"><strong>buffer_obj</strong>：buffer</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">buf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">getbuffer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&apos;\x00&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">buf</span>
+<span class="go">&lt;read-write buffer for 0x8af1e70, size 3, offset 1 at 0x8ba4ec0&gt;</span>
+</pre></div>
+</div>
+</dd></dl>

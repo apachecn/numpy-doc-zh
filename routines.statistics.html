@@ -1,0 +1,124 @@
+
+<h1><span class="yiyi-st" id="yiyi-17">Statistics</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.statistics.html">https://docs.scipy.org/doc/numpy/reference/routines.statistics.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="order-statistics">
+<h2><span class="yiyi-st" id="yiyi-18">Order statistics</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="generated/numpy.amin.html#numpy.amin" title="numpy.amin"><code class="xref py py-obj docutils literal"><span class="pre">amin</span></code></a>（a [，axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-20">沿轴返回数组或最小值的最小值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="generated/numpy.amax.html#numpy.amax" title="numpy.amax"><code class="xref py py-obj docutils literal"><span class="pre">amax</span></code></a>（a [，axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-22">返回沿轴的数组或最大值的最大值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="generated/numpy.nanmin.html#numpy.nanmin" title="numpy.nanmin"><code class="xref py py-obj docutils literal"><span class="pre">nanmin</span></code></a>（a [，axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-24">沿轴返回数组或最小值，忽略任何NaN。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="generated/numpy.nanmax.html#numpy.nanmax" title="numpy.nanmax"><code class="xref py py-obj docutils literal"><span class="pre">nanmax</span></code></a>（a [，axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-26">返回沿轴的数组或最大值的最大值，忽略任何NaN。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="generated/numpy.ptp.html#numpy.ptp" title="numpy.ptp"><code class="xref py py-obj docutils literal"><span class="pre">ptp</span></code></a>（a [，axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-28">沿轴的值范围（最大 - 最小）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="generated/numpy.percentile.html#numpy.percentile" title="numpy.percentile"><code class="xref py py-obj docutils literal"><span class="pre">percentile</span></code></a>（a，q [，axis，out，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-30">沿指定轴计算数据的第q个百分位数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="generated/numpy.nanpercentile.html#numpy.nanpercentile" title="numpy.nanpercentile"><code class="xref py py-obj docutils literal"><span class="pre">nanpercentile</span></code></a>（a，q [，axis，out，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-32">沿着指定轴计算数据的第q个百分位数，而忽略nan值。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="averages-and-variances">
+<h2><span class="yiyi-st" id="yiyi-33">Averages and variances</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="generated/numpy.median.html#numpy.median" title="numpy.median"><code class="xref py py-obj docutils literal"><span class="pre">median</span></code></a>（a [，axis，out，overwrite_input，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-35">计算沿指定轴的中值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="generated/numpy.average.html#numpy.average" title="numpy.average"><code class="xref py py-obj docutils literal"><span class="pre">average</span></code></a>（a [，axis，weights，returned]）</span></td>
+<td><span class="yiyi-st" id="yiyi-37">沿指定轴计算加权平均值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="generated/numpy.mean.html#numpy.mean" title="numpy.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a>（a [，axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-39">沿指定轴计算算术平均值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="generated/numpy.std.html#numpy.std" title="numpy.std"><code class="xref py py-obj docutils literal"><span class="pre">std</span></code></a>（a [，axis，dtype，out，ddof，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-41">计算沿指定轴的标准偏差。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="generated/numpy.var.html#numpy.var" title="numpy.var"><code class="xref py py-obj docutils literal"><span class="pre">var</span></code></a>（a [，axis，dtype，out，ddof，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-43">计算沿指定轴的方差。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="generated/numpy.nanmedian.html#numpy.nanmedian" title="numpy.nanmedian"><code class="xref py py-obj docutils literal"><span class="pre">nanmedian</span></code></a>（a [，axis，out，overwrite_input，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-45">沿着指定轴计算中值，而忽略NaN。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="generated/numpy.nanmean.html#numpy.nanmean" title="numpy.nanmean"><code class="xref py py-obj docutils literal"><span class="pre">nanmean</span></code></a>（a [，axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-47">沿着指定的轴计算算术平均值，忽略NaN。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="generated/numpy.nanstd.html#numpy.nanstd" title="numpy.nanstd"><code class="xref py py-obj docutils literal"><span class="pre">nanstd</span></code></a>（a [，axis，dtype，out，ddof，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-49">计算沿着指定轴的标准偏差，而忽略NaN。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="generated/numpy.nanvar.html#numpy.nanvar" title="numpy.nanvar"><code class="xref py py-obj docutils literal"><span class="pre">nanvar</span></code></a>（a [，axis，dtype，out，ddof，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-51">计算沿指定轴的方差，而忽略NaN。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="correlating">
+<h2><span class="yiyi-st" id="yiyi-52">Correlating</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="generated/numpy.corrcoef.html#numpy.corrcoef" title="numpy.corrcoef"><code class="xref py py-obj docutils literal"><span class="pre">corrcoef</span></code></a>（x [，y，rowvar，bias，ddof]）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">返回Pearson乘积矩相关系数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="generated/numpy.correlate.html#numpy.correlate" title="numpy.correlate"><code class="xref py py-obj docutils literal"><span class="pre">correlate</span></code></a>（a，v [，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-56">两个1维序列的互相关。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="generated/numpy.cov.html#numpy.cov" title="numpy.cov"><code class="xref py py-obj docutils literal"><span class="pre">cov</span></code></a>（m [，y，rowvar，bias，ddof，fweights，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-58">估计协方差矩阵，给定数据和权重。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="histograms">
+<h2><span class="yiyi-st" id="yiyi-59">Histograms</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-60"><a class="reference internal" href="generated/numpy.histogram.html#numpy.histogram" title="numpy.histogram"><code class="xref py py-obj docutils literal"><span class="pre">histogram</span></code></a>（a [，bins，range，normed，weights，...]</span></td>
+<td><span class="yiyi-st" id="yiyi-61">计算一组数据的直方图。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-62"><a class="reference internal" href="generated/numpy.histogram2d.html#numpy.histogram2d" title="numpy.histogram2d"><code class="xref py py-obj docutils literal"><span class="pre">histogram2d</span></code></a>（x，y [，bins，range，normed，weights]）</span></td>
+<td><span class="yiyi-st" id="yiyi-63">计算两个数据样本的二维直方图。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="generated/numpy.histogramdd.html#numpy.histogramdd" title="numpy.histogramdd"><code class="xref py py-obj docutils literal"><span class="pre">histogramdd</span></code></a>（sample [，bins，range，normed，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-65">计算一些数据的多维直方图。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-66"><a class="reference internal" href="generated/numpy.bincount.html#numpy.bincount" title="numpy.bincount"><code class="xref py py-obj docutils literal"><span class="pre">bincount</span></code></a>（x [，weights，minlength]）</span></td>
+<td><span class="yiyi-st" id="yiyi-67">计算非负整数数组中每个值的出现次数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-68"><a class="reference internal" href="generated/numpy.digitize.html#numpy.digitize" title="numpy.digitize"><code class="xref py py-obj docutils literal"><span class="pre">digitize</span></code></a>（x，bins [，right]）</span></td>
+<td><span class="yiyi-st" id="yiyi-69">返回输入数组中每个值所属的bin的索引。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

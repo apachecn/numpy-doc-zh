@@ -1,0 +1,102 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.interp</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.interp.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.interp.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.interp"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">interp</code><span class="sig-paren">(</span><em>x</em>, <em>xp</em>, <em>fp</em>, <em>left=None</em>, <em>right=None</em>, <em>period=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L1581-L1703"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">一维线性插值。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">将离散数据点处的给定值的函数返回到一维分段线性插值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">内插值的x坐标。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>xp</strong>：浮点数一维序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">如果未指定参数<em class="xref py py-obj">period</em>，则数据点的x坐标必须增加。</span><span class="yiyi-st" id="yiyi-21">否则，在用<code class="docutils literal"><span class="pre">xp</span> <span class="pre">=</span> <span class="pre">xp</span> <span class="pre">％标准化周期边界之后，内部排序<em class="xref py py-obj">xp</em> </span> <span class="pre">period</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>fp</strong>：1-D序列的浮点数</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">数据点的y坐标，长度与<em class="xref py py-obj">xp</em>相同。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>左</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">要返回的值<em class="xref py py-obj">x ，默认为<em class="xref py py-obj">fp [0]</em>。</em></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>右</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">要返回的值<em class="xref py py-obj">x&gt; xp [-1]</em>，默认为<em class="xref py py-obj">fp [-1]</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>周期</strong>：无或浮动，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">x坐标的周期。</span><span class="yiyi-st" id="yiyi-30">此参数允许角度x坐标的正确插值。</span><span class="yiyi-st" id="yiyi-31">如果指定<em class="xref py py-obj">周期</em>，则忽略参数<em class="xref py py-obj">左</em>和<em class="xref py py-obj">右</em>。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-32"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-33">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-34"><strong>y</strong>：float或ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-35">内插值，形状与<em class="xref py py-obj">x</em>相同。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-36">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-37"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-38">如果<em class="xref py py-obj">xp</em>和<em class="xref py py-obj">fp</em>具有不同的长度If <em class="xref py py-obj">xp</em>或<em class="xref py py-obj">fp</em>不是1-D序列如果<em class="xref py py-obj">== 0</em></span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-40">不检查x坐标序列<em class="xref py py-obj">xp</em>是否增加。</span><span class="yiyi-st" id="yiyi-41">如果<em class="xref py py-obj">xp</em>不增加，结果是无义的。</span><span class="yiyi-st" id="yiyi-42">增加的简单检查是：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">xp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.72</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">],</span> <span class="n">xp</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>
+<span class="go">array([ 3. ,  3. ,  2.5 ,  0.56,  0. ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">UNDEF</span> <span class="o">=</span> <span class="o">-</span><span class="mf">99.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="n">UNDEF</span><span class="p">)</span>
+<span class="go">-99.0</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-44">将内插器绘制到正弦函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yinterp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">xvals</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&apos;o&apos;</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xvals</span><span class="p">,</span> <span class="n">yinterp</span><span class="p">,</span> <span class="s1">&apos;-x&apos;</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">（<a class="reference external" href="../../reference/generated/numpy-interp-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-interp-1_00_00.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-interp-1_00_00.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-interp-1_00_00.png" src="../../_images/numpy-interp-1_00_00.png">
+</div>
+<p><span class="yiyi-st" id="yiyi-46">周期性x坐标插值：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="o">-</span><span class="mi">170</span><span class="p">,</span> <span class="o">-</span><span class="mi">185</span><span class="p">,</span> <span class="mi">185</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">365</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">190</span><span class="p">,</span> <span class="o">-</span><span class="mi">190</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="o">-</span><span class="mi">350</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">360</span><span class="p">)</span>
+<span class="go">array([7.5, 5., 8.75, 6.25, 3., 3.25, 3.5, 3.75])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.trim_zeros</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.trim_zeros.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.trim_zeros.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.trim_zeros"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">trim_zeros</code><span class="sig-paren">(</span><em>filt</em>, <em>trim=&apos;fb&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L1843-L1891"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从1-D数组或序列修剪前导和/或尾随零。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>filt</strong>：1-D数组或序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>修剪</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">一个字符串，&apos;f&apos;表示从前面修剪，&apos;b&apos;表示从后面修剪。</span><span class="yiyi-st" id="yiyi-20">默认值为“fb”，从数组的前面和后面修剪零。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>修剪</strong>：1-D数组或序列</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">修剪输入的结果。</span><span class="yiyi-st" id="yiyi-24">保留输入数据类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">trim_zeros</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([1, 2, 3, 0, 2, 1])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">trim_zeros</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&apos;b&apos;</span><span class="p">)</span>
+<span class="go">array([0, 0, 0, 1, 2, 3, 0, 2, 1])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-26">输入数据类型被保留，列表/元组在装置列表/元组输出中。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">trim_zeros</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">[1, 2]</span>
+</pre></div>
+</div>
+</dd></dl>

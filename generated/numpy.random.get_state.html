@@ -1,0 +1,38 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.get_state</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.get_state.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.get_state.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.get_state"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">get_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回表示生成器的内部状态的元组。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">有关详细信息，请参见<a class="reference internal" href="numpy.random.set_state.html#numpy.random.set_state" title="numpy.random.set_state"><code class="xref py py-obj docutils literal"><span class="pre">set_state</span></code></a>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>out</strong>：tuple（str，ndarray of 624 uints，int，int，float）</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-18">返回的元组有以下项：</span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-19">字符串&apos;MT19937&apos;。</span></li>
+<li><span class="yiyi-st" id="yiyi-20">624个无符号整数键的1-D数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-21">整数<code class="docutils literal"><span class="pre">pos</span></code>。</span></li>
+<li><span class="yiyi-st" id="yiyi-22">整数<code class="docutils literal"><span class="pre">has_gauss</span></code>。</span></li>
+<li><span class="yiyi-st" id="yiyi-23">浮动<code class="docutils literal"><span class="pre">cached_gaussian</span></code>。</span></li>
+</ol>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.random.set_state.html#numpy.random.set_state" title="numpy.random.set_state"><code class="xref py py-obj docutils literal"><span class="pre">set_state</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">不需要<a class="reference internal" href="numpy.random.set_state.html#numpy.random.set_state" title="numpy.random.set_state"><code class="xref py py-obj docutils literal"><span class="pre">set_state</span></code></a>和<a class="reference internal" href="#numpy.random.get_state" title="numpy.random.get_state"><code class="xref py py-obj docutils literal"><span class="pre">get_state</span></code></a>来处理NumPy中的任何随机分布。</span><span class="yiyi-st" id="yiyi-28">如果内部状态被手动改变，则用户应该准确地知道他/她正在做什么。</span></p>
+</dd></dl>

@@ -1,0 +1,48 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.core.defchararray.rstrip</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.rstrip.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.rstrip.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.core.defchararray.rstrip"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.core.defchararray.</code><code class="descname">rstrip</code><span class="sig-paren">(</span><em>a</em>, <em>chars=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/defchararray.py#L1243-L1284"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">对于<em class="xref py py-obj">a</em>中的每个元素，返回一个删除了尾随字符的副本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">逐个调用<em class="xref py py-obj">str.rstrip</em>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：数组类似str或unicode</span></p>
+<p><span class="yiyi-st" id="yiyi-18"><strong>chars</strong>：str或unicode，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19"><em class="xref py py-obj">chars</em>参数是一个字符串，指定要删除的字符集。</span><span class="yiyi-st" id="yiyi-20">如果省略或无，则<em class="xref py py-obj">chars</em>参数默认为删除空格。</span><span class="yiyi-st" id="yiyi-21"><em class="xref py py-obj">chars</em>参数不是后缀；相反，其值的所有组合都被去除。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">输出str或unicode的数组，取决于输入类型</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str.rstrip" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">str.rstrip</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;aAaAaA&apos;</span><span class="p">,</span> <span class="s1">&apos;abBABba&apos;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;S7&apos;</span><span class="p">);</span> <span class="n">c</span>
+<span class="go">array([&apos;aAaAaA&apos;, &apos;abBABba&apos;],</span>
+<span class="go">    dtype=&apos;|S7&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s1">&apos;a&apos;</span><span class="p">)</span>
+<span class="go">array([&apos;aAaAaA&apos;, &apos;abBABb&apos;],</span>
+<span class="go">    dtype=&apos;|S7&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s1">&apos;A&apos;</span><span class="p">)</span>
+<span class="go">array([&apos;aAaAa&apos;, &apos;abBABba&apos;],</span>
+<span class="go">    dtype=&apos;|S7&apos;)</span>
+</pre></div>
+</div>
+</dd></dl>

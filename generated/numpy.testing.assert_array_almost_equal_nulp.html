@@ -1,0 +1,64 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.assert_array_almost_equal_nulp</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_array_almost_equal_nulp.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_array_almost_equal_nulp.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.assert_array_almost_equal_nulp"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.</code><code class="descname">assert_array_almost_equal_nulp</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>nulp=1</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/utils.py#L1394-L1454"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">比较两个数组与它们的间距。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">这是一个相对稳健的方法来比较幅度可变的两个数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>x，y</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>nulp</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">最后一个容差的最大单位数（见注释）。</span><span class="yiyi-st" id="yiyi-21">默认值为1。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23">没有</span></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>AssertionError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">如果一个或多个元素的<em class="xref py py-obj">x</em>和<em class="xref py py-obj">y</em>之间的间隔大于<em class="xref py py-obj">nulp</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.testing.assert_array_max_ulp.html#numpy.testing.assert_array_max_ulp" title="numpy.testing.assert_array_max_ulp"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_max_ulp</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">检查数组的所有项目在最后一个位置的最多N个单位不同。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-30"><code class="xref py py-obj docutils literal"><span class="pre">spacing</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">返回x和最近的相邻数字之间的距离。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-33">如果不满足以下条件，则引发断言：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">nulps</span> <span class="o">*</span> <span class="n">spacing</span><span class="p">(</span><span class="n">maximum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">20</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_almost_equal_nulp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">eps</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_almost_equal_nulp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">eps</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">AssertionError</span>: <span class="n">X and Y are not equal to 1 ULP (max is 2)</span>
+</pre></div>
+</div>
+</dd></dl>

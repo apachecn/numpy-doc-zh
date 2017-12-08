@@ -1,0 +1,81 @@
+
+<h1><span class="yiyi-st" id="yiyi-17">Miscellaneous routines</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.other.html">https://docs.scipy.org/doc/numpy/reference/routines.other.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="buffer-objects">
+<h2><span class="yiyi-st" id="yiyi-18">Buffer objects</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="generated/numpy.getbuffer.html#numpy.getbuffer" title="numpy.getbuffer"><code class="xref py py-obj docutils literal"><span class="pre">getbuffer</span></code></a>（obj [，offset [，size]]）</span></td>
+<td><span class="yiyi-st" id="yiyi-20">从给定对象创建一个缓冲对象，引用从偏移开始的长度大小的切片。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="generated/numpy.newbuffer.html#numpy.newbuffer" title="numpy.newbuffer"><code class="xref py py-obj docutils literal"><span class="pre">newbuffer</span></code></a>（size）</span></td>
+<td><span class="yiyi-st" id="yiyi-22">返回一个新的未初始化缓冲区对象。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="performance-tuning">
+<h2><span class="yiyi-st" id="yiyi-23">Performance tuning</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="generated/numpy.alterdot.html#numpy.alterdot" title="numpy.alterdot"><code class="xref py py-obj docutils literal"><span class="pre">alterdot</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-25">更改<a class="reference internal" href="generated/numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-obj docutils literal"><span class="pre">dot</span></code></a>，<a class="reference internal" href="generated/numpy.vdot.html#numpy.vdot" title="numpy.vdot"><code class="xref py py-obj docutils literal"><span class="pre">vdot</span></code></a>和<a class="reference internal" href="generated/numpy.inner.html#numpy.inner" title="numpy.inner"><code class="xref py py-obj docutils literal"><span class="pre">inner</span></code></a>以使用加速的BLAS功能。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="generated/numpy.restoredot.html#numpy.restoredot" title="numpy.restoredot"><code class="xref py py-obj docutils literal"><span class="pre">restoredot</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-27">将<a class="reference internal" href="generated/numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-obj docutils literal"><span class="pre">dot</span></code></a>，<a class="reference internal" href="generated/numpy.vdot.html#numpy.vdot" title="numpy.vdot"><code class="xref py py-obj docutils literal"><span class="pre">vdot</span></code></a>和<em class="xref py py-obj">innerproduct</em>恢复为默认的非BLAS实现。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="generated/numpy.setbufsize.html#numpy.setbufsize" title="numpy.setbufsize"><code class="xref py py-obj docutils literal"><span class="pre">setbufsize</span></code></a>（size）</span></td>
+<td><span class="yiyi-st" id="yiyi-29">设置ufuncs中使用的缓冲区的大小。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.getbufsize.html#numpy.getbufsize" title="numpy.getbufsize"><code class="xref py py-obj docutils literal"><span class="pre">getbufsize</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-31">返回ufuncs中使用的缓冲区的大小。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="memory-ranges">
+<h2><span class="yiyi-st" id="yiyi-32">Memory ranges</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="generated/numpy.shares_memory.html#numpy.shares_memory" title="numpy.shares_memory"><code class="xref py py-obj docutils literal"><span class="pre">shares_memory</span></code></a>（a，b [，max_work]）</span></td>
+<td><span class="yiyi-st" id="yiyi-34">确定两个数组是否共享内存</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="generated/numpy.may_share_memory.html#numpy.may_share_memory" title="numpy.may_share_memory"><code class="xref py py-obj docutils literal"><span class="pre">may_share_memory</span></code></a>（a，b [，max_work]）</span></td>
+<td><span class="yiyi-st" id="yiyi-36">确定两个数组是否可能共享内存</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="numpy-version-comparison">
+<h2><span class="yiyi-st" id="yiyi-37">NumPy version comparison</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="generated/numpy.lib.NumpyVersion.html#numpy.lib.NumpyVersion" title="numpy.lib.NumpyVersion"><code class="xref py py-obj docutils literal"><span class="pre">lib.NumpyVersion</span></code></a>（vstring）</span></td>
+<td><span class="yiyi-st" id="yiyi-39">解析和比较numpy版本字符串。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

@@ -1,0 +1,65 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.clip</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.clip.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.clip.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.clip"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">clip</code><span class="sig-paren">(</span><em>a</em>, <em>a_min</em>, <em>a_max</em>, <em>out=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L1686-L1740"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">剪辑（限制）数组中的值。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">给定间隔，间隔之外的值被剪切到间隔边缘。</span><span class="yiyi-st" id="yiyi-16">例如，如果指定<code class="docutils literal"><span class="pre">[0，</span> <span class="pre">1]</span></code>的间隔，则小于0的值变为0，并且大于1的值变为1 。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">数组包含要剪辑的元素。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>a_min</strong>：scalar或array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">最小值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>a_max</strong>：scalar或array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">最大值。</span><span class="yiyi-st" id="yiyi-24">如果<em class="xref py py-obj">a_min</em>或<em class="xref py py-obj">a_max</em>是array_like，则它们将被广播为<em class="xref py py-obj">a</em>的形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">结果将放置在此数组中。</span><span class="yiyi-st" id="yiyi-27">它可以是用于就地裁剪的输入数组。</span><span class="yiyi-st" id="yiyi-28"><em class="xref py py-obj">out</em>必须是保持输出的正确形状。</span><span class="yiyi-st" id="yiyi-29">其类型保留。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>clipped_array</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">An array with the elements of <em class="xref py py-obj">a</em>, but where values &lt; <em class="xref py py-obj">a_min</em> are replaced with <em class="xref py py-obj">a_min</em>, and those &gt; <em class="xref py py-obj">a_max</em> with <em class="xref py py-obj">a_max</em>.</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-33">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-34"><code class="xref py py-obj docutils literal"><span class="pre">numpy.doc.ufuncs</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">节“输出参数”</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">array([1, 1, 2, 3, 4, 5, 6, 7, 8, 8])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([3, 3, 3, 3, 4, 5, 6, 6, 6, 6])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">array([3, 4, 2, 3, 4, 5, 6, 7, 8, 8])</span>
+</pre></div>
+</div>
+</dd></dl>

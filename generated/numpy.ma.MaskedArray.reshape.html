@@ -1,0 +1,61 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.reshape</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.reshape.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.reshape.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.reshape"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">reshape</code><span class="sig-paren">(</span><em>*s</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L4425-L4479"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">为数组提供新形状，而不更改其数据。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">返回包含相同数据但具有新形状的蒙版数组。</span><span class="yiyi-st" id="yiyi-17">结果是一个视图上原来的数组；如果这不可能，则引发ValueError。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>shape</strong>：int或tuple的整数</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">新的形状应该与原始形状兼容。</span><span class="yiyi-st" id="yiyi-21">如果提供了整数，那么结果将是该长度的1-D数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">确定数组数据是否应视为C（row-major）或FORTRAN（column-major）顺序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>reshaped_array</strong>：数组</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">数组的新视图。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.ma.reshape.html#numpy.ma.reshape" title="numpy.ma.reshape"><code class="xref py py-obj docutils literal"><span class="pre">reshape</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">屏蔽数组模块中的等效功能。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.ndarray.reshape.html#numpy.ndarray.reshape" title="numpy.ndarray.reshape"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ndarray.reshape</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">对ndarray对象的等效方法。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.reshape.html#numpy.reshape" title="numpy.reshape"><code class="xref py py-obj docutils literal"><span class="pre">numpy.reshape</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">NumPy模块中的等效函数。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-35">重新塑造操作不能保证不会进行复制，要修改形状，请使用<code class="docutils literal"><span class="pre">a.shape</span> <span class="pre">=</span> <span class="pre">s</span> </code></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]],</span> <span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">[[-- 2]</span>
+<span class="go"> [3 --]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">[[--]</span>
+<span class="go"> [2]</span>
+<span class="go"> [3]</span>
+<span class="go"> [--]]</span>
+</pre></div>
+</div>
+</dd></dl>

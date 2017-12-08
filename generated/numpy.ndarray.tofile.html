@@ -1,0 +1,35 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ndarray.tofile</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.tofile.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.tofile.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ndarray.tofile"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">ndarray.</code><code class="descname">tofile</code><span class="sig-paren">(</span><em>fid</em>, <em>sep=&quot;&quot;</em>, <em>format=&quot;%s&quot;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将数组作为文本或二进制（默认）写入文件。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">数据始终以&apos;C&apos;顺序写入，与<em class="xref py py-obj">a</em>的顺序无关。</span><span class="yiyi-st" id="yiyi-17">此方法生成的数据可以使用函数fromfile()恢复。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>fid</strong>：file或str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">打开的文件对象或包含文件名的字符串。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>sep</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">用于文本输出的数组项之间的分隔符。</span><span class="yiyi-st" id="yiyi-23">如果“”（空），则写入二进制文件，等效于<code class="docutils literal"><span class="pre">file.write(a.tobytes())</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>格式</strong>：str</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">格式化文本文件输出的字符串。</span><span class="yiyi-st" id="yiyi-26">数组中的每个条目都被格式化为文本，首先将其转换为最接近的Python类型，然后使用“format”％item。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">这是快速存储数组数据的便利功能。</span><span class="yiyi-st" id="yiyi-29">关于字节序和精度的信息丢失了，因此这种方法不适合用于在具有不同字节序的机器之间存档数据或传输数据的文件。</span><span class="yiyi-st" id="yiyi-30">这些问题中的一些可以通过以牺牲速度和文件大小为代价将数据输出为文本文件来克服。</span></p>
+</dd></dl>

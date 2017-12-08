@@ -1,0 +1,667 @@
+
+<span id="packaging-numpy-distutils"></span><h1><span class="yiyi-st" id="yiyi-24">Packaging (<a class="reference internal" href="#module-numpy.distutils" title="numpy.distutils"><code class="xref py py-mod docutils literal"><span class="pre">numpy.distutils</span></code></a>)</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/distutils.html">https://docs.scipy.org/doc/numpy/reference/distutils.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-25">NumPy提供增强的distutils功能，使其更容易构建和安装使用Fortran编译库的子包，自动生成代码和扩展模块。</span><span class="yiyi-st" id="yiyi-26">要使用NumPy distutils的功能，请使用<code class="xref py py-mod docutils literal"><span class="pre">numpy.distutils.core</span></code>的<code class="xref py py-func docutils literal"><span class="pre">setup</span></code>命令。</span><span class="yiyi-st" id="yiyi-27">在<a class="reference internal" href="#module-numpy.distutils.misc_util" title="numpy.distutils.misc_util"><code class="xref py py-mod docutils literal"><span class="pre">numpy.distutils.misc_util</span></code></a>中还提供了一个有用的<a class="reference internal" href="#numpy.distutils.misc_util.Configuration" title="numpy.distutils.misc_util.Configuration"><code class="xref py py-class docutils literal"><span class="pre">Configuration</span></code></a>类，它可以更容易地构造关键字参数以传递给安装函数（通过传递从todict()方法的类）。</span><span class="yiyi-st" id="yiyi-28">有关详细信息，请参阅<code class="docutils literal"><span class="pre">&lt;site-packages&gt;/numpy/doc/DISTUTILS.txt</span></code>中的NumPy Distutils用户指南。</span></p>
+<div class="section" id="modules-in-numpy-distutils">
+<span id="index-0"></span><h2><span class="yiyi-st" id="yiyi-29">Modules in <a class="reference internal" href="#module-numpy.distutils" title="numpy.distutils"><code class="xref py py-mod docutils literal"><span class="pre">numpy.distutils</span></code></a></span></h2>
+<div class="section" id="module-numpy.distutils.misc_util">
+<span id="misc-util"></span><h3><span class="yiyi-st" id="yiyi-30">misc_util</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="generated/numpy.distutils.misc_util.get_numpy_include_dirs.html#numpy.distutils.misc_util.get_numpy_include_dirs" title="numpy.distutils.misc_util.get_numpy_include_dirs"><code class="xref py py-obj docutils literal"><span class="pre">get_numpy_include_dirs</span></code></a>()</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="generated/numpy.distutils.misc_util.dict_append.html#numpy.distutils.misc_util.dict_append" title="numpy.distutils.misc_util.dict_append"><code class="xref py py-obj docutils literal"><span class="pre">dict_append</span></code></a>（d，\ * \ * kws）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="generated/numpy.distutils.misc_util.appendpath.html#numpy.distutils.misc_util.appendpath" title="numpy.distutils.misc_util.appendpath"><code class="xref py py-obj docutils literal"><span class="pre">appendpath</span></code></a>（prefix，path）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="generated/numpy.distutils.misc_util.allpath.html#numpy.distutils.misc_util.allpath" title="numpy.distutils.misc_util.allpath"><code class="xref py py-obj docutils literal"><span class="pre">allpath</span></code></a>（name）</span></td>
+<td><span class="yiyi-st" id="yiyi-35">使用操作系统的路径分隔符将/ -separated路径名转换为一个。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="generated/numpy.distutils.misc_util.dot_join.html#numpy.distutils.misc_util.dot_join" title="numpy.distutils.misc_util.dot_join"><code class="xref py py-obj docutils literal"><span class="pre">dot_join</span></code></a>（\ * args）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="generated/numpy.distutils.misc_util.generate_config_py.html#numpy.distutils.misc_util.generate_config_py" title="numpy.distutils.misc_util.generate_config_py"><code class="xref py py-obj docutils literal"><span class="pre">generate_config_py</span></code></a>（target）</span></td>
+<td><span class="yiyi-st" id="yiyi-38">生成包含在构建包期间使用的system_info信息的config.py文件。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="generated/numpy.distutils.misc_util.get_cmd.html#numpy.distutils.misc_util.get_cmd" title="numpy.distutils.misc_util.get_cmd"><code class="xref py py-obj docutils literal"><span class="pre">get_cmd</span></code></a>（cmdname [，_cache]）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="generated/numpy.distutils.misc_util.terminal_has_colors.html#numpy.distutils.misc_util.terminal_has_colors" title="numpy.distutils.misc_util.terminal_has_colors"><code class="xref py py-obj docutils literal"><span class="pre">terminal_has_colors</span></code></a>()</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="generated/numpy.distutils.misc_util.red_text.html#numpy.distutils.misc_util.red_text" title="numpy.distutils.misc_util.red_text"><code class="xref py py-obj docutils literal"><span class="pre">red_text</span></code></a>（s）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="generated/numpy.distutils.misc_util.green_text.html#numpy.distutils.misc_util.green_text" title="numpy.distutils.misc_util.green_text"><code class="xref py py-obj docutils literal"><span class="pre">green_text</span></code></a>（s）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="generated/numpy.distutils.misc_util.yellow_text.html#numpy.distutils.misc_util.yellow_text" title="numpy.distutils.misc_util.yellow_text"><code class="xref py py-obj docutils literal"><span class="pre">yellow_text</span></code></a>（s）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="generated/numpy.distutils.misc_util.blue_text.html#numpy.distutils.misc_util.blue_text" title="numpy.distutils.misc_util.blue_text"><code class="xref py py-obj docutils literal"><span class="pre">blue_text</span></code></a>（s）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.distutils.misc_util.cyan_text.html#numpy.distutils.misc_util.cyan_text" title="numpy.distutils.misc_util.cyan_text"><code class="xref py py-obj docutils literal"><span class="pre">cyan_text</span></code></a>（s）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="generated/numpy.distutils.misc_util.cyg2win32.html#numpy.distutils.misc_util.cyg2win32" title="numpy.distutils.misc_util.cyg2win32"><code class="xref py py-obj docutils literal"><span class="pre">cyg2win32</span></code></a>（path）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.distutils.misc_util.all_strings.html#numpy.distutils.misc_util.all_strings" title="numpy.distutils.misc_util.all_strings"><code class="xref py py-obj docutils literal"><span class="pre">all_strings</span></code></a>（lst）</span></td>
+<td><span class="yiyi-st" id="yiyi-48">如果lst中的所有项目都是字符串对象，则返回True。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.distutils.misc_util.has_f_sources.html#numpy.distutils.misc_util.has_f_sources" title="numpy.distutils.misc_util.has_f_sources"><code class="xref py py-obj docutils literal"><span class="pre">has_f_sources</span></code></a>（来源）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">如果源包含Fortran文件，则返回True</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.distutils.misc_util.has_cxx_sources.html#numpy.distutils.misc_util.has_cxx_sources" title="numpy.distutils.misc_util.has_cxx_sources"><code class="xref py py-obj docutils literal"><span class="pre">has_cxx_sources</span></code></a>（sources）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">如果源包含C ++文件，则返回True</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="generated/numpy.distutils.misc_util.filter_sources.html#numpy.distutils.misc_util.filter_sources" title="numpy.distutils.misc_util.filter_sources"><code class="xref py py-obj docutils literal"><span class="pre">filter_sources</span></code></a>（sources）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">返回四个文件名列表，分别包含C，C ++，Fortran和Fortran 90模块源。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="generated/numpy.distutils.misc_util.get_dependencies.html#numpy.distutils.misc_util.get_dependencies" title="numpy.distutils.misc_util.get_dependencies"><code class="xref py py-obj docutils literal"><span class="pre">get_dependencies</span></code></a>（sources）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="generated/numpy.distutils.misc_util.is_local_src_dir.html#numpy.distutils.misc_util.is_local_src_dir" title="numpy.distutils.misc_util.is_local_src_dir"><code class="xref py py-obj docutils literal"><span class="pre">is_local_src_dir</span></code></a>（目录）</span></td>
+<td><span class="yiyi-st" id="yiyi-57">如果目录是本地目录，返回true。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-58"><a class="reference internal" href="generated/numpy.distutils.misc_util.get_ext_source_files.html#numpy.distutils.misc_util.get_ext_source_files" title="numpy.distutils.misc_util.get_ext_source_files"><code class="xref py py-obj docutils literal"><span class="pre">get_ext_source_files</span></code></a>（ext）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="generated/numpy.distutils.misc_util.get_script_files.html#numpy.distutils.misc_util.get_script_files" title="numpy.distutils.misc_util.get_script_files"><code class="xref py py-obj docutils literal"><span class="pre">get_script_files</span></code></a>（scripts）</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="numpy.distutils.misc_util.Configuration"><span class="yiyi-st" id="yiyi-60"> <em class="property">class </em><code class="descclassname">numpy.distutils.misc_util.</code><code class="descname">Configuration</code><span class="sig-paren">(</span><em>package_name=None</em>, <em>parent_name=None</em>, <em>top_path=None</em>, <em>package_path=None</em>, <em>**attrs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L696-L2053"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-61">构造给定包名称的配置实例。</span><span class="yiyi-st" id="yiyi-62">如果<em>parent_name</em>不为None，则将包构建为<em>parent_name</em>包的子包。</span><span class="yiyi-st" id="yiyi-63">如果<em>top_path</em>和<em>package_path</em>为None，则假定它们等于创建此实例的文件的路径。</span><span class="yiyi-st" id="yiyi-64">numpy分布中的setup.py文件是如何使用<a class="reference internal" href="#numpy.distutils.misc_util.Configuration" title="numpy.distutils.misc_util.Configuration"><code class="xref py py-class docutils literal"><span class="pre">Configuration</span></code></a>实例的好例子。</span></p>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.todict"><span class="yiyi-st" id="yiyi-65"> <code class="descname">todict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L803-L820"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-66">返回与distutils setup函数的关键字参数兼容的字典。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-67">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">setup</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="o">.</span><span class="n">todict</span><span class="p">())</span>                           
+</pre></div>
+</div>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.get_distribution"><span class="yiyi-st" id="yiyi-68"> <code class="descname">get_distribution</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L846-L849"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-69">返回distutils分布对象为self。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.get_subpackage"><span class="yiyi-st" id="yiyi-70"> <code class="descname">get_subpackage</code><span class="sig-paren">(</span><em>subpackage_name</em>, <em>subpackage_path=None</em>, <em>parent_name=None</em>, <em>caller_level=1</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L914-L973"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-71">返回子包配置列表。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-72">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-73"><strong>subpackage_name</strong>：str或None</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-74">获取配置的子包的名称。</span><span class="yiyi-st" id="yiyi-75">subpackage_name中的&apos;*&apos;作为通配符处理。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-76"><strong>subpackage_path</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-77">如果为None，则路径假定为本地路径加上subpackage_name。</span><span class="yiyi-st" id="yiyi-78">如果在subpackage_path中找不到setup.py文件，则使用默认配置。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-79"><strong>parent_name</strong>：str</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-80">父名称。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.add_subpackage"><span class="yiyi-st" id="yiyi-81"> <code class="descname">add_subpackage</code><span class="sig-paren">(</span><em>subpackage_name</em>, <em>subpackage_path=None</em>, <em>standalone=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L975-L1016"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-82">将子包添加到当前配置实例。</span></p>
+<p><span class="yiyi-st" id="yiyi-83">这在用于将子包添加到包的setup.py脚本中很有用。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-84">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-85"><strong>subpackage_name</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-86">子包名称</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-87"><strong>subpackage_path</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-88">如果给定，子包路径（例如子包）位于subpackage_path / subpackage_name中。</span><span class="yiyi-st" id="yiyi-89">如果为无，则假定子包位于本地路径/ subpackage_name中。</span></p>
+</div></blockquote>
+<p class="last"><span class="yiyi-st" id="yiyi-90"><strong>standalone</strong>：bool</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.add_data_files"><span class="yiyi-st" id="yiyi-91"> <code class="descname">add_data_files</code><span class="sig-paren">(</span><em>*files</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1146-L1295"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-92">将数据文件添加到配置data_files。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-93">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-94"><strong>文件</strong>：sequence</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-95">参数可以是</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-96">2-sequence (<datadir prefix="">,<path to="" data="" file(s)=""></path>)</datadir></span></li>
+<li><span class="yiyi-st" id="yiyi-97">数据文件的路径，其中python datadir前缀默认为package dir。</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-98">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-99">文件序列的每个元素的形式是非常灵活的，允许从包中获取文件的何处以及它们最终将被安装在系统上的多种组合。</span><span class="yiyi-st" id="yiyi-100">最基本的用法是将files参数序列的一个元素作为一个简单的文件名。</span><span class="yiyi-st" id="yiyi-101">这将导致该文件从本地路径安装到self.name包的安装路径（包路径）。</span><span class="yiyi-st" id="yiyi-102">文件参数也可以是相对路径，在这种情况下，整个相对路径将安装到包目录中。</span><span class="yiyi-st" id="yiyi-103">最后，文件可以是绝对路径名，在这种情况下，文件将在绝对路径名中找到，但安装到包路径。</span></p>
+<p><span class="yiyi-st" id="yiyi-104">这种基本行为可以通过传递2元组作为文件参数来增强。</span><span class="yiyi-st" id="yiyi-105">元组的第一个元素应该指定应该在其中安装文件的剩余序列的相对路径（在软件包安装目录下）（它与源分发中的文件名无关）。</span><span class="yiyi-st" id="yiyi-106">元组的第二个元素是应该安装的文件序列。</span><span class="yiyi-st" id="yiyi-107">此序列中的文件可以是文件名，相对路径或绝对路径。</span><span class="yiyi-st" id="yiyi-108">对于绝对路径，文件将安装在顶层软件包安装目录中（不考虑第一个参数）。</span><span class="yiyi-st" id="yiyi-109">文件名和相对路径名将安装在软件包安装目录中作为元组的第一个元素提供的路径名下。</span></p>
+<p><span class="yiyi-st" id="yiyi-110">安装路径规则：</span></p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-111">file.txt  - &gt;（。，file.txt） - &gt; parent / file.txt</span></li>
+<li><span class="yiyi-st" id="yiyi-112">foo / file.txt  - &gt;（foo，foo / file.txt） - &gt; parent / foo / file.txt</span></li>
+<li><span class="yiyi-st" id="yiyi-113">/foo/bar/file.txt  - &gt;（。，/foo/bar/file.txt） - &gt; parent / file.txt</span></li>
+<li><span class="yiyi-st" id="yiyi-114"><a href="#id1"><span class="problematic" id="id2">*</span></a> .txt  - &gt; parent / a.txt，parent / b.txt</span></li>
+<li><span class="yiyi-st" id="yiyi-115">foo / <a href="#id3"><span class="problematic" id="id4">*</span></a> .txt  - &gt; parent / foo / a.txt，parent / foo / b.txt</span></li>
+<li><span class="yiyi-st" id="yiyi-116"><em>/</em> .txt  - &gt;（<em>，* /</em> .txt） - &gt; parent / c / a.txt，parent / d / b.txt</span></li>
+<li><span class="yiyi-st" id="yiyi-117">（sun，file.txt） - &gt; parent / sun / file.txt</span></li>
+<li><span class="yiyi-st" id="yiyi-118">（sun，bar / file.txt） - &gt; parent / sun / file.txt</span></li>
+<li><span class="yiyi-st" id="yiyi-119">（sun，/foo/bar/file.txt） - &gt; parent / sun / file.txt</span></li>
+<li><span class="yiyi-st" id="yiyi-120">（sun，<a href="#id5"><span class="problematic" id="id6">*</span></a> .txt） - &gt; parent / sun / a.txt，parent / sun / b.txt</span></li>
+<li><span class="yiyi-st" id="yiyi-121">（sun，bar / <a href="#id7"><span class="problematic" id="id8">*</span></a> .txt） - &gt; parent / sun / a.txt，parent / sun / b.txt</span></li>
+<li><span class="yiyi-st" id="yiyi-122">（sun / <em>，* /</em> .txt） - &gt; parent / sun / c / a.txt，parent / d / b.txt</span></li>
+</ol>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-123">另一个特性是，到数据文件的路径实际上可以是一个不带参数并返回到数据文件的实际路径的函数。</span><span class="yiyi-st" id="yiyi-124">这在构建包时生成数据文件时很有用。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-125">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-126">将文件添加到要包含在包中的data_files列表中。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">add_data_files</span><span class="p">(</span><span class="s1">&apos;foo.dat&apos;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="s1">&apos;fun&apos;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&apos;gun.dat&apos;</span><span class="p">,</span> <span class="s1">&apos;nun/pun.dat&apos;</span><span class="p">,</span> <span class="s1">&apos;/tmp/sun.dat&apos;</span><span class="p">]),</span>
+<span class="gp">... </span>    <span class="s1">&apos;bar/cat.dat&apos;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s1">&apos;/full/path/to/can.dat&apos;</span><span class="p">)</span>                   
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-127">将安装这些数据文件到：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">package</span> <span class="n">install</span> <span class="n">directory</span><span class="o">&gt;/</span>
+ <span class="n">foo</span><span class="o">.</span><span class="n">dat</span>
+ <span class="n">fun</span><span class="o">/</span>
+   <span class="n">gun</span><span class="o">.</span><span class="n">dat</span>
+   <span class="n">nun</span><span class="o">/</span>
+     <span class="n">pun</span><span class="o">.</span><span class="n">dat</span>
+ <span class="n">sun</span><span class="o">.</span><span class="n">dat</span>
+ <span class="n">bar</span><span class="o">/</span>
+   <span class="n">car</span><span class="o">.</span><span class="n">dat</span>
+ <span class="n">can</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-128">其中<package directory="" install="">是包（或子包）目录，例如&apos;/usr/lib/python2.4/site-packages/mypackage&apos;（&apos;C：Python2.4 Lib site-packages mypackage&apos;）或&apos;/ usr /lib/python2.4/site-packages/mypackage/mysubpackage&apos;（&apos;C：Python2.4 Lib site-packages mypackage mysubpackage&apos;）。</package></span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.add_data_dir"><span class="yiyi-st" id="yiyi-129"> <code class="descname">add_data_dir</code><span class="sig-paren">(</span><em>data_path</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1018-L1135"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-130">递归地将data_path下的文件添加到data_files列表。</span></p>
+<p><span class="yiyi-st" id="yiyi-131">递归地将data_path下的文件添加到要安装（和分发）的data_files列表中。</span><span class="yiyi-st" id="yiyi-132">data_path可以是相对路径名或绝对路径名，也可以是2元组，其中第一个参数显示安装目录中应安装数据目录的位置。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-133">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-134"><strong>data_path</strong>：seq或str</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-135">参数可以是</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-136">2序列（<datadir suffix="">，<path data="" directory="" to=""></path>）</datadir></span></li>
+<li><span class="yiyi-st" id="yiyi-137">数据目录的路径，其中python datadir后缀默认为package dir。</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-138">笔记</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-139">安装路径规则：</span></dt>
+<dd><span class="yiyi-st" id="yiyi-140">foo / bar  - &gt;（foo / bar，foo / bar） - &gt; parent / foo / bar（gun，foo / bar） - &gt; parent / gun foo / *  - &gt;（foo / a，foo / a） / b，foo / b） - &gt; parent / foo / a，parent / foo / b（gun，foo / <em>） - （gun，foo / a），（gun，foo / b）枪（枪/</em>，foo / <em>） - ＆gt；父/枪/ a，父/枪/ b / foo / bar  - ＆gt； （bar，/ foo / bar） - &gt;父/条（枪，/ foo / bar） - ＆gt；父/枪（fun /</em> / gun / <a href="#id9"><span class="problematic" id="id10">*</span></a>，sun / foo / bar） - &gt; parent / fun / foo / gun / bar</span></dd>
+</dl>
+<p class="rubric"><span class="yiyi-st" id="yiyi-141">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-142">例如假设源目录包含fun / foo.dat和fun / bar / car.dat：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">add_data_dir</span><span class="p">(</span><span class="s1">&apos;fun&apos;</span><span class="p">)</span>                       
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">add_data_dir</span><span class="p">((</span><span class="s1">&apos;sun&apos;</span><span class="p">,</span> <span class="s1">&apos;fun&apos;</span><span class="p">))</span>              
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">add_data_dir</span><span class="p">((</span><span class="s1">&apos;gun&apos;</span><span class="p">,</span> <span class="s1">&apos;/full/path/to/fun&apos;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-143">将数据文件安装到以下位置：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">package</span> <span class="n">install</span> <span class="n">directory</span><span class="o">&gt;/</span>
+  <span class="n">fun</span><span class="o">/</span>
+    <span class="n">foo</span><span class="o">.</span><span class="n">dat</span>
+    <span class="n">bar</span><span class="o">/</span>
+      <span class="n">car</span><span class="o">.</span><span class="n">dat</span>
+  <span class="n">sun</span><span class="o">/</span>
+    <span class="n">foo</span><span class="o">.</span><span class="n">dat</span>
+    <span class="n">bar</span><span class="o">/</span>
+      <span class="n">car</span><span class="o">.</span><span class="n">dat</span>
+  <span class="n">gun</span><span class="o">/</span>
+    <span class="n">foo</span><span class="o">.</span><span class="n">dat</span>
+    <span class="n">car</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.add_include_dirs"><span class="yiyi-st" id="yiyi-144"> <code class="descname">add_include_dirs</code><span class="sig-paren">(</span><em>*paths</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1315-L1329"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-145">添加配置包含目录的路径。</span></p>
+<p><span class="yiyi-st" id="yiyi-146">将给定的路径序列添加到include_dirs列表的开头。</span><span class="yiyi-st" id="yiyi-147">此列表对当前软件包的所有扩展模块都可见。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.add_headers"><span class="yiyi-st" id="yiyi-148"> <code class="descname">add_headers</code><span class="sig-paren">(</span><em>*files</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1331-L1363"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-149">为配置添加可安装的标头。</span></p>
+<p><span class="yiyi-st" id="yiyi-150">将给定的文件序列添加到标题列表的开头。</span><span class="yiyi-st" id="yiyi-151">By default, headers will be installed under <python- include="">/<self.name.replace(‘.’,’ ’)="">/ directory. </self.name.replace(‘.’,’></python-></span><span class="yiyi-st" id="yiyi-152">如果文件项是元组，则其第一个参数指定相对于<python-include>路径的实际安装位​​置。</python-include></span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-153">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-154"><strong>文件</strong>：str或seq</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-155">参数可以是：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-156">2-sequence (<includedir suffix="">,<path to="" header="" file(s)=""></path>)</includedir></span></li>
+<li><span class="yiyi-st" id="yiyi-157">路径到头文件，其中python includeir后缀将默认为包名称。</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.add_extension"><span class="yiyi-st" id="yiyi-158"> <code class="descname">add_extension</code><span class="sig-paren">(</span><em>name</em>, <em>sources</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1388-L1489"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-159">将扩展名添加到配置。</span></p>
+<p><span class="yiyi-st" id="yiyi-160">创建并将扩展实例添加到ext_modules列表。</span><span class="yiyi-st" id="yiyi-161">此方法还采用以下可选的关键字参数传递到Extension构造函数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-162">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-163"><strong>名称</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-164">扩展名称</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-165"><strong>源</strong>：seq</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-166">源列表。</span><span class="yiyi-st" id="yiyi-167">源列表可能包含一些函数（称为源生成器），它们必须将扩展实例和构建目录作为输入，并返回源文件或源文件列表或无。</span><span class="yiyi-st" id="yiyi-168">如果返回None，则不会生成任何源。</span><span class="yiyi-st" id="yiyi-169">如果扩展实例在处理所有源生成器之后没有源，则不构建扩展模块。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-170"><strong>include_dirs：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-171"><strong>define_macros：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-172"><strong>undef_macros：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-173"><strong>library_dirs：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-174"><strong>库：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-175"><strong>runtime_library_dirs：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-176"><strong>extra_objects：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-177"><strong>extra_compile_args：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-178"><strong>extra_link_args：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-179"><strong>extra_f77_compile_args：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-180"><strong>extra_f90_compile_args：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-181"><strong>export_symbols：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-182"><strong>swig_opts：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-183"><strong>取决于：</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-184">依赖列表包含扩展模块的来源所依赖的文件或目录的路径。</span><span class="yiyi-st" id="yiyi-185">如果依赖列表中的任何路径比扩展模块新，则将重建模块。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-186"><strong>语言：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-187"><strong>f2py_options：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-188"><strong>module_dirs：</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-189"><strong>extra_info</strong>：dict或list</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-190">要附加到关键字的关键字的dict的dict或list。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-191">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-192">self.paths（...）方法应用于可能包含路径的所有列表。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.add_library"><span class="yiyi-st" id="yiyi-193"> <code class="descname">add_library</code><span class="sig-paren">(</span><em>name</em>, <em>sources</em>, <em>**build_info</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1491-L1525"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-194">将库添加到配置。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-195">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-196"><strong>名称</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-197">扩展名称。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-198"><strong>源</strong>：序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-199">源的列表。</span><span class="yiyi-st" id="yiyi-200">源列表可能包含一些函数（称为源生成器），它们必须将扩展实例和构建目录作为输入，并返回源文件或源文件列表或无。</span><span class="yiyi-st" id="yiyi-201">如果返回None，则不会生成任何源。</span><span class="yiyi-st" id="yiyi-202">如果扩展实例在处理所有源生成器之后没有源，则不构建扩展模块。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-203"><strong>build_info</strong>：dict，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-204">允许以下密钥：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-205">依靠</span></li>
+<li><span class="yiyi-st" id="yiyi-206">宏</span></li>
+<li><span class="yiyi-st" id="yiyi-207">include_dirs</span></li>
+<li><span class="yiyi-st" id="yiyi-208">extra_compiler_args</span></li>
+<li><span class="yiyi-st" id="yiyi-209">extra_f77_compiler_args</span></li>
+<li><span class="yiyi-st" id="yiyi-210">extra_f90_compiler_args</span></li>
+<li><span class="yiyi-st" id="yiyi-211">f2py_options</span></li>
+<li><span class="yiyi-st" id="yiyi-212">语言</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.add_scripts"><span class="yiyi-st" id="yiyi-213"> <code class="descname">add_scripts</code><span class="sig-paren">(</span><em>*files</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1668-L1682"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-214">将脚本添加到配置。</span></p>
+<p><span class="yiyi-st" id="yiyi-215">将文件序列添加到脚本列表的开头。</span><span class="yiyi-st" id="yiyi-216">脚本将安装在<prefix>/ bin /目录下。</prefix></span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.add_installed_library"><span class="yiyi-st" id="yiyi-217"> <code class="descname">add_installed_library</code><span class="sig-paren">(</span><em>name</em>, <em>sources</em>, <em>install_dir</em>, <em>build_info=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1544-L1593"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-218">与add_library类似，但安装了指定的库。</span></p>
+<p><span class="yiyi-st" id="yiyi-219">与<a class="reference external" href="https://docs.python.org/dev/library/distutils.html#module-distutils" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">distutils</span></code></a>一起使用的大多数C库仅用于构建Python扩展，但是通过此方法构建的库将被安装，以便它们可以被第三方包重用。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-220">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-221"><strong>名称</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-222">已安装库的名称。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-223"><strong>源</strong>：序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-224">库源文件列表。</span><span class="yiyi-st" id="yiyi-225">有关详细信息，请参见<a class="reference internal" href="#numpy.distutils.misc_util.Configuration.add_library" title="numpy.distutils.misc_util.Configuration.add_library"><code class="xref py py-obj docutils literal"><span class="pre">add_library</span></code></a>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-226"><strong>install_dir</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-227">相对于当前子包安装库的路径。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-228"><strong>build_info</strong>：dict，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-229">允许以下密钥：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-230">依靠</span></li>
+<li><span class="yiyi-st" id="yiyi-231">宏</span></li>
+<li><span class="yiyi-st" id="yiyi-232">include_dirs</span></li>
+<li><span class="yiyi-st" id="yiyi-233">extra_compiler_args</span></li>
+<li><span class="yiyi-st" id="yiyi-234">extra_f77_compiler_args</span></li>
+<li><span class="yiyi-st" id="yiyi-235">extra_f90_compiler_args</span></li>
+<li><span class="yiyi-st" id="yiyi-236">f2py_options</span></li>
+<li><span class="yiyi-st" id="yiyi-237">语言</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-238">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-239">没有</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-240">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-241"><a class="reference internal" href="#numpy.distutils.misc_util.Configuration.add_library" title="numpy.distutils.misc_util.Configuration.add_library"><code class="xref py py-obj docutils literal"><span class="pre">add_library</span></code></a>，<a class="reference internal" href="#numpy.distutils.misc_util.Configuration.add_npy_pkg_config" title="numpy.distutils.misc_util.Configuration.add_npy_pkg_config"><code class="xref py py-obj docutils literal"><span class="pre">add_npy_pkg_config</span></code></a>，<a class="reference internal" href="#numpy.distutils.misc_util.Configuration.get_info" title="numpy.distutils.misc_util.Configuration.get_info"><code class="xref py py-obj docutils literal"><span class="pre">get_info</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-242">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-243">编译链接到指定C库所需的选项的最佳方法是使用“libname.ini”文件，并使用<a class="reference internal" href="#numpy.distutils.misc_util.Configuration.get_info" title="numpy.distutils.misc_util.Configuration.get_info"><code class="xref py py-obj docutils literal"><span class="pre">get_info</span></code></a>检索所需的选项（请参阅<a class="reference internal" href="#numpy.distutils.misc_util.Configuration.add_npy_pkg_config" title="numpy.distutils.misc_util.Configuration.add_npy_pkg_config"><code class="xref py py-obj docutils literal"><span class="pre">add_npy_pkg_config</span></code></a></span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.add_npy_pkg_config"><span class="yiyi-st" id="yiyi-244"> <code class="descname">add_npy_pkg_config</code><span class="sig-paren">(</span><em>template</em>, <em>install_dir</em>, <em>subst_dict=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1595-L1665"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-245">从模板生成并安装npy-pkg配置文件。</span></p>
+<p><span class="yiyi-st" id="yiyi-246">从<em class="xref py py-obj">模板</em>生成的配置文件安装在给定的安装目录中，使用<em class="xref py py-obj">subst_dict</em>进行变量替换。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-247">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-248"><strong>模板</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-249">模板的路径，相对于当前的包路径。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-250"><strong>install_dir</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-251">在哪里安装npy-pkg配置文件，相对于当前的包路径。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-252"><strong>subst_dict</strong>：dict，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-253">如果给定，则在安装时，模板文件中的任何字符串<code class="docutils literal"><span class="pre">@key@</span></code>将替换为<code class="docutils literal"><span class="pre">subst_dict[key]</span></code>。</span><span class="yiyi-st" id="yiyi-254">安装前缀始终可通过变量<code class="docutils literal"><span class="pre">@prefix@</span></code>获得，因为安装前缀不容​​易从setup.py中可靠地获取。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-255">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-256"><a class="reference internal" href="#numpy.distutils.misc_util.Configuration.add_installed_library" title="numpy.distutils.misc_util.Configuration.add_installed_library"><code class="xref py py-obj docutils literal"><span class="pre">add_installed_library</span></code></a>，<a class="reference internal" href="#numpy.distutils.misc_util.Configuration.get_info" title="numpy.distutils.misc_util.Configuration.get_info"><code class="xref py py-obj docutils literal"><span class="pre">get_info</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-257">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-258">这适用于标准安装和就地构建，即<code class="docutils literal"><span class="pre">@prefix@</span></code>指的是原位构建的源目录。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-259">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">config</span><span class="o">.</span><span class="n">add_npy_pkg_config</span><span class="p">(</span><span class="s1">&apos;foo.ini.in&apos;</span><span class="p">,</span> <span class="s1">&apos;lib&apos;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&apos;foo&apos;</span><span class="p">:</span> <span class="n">bar</span><span class="p">})</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-260">假设foo.ini.in文件具有以下内容：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">meta</span><span class="p">]</span>
+<span class="n">Name</span><span class="o">=</span><span class="nd">@foo</span><span class="o">@</span>
+<span class="n">Version</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">Description</span><span class="o">=</span><span class="n">dummy</span> <span class="n">description</span>
+
+<span class="p">[</span><span class="n">default</span><span class="p">]</span>
+<span class="n">Cflags</span><span class="o">=-</span><span class="n">I</span><span class="nd">@prefix</span><span class="o">@/</span><span class="n">include</span>
+<span class="n">Libs</span><span class="o">=</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-261">生成的文件将具有以下内容：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">meta</span><span class="p">]</span>
+<span class="n">Name</span><span class="o">=</span><span class="n">bar</span>
+<span class="n">Version</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">Description</span><span class="o">=</span><span class="n">dummy</span> <span class="n">description</span>
+
+<span class="p">[</span><span class="n">default</span><span class="p">]</span>
+<span class="n">Cflags</span><span class="o">=-</span><span class="n">Iprefix_dir</span><span class="o">/</span><span class="n">include</span>
+<span class="n">Libs</span><span class="o">=</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-262">并将作为foo.ini安装在&apos;lib&apos;子路径中。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.paths"><span class="yiyi-st" id="yiyi-263"> <code class="descname">paths</code><span class="sig-paren">(</span><em>*paths</em>, <em>**kws</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1365-L1378"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-264">将glob应用于路径，如果需要，在前面添加local_path。</span></p>
+<p><span class="yiyi-st" id="yiyi-265">将glob.glob（...）应用于序列中的每个路径（如果需要），如果需要，预先置入local_path。</span><span class="yiyi-st" id="yiyi-266">因为在所有源列表上调用，所以允许在扩展模块和库和脚本的源列表中指定通配符，并允许路径名相对于源目录。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.get_config_cmd"><span class="yiyi-st" id="yiyi-267"> <code class="descname">get_config_cmd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1722-L1734"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-268">返回numpy.distutils config命令实例。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.get_build_temp_dir"><span class="yiyi-st" id="yiyi-269"> <code class="descname">get_build_temp_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1736-L1743"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-270">返回到临时文件应放置的临时目录的路径。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.have_f77c"><span class="yiyi-st" id="yiyi-271"> <code class="descname">have_f77c</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1745-L1762"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-272">检查Fortran 77编译器的可用性。</span></p>
+<p><span class="yiyi-st" id="yiyi-273">在源生成函数中使用它，以确保设置分发实例已初始化。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-274">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-275">如果Fortran 77编译器可用（因为一个简单的Fortran 77代码能够成功编译），则为true。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.have_f90c"><span class="yiyi-st" id="yiyi-276"> <code class="descname">have_f90c</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1764-L1781"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-277">检查Fortran 90编译器的可用性。</span></p>
+<p><span class="yiyi-st" id="yiyi-278">在源生成函数中使用它，以确保设置分发实例已初始化。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-279">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-280">如果Fortran 90编译器可用（因为一个简单的Fortran 90代码能够成功编译）</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.get_version"><span class="yiyi-st" id="yiyi-281"> <code class="descname">get_version</code><span class="sig-paren">(</span><em>version_file=None</em>, <em>version_variable=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1877-L1945"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-282">尝试获取包的版本字符串。</span></p>
+<p><span class="yiyi-st" id="yiyi-283">返回当前软件包的版本字符串或无法检测版本信息。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-284">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-285">此方法扫描名为__version__.py，<packagename>_version.py，version.py和__svn_version__.py的文件，用于字符串变量版本，__version__和<packagename>_version，直到找到版本号。</packagename> t0&gt;</packagename></span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.make_svn_version_py"><span class="yiyi-st" id="yiyi-286"> <code class="descname">make_svn_version_py</code><span class="sig-paren">(</span><em>delete=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L1947-L1988"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-287">将数据函数附加到data_files列表，将生成__svn_version__.py文件到当前包目录。</span></p>
+<p><span class="yiyi-st" id="yiyi-288">从SVN版本号生成包__svn_version__.py文件，它将在python退出后删除，但将在执行sdist，etc命令时可用。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-289">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-290">如果之前存在__svn_version__.py，则不会执行任何操作。</span></p>
+<p><span class="yiyi-st" id="yiyi-291">这用于处理SVN存储库中的源目录。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.make_config_py"><span class="yiyi-st" id="yiyi-292"> <code class="descname">make_config_py</code><span class="sig-paren">(</span><em>name=&apos;__config__&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L2032-L2040"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-293">生成包含在构建包期间使用的包含system_info信息的包__config__.py文件。</span></p>
+<p><span class="yiyi-st" id="yiyi-294">此文件安装到软件包安装目录。</span></p>
+</dd></dl>
+<dl class="method">
+<dt id="numpy.distutils.misc_util.Configuration.get_info"><span class="yiyi-st" id="yiyi-295"> <code class="descname">get_info</code><span class="sig-paren">(</span><em>*names</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/distutils/misc_util.py#L2043-L2053"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-296">获取资源信息。</span></p>
+<p><span class="yiyi-st" id="yiyi-297">返回单个字典中参数列表中所有名称的信息（从system_info.get_info）。</span></p>
+</dd></dl>
+</dd></dl>
+</div>
+<div class="section" id="other-modules">
+<h3><span class="yiyi-st" id="yiyi-298">Other modules</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-299"><a class="reference internal" href="generated/numpy.distutils.system_info.get_info.html#numpy.distutils.system_info.get_info" title="numpy.distutils.system_info.get_info"><code class="xref py py-obj docutils literal"><span class="pre">system_info.get_info</span></code></a>（name [，notfound_action]）</span></td>
+<td><span class="yiyi-st" id="yiyi-300">notfound_action：</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-301"><a class="reference internal" href="generated/numpy.distutils.system_info.get_standard_file.html#numpy.distutils.system_info.get_standard_file" title="numpy.distutils.system_info.get_standard_file"><code class="xref py py-obj docutils literal"><span class="pre">system_info.get_standard_file</span></code></a>（fname）</span></td>
+<td><span class="yiyi-st" id="yiyi-302">返回名为“fname”的文件的列表</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-303"><a class="reference internal" href="generated/numpy.distutils.cpuinfo.cpu.html#numpy.distutils.cpuinfo.cpu" title="numpy.distutils.cpuinfo.cpu"><code class="xref py py-obj docutils literal"><span class="pre">cpuinfo.cpu</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-304"><a class="reference internal" href="generated/numpy.distutils.log.set_verbosity.html#numpy.distutils.log.set_verbosity" title="numpy.distutils.log.set_verbosity"><code class="xref py py-obj docutils literal"><span class="pre">log.set_verbosity</span></code></a>（v [，force]）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-305"><a class="reference internal" href="generated/numpy.distutils.exec_command.html#module-numpy.distutils.exec_command" title="numpy.distutils.exec_command"><code class="xref py py-obj docutils literal"><span class="pre">exec_command</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-306">exec_command</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="building-installable-c-libraries">
+<h2><span class="yiyi-st" id="yiyi-307">Building Installable C libraries</span></h2>
+<p><span class="yiyi-st" id="yiyi-308">不安装常规C库（通过<em class="xref py py-obj">add_library</em>安装），并且仅在构建期间使用（它们是静态链接的）。</span><span class="yiyi-st" id="yiyi-309">可安装的C库是一个纯C库，它不依赖于python C运行时，并且安装成可以被第三方包使用。</span><span class="yiyi-st" id="yiyi-310">要构建和安装C库，您只需使用方法<em class="xref py py-obj">add_installed_library</em>而不是<em class="xref py py-obj">add_library</em>，除了额外的<code class="docutils literal"><span class="pre">install_dir</span></code>参数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">add_installed_library</span><span class="p">(</span><span class="s1">&apos;foo&apos;</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;foo.c&apos;</span><span class="p">],</span> <span class="n">install_dir</span><span class="o">=</span><span class="s1">&apos;lib&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="npy-pkg-config-files">
+<h3><span class="yiyi-st" id="yiyi-311">npy-pkg-config files</span></h3>
+<p><span class="yiyi-st" id="yiyi-312">要使必要的构建选项可用于第三方，您可以使用<a class="reference internal" href="#module-numpy.distutils" title="numpy.distutils"><code class="xref py py-obj docutils literal"><span class="pre">numpy.distutils</span></code></a>中实现的<em class="xref py py-obj">npy-pkg-config</em>机制。</span><span class="yiyi-st" id="yiyi-313">此机制基于包含所有选项的.ini文件。</span><span class="yiyi-st" id="yiyi-314">.ini文件与pkg-config unix实用程序使用的.pc文件非常相似：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>[meta]
+Name: foo
+Version: 1.0
+Description: foo library
+
+[variables]
+prefix = /home/user/local
+libdir = ${prefix}/lib
+includedir = ${prefix}/include
+
+[default]
+cflags = -I${includedir}
+libs = -L${libdir} -lfoo
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-315">通常，该文件需要在构建期间生成，因为它需要在构建时仅知道一些信息（例如前缀）。</span><span class="yiyi-st" id="yiyi-316">如果使用<em class="xref py py-obj">配置</em>方法<em class="xref py py-obj">add_npy_pkg_config</em>，则这是自动的。</span><span class="yiyi-st" id="yiyi-317">假设我们有一个模板文件foo.ini.in如下：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>[meta]
+Name: foo
+Version: @version@
+Description: foo library
+
+[variables]
+prefix = @prefix@
+libdir = ${prefix}/lib
+includedir = ${prefix}/include
+
+[default]
+cflags = -I${includedir}
+libs = -L${libdir} -lfoo
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-318">和setup.py中的以下代码：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">add_installed_library</span><span class="p">(</span><span class="s1">&apos;foo&apos;</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;foo.c&apos;</span><span class="p">],</span> <span class="n">install_dir</span><span class="o">=</span><span class="s1">&apos;lib&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subst</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&apos;version&apos;</span><span class="p">:</span> <span class="s1">&apos;1.0&apos;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">add_npy_pkg_config</span><span class="p">(</span><span class="s1">&apos;foo.ini.in&apos;</span><span class="p">,</span> <span class="s1">&apos;lib&apos;</span><span class="p">,</span> <span class="n">subst_dict</span><span class="o">=</span><span class="n">subst</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-319">这会将文件foo.ini安装到目录package_dir / lib中，并且foo.ini文件将从foo.ini.in生成，其中每个<code class="docutils literal"><span class="pre">@version@</span></code>将替换为<code class="docutils literal"><span class="pre">subst_dict[&apos;version&apos;]</span></code>。</span><span class="yiyi-st" id="yiyi-320">字典有一个额外的前缀替换规则自动添加，其中包含安装前缀（因为这不容易从setup.py获得）。</span><span class="yiyi-st" id="yiyi-321">npy-pkg-config文件也可以使用从<em class="xref py py-obj">get_npy_pkg_dir</em>函数返回的路径安装在与numpy相同的位置。</span></p>
+</div>
+<div class="section" id="reusing-a-c-library-from-another-package">
+<h3><span class="yiyi-st" id="yiyi-322">Reusing a C library from another package</span></h3>
+<p><span class="yiyi-st" id="yiyi-323">可以从<a class="reference internal" href="#module-numpy.distutils.misc_util" title="numpy.distutils.misc_util"><code class="xref py py-obj docutils literal"><span class="pre">numpy.distutils.misc_util</span></code></a>中的<em class="xref py py-obj">get_info</em>函数轻松检索信息：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">get_info</span><span class="p">(</span><span class="s1">&apos;npymath&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">add_extension</span><span class="p">(</span><span class="s1">&apos;foo&apos;</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;foo.c&apos;</span><span class="p">],</span> <span class="n">extra_info</span><span class="o">=**</span><span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-324">可以向<em class="xref py py-obj">get_info</em>提供查找.ini文件的其他路径列表。</span></p>
+</div>
+</div>
+<div class="section" id="conversion-of-src-files">
+<h2><span class="yiyi-st" id="yiyi-325">Conversion of <code class="docutils literal"><span class="pre">.src</span></code> files</span></h2>
+<p><span class="yiyi-st" id="yiyi-326">NumPy distutils支持自动转换名为<somefile>.src的源文件。 </somefile></span><span class="yiyi-st" id="yiyi-327">该设施可以用于维持非常类似的代码块，只需要简单的块之间的改变。</span><span class="yiyi-st" id="yiyi-328">在安装的构建阶段，如果遇到名为<somefile>.src的模板文件，则从模板构造名为<somefile>的新文件，并将其放在要使用的构建目录中。 </somefile></somefile></span><span class="yiyi-st" id="yiyi-329">支持两种形式的模板转换。</span><span class="yiyi-st" id="yiyi-330">第一种形式出现在名为<file>.ext.src的文件中，其中ext是一个公认的Fortran扩展名（f，f90，f95，f77，for，ftn，pyf）。 </file></span><span class="yiyi-st" id="yiyi-331">第二种形式用于所有其他情况。</span></p>
+<div class="section" id="fortran-files">
+<span id="index-1"></span><h3><span class="yiyi-st" id="yiyi-332">Fortran files</span></h3>
+<p><span class="yiyi-st" id="yiyi-333">此模板转换器将根据“<...>”中的规则复制文件中名称包含“<...>”的所有<strong>函数</strong>和<strong>子例程</strong> </...></...></span><span class="yiyi-st" id="yiyi-334">&apos;<...>&apos;中逗号分隔的字的数量确定块被重复的次数。 </...></span><span class="yiyi-st" id="yiyi-335">这些字是什么表示什么重复规则，&apos;<...>&apos;，应该在每个块中替换。 </...></span><span class="yiyi-st" id="yiyi-336">块中的所有重复规则必须包含相同数量的逗号分隔的字，指示块应该重复的次数。</span><span class="yiyi-st" id="yiyi-337">如果重复规则中的单词需要逗号，左边或右边，那么在它前面加上一个反斜杠“”。</span><span class="yiyi-st" id="yiyi-338">如果重复规则中的单词与&apos;\ <index>&apos;匹配，则在相同重复规范中它将被<index>字替换。 </index></index></span><span class="yiyi-st" id="yiyi-339">重复规则有两种形式：命名和短。</span></p>
+<div class="section" id="named-repeat-rule">
+<h4><span class="yiyi-st" id="yiyi-340">Named repeat rule</span></h4>
+<p><span class="yiyi-st" id="yiyi-341">当同一组重复必须在块中使用多次时，命名重复规则很有用。</span><span class="yiyi-st" id="yiyi-342">It is specified using <rule1=item1, item2,="" item3,...,="" itemn="">, where N is the number of times the block should be repeated. </rule1=item1,></span><span class="yiyi-st" id="yiyi-343">在块的每个重复，整个表达式，&apos;<...>&apos;将首先替换为item1，然后替换为item2，依此类推，直到完成N个重复。 </...></span><span class="yiyi-st" id="yiyi-344">Once a named repeat specification has been introduced, the same repeat rule may be used <strong>in the current block</strong> by referring only to the name (i.e. <rule1>.</rule1></span></p>
+</div>
+<div class="section" id="short-repeat-rule">
+<h4><span class="yiyi-st" id="yiyi-345">Short repeat rule</span></h4>
+<p><span class="yiyi-st" id="yiyi-346">A short repeat rule looks like <item1, item2,="" item3,="" ...,="" itemn="">. </item1,></span><span class="yiyi-st" id="yiyi-347">规则指定整个表达式&apos;<...>&apos;应首先替换为item1，然后替换为item2，依此类推，直到完成N个重复。</...></span></p>
+</div>
+<div class="section" id="pre-defined-names">
+<h4><span class="yiyi-st" id="yiyi-348">Pre-defined names</span></h4>
+<p><span class="yiyi-st" id="yiyi-349">以下预定义的命名重复规则可用：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-350"><prefix=s,d,c,z></prefix=s,d,c,z></span></li>
+<li><span class="yiyi-st" id="yiyi-351"><_c></_c></span></li>
+<li><span class="yiyi-st" id="yiyi-352"><_t complex="" double="" precision=""></_t></span></li>
+<li><span class="yiyi-st" id="yiyi-353"><ftype=real, double="" precision,="" complex,="" complex=""></ftype=real,></span></li>
+<li><span class="yiyi-st" id="yiyi-354"><ctype=float, double,="" complex_float,="" complex_double=""></ctype=float,></span></li>
+<li><span class="yiyi-st" id="yiyi-355"><ftypereal=float, double="" precision,="" \0,="" \1=""></ftypereal=float,></span></li>
+<li><span class="yiyi-st" id="yiyi-356"><ctypereal=float, double,="" \0,="" \1=""></ctypereal=float,></span></li>
+</ul>
+</div>
+</div>
+<div class="section" id="other-files">
+<h3><span class="yiyi-st" id="yiyi-357">Other files</span></h3>
+<p><span class="yiyi-st" id="yiyi-358">非Fortran文件使用单独的语法定义模板块，应使用类似于Fortran特定重复的命名重复规则的变量扩展重复。</span><span class="yiyi-st" id="yiyi-359">这些文件的模板规则是：</span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-360">“/ **开始重复”在一行上标记了应该重复的段的开始。</span></li>
+<li><span class="yiyi-st" id="yiyi-361">命名的变量扩展使用＃name = item1，item2，item3，...，itemN＃定义，并放置在连续的行上。</span><span class="yiyi-st" id="yiyi-362">这些变量在每个重复块中用相应的字替换。</span><span class="yiyi-st" id="yiyi-363">在同一重复块中的所有命名变量必须定义相同数量的字。</span></li>
+<li><span class="yiyi-st" id="yiyi-364">在指定命名变量的重复规则时，项目* N是项目，项目，...，项目的重复N次的简写。</span><span class="yiyi-st" id="yiyi-365">此外，括号与* N组合可用于对应重复的多个项目进行分组。</span><span class="yiyi-st" id="yiyi-366">因此，＃name =（item1，item2）* 4＃相当于＃name = item1，item2，item1，item2，item1，item2，item1，item2＃</span></li>
+<li><span class="yiyi-st" id="yiyi-367">“* /”在一行上本身标志着变量扩展命名的结束。</span><span class="yiyi-st" id="yiyi-368">下一行是将使用命名规则重复的第一行。</span></li>
+<li><span class="yiyi-st" id="yiyi-369">在要重复的块中，应扩展的变量指定为@ name @。</span></li>
+<li><span class="yiyi-st" id="yiyi-370">“/ ** end repeat ** /”在一行上，将前一行标记为要重复的块的最后一行。</span></li>
+</ol>
+</div>
+</div>

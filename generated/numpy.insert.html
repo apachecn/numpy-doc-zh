@@ -1,0 +1,105 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.insert</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.insert.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.insert.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.insert"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">insert</code><span class="sig-paren">(</span><em>arr</em>, <em>obj</em>, <em>values</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L4323-L4531"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">在给定的索引之前沿给定轴插入值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>arr</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>obj</strong>：int，slice或ints序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">定义插入<em class="xref py py-obj">值</em>之前的索引的对象。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-20"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-21">当<em class="xref py py-obj">obj</em>是单个标量或具有一个元素的序列（类似于调用插入多次）时支持多次插入。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>值</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">要插入<em class="xref py py-obj">arr</em>的值。</span><span class="yiyi-st" id="yiyi-24">如果<em class="xref py py-obj">值</em>的类型不同于<em class="xref py py-obj">arr</em>的类型，则<em class="xref py py-obj">值</em>被转换为<em class="xref py py-obj">arr</em>的类型。</span><span class="yiyi-st" id="yiyi-25"><em class="xref py py-obj">值</em>的形状应使<code class="docutils literal"><span class="pre">arr [...，obj，...]</span> <span class="pre">=</span> <span class="pre">值 t4 &gt;</span></code>是合法的。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">要插入<em class="xref py py-obj">值的轴</em>。</span><span class="yiyi-st" id="yiyi-28">如果<em class="xref py py-obj">axis</em>为None，则首先平铺<em class="xref py py-obj">arr</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">插入了<em class="xref py py-obj">值</em>的<em class="xref py py-obj">arr</em>的副本。</span><span class="yiyi-st" id="yiyi-32">请注意，<a class="reference internal" href="#numpy.insert" title="numpy.insert"><code class="xref py py-obj docutils literal"><span class="pre">insert</span></code></a>不会就地发生：返回一个新的数组。</span><span class="yiyi-st" id="yiyi-33">如果<em class="xref py py-obj">axis</em>为None，则<em class="xref py py-obj">out</em>是一个展平的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-34">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.append.html#numpy.append" title="numpy.append"><code class="xref py py-obj docutils literal"><span class="pre">append</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">在数组末尾追加元素。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.concatenate.html#numpy.concatenate" title="numpy.concatenate"><code class="xref py py-obj docutils literal"><span class="pre">concatenate</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-38">沿现有轴连接数组序列。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="numpy.delete.html#numpy.delete" title="numpy.delete"><code class="xref py py-obj docutils literal"><span class="pre">delete</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-40">从数组中删除元素。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-42">注意，对于高维插入<em class="xref py py-obj">obj = 0</em>与<em class="xref py py-obj">obj = [0]</em>非常不同，就像<em class="xref py py-obj">arr [：，0 ,:] = values  t2 &gt;与<em class="xref py py-obj">arr [：，[0]，：] =值</em>不同。</em></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[1, 1],</span>
+<span class="go">       [2, 2],</span>
+<span class="go">       [3, 3]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">array([1, 5, 1, 2, 2, 3, 3])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[1, 5, 1],</span>
+<span class="go">       [2, 5, 2],</span>
+<span class="go">       [3, 5, 3]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-44">序列和标量之间的差异：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[1, 1, 1],</span>
+<span class="go">       [2, 2, 2],</span>
+<span class="go">       [3, 3, 3]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>               <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">array([1, 1, 2, 2, 3, 3])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="go">array([1, 1, 5, 6, 2, 2, 3, 3])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="go">array([1, 1, 5, 2, 6, 2, 3, 3])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mf">7.13</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span> <span class="c1"># type casting</span>
+<span class="go">array([1, 1, 7, 0, 2, 2, 3, 3])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="mi">999</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[  0, 999,   1,   2, 999,   3],</span>
+<span class="go">       [  4, 999,   5,   6, 999,   7]])</span>
+</pre></div>
+</div>
+</dd></dl>

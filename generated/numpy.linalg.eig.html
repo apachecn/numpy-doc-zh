@@ -1,0 +1,102 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.eig</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.eig.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.eig.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.eig"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">eig</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L1000-L1138"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算正方形数组的特征值和右特征向量。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：（...，M，M）数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">将计算特征值和右特征向量的矩阵</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>w</strong>：（...，M）数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">特征值，每个根据其多重性重复。</span><span class="yiyi-st" id="yiyi-21">特征值不必是有序的。</span><span class="yiyi-st" id="yiyi-22">结果数组将是复杂类型，除非虚部为零，在这种情况下，它将被转换为实数类型。</span><span class="yiyi-st" id="yiyi-23">当<em class="xref py py-obj">a</em>是实数时，得到的特征值将是实数（0虚数部分）或出现在共轭对</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>v</strong>：（...，M，M）数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">归一化（单位“长度”）特征向量，使得列<code class="docutils literal"><span class="pre">v[:,i]</span></code>是对应于特征值<code class="docutils literal"><span class="pre">w[i]</span></code></span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">引发：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>LinAlgError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">如果特征值计算不收敛。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">另见</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.linalg.eigvals.html#numpy.linalg.eigvals" title="numpy.linalg.eigvals"><code class="xref py py-obj docutils literal"><span class="pre">eigvals</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">非对称数组的特征值。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.linalg.eigh.html#numpy.linalg.eigh" title="numpy.linalg.eigh"><code class="xref py py-obj docutils literal"><span class="pre">eigh</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">对称或Hermitian（共轭对称）数组的特征值和特征向量。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.linalg.eigvalsh.html#numpy.linalg.eigvalsh" title="numpy.linalg.eigvalsh"><code class="xref py py-obj docutils literal"><span class="pre">eigvalsh</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">对称或Hermitian（共轭对称）数组的特征值。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">注</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-37"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">广播规则适用，有关详细信息，请参阅<code class="xref py py-obj docutils literal"><span class="pre">numpy.linalg</span></code>文档。</span></p>
+<p><span class="yiyi-st" id="yiyi-39">这是使用_geev LAPACK例程来实现的，其计算一般方阵数组的特征值和特征向量。</span></p>
+<p><span class="yiyi-st" id="yiyi-40">The number <em class="xref py py-obj">w</em> is an eigenvalue of <em class="xref py py-obj">a</em> if there exists a vector <em class="xref py py-obj">v</em> such that <code class="docutils literal"><span class="pre">dot(a,v)</span> <span class="pre">=</span> <span class="pre">w</span> <span class="pre">*</span> <span class="pre">v</span></code>. Thus, the arrays <em class="xref py py-obj">a</em>, <em class="xref py py-obj">w</em>, and <em class="xref py py-obj">v</em> satisfy the equations <code class="docutils literal"><span class="pre">dot(a[:,:],</span> <span class="pre">v[:,i])</span> <span class="pre">=</span> <span class="pre">w[i]</span> <span class="pre">*</span> <span class="pre">v[:,i]</span></code> for <img alt="i \in \{0,...,M-1\}" class="math" src="../../_images/math/edc49861125a5414582c2ccb65270db45191b8b2.png" style="vertical-align: -4px">.</span></p>
+<p><span class="yiyi-st" id="yiyi-41">特征向量的数组<em class="xref py py-obj">v</em>可能不是最大秩，即，一些列可以是线性相关的，尽管舍入误差可能模糊该事实。</span><span class="yiyi-st" id="yiyi-42">如果特征值全部不同，则理论上特征向量是线性无关的。</span><span class="yiyi-st" id="yiyi-43">Likewise, the (complex-valued) matrix of eigenvectors <em class="xref py py-obj">v</em> is unitary if the matrix <em class="xref py py-obj">a</em> is normal, i.e., if <code class="docutils literal"><span class="pre">dot(a,</span> <span class="pre">a.H)</span> <span class="pre">=</span> <span class="pre">dot(a.H,</span> <span class="pre">a)</span></code>, where <em class="xref py py-obj">a.H</em> denotes the conjugate transpose of <em class="xref py py-obj">a</em>.</span></p>
+<p><span class="yiyi-st" id="yiyi-44">最后，要强调的是，<em class="xref py py-obj">v</em>由<em class="xref py py-obj">a</em>的<em>右侧</em>（如右侧）特征向量组成。</span><span class="yiyi-st" id="yiyi-45">A vector <em class="xref py py-obj">y</em> satisfying <code class="docutils literal"><span class="pre">dot(y.T,</span> <span class="pre">a)</span> <span class="pre">=</span> <span class="pre">z</span> <span class="pre">*</span> <span class="pre">y.T</span></code> for some number <em class="xref py py-obj">z</em> is called a <em>left</em> eigenvector of <em class="xref py py-obj">a</em>, and, in general, the left and right eigenvectors of a matrix are not necessarily the (perhaps conjugate) transposes of each other.</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-46">参考文献</span></p>
+<p><span class="yiyi-st" id="yiyi-47">G.Strang，<em>Linear Algebra and Its Applications</em>，第2版，Orlando，FL，Academic Press，Inc.，1980，</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">linalg</span> <span class="k">as</span> <span class="n">LA</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-49">（几乎）平凡的例子与真实e值和e向量。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">LA</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">;</span> <span class="n">v</span>
+<span class="go">array([ 1.,  2.,  3.])</span>
+<span class="go">array([[ 1.,  0.,  0.],</span>
+<span class="go">       [ 0.,  1.,  0.],</span>
+<span class="go">       [ 0.,  0.,  1.]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-50">具有复杂e值和e向量的真实矩阵；注意e值是彼此的复共轭。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">LA</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">;</span> <span class="n">v</span>
+<span class="go">array([ 1. + 1.j,  1. - 1.j])</span>
+<span class="go">array([[ 0.70710678+0.j        ,  0.70710678+0.j        ],</span>
+<span class="go">       [ 0.00000000-0.70710678j,  0.00000000+0.70710678j]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-51">具有真实e值（但复值e向量）的复值矩阵；注意a.conj()。T = a，即a是Hermitian。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">LA</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">;</span> <span class="n">v</span>
+<span class="go">array([  2.00000000e+00+0.j,   5.98651912e-36+0.j]) # i.e., {2, 0}</span>
+<span class="go">array([[ 0.00000000+0.70710678j,  0.70710678+0.j        ],</span>
+<span class="go">       [ 0.70710678+0.j        ,  0.00000000+0.70710678j]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-52">小心舍入错误！</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Theor. e-values are 1 +/- 1e-9</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">LA</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">;</span> <span class="n">v</span>
+<span class="go">array([ 1.,  1.])</span>
+<span class="go">array([[ 1.,  0.],</span>
+<span class="go">       [ 0.,  1.]])</span>
+</pre></div>
+</div>
+</dd></dl>

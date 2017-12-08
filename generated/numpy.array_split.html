@@ -1,0 +1,26 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.array_split</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array_split.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.array_split.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.array_split"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">array_split</code><span class="sig-paren">(</span><em>ary</em>, <em>indices_or_sections</em>, <em>axis=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/shape_base.py#L378-L424"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将数组拆分为多个子数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">请参阅<code class="docutils literal"><span class="pre">split</span></code>文档。</span><span class="yiyi-st" id="yiyi-16">这些函数之间的唯一区别是<code class="docutils literal"><span class="pre">array_split</span></code>允许<em class="xref py py-obj">indices_or_sections</em>是<em>不</em>等分轴的整数。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-17">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="numpy.split.html#numpy.split" title="numpy.split"><code class="xref py py-obj docutils literal"><span class="pre">split</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-19">将数组拆分成等大小的多个子数组。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-20">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">    [array([ 0.,  1.,  2.]), array([ 3.,  4.,  5.]), array([ 6.,  7.])]</span>
+</pre></div>
+</div>
+</dd></dl>

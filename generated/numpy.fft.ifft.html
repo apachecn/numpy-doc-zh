@@ -1,0 +1,96 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fft.ifft</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.ifft.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.ifft.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fft.ifft"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.fft.</code><code class="descname">ifft</code><span class="sig-paren">(</span><em>a</em>, <em>n=None</em>, <em>axis=-1</em>, <em>norm=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/fft/fftpack.py#L195-L284"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算一维离散傅里叶逆变换。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">该函数计算由<a class="reference internal" href="numpy.fft.fft.html#numpy.fft.fft" title="numpy.fft.fft"><code class="xref py py-obj docutils literal"><span class="pre">fft</span></code></a>计算的一维<em>n</em>点离散傅立叶变换的逆。</span><span class="yiyi-st" id="yiyi-16">换句话说，在数值精度内的<code class="docutils literal"><span class="pre">ifft（fft（a））</span> <span class="pre">==</span> <span class="pre">a</span> </code></span><span class="yiyi-st" id="yiyi-17">有关算法和定义的一般说明，请参阅<a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">输入应按照<a class="reference internal" href="numpy.fft.fft.html#numpy.fft.fft" title="numpy.fft.fft"><code class="xref py py-obj docutils literal"><span class="pre">fft</span></code></a>返回的相同方式排序，即，</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-19"><code class="docutils literal"><span class="pre">a[0]</span></code>应包含零频率项，</span></li>
+<li><span class="yiyi-st" id="yiyi-20"><code class="docutils literal"><span class="pre">a[1:n//2]</span></code>应包含正频项，</span></li>
+<li><span class="yiyi-st" id="yiyi-21"><code class="docutils literal"><span class="pre">a [n // 2</span> <span class="pre">+</span> <span class="pre">1：]</span></code>应包含负频率项从最负的频率。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-22">对于偶数个输入点，<code class="docutils literal"><span class="pre">A[n//2]</span></code>表示正和负奈奎斯特频率处的值的总和，因为这两个输入点被混叠在一起。</span><span class="yiyi-st" id="yiyi-23">有关详细信息，请参见<a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">输入数组，可以为复数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>n</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">输出的变换轴的长度。</span><span class="yiyi-st" id="yiyi-29">如果<em class="xref py py-obj">n</em>小于输入的长度，则输入被裁剪。</span><span class="yiyi-st" id="yiyi-30">如果它较大，输入用零填充。</span><span class="yiyi-st" id="yiyi-31">如果未给出<em class="xref py py-obj">n</em>，则使用沿由<em class="xref py py-obj">轴</em>指定的轴的输入长度。</span><span class="yiyi-st" id="yiyi-32">请参阅有关填充问题的注意事项。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">在其上计算逆DFT的轴。</span><span class="yiyi-st" id="yiyi-35">如果未给出，则使用最后一个轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-36"><strong>norm</strong>：{None，“ortho”}，可选</span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-37"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">规范化模式（参见<a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a>）。</span><span class="yiyi-st" id="yiyi-39">默认值为None。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-40">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-41"><strong>out</strong>：complex ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-42">未指定沿<em class="xref py py-obj">轴</em>指示的轴变换的截断或零填充输入，如果<em class="xref py py-obj">轴</em>指定最后一个输入。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-43">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-44"><strong>IndexError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-45">如果<em class="xref py py-obj">轴</em>大于<em class="xref py py-obj">a</em>的最后一个轴。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-46">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-48">介绍，定义和一般解释。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="numpy.fft.fft.html#numpy.fft.fft" title="numpy.fft.fft"><code class="xref py py-obj docutils literal"><span class="pre">fft</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-50">一维（前向）FFT，其中<a class="reference internal" href="#numpy.fft.ifft" title="numpy.fft.ifft"><code class="xref py py-obj docutils literal"><span class="pre">ifft</span></code></a>是反向的</span></dd>
+<dt><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="numpy.fft.ifft2.html#numpy.fft.ifft2" title="numpy.fft.ifft2"><code class="xref py py-obj docutils literal"><span class="pre">ifft2</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-52">二维逆FFT。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="numpy.fft.ifftn.html#numpy.fft.ifftn" title="numpy.fft.ifftn"><code class="xref py py-obj docutils literal"><span class="pre">ifftn</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-54">n维逆FFT。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-55">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-56">如果输入参数<em class="xref py py-obj">n</em>大于输入的大小，则通过在末尾添加零来填充输入。</span><span class="yiyi-st" id="yiyi-57">即使这是常见的方法，它可能会导致令人惊讶的结果。</span><span class="yiyi-st" id="yiyi-58">如果需要不同的填充，则必须在调用<a class="reference internal" href="#numpy.fft.ifft" title="numpy.fft.ifft"><code class="xref py py-obj docutils literal"><span class="pre">ifft</span></code></a>之前执行。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-59">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">array([ 1.+0.j,  0.+1.j, -1.+0.j,  0.-1.j])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-60">创建并绘制带有随机相位的带限信号：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">400</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="p">(</span><span class="mi">20</span><span class="p">,)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="s1">&apos;b-&apos;</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="s1">&apos;r--&apos;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&apos;real&apos;</span><span class="p">,</span> <span class="s1">&apos;imaginary&apos;</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-61">（<a class="reference external" href="../../reference/generated/numpy-fft-ifft-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-fft-ifft-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-fft-ifft-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-fft-ifft-1.png" src="../../_images/numpy-fft-ifft-1.png">
+</div>
+</dd></dl>

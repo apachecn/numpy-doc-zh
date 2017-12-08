@@ -1,0 +1,73 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.cumprod</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.cumprod.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.cumprod.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.cumprod"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">cumprod</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em>, <em>dtype=None</em>, <em>out=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L2546-L2610"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回沿给定轴的元素的累积积。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">计算累积积的轴。</span><span class="yiyi-st" id="yiyi-20">默认情况下，输入为扁平。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">返回的数组的类型，以及与元素相乘的累加器的类型。</span><span class="yiyi-st" id="yiyi-23">如果未指定<em>dtype</em>，则默认为<em class="xref py py-obj">a</em>的dtype，除非<em class="xref py py-obj">a</em>具有精度小于默认值的整数dtype平台整数。</span><span class="yiyi-st" id="yiyi-24">在这种情况下，将使用默认平台整数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">用于放置结果的替代输出数组。</span><span class="yiyi-st" id="yiyi-27">它必须具有与预期输出相同的形状和缓冲区长度，但如果需要，将转换结果值的类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>cumprod</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">除非指定<em class="xref py py-obj">out</em>，否则将返回保存结果的新数组，在这种情况下将返回对out的引用。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-32"><code class="xref py py-obj docutils literal"><span class="pre">numpy.doc.ufuncs</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">节“输出参数”</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-35">当使用整数类型时，算术是模块化的，并且在溢出时不产生错误。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cumprod</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># intermediate results 1, 1*2</span>
+<span class="gp">... </span>              <span class="c1"># total product 1*2*3 = 6</span>
+<span class="go">array([1, 2, 6])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cumprod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="c1"># specify type of output</span>
+<span class="go">array([   1.,    2.,    6.,   24.,  120.,  720.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37"><em class="xref py py-obj">a</em>：每列（即，在行上）的累积积</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cumprod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[ 1,  2,  3],</span>
+<span class="go">       [ 4, 10, 18]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38"><em class="xref py py-obj">a</em>的每一行（即，在列上）的累积乘积：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cumprod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[  1,   2,   6],</span>
+<span class="go">       [  4,  20, 120]])</span>
+</pre></div>
+</div>
+</dd></dl>

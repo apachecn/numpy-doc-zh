@@ -1,0 +1,42 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.transpose</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.transpose.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.transpose.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.transpose"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">transpose</code><span class="sig-paren">(</span><em>a</em>, <em>axes=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L6768-L6805"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">允许数组的尺寸。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">此函数与<a class="reference internal" href="numpy.transpose.html#numpy.transpose" title="numpy.transpose"><code class="xref py py-obj docutils literal"><span class="pre">numpy.transpose</span></code></a>完全相同。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-17">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="numpy.transpose.html#numpy.transpose" title="numpy.transpose"><code class="xref py py-obj docutils literal"><span class="pre">numpy.transpose</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-19">顶级NumPy模块中的等效函数。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-20">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked</span>
+<span class="go">&gt;&gt;&gt;&gt; x</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[0 1]</span>
+<span class="go"> [2 --]],</span>
+<span class="go">             mask =</span>
+<span class="go"> [[False False]</span>
+<span class="go"> [False  True]],</span>
+<span class="go">       fill_value = 999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[0 2]</span>
+<span class="go"> [1 --]],</span>
+<span class="go">             mask =</span>
+<span class="go"> [[False False]</span>
+<span class="go"> [False  True]],</span>
+<span class="go">       fill_value = 999999)</span>
+</pre></div>
+</div>
+</dd></dl>

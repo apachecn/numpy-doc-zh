@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.frexp</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.frexp.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.frexp.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.frexp"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">frexp</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out1</em>, <em>out2</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;frexp&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将x的元素分解为尾数和二进制指数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回（<em class="xref py py-obj">尾数</em>，<em class="xref py py-obj">指数</em>），其中<em class="xref py py-obj">x =尾数* 2 **指数</em>。</span><span class="yiyi-st" id="yiyi-16">尾数位于开放间隔（-1,1），而二进制指数是有符号整数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">要分解的数字的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>out1</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">输出数组的尾数。</span><span class="yiyi-st" id="yiyi-22">必须与<em class="xref py py-obj">x</em>具有相同的形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>out2</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">输出指数的数组。</span><span class="yiyi-st" id="yiyi-25">必须与<em class="xref py py-obj">x</em>具有相同的形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>（尾数，指数）</strong>：ndarrays的元组，（float，int）</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28"><em class="xref py py-obj">尾数</em>是值为-1和1之间的浮点数组。<em class="xref py py-obj">exponent</em>是一个int数组，表示2的指数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.ldexp.html#numpy.ldexp" title="numpy.ldexp"><code class="xref py py-obj docutils literal"><span class="pre">ldexp</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">计算<code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x1</span> <span class="pre">*</span> <span class="pre">2 ** x2</span>  t0 &gt;，<a class="reference internal" href="#numpy.frexp" title="numpy.frexp"><code class="xref py py-obj docutils literal"><span class="pre">frexp</span></code></a>的倒数。</code></span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-33">不支持复杂的dtypes，它们会引发一个TypeError。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frexp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y1</span>
+<span class="go">array([ 0.   ,  0.5  ,  0.5  ,  0.75 ,  0.5  ,  0.625,  0.75 ,  0.875,</span>
+<span class="go">        0.5  ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y2</span>
+<span class="go">array([0, 1, 2, 2, 3, 3, 3, 3, 4])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y1</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="n">y2</span>
+<span class="go">array([ 0.,  1.,  2.,  3.,  4.,  5.,  6.,  7.,  8.])</span>
+</pre></div>
+</div>
+</dd></dl>

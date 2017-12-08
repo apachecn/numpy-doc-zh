@@ -1,0 +1,72 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.nanprod</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanprod.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanprod.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.nanprod"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">nanprod</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em>, <em>dtype=None</em>, <em>out=None</em>, <em>keepdims=&lt;class numpy._globals._NoValue&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/nanfunctions.py#L539-L606"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回数组元素在给定轴上的处理非数字（NaN）为零的乘积。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">对于全为NaN或空的切片，返回一个。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-16"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">数组包含需要和的数字。</span><span class="yiyi-st" id="yiyi-20">如果<em class="xref py py-obj">a</em>不是数组，则尝试进行转换。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">计算乘积的轴。</span><span class="yiyi-st" id="yiyi-23">默认值是计算展平数组的乘积。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">返回的数组和累加器元素的累加器的类型。</span><span class="yiyi-st" id="yiyi-26">默认情况下，使用<em class="xref py py-obj">a</em>的dtype。</span><span class="yiyi-st" id="yiyi-27">一个例外是当<em class="xref py py-obj">a</em>具有比平台（u）intp精度更低的整数类型时。</span><span class="yiyi-st" id="yiyi-28">在这种情况下，默认值将是（u）int32或（u）int64，具体取决于平台是32位还是64位。</span><span class="yiyi-st" id="yiyi-29">对于不精确的输入，dtype必须不精确。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">备用输出放置结果的数组。</span><span class="yiyi-st" id="yiyi-32">默认值为<code class="docutils literal"><span class="pre">None</span></code>。</span><span class="yiyi-st" id="yiyi-33">如果提供，它必须具有与预期输出相同的形状，但如果必要，将转换类型。</span><span class="yiyi-st" id="yiyi-34">有关详细信息，请参阅<code class="xref py py-obj docutils literal"><span class="pre">doc.ufuncs</span></code>。</span><span class="yiyi-st" id="yiyi-35">将NaN转换为整数可能会产生意想不到的结果。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-36"><strong>keepdims</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-37">如果为真，则缩小的轴在结果中保留为尺寸为1的尺寸。</span><span class="yiyi-st" id="yiyi-38">使用此选项，结果将相对于原始<em class="xref py py-obj">arr</em>正确广播。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-39">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-40"><strong>y</strong>：ndarray或numpy scalar</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-41">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.prod.html#numpy.prod" title="numpy.prod"><code class="xref py py-obj docutils literal"><span class="pre">numpy.prod</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">产品跨数组传播NaNs。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.isnan.html#numpy.isnan" title="numpy.isnan"><code class="xref py py-obj docutils literal"><span class="pre">isnan</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-45">显示哪些元素是NaN。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-46">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-47">Numpy整数运算是模块化的。</span><span class="yiyi-st" id="yiyi-48">如果产品的大小超过整数累加器的大小，其值将回绕，结果将不正确。</span><span class="yiyi-st" id="yiyi-49">指定<code class="docutils literal"><span class="pre">dtype=double</span></code>可以缓解这个问题。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-50">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanprod</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanprod</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanprod</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanprod</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">6.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanprod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([ 3.,  2.])</span>
+</pre></div>
+</div>
+</dd></dl>

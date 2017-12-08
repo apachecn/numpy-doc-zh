@@ -1,0 +1,77 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.f</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.f.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.f.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.f"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">f</code><span class="sig-paren">(</span><em>dfnum</em>, <em>dfden</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从F分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">样本从具有指定参数<em class="xref py py-obj">dfnum</em>（分子中的自由度）和<em class="xref py py-obj">dfden</em>（分母中的自由度）的F分布中绘制，其中两个参数应大于零。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">F分布的随机变量（也称为Fisher分布）是在ANOVA测试中出现的连续概率分布，并且是两个卡方变量的比率。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>dfnum</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">分子自由度。</span><span class="yiyi-st" id="yiyi-20">应大于零。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>dfden</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">分母的自由度。</span><span class="yiyi-st" id="yiyi-23">应大于零。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">输出形状。</span><span class="yiyi-st" id="yiyi-26">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-27">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>samples</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">Fisher分布的样品。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-32"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.f</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">概率密度函数，分布或累积密度函数等。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-35">F统计量用于将组内方差与组间方差进行比较。</span><span class="yiyi-st" id="yiyi-36">计算分布取决于采样，因此它是问题中相应自由度的函数。</span><span class="yiyi-st" id="yiyi-37">变量<em class="xref py py-obj">dfnum</em>是样本数减去组间自由度的数目，而<em class="xref py py-obj">dfden</em>是组内自由度，每组样品减去组数。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r219" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-39"><a class="fn-backref" href="#id1">[R219]</a></span></td><td><span class="yiyi-st" id="yiyi-40">Glantz，Stanton A.</span><span class="yiyi-st" id="yiyi-41">“Primer of Biostatistics。”，McGraw-Hill，第五版，2002。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r220" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-42"><a class="fn-backref" href="#id2">[R220]</a></span></td><td><span class="yiyi-st" id="yiyi-43">维基百科，“F分布”，<a class="reference external" href="http://en.wikipedia.org/wiki/F-distribution">http://en.wikipedia.org/wiki/F-distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-45">来自Glantz [1]，pp 47-40：</span></p>
+<p><span class="yiyi-st" id="yiyi-46">两组，糖尿病儿童（25人）和没有糖尿病的人的儿童（25人）。</span><span class="yiyi-st" id="yiyi-47">测量空腹血糖，病例组的平均值为86.1，对照组的平均值为82.2。</span><span class="yiyi-st" id="yiyi-48">标准偏差分别为2.09和2.49。</span><span class="yiyi-st" id="yiyi-49">这些数据是否与父母的糖尿病状态不影响他们孩子的血糖水平的零假设一致？</span><span class="yiyi-st" id="yiyi-50">从数据计算F统计量给出值36.01。</span></p>
+<p><span class="yiyi-st" id="yiyi-51">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dfnum</span> <span class="o">=</span> <span class="mf">1.</span> <span class="c1"># between group degrees of freedom</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dfden</span> <span class="o">=</span> <span class="mf">48.</span> <span class="c1"># within groups degrees of freedom</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">dfnum</span><span class="p">,</span> <span class="n">dfden</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-52">最高1％的样品的下限为：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sort</span><span class="p">(</span><span class="n">s</span><span class="p">)[</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span>
+<span class="go">7.61988120985</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-53">因此，F统计量将有大约1％的机会超过7.62，测量值为36，因此无效假设在1％水平被拒绝。</span></p>
+</dd></dl>

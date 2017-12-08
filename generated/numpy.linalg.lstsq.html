@@ -1,0 +1,92 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.lstsq</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.lstsq.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.lstsq.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.lstsq"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">lstsq</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>rcond=-1</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L1785-L1943"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将最小二乘解返回到线性矩阵方程。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">Solves the equation <em class="xref py py-obj">a x = b</em> by computing a vector <em class="xref py py-obj">x</em> that minimizes the Euclidean 2-norm <em class="xref py py-obj">|| b - a x ||^2</em>. </span><span class="yiyi-st" id="yiyi-16">方程可以是欠，好或过度确定（即，<em class="xref py py-obj">a</em>的线性独立行的数量可以小于，等于或大于其线性独立列的数量） 。</span><span class="yiyi-st" id="yiyi-17">如果<em class="xref py py-obj">a</em>是平方和满秩，则<em class="xref py py-obj">x</em>（但是对于舍入误差）是等式的“精确”解。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：（M，N）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">“系数”矩阵。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>b</strong>：{（M，），（M，K）} array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">纵坐标或“因变量”值。</span><span class="yiyi-st" id="yiyi-23">如果<em class="xref py py-obj">b</em>是二维的，则对于<em class="xref py py-obj">b</em>的每个<em class="xref py py-obj">K</em>列计算最小二乘解。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>rcond</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25"><em class="xref py py-obj">a</em>的小奇异值的截止比。如果奇异值小于<em class="xref py py-obj">a</em>的最大奇异值的<em class="xref py py-obj">rcond</em>倍，则奇异值被设置为零。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>x</strong>：{（N，），（N，K）} ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">最小二乘解。</span><span class="yiyi-st" id="yiyi-29">如果<em class="xref py py-obj">b</em>是二维的，则解决方案在<em class="xref py py-obj">x</em>的<em class="xref py py-obj">K</em>列中。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>残差</strong>：{()，（1，），（K，）} ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">残差总和；在<code class="docutils literal"><span class="pre">b</span> <span class="pre"> - </span> <span class="pre">a * x</span></code>中的每一列的平方欧几里得2-范数。</span><span class="yiyi-st" id="yiyi-32">如果<em class="xref py py-obj">a</em>的秩为</span><span class="yiyi-st" id="yiyi-33">如果<em class="xref py py-obj">b</em>是一维的，则这是一个（1，）形状数组。</span><span class="yiyi-st" id="yiyi-34">否则形状为（K，）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35"><strong>rank</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-36">矩阵的秩<em class="xref py py-obj">a</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-37"><strong>s</strong>：（min（M，N），）ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-38"><em class="xref py py-obj">a的奇异值</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-39">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-40"><strong>LinAlgError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-41">如果计算不收敛。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-42">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-43">如果<em class="xref py py-obj">b</em>是矩阵，则所有数组结果作为矩阵返回。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-45">适合一条线，<code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">mx</span> <span class="pre">+</span> <span class="pre">c</span>  t0 &gt;，通过一些嘈杂的数据点：</code></span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">通过检查系数，我们看到线应该具有大约1的梯度，并且以或多或少-1切割y轴。</span></p>
+<p><span class="yiyi-st" id="yiyi-47">We can rewrite the line equation as <code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">Ap</span></code>, where <code class="docutils literal"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">[[x</span> <span class="pre">1]]</span></code> and <code class="docutils literal"><span class="pre">p</span> <span class="pre">=</span> <span class="pre">[[m],</span> <span class="pre">[c]]</span></code>. </span><span class="yiyi-st" id="yiyi-48">现在使用<a class="reference internal" href="#numpy.linalg.lstsq" title="numpy.linalg.lstsq"><code class="xref py py-obj docutils literal"><span class="pre">lstsq</span></code></a>解决<em class="xref py py-obj">p</em>：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))])</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
+<span class="go">array([[ 0.,  1.],</span>
+<span class="go">       [ 1.,  1.],</span>
+<span class="go">       [ 2.,  1.],</span>
+<span class="go">       [ 3.,  1.]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="go">1.0 -0.95</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-49">绘制数据与拟合线：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&apos;o&apos;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&apos;Original data&apos;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">,</span> <span class="s1">&apos;r&apos;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&apos;Fitted line&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-50">（<a class="reference external" href="../../reference/generated/numpy-linalg-lstsq-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-linalg-lstsq-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-linalg-lstsq-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-linalg-lstsq-1.png" src="../../_images/numpy-linalg-lstsq-1.png">
+</div>
+</dd></dl>

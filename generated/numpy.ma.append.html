@@ -1,0 +1,56 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.append</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.append.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.append.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.append"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">append</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L7825-L7862"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将值附加到数组的末尾。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-16"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">值附加到此数组的副本。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>b</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">这些值附加到<em class="xref py py-obj">a</em>的副本。</span><span class="yiyi-st" id="yiyi-22">它必须是正确的形状（与<em class="xref py py-obj">a</em>相同的形状，不包括<em class="xref py py-obj">轴</em>）。</span><span class="yiyi-st" id="yiyi-23">如果未指定<em class="xref py py-obj">axis</em>，则<em class="xref py py-obj">b</em>可以是任何形状，在使用前将被平展。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">附加<em class="xref py py-obj">v</em>的轴。</span><span class="yiyi-st" id="yiyi-26">如果未给出<em class="xref py py-obj">axis</em>，则在使用之前，<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>均为扁平。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>append</strong>：MaskedArray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29"><em class="xref py py-obj">a</em>的副本，<em class="xref py py-obj">b</em>附加到<em class="xref py py-obj">轴</em>。</span><span class="yiyi-st" id="yiyi-30">请注意，<a class="reference internal" href="#numpy.ma.append" title="numpy.ma.append"><code class="xref py py-obj docutils literal"><span class="pre">append</span></code></a>不是就地发生的：分配并填充一个新的数组。</span><span class="yiyi-st" id="yiyi-31">如果<em class="xref py py-obj">axis</em>为None，则结果为展平的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-32">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.append.html#numpy.append" title="numpy.append"><code class="xref py py-obj docutils literal"><span class="pre">numpy.append</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">顶层NumPy模块中的等效函数。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_values</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_values</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]],</span> <span class="mi">7</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ma</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="go">[1 -- 3 4 5 6 -- 8 9]</span>
+</pre></div>
+</div>
+</dd></dl>

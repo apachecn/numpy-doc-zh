@@ -1,0 +1,69 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.recarray.sort</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.sort.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.sort.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.recarray.sort"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">recarray.</code><code class="descname">sort</code><span class="sig-paren">(</span><em>axis=-1</em>, <em>kind=&apos;quicksort&apos;</em>, <em>order=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">就地对数组进行排序。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">要排序的轴。</span><span class="yiyi-st" id="yiyi-19">默认值为-1，表示沿最后一个轴排序。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>kind</strong>：{&apos;quicksort&apos;，&apos;mergesort&apos;，&apos;heapsort&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">排序算法。</span><span class="yiyi-st" id="yiyi-22">默认值为“quicksort”。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>order</strong>：str或str的列表，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">当<em class="xref py py-obj">a</em>是定义了字段的数组时，此参数指定首先，第二等比较哪些字段。</span><span class="yiyi-st" id="yiyi-25">单个字段可以指定为字符串，并且不是所有字段都需要指定，但是未指定的字段仍将按照它们在dtype中出现的顺序使用，以断开关系。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.sort.html#numpy.sort" title="numpy.sort"><code class="xref py py-obj docutils literal"><span class="pre">numpy.sort</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28">返回数组的排序副本。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.argsort.html#numpy.argsort" title="numpy.argsort"><code class="xref py py-obj docutils literal"><span class="pre">argsort</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">间接排序。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.lexsort.html#numpy.lexsort" title="numpy.lexsort"><code class="xref py py-obj docutils literal"><span class="pre">lexsort</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">对多个键进行间接稳定排序。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.searchsorted.html#numpy.searchsorted" title="numpy.searchsorted"><code class="xref py py-obj docutils literal"><span class="pre">searchsorted</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">在排序的数组中查找元素。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.partition.html#numpy.partition" title="numpy.partition"><code class="xref py py-obj docutils literal"><span class="pre">partition</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">部分排序。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-38">有关不同排序算法的说明，请参见<code class="docutils literal"><span class="pre">sort</span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[1, 4],</span>
+<span class="go">       [1, 3]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[1, 3],</span>
+<span class="go">       [1, 4]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">使用<em class="xref py py-obj">order</em>关键字指定在对结构化数组进行排序时要使用的字段：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="s1">&apos;a&apos;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;c&apos;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&apos;x&apos;</span><span class="p">,</span> <span class="s1">&apos;S1&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;y&apos;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&apos;y&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([(&apos;c&apos;, 1), (&apos;a&apos;, 2)],</span>
+<span class="go">      dtype=[(&apos;x&apos;, &apos;|S1&apos;), (&apos;y&apos;, &apos;&lt;i4&apos;)])</span>
+</pre></div>
+</div>
+</dd></dl>

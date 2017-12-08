@@ -1,0 +1,56 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.log10</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.log10.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.log10.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.log10"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">log10</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;log10&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">以元素为单位返回输入数组的基数10的对数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20">以元素为单位的<em class="xref py py-obj">x</em>的以10为底的对数。</span><span class="yiyi-st" id="yiyi-21">返回NaN，其中x为负数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-22">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-23"><code class="xref py py-obj docutils literal"><span class="pre">emath.log10</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-25">对数是多值函数：对于每个<em class="xref py py-obj">x</em>，存在无限数量的<em class="xref py py-obj">z</em>，使得<em class="xref py py-obj">10 ** z = x</em>。</span><span class="yiyi-st" id="yiyi-26">约定是返回其虚部在<em class="xref py py-obj">[ -  pi，pi]</em>中的<em class="xref py py-obj">z</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-27">对于实值输入数据类型，<a class="reference internal" href="#numpy.log10" title="numpy.log10"><code class="xref py py-obj docutils literal"><span class="pre">log10</span></code></a>始终返回实际输出。</span><span class="yiyi-st" id="yiyi-28">对于不能表示为实数或无穷大的每个值，它会产生<code class="docutils literal"><span class="pre">nan</span></code>并设置<em class="xref py py-obj">无效</em>浮点错误标志。</span></p>
+<p><span class="yiyi-st" id="yiyi-29">对于复值输入，<a class="reference internal" href="#numpy.log10" title="numpy.log10"><code class="xref py py-obj docutils literal"><span class="pre">log10</span></code></a>是具有分支切口<em class="xref py py-obj">[-inf，0]</em>并且从上面连续的复杂分析函数。</span><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="#numpy.log10" title="numpy.log10"><code class="xref py py-obj docutils literal"><span class="pre">log10</span></code></a>将浮点负零作为无穷小负数处理，符合C99标准。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r46" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-32"><a class="fn-backref" href="#id1">[R46]</a></span></td><td><span class="yiyi-st" id="yiyi-33">Abramowitz和I.A.</span><span class="yiyi-st" id="yiyi-34">Stegun，“Handbook of Mathematical Functions”，10th printing，1964，pp。</span><span class="yiyi-st" id="yiyi-35">67. <a class="reference external" href="http://www.math.sfu.ca/~cbm/aands/">http://www.math.sfu.ca/~cbm/aands/</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r47" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-36"><a class="fn-backref" href="#id2">[R47]</a></span></td><td><span class="yiyi-st" id="yiyi-37">维基百科，“对数”。</span><span class="yiyi-st" id="yiyi-38"><a class="reference external" href="http://en.wikipedia.org/wiki/Logarithm">http://en.wikipedia.org/wiki/Logarithm</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">([</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.</span><span class="p">])</span>
+<span class="go">array([-15.,  NaN])</span>
+</pre></div>
+</div>
+</dd></dl>

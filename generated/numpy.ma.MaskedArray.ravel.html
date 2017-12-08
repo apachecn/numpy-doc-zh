@@ -1,0 +1,40 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.ravel</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.ravel.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.ravel.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.ravel"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">ravel</code><span class="sig-paren">(</span><em>order=&apos;C&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L4377-L4420"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">作为视图返回self的1D版本。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>订单</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;，&apos;K&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">使用此索引顺序读取<em class="xref py py-obj">a</em>的元素。</span><span class="yiyi-st" id="yiyi-19">&apos;C&apos;意味着以C样顺序索引元素，最后一个轴索引变化最快，回到第一个轴索引变化最慢。</span><span class="yiyi-st" id="yiyi-20">&apos;F&apos;意味着以类似Fortran的索引顺序索引元素，第一个索引变化最快，最后一个索引变化最慢。</span><span class="yiyi-st" id="yiyi-21">请注意，&apos;C&apos;和&apos;F&apos;选项不考虑底层数组的内存布局，只涉及轴索引的顺序。</span><span class="yiyi-st" id="yiyi-22">&apos;A&apos;意味着在内存中<em class="xref py py-obj">m</em>是Fortran <em>连续</em>时，以类似Fortran的顺序读取元素，否则类似C的顺序。</span><span class="yiyi-st" id="yiyi-23">&apos;K&apos;意味着按照它们在存储器中出现的顺序读取元素，除非当步幅为负时反转数据。</span><span class="yiyi-st" id="yiyi-24">默认情况下，将使用“C”索引顺序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26">MaskedArray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">输出视图的形状为<code class="docutils literal"><span class="pre">(self.size,)</span></code>（或<code class="docutils literal"><span class="pre">(np.ma.product(self.shape),)</span></code>）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]],</span> <span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">[[1 -- 3]</span>
+<span class="go"> [-- 5 --]</span>
+<span class="go"> [7 -- 9]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+<span class="go">[1 -- 3 -- 5 -- 7 -- 9]</span>
+</pre></div>
+</div>
+</dd></dl>

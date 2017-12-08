@@ -1,0 +1,82 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.digitize</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.digitize.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.digitize.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.digitize"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">digitize</code><span class="sig-paren">(</span><em>x</em>, <em>bins</em>, <em>right=False</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回输入数组中每个值所属的bin的索引。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">Each index <code class="docutils literal"><span class="pre">i</span></code> returned is such that <code class="docutils literal"><span class="pre">bins[i-1]</span> <span class="pre">&lt;=</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">bins[i]</span></code> if <em class="xref py py-obj">bins</em> is monotonically increasing, or <code class="docutils literal"><span class="pre">bins[i-1]</span> <span class="pre">&gt;</span> <span class="pre">x</span> <span class="pre">&gt;=</span> <span class="pre">bins[i]</span></code> if <em class="xref py py-obj">bins</em> is monotonically decreasing. </span><span class="yiyi-st" id="yiyi-16">如果<em class="xref py py-obj">x</em>中的值超出了<em class="xref py py-obj">bin</em>的界限，则适当返回0或<code class="docutils literal"><span class="pre">len(bins)</span></code>。</span><span class="yiyi-st" id="yiyi-17">如果right为True，则右边仓关闭，使得索引<code class="docutils literal"><span class="pre">i</span></code>使得<code class="docutils literal"><span class="pre">bin [i-1]</span> <span class="pre">&gt; <span class="pre">x</span> <span class="pre"> <span class="pre">bins [i]</span></span></span></code>或bins [i-1]&gt; = x&gt; bins [i] `if <em class="xref py py-obj">bins</em>分别单调递增或递减。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输入要组合的数组。</span><span class="yiyi-st" id="yiyi-21">在Numpy 1.10.0之前，这个数组必须是一维的，但现在可以有任何形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>bin</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">数组组。</span><span class="yiyi-st" id="yiyi-24">它必须是一维和单调的。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>右</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">指示间隔是否包括右边框或左边框。</span><span class="yiyi-st" id="yiyi-27">默认行为是（right == False），表示间隔不包括右边缘。</span><span class="yiyi-st" id="yiyi-28">在这种情况下，左端口端是打开的，即bin [i-1]</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>out</strong>：intar的ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">输出数组的索引，形状与<em class="xref py py-obj">x</em>相同。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-32">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-33"><strong>ValueError</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">如果<em class="xref py py-obj">bin</em>不是单调的。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35"><strong>TypeError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-36">如果输入的类型复杂。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-37">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="numpy.bincount.html#numpy.bincount" title="numpy.bincount"><code class="xref py py-obj docutils literal"><span class="pre">bincount</span></code></a>，<a class="reference internal" href="numpy.histogram.html#numpy.histogram" title="numpy.histogram"><code class="xref py py-obj docutils literal"><span class="pre">histogram</span></code></a>，<a class="reference internal" href="numpy.unique.html#numpy.unique" title="numpy.unique"><code class="xref py py-obj docutils literal"><span class="pre">unique</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-40">如果<em class="xref py py-obj">x</em>中的值落在bin范围之外，则尝试使用<a class="reference internal" href="#numpy.digitize" title="numpy.digitize"><code class="xref py py-obj docutils literal"><span class="pre">digitize</span></code></a>返回的索引将<em class="xref py py-obj">bin</em>编入索引将导致IndexError 。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-41"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-42"><em class="xref py py-obj">np.digitize</em>按照<em class="xref py py-obj">np.searchsorted</em>执行。</span><span class="yiyi-st" id="yiyi-43">这意味着二进制搜索用于对值进行二进制化，对于大于先前线性搜索的二进制数，这些二进制搜索的尺度更好。</span><span class="yiyi-st" id="yiyi-44">它也删除了对输入数组为一维的要求。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-45">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">6.4</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inds</span>
+<span class="go">array([1, 4, 3, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="nb">print</span><span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="n">inds</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;&lt;=&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="p">[</span><span class="n">inds</span><span class="p">[</span><span class="n">n</span><span class="p">]])</span>
+<span class="gp">...</span>
+<span class="go">0.0 &lt;= 0.2 &lt; 1.0</span>
+<span class="go">4.0 &lt;= 6.4 &lt; 10.0</span>
+<span class="go">2.5 &lt;= 3.0 &lt; 4.0</span>
+<span class="go">1.0 &lt;= 1.6 &lt; 2.5</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">12.4</span><span class="p">,</span> <span class="mf">15.5</span><span class="p">,</span> <span class="mf">20.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">bins</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([1, 2, 3, 4, 4])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">bins</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">array([1, 3, 3, 4, 5])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,105 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.nonzero</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.nonzero.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.nonzero.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ma.nonzero"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">nonzero</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><em class="property"> = &lt;numpy.ma.core._frommethod instance&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回非零的未屏蔽元素的索引。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">返回数组的元组，每个维包含一个元组，其中包含该维中非零元素的索引。</span><span class="yiyi-st" id="yiyi-17">相应的非零值可以用下式获得：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-18">要按元素（而不是维）对索引进行分组，请改用：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">nonzero</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-19">其结果始终是2d数组，每个非零元素都有一行。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>无</strong></span></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>tuple_of_arrays</strong>：tuple</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">非零元素的索引。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.nonzero.html#numpy.nonzero" title="numpy.nonzero"><code class="xref py py-obj docutils literal"><span class="pre">numpy.nonzero</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-27">函数对ndarrays操作。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-28"><code class="xref py py-obj docutils literal"><span class="pre">flatnonzero</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">在输入数组的扁平版本中返回非零的索引。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-30"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.nonzero</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">等效ndarray方法。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-32"><code class="xref py py-obj docutils literal"><span class="pre">count_nonzero</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">计算输入数组中非零元素的数量。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[ 1.  0.  0.]</span>
+<span class="go"> [ 0.  1.  0.]</span>
+<span class="go"> [ 0.  0.  1.]],</span>
+<span class="go">      mask =</span>
+<span class="go"> False,</span>
+<span class="go">      fill_value=1e+20)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span>
+<span class="go">(array([0, 1, 2]), array([0, 1, 2]))</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-35">被忽略的元素被忽略。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[1.0 0.0 0.0]</span>
+<span class="go"> [0.0 -- 0.0]</span>
+<span class="go"> [0.0 0.0 1.0]],</span>
+<span class="go">      mask =</span>
+<span class="go"> [[False False False]</span>
+<span class="go"> [False  True False]</span>
+<span class="go"> [False False False]],</span>
+<span class="go">      fill_value=1e+20)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span>
+<span class="go">(array([0, 2]), array([0, 2]))</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-36">指数也可以按元素分组。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">nonzero</span><span class="p">())</span>
+<span class="go">array([[0, 0],</span>
+<span class="go">       [2, 2]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37"><code class="docutils literal"><span class="pre">nonzero</span></code>的常见用法是找到数组的索引，其中条件为True。</span><span class="yiyi-st" id="yiyi-38">Given an array <em class="xref py py-obj">a</em>, the condition <em class="xref py py-obj">a</em> &gt; 3 is a boolean array and since False is interpreted as 0, ma.nonzero(a &gt; 3) yields the indices of the <em class="xref py py-obj">a</em> where the condition is true.</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">3</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[False False False]</span>
+<span class="go"> [ True  True  True]</span>
+<span class="go"> [ True  True  True]],</span>
+<span class="go">      mask =</span>
+<span class="go"> False,</span>
+<span class="go">      fill_value=999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">(array([1, 1, 1, 2, 2, 2]), array([0, 1, 2, 0, 1, 2]))</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">也可以调用条件数组的<code class="docutils literal"><span class="pre">nonzero</span></code>方法。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span>
+<span class="go">(array([1, 1, 1, 2, 2, 2]), array([0, 1, 2, 0, 1, 2]))</span>
+</pre></div>
+</div>
+</dd></dl>

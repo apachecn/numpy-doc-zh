@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.power</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.power.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.power.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.power"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">power</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;power&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">第一个数组元素从第二个数组提升到权力，逐元素。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">将<em class="xref py py-obj">x1</em>中的每个基数提高为<em class="xref py py-obj">x2</em>中位置相应的幂。</span><span class="yiyi-st" id="yiyi-16"><em class="xref py py-obj">x1</em>和<em class="xref py py-obj">x2</em>必须可以广播到相同的形状。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>x1</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">基地。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>x2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">指数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24"><em class="xref py py-obj">x1</em>中的基数增加到<em class="xref py py-obj">x2</em>中的指数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-26">立方体列表中的每个元素。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x1</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x1</span>
+<span class="go">[0, 1, 2, 3, 4, 5]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">array([  0,   1,   8,  27,  64, 125])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-27">将碱基提高到不同的指数。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+<span class="go">array([  0.,   1.,   8.,  27.,  16.,   5.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-28">广播的效果。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x2</span>
+<span class="go">array([[1, 2, 3, 3, 2, 1],</span>
+<span class="go">       [1, 2, 3, 3, 2, 1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+<span class="go">array([[ 0,  1,  8, 27, 16,  5],</span>
+<span class="go">       [ 0,  1,  8, 27, 16,  5]])</span>
+</pre></div>
+</div>
+</dd></dl>

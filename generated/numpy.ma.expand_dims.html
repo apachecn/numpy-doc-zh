@@ -1,0 +1,47 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.expand_dims</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.expand_dims.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.expand_dims.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.expand_dims"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">expand_dims</code><span class="sig-paren">(</span><em>x</em>, <em>axis</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L6618-L6665"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">展开数组的形状。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">通过在由<em class="xref py py-obj">axis</em>参数指定的轴之前包括一个新轴，来扩展数组的形状。</span><span class="yiyi-st" id="yiyi-17">此函数的行为与<a class="reference internal" href="numpy.expand_dims.html#numpy.expand_dims" title="numpy.expand_dims"><code class="xref py py-obj docutils literal"><span class="pre">numpy.expand_dims</span></code></a>相同，但保留了屏蔽的元素。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-18">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="numpy.expand_dims.html#numpy.expand_dims" title="numpy.expand_dims"><code class="xref py py-obj docutils literal"><span class="pre">numpy.expand_dims</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-20">顶级NumPy模块中的等效函数。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-21">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">masked_array(data = [1 -- 4],</span>
+<span class="go">             mask = [False  True False],</span>
+<span class="go">       fill_value = 999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[1, 2, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[1 -- 4]],</span>
+<span class="go">             mask =</span>
+<span class="go"> [[False  True False]],</span>
+<span class="go">       fill_value = 999999)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-22">使用<em class="xref py py-obj">np.newaxis</em>的分片语法可以实现相同的结果。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[1 -- 4]],</span>
+<span class="go">             mask =</span>
+<span class="go"> [[False  True False]],</span>
+<span class="go">       fill_value = 999999)</span>
+</pre></div>
+</div>
+</dd></dl>

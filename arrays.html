@@ -1,0 +1,93 @@
+
+<span id="arrays"></span><h1><span class="yiyi-st" id="yiyi-10">数组对象</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/arrays.html">https://docs.scipy.org/doc/numpy/reference/arrays.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-11">NumPy提供一个N维数组类型<a class="reference internal" href="arrays.ndarray.html#arrays-ndarray"><span class="std std-ref">ndarray</span></a>，它描述相同类型的“元素”的集合。</span><span class="yiyi-st" id="yiyi-12">可以使用例如N个整数来对元素进行<a class="reference internal" href="arrays.indexing.html#arrays-indexing"><span class="std std-ref">索引</span></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-13">所有ndarrays都是<span class="xref std std-term">同质的</span>：每个元素占用相同大小的内存块，并且所有块都以完全相同的方式解释。</span><span class="yiyi-st" id="yiyi-14">如何解释数组中的每个元素由单独的<a class="reference internal" href="arrays.dtypes.html#arrays-dtypes"><span class="std std-ref">数据类型对象</span></a>指定，每个数组与其中一个对象相关联。</span><span class="yiyi-st" id="yiyi-15">除了基本类型之外（整数、浮点<em>等等</em></span><span class="yiyi-st" id="yiyi-16">），数据类型对象也可以表示数据结构。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">从数组中提取的元素（<em>例如</em>通过索引）由一个Python对象表示，该对象的类型为NumPy中内置的<a class="reference internal" href="arrays.scalars.html#arrays-scalars"><span class="std std-ref">数组标量类型</span></a>之一。</span><span class="yiyi-st" id="yiyi-18">数组标量允许简单地处理更复杂的数据布置。</span></p>
+<div class="figure" id="id1">
+<img alt="../_images/threefundamental.png" src="../_images/threefundamental.png">
+<p class="caption"><span class="yiyi-st" id="yiyi-19"><span class="caption-text"><strong>图</strong> 概念图，显示用于描述数组中的数据的三个基本对象之间的关系：（1）ndarray本身（2）数据类型对象，描述数组单个固定大小元素的布局（3）数组标量Python对象，在访问数组的单个元素时返回。</span></span></p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="arrays.ndarray.html">N维数组（<code class="docutils literal"><span class="pre">ndarray</span></code>）</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="arrays.ndarray.html#constructing-arrays">构造数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="arrays.ndarray.html#indexing-arrays">索引数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="arrays.ndarray.html#internal-memory-layout-of-an-ndarray">ndarray的内部存储器布局</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="arrays.ndarray.html#array-attributes">数组属性</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="arrays.ndarray.html#array-methods">数组方法</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="arrays.ndarray.html#arithmetic-matrix-multiplication-and-comparison-operations">算术，矩阵乘法和比较运算</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="arrays.ndarray.html#special-methods">特殊方法</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="arrays.scalars.html">Scalars</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="arrays.scalars.html#built-in-scalar-types">内置标量类型</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="arrays.scalars.html#attributes">属性</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="arrays.scalars.html#indexing">索引</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="arrays.scalars.html#methods">方法</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="arrays.scalars.html#defining-new-types">定义新类型</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="arrays.dtypes.html">数据类型对象（<code class="docutils literal"><span class="pre">dtype</span></code>）</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="arrays.dtypes.html#specifying-and-constructing-data-types">指定和构造数据类型</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="arrays.dtypes.html#dtype"><code class="docutils literal"><span class="pre">dtype</span></code></a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="arrays.indexing.html">索引</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="arrays.indexing.html#basic-slicing-and-indexing">基本切片和索引</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="arrays.indexing.html#advanced-indexing">高级索引</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="arrays.indexing.html#detailed-notes">详细注释</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="arrays.indexing.html#field-access">字段访问</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="arrays.indexing.html#flat-iterator-indexing">平面迭代器索引</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="arrays.nditer.html">迭代数组</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="arrays.nditer.html#single-array-iteration">单个数组迭代</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="arrays.nditer.html#broadcasting-array-iteration">广播数组迭代</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="arrays.nditer.html#putting-the-inner-loop-in-cython">将内部循环置于Cython</a>中</span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="arrays.classes.html">标准数组子类</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="arrays.classes.html#special-attributes-and-methods">特殊属性和方法</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="arrays.classes.html#matrix-objects">矩阵对象</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="arrays.classes.html#memory-mapped-file-arrays">内存映射文件数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="arrays.classes.html#character-arrays-numpy-char">字符数组（<code class="docutils literal"><span class="pre">numpy.char</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="arrays.classes.html#record-arrays-numpy-rec">记录数组（<code class="docutils literal"><span class="pre">numpy.rec</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="arrays.classes.html#masked-arrays-numpy-ma">掩码数组（<code class="docutils literal"><span class="pre">numpy.ma</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="arrays.classes.html#standard-container-class">标准容器类</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="arrays.classes.html#array-iterators">数组迭代器</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="maskedarray.html">掩码数组</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="maskedarray.generic.html"><code class="docutils literal"><span class="pre">numpy.ma</span></code>模块</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="maskedarray.generic.html#using-numpy-ma">使用numpy.ma</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-58"><a class="reference internal" href="maskedarray.generic.html#examples">示例</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="maskedarray.baseclass.html"><code class="docutils literal"><span class="pre">numpy.ma</span></code>模块的常量</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-60"><a class="reference internal" href="maskedarray.baseclass.html#the-maskedarray-class"><code class="docutils literal"><span class="pre">MaskedArray</span></code>类</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="maskedarray.baseclass.html#maskedarray-methods"><code class="docutils literal"><span class="pre">MaskedArray</span></code>方法</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-62"><a class="reference internal" href="routines.ma.html">屏蔽数组操作</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-68"><a class="reference internal" href="arrays.interface.html">数组接口</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="arrays.interface.html#python-side">Python端</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="arrays.interface.html#c-struct-access">C结构访问</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-66"><a class="reference internal" href="arrays.interface.html#type-description-examples">类型说明示例</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="arrays.interface.html#differences-with-array-interface-version-2">与数组接口（版本2）的差异</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-75"><a class="reference internal" href="arrays.datetime.html">Datetimes和Timedeltas</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="arrays.datetime.html#basic-datetimes">基本数据时间</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-70"><a class="reference internal" href="arrays.datetime.html#datetime-and-timedelta-arithmetic">日期时间和Timedelta算术</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-71"><a class="reference internal" href="arrays.datetime.html#datetime-units">日期时间单位</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="arrays.datetime.html#business-day-functionality">工作日功能</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-73"><a class="reference internal" href="arrays.datetime.html#changes-with-numpy-1-11">NumPy 1.11</a>更改</span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="arrays.datetime.html#differences-between-1-6-and-1-7-datetimes">1.6和1.7数据时间之间的差异</a></span></li>
+</ul>
+</li>
+</ul>
+</div>

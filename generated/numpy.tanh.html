@@ -1,0 +1,75 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.tanh</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.tanh.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.tanh.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.tanh"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">tanh</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;tanh&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">逐元素计算双曲正切。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">等效于<code class="docutils literal"><span class="pre">np.sinh(x)/np.cosh(x)</span></code>或<code class="docutils literal"><span class="pre">-1j</span> <span class="pre">*</span> <span class="pre">np.tan 1j * x）</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">与<em class="xref py py-obj">x</em>形状相同的输出数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>y</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">相应的双曲正切值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>ValueError：invalid return数组shape</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">如果提供<em class="xref py py-obj">out</em>并且<em class="xref py py-obj">out.shape</em>！= <em class="xref py py-obj">x.shape</em></span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">如果提供<em class="xref py py-obj">out</em>，则函数将结果写入其中，并返回对<em class="xref py py-obj">out</em>的引用。</span><span class="yiyi-st" id="yiyi-29">（参见实施例）</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r284" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-31"><a class="fn-backref" href="#id1">[R284]</a></span></td><td><span class="yiyi-st" id="yiyi-32">Abramowitz和I.</span><span class="yiyi-st" id="yiyi-33">A. Stegun，Handbook of Mathematical Functions。</span><span class="yiyi-st" id="yiyi-34">New York，NY：Dover，1972，pg。</span><span class="yiyi-st" id="yiyi-35">83. <a class="reference external" href="http://www.math.sfu.ca/~cbm/aands/">http://www.math.sfu.ca/~cbm/aands/</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r285" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-36"><a class="fn-backref" href="#id2">[R285]</a></span></td><td><span class="yiyi-st" id="yiyi-37">维基百科，“双曲函数”，<a class="reference external" href="http://en.wikipedia.org/wiki/Hyperbolic_function">http://en.wikipedia.org/wiki/Hyperbolic_function</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">array([ 0. +0.00000000e+00j,  0. -1.22460635e-16j,  0. +1.63317787e+16j])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Example of providing the optional output parameter illustrating</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># that what is returned is a reference to said parameter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">([</span><span class="mf">0.1</span><span class="p">],</span> <span class="n">out1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out2</span> <span class="ow">is</span> <span class="n">out1</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Example of ValueError due to provision of shape mis-matched `out`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)),</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">ValueError</span>: <span class="n">invalid return array shape</span>
+</pre></div>
+</div>
+</dd></dl>

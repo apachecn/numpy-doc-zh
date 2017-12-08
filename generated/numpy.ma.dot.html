@@ -1,0 +1,68 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.dot</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.dot.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.dot.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.dot"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">dot</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>strict=False</em>, <em>out=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L7227-L7308"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回两个数组的点积。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">此函数等效于将屏蔽的值考虑在内的<a class="reference internal" href="numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-obj docutils literal"><span class="pre">numpy.dot</span></code></a>。</span><span class="yiyi-st" id="yiyi-17">请注意，<em class="xref py py-obj">严格</em>和<em class="xref py py-obj">输出</em>的位置与方法版本不同。</span><span class="yiyi-st" id="yiyi-18">为了保持与相应方法的兼容性，建议将可选参数视为仅作为关键字。</span><span class="yiyi-st" id="yiyi-19">在某些时候可能是强制性的。</span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-20">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-21">目前只适用于2-D数组。</span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>a，b</strong>：masked_array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>严格</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">掩码数据是传播（True）还是设置为0（False）用于计算。</span><span class="yiyi-st" id="yiyi-27">默认值为False。</span><span class="yiyi-st" id="yiyi-28">传播掩码意味着如果掩蔽的值出现在行或列中，则整个行或列被认为被掩蔽。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>out</strong>：masked_array，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">输出参数。</span><span class="yiyi-st" id="yiyi-31">这必须有返回的确切的类型，如果没有使用。</span><span class="yiyi-st" id="yiyi-32">特别地，它必须具有正确的类型，必须是C连续的，并且其dtype必须是将为<em class="xref py py-obj">dot（a，b）</em>返回的dtype。</span><span class="yiyi-st" id="yiyi-33">这是一个性能特性。</span><span class="yiyi-st" id="yiyi-34">因此，如果不满足这些条件，则引发异常，而不是试图灵活。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-35"><span class="versionmodified">版本1.10.2中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-36">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-obj docutils literal"><span class="pre">numpy.dot</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-38">ndarrays的等效函数。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">mask</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">mask</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[21 26]</span>
+<span class="go"> [45 64]],</span>
+<span class="go">             mask =</span>
+<span class="go"> [[False False]</span>
+<span class="go"> [False False]],</span>
+<span class="go">       fill_value = 999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[-- --]</span>
+<span class="go"> [-- 64]],</span>
+<span class="go">             mask =</span>
+<span class="go"> [[ True  True]</span>
+<span class="go"> [ True False]],</span>
+<span class="go">       fill_value = 999999)</span>
+</pre></div>
+</div>
+</dd></dl>

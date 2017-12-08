@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.make_mask_none</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.make_mask_none.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.make_mask_none.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.make_mask_none"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">make_mask_none</code><span class="sig-paren">(</span><em>newshape</em>, <em>dtype=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L1621-L1668"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回给定形状的布尔掩码，填充False。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">此函数返回一个布尔值ndarray，所有条目都为False，可用于常用的掩码操作。</span><span class="yiyi-st" id="yiyi-17">如果指定了复杂类型，则每个字段的类型将转换为布尔类型。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>newshape</strong>：tuple</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">指示掩码形状的元组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>dtype</strong>：{None，dtype}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">如果为None，请使用MaskType实例。</span><span class="yiyi-st" id="yiyi-23">否则，请使用与<em class="xref py py-obj">dtype</em>相同字段的新数据类型，并将其转换为布尔类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>result</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">适当的形状和dtype的narray，填充False。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.ma.make_mask.html#numpy.ma.make_mask" title="numpy.ma.make_mask"><code class="xref py py-obj docutils literal"><span class="pre">make_mask</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">从数组中创建一个布尔掩码。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.ma.make_mask_descr.html#numpy.ma.make_mask_descr" title="numpy.ma.make_mask_descr"><code class="xref py py-obj docutils literal"><span class="pre">make_mask_descr</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">从给定的dtype构造dtype描述列表。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">make_mask_none</span><span class="p">((</span><span class="mi">3</span><span class="p">,))</span>
+<span class="go">array([False, False, False], dtype=bool)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-33">定义一个更复杂的dtype。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">({</span><span class="s1">&apos;names&apos;</span><span class="p">:[</span><span class="s1">&apos;foo&apos;</span><span class="p">,</span> <span class="s1">&apos;bar&apos;</span><span class="p">],</span>
+<span class="go">                      &apos;formats&apos;:[np.float32, np.int]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dtype</span>
+<span class="go">dtype([(&apos;foo&apos;, &apos;&lt;f4&apos;), (&apos;bar&apos;, &apos;&lt;i4&apos;)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">make_mask_none</span><span class="p">((</span><span class="mi">3</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+<span class="go">array([(False, False), (False, False), (False, False)],</span>
+<span class="go">      dtype=[(&apos;foo&apos;, &apos;|b1&apos;), (&apos;bar&apos;, &apos;|b1&apos;)])</span>
+</pre></div>
+</div>
+</dd></dl>

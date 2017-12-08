@@ -1,0 +1,63 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.hstack</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.hstack.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.hstack.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ma.hstack"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">hstack</code><span class="sig-paren">(</span><em>tup</em><span class="sig-paren">)</span><em class="property"> = &lt;numpy.ma.extras._fromnxfunction instance&gt;</em></span></dt>
+<dd><blockquote>
+<div><p><span class="yiyi-st" id="yiyi-15">水平（按列顺序）堆叠数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">取一个数组的序列，并将它们水平堆叠以构成一个数组。</span><span class="yiyi-st" id="yiyi-17">重建数组除以<a class="reference internal" href="numpy.ma.hsplit.html#numpy.ma.hsplit" title="numpy.ma.hsplit"><code class="xref py py-obj docutils literal"><span class="pre">hsplit</span></code></a>。</span></p>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>tup</strong>：ndarrays的序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">除第二个轴外，所有数组必须具有相同的形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>堆叠</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">通过堆叠给定数组形成的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-25"><code class="xref py py-obj docutils literal"><span class="pre">stack</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-26">沿着新轴连接数组的序列。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.ma.vstack.html#numpy.ma.vstack" title="numpy.ma.vstack"><code class="xref py py-obj docutils literal"><span class="pre">vstack</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28">垂直（按行）顺序堆叠数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.ma.dstack.html#numpy.ma.dstack" title="numpy.ma.dstack"><code class="xref py py-obj docutils literal"><span class="pre">dstack</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">按照深度顺序（沿第三轴）堆叠数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.ma.concatenate.html#numpy.ma.concatenate" title="numpy.ma.concatenate"><code class="xref py py-obj docutils literal"><span class="pre">concatenate</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">沿现有轴连接数组序列。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.ma.hsplit.html#numpy.ma.hsplit" title="numpy.ma.hsplit"><code class="xref py py-obj docutils literal"><span class="pre">hsplit</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">沿第二轴拆分数组。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-36">该函数应用于_data和_mask（如果有）。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+<span class="go">array([1, 2, 3, 2, 3, 4])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [2, 3],</span>
+<span class="go">       [3, 4]])</span>
+</pre></div>
+</div>
+</dd></dl>

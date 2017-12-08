@@ -1,0 +1,52 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.lib.NumpyVersion</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.lib.NumpyVersion.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.lib.NumpyVersion.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.lib.NumpyVersion"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.lib.</code><code class="descname">NumpyVersion</code><span class="sig-paren">(</span><em>vstring</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/_version.py#L18-L156"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">解析和比较numpy版本字符串。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">Numpy有以下版本化方案（数字给出的例子；它们可以&gt; 9）原则上）：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-16">发布版本：&apos;1.8.0&apos;，&apos;1.8.1&apos;等。</span></li>
+<li><span class="yiyi-st" id="yiyi-17">Alpha：&apos;1.8.0a1&apos;，&apos;1.8.0a2&apos;等</span></li>
+<li><span class="yiyi-st" id="yiyi-18">Beta：&apos;1.8.0b1&apos;，&apos;1.8.0b2&apos;等</span></li>
+<li><span class="yiyi-st" id="yiyi-19">发布候选人：&apos;1.8.0rc1&apos;，&apos;1.8.0rc2&apos;等</span></li>
+<li><span class="yiyi-st" id="yiyi-20">开发版本：&apos;1.8.0.dev-f1234afa&apos;（附加git commit哈希）</span></li>
+<li><dl class="first docutils">
+<dt><span class="yiyi-st" id="yiyi-21">开发版本之后a1：&apos;1.8.0a1.dev-f1234afa&apos;，</span></dt>
+<dd><span class="yiyi-st" id="yiyi-22">&apos;1.8.0b2.dev-f1234afa&apos;，&apos;1.8.1rc1.dev-f1234afa&apos;等。</span></dd>
+</dl>
+</li>
+<li><span class="yiyi-st" id="yiyi-23">开发版本（没有git哈希可用）：&apos;1.8.0.dev-Unknown&apos;</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-24">需要对有效的版本字符串或其他<a class="reference internal" href="#numpy.lib.NumpyVersion" title="numpy.lib.NumpyVersion"><code class="xref py py-obj docutils literal"><span class="pre">NumpyVersion</span></code></a>实例进行比较。</span><span class="yiyi-st" id="yiyi-25">注意，相同（预）释放的所有开发版本都比较相等。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-26"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>vstring</strong>：str</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">Numpy版本字符串（<code class="docutils literal"><span class="pre">np.__version__</span></code>）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.lib</span> <span class="k">import</span> <span class="n">NumpyVersion</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">NumpyVersion</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&lt;</span> <span class="s1">&apos;1.7.0&apos;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&apos;skip&apos;</span><span class="p">)</span>
+<span class="go">skip</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NumpyVersion</span><span class="p">(</span><span class="s1">&apos;1.7&apos;</span><span class="p">)</span>  <span class="c1"># raises ValueError, add &quot;.0&quot;</span>
+</pre></div>
+</div>
+</dd></dl>

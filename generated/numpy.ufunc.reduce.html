@@ -1,0 +1,88 @@
+
+<h1><span class="yiyi-st" id="yiyi-11">numpy.ufunc.reduce</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ufunc.reduce.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ufunc.reduce.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ufunc.reduce"><span class="yiyi-st" id="yiyi-12"> <code class="descclassname">ufunc.</code><code class="descname">reduce</code><span class="sig-paren">(</span><em>a</em>, <em>axis=0</em>, <em>dtype=None</em>, <em>out=None</em>, <em>keepdims=False</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-13">通过沿一个轴应用ufunc，将<em class="xref py py-obj">a</em>的尺寸减少一。</span></p>
+<p><span class="yiyi-st" id="yiyi-14">让<img alt="a.shape = (N_0, ..., N_i, ..., N_{M-1})" class="math" src="../../_images/math/b691758bcc38e8ad34bfc32210ced3b900abd86f.png" style="vertical-align: -4px">。</span><span class="yiyi-st" id="yiyi-15">然后<img alt="ufunc.reduce(a, axis=i)[k_0, ..,k_{i-1}, k_{i+1}, .., k_{M-1}]" class="math" src="../../_images/math/f4508138b0ae1b3bfac1bb3ff20d0b23561d69a4.png" style="vertical-align: -4px"> =在<img alt="range(N_i)" class="math" src="../../_images/math/c929f5ce07d91784b76935cac0256d2e20bc3d2e.png" style="vertical-align: -4px">之上迭代<em class="xref py py-obj">j</em>的结果，对每个<img alt="a[k_0, ..,k_{i-1}, j, k_{i+1}, .., k_{M-1}]" class="math" src="../../_images/math/095eb5016f45d8291f2d1ccc6e6f93f236e4103e.png" style="vertical-align: -4px">累积应用ufunc。</span><span class="yiyi-st" id="yiyi-16">对于一维数组，reduce生成的结果等效于：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">identity</span> <span class="c1"># op = ufunc</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="n">op</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="k">return</span> <span class="n">r</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-17">例如，add.reduce()等价于sum()。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">要执行的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>axis</strong>：无或int或tuple ints，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">执行缩小的轴或轴。</span><span class="yiyi-st" id="yiyi-23">默认值（<em class="xref py py-obj">axis</em> = 0）对输入数组的第一维执行缩小。</span><span class="yiyi-st" id="yiyi-24"><em class="xref py py-obj">轴</em>可能为负，在这种情况下，从最后一个轴计数到第一个轴。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-25"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-26">如果这是<em class="xref py py-obj">无</em>，则在所有轴上执行缩小。</span><span class="yiyi-st" id="yiyi-27">如果这是一个ints的元组，则在多个轴上执行缩减，而不是像以前一样执行单个轴或所有轴。</span></p>
+<p><span class="yiyi-st" id="yiyi-28">对于不是可交换的或不相关的操作，在多个轴上执行缩减不是很好地定义。</span><span class="yiyi-st" id="yiyi-29">在这种情况下，ufuncs目前不会引发异常，但是将来可能会这样做。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>dtype</strong>：数据类型代码，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">用于表示中间结果的类型。</span><span class="yiyi-st" id="yiyi-32">默认为输出数组的数据类型（如果提供）或输入数组的数据类型（如果未提供输出数组）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">存储结果的位置。</span><span class="yiyi-st" id="yiyi-35">如果未提供，则返回新分配的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-36"><strong>keepdims</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-37">如果设置为True，则缩小的轴在结果中保留为尺寸为1的尺寸。</span><span class="yiyi-st" id="yiyi-38">使用此选项，结果将相对于原始<em class="xref py py-obj">arr</em>正确广播。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-39"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-40">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-41"><strong>r</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-42">减少的数组。</span><span class="yiyi-st" id="yiyi-43">如果提供<em class="xref py py-obj">out</em>，则<em class="xref py py-obj">r</em>是对它的引用。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="o">.</span><span class="n">reduce</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="go">30</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">多维数组示例：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span>
+<span class="go">array([[[0, 1],</span>
+<span class="go">        [2, 3]],</span>
+<span class="go">       [[4, 5],</span>
+<span class="go">        [6, 7]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[ 4,  6],</span>
+<span class="go">       [ 8, 10]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="c1"># confirm: default axis value is 0</span>
+<span class="go">array([[ 4,  6],</span>
+<span class="go">       [ 8, 10]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[ 2,  4],</span>
+<span class="go">       [10, 12]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([[ 1,  5],</span>
+<span class="go">       [ 9, 13]])</span>
+</pre></div>
+</div>
+</dd></dl>

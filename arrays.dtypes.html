@@ -1,0 +1,524 @@
+
+<span id="arrays-dtypes"></span><h1><span class="yiyi-st" id="yiyi-17">Data type objects (<a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-class docutils literal"><span class="pre">dtype</span></code></a>)</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/arrays.dtypes.html">https://docs.scipy.org/doc/numpy/reference/arrays.dtypes.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-18">数据类型对象（<a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-class docutils literal"><span class="pre">numpy.dtype</span></code></a>类的实例）描述如何解释与数组项对应的固定大小的内存块中的字节。</span><span class="yiyi-st" id="yiyi-19">它描述了数据的以下方面：</span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-20">数据类型（整型，浮点型，Python对象等）</span></li>
+<li><span class="yiyi-st" id="yiyi-21">数据大小（<em>例如， 整数使用多少个字节存储</em>）</span></li>
+<li><span class="yiyi-st" id="yiyi-22">数据的字节顺序（<span class="xref std std-term">little-endian</span>或<span class="xref std std-term">big-endian</span>）</span></li>
+<li><span class="yiyi-st" id="yiyi-26">如果数据类型为<span class="xref std std-term">结构化</span>，则汇总其他数据类型（<em>例如</em>，描述由整数和浮点组成的数组项）</span><ol class="arabic">
+<li><span class="yiyi-st" id="yiyi-23">结构的“<span class="xref std std-term">字段</span>”的名称是什么，通过它们可以<a class="reference internal" href="arrays.indexing.html#arrays-indexing-fields"><span class="std std-ref">accessed</span></a></span></li>
+<li><span class="yiyi-st" id="yiyi-24">每个<span class="xref std std-term">字段</span>的数据类型是什么，以及</span></li>
+<li><span class="yiyi-st" id="yiyi-25">每个字段占用的内存块的哪部分。</span></li>
+</ol>
+</li>
+<li><span class="yiyi-st" id="yiyi-27">如果数据类型是子数组，它的形状和数据类型是什么。</span></li>
+</ol>
+<p id="index-0"><span class="yiyi-st" id="yiyi-28">为了描述标量数据的类型，对于整数，浮点数，<em>等</em>的各种精度，在NumPy中存在若干<a class="reference internal" href="arrays.scalars.html#arrays-scalars-built-in"><span class="std std-ref">built-in scalar types</span></a>。</span><span class="yiyi-st" id="yiyi-29">通过索引从数组<em>（例如</em>）提取的项目将是一个Python对象，其类型是与数组的数据类型相关联的标量类型。</span></p>
+<p><span class="yiyi-st" id="yiyi-30">注意，标量类型不是<a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-class docutils literal"><span class="pre">dtype</span></code></a>对象，即使它们可以在NumPy中需要数据类型规范时代替一个。</span></p>
+<p id="index-1"><span class="yiyi-st" id="yiyi-31">结构化数据类型是通过创建其<span class="xref std std-term">字段</span>包含其他数据类型的数据类型而形成的。</span><span class="yiyi-st" id="yiyi-32">每个字段都具有可以<a class="reference internal" href="arrays.indexing.html#arrays-indexing-fields"><span class="std std-ref">accessed</span></a>。</span><span class="yiyi-st" id="yiyi-33">父数据类型应具有足够的大小以包含其所有字段；父类几乎总是基于允许任意项目大小的<code class="xref py py-class docutils literal"><span class="pre">void</span></code>类型。</span><span class="yiyi-st" id="yiyi-34">结构化数据类型还可以在其字段中包含嵌套结构化子数组数据类型。</span></p>
+<p id="index-2"><span class="yiyi-st" id="yiyi-35">最后，数据类型可以描述自身是另一数据类型的项的数组的项。</span><span class="yiyi-st" id="yiyi-36">然而，这些子阵列必须具有固定的大小。</span></p>
+<p><span class="yiyi-st" id="yiyi-37">如果使用描述子数组的数据类型创建数组，则在创建数组时，子数组的维数会追加到数组的形状。</span><span class="yiyi-st" id="yiyi-38">结构化类型字段中的子数组行为不同，请参见<a class="reference internal" href="arrays.indexing.html#arrays-indexing-fields"><span class="std std-ref">Field Access</span></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-39">子数组总是具有C连续的存储器布局。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-40">例</span></p>
+<p><span class="yiyi-st" id="yiyi-41">包含32位大端整数的简单数据类型：（有关构造的详细信息，请参见<a class="reference internal" href="#arrays-dtypes-constructing"><span class="std std-ref">Specifying and constructing data types</span></a>）</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;&gt;i4&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">byteorder</span>
+<span class="go">&apos;&gt;&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">itemsize</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&apos;int32&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">type</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p class="last"><span class="yiyi-st" id="yiyi-42">相应的数组标量类型为<code class="xref py py-class docutils literal"><span class="pre">int32</span></code>。</span></p>
+</div>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-43">例</span></p>
+<p><span class="yiyi-st" id="yiyi-44">包含16个字符的字符串（在&apos;name&apos;字段中）和两个64位浮点数（在字段&apos;grade&apos;中）的子数组的结构化数据类型：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&apos;name&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;grades&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="p">[</span><span class="s1">&apos;name&apos;</span><span class="p">]</span>
+<span class="go">dtype(&apos;|S16&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="p">[</span><span class="s1">&apos;grades&apos;</span><span class="p">]</span>
+<span class="go">dtype((&apos;float64&apos;,(2,)))</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">此数据类型的数组的项目包裹在还具有两个字段的<a class="reference internal" href="arrays.scalars.html#arrays-scalars"><span class="std std-ref">array scalar</span></a>类型中：</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="s1">&apos;Sarah&apos;</span><span class="p">,</span> <span class="p">(</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">)),</span> <span class="p">(</span><span class="s1">&apos;John&apos;</span><span class="p">,</span> <span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">))],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">(&apos;John&apos;, [6.0, 7.0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&apos;grades&apos;</span><span class="p">]</span>
+<span class="go">array([ 6.,  7.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">&lt;type &apos;numpy.void&apos;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&apos;grades&apos;</span><span class="p">])</span>
+<span class="go">&lt;type &apos;numpy.ndarray&apos;&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specifying-and-constructing-data-types">
+<span id="arrays-dtypes-constructing"></span><h2><span class="yiyi-st" id="yiyi-46">Specifying and constructing data types</span></h2>
+<p><span class="yiyi-st" id="yiyi-47">每当在NumPy函数或方法中需要数据类型时，可以提供<a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-class docutils literal"><span class="pre">dtype</span></code></a>对象或可以转换为一个的对象。</span><span class="yiyi-st" id="yiyi-48">这种转换由<a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-class docutils literal"><span class="pre">dtype</span></code></a>构造函数完成：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-50">创建数据类型对象。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-51">可以转换为数据类型对象的内容如下所述：</span></p>
+<p><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-class docutils literal"><span class="pre">dtype</span></code></a>对象</span></p>
+<blockquote>
+<div><p id="index-3"><span class="yiyi-st" id="yiyi-53">按原样使用。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-54"><code class="xref py py-const docutils literal"><span class="pre">None</span></code></span></p>
+<blockquote>
+<div><p id="index-4"><span class="yiyi-st" id="yiyi-55">默认数据类型：<code class="xref py py-class docutils literal"><span class="pre">float_</span></code>。</span></p>
+</div></blockquote>
+<p id="index-5"><span class="yiyi-st" id="yiyi-56">数组标量类型</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-57">24个内置<a class="reference internal" href="arrays.scalars.html#arrays-scalars-built-in"><span class="std std-ref">array scalar type objects</span></a>都会转换为关联的数据类型对象。</span><span class="yiyi-st" id="yiyi-58">这也适用于他们的子类。</span></p>
+<p><span class="yiyi-st" id="yiyi-59">请注意，并非所有数据类型信息都可以提供类型对象：例如，<span class="xref std std-term">flexible</span>数据类型的默认值为<em>itemsize</em>为0，大小有用。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-60">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>      <span class="c1"># 32-bit integer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span> <span class="c1"># 128-bit complex floating-point number</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-61">通用类型</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-62">通用分层类型对象根据关联转换为对应的类型对​​象：</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="78%">
+<col width="22%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-63"><code class="xref py py-class docutils literal"><span class="pre">number</span></code>，<code class="xref py py-class docutils literal"><span class="pre">inexact</span></code>，<code class="xref py py-class docutils literal"><span class="pre">floating</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-64"><a class="reference external" href="https://docs.python.org/dev/library/functions.html#float" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">float</span></code></a></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-65"><code class="xref py py-class docutils literal"><span class="pre">complexfloating</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-66"><code class="xref py py-class docutils literal"><span class="pre">cfloat</span></code></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-67"><code class="xref py py-class docutils literal"><span class="pre">integer</span></code>，<code class="xref py py-class docutils literal"><span class="pre">signedinteger</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-68"><code class="xref py py-class docutils literal"><span class="pre">int_</span></code></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-69"><code class="xref py py-class docutils literal"><span class="pre">unsignedinteger</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-70"><code class="xref py py-class docutils literal"><span class="pre">uint</span></code></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-71"><code class="xref py py-class docutils literal"><span class="pre">character</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-72"><code class="xref py py-class docutils literal"><span class="pre">string</span></code></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-73"><a class="reference internal" href="generated/numpy.generic.html#numpy.generic" title="numpy.generic"><code class="xref py py-class docutils literal"><span class="pre">generic</span></code></a>，<code class="xref py py-class docutils literal"><span class="pre">flexible</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-74"><code class="xref py py-class docutils literal"><span class="pre">void</span></code></span></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-75">内置Python类型</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-76">当用于生成<a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-class docutils literal"><span class="pre">dtype</span></code></a>对象时，多个python类型等同于对应的数组标量：</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%">
+<col width="53%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-77"><a class="reference external" href="https://docs.python.org/dev/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">int</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-78"><code class="xref py py-class docutils literal"><span class="pre">int_</span></code></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-79"><a class="reference external" href="https://docs.python.org/dev/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">bool</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-80"><code class="xref py py-class docutils literal"><span class="pre">bool_</span></code></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-81"><a class="reference external" href="https://docs.python.org/dev/library/functions.html#float" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">float</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-82"><code class="xref py py-class docutils literal"><span class="pre">float_</span></code></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-83"><a class="reference external" href="https://docs.python.org/dev/library/functions.html#complex" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">complex</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-84"><code class="xref py py-class docutils literal"><span class="pre">cfloat</span></code></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-85"><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">str</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-86"><code class="xref py py-class docutils literal"><span class="pre">string</span></code></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-87"><code class="xref py py-class docutils literal"><span class="pre">unicode</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-88"><code class="xref py py-class docutils literal"><span class="pre">unicode_</span></code></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-89"><code class="xref py py-class docutils literal"><span class="pre">buffer</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-90"><code class="xref py py-class docutils literal"><span class="pre">void</span></code></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-91">（所有其他对象）</span></td>
+<td><span class="yiyi-st" id="yiyi-92"><code class="xref py py-class docutils literal"><span class="pre">object_</span></code></span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-93">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>   <span class="c1"># Python-compatible floating-point number</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>     <span class="c1"># Python-compatible integer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>  <span class="c1"># Python object</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-94">具有<code class="docutils literal"><span class="pre">.dtype</span></code>的类型</span></p>
+<blockquote>
+<div><span class="yiyi-st" id="yiyi-95">具有<code class="docutils literal"><span class="pre">dtype</span></code>属性的任何类型对象：将直接访问和使用该属性。</span><span class="yiyi-st" id="yiyi-96">该属性必须返回可转换为dtype对象的东西。</span></div></blockquote>
+<p id="index-6"><span class="yiyi-st" id="yiyi-97">几种字符串可以转换。</span><span class="yiyi-st" id="yiyi-98">Recognized strings can be prepended with <code class="docutils literal"><span class="pre">&apos;&gt;&apos;</span></code> (<span class="xref std std-term">big-endian</span>), <code class="docutils literal"><span class="pre">&apos;&lt;&apos;</span></code> (<span class="xref std std-term">little-endian</span>), or <code class="docutils literal"><span class="pre">&apos;=&apos;</span></code> (hardware-native, the default), to specify the byte order.</span></p>
+<p><span class="yiyi-st" id="yiyi-99">单字符字符串</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-100">每个内置数据类型都有一个字符代码（更新的Numeric类型代码），它唯一地标识它。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-101">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;b&apos;</span><span class="p">)</span>  <span class="c1"># byte, native byte order</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;&gt;H&apos;</span><span class="p">)</span> <span class="c1"># big-endian unsigned short</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;&lt;f&apos;</span><span class="p">)</span> <span class="c1"># little-endian single-precision float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;d&apos;</span><span class="p">)</span>  <span class="c1"># double-precision floating-point number</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-102">阵列协议类型字符串（参见<a class="reference internal" href="arrays.interface.html#arrays-interface"><span class="std std-ref">The Array Interface</span></a>）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-103">第一个字符指定数据的类型，其余字符指定每个项目的字节数，Unicode除外，其中它被解释为字符数。</span><span class="yiyi-st" id="yiyi-104">项目大小必须对应于现有类型，否则将出现错误。</span><span class="yiyi-st" id="yiyi-105">支持的类型是</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%">
+<col width="60%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-106"><code class="docutils literal"><span class="pre">&apos;b&apos;</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-107">布尔</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-108"><code class="docutils literal"><span class="pre">&apos;i&apos;</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-109">（有符号）整数</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-110"><code class="docutils literal"><span class="pre">&apos;u&apos;</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-111">无符号整数</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-112"><code class="docutils literal"><span class="pre">&apos;f&apos;</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-113">浮点</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-114"><code class="docutils literal"><span class="pre">&apos;c&apos;</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-115">复杂浮点</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-116"><code class="docutils literal"><span class="pre">&apos;m&apos;</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-117">timedelta</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-118"><code class="docutils literal"><span class="pre">&apos;M&apos;</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-119">datetime</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-120"><code class="docutils literal"><span class="pre">&apos;O&apos;</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-121">（Python）对象</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-122"><code class="docutils literal"><span class="pre">&apos;S&apos;</span></code>，<code class="docutils literal"><span class="pre">&apos;a&apos;</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-123">（byte-）字符串</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-124"><code class="docutils literal"><span class="pre">&apos;U&apos;</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-125">Unicode</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-126"><code class="docutils literal"><span class="pre">&apos;V&apos;</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-127">原始数据（<code class="xref py py-class docutils literal"><span class="pre">void</span></code>）</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-128">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;i4&apos;</span><span class="p">)</span>   <span class="c1"># 32-bit signed integer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;f8&apos;</span><span class="p">)</span>   <span class="c1"># 64-bit floating-point number</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;c16&apos;</span><span class="p">)</span>  <span class="c1"># 128-bit complex floating-point number</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;a25&apos;</span><span class="p">)</span>  <span class="c1"># 25-character string</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-129">带逗号分隔字段的字符串</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-130">用于指定结构化数据类型的格式的简写符号是以逗号分隔的基本格式字符串。</span></p>
+<p><span class="yiyi-st" id="yiyi-131">此上下文中的基本格式是可选的形状说明符，后跟数组协议类型字符串。</span><span class="yiyi-st" id="yiyi-132">如果形状具有多个维度，则需要括号。</span><span class="yiyi-st" id="yiyi-133">NumPy允许对格式进行修改，因为任何可以唯一标识该类型的字符串都可以用于指定字段中的数据类型。</span><span class="yiyi-st" id="yiyi-134">所生成的数据类型字段被命名为<code class="docutils literal"><span class="pre">&apos;f0&apos;</span></code>，<code class="docutils literal"><span class="pre">&apos;f1&apos;</span></code>，...，<code class="docutils literal"><span class="pre">&apos;f&lt;N-1&gt;&apos;</span></code></span><span class="yiyi-st" id="yiyi-135">如果提供了可选的形状说明符，则相应字段的数据类型描述子阵列。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-136">例</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-137">包含32位整数的名为<code class="docutils literal"><span class="pre">f0</span></code>的字段</span></li>
+<li><span class="yiyi-st" id="yiyi-138">名为<code class="docutils literal"><span class="pre">f1</span></code>的字段，其中包含64位浮点数的2 x 3子阵列</span></li>
+<li><span class="yiyi-st" id="yiyi-139">包含32位浮点数的名为<code class="docutils literal"><span class="pre">f2</span></code>的字段</span></li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s2">&quot;i4, (2,3)f8, f4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-140">名为<code class="docutils literal"><span class="pre">f0</span></code>的字段，其中包含3个字符的字符串</span></li>
+<li><span class="yiyi-st" id="yiyi-141">字段名为<code class="docutils literal"><span class="pre">f1</span></code>的字段包含形状（3，）的子数组，其中包含64位无符号整数</span></li>
+<li><span class="yiyi-st" id="yiyi-142">名为<code class="docutils literal"><span class="pre">f2</span></code>的字段，其中包含一个包含10个字符的字符串的3 x 4子数组</span></li>
+</ul>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s2">&quot;a3, 3u8, (3,4)a10&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-143">键入字符串</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-144"><code class="xref py py-obj docutils literal"><span class="pre">numpy.sctypeDict</span></code>中的任何字符串.keys()：</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-145">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;uint32&apos;</span><span class="p">)</span>   <span class="c1"># 32-bit unsigned integer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;Float64&apos;</span><span class="p">)</span>  <span class="c1"># 64-bit floating-point number</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p id="index-7"><span class="yiyi-st" id="yiyi-146"><code class="docutils literal"><span class="pre">（flexible_dtype，</span> <span class="pre">itemsize）</span></code></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-147">第一个参数必须是转换为零大小的弹性数据类型对象的对象，第二个参数是提供所需项目大小的整数。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-148">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">((</span><span class="n">void</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>  <span class="c1"># 10-byte wide data block</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">((</span><span class="nb">str</span><span class="p">,</span> <span class="mi">35</span><span class="p">))</span>   <span class="c1"># 35-character string</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">((</span><span class="s1">&apos;U&apos;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>   <span class="c1"># 10-character unicode string</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-149"><code class="docutils literal"><span class="pre">（fixed_dtype，</span> <span class="pre">shape）</span></code></span></p>
+<blockquote>
+<div><p id="index-8"><span class="yiyi-st" id="yiyi-150">第一个参数是可以转换为固定大小的数据类型对象的任何对象。</span><span class="yiyi-st" id="yiyi-151">第二个参数是这种类型的所需形状。</span><span class="yiyi-st" id="yiyi-152">如果shape参数为1，则数据类型对象等效于fixed dtype。</span><span class="yiyi-st" id="yiyi-153">如果<em>shape</em>是元组，则新dtype定义给定形状的子数组。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-154">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>          <span class="c1"># 2 x 2 integer sub-array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">((</span><span class="s1">&apos;S10&apos;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>                 <span class="c1"># 10-character string</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">((</span><span class="s1">&apos;i4, (2,3)f8, f4&apos;</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span> <span class="c1"># 2 x 3 structured sub-array</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p id="index-9"><span class="yiyi-st" id="yiyi-155"><code class="docutils literal"><span class="pre">[（field_name，</span> <span class="pre">field_dtype，</span> <span class="pre">field_shape），</span> <span class="pre">...]</span></code></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-156"><em>obj</em>应为字段列表，其中每个字段由长度为2或3的元组描述。</span><span class="yiyi-st" id="yiyi-157">（等同于<a class="reference internal" href="arrays.interface.html#__array_interface__" title="__array_interface__"><code class="xref py py-obj docutils literal"><span class="pre">__array_interface__</span></code></a>属性中的<code class="docutils literal"><span class="pre">descr</span></code>项）。</span></p>
+<p><span class="yiyi-st" id="yiyi-158">第一个元素<em>field_name</em>是字段名称（如果这是<code class="docutils literal"><span class="pre">&apos;&apos;</span></code>，则分配标准字段名称<code class="docutils literal"><span class="pre">&apos;f#&apos;</span></code> 。</span><span class="yiyi-st" id="yiyi-159">字段名称也可以是2元组的字符串，其中第一个字符串是“标题”（其可以是任何字符串或unicode字符串）或者可以是任何对象的字段的元数据，并且第二字符串“名称”必须是有效的Python标识符。</span></p>
+<p><span class="yiyi-st" id="yiyi-160">第二个元素<em>field_dtype</em>可以是任何可以解释为数据类型的东西。</span></p>
+<p><span class="yiyi-st" id="yiyi-161">如果此字段表示第二个元素中数据类型的数组，则可选的第三个元素<em>field_shape</em>包含形状。</span><span class="yiyi-st" id="yiyi-162">注意，具有等于1的第三自变量的3元组等价于2元组。</span></p>
+<p><span class="yiyi-st" id="yiyi-163">此样式不接受<a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-class docutils literal"><span class="pre">dtype</span></code></a>构造函数中的<em>align</em>，因为它假定所有内存都由数组接口描述。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-164">例</span></p>
+<p><span class="yiyi-st" id="yiyi-165">具有字段<code class="docutils literal"><span class="pre">big</span></code>（big-endian 32位整数）和<code class="docutils literal"><span class="pre">little</span></code>（小字节32位整数）的数据类型：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&apos;big&apos;</span><span class="p">,</span> <span class="s1">&apos;&gt;i4&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;little&apos;</span><span class="p">,</span> <span class="s1">&apos;&lt;i4&apos;</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-166">具有字段<code class="docutils literal"><span class="pre">R</span></code>，<code class="docutils literal"><span class="pre">G</span></code>，<code class="docutils literal"><span class="pre">B</span></code>，<code class="docutils literal"><span class="pre">A</span></code>的数据类型，每个都是无符号的8位整数：</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&apos;R&apos;</span><span class="p">,</span><span class="s1">&apos;u1&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;G&apos;</span><span class="p">,</span><span class="s1">&apos;u1&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;B&apos;</span><span class="p">,</span><span class="s1">&apos;u1&apos;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;A&apos;</span><span class="p">,</span><span class="s1">&apos;u1&apos;</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p id="index-10"><span class="yiyi-st" id="yiyi-167"><code class="docutils literal"><span class="pre">{&apos;names&apos;：</span> <span class="pre">...，</span> <span class="pre">&apos;formats&apos;：</span> <span class="pre">...，</span> <span class="pre">&apos;offsets&apos;：</span> <span class="pre">...，</span> <span class="pre">&apos;titles&apos;：</span> <span class="pre">...，</span> <span class="pre">&apos;itemsize&apos;： <span class="pre">...}</span></span></code></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-168">此样式有两个必需和三个可选键。</span><span class="yiyi-st" id="yiyi-169">需要<em>名称</em>和<em>格式</em>键。</span><span class="yiyi-st" id="yiyi-170">它们各自的值是具有字段名称和字段格式的等长列表。</span><span class="yiyi-st" id="yiyi-171">字段名称必须是字符串，字段格式可以是<a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-class docutils literal"><span class="pre">dtype</span></code></a>构造函数接受的任何对象。</span></p>
+<p><span class="yiyi-st" id="yiyi-172">当提供可选键<em>偏移量</em>和<em>标题</em>时，它们的值必须都是与<em>名称</em>和<em>格式相同长度的列表列表。</em></span><span class="yiyi-st" id="yiyi-173"><em>offsets</em>值是每个字段的字节偏移量（整数）的列表，<em>titles</em>值是每个字段的标题列表（<code class="xref py py-const docutils literal"><span class="pre">None</span></code></span><span class="yiyi-st" id="yiyi-174"><em>titles</em>可以是任何<code class="xref py py-class docutils literal"><span class="pre">string</span></code>或<code class="xref py py-class docutils literal"><span class="pre">unicode</span></code>对象，并将添加另一个条目到字段键入的标题和引用同一字段元组将包含标题作为额外的元组成员。</span></p>
+<p><span class="yiyi-st" id="yiyi-175"><em>itemsize</em>键允许设置dtype的总大小，并且必须是足够大的整数，因此所有字段都在dtype内。</span><span class="yiyi-st" id="yiyi-176">如果构造的dtype是对齐的，则<em>itemsize</em>也必须可以被struct对齐整除。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-177">例</span></p>
+<p><span class="yiyi-st" id="yiyi-178">具有字段<code class="docutils literal"><span class="pre">r</span></code>，<code class="docutils literal"><span class="pre">g</span></code>，<code class="docutils literal"><span class="pre">b</span></code>，<code class="docutils literal"><span class="pre">a</span></code>的数据类型，每个都是8位无符号整数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">({</span><span class="s1">&apos;names&apos;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&apos;r&apos;</span><span class="p">,</span><span class="s1">&apos;g&apos;</span><span class="p">,</span><span class="s1">&apos;b&apos;</span><span class="p">,</span><span class="s1">&apos;a&apos;</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="s1">&apos;formats&apos;</span><span class="p">:</span> <span class="p">[</span><span class="n">uint8</span><span class="p">,</span> <span class="n">uint8</span><span class="p">,</span> <span class="n">uint8</span><span class="p">,</span> <span class="n">uint8</span><span class="p">]})</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-179">具有字段<code class="docutils literal"><span class="pre">r</span></code>和<code class="docutils literal"><span class="pre">b</span></code>的数据类型（带有给定标题），都是8位无符号整数，第一个位于从字段开始的字节位置0，秒在位置2：</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">({</span><span class="s1">&apos;names&apos;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&apos;r&apos;</span><span class="p">,</span><span class="s1">&apos;b&apos;</span><span class="p">],</span> <span class="s1">&apos;formats&apos;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&apos;u1&apos;</span><span class="p">,</span> <span class="s1">&apos;u1&apos;</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="s1">&apos;offsets&apos;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>               <span class="s1">&apos;titles&apos;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&apos;Red pixel&apos;</span><span class="p">,</span> <span class="s1">&apos;Blue pixel&apos;</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-180"><code class="docutils literal"><span class="pre">{&apos;field1&apos;：</span> <span class="pre">...，</span> <span class="pre">&apos;field2&apos;：</span> <span class="pre">...，</span> <span class="pre"> ...}</span></code></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-181">不建议使用这种用法，因为它与其他基于dict的构造方法不明确。</span><span class="yiyi-st" id="yiyi-182">如果你有一个名为&apos;names&apos;的字段和一个名为&apos;formats&apos;的字段，则会有冲突。</span></p>
+<p><span class="yiyi-st" id="yiyi-183">此样式允许传递数据类型对象的<a class="reference internal" href="generated/numpy.dtype.fields.html#numpy.dtype.fields" title="numpy.dtype.fields"><code class="xref py py-attr docutils literal"><span class="pre">fields</span></code></a>属性。</span></p>
+<p><span class="yiyi-st" id="yiyi-184"><em>obj</em> should contain string or unicode keys that refer to <code class="docutils literal"><span class="pre">(data-type,</span> <span class="pre">offset)</span></code> or <code class="docutils literal"><span class="pre">(data-type,</span> <span class="pre">offset,</span> <span class="pre">title)</span></code> tuples.</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-185">例</span></p>
+<p><span class="yiyi-st" id="yiyi-186">包含字段<code class="docutils literal"><span class="pre">col1</span></code>（位于字节位置0处的10个字符的字符串），<code class="docutils literal"><span class="pre">col2</span></code>（位于字节位置10的32位浮点）和<code class="docutils literal"><span class="pre">col3</span></code></span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">({</span><span class="s1">&apos;col1&apos;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&apos;S10&apos;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&apos;col2&apos;</span><span class="p">:</span> <span class="p">(</span><span class="n">float32</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<span class="go">    &apos;col3&apos;: (int, 14)})</span>
+</pre></div>
+</div>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-187"><code class="docutils literal"><span class="pre">（base_dtype，</span> <span class="pre">new_dtype）</span></code></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-188">在NumPy 1.7和更高版本中，此形式允许将<em class="xref py py-obj">base_dtype</em>解释为结构化dtype。</span><span class="yiyi-st" id="yiyi-189">使用此dtype创建的数组将具有底层dtype <em class="xref py py-obj">base_dtype</em>，但将具有取自<em class="xref py py-obj">new_dtype</em>的字段和标志。</span><span class="yiyi-st" id="yiyi-190">这对于创建自定义结构化数据类型非常有用，如<a class="reference internal" href="arrays.classes.html#arrays-classes-rec"><span class="std std-ref">record arrays</span></a>中所做。</span></p>
+<p><span class="yiyi-st" id="yiyi-191">这种形式还可以指定具有重叠字段的struct dtypes，其功能类似于C中的“union”类型。但是不建议使用这种用法，并且优选联合机制。</span></p>
+<p><span class="yiyi-st" id="yiyi-192">这两个参数必须可以转换为具有相同总大小的数据类型对象。</span><span class="yiyi-st" id="yiyi-193">.. admonition :: Example</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-194">32位整数，其前两个字节通过字段<code class="docutils literal"><span class="pre">real</span></code>解释为整数，以及以下两个字节通过字段<code class="docutils literal"><span class="pre">imag</span></code>解释。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,{</span><span class="s1">&apos;real&apos;</span><span class="p">:(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span><span class="s1">&apos;imag&apos;</span><span class="p">:(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">,</span> <span class="mi">2</span><span class="p">)})</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-195">32位整数，其被解释为由包含8位整数的形式<code class="docutils literal"><span class="pre">(4,)</span></code>的子数组组成：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-196">32位整数，包含解释整数中的4个字节的字段<code class="docutils literal"><span class="pre">r</span></code>，<code class="docutils literal"><span class="pre">g</span></code>，<code class="docutils literal"><span class="pre">b</span></code>，<code class="docutils literal"><span class="pre">a</span></code>作为四个无符号整数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">((</span><span class="s1">&apos;i4&apos;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&apos;r&apos;</span><span class="p">,</span><span class="s1">&apos;u1&apos;</span><span class="p">),(</span><span class="s1">&apos;g&apos;</span><span class="p">,</span><span class="s1">&apos;u1&apos;</span><span class="p">),(</span><span class="s1">&apos;b&apos;</span><span class="p">,</span><span class="s1">&apos;u1&apos;</span><span class="p">),(</span><span class="s1">&apos;a&apos;</span><span class="p">,</span><span class="s1">&apos;u1&apos;</span><span class="p">)]))</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="dtype">
+<h2><span class="yiyi-st" id="yiyi-197"><a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-class docutils literal"><span class="pre">dtype</span></code></a></span></h2>
+<p><span class="yiyi-st" id="yiyi-198">NumPy数据类型描述是<a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-class docutils literal"><span class="pre">dtype</span></code></a>类的实例。</span></p>
+<div class="section" id="attributes">
+<h3><span class="yiyi-st" id="yiyi-199">Attributes</span></h3>
+<p><span class="yiyi-st" id="yiyi-200">数据的类型由以下<a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-class docutils literal"><span class="pre">dtype</span></code></a>属性描述：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-201"><a class="reference internal" href="generated/numpy.dtype.type.html#numpy.dtype.type" title="numpy.dtype.type"><code class="xref py py-obj docutils literal"><span class="pre">dtype.type</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-202">用于实例化此数据类型的标量的类型对象。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-203"><a class="reference internal" href="generated/numpy.dtype.kind.html#numpy.dtype.kind" title="numpy.dtype.kind"><code class="xref py py-obj docutils literal"><span class="pre">dtype.kind</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-204">标识数据的一般类型的字符代码（&apos;biufcmMOSUV&apos;之一）。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-205"><a class="reference internal" href="generated/numpy.dtype.char.html#numpy.dtype.char" title="numpy.dtype.char"><code class="xref py py-obj docutils literal"><span class="pre">dtype.char</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-206">21种不同内置类型中的每一种的唯一字符代码。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-207"><a class="reference internal" href="generated/numpy.dtype.num.html#numpy.dtype.num" title="numpy.dtype.num"><code class="xref py py-obj docutils literal"><span class="pre">dtype.num</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-208">21种不同内置类型中的每一种的唯一编号。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-209"><a class="reference internal" href="generated/numpy.dtype.str.html#numpy.dtype.str" title="numpy.dtype.str"><code class="xref py py-obj docutils literal"><span class="pre">dtype.str</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-210">此数据类型对象的数组协议typestring。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-211">数据的大小又由以下描述：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-212"><a class="reference internal" href="generated/numpy.dtype.name.html#numpy.dtype.name" title="numpy.dtype.name"><code class="xref py py-obj docutils literal"><span class="pre">dtype.name</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-213">此数据类型的位宽名称。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-214"><a class="reference internal" href="generated/numpy.dtype.itemsize.html#numpy.dtype.itemsize" title="numpy.dtype.itemsize"><code class="xref py py-obj docutils literal"><span class="pre">dtype.itemsize</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-215">此数据类型对象的元素大小。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-216">该数据的字尾数：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-217"><a class="reference internal" href="generated/numpy.dtype.byteorder.html#numpy.dtype.byteorder" title="numpy.dtype.byteorder"><code class="xref py py-obj docutils literal"><span class="pre">dtype.byteorder</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-218">指示此数据类型对象的字节顺序的字符。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-219">有关<span class="xref std std-term">结构化</span>数据类型中子数据类型的信息：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-220"><a class="reference internal" href="generated/numpy.dtype.fields.html#numpy.dtype.fields" title="numpy.dtype.fields"><code class="xref py py-obj docutils literal"><span class="pre">dtype.fields</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-221">为此数据类型定义的命名字段字典，或<code class="docutils literal"><span class="pre">None</span></code>。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-222"><a class="reference internal" href="generated/numpy.dtype.names.html#numpy.dtype.names" title="numpy.dtype.names"><code class="xref py py-obj docutils literal"><span class="pre">dtype.names</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-223">字段名称的有序列表，如果没有字段，则为<code class="docutils literal"><span class="pre">None</span></code>。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-224">对于描述子数组的数据类型：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-225"><a class="reference internal" href="generated/numpy.dtype.subdtype.html#numpy.dtype.subdtype" title="numpy.dtype.subdtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype.subdtype</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-226">Tuple <code class="docutils literal"><span class="pre">(item_dtype,</span> <span class="pre">shape)</span></code> if this <a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a> describes a sub-array, and None otherwise.</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-227"><a class="reference internal" href="generated/numpy.dtype.shape.html#numpy.dtype.shape" title="numpy.dtype.shape"><code class="xref py py-obj docutils literal"><span class="pre">dtype.shape</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-228">如果此数据类型描述子数组，则子数组的形状元组，否则为<code class="docutils literal"><span class="pre">()</span></code>。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-229">提供附加信息的属性：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-230"><a class="reference internal" href="generated/numpy.dtype.hasobject.html#numpy.dtype.hasobject" title="numpy.dtype.hasobject"><code class="xref py py-obj docutils literal"><span class="pre">dtype.hasobject</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-231">布尔值，指示此dtype是否在任何字段或子类型中包含任何引用计数的对象。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-232"><a class="reference internal" href="generated/numpy.dtype.flags.html#numpy.dtype.flags" title="numpy.dtype.flags"><code class="xref py py-obj docutils literal"><span class="pre">dtype.flags</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-233">位标志描述如何解释此数据类型。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-234"><a class="reference internal" href="generated/numpy.dtype.isbuiltin.html#numpy.dtype.isbuiltin" title="numpy.dtype.isbuiltin"><code class="xref py py-obj docutils literal"><span class="pre">dtype.isbuiltin</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-235">整数指示此dtype如何与内置的dtype相关。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-236"><a class="reference internal" href="generated/numpy.dtype.isnative.html#numpy.dtype.isnative" title="numpy.dtype.isnative"><code class="xref py py-obj docutils literal"><span class="pre">dtype.isnative</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-237">布尔值，指示此dtype的字节顺序是否为平台本地的。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-238"><a class="reference internal" href="generated/numpy.dtype.descr.html#numpy.dtype.descr" title="numpy.dtype.descr"><code class="xref py py-obj docutils literal"><span class="pre">dtype.descr</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-239">数组类型的数组接口完全描述。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-240"><a class="reference internal" href="generated/numpy.dtype.alignment.html#numpy.dtype.alignment" title="numpy.dtype.alignment"><code class="xref py py-obj docutils literal"><span class="pre">dtype.alignment</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-241">根据编译器，此数据类型所需的对齐（字节）。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="methods">
+<h3><span class="yiyi-st" id="yiyi-242">Methods</span></h3>
+<p><span class="yiyi-st" id="yiyi-243">数据类型具有以下用于更改字节顺序的方法：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-244"><a class="reference internal" href="generated/numpy.dtype.newbyteorder.html#numpy.dtype.newbyteorder" title="numpy.dtype.newbyteorder"><code class="xref py py-obj docutils literal"><span class="pre">dtype.newbyteorder</span></code></a>（[new_order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-245">返回一个具有不同字节顺序的新dtype。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-246">以下方法实现pickle协议：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-247"><a class="reference internal" href="generated/numpy.dtype.__reduce__.html#numpy.dtype.__reduce__" title="numpy.dtype.__reduce__"><code class="xref py py-obj docutils literal"><span class="pre">dtype.__reduce__</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-248"><a class="reference internal" href="generated/numpy.dtype.__setstate__.html#numpy.dtype.__setstate__" title="numpy.dtype.__setstate__"><code class="xref py py-obj docutils literal"><span class="pre">dtype.__setstate__</span></code></a></span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

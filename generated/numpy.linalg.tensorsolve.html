@@ -1,0 +1,57 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.tensorsolve</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.tensorsolve.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.tensorsolve.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.tensorsolve"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">tensorsolve</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>axes=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L227-L294"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">为x解出张量方程<code class="docutils literal"><span class="pre">a</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">b</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-15">假设<em class="xref py py-obj">x</em>的所有索引与<em class="xref py py-obj">a</em>的最右边索引一起在产物中求和，如在例如<code class="docutils literal"><span class="pre"> tensordot（a，</span> <span class="pre">x，</span> <span class="pre">axes = len（b.shape））</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">系数张量，形状<code class="docutils literal"><span class="pre">b.shape</span> <span class="pre">+</span> <span class="pre">Q</span></code>。 <em class="xref py py-obj">Q</em>等于由其最右边索引的适当数目组成的<em class="xref py py-obj">a</em>的子张量的形状，并且必须使得<code class="docutils literal"><span class="pre">prod（Q）</span> <span class="pre">==</span> <span class="pre">prod（b.shape）</span></code>（在某种意义上<em class="xref py py-obj">a</em> &apos;广场&apos;）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>b</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">右手张量，可以是任何形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>axes</strong>：ints的元组，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">在<em class="xref py py-obj">a</em>中的轴，在反演前向右重新排序。</span><span class="yiyi-st" id="yiyi-23">如果为无（默认值），则不进行重新排序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>x</strong>：ndarray，shape Q</span></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>LinAlgError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">如果<em class="xref py py-obj">a</em>是奇异的或不是&apos;正方形&apos;（在上述意义上）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-30"><code class="xref py py-obj docutils literal"><span class="pre">tensordot</span></code>，<a class="reference internal" href="numpy.linalg.tensorinv.html#numpy.linalg.tensorinv" title="numpy.linalg.tensorinv"><code class="xref py py-obj docutils literal"><span class="pre">tensorinv</span></code></a>，<code class="xref py py-obj docutils literal"><span class="pre">einsum</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">tensorsolve</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 3, 4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

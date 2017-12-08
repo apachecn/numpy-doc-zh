@@ -1,0 +1,182 @@
+
+<h1><span class="yiyi-st" id="yiyi-22">Chebyshev Module (<code class="xref py py-mod docutils literal"><span class="pre">numpy.polynomial.chebyshev</span></code>)</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.polynomials.chebyshev.html">https://docs.scipy.org/doc/numpy/reference/routines.polynomials.chebyshev.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-23"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-24">这个模块提供了许多对处理Chebyshev系列有用的对象（主要是函数），包括封装了通常的算术运算的<a class="reference internal" href="generated/numpy.polynomial.chebyshev.Chebyshev.html#numpy.polynomial.chebyshev.Chebyshev" title="numpy.polynomial.chebyshev.Chebyshev"><code class="xref py py-obj docutils literal"><span class="pre">Chebyshev</span></code></a>类。</span><span class="yiyi-st" id="yiyi-25">（关于此模块如何表示和使用这样的多项式的一般信息在其“父”子包的文档字符串中，<code class="xref py py-obj docutils literal"><span class="pre">numpy.polynomial</span></code>）。</span></p>
+<div class="section" id="chebyshev-class">
+<h2><span class="yiyi-st" id="yiyi-26">Chebyshev Class</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.Chebyshev.html#numpy.polynomial.chebyshev.Chebyshev" title="numpy.polynomial.chebyshev.Chebyshev"><code class="xref py py-obj docutils literal"><span class="pre">Chebyshev</span></code></a>（coef [，domain，window]）</span></td>
+<td><span class="yiyi-st" id="yiyi-28">Chebyshev系列类。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="basics">
+<h2><span class="yiyi-st" id="yiyi-29">Basics</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebval.html#numpy.polynomial.chebyshev.chebval" title="numpy.polynomial.chebyshev.chebval"><code class="xref py py-obj docutils literal"><span class="pre">chebval</span></code></a>（x，c [，张量]）</span></td>
+<td><span class="yiyi-st" id="yiyi-31">在点x评估切比雪夫系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebval2d.html#numpy.polynomial.chebyshev.chebval2d" title="numpy.polynomial.chebyshev.chebval2d"><code class="xref py py-obj docutils literal"><span class="pre">chebval2d</span></code></a>（x，y，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-33">在点（x，y）评估2-D切比雪夫系列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebval3d.html#numpy.polynomial.chebyshev.chebval3d" title="numpy.polynomial.chebyshev.chebval3d"><code class="xref py py-obj docutils literal"><span class="pre">chebval3d</span></code></a>（x，y，z，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-35">在点（x，y，z）评估3-D切比雪夫系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebgrid2d.html#numpy.polynomial.chebyshev.chebgrid2d" title="numpy.polynomial.chebyshev.chebgrid2d"><code class="xref py py-obj docutils literal"><span class="pre">chebgrid2d</span></code></a>（x，y，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-37">评估x和y的笛卡尔乘积上的2-D Chebyshev系列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebgrid3d.html#numpy.polynomial.chebyshev.chebgrid3d" title="numpy.polynomial.chebyshev.chebgrid3d"><code class="xref py py-obj docutils literal"><span class="pre">chebgrid3d</span></code></a>（x，y，z，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-39">在x，y和z的笛卡尔乘积上评估3-D切比雪夫系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebroots.html#numpy.polynomial.chebyshev.chebroots" title="numpy.polynomial.chebyshev.chebroots"><code class="xref py py-obj docutils literal"><span class="pre">chebroots</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-41">计算切比雪夫系列的根。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebfromroots.html#numpy.polynomial.chebyshev.chebfromroots" title="numpy.polynomial.chebyshev.chebfromroots"><code class="xref py py-obj docutils literal"><span class="pre">chebfromroots</span></code></a>（根）</span></td>
+<td><span class="yiyi-st" id="yiyi-43">生成具有给定根的切比雪夫系列。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fitting">
+<h2><span class="yiyi-st" id="yiyi-44">Fitting</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebfit.html#numpy.polynomial.chebyshev.chebfit" title="numpy.polynomial.chebyshev.chebfit"><code class="xref py py-obj docutils literal"><span class="pre">chebfit</span></code></a>（x，y，deg [，rcond，full，w]）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">切比雪夫系列数据的最小二乘拟合。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebvander.html#numpy.polynomial.chebyshev.chebvander" title="numpy.polynomial.chebyshev.chebvander"><code class="xref py py-obj docutils literal"><span class="pre">chebvander</span></code></a>（x，deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-48">给定程度的伪Vandermonde矩阵。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebvander2d.html#numpy.polynomial.chebyshev.chebvander2d" title="numpy.polynomial.chebyshev.chebvander2d"><code class="xref py py-obj docutils literal"><span class="pre">chebvander2d</span></code></a>（x，y，deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">给定度的伪Vandermonde矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebvander3d.html#numpy.polynomial.chebyshev.chebvander3d" title="numpy.polynomial.chebyshev.chebvander3d"><code class="xref py py-obj docutils literal"><span class="pre">chebvander3d</span></code></a>（x，y，z，deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">给定度的伪Vandermonde矩阵。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="calculus">
+<h2><span class="yiyi-st" id="yiyi-53">Calculus</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebder.html#numpy.polynomial.chebyshev.chebder" title="numpy.polynomial.chebyshev.chebder"><code class="xref py py-obj docutils literal"><span class="pre">chebder</span></code></a>（c [，m，scl，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-55">区分一个切比雪夫系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebint.html#numpy.polynomial.chebyshev.chebint" title="numpy.polynomial.chebyshev.chebint"><code class="xref py py-obj docutils literal"><span class="pre">chebint</span></code></a>（c [，m，k，lbnd，scl，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-57">集成Chebyshev系列。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="algebra">
+<h2><span class="yiyi-st" id="yiyi-58">Algebra</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebadd.html#numpy.polynomial.chebyshev.chebadd" title="numpy.polynomial.chebyshev.chebadd"><code class="xref py py-obj docutils literal"><span class="pre">chebadd</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">添加一个切比雪夫系列到另一个。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebsub.html#numpy.polynomial.chebyshev.chebsub" title="numpy.polynomial.chebyshev.chebsub"><code class="xref py py-obj docutils literal"><span class="pre">chebsub</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-62">从另一个减去一个切比雪夫系列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebmul.html#numpy.polynomial.chebyshev.chebmul" title="numpy.polynomial.chebyshev.chebmul"><code class="xref py py-obj docutils literal"><span class="pre">chebmul</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-64">将一个切比雪夫系列乘以另一个。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebmulx.html#numpy.polynomial.chebyshev.chebmulx" title="numpy.polynomial.chebyshev.chebmulx"><code class="xref py py-obj docutils literal"><span class="pre">chebmulx</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-66">乘以一个Chebyshev系列x。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebdiv.html#numpy.polynomial.chebyshev.chebdiv" title="numpy.polynomial.chebyshev.chebdiv"><code class="xref py py-obj docutils literal"><span class="pre">chebdiv</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-68">将一个切比雪夫系列除以另一个。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebpow.html#numpy.polynomial.chebyshev.chebpow" title="numpy.polynomial.chebyshev.chebpow"><code class="xref py py-obj docutils literal"><span class="pre">chebpow</span></code></a>（c，pow [，maxpower]）</span></td>
+<td><span class="yiyi-st" id="yiyi-70">提高切比雪夫系列的力量。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="quadrature">
+<h2><span class="yiyi-st" id="yiyi-71">Quadrature</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebgauss.html#numpy.polynomial.chebyshev.chebgauss" title="numpy.polynomial.chebyshev.chebgauss"><code class="xref py py-obj docutils literal"><span class="pre">chebgauss</span></code></a>（deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-73">高斯 - 切比雪夫正交。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebweight.html#numpy.polynomial.chebyshev.chebweight" title="numpy.polynomial.chebyshev.chebweight"><code class="xref py py-obj docutils literal"><span class="pre">chebweight</span></code></a>（x）</span></td>
+<td><span class="yiyi-st" id="yiyi-75">切比雪夫多项式的加权函数。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="miscellaneous">
+<h2><span class="yiyi-st" id="yiyi-76">Miscellaneous</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-77"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebcompanion.html#numpy.polynomial.chebyshev.chebcompanion" title="numpy.polynomial.chebyshev.chebcompanion"><code class="xref py py-obj docutils literal"><span class="pre">chebcompanion</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-78">返回c的缩放伴随矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-79"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebdomain.html#numpy.polynomial.chebyshev.chebdomain" title="numpy.polynomial.chebyshev.chebdomain"><code class="xref py py-obj docutils literal"><span class="pre">chebdomain</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebzero.html#numpy.polynomial.chebyshev.chebzero" title="numpy.polynomial.chebyshev.chebzero"><code class="xref py py-obj docutils literal"><span class="pre">chebzero</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-81"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebone.html#numpy.polynomial.chebyshev.chebone" title="numpy.polynomial.chebyshev.chebone"><code class="xref py py-obj docutils literal"><span class="pre">chebone</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-82"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebx.html#numpy.polynomial.chebyshev.chebx" title="numpy.polynomial.chebyshev.chebx"><code class="xref py py-obj docutils literal"><span class="pre">chebx</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-83"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebtrim.html#numpy.polynomial.chebyshev.chebtrim" title="numpy.polynomial.chebyshev.chebtrim"><code class="xref py py-obj docutils literal"><span class="pre">chebtrim</span></code></a>（c [，tol]）</span></td>
+<td><span class="yiyi-st" id="yiyi-84">从多项式中删除“小”“拖尾”系数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-85"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.chebline.html#numpy.polynomial.chebyshev.chebline" title="numpy.polynomial.chebyshev.chebline"><code class="xref py py-obj docutils literal"><span class="pre">chebline</span></code></a>（off，scl）</span></td>
+<td><span class="yiyi-st" id="yiyi-86">切比雪夫系列的图形是一条直线。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-87"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.cheb2poly.html#numpy.polynomial.chebyshev.cheb2poly" title="numpy.polynomial.chebyshev.cheb2poly"><code class="xref py py-obj docutils literal"><span class="pre">cheb2poly</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-88">将切比雪夫系列转换为多项式。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-89"><a class="reference internal" href="generated/numpy.polynomial.chebyshev.poly2cheb.html#numpy.polynomial.chebyshev.poly2cheb" title="numpy.polynomial.chebyshev.poly2cheb"><code class="xref py py-obj docutils literal"><span class="pre">poly2cheb</span></code></a>（pol）</span></td>
+<td><span class="yiyi-st" id="yiyi-90">将多项式转换为切比雪夫系列。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

@@ -1,0 +1,75 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.wald</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.wald.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.wald.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.wald"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">wald</code><span class="sig-paren">(</span><em>mean</em>, <em>scale</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从Wald或反高斯分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">随着尺度接近无穷大，分布变得更像高斯。</span><span class="yiyi-st" id="yiyi-17">一些参考文献声称Wald是平均等于1的反高斯，但这不是通用的。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">首先研究与布朗运动相关的反高斯分布。</span><span class="yiyi-st" id="yiyi-19">1956年M.C.K.</span><span class="yiyi-st" id="yiyi-20">Tweedie使用名称inverse Gaussian，因为在单位时间内覆盖单位距离和距离的时间之间存在反比关系。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>表示</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">分布均值，应&gt; 0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>scale</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">缩放参数，应为&gt; = 0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">输出形状。</span><span class="yiyi-st" id="yiyi-28">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-29">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>samples</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">绘制的样本，都大于零。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-34">Wald分布的概率密度函数为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-35">如上所述，反高斯分布首先来自对布朗运动建模的尝试。</span><span class="yiyi-st" id="yiyi-36">它也是Weibull的竞争对手，用于可靠性建模和建模股票回报和利率过程。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r201" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-38"><a class="fn-backref" href="#id1">[R201]</a></span></td><td><span class="yiyi-st" id="yiyi-39">Brighton Webs Ltd.，Wald Distribution，<a class="reference external" href="http://www.brighton-webs.co.uk/distributions/wald.asp">http://www.brighton-webs.co.uk/distributions/wald.asp</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r202" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-40"><a class="fn-backref" href="#id2">[R202]</a></span></td><td><span class="yiyi-st" id="yiyi-41">Chhikara，Raj S.和Folks，J.Leroy，“The Inverse Gaussian Distribution：Theory：Methodology，and Applications”，CRC Press，1988。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r203" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-42"><a class="fn-backref" href="#id3">[R203]</a></span></td><td><span class="yiyi-st" id="yiyi-43">维基百科，“Wald分发”<a class="reference external" href="http://en.wikipedia.org/wiki/Wald_distribution">http://en.wikipedia.org/wiki/Wald_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-45">从分布中绘制值并绘制直方图：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">wald</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100000</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">（<a class="reference external" href="../../reference/generated/numpy-random-RandomState-wald-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-wald-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-wald-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-RandomState-wald-1.png" src="../../_images/numpy-random-RandomState-wald-1.png">
+</div>
+</dd></dl>

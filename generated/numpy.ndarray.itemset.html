@@ -1,0 +1,41 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ndarray.itemset</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.itemset.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.itemset.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ndarray.itemset"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">ndarray.</code><code class="descname">itemset</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将标量插入到数组中（如果可能，将标量转换为数组的dtype）</span></p>
+<p><span class="yiyi-st" id="yiyi-16">必须至少有1个参数，并将最后一个参数定义为<em>项</em>。</span><span class="yiyi-st" id="yiyi-17">然后，<code class="docutils literal"><span class="pre">a.itemset(*args)</span></code>与<code class="docutils literal"><span class="pre">a [args]</span> <span class="pre">=</span> <span class="pre">t5&gt;</span></code>。</span><span class="yiyi-st" id="yiyi-18">项目应为标量值，<em class="xref py py-obj">args</em>必须在数组<em class="xref py py-obj">a</em>中选择单个项目。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>* args</strong>：参数</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">如果一个参数：标量，仅用于<em class="xref py py-obj">a</em>的大小为1。</span><span class="yiyi-st" id="yiyi-22">如果有两个参数：最后一个参数是要设置的值，并且必须是标量，第一个参数指定单个数组元素位置。</span><span class="yiyi-st" id="yiyi-23">它是一个int或一个元组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-25">与索引语法相比，如果你必须这样做，则<a class="reference internal" href="#numpy.ndarray.itemset" title="numpy.ndarray.itemset"><code class="xref py py-obj docutils literal"><span class="pre">itemset</span></code></a>提供一些将标量放入<a class="reference internal" href="numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a>中的特定位置的速度。</span><span class="yiyi-st" id="yiyi-26">然而，通常这是不鼓励的：除了其他问题，它使代码的外观复杂化。</span><span class="yiyi-st" id="yiyi-27">此外，当在循环中使用<a class="reference internal" href="#numpy.ndarray.itemset" title="numpy.ndarray.itemset"><code class="xref py py-obj docutils literal"><span class="pre">itemset</span></code></a>（和<a class="reference internal" href="numpy.ndarray.item.html#numpy.ndarray.item" title="numpy.ndarray.item"><code class="xref py py-obj docutils literal"><span class="pre">item</span></code></a>）时，请务必将方法分配给局部变量，以避免在每次循环迭代时查找属性。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[3, 1, 7],</span>
+<span class="go">       [2, 8, 3],</span>
+<span class="go">       [8, 5, 3]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">itemset</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">itemset</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[3, 1, 7],</span>
+<span class="go">       [2, 0, 3],</span>
+<span class="go">       [8, 5, 9]])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,96 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.lib.Arrayterator</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.lib.Arrayterator.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.lib.Arrayterator.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.lib.Arrayterator"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.lib.</code><code class="descname">Arrayterator</code><span class="sig-paren">(</span><em>var</em>, <em>buf_size=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/arrayterator.py#L20-L225"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">大数组的缓冲迭代器。</span></p>
+<p><span class="yiyi-st" id="yiyi-15"><a class="reference internal" href="#numpy.lib.Arrayterator" title="numpy.lib.Arrayterator"><code class="xref py py-obj docutils literal"><span class="pre">Arrayterator</span></code></a>创建一个缓冲迭代器，用于在小连续块中读取大数组。</span><span class="yiyi-st" id="yiyi-16">该类对存储在文件系统中的对象很有用。</span><span class="yiyi-st" id="yiyi-17">它允许对象<em>上的迭代，而不用</em>读取内存中的所有内容；相反，小块被读取和迭代。</span></p>
+<p><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="#numpy.lib.Arrayterator" title="numpy.lib.Arrayterator"><code class="xref py py-obj docutils literal"><span class="pre">Arrayterator</span></code></a>可用于支持多维切片的任何对象。</span><span class="yiyi-st" id="yiyi-19">这包括NumPy数组，但也包括来自Scientific.IO.NetCDF或pynetcdf的变量。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>var</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">要迭代的对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>buf_size</strong>：int，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">缓冲区大小。</span><span class="yiyi-st" id="yiyi-25">如果提供<em class="xref py py-obj">buf_size</em>，则将读入存储器的最大数据量为<em class="xref py py-obj">buf_size</em>元素。</span><span class="yiyi-st" id="yiyi-26">默认值为None，这将尽可能多的元素读入内存。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-28"><code class="xref py py-obj docutils literal"><span class="pre">ndenumerate</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">多维数组迭代器。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-30"><code class="xref py py-obj docutils literal"><span class="pre">flatiter</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">平数组迭代器。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-32"><code class="xref py py-obj docutils literal"><span class="pre">memmap</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">创建存储在磁盘上的二进制文件中的数组的内存映射。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-35">该算法通过首先找到“运行维度”来工作，沿着该运行维度将提取块。</span><span class="yiyi-st" id="yiyi-36">给定尺寸为<code class="docutils literal"><span class="pre">（d1，</span> <span class="pre">d2，</span> <span class="pre">...，</span> <span class="pre">dn）</span>  t0 &gt;，例如如果<em class="xref py py-obj">buf_size</em>小于<code class="docutils literal"><span class="pre">d1</span></code>，则将使用第一个维度。</code></span><span class="yiyi-st" id="yiyi-37">另一方面，如果<code class="docutils literal"><span class="pre">d1</span> <span class="pre"> <span class="pre">buf_size</span> <span class="pre"></span> <span class="pre">d1 * d2 </span></span></code>将使用第二个维度，以此类推。</span><span class="yiyi-st" id="yiyi-38">沿此维提取块，并且当返回最后一个块时，过程从下一维继续，直到已读取所有元素。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a_itor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">Arrayterator</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a_itor</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 4, 5, 6)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">现在我们可以迭代<code class="docutils literal"><span class="pre">a_itor</span></code>，它将返回大小为2的数组。</span><span class="yiyi-st" id="yiyi-41">由于<em class="xref py py-obj">buf_size</em>小于任何维度，因此第一个维度将首先迭代：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">subarr</span> <span class="ow">in</span> <span class="n">a_itor</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">subarr</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">subarr</span><span class="p">,</span> <span class="n">subarr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">[[[[0 1]]]] (1, 1, 1, 2)</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-42">属性</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="numpy.lib.Arrayterator.shape.html#numpy.lib.Arrayterator.shape" title="numpy.lib.Arrayterator.shape"><code class="xref py py-obj docutils literal"><span class="pre">shape</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-44">要迭代的数组的形状。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="numpy.lib.Arrayterator.flat.html#numpy.lib.Arrayterator.flat" title="numpy.lib.Arrayterator.flat"><code class="xref py py-obj docutils literal"><span class="pre">flat</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-46">Arrayterator对象的1-D平面迭代器。</span></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%">
+<col width="56%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-47">var</span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-48">buf_size</span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49">开始</span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-50">停止</span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-51">步</span></td>
+<td>&#xA0;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

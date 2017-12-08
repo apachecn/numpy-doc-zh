@@ -1,0 +1,66 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.tensorinv</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.tensorinv.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.tensorinv.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.tensorinv"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">tensorinv</code><span class="sig-paren">(</span><em>a</em>, <em>ind=2</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L389-L453"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算N维数组的“逆”。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">结果是相对于十字变换操作的<em class="xref py py-obj">a</em>的倒数<code class="docutils literal"><span class="pre">tensordot（a，</span> <span class="pre">b，</span> <span class="pre">ind） t4 &gt;</span></code>，i。即，直到浮点精度，<code class="docutils literal"><span class="pre">tensordot（张量函数（a），</span> <span class="pre">a，</span> <span class="pre">ind）</span></code>用于tensordot操作的“身份”张量。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">Tensor“反转”。</span><span class="yiyi-st" id="yiyi-19">它的形状必须是“正方形”，即。例如<code class="docutils literal"><span class="pre">prod（a.shape [：ind]）</span> <span class="pre">==</span> <span class="pre">prod（a.shape [ind：]） / t0&gt;。</span></code></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>ind</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">在逆总和中涉及的第一索引的数量。</span><span class="yiyi-st" id="yiyi-22">必须为正整数，默认值为2。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>b</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25"><em class="xref py py-obj">a</em>的形容词反转，形状<code class="docutils literal"><span class="pre">a.shape [ind：]</span> <span class="pre">+</span> <span class="pre">a.shape [：ind] / t4&gt;</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>LinAlgError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">如果<em class="xref py py-obj">a</em>是奇异的或不是&apos;正方形&apos;（在上述意义上）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-30"><code class="xref py py-obj docutils literal"><span class="pre">tensordot</span></code>，<a class="reference internal" href="numpy.linalg.tensorsolve.html#numpy.linalg.tensorsolve" title="numpy.linalg.tensorsolve"><code class="xref py py-obj docutils literal"><span class="pre">tensorsolve</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ainv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">tensorinv</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">ind</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ainv</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(8, 3, 4, 6)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">ainv</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">tensorsolve</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ainv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">tensorinv</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">ind</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ainv</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(8, 3, 24)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">ainv</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">tensorsolve</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

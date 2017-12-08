@@ -1,0 +1,140 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.poly1d</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.poly1d.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.poly1d.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.poly1d"><span class="yiyi-st" id="yiyi-14"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">poly1d</code><span class="sig-paren">(</span><em>c_or_r</em>, <em>r=0</em>, <em>variable=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/polynomial.py#L940-L1274"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">一维多项式类。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">一个方便类，用于封装对多项式的“自然”操作，以便所述操作可以采用其在代码中的常规形式（参见示例）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>c_or_r</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">多项式的系数，以降低的功率，或者如果第二个参数的值为True，多项式的根（多项式计算结果为0的值）。</span><span class="yiyi-st" id="yiyi-20">例如，<code class="docutils literal"><span class="pre">poly1d（[1，</span> <span class="pre">2，</span> <span class="pre">3]）</span></code>返回表示<img alt="x^2 + 2x + 3" class="math" src="../../_images/math/d05f298257f5083394777a2e7f94d1c29117a893.png" style="vertical-align: -2px"> ，而<code class="docutils literal"><span class="pre">poly1d（[1，</span> <span class="pre">2，</span> <span class="pre">3]，</span> <span class="pre">True）</span></code>一个代表<img alt="(x-1)(x-2)(x-3) = x^3 - 6x^2 + 11x -6" class="math" src="../../_images/math/ad47d4d26a8cfe688df179057f5d78452296ad5b.png" style="vertical-align: -4px">。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>r</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">如果为真，则<em class="xref py py-obj">c_or_r</em>指定多项式的根；默认值为False。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>variable</strong>：str，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">更改将<em class="xref py py-obj">p</em>从<em class="xref py py-obj">x</em>更改为<a class="reference internal" href="numpy.poly1d.variable.html#numpy.poly1d.variable" title="numpy.poly1d.variable"><code class="xref py py-obj docutils literal"><span class="pre">variable</span></code></a>时使用的变量（请参阅示例）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-26">构造多项式<img alt="x^2 + 2x + 3" class="math" src="../../_images/math/d05f298257f5083394777a2e7f94d1c29117a893.png" style="vertical-align: -2px">：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+<span class="go">   2</span>
+<span class="go">1 x + 2 x + 3</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-27">评估<img alt="x = 0.5" class="math" src="../../_images/math/5c8d50eedb78f47fa1c946e1a91bd06238f06ea1.png" style="vertical-align: 0px">处的多项式：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">4.25</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-28">找到根：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">r</span>
+<span class="go">array([-1.+1.41421356j, -1.-1.41421356j])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+<span class="go">array([ -4.44089210e-16+0.j,  -4.44089210e-16+0.j])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-29">上一行中的这些数字表示（0,0）到机器精度</span></p>
+<p><span class="yiyi-st" id="yiyi-30">显示系数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">c</span>
+<span class="go">array([1, 2, 3])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-31">显示顺序（去除前导零系数）：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">order</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-32">显示多项式中的k次方的系数（相当于<code class="docutils literal"><span class="pre">p.c[-(i+1)]</span></code>）：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-33">多项式可以加，减，乘和除（返回商和余数）：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">*</span> <span class="n">p</span>
+<span class="go">poly1d([ 1,  4, 10, 12,  9])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">/</span> <span class="n">p</span>
+<span class="go">(poly1d([  1.,   4.,  10.,  12.,   9.]), poly1d([ 4.]))</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-34"><code class="docutils literal"><span class="pre">asarray(p)</span></code>给出系数数组，因此多项式可以用于所有接受数组的函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">**</span><span class="mi">2</span> <span class="c1"># square of polynomial</span>
+<span class="go">poly1d([ 1,  4, 10, 12,  9])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="c1"># square of individual coefficients</span>
+<span class="go">array([1, 4, 9])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-35">可以使用<a class="reference internal" href="numpy.poly1d.variable.html#numpy.poly1d.variable" title="numpy.poly1d.variable"><code class="xref py py-obj docutils literal"><span class="pre">variable</span></code></a>参数修改<em class="xref py py-obj">p</em>的字符串表示中使用的变量：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">variable</span><span class="o">=</span><span class="s1">&apos;z&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">   2</span>
+<span class="go">1 z + 2 z + 3</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-36">从它的根构造一个多项式：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">poly1d([ 1, -3,  2])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37">这是与通过以下获得的相同的多项式：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">poly1d([ 1, -3,  2])</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">属性</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%">
+<col width="56%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-39">coeffs</span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-40">订购</span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-41">变量</span></td>
+<td>&#xA0;</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-42">方法</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="numpy.poly1d.__call__.html#numpy.poly1d.__call__" title="numpy.poly1d.__call__"><code class="xref py py-obj docutils literal"><span class="pre">__call__</span></code></a>（val）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.poly1d.deriv.html#numpy.poly1d.deriv" title="numpy.poly1d.deriv"><code class="xref py py-obj docutils literal"><span class="pre">deriv</span></code></a>（[m]）</span></td>
+<td><span class="yiyi-st" id="yiyi-45">返回此多项式的导数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.poly1d.integ.html#numpy.poly1d.integ" title="numpy.poly1d.integ"><code class="xref py py-obj docutils literal"><span class="pre">integ</span></code></a>（[m，k]）</span></td>
+<td><span class="yiyi-st" id="yiyi-47">返回此多项式的反向积分（不确定积分）。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

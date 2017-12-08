@@ -1,0 +1,68 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.count</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.count.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.count.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.count"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">count</code><span class="sig-paren">(</span><em>axis=None</em>, <em>keepdims=&lt;class numpy._globals._NoValue&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L4270-L4373"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">沿给定轴计算数组的非屏蔽元素。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>axis</strong>：无或int或tuple ints，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">执行计数的轴或轴。</span><span class="yiyi-st" id="yiyi-19">默认值（<em class="xref py py-obj">轴</em> = <em class="xref py py-obj">无</em>）对输入数组的所有维执行计数。</span><span class="yiyi-st" id="yiyi-20"><em class="xref py py-obj">轴</em>可能为负，在这种情况下，从最后一个轴计数到第一个轴。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-21"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-22">如果这是一个int的元组，则在多个轴上执行计数，而不是像以前一样执行单个轴或所有轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>keepdims</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">如果设置为True，则缩小的轴在结果中保留为尺寸为1的尺寸。</span><span class="yiyi-st" id="yiyi-25">使用此选项，结果将针对数组正确地广播。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>result</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">与输入数组具有相同形状，删除指定轴的数组。</span><span class="yiyi-st" id="yiyi-29">如果数组是0-d数组，或者如果<em class="xref py py-obj">轴</em>是无，则返回标量。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.ma.count_masked.html#numpy.ma.count_masked" title="numpy.ma.count_masked"><code class="xref py py-obj docutils literal"><span class="pre">count_masked</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">数组中或沿给定轴的计数屏蔽元素。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[0 1 2]</span>
+<span class="go"> [-- -- --]],</span>
+<span class="go">             mask =</span>
+<span class="go"> [[False False False]</span>
+<span class="go"> [ True  True  True]],</span>
+<span class="go">       fill_value = 999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-34">当指定<em class="xref py py-obj">axis</em>关键字时，返回适当大小的数组。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([1, 1, 1])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([3, 0])</span>
+</pre></div>
+</div>
+</dd></dl>

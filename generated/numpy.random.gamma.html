@@ -1,0 +1,85 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.gamma</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.gamma.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.gamma.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.gamma"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">gamma</code><span class="sig-paren">(</span><em>shape</em>, <em>scale=1.0</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从Gamma分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">样品从具有指定参数<em class="xref py py-obj">形状</em>（有时称为“k”）和<em class="xref py py-obj">缩放</em>（有时称为“&#x3B8;”）的Gamma分布中绘制，其中两个参数都大于0。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>shape</strong>：scalar&gt; 0</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">伽马分布的形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>scale</strong>：scalar&gt; 0，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">伽马分布的规模。</span><span class="yiyi-st" id="yiyi-21">默认值为1。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">输出形状。</span><span class="yiyi-st" id="yiyi-24">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-25">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>out</strong>：ndarray，float</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">返回一个样本，除非指定<em class="xref py py-obj">size</em>参数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.gamma</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">概率密度函数，分布或累积密度函数等。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-33">Gamma分布的概率密度为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-34">其中<img alt="k" class="math" src="../../_images/math/c8ff6dc362a9a07153582909d5a26898fae59569.png" style="vertical-align: 0px">是形状，<img alt="\theta" class="math" src="../../_images/math/e6c170635ca2703de256ca22be636c009ae8bf33.png" style="vertical-align: 0px">标度，<img alt="\Gamma" class="math" src="../../_images/math/d71c74078e709f44826135f99abda79dc6926cbe.png" style="vertical-align: -1px">是伽玛函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-35">Gamma分布通常用于模拟电子部件故障的时间，并且在Poisson分布式事件之间的等待时间相关的过程中自然出现。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r221" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-37"><a class="fn-backref" href="#id1">[R221]</a></span></td><td><span class="yiyi-st" id="yiyi-38">Weisstein，Eric W.“Gamma Distribution。”来自MathWorld-Wolfram Web资源。</span><span class="yiyi-st" id="yiyi-39"><a class="reference external" href="http://mathworld.wolfram.com/GammaDistribution.html">http://mathworld.wolfram.com/GammaDistribution.html</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r222" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-40"><a class="fn-backref" href="#id2">[R222]</a></span></td><td><span class="yiyi-st" id="yiyi-41">维基百科，“Gamma分布”，<a class="reference external" href="http://en.wikipedia.org/wiki/Gamma-distribution">http://en.wikipedia.org/wiki/Gamma-distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-42">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-43">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">shape</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span> <span class="c1"># mean and dispersion</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-44">显示样本的直方图，以及概率密度函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">scipy.special</span> <span class="k">as</span> <span class="nn">sps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">bins</span><span class="o">**</span><span class="p">(</span><span class="n">shape</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">bins</span><span class="o">/</span><span class="n">scale</span><span class="p">)</span> <span class="o">/</span>
+<span class="gp">... </span>                     <span class="p">(</span><span class="n">sps</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span><span class="o">*</span><span class="n">scale</span><span class="o">**</span><span class="n">shape</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">（<a class="reference external" href="../../reference/generated/numpy-random-gamma-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-gamma-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-gamma-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-gamma-1.png" src="../../_images/numpy-random-gamma-1.png">
+</div>
+</dd></dl>

@@ -1,0 +1,58 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.transpose</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.transpose.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.transpose.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.transpose"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">transpose</code><span class="sig-paren">(</span><em>*axes</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L2548-L2561"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回具有轴转置的数组的视图。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">对于1-D数组，这没有效果。</span><span class="yiyi-st" id="yiyi-17">（要在列和行向量之间更改，请先将1-D数组转换为矩阵对象。）</span><span class="yiyi-st" id="yiyi-18">对于2-D数组，这是通常的矩阵转置。</span><span class="yiyi-st" id="yiyi-19">对于n-D数组，如果给定轴，它们的顺序表示轴的排列方式（见示例）。</span><span class="yiyi-st" id="yiyi-20">If axes are not provided and <code class="docutils literal"><span class="pre">a.shape</span> <span class="pre">=</span> <span class="pre">(i[0],</span> <span class="pre">i[1],</span> <span class="pre">...</span> <span class="pre">i[n-2],</span> <span class="pre">i[n-1])</span></code>, then <code class="docutils literal"><span class="pre">a.transpose().shape</span> <span class="pre">=</span> <span class="pre">(i[n-1],</span> <span class="pre">i[n-2],</span> <span class="pre">...</span> <span class="pre">i[1],</span> <span class="pre">i[0])</span></code>.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>axes</strong>：无，ints的元组或<em class="xref py py-obj">n</em> ints</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-23">无或无参数：反转轴的顺序。</span></li>
+<li><span class="yiyi-st" id="yiyi-24">元组中的<em class="xref py py-obj">j</em>位中的ints：<em class="xref py py-obj">i</em>元组中的元组意味着<em class="xref py py-obj">a</em> <em class="xref py py-obj">i</em>轴变为<em class="xref py py-obj">a.transpose()</em>&apos;s <em class="xref py py-obj">j</em>轴。</span></li>
+<li><span class="yiyi-st" id="yiyi-25"><em class="xref py py-obj">n</em> ints：与相同int的n元组相同（这种形式只是简单地作为元组形式的“方便”替代）</span></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">视图<em class="xref py py-obj">a</em>，轴适当排列。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.T</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">返回数组转置的数组属性。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [3, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="go">array([[1, 3],</span>
+<span class="go">       [2, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="go">array([[1, 3],</span>
+<span class="go">       [2, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[1, 3],</span>
+<span class="go">       [2, 4]])</span>
+</pre></div>
+</div>
+</dd></dl>

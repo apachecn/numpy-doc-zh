@@ -1,0 +1,99 @@
+
+<h1><span class="yiyi-st" id="yiyi-11">numpy.ufunc.reduceat</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ufunc.reduceat.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ufunc.reduceat.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ufunc.reduceat"><span class="yiyi-st" id="yiyi-12"> <code class="descclassname">ufunc.</code><code class="descname">reduceat</code><span class="sig-paren">(</span><em>a</em>, <em>indices</em>, <em>axis=0</em>, <em>dtype=None</em>, <em>out=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-13">使用单个轴上的指定切片执行（局部）缩减。</span></p>
+<p><span class="yiyi-st" id="yiyi-14">For i in <code class="docutils literal"><span class="pre">range(len(indices))</span></code>, <a class="reference internal" href="#numpy.ufunc.reduceat" title="numpy.ufunc.reduceat"><code class="xref py py-obj docutils literal"><span class="pre">reduceat</span></code></a> computes <code class="docutils literal"><span class="pre">ufunc.reduce(a[indices[i]:indices[i+1]])</span></code>, which becomes the i-th generalized “row” parallel to <em class="xref py py-obj">axis</em> in the final result (i.e., in a 2-D array, for example, if <em class="xref py py-obj">axis = 0</em>, it becomes the i-th row, but if <em class="xref py py-obj">axis = 1</em>, it becomes the i-th column). </span><span class="yiyi-st" id="yiyi-15">这里有三个例外：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-16">when <code class="docutils literal"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">len(indices)</span> <span class="pre">-</span> <span class="pre">1</span></code> (so for the last index), <code class="docutils literal"><span class="pre">indices[i+1]</span> <span class="pre">=</span> <span class="pre">a.shape[axis]</span></code>.</span></li>
+<li><span class="yiyi-st" id="yiyi-17">如果<code class="docutils literal"><span class="pre">索引[i]</span> <span class="pre">=</span> <span class="pre">索引[i</span> <span class="pre">+</span> <span class="pre">t5&gt;</span></code>，第i个广义“行”仅仅是<code class="docutils literal"><span class="pre">a[indices[i]]</span></code>。</span></li>
+<li><span class="yiyi-st" id="yiyi-18">如果<code class="docutils literal"><span class="pre">索引[i]</span> <span class="pre">&gt; =</span> <span class="pre">len（a）</span></code>或<code class="docutils literal"><span class="pre">]</span> <span class="pre">＆lt；</span> <span class="pre">0</span></code>时，会出现错误。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-19">输出的形状取决于<a class="reference internal" href="numpy.indices.html#numpy.indices" title="numpy.indices"><code class="xref py py-obj docutils literal"><span class="pre">indices</span></code></a>的大小，并且可能大于<em class="xref py py-obj">a</em>（如果<code class="docutils literal"><span class="pre">len（indices）</span> <span class="pre">＆gt；</span> <span class="pre">a.shape [axis]</span></code>）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">要执行的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>indices</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">成对索引，逗号分隔（不是冒号），指定要减少的切片。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">沿着哪条轴应用缩小。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>dtype</strong>：数据类型代码，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">用于表示中间结果的类型。</span><span class="yiyi-st" id="yiyi-29">默认为输出数组（如果提供）的数据类型，或输入数组（如果未提供输出数组）的数据类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">存储结果的位置。</span><span class="yiyi-st" id="yiyi-32">如果未提供，则返回新分配的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-33">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-34"><strong>r</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-35">减小的值。</span><span class="yiyi-st" id="yiyi-36">如果提供<em class="xref py py-obj">out</em>，则<em class="xref py py-obj">r</em>是对<em class="xref py py-obj">out</em>的引用。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-38">一个描述性示例：</span></p>
+<p><span class="yiyi-st" id="yiyi-39">If <em class="xref py py-obj">a</em> is 1-D, the function <em class="xref py py-obj">ufunc.accumulate(a)</em> is the same as <code class="docutils literal"><span class="pre">ufunc.reduceat(a,</span> <span class="pre">indices)[::2]</span></code> where <a class="reference internal" href="numpy.indices.html#numpy.indices" title="numpy.indices"><code class="xref py py-obj docutils literal"><span class="pre">indices</span></code></a> is <code class="docutils literal"><span class="pre">range(len(array)</span> <span class="pre">-</span> <span class="pre">1)</span></code> with a zero placed in every other element: <code class="docutils literal"><span class="pre">indices</span> <span class="pre">=</span> <span class="pre">zeros(2</span> <span class="pre">*</span> <span class="pre">len(a)</span> <span class="pre">-</span> <span class="pre">1)</span></code>, <code class="docutils literal"><span class="pre">indices[1::2]</span> <span class="pre">=</span> <span class="pre">range(1,</span> <span class="pre">len(a))</span></code>.</span></p>
+<p><span class="yiyi-st" id="yiyi-40">不要被此属性的名称欺骗：<em class="xref py py-obj">reduceat（a）</em>不一定小于<em class="xref py py-obj">a</em>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-42">要获取四个连续值的运行总和：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">reduceat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">),[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">])[::</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">array([ 6, 10, 14, 18])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">2-D示例：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[  0.,   1.,   2.,   3.],</span>
+<span class="go">       [  4.,   5.,   6.,   7.],</span>
+<span class="go">       [  8.,   9.,  10.,  11.],</span>
+<span class="go">       [ 12.,  13.,  14.,  15.]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># reduce such that the result has the following five rows:</span>
+<span class="c1"># [row1 + row2 + row3]</span>
+<span class="c1"># [row4]</span>
+<span class="c1"># [row2]</span>
+<span class="c1"># [row3]</span>
+<span class="c1"># [row1 + row2 + row3 + row4]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">reduceat</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="go">array([[ 12.,  15.,  18.,  21.],</span>
+<span class="go">       [ 12.,  13.,  14.,  15.],</span>
+<span class="go">       [  4.,   5.,   6.,   7.],</span>
+<span class="go">       [  8.,   9.,  10.,  11.],</span>
+<span class="go">       [ 24.,  28.,  32.,  36.]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># reduce such that result has the following two columns:</span>
+<span class="c1"># [col1 * col2 * col3, col4]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="o">.</span><span class="n">reduceat</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[    0.,     3.],</span>
+<span class="go">       [  120.,     7.],</span>
+<span class="go">       [  720.,    11.],</span>
+<span class="go">       [ 2184.,    15.]])</span>
+</pre></div>
+</div>
+</dd></dl>

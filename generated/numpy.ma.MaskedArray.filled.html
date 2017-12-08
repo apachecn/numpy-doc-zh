@@ -1,0 +1,47 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.filled</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.filled.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.filled.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.filled"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">filled</code><span class="sig-paren">(</span><em>fill_value=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L3620-L3694"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回self的副本，掩码值填充给定值。</span><span class="yiyi-st" id="yiyi-16"><strong>但是</strong>，如果没有要填充的掩码值，则self将作为ndarray返回。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>fill_value</strong>：标量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">用于无效条目的值（默认值为None）。</span><span class="yiyi-st" id="yiyi-20">如果为“无”，则使用数组的<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.MaskedArray.fill_value" title="numpy.ma.MaskedArray.fill_value"><code class="xref py py-obj docutils literal"><span class="pre">fill_value</span></code></a>属性。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>filled_array</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">A copy of <code class="docutils literal"><span class="pre">self</span></code> with invalid entries replaced by <em>fill_value</em> (be it the function argument or the attribute of <code class="docutils literal"><span class="pre">self</span></code>), or <code class="docutils literal"><span class="pre">self</span></code> itself as an ndarray if there are no invalid entries to be replaced.</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-25">结果是<strong>不</strong> a MaskedArray！</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">fill_value</span><span class="o">=-</span><span class="mi">999</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">filled</span><span class="p">()</span>
+<span class="go">array([1, 2, -999, 4, -999])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">filled</span><span class="p">())</span>
+<span class="go">&lt;type &apos;numpy.ndarray&apos;&gt;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-27">子类保留。</span><span class="yiyi-st" id="yiyi-28">这意味着如果掩码数组的数据部分是一个矩阵，<a class="reference internal" href="numpy.ma.filled.html#numpy.ma.filled" title="numpy.ma.filled"><code class="xref py py-obj docutils literal"><span class="pre">filled</span></code></a>返回一个矩阵：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]),</span> <span class="n">mask</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">filled</span><span class="p">()</span>
+<span class="go">matrix([[     1, 999999],</span>
+<span class="go">        [999999,      4]])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,74 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.cholesky</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.cholesky.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.cholesky.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.cholesky"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">cholesky</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L532-L613"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">Cholesky分解。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回方矩阵<em class="xref py py-obj">a</em>的Cholesky分解<em class="xref py py-obj">L * LH</em>，其中<em class="xref py py-obj">L</em>是下三角形，而H是共轭转置运算符（如果<em class="xref py py-obj">a</em>是实数值，则是普通转置）。</span><span class="yiyi-st" id="yiyi-16"><em class="xref py py-obj">a</em>必须是Hermitian（如果实数值对称的）和正定数。</span><span class="yiyi-st" id="yiyi-17">只有<em class="xref py py-obj">L</em>实际返回。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：（...，M，M）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">Hermitian（如果所有元素都是实数，则为对称），正定输入矩阵。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>L</strong>：（...，M，M）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">上或下三角形Cholesky因子<em class="xref py py-obj">a</em>。</span><span class="yiyi-st" id="yiyi-24">如果<em class="xref py py-obj">a</em>是一个矩阵对象，则返回一个矩阵对象。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>LinAlgError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">如果分解失败，例如，如果<em class="xref py py-obj">a</em>不是正定的。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-29"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-30">广播规则适用，有关详细信息，请参阅<code class="xref py py-obj docutils literal"><span class="pre">numpy.linalg</span></code>文档。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">Cholesky分解经常被用作一种快速的求解方法</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-32">（当<em class="xref py py-obj">A</em>是厄米/对称和正定时）。</span></p>
+<p><span class="yiyi-st" id="yiyi-33">首先，我们解决<img alt="\mathbf{y}" class="math" src="../../_images/math/5281327b77217c7529bc5c19e3fb3e8ed4dba989.png" style="vertical-align: -3px"></span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-34">然后为<img alt="\mathbf{x}" class="math" src="../../_images/math/f1701cdfd2f0a2c28f96ea4b10a33cfb272b4b55.png" style="vertical-align: -1px"></span></p>
+<div class="math">
+<p></p>
+</div><p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="n">j</span><span class="p">],[</span><span class="mi">2</span><span class="n">j</span><span class="p">,</span><span class="mi">5</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
+<span class="go">array([[ 1.+0.j,  0.-2.j],</span>
+<span class="go">       [ 0.+2.j,  5.+0.j]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span>
+<span class="go">array([[ 1.+0.j,  0.+0.j],</span>
+<span class="go">       [ 0.+2.j,  1.+0.j]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">conj</span><span class="p">())</span> <span class="c1"># verify that L * L.H = A</span>
+<span class="go">array([[ 1.+0.j,  0.-2.j],</span>
+<span class="go">       [ 0.+2.j,  5.+0.j]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="n">j</span><span class="p">],[</span><span class="mi">2</span><span class="n">j</span><span class="p">,</span><span class="mi">5</span><span class="p">]]</span> <span class="c1"># what happens if A is only array_like?</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1"># an ndarray object is returned</span>
+<span class="go">array([[ 1.+0.j,  0.+0.j],</span>
+<span class="go">       [ 0.+2.j,  1.+0.j]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># But a matrix object is returned if A is a matrix object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="go">matrix([[ 1.+0.j,  0.+0.j],</span>
+<span class="go">        [ 0.+2.j,  1.+0.j]])</span>
+</pre></div>
+</div>
+</dd></dl>

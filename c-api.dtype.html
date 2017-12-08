@@ -1,0 +1,295 @@
+
+<h1><span class="yiyi-st" id="yiyi-25">Data Type API</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/c-api.dtype.html">https://docs.scipy.org/doc/numpy/reference/c-api.dtype.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-26">标准数组可以有24种不同的数据类型（并且有一些支持添加自己的类型）。</span><span class="yiyi-st" id="yiyi-27">这些数据类型都具有枚举类型，枚举类型字符和对应的数组标量Python类型对象（放置在层次结构中）。</span><span class="yiyi-st" id="yiyi-28">还有标准的C typedef，以便更容易操作给定数据类型的元素。</span><span class="yiyi-st" id="yiyi-29">对于数字类型，还有位宽等价的C typedef和命名的typenumbers，使得更容易选择所需的精度。</span></p>
+<div class="admonition warning">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">警告</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-31">c代码中的类型的名称更紧密地遵循c命名约定。</span><span class="yiyi-st" id="yiyi-32">这些类型的Python名称遵循Python约定。</span><span class="yiyi-st" id="yiyi-33">因此，<a class="reference internal" href="#c.NPY_FLOAT" title="NPY_FLOAT"><code class="xref c c-data docutils literal"><span class="pre">NPY_FLOAT</span></code></a>在C中拾取一个32位的浮点数，但Python中的<code class="xref py py-class docutils literal"><span class="pre">numpy.float_</span></code>对应于64位双精度浮点数。</span><span class="yiyi-st" id="yiyi-34">为了清楚起见，位宽名称可以在Python和C中使用。</span></p>
+</div>
+<div class="section" id="enumerated-types">
+<h2><span class="yiyi-st" id="yiyi-35">Enumerated Types</span></h2>
+<p><span class="yiyi-st" id="yiyi-36">有一个定义的枚举类型列表提供基本的24个数据类型加上一些有用的通用名称。</span><span class="yiyi-st" id="yiyi-37">每当代码需要类型号时，请求这些枚举类型之一。</span><span class="yiyi-st" id="yiyi-38">这些类型都称为<code class="xref c c-data docutils literal"><span class="pre">NPY_{NAME}</span></code>：</span></p>
+<dl class="var">
+<dt id="c.NPY_BOOL"><span class="yiyi-st" id="yiyi-39"> <code class="descname">NPY_BOOL</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-40">布尔类型的枚举值，存储为一个字节。</span><span class="yiyi-st" id="yiyi-41">它只能设置为值0和1。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_BYTE"><span class="yiyi-st" id="yiyi-42"> <code class="descname">NPY_BYTE</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_INT8"><span class="yiyi-st" id="yiyi-43"> <code class="descname">NPY_INT8</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-44">8位/ 1字节有符号整数的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_SHORT"><span class="yiyi-st" id="yiyi-45"> <code class="descname">NPY_SHORT</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_INT16"><span class="yiyi-st" id="yiyi-46"> <code class="descname">NPY_INT16</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-47">16位/ 2字节有符号整数的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_INT"><span class="yiyi-st" id="yiyi-48"> <code class="descname">NPY_INT</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_INT32"><span class="yiyi-st" id="yiyi-49"> <code class="descname">NPY_INT32</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-50">32位/ 4字节有符号整数的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_LONG"><span class="yiyi-st" id="yiyi-51"> <code class="descname">NPY_LONG</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-52">相当于NPY_INT或NPY_LONGLONG，具体取决于平台。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_LONGLONG"><span class="yiyi-st" id="yiyi-53"> <code class="descname">NPY_LONGLONG</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_INT64"><span class="yiyi-st" id="yiyi-54"> <code class="descname">NPY_INT64</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-55">64位/ 8字节有符号整数的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_UBYTE"><span class="yiyi-st" id="yiyi-56"> <code class="descname">NPY_UBYTE</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_UINT8"><span class="yiyi-st" id="yiyi-57"> <code class="descname">NPY_UINT8</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-58">8位/ 1字节无符号整数的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_USHORT"><span class="yiyi-st" id="yiyi-59"> <code class="descname">NPY_USHORT</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_UINT16"><span class="yiyi-st" id="yiyi-60"> <code class="descname">NPY_UINT16</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-61">16位/ 2字节无符号整数的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_UINT"><span class="yiyi-st" id="yiyi-62"> <code class="descname">NPY_UINT</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_UINT32"><span class="yiyi-st" id="yiyi-63"> <code class="descname">NPY_UINT32</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-64">32位/ 4字节无符号整数的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ULONG"><span class="yiyi-st" id="yiyi-65"> <code class="descname">NPY_ULONG</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-66">相当于NPY_UINT或NPY_ULONGLONG，具体取决于平台。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ULONGLONG"><span class="yiyi-st" id="yiyi-67"> <code class="descname">NPY_ULONGLONG</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_UINT64"><span class="yiyi-st" id="yiyi-68"> <code class="descname">NPY_UINT64</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-69">64位/ 8字节无符号整数的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_HALF"><span class="yiyi-st" id="yiyi-70"> <code class="descname">NPY_HALF</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_FLOAT16"><span class="yiyi-st" id="yiyi-71"> <code class="descname">NPY_FLOAT16</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-72">16位/ 2字节IEEE 754-2008兼容浮点类型的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_FLOAT"><span class="yiyi-st" id="yiyi-73"> <code class="descname">NPY_FLOAT</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_FLOAT32"><span class="yiyi-st" id="yiyi-74"> <code class="descname">NPY_FLOAT32</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-75">32位/ 4字节IEEE 754兼容浮点类型的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_DOUBLE"><span class="yiyi-st" id="yiyi-76"> <code class="descname">NPY_DOUBLE</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_FLOAT64"><span class="yiyi-st" id="yiyi-77"> <code class="descname">NPY_FLOAT64</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-78">64位/ 8字节IEEE 754兼容浮点类型的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_LONGDOUBLE"><span class="yiyi-st" id="yiyi-79"> <code class="descname">NPY_LONGDOUBLE</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-80">特定于平台的浮点类型的枚举值至少与NPY_DOUBLE一样大，但在许多平台上更大。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_CFLOAT"><span class="yiyi-st" id="yiyi-81"> <code class="descname">NPY_CFLOAT</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_COMPLEX64"><span class="yiyi-st" id="yiyi-82"> <code class="descname">NPY_COMPLEX64</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-83">由两个NPY_FLOAT值组成的64位/ 8字节复杂类型的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_CDOUBLE"><span class="yiyi-st" id="yiyi-84"> <code class="descname">NPY_CDOUBLE</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_COMPLEX128"><span class="yiyi-st" id="yiyi-85"> <code class="descname">NPY_COMPLEX128</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-86">由两个NPY_DOUBLE值组成的128位/ 16字节复杂类型的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_CLONGDOUBLE"><span class="yiyi-st" id="yiyi-87"> <code class="descname">NPY_CLONGDOUBLE</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-88">特定于平台的复杂浮点类型的枚举值，它由两个NPY_LONGDOUBLE值组成。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_DATETIME"><span class="yiyi-st" id="yiyi-89"> <code class="descname">NPY_DATETIME</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-90">基于可选日期或时间单位的精确度保存日期或数据时间的数据类型的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_TIMEDELTA"><span class="yiyi-st" id="yiyi-91"> <code class="descname">NPY_TIMEDELTA</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-92">用于保存可选日期或时间单位的整数倍的时间长度的数据类型的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_STRING"><span class="yiyi-st" id="yiyi-93"> <code class="descname">NPY_STRING</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-94">可选大小的ASCII字符串的枚举值。</span><span class="yiyi-st" id="yiyi-95">字符串在给定数组中具有固定的最大大小。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_UNICODE"><span class="yiyi-st" id="yiyi-96"> <code class="descname">NPY_UNICODE</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-97">可选大小的UCS4字符串的枚举值。</span><span class="yiyi-st" id="yiyi-98">字符串在给定数组中具有固定的最大大小。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_OBJECT"><span class="yiyi-st" id="yiyi-99"> <code class="descname">NPY_OBJECT</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-100">引用任意Python对象的枚举值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_VOID"><span class="yiyi-st" id="yiyi-101"> <code class="descname">NPY_VOID</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-102">主要用于保存struct dtypes，但可以包含任意二进制数据。</span></p>
+</dd></dl>
+<p><span class="yiyi-st" id="yiyi-103">上述类型的一些有用的别名是</span></p>
+<dl class="var">
+<dt id="c.NPY_INTP"><span class="yiyi-st" id="yiyi-104"> <code class="descname">NPY_INTP</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-105">有符号整数类型的枚举值，它与（void *）指针的大小相同。</span><span class="yiyi-st" id="yiyi-106">这是所有数组的索引使用的类型。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_UINTP"><span class="yiyi-st" id="yiyi-107"> <code class="descname">NPY_UINTP</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-108">无符号整数类型的枚举值，它与（void *）指针的大小相同。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_MASK"><span class="yiyi-st" id="yiyi-109"> <code class="descname">NPY_MASK</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-110">用于掩码的类型的枚举值，例如使用<a class="reference internal" href="c-api.iterator.html#c.NPY_ITER_ARRAYMASK" title="NPY_ITER_ARRAYMASK"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_ARRAYMASK</span></code></a>迭代器标志。</span><span class="yiyi-st" id="yiyi-111">这相当于<a class="reference internal" href="#c.NPY_UINT8" title="NPY_UINT8"><code class="xref c c-data docutils literal"><span class="pre">NPY_UINT8</span></code></a>。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_DEFAULT_TYPE"><span class="yiyi-st" id="yiyi-112"> <code class="descname">NPY_DEFAULT_TYPE</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-113">当没有显式指定dtype时使用的默认类型，例如调用np.zero（shape）时。</span><span class="yiyi-st" id="yiyi-114">这相当于<a class="reference internal" href="#c.NPY_DOUBLE" title="NPY_DOUBLE"><code class="xref c c-data docutils literal"><span class="pre">NPY_DOUBLE</span></code></a>。</span></p>
+</dd></dl>
+<p><span class="yiyi-st" id="yiyi-115">其他有用的相关常数为</span></p>
+<dl class="var">
+<dt id="c.NPY_NTYPES"><span class="yiyi-st" id="yiyi-116"> <code class="descname">NPY_NTYPES</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-117">内置NumPy类型的总数。</span><span class="yiyi-st" id="yiyi-118">枚举涵盖从0到NPY_NTYPES-1的范围。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_NOTYPE"><span class="yiyi-st" id="yiyi-119"> <code class="descname">NPY_NOTYPE</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-120">保证不是有效类型枚举数的信号值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_USERDEF"><span class="yiyi-st" id="yiyi-121"> <code class="descname">NPY_USERDEF</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-122">用于自定义数据类型的类型号的开始。</span></p>
+</dd></dl>
+<p><span class="yiyi-st" id="yiyi-123">指示某些类型的各种字符代码也是枚举列表的一部分。</span><span class="yiyi-st" id="yiyi-124">引用类型字符（如果需要它们）应始终使用这些枚举。</span><span class="yiyi-st" id="yiyi-125">它们的形式是<code class="xref c c-data docutils literal"><span class="pre">NPY_{NAME}LTR</span></code>，其中<code class="docutils literal"><span class="pre">{NAME}</span></code>可以是</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-126"><strong>BOOL</strong>, <strong>BYTE</strong>, <strong>UBYTE</strong>, <strong>SHORT</strong>, <strong>USHORT</strong>, <strong>INT</strong>, <strong>UINT</strong>, <strong>LONG</strong>, <strong>ULONG</strong>, <strong>LONGLONG</strong>, <strong>ULONGLONG</strong>, <strong>HALF</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>LONGDOUBLE</strong>, <strong>CFLOAT</strong>, <strong>CDOUBLE</strong>, <strong>CLONGDOUBLE</strong>, <strong>DATETIME</strong>, <strong>TIMEDELTA</strong>, <strong>OBJECT</strong>, <strong>STRING</strong>, <strong>VOID</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-127"><strong>INTP</strong>，<strong>UINTP</strong></span></p>
+<p><span class="yiyi-st" id="yiyi-128"><strong>GENBOOL</strong>，<strong>签署</strong>，<strong>UNSIGNED</strong>，<strong>浮动</strong>，<strong>COMPLEX</strong></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-129">后一组<code class="docutils literal"><span class="pre">{NAME}s</span></code>对应于数组接口typestring规范中使用的字母。</span></p>
+</div>
+<div class="section" id="defines">
+<h2><span class="yiyi-st" id="yiyi-130">Defines</span></h2>
+<div class="section" id="max-and-min-values-for-integers">
+<h3><span class="yiyi-st" id="yiyi-131">Max and min values for integers</span></h3>
+<dl class="var">
+<dt><span class="yiyi-st" id="yiyi-132"><code class="descname">NPY_MAX_INT {bits}</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt><span class="yiyi-st" id="yiyi-133"><code class="descname">NPY_MAX_UINT {bits}</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt><span class="yiyi-st" id="yiyi-134"><code class="descname">NPY_MIN_INT {bits}</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-135">这些为<code class="docutils literal"><span class="pre">{bits}</span></code> = 8,16,32,64,128和256定义，并提供相应（无符号）整数类型的最大值（最小值）。</span><span class="yiyi-st" id="yiyi-136">注意：实际的整数类型可能不适用于所有平台（即128位和256位整数很少）。</span></p>
+</dd></dl>
+<dl class="var">
+<dt><span class="yiyi-st" id="yiyi-137"><code class="descname">NPY_MIN_ {type}</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-138">这是为<code class="docutils literal"><span class="pre">{type}</span></code> = <strong>BYTE</strong>，<strong>短</strong>，<strong>INT</strong>，<strong>LONG</strong> ，<strong>LONGLONG</strong>，<strong>INTP</strong></span></p>
+</dd></dl>
+<dl class="var">
+<dt><span class="yiyi-st" id="yiyi-139"><code class="descname">NPY_MAX_ {type}</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-140">This is defined for all defined for <code class="docutils literal"><span class="pre">{type}</span></code> = <strong>BYTE</strong>, <strong>UBYTE</strong>, <strong>SHORT</strong>, <strong>USHORT</strong>, <strong>INT</strong>, <strong>UINT</strong>, <strong>LONG</strong>, <strong>ULONG</strong>, <strong>LONGLONG</strong>, <strong>ULONGLONG</strong>, <strong>INTP</strong>, <strong>UINTP</strong></span></p>
+</dd></dl>
+</div>
+<div class="section" id="number-of-bits-in-data-types">
+<h3><span class="yiyi-st" id="yiyi-141">Number of bits in data types</span></h3>
+<p><span class="yiyi-st" id="yiyi-142">所有<code class="xref c c-data docutils literal"><span class="pre">NPY_SIZEOF_{CTYPE}</span></code>常数都定义了相应的<code class="xref c c-data docutils literal"><span class="pre">NPY_BITSOF_{CTYPE}</span></code>常量。</span><span class="yiyi-st" id="yiyi-143"><code class="xref c c-data docutils literal"><span class="pre">NPY_BITSOF_{CTYPE}</span></code>常量提供数据类型中的位数。</span><span class="yiyi-st" id="yiyi-144">具体来说，可用的<code class="docutils literal"><span class="pre">{CTYPE}s</span></code>是</span></p>
+<blockquote>
+<div><span class="yiyi-st" id="yiyi-145"><strong>BOOL</strong>，<strong>CHAR</strong>，<strong>SHORT</strong>，<strong>INT</strong>，<strong>LONG</strong>，<strong>LONGLONG ，<strong>FLOAT</strong>，<strong>DOUBLE</strong>，<strong>LONGDOUBLE</strong></strong></span></div></blockquote>
+</div>
+<div class="section" id="bit-width-references-to-enumerated-typenums">
+<h3><span class="yiyi-st" id="yiyi-146">Bit-width references to enumerated typenums</span></h3>
+<p><span class="yiyi-st" id="yiyi-147">所有数字数据类型（整数，浮点和复数）都具有定义为特定枚举类型编号的常量。</span><span class="yiyi-st" id="yiyi-148">位宽度类型所指的枚举类型正好是平台相关的。</span><span class="yiyi-st" id="yiyi-149">特别是，可用的常数为<code class="xref c c-data docutils literal"><span class="pre">PyArray_{NAME}{BITS}</span></code>其中<code class="docutils literal"><span class="pre">{NAME}</span></code>为<strong>INT</strong>，<strong>UINT</strong> ，<strong>FLOAT</strong>，<strong>COMPLEX</strong>和<code class="docutils literal"><span class="pre">{BITS}</span></code>可以是8,16,32,64,80,96,128,160,192,256 ，512。</span><span class="yiyi-st" id="yiyi-150">显然，并非所有位宽都适用于所有类型的数字类型的所有平台。</span><span class="yiyi-st" id="yiyi-151">通常为8位，16位，32位，64位整数； 32位，64位浮点数；和64位，128位复杂类型。</span></p>
+</div>
+<div class="section" id="integer-that-can-hold-a-pointer">
+<h3><span class="yiyi-st" id="yiyi-152">Integer that can hold a pointer</span></h3>
+<p><span class="yiyi-st" id="yiyi-153">常量<strong>NPY_INTP</strong>和<strong>NPY_UINTP</strong>是指足够大以在平台上保存指针的枚举整数类型。</span><span class="yiyi-st" id="yiyi-154">索引数组应始终转换为<strong>NPY_INTP</strong>，因为数组的维的类型为npy_intp。</span></p>
+</div>
+</div>
+<div class="section" id="c-type-names">
+<h2><span class="yiyi-st" id="yiyi-155">C-type names</span></h2>
+<p><span class="yiyi-st" id="yiyi-156">每个数值数据类型和布尔数据类型都有标准变量类型。</span><span class="yiyi-st" id="yiyi-157">其中一些已经在C规范中可用。</span><span class="yiyi-st" id="yiyi-158">你可以在这些类型的扩展代码中创建变量。</span></p>
+<div class="section" id="boolean">
+<h3><span class="yiyi-st" id="yiyi-159">Boolean</span></h3>
+<dl class="type">
+<dt id="c.npy_bool"><span class="yiyi-st" id="yiyi-160"> <code class="descname">npy_bool</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-161">无符号字符；还定义常数<a class="reference internal" href="c-api.array.html#c.NPY_FALSE" title="NPY_FALSE"><code class="xref c c-data docutils literal"><span class="pre">NPY_FALSE</span></code></a>和<a class="reference internal" href="c-api.array.html#c.NPY_TRUE" title="NPY_TRUE"><code class="xref c c-data docutils literal"><span class="pre">NPY_TRUE</span></code></a>。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="un-signed-integer">
+<h3><span class="yiyi-st" id="yiyi-162">(Un)Signed Integer</span></h3>
+<p><span class="yiyi-st" id="yiyi-163">整数的无符号版本可以通过在整数名称的前面预先挂起一个&apos;u&apos;来定义。</span></p>
+<dl class="type">
+<dt><span class="yiyi-st" id="yiyi-164"><code class="descname">npy_（u）byte</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-165">（无符号字符</span></p>
+</dd></dl>
+<dl class="type">
+<dt><span class="yiyi-st" id="yiyi-166"><code class="descname">npy_（u）short</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-167">（无符号）短</span></p>
+</dd></dl>
+<dl class="type">
+<dt><span class="yiyi-st" id="yiyi-168"><code class="descname">npy_（u）int</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-169">（unsigned）int</span></p>
+</dd></dl>
+<dl class="type">
+<dt><span class="yiyi-st" id="yiyi-170"><code class="descname">npy_（u）long</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-171">（unsigned）long int</span></p>
+</dd></dl>
+<dl class="type">
+<dt><span class="yiyi-st" id="yiyi-172"><code class="descname">npy_（u）longlong</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-173">（unsigned long long int）</span></p>
+</dd></dl>
+<dl class="type">
+<dt><span class="yiyi-st" id="yiyi-174"><code class="descname">npy_（u）intp</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-175">（unsigned）Py_intptr_t（一个整数，它是平台上指针的大小）。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="complex-floating-point">
+<h3><span class="yiyi-st" id="yiyi-176">(Complex) Floating point</span></h3>
+<dl class="type">
+<dt><span class="yiyi-st" id="yiyi-177"><code class="descname">npy_（c）float</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-178">浮动</span></p>
+</dd></dl>
+<dl class="type">
+<dt><span class="yiyi-st" id="yiyi-179"><code class="descname">npy_（c）double</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-180">双</span></p>
+</dd></dl>
+<dl class="type">
+<dt><span class="yiyi-st" id="yiyi-181"><code class="descname">npy_（c）longdouble</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-182">长双</span></p>
+</dd></dl>
+<p><span class="yiyi-st" id="yiyi-183">复杂类型是具有<strong>.real</strong>和<strong>.imag</strong>成员（按此顺序）的结构。</span></p>
+</div>
+<div class="section" id="bit-width-names">
+<h3><span class="yiyi-st" id="yiyi-184">Bit-width names</span></h3>
+<p><span class="yiyi-st" id="yiyi-185">还有有符号整数，无符号整数，浮点和特定位宽的复杂浮点类型的typedef。</span><span class="yiyi-st" id="yiyi-186">可用的类型名称为</span></p>
+<blockquote>
+<div><span class="yiyi-st" id="yiyi-187"><code class="xref c c-type docutils literal"><span class="pre">npy_int{bits}</span></code>，<code class="xref c c-type docutils literal"><span class="pre">npy_uint{bits}</span></code>，<code class="xref c c-type docutils literal"><span class="pre">npy_float{bits}</span></code>和<code class="xref c c-type docutils literal"><span class="pre">npy_complex{bits}</span></code></span></div></blockquote>
+<p><span class="yiyi-st" id="yiyi-188">where <code class="docutils literal"><span class="pre">{bits}</span></code> is the number of bits in the type and can be <strong>8</strong>, <strong>16</strong>, <strong>32</strong>, <strong>64</strong>, 128, and 256 for integer types; 16, <strong>32</strong> , <strong>64</strong>, 80, 96, 128, and 256 for floating-point types; and 32, <strong>64</strong>, <strong>128</strong>, 160, 192, and 512 for complex-valued types. </span><span class="yiyi-st" id="yiyi-189">哪些位宽可用取决于平台。</span><span class="yiyi-st" id="yiyi-190">粗体的位宽通常在所有平台上可用。</span></p>
+</div>
+</div>
+<div class="section" id="printf-formatting">
+<h2><span class="yiyi-st" id="yiyi-191">Printf Formatting</span></h2>
+<p><span class="yiyi-st" id="yiyi-192">有关打印的帮助，以下字符串被定义为printf和相关命令中的正确格式说明符。</span></p>
+<blockquote>
+<div><span class="yiyi-st" id="yiyi-193"><code class="xref c c-data docutils literal"><span class="pre">NPY_LONGLONG_FMT</span></code>，<code class="xref c c-data docutils literal"><span class="pre">NPY_ULONGLONG_FMT</span></code>，<code class="xref c c-data docutils literal"><span class="pre">NPY_INTP_FMT</span></code>，<code class="xref c c-data docutils literal"><span class="pre">NPY_UINTP_FMT</span></code>，<code class="xref c c-data docutils literal"><span class="pre">NPY_LONGDOUBLE_FMT</span></code></span></div></blockquote>
+</div>

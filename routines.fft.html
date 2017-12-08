@@ -1,0 +1,160 @@
+
+<h1><span class="yiyi-st" id="yiyi-24">Discrete Fourier Transform (<a class="reference internal" href="#module-numpy.fft" title="numpy.fft"><code class="xref py py-mod docutils literal"><span class="pre">numpy.fft</span></code></a>)</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.fft.html">https://docs.scipy.org/doc/numpy/reference/routines.fft.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="standard-ffts">
+<h2><span class="yiyi-st" id="yiyi-25">Standard FFTs</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="generated/numpy.fft.fft.html#numpy.fft.fft" title="numpy.fft.fft"><code class="xref py py-obj docutils literal"><span class="pre">fft</span></code></a>（a [，n，axis，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-27">计算一维离散傅里叶变换。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="generated/numpy.fft.ifft.html#numpy.fft.ifft" title="numpy.fft.ifft"><code class="xref py py-obj docutils literal"><span class="pre">ifft</span></code></a>（a [，n，axis，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-29">计算一维离散傅里叶逆变换。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.fft.fft2.html#numpy.fft.fft2" title="numpy.fft.fft2"><code class="xref py py-obj docutils literal"><span class="pre">fft2</span></code></a>（a [，s，axes，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-31">计算2维离散傅里叶变换</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="generated/numpy.fft.ifft2.html#numpy.fft.ifft2" title="numpy.fft.ifft2"><code class="xref py py-obj docutils literal"><span class="pre">ifft2</span></code></a>（a [，s，axes，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-33">计算二维离散傅里叶逆变换。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="generated/numpy.fft.fftn.html#numpy.fft.fftn" title="numpy.fft.fftn"><code class="xref py py-obj docutils literal"><span class="pre">fftn</span></code></a>（a [，s，axes，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-35">计算N维离散傅里叶变换。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="generated/numpy.fft.ifftn.html#numpy.fft.ifftn" title="numpy.fft.ifftn"><code class="xref py py-obj docutils literal"><span class="pre">ifftn</span></code></a>（a [，s，axes，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-37">计算N维离散傅里叶逆变换。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="real-ffts">
+<h2><span class="yiyi-st" id="yiyi-38">Real FFTs</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="generated/numpy.fft.rfft.html#numpy.fft.rfft" title="numpy.fft.rfft"><code class="xref py py-obj docutils literal"><span class="pre">rfft</span></code></a>（a [，n，axis，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-40">计算实数输入的一维离散傅里叶变换。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="generated/numpy.fft.irfft.html#numpy.fft.irfft" title="numpy.fft.irfft"><code class="xref py py-obj docutils literal"><span class="pre">irfft</span></code></a>（a [，n，axis，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-42">计算实数输入的n点DFT的逆。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="generated/numpy.fft.rfft2.html#numpy.fft.rfft2" title="numpy.fft.rfft2"><code class="xref py py-obj docutils literal"><span class="pre">rfft2</span></code></a>（a [，s，axes，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-44">计算实数组的二维FFT。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.fft.irfft2.html#numpy.fft.irfft2" title="numpy.fft.irfft2"><code class="xref py py-obj docutils literal"><span class="pre">irfft2</span></code></a>（a [，s，axes，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">计算实数组的二维逆FFT。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.fft.rfftn.html#numpy.fft.rfftn" title="numpy.fft.rfftn"><code class="xref py py-obj docutils literal"><span class="pre">rfftn</span></code></a>（a [，s，axes，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-48">计算实际输入的N维离散傅里叶变换。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.fft.irfftn.html#numpy.fft.irfftn" title="numpy.fft.irfftn"><code class="xref py py-obj docutils literal"><span class="pre">irfftn</span></code></a>（a [，s，axes，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">计算实际输入的N维FFT的逆。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hermitian-ffts">
+<h2><span class="yiyi-st" id="yiyi-51">Hermitian FFTs</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="generated/numpy.fft.hfft.html#numpy.fft.hfft" title="numpy.fft.hfft"><code class="xref py py-obj docutils literal"><span class="pre">hfft</span></code></a>（a [，n，axis，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-53">计算具有厄密对称（实际频谱）的信号的FFT。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="generated/numpy.fft.ihfft.html#numpy.fft.ihfft" title="numpy.fft.ihfft"><code class="xref py py-obj docutils literal"><span class="pre">ihfft</span></code></a>（a [，n，axis，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-55">计算具有厄密对称性的信号的逆FFT。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="helper-routines">
+<h2><span class="yiyi-st" id="yiyi-56">Helper routines</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="generated/numpy.fft.fftfreq.html#numpy.fft.fftfreq" title="numpy.fft.fftfreq"><code class="xref py py-obj docutils literal"><span class="pre">fftfreq</span></code></a>（n [，d]）</span></td>
+<td><span class="yiyi-st" id="yiyi-58">返回离散傅里叶变换采样频率。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="generated/numpy.fft.rfftfreq.html#numpy.fft.rfftfreq" title="numpy.fft.rfftfreq"><code class="xref py py-obj docutils literal"><span class="pre">rfftfreq</span></code></a>（n [，d]）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">返回离散傅立叶变换采样频率（用于rfft，irfft）。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="generated/numpy.fft.fftshift.html#numpy.fft.fftshift" title="numpy.fft.fftshift"><code class="xref py py-obj docutils literal"><span class="pre">fftshift</span></code></a>（x [，axes]）</span></td>
+<td><span class="yiyi-st" id="yiyi-62">将零频率分量移动到频谱的中心。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="generated/numpy.fft.ifftshift.html#numpy.fft.ifftshift" title="numpy.fft.ifftshift"><code class="xref py py-obj docutils literal"><span class="pre">ifftshift</span></code></a>（x [，axes]）</span></td>
+<td><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="generated/numpy.fft.fftshift.html#numpy.fft.fftshift" title="numpy.fft.fftshift"><code class="xref py py-obj docutils literal"><span class="pre">fftshift</span></code></a>的逆。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="background-information">
+<h2><span class="yiyi-st" id="yiyi-65">Background information</span></h2>
+<p><span class="yiyi-st" id="yiyi-66">傅里叶分析基本上是用于表示作为周期分量的和的函数，以及用于从那些分量恢复函数的方法。</span><span class="yiyi-st" id="yiyi-67">当函数和其傅里叶变换都用离散对等项代替时，它被称为离散傅里叶变换（DFT）。</span><span class="yiyi-st" id="yiyi-68">DFT已经成为数值计算的主要部分，这部分是因为用于计算它的非常快速的算法，称为快速傅立叶变换（FFT），其已知为高斯（1805），并且由Cooley和其当前形式Tukey <a class="reference internal" href="#ct" id="id1">[CT]</a>。</span><span class="yiyi-st" id="yiyi-69">Press et al。</span><span class="yiyi-st" id="yiyi-70"><a class="reference internal" href="#nr" id="id2">[NR]</a>提供对傅立叶分析及其应用的可访问介绍。</span></p>
+<p><span class="yiyi-st" id="yiyi-71">Because the discrete Fourier transform separates its input into components that contribute at discrete frequencies, it has a great number of applications in digital signal processing, e.g., for filtering, and in this context the discretized input to the transform is customarily referred to as a <em>signal</em>, which exists in the <em>time domain</em>. </span><span class="yiyi-st" id="yiyi-72">输出称为<em>频谱</em>或<em>变换</em>，并存在于<em>频域</em>中。</span></p>
+</div>
+<div class="section" id="implementation-details">
+<h2><span class="yiyi-st" id="yiyi-73">Implementation details</span></h2>
+<p><span class="yiyi-st" id="yiyi-74">有许多方法来定义DFT，在指数的符号，规范化等方面变化。</span><span class="yiyi-st" id="yiyi-75">在该实现中，DFT被定义为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-76">DFT通常为复数输入和输出定义，并且线性频率<img alt="f" class="math" src="../_images/math/820575a3248a951f90af909f7c19f0c30d7679d6.png" style="vertical-align: -3px">处的单频分量由复指数<img alt="a_m = \exp\{2\pi i\,f m\Delta t\}" class="math" src="../_images/math/03d4e8caffdd759ce30626c7d0c6cd5c88059f29.png" style="vertical-align: -4px">表示，其中<img alt="\Delta t" class="math" src="../_images/math/ea7e70d8392beb70ffea7680e3c5cec18e5c9bf0.png" style="vertical-align: 0px">是采样间隔。</span></p>
+<p><span class="yiyi-st" id="yiyi-77">结果中的值遵循所谓的“标准”顺序：如果<code class="docutils literal"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">fft（a，</span> <span class="pre">n） </span></code>，则<code class="docutils literal"><span class="pre">A[0]</span></code>包含零频率项（信号的和），其对于实数输入始终是真实的。</span><span class="yiyi-st" id="yiyi-78">那么<code class="docutils literal"><span class="pre">A[1:n/2]</span></code>包含正频率项，而<code class="docutils literal"><span class="pre">A[n/2+1:]</span></code>降低负频率。</span><span class="yiyi-st" id="yiyi-79">对于偶数个输入点，<code class="docutils literal"><span class="pre">A[n/2]</span></code>表示正和负奈奎斯特频率，并且对于实际输入也是纯实数。</span><span class="yiyi-st" id="yiyi-80">对于奇数个输入点，<code class="docutils literal"><span class="pre">A[(n-1)/2]</span></code>包含最大的正频率，而<code class="docutils literal"><span class="pre">A[(n+1)/2]</span></code></span><span class="yiyi-st" id="yiyi-81">例程<code class="docutils literal"><span class="pre">np.fft.fftfreq(n)</span></code>返回一个数组，给出输出中相应元素的频率。</span><span class="yiyi-st" id="yiyi-82">例程<code class="docutils literal"><span class="pre">np.fft.fftshift(A)</span></code>移动变换及其频率以将零频率分量置于中间，并且<code class="docutils literal"><span class="pre">np.fft.ifftshift(A)</span></code>撤消那个转变。</span></p>
+<p><span class="yiyi-st" id="yiyi-83">When the input <em class="xref py py-obj">a</em> is a time-domain signal and <code class="docutils literal"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">fft(a)</span></code>, <code class="docutils literal"><span class="pre">np.abs(A)</span></code> is its amplitude spectrum and <code class="docutils literal"><span class="pre">np.abs(A)**2</span></code> is its power spectrum. </span><span class="yiyi-st" id="yiyi-84">相位谱通过<code class="docutils literal"><span class="pre">np.angle(A)</span></code>获得。</span></p>
+<p><span class="yiyi-st" id="yiyi-85">逆DFT定义为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-86">它不同于正向变换的指数参数的符号和<img alt="1/n" class="math" src="../_images/math/20adedda64097d8328ed617bf7fba5d2ece0797c.png" style="vertical-align: -4px">的默认归一化。</span></p>
+</div>
+<div class="section" id="normalization">
+<h2><span class="yiyi-st" id="yiyi-87">Normalization</span></h2>
+<p><span class="yiyi-st" id="yiyi-88">默认归一化具有未缩放的直接变换，并且逆变换由<img alt="1/n" class="math" src="../_images/math/20adedda64097d8328ed617bf7fba5d2ece0797c.png" style="vertical-align: -4px">缩放。</span><span class="yiyi-st" id="yiyi-89">通过将关键字参数<code class="docutils literal"><span class="pre">norm</span></code>设置为<code class="docutils literal"><span class="pre">&quot;ortho&quot;</span></code>（默认为<em class="xref py py-obj">None</em>），可以获得酉变换，将缩放<img alt="1/\sqrt{n}" class="math" src="../_images/math/1d79a586c3b92f60c06e9f5c38facae82d198229.png" style="vertical-align: -5px">。</span></p>
+</div>
+<div class="section" id="real-and-hermitian-transforms">
+<h2><span class="yiyi-st" id="yiyi-90">Real and Hermitian transforms</span></h2>
+<p><span class="yiyi-st" id="yiyi-91">当输入是纯实数时，其变换是Hermitian，即，频率<img alt="f_k" class="math" src="../_images/math/e1c2036b297181c0e13bfe6ba86a1c33c37a77a5.png" style="vertical-align: -3px">的分量是频率<img alt="-f_k" class="math" src="../_images/math/2bd1ad86f3e5722728a00c972e436567397697f1.png" style="vertical-align: -3px">处的分量的复共轭，这意味着对于实际输入，在负频率中没有信息从正频率分量中不可用的分量。</span><span class="yiyi-st" id="yiyi-92">系列的<a class="reference internal" href="generated/numpy.fft.rfft.html#numpy.fft.rfft" title="numpy.fft.rfft"><code class="xref py py-obj docutils literal"><span class="pre">rfft</span></code></a>功能设计为对实际输入进行操作，并通过只计算正频率分量，直到并包括奈奎斯特频率来利用这种对称性。</span><span class="yiyi-st" id="yiyi-93">因此，<code class="docutils literal"><span class="pre">n</span></code>输入点产生<code class="docutils literal"><span class="pre">n/2+1</span></code>复数输出点。</span><span class="yiyi-st" id="yiyi-94">该族的反相假设其输入的相同对称性，并且对于<code class="docutils literal"><span class="pre">n</span></code>点的输出使用<code class="docutils literal"><span class="pre">n/2+1</span></code>输入点。</span></p>
+<p><span class="yiyi-st" id="yiyi-95">相应地，当频谱是纯实数时，信号是厄密共轭。</span><span class="yiyi-st" id="yiyi-96"><a class="reference internal" href="generated/numpy.fft.hfft.html#numpy.fft.hfft" title="numpy.fft.hfft"><code class="xref py py-obj docutils literal"><span class="pre">hfft</span></code></a>系列通过在输入（时间）域中使用<code class="docutils literal"><span class="pre">n</span></code>真实点的<code class="docutils literal"><span class="pre">n/2+1</span></code>复杂点来利用这种对称性频域。</span></p>
+<p><span class="yiyi-st" id="yiyi-97">在较高维度中，使用FFT，例如用于图像分析和滤波。</span><span class="yiyi-st" id="yiyi-98">FFT的计算效率意味着它也可以是使用在时域中的卷积等价于频域中的逐点乘法的性质来计算大卷积的更快的方式。</span></p>
+</div>
+<div class="section" id="higher-dimensions">
+<h2><span class="yiyi-st" id="yiyi-99">Higher dimensions</span></h2>
+<p><span class="yiyi-st" id="yiyi-100">在二维中，DFT被定义为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-101">其以明显的方式延伸到较高的尺寸，并且较高尺寸的反转也以相同的方式延伸。</span></p>
+</div>
+<div class="section" id="references">
+<h2><span class="yiyi-st" id="yiyi-102">References</span></h2>
+<table class="docutils citation" frame="void" id="ct" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-103"><a class="fn-backref" href="#id1">[CT]</a></span></td><td><span class="yiyi-st" id="yiyi-104">Cooley，James W.和John W. Tukey，1965，“An algorithm for the machine calculation of complex Fourier series，”<em>计算。</em></span><span class="yiyi-st" id="yiyi-105">19：297-301。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="nr" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-106"><a class="fn-backref" href="#id2">[NR]</a></span></td><td><span class="yiyi-st" id="yiyi-107">Press, W., Teukolsky, S., Vetterline, W.T., and Flannery, B.P., 2007, <em>Numerical Recipes: The Art of Scientific Computing</em>, ch. </span><span class="yiyi-st" id="yiyi-108">12-13。</span><span class="yiyi-st" id="yiyi-109">剑桥大学</span><span class="yiyi-st" id="yiyi-110">Press，Cambridge，UK。</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="examples">
+<h2><span class="yiyi-st" id="yiyi-111">Examples</span></h2>
+<p><span class="yiyi-st" id="yiyi-112">例如，参见各种功能。</span></p>
+</div>

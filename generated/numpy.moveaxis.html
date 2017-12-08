@@ -1,0 +1,67 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.moveaxis</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.moveaxis.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.moveaxis.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.moveaxis"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">moveaxis</code><span class="sig-paren">(</span><em>a</em>, <em>source</em>, <em>destination</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L1478-L1546"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将数组的轴移动到新位置。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">其他轴保持其原始顺序。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：np.ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">其轴应重新排序的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>源</strong>：int或int的序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">要移动的轴的原始位置。</span><span class="yiyi-st" id="yiyi-21">这些必须是唯一的。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>destination</strong>：int或int的序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">每个原始轴的目标位置。</span><span class="yiyi-st" id="yiyi-24">这些也必须是唯一的。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>result</strong>：np.ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">移动轴的数组。</span><span class="yiyi-st" id="yiyi-28">此数组是输入数组的视图。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.transpose.html#numpy.transpose" title="numpy.transpose"><code class="xref py py-obj docutils literal"><span class="pre">transpose</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">允许数组的尺寸。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.swapaxes.html#numpy.swapaxes" title="numpy.swapaxes"><code class="xref py py-obj docutils literal"><span class="pre">swapaxes</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">交换数组的两个轴。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(4, 5, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(5, 3, 4)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-35">这些都达到相同的结果：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(5, 4, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">swapaxis</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(5, 4, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(5, 4, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(5, 4, 3)</span>
+</pre></div>
+</div>
+</dd></dl>

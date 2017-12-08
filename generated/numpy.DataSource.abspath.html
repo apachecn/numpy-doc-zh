@@ -1,0 +1,33 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.DataSource.abspath</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.DataSource.abspath.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.DataSource.abspath.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.DataSource.abspath"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">DataSource.</code><code class="descname">abspath</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/_datasource.py#L343-L386"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回DataSource目录中文件的绝对路径。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">如果<em class="xref py py-obj">path</em>是URL，则<a class="reference internal" href="#numpy.DataSource.abspath" title="numpy.DataSource.abspath"><code class="xref py py-obj docutils literal"><span class="pre">abspath</span></code></a>将返回文件在本地存在的位置或使用<a class="reference internal" href="numpy.DataSource.open.html#numpy.DataSource.open" title="numpy.DataSource.open"><code class="xref py py-obj docutils literal"><span class="pre">open</span></code></a>方法打开时将存在的位置。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>路径</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">可以是本地文件或远程URL。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：str</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">完成路径，包括<a class="reference internal" href="numpy.DataSource.html#numpy.DataSource" title="numpy.DataSource"><code class="xref py py-obj docutils literal"><span class="pre">DataSource</span></code></a>目标目录。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-24">该功能基于<a class="reference external" href="https://docs.python.org/dev/library/os.path.html#os.path.abspath" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">os.path.abspath</span></code></a>。</span></p>
+</dd></dl>

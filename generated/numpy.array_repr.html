@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.array_repr</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array_repr.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.array_repr.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.array_repr"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">array_repr</code><span class="sig-paren">(</span><em>arr</em>, <em>max_line_width=None</em>, <em>precision=None</em>, <em>suppress_small=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L1763-L1833"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回数组的字符串表示形式。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>arr</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>max_line_width</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">字符串应该跨越的最大列数。</span><span class="yiyi-st" id="yiyi-20">换行符在数组元素后适当地拆分字符串。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>precision</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">浮点精度。</span><span class="yiyi-st" id="yiyi-23">默认值是当前打印精度（通常为8），可以使用<a class="reference internal" href="numpy.set_printoptions.html#numpy.set_printoptions" title="numpy.set_printoptions"><code class="xref py py-obj docutils literal"><span class="pre">set_printoptions</span></code></a>更改。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>suppress_small</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">将非常小的数字表示为零，默认值为False。</span><span class="yiyi-st" id="yiyi-26">非常小的由<em class="xref py py-obj">精度</em>定义，如果精度为8，那么小于5e-9的数字表示为零。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>string</strong>：str</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">数组的字符串表示形式。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.array_str.html#numpy.array_str" title="numpy.array_str"><code class="xref py py-obj docutils literal"><span class="pre">array_str</span></code></a>，<a class="reference internal" href="numpy.array2string.html#numpy.array2string" title="numpy.array2string"><code class="xref py py-obj docutils literal"><span class="pre">array2string</span></code></a>，<a class="reference internal" href="numpy.set_printoptions.html#numpy.set_printoptions" title="numpy.set_printoptions"><code class="xref py py-obj docutils literal"><span class="pre">set_printoptions</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array_repr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]))</span>
+<span class="go">&apos;array([1, 2])&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array_repr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">]))</span>
+<span class="go">&apos;MaskedArray([ 0.])&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array_repr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">))</span>
+<span class="go">&apos;array([], dtype=int32)&apos;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="n">e</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array_repr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">suppress_small</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&apos;array([ 0.000001,  0.      ,  2.      ,  3.      ])&apos;</span>
+</pre></div>
+</div>
+</dd></dl>

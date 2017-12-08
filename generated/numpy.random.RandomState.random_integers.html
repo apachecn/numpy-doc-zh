@@ -1,0 +1,87 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.random_integers</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.random_integers.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.random_integers.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.random_integers"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">random_integers</code><span class="sig-paren">(</span><em>low</em>, <em>high=None</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15"><em class="xref py py-obj">低</em>和<em class="xref py py-obj">高</em>之间的np.int类型的随机整数（含）。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">从闭合区间[<em class="xref py py-obj">低</em>，<em class="xref py py-obj">高</em>]中的“离散均匀”分布返回np.int类型的随机整数。</span><span class="yiyi-st" id="yiyi-17">如果<em class="xref py py-obj">高</em>为无（默认值），则结果来自[1，<em class="xref py py-obj">低</em>]。</span><span class="yiyi-st" id="yiyi-18">np.int类型转换为Python 2用于“短”整数的C long类型，其精度是平台相关的。</span></p>
+<p><span class="yiyi-st" id="yiyi-19">此函数已被弃用。</span><span class="yiyi-st" id="yiyi-20">请改用randint。</span></p>
+<div class="deprecated">
+<p><span class="yiyi-st" id="yiyi-21"><span class="versionmodified">自1.11.0版起已弃用。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>低</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">从分布中绘制的最低（有符号）整数（除非<code class="docutils literal"><span class="pre">high=None</span></code>，在此情况下此参数是<em>最高</em>这样的整数）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>高</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">如果提供，从分布中绘制的最大（有符号）整数（如果<code class="docutils literal"><span class="pre">high=None</span></code>，请参见上面的行为）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">输出形状。</span><span class="yiyi-st" id="yiyi-29">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-30">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>out</strong>：int或ndarray的整数</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-33"><em class="xref py py-obj">size</em>从合适的分布中随机整数的数组，或者如果<em class="xref py py-obj">size</em>未提供，则单个这样的随机int。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-34">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference external" href="https://docs.python.org/dev/library/random.html#random.randint" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">random.randint</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">Similar to <a class="reference internal" href="numpy.random.random_integers.html#numpy.random.random_integers" title="numpy.random.random_integers"><code class="xref py py-obj docutils literal"><span class="pre">random_integers</span></code></a>, only for the half-open interval [<em class="xref py py-obj">low</em>, <em class="xref py py-obj">high</em>), and 0 is the lowest value if <em class="xref py py-obj">high</em> is omitted.</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-38">要从a和b之间的N个均匀间隔的浮点数进行采样，请使用：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_integers</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_integers</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_integers</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="go">&lt;type &apos;int&apos;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_integers</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mf">3.</span><span class="p">,</span><span class="mf">2.</span><span class="p">))</span>
+<span class="go">array([[5, 4],</span>
+<span class="go">       [3, 3],</span>
+<span class="go">       [4, 5]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">从0到2.5之间的五个均匀间隔数字（<em>，即</em>，从集合<img alt="{0, 5/8, 10/8, 15/8, 20/8}" class="math" src="../../_images/math/260812782a8a4f35a929d637a38520175045eaa2.png" style="vertical-align: -4px">）中选择五个随机数字：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mf">2.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_integers</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">4.</span>
+<span class="go">array([ 0.625,  1.25 ,  0.625,  0.625,  2.5  ])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-41">辊两面六面骰子1000次，总结结果：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_integers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_integers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dsums</span> <span class="o">=</span> <span class="n">d1</span> <span class="o">+</span> <span class="n">d2</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">以直方图显示结果：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">dsums</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">（<a class="reference external" href="../../reference/generated/numpy-random-RandomState-random_integers-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-random_integers-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-random_integers-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-RandomState-random_integers-1.png" src="../../_images/numpy-random-RandomState-random_integers-1.png">
+</div>
+</dd></dl>

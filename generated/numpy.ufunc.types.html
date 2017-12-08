@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-11">numpy.ufunc.types</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ufunc.types.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ufunc.types.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="attribute">
+<dt id="numpy.ufunc.types"><span class="yiyi-st" id="yiyi-12"> <code class="descclassname">ufunc.</code><code class="descname">types</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-13">返回一个类型为input-&gt; output的列表。</span></p>
+<p><span class="yiyi-st" id="yiyi-14">数据属性列出ufunc可以提供的数据类型“域范围”分组。</span><span class="yiyi-st" id="yiyi-15">数据类型使用字符代码给出。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-16">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-17"><a class="reference internal" href="numpy.ufunc.ntypes.html#numpy.ufunc.ntypes" title="numpy.ufunc.ntypes"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ufunc.ntypes</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-18">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">types</span>
+<span class="go">[&apos;??-&gt;?&apos;, &apos;bb-&gt;b&apos;, &apos;BB-&gt;B&apos;, &apos;hh-&gt;h&apos;, &apos;HH-&gt;H&apos;, &apos;ii-&gt;i&apos;, &apos;II-&gt;I&apos;, &apos;ll-&gt;l&apos;,</span>
+<span class="go">&apos;LL-&gt;L&apos;, &apos;qq-&gt;q&apos;, &apos;QQ-&gt;Q&apos;, &apos;ff-&gt;f&apos;, &apos;dd-&gt;d&apos;, &apos;gg-&gt;g&apos;, &apos;FF-&gt;F&apos;, &apos;DD-&gt;D&apos;,</span>
+<span class="go">&apos;GG-&gt;G&apos;, &apos;OO-&gt;O&apos;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="o">.</span><span class="n">types</span>
+<span class="go">[&apos;??-&gt;?&apos;, &apos;bb-&gt;b&apos;, &apos;BB-&gt;B&apos;, &apos;hh-&gt;h&apos;, &apos;HH-&gt;H&apos;, &apos;ii-&gt;i&apos;, &apos;II-&gt;I&apos;, &apos;ll-&gt;l&apos;,</span>
+<span class="go">&apos;LL-&gt;L&apos;, &apos;qq-&gt;q&apos;, &apos;QQ-&gt;Q&apos;, &apos;ff-&gt;f&apos;, &apos;dd-&gt;d&apos;, &apos;gg-&gt;g&apos;, &apos;FF-&gt;F&apos;, &apos;DD-&gt;D&apos;,</span>
+<span class="go">&apos;GG-&gt;G&apos;, &apos;OO-&gt;O&apos;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="o">.</span><span class="n">types</span>
+<span class="go">[&apos;bb-&gt;b&apos;, &apos;BB-&gt;B&apos;, &apos;hh-&gt;h&apos;, &apos;HH-&gt;H&apos;, &apos;ii-&gt;i&apos;, &apos;II-&gt;I&apos;, &apos;ll-&gt;l&apos;, &apos;LL-&gt;L&apos;,</span>
+<span class="go">&apos;qq-&gt;q&apos;, &apos;QQ-&gt;Q&apos;, &apos;ff-&gt;f&apos;, &apos;dd-&gt;d&apos;, &apos;gg-&gt;g&apos;, &apos;FF-&gt;F&apos;, &apos;DD-&gt;D&apos;, &apos;GG-&gt;G&apos;,</span>
+<span class="go">&apos;OO-&gt;O&apos;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">types</span>
+<span class="go">[&apos;f-&gt;f&apos;, &apos;d-&gt;d&apos;, &apos;g-&gt;g&apos;, &apos;F-&gt;F&apos;, &apos;D-&gt;D&apos;, &apos;G-&gt;G&apos;, &apos;O-&gt;O&apos;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">remainder</span><span class="o">.</span><span class="n">types</span>
+<span class="go">[&apos;bb-&gt;b&apos;, &apos;BB-&gt;B&apos;, &apos;hh-&gt;h&apos;, &apos;HH-&gt;H&apos;, &apos;ii-&gt;i&apos;, &apos;II-&gt;I&apos;, &apos;ll-&gt;l&apos;, &apos;LL-&gt;L&apos;,</span>
+<span class="go">&apos;qq-&gt;q&apos;, &apos;QQ-&gt;Q&apos;, &apos;ff-&gt;f&apos;, &apos;dd-&gt;d&apos;, &apos;gg-&gt;g&apos;, &apos;OO-&gt;O&apos;]</span>
+</pre></div>
+</div>
+</dd></dl>

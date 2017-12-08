@@ -1,0 +1,51 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.matlib.rand</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matlib.rand.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matlib.rand.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.matlib.rand"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.matlib.</code><code class="descname">rand</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/matlib.py#L215-L258"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回具有给定形状的随机值矩阵。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">创建给定形状的矩阵，并通过<code class="docutils literal"><span class="pre">[0，</span> <span class="pre">1）</span></code>的均匀分布的随机样本传播它。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>* args</strong>：参数</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输出形状。</span><span class="yiyi-st" id="yiyi-19">如果给定为N个整数，每个整数指定一个维度的大小。</span><span class="yiyi-st" id="yiyi-20">如果给出一个元组，这个元组给出完整的形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">具有由<em class="xref py py-obj">* args</em>给出的形状的随机值矩阵。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.matlib.randn.html#numpy.matlib.randn" title="numpy.matlib.randn"><code class="xref py py-obj docutils literal"><span class="pre">randn</span></code></a>，<a class="reference internal" href="numpy.random.rand.html#numpy.random.rand" title="numpy.random.rand"><code class="xref py py-obj docutils literal"><span class="pre">numpy.random.rand</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.matlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matlib</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">matrix([[ 0.68340382,  0.67926887,  0.83271405],</span>
+<span class="go">        [ 0.00793551,  0.20468222,  0.95253525]])       #random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matlib</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">matrix([[ 0.84682055,  0.73626594,  0.11308016],</span>
+<span class="go">        [ 0.85429008,  0.3294825 ,  0.89139555]])       #random</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-27">如果第一个参数是元组，则忽略其他参数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matlib</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">matrix([[ 0.46898646,  0.15163588,  0.95188261],</span>
+<span class="go">        [ 0.59208621,  0.09561818,  0.00583606]])       #random</span>
+</pre></div>
+</div>
+</dd></dl>

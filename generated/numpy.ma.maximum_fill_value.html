@@ -1,0 +1,67 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.maximum_fill_value</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.maximum_fill_value.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.maximum_fill_value.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.maximum_fill_value"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">maximum_fill_value</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L316-L376"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回可由对象的dtype表示的最小值。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">此函数适用于计算适合获取带有给定dtype的数组的最大值的填充值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>obj</strong>：{ndarray，dtype}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">可以查询其为数值类型的对象。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>val</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">最小可表示值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>TypeError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">如果<em class="xref py py-obj">obj</em>不是合适的数值类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-27"><code class="xref py py-obj docutils literal"><span class="pre">minimum_fill_value</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28">反函数。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.ma.set_fill_value.html#numpy.ma.set_fill_value" title="numpy.ma.set_fill_value"><code class="xref py py-obj docutils literal"><span class="pre">set_fill_value</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">设置掩码数组的填充值。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.MaskedArray.fill_value" title="numpy.ma.MaskedArray.fill_value"><code class="xref py py-obj docutils literal"><span class="pre">MaskedArray.fill_value</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">返回当前填充值。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">maximum_fill_value</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">-128</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">maximum_fill_value</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">-2147483648</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-34">也可以传递数字数据的数组。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">maximum_fill_value</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">-128</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">maximum_fill_value</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">-inf</span>
+</pre></div>
+</div>
+</dd></dl>

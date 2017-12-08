@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.matrix_rank</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.matrix_rank.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.matrix_rank.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.matrix_rank"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">matrix_rank</code><span class="sig-paren">(</span><em>M</em>, <em>tol=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L1462-L1546"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">使用SVD方法返回数组的矩阵秩</span></p>
+<p><span class="yiyi-st" id="yiyi-15">数组的等级是数组的SVD奇异值的数目大于<em class="xref py py-obj">tol</em>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>M</strong>：{（M，），（M，N）} array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">数组</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>tol</strong>：{None，float}，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20">阈值，在该阈值以下SVD值被认为是零。</span><span class="yiyi-st" id="yiyi-21">如果<em class="xref py py-obj">tol</em>为无，并且<code class="docutils literal"><span class="pre">S</span></code>是具有<em class="xref py py-obj">M</em>的奇异值的数组，并且<code class="docutils literal"><span class="pre">eps</span></code>对于<code class="docutils literal"><span class="pre">S</span></code>的数据类型，则将<em class="xref py py-obj">tol</em>设置为<code class="docutils literal"><span class="pre">S.max()</span> <span class="pre">*</span> <span class="pre">max（M.shape）</span> <span class="pre">*</span> <span class="pre">eps</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-23">The default threshold to detect rank deficiency is a test on the magnitude of the singular values of <em class="xref py py-obj">M</em>. By default, we identify singular values less than <code class="docutils literal"><span class="pre">S.max()</span> <span class="pre">*</span> <span class="pre">max(M.shape)</span> <span class="pre">*</span> <span class="pre">eps</span></code> as indicating rank deficiency (with the symbols defined above). </span><span class="yiyi-st" id="yiyi-24">这是MATLAB使用的算法[1]。</span><span class="yiyi-st" id="yiyi-25">它也出现在<em>数值配方</em>中讨论的SVD解的线性最小二乘法[2]。</span></p>
+<p><span class="yiyi-st" id="yiyi-26">该默认阈值被设计为检测SVD计算的数值误差的秩错误。</span><span class="yiyi-st" id="yiyi-27">假设在<em class="xref py py-obj">M</em>中有一列，它是<em class="xref py py-obj">M</em>中其他列的精确（在浮点中）线性组合。在<em class="xref py py-obj">M</em>上计算SVD通常不会产生精确等于0的奇异值：最小SVD值与0的任何差异将由SVD的计算中的数值不精确引起。</span><span class="yiyi-st" id="yiyi-28">我们对小SVD值的阈值考虑了这种数值不精确性，并且默认阈值将检测这种数值秩缺陷。</span><span class="yiyi-st" id="yiyi-29">即使<em class="xref py py-obj">M</em>的一些列的线性组合不完全等于<em class="xref py py-obj">M</em>的另一列，但是阈值可以声明矩阵<em class="xref py py-obj">M</em>只在数字上非常接近<em class="xref py py-obj">M</em>的另一列。</span></p>
+<p><span class="yiyi-st" id="yiyi-30">我们选择了默认阈值，因为它被广泛使用。</span><span class="yiyi-st" id="yiyi-31">其他阈值是可能的。</span><span class="yiyi-st" id="yiyi-32">例如，在<em>数字配方</em>的2007版本的其他地方，存在<code class="docutils literal"><span class="pre">S.max()</span> <span class="pre">*</span> <span class="pre">np.finfo（M.dtype）.eps</span> <span class="pre">/</span> <span class="pre">2. </span> <span class="pre">*</span> <span class="pre">np.sqrt（m  t8 &gt; <span class="pre">+</span> <span class="pre">n</span> <span class="pre">+</span> <span class="pre">1. ）</span></span></code>。</span><span class="yiyi-st" id="yiyi-33">作者将此阈值描述为基于“预期四舍五入误差”（p 71）。</span></p>
+<p><span class="yiyi-st" id="yiyi-34">上述阈值在SVD的计算中处理浮点舍入误差。</span><span class="yiyi-st" id="yiyi-35">但是，您可能有更多关于<em class="xref py py-obj">M</em>中的错误来源的信息，这将使您考虑其他容差值来检测<em>有效</em>排名缺陷。</span><span class="yiyi-st" id="yiyi-36">对公差的最有用的度量取决于你打算在矩阵上使用的操作。</span><span class="yiyi-st" id="yiyi-37">例如，如果您的数据来自不确定度大于浮点&#x3B5;的不确定度，则选择接近该不确定度的容差可能更可取。</span><span class="yiyi-st" id="yiyi-38">如果不确定性是绝对的而不是相对的，容差可以是绝对的。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r39" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-40"><a class="fn-backref" href="#id1">[R39]</a></span></td><td><span class="yiyi-st" id="yiyi-41">MATLAB参考文档“Rank”<a class="reference external" href="http://www.mathworks.com/help/techdoc/ref/rank.html">http://www.mathworks.com/help/techdoc/ref/rank.html</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r40" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-42"><a class="fn-backref" href="#id2">[R40]</a></span></td><td><span class="yiyi-st" id="yiyi-43">W.K.Veterling和B.P.Flannery，“Numerical Recipes（3rd edition）”，Cambridge University Press，2007，第795页。</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="k">import</span> <span class="n">matrix_rank</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># Full rank matrix</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="n">I</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span> <span class="c1"># rank deficient matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">4</span><span class="p">,)))</span> <span class="c1"># 1 dimension - rank 1 unless all 0</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,)))</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>

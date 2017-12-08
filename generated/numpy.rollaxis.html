@@ -1,0 +1,57 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.rollaxis</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.rollaxis.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.rollaxis.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.rollaxis"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">rollaxis</code><span class="sig-paren">(</span><em>a</em>, <em>axis</em>, <em>start=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L1404-L1461"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">向后滚动指定的轴，直到它位于给定位置。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>axis</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">轴向后滚动。</span><span class="yiyi-st" id="yiyi-20">其他轴的位置相对于彼此不改变。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>start</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">轴被滚动，直到它位于此位置之前。</span><span class="yiyi-st" id="yiyi-23">默认值为0，导致“完成”滚动。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>res</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">对于Numpy&gt; = 1.10，始终返回<em class="xref py py-obj">a</em>的视图。</span><span class="yiyi-st" id="yiyi-27">对于早期的Numpy版本，只有当轴的顺序改变时，才返回<em class="xref py py-obj">a</em>的视图，否则返回输入数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.moveaxis.html#numpy.moveaxis" title="numpy.moveaxis"><code class="xref py py-obj docutils literal"><span class="pre">moveaxis</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">将数轴移动到新位置。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.roll.html#numpy.roll" title="numpy.roll"><code class="xref py py-obj docutils literal"><span class="pre">roll</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">通过沿给定轴的多个位置滚动数组的元素。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">rollaxis</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 6, 4, 5)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">rollaxis</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(5, 3, 4, 6)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">rollaxis</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 5, 6, 4)</span>
+</pre></div>
+</div>
+</dd></dl>

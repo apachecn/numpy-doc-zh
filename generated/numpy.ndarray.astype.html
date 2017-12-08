@@ -1,0 +1,73 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ndarray.astype</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.astype.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.astype.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ndarray.astype"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">ndarray.</code><code class="descname">astype</code><span class="sig-paren">(</span><em>dtype</em>, <em>order=&apos;K&apos;</em>, <em>casting=&apos;unsafe&apos;</em>, <em>subok=True</em>, <em>copy=True</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">数组的复制，强制转换为指定的类型。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>dtype</strong>：str或dtype</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">数组被转换到的类型代码或数据类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>订单</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;，&apos;K&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">控制结果的内存布局顺序。</span><span class="yiyi-st" id="yiyi-21">&apos;C&apos;表示C顺序，&apos;F&apos;表示Fortran顺序，&apos;A&apos;表示&apos;F&apos;顺序，如果所有数组都是Fortran连续的，&apos;C&apos;顺序否则，&apos;K&apos;表示接近数组元素出现的顺序在内存中。</span><span class="yiyi-st" id="yiyi-22">默认值为“K”。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>投射</strong>：{&apos;no&apos;，&apos;equiv&apos;，&apos;safe&apos;，&apos;same_kind&apos;，&apos;unsafe&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">控制可能发生的数据转换类型。</span><span class="yiyi-st" id="yiyi-25">默认为&apos;不安全&apos;，以实现向后兼容性。</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-26">&apos;no&apos;意味着不应该转换数据类型。</span></li>
+<li><span class="yiyi-st" id="yiyi-27">&apos;equiv&apos;意味着只允许字节顺序改变。</span></li>
+<li><span class="yiyi-st" id="yiyi-28">“安全”意味着只允许保留值的转换。</span></li>
+<li><span class="yiyi-st" id="yiyi-29">&apos;same_kind&apos;表示只允许一种类型中的安全类型转换，例如float64到float32。</span></li>
+<li><span class="yiyi-st" id="yiyi-30">“不安全”表示可以进行任何数据转换。</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>subok</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">如果为True，则子类将被传递（默认），否则返回的数组将被强制为基类数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>copy</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">默认情况下，astype总是返回一个新分配的数组。</span><span class="yiyi-st" id="yiyi-35">如果此设置为false，并且满足<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，<em class="xref py py-obj">order</em>和<em class="xref py py-obj">subok</em>要求，则返回输入数组，而不是副本。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-36">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-37"><strong>arr_t</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-38">除非<a class="reference internal" href="numpy.copy.html#numpy.copy" title="numpy.copy"><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code></a>为False，并且满足返回输入数组的其他条件（参见<a class="reference internal" href="numpy.copy.html#numpy.copy" title="numpy.copy"><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code></a>输入参数的说明），<em class="xref py py-obj">arr_t</em>具有与输入数组相同的形状，其中dtype，由<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，<em class="xref py py-obj">order</em>给出的顺序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-39">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-40"><strong>ComplexWarning</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-41">当从complex转换为float或int时。</span><span class="yiyi-st" id="yiyi-42">为了避免这种情况，应该使用<code class="docutils literal"><span class="pre">a.real.astype(t)</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-44">从NumPy 1.9开始，astype方法现在返回一个错误，如果要转换的字符串dtype在“安全”转换模式下不够长，以保持正在转换的整数/浮点数组的最大值。</span><span class="yiyi-st" id="yiyi-45">以前即使结果被截断也允许转换。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-46">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([ 1. ,  2. ,  2.5])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="go">array([1, 2, 2])</span>
+</pre></div>
+</div>
+</dd></dl>

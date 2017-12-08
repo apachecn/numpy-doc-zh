@@ -1,0 +1,63 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.rayleigh</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.rayleigh.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.rayleigh.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.rayleigh"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">rayleigh</code><span class="sig-paren">(</span><em>scale=1.0</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从瑞利分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16"><img alt="\chi" class="math" src="../../_images/math/278069d6afb88839c678d44d3d464b17ff39fd7b.png" style="vertical-align: -3px">和Weibull分布是瑞利的泛化。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>scale</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">缩放，也等于模式。</span><span class="yiyi-st" id="yiyi-20">应为&gt; = 0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">输出形状。</span><span class="yiyi-st" id="yiyi-23">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-24">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-26">瑞利分布的概率密度函数为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-27">例如，如果风速的东和北分量具有相同的零均值高斯分布，则瑞利分布将出现。</span><span class="yiyi-st" id="yiyi-28">然后风速将具有瑞利分布。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r188" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-30"><a class="fn-backref" href="#id1">[R188]</a></span></td><td><span class="yiyi-st" id="yiyi-31">Brighton Webs Ltd.，“Rayleigh Distribution”，<a class="reference external" href="http://www.brighton-webs.co.uk/distributions/rayleigh.asp">http://www.brighton-webs.co.uk/distributions/rayleigh.asp</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r189" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-32"><a class="fn-backref" href="#id2">[R189]</a></span></td><td><span class="yiyi-st" id="yiyi-33">维基百科，“瑞利分布”<a class="reference external" href="http://en.wikipedia.org/wiki/Rayleigh_distribution">http://en.wikipedia.org/wiki/Rayleigh_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-35">从分布中绘制值并绘制直方图</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rayleigh</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">100000</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-36">波高高度趋于遵循瑞利分布。</span><span class="yiyi-st" id="yiyi-37">如果平均波高为1米，那么波浪的几分之一可能大于3米？</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">meanvalue</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">modevalue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">meanvalue</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rayleigh</span><span class="p">(</span><span class="n">modevalue</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">大于3米的波浪的百分比为：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mf">100.</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="o">&gt;</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mf">1000000.</span>
+<span class="go">0.087300000000000003</span>
+</pre></div>
+</div>
+</dd></dl>

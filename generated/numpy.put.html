@@ -1,0 +1,63 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.put</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.put.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.put.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.put"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">put</code><span class="sig-paren">(</span><em>a</em>, <em>ind</em>, <em>v</em>, <em>mode=&apos;raise&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L399-L453"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">用给定值替换数组的指定元素。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">索引对展平的目标数组起作用。</span><span class="yiyi-st" id="yiyi-16"><a class="reference internal" href="#numpy.put" title="numpy.put"><code class="xref py py-obj docutils literal"><span class="pre">put</span></code></a>大致相当于：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">目标数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>ind</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">目标索引，解释为整数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>v</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">要放在<em class="xref py py-obj">a</em>中的值。</span><span class="yiyi-st" id="yiyi-24">如果<em class="xref py py-obj">v</em>短于<em class="xref py py-obj">ind</em>，则将根据需要重复。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>mode</strong>：{&apos;raise&apos;，&apos;wrap&apos;，&apos;clip&apos;}，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">指定超越界限索引的行为。</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-27">&apos;raise&apos; - 引发错误（默认）</span></li>
+<li><span class="yiyi-st" id="yiyi-28">&apos;wrap&apos; -  wrap around</span></li>
+<li><span class="yiyi-st" id="yiyi-29">&apos;clip&apos; - 剪辑到范围</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-30">“剪切”模式意味着所有过大的索引都被替换为沿着该轴的最后一个元素的索引。</span><span class="yiyi-st" id="yiyi-31">请注意，这将禁用使用负数的索引。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-32">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.putmask.html#numpy.putmask" title="numpy.putmask"><code class="xref py py-obj docutils literal"><span class="pre">putmask</span></code></a>，<a class="reference internal" href="numpy.place.html#numpy.place" title="numpy.place"><code class="xref py py-obj docutils literal"><span class="pre">place</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">44</span><span class="p">,</span> <span class="o">-</span><span class="mi">55</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([-44,   1, -55,   3,   4])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&apos;clip&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([ 0,  1,  2,  3, -5])</span>
+</pre></div>
+</div>
+</dd></dl>

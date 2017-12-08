@@ -1,0 +1,51 @@
+
+<h1><span class="yiyi-st" id="yiyi-12"><a class="reference internal" href="#numpy-s">numpy.s</a></span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.s_.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.s_.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.s_"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">s_</code><em class="property"> = &lt;numpy.lib.index_tricks.IndexExpression object&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">为数组构建索引元组的更好方法。</span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-15">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-16">使用两个预定义实例之一<code class="xref py py-obj docutils literal"><span class="pre">index_exp</span></code>或<a class="reference internal" href="#numpy.s_" title="numpy.s_"><code class="xref py py-obj docutils literal"><span class="pre">s_</span></code></a>，而不是直接使用<em class="xref py py-obj">IndexExpression</em>。</span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-17">对于任何索引组合，包括切片和轴插入，对于任何数组<em class="xref py py-obj">a <code class="docutils literal"><span class="pre">a[indices]</span></code>与<code class="docutils literal"><span class="pre">a[np.index_exp[indices]]</span></code> / t4&gt;。</em></span><span class="yiyi-st" id="yiyi-18">但是，<code class="docutils literal"><span class="pre">np.index_exp[indices]</span></code>可以在Python代码中的任何地方使用，并返回一个可用于构建复杂索引表达式的slice对象的元组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>maketuple</strong>：bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">如果为True，总是返回一个元组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-22">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-23"><code class="xref py py-obj docutils literal"><span class="pre">index_exp</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-24">预定义的实例总是返回一个元组：<em class="xref py py-obj">index_exp = IndexExpression（maketuple = True）</em>。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="#numpy.s_" title="numpy.s_"><code class="xref py py-obj docutils literal"><span class="pre">s_</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-26">没有元组转换的预定义实例：<em class="xref py py-obj">s_ = IndexExpression（maketuple = False）</em>。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">你可以用<em class="xref py py-obj">slice()</em>加上一些特殊的对象来做到这一切，但有很多值得记住的地方，这个版本更简单，因为它使用标准的数组索引语法。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">slice(2, None, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">index_exp</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">(slice(2, None, 2),)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])[</span><span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">2</span><span class="p">]]</span>
+<span class="go">array([2, 4])</span>
+</pre></div>
+</div>
+</dd></dl>

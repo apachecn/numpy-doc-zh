@@ -1,0 +1,77 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.assert_approx_equal</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_approx_equal.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_approx_equal.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.assert_approx_equal"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.</code><code class="descname">assert_approx_equal</code><span class="sig-paren">(</span><em>actual</em>, <em>desired</em>, <em>significant=7</em>, <em>err_msg=&apos;&apos;</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/utils.py#L542-L637"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">如果两个项不等于有效数字，则引发AssertionError。</span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-15">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-16">建议使用<a class="reference internal" href="numpy.testing.assert_allclose.html#numpy.testing.assert_allclose" title="numpy.testing.assert_allclose"><code class="xref py py-obj docutils literal"><span class="pre">assert_allclose</span></code></a>，<a class="reference internal" href="numpy.testing.assert_array_almost_equal_nulp.html#numpy.testing.assert_array_almost_equal_nulp" title="numpy.testing.assert_array_almost_equal_nulp"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_almost_equal_nulp</span></code></a>或<a class="reference internal" href="numpy.testing.assert_array_max_ulp.html#numpy.testing.assert_array_max_ulp" title="numpy.testing.assert_array_max_ulp"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_max_ulp</span></code></a>之一来代替此函数，以获得更一致的浮点比较。</span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-17">给定两个数字，检查它们大致相等。</span><span class="yiyi-st" id="yiyi-18">大约等于定义为同意的有效数字的数量。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>actual</strong>：scalar</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">要检查的对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>所需</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">预期对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>significant</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">所需精度，默认为7。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>err_msg</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">出现故障时打印的错误消息。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>verbose</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">如果为True，则冲突的值将附加到错误消息。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>AssertionError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">如果实际和期望的不等于指定的精度。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-33">也可以看看</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.testing.assert_allclose.html#numpy.testing.assert_allclose" title="numpy.testing.assert_allclose"><code class="xref py py-obj docutils literal"><span class="pre">assert_allclose</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">将两个array_like对象与所需的相对和/或绝对精度进行比较。</span></dd>
+</dl>
+<p class="last"><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="numpy.testing.assert_array_almost_equal_nulp.html#numpy.testing.assert_array_almost_equal_nulp" title="numpy.testing.assert_array_almost_equal_nulp"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_almost_equal_nulp</span></code></a>，<a class="reference internal" href="numpy.testing.assert_array_max_ulp.html#numpy.testing.assert_array_max_ulp" title="numpy.testing.assert_array_max_ulp"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_max_ulp</span></code></a>，<a class="reference internal" href="numpy.testing.assert_equal.html#numpy.testing.assert_equal" title="numpy.testing.assert_equal"><code class="xref py py-obj docutils literal"><span class="pre">assert_equal</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_approx_equal</span><span class="p">(</span><span class="mf">0.12345677777777e-20</span><span class="p">,</span> <span class="mf">0.1234567e-20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_approx_equal</span><span class="p">(</span><span class="mf">0.12345670e-20</span><span class="p">,</span> <span class="mf">0.12345671e-20</span><span class="p">,</span>
+<span class="go">                                   significant=8)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_approx_equal</span><span class="p">(</span><span class="mf">0.12345670e-20</span><span class="p">,</span> <span class="mf">0.12345672e-20</span><span class="p">,</span>
+<span class="go">                                   significant=8)</span>
+<span class="gp">...</span>
+<span class="go">&lt;type &apos;exceptions.AssertionError&apos;&gt;:</span>
+<span class="go">Items are not equal to 8 significant digits:</span>
+<span class="go"> ACTUAL: 1.234567e-021</span>
+<span class="go"> DESIRED: 1.2345672000000001e-021</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">引发异常的计算条件为</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">abs</span><span class="p">(</span><span class="mf">0.12345670e-20</span><span class="o">/</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">21</span> <span class="o">-</span> <span class="mf">0.12345672e-20</span><span class="o">/</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">21</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="o">**-</span><span class="p">(</span><span class="mi">8</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

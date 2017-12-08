@@ -1,0 +1,59 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.cov</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.cov.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.cov.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.cov"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">cov</code><span class="sig-paren">(</span><em>x</em>, <em>y=None</em>, <em>rowvar=True</em>, <em>bias=False</em>, <em>allow_masked=True</em>, <em>ddof=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/extras.py#L1169-L1239"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">估计协方差矩阵。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">除了处理缺少的数据，此函数与<a class="reference internal" href="numpy.cov.html#numpy.cov" title="numpy.cov"><code class="xref py py-obj docutils literal"><span class="pre">numpy.cov</span></code></a>相同。</span><span class="yiyi-st" id="yiyi-17">有关更多详细信息和示例，请参阅<a class="reference internal" href="numpy.cov.html#numpy.cov" title="numpy.cov"><code class="xref py py-obj docutils literal"><span class="pre">numpy.cov</span></code></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">默认情况下，屏蔽值将被识别。</span><span class="yiyi-st" id="yiyi-19">If <em class="xref py py-obj">x</em> and <em class="xref py py-obj">y</em> have the same shape, a common mask is allocated: if <code class="docutils literal"><span class="pre">x[i,j]</span></code> is masked, then <code class="docutils literal"><span class="pre">y[i,j]</span></code> will also be masked. </span><span class="yiyi-st" id="yiyi-20">如果在输入数组中缺少值，将<em class="xref py py-obj">allow_masked</em>设置为False将引发异常。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">包含多个变量和观察值的1-D或2-D数组。</span><span class="yiyi-st" id="yiyi-24"><em class="xref py py-obj">x</em>的每一行代表一个变量，每一列都是对所有这些变量的单次观察。</span><span class="yiyi-st" id="yiyi-25">另请参阅下面的<em class="xref py py-obj">rowvar</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>y</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">另一组变量和观察值。</span><span class="yiyi-st" id="yiyi-28"><em class="xref py py-obj">y</em>与<em class="xref py py-obj">x</em>具有相同的形式。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>rowvar</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">如果<em class="xref py py-obj">rowvar</em>为True（默认值），则每行代表一个变量，在列中有观察值。</span><span class="yiyi-st" id="yiyi-31">否则，关系会转置：每个列表示一个变量，而行包含观察值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>bias</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">默认归一化（False）由<code class="docutils literal"><span class="pre">(N-1)</span></code>表示，其中<code class="docutils literal"><span class="pre">N</span></code>是给出的观测数量（无偏估计）。</span><span class="yiyi-st" id="yiyi-34">如果<em class="xref py py-obj">bias</em>为True，则归一化为<code class="docutils literal"><span class="pre">N</span></code>。此关键字可以通过numpy versions&gt; = 1.5中的关键字<code class="docutils literal"><span class="pre">ddof</span></code>覆盖。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35"><strong>allow_masked</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-36">如果为True，屏蔽值将成对传播：如果在<em class="xref py py-obj">x</em>中屏蔽了某个值，则相应的值将在<em class="xref py py-obj">y</em>中屏蔽。</span><span class="yiyi-st" id="yiyi-37">如果为False，则在缺少某些值时引发<em class="xref py py-obj">ValueError</em>异常。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-38"><strong>ddof</strong>：{None，int}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-39">如果<code class="docutils literal"><span class="pre">None</span></code>通过<code class="docutils literal"><span class="pre">（N</span> <span class="pre"> - </span> <span class="pre">ddof）</span></code>进行归一化，其中<code class="docutils literal"><span class="pre">N</span></code>是观察的数量；这将覆盖<code class="docutils literal"><span class="pre">bias</span></code>所隐含的值。</span><span class="yiyi-st" id="yiyi-40">默认值为<code class="docutils literal"><span class="pre">None</span></code>。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-41"><span class="versionmodified">版本1.5中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-42">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-43"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-44">如果缺少某些值并且<em class="xref py py-obj">allow_masked</em>为False，则引发。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-45">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.cov.html#numpy.cov" title="numpy.cov"><code class="xref py py-obj docutils literal"><span class="pre">numpy.cov</span></code></a></span></p>
+</div>
+</dd></dl>

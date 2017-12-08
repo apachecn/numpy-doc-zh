@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.clump_masked</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.clump_masked.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.clump_masked.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.clump_masked"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">clump_masked</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/extras.py#L1710-L1746"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回与1-D数组的蒙版簇对应的切片列表。</span><span class="yiyi-st" id="yiyi-16">（“丛”被定义为数组的连续区域）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">一维屏蔽数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>slices</strong>：slice的列表</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">切片列表，一个用于<em class="xref py py-obj">a</em>中的蒙版元素的每个连续区域。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="numpy.ma.flatnotmasked_edges.html#numpy.ma.flatnotmasked_edges" title="numpy.ma.flatnotmasked_edges"><code class="xref py py-obj docutils literal"><span class="pre">flatnotmasked_edges</span></code></a>，<a class="reference internal" href="numpy.ma.flatnotmasked_contiguous.html#numpy.ma.flatnotmasked_contiguous" title="numpy.ma.flatnotmasked_contiguous"><code class="xref py py-obj docutils literal"><span class="pre">flatnotmasked_contiguous</span></code></a>，<a class="reference internal" href="numpy.ma.notmasked_edges.html#numpy.ma.notmasked_edges" title="numpy.ma.notmasked_edges"><code class="xref py py-obj docutils literal"><span class="pre">notmasked_edges</span></code></a>，<a class="reference internal" href="numpy.ma.notmasked_contiguous.html#numpy.ma.notmasked_contiguous" title="numpy.ma.notmasked_contiguous"><code class="xref py py-obj docutils literal"><span class="pre">notmasked_contiguous</span></code></a>，<a class="reference internal" href="numpy.ma.clump_unmasked.html#numpy.ma.clump_unmasked" title="numpy.ma.clump_unmasked"><code class="xref py py-obj docutils literal"><span class="pre">clump_unmasked</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-26"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">clump_masked</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">[slice(0, 3, None), slice(6, 7, None), slice(8, 10, None)]</span>
+</pre></div>
+</div>
+</dd></dl>

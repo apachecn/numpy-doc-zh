@@ -1,0 +1,65 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fmod</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fmod.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fmod.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.fmod"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">fmod</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;fmod&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回除法的元素余项。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">这是C库函数fmod的NumPy实现，其余的符号与被除数<em class="xref py py-obj">x1</em>相同。</span><span class="yiyi-st" id="yiyi-16">它等同于Matlab TM <code class="docutils literal"><span class="pre">rem</span></code>函数，不应该与Python模数运算符<code class="docutils literal"><span class="pre">x1</span> <span class="pre">％</span> <span class="pre">x2</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>x1</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">股利。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>x2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">除数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>y</strong>：array_like</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24"><em class="xref py py-obj">x1</em>除以<em class="xref py py-obj">x2</em>的余数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.remainder.html#numpy.remainder" title="numpy.remainder"><code class="xref py py-obj docutils literal"><span class="pre">remainder</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-27">相当于Python <code class="docutils literal"><span class="pre">%</span></code>运算符。</span></dd>
+</dl>
+<p class="last"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.divide.html#numpy.divide" title="numpy.divide"><code class="xref py py-obj docutils literal"><span class="pre">divide</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-30">负的被除数和除数的模运算的结果受约定约束。</span><span class="yiyi-st" id="yiyi-31">对于<a class="reference internal" href="#numpy.fmod" title="numpy.fmod"><code class="xref py py-obj docutils literal"><span class="pre">fmod</span></code></a>，结果的符号是被除数的符号，而对于<a class="reference internal" href="numpy.remainder.html#numpy.remainder" title="numpy.remainder"><code class="xref py py-obj docutils literal"><span class="pre">remainder</span></code></a>，结果的符号是除数的符号。</span><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="#numpy.fmod" title="numpy.fmod"><code class="xref py py-obj docutils literal"><span class="pre">fmod</span></code></a>函数等同于Matlab（TM）<code class="docutils literal"><span class="pre">rem</span></code>函数。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fmod</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([-1,  0, -1,  1,  0,  1])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">remainder</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([1, 0, 1, 1, 0, 1])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fmod</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">2.</span><span class="p">])</span>
+<span class="go">array([ 1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[-3, -2],</span>
+<span class="go">       [-1,  0],</span>
+<span class="go">       [ 1,  2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fmod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">array([[-1,  0],</span>
+<span class="go">       [-1,  0],</span>
+<span class="go">       [ 1,  0]])</span>
+</pre></div>
+</div>
+</dd></dl>

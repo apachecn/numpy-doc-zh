@@ -1,0 +1,42 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.dtype.isbuiltin</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.isbuiltin.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.isbuiltin.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="attribute">
+<dt id="numpy.dtype.isbuiltin"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">dtype.</code><code class="descname">isbuiltin</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">整数指示此dtype如何与内置的dtype相关。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">只读。</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="1%">
+<col width="99%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-17">0</span></td>
+<td><span class="yiyi-st" id="yiyi-18">如果这是一个结构化的数组类型，带有字段</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-19">1</span></td>
+<td><span class="yiyi-st" id="yiyi-20">如果这是一个dtype编译成numpy（如int，float等）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-21">2</span></td>
+<td><span class="yiyi-st" id="yiyi-22">如果dtype用于用户定义的numpy类型用户定义的类型使用numpy C-API机制扩展numpy以处理新的数组类型。</span><span class="yiyi-st" id="yiyi-23">请参阅Numpy手册中的<a class="reference internal" href="../../user/c-info.beyond-basics.html#user-user-defined-data-types"><span class="std std-ref">User-defined data-types</span></a>。</span></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;i2&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">isbuiltin</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;f8&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">isbuiltin</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&apos;field1&apos;</span><span class="p">,</span> <span class="s1">&apos;f8&apos;</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">isbuiltin</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>

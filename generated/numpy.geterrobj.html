@@ -1,0 +1,64 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.geterrobj</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.geterrobj.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.geterrobj.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.geterrobj"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">geterrobj</code><span class="sig-paren">(</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回定义浮点错误处理的当前对象。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">错误对象包含定义Numpy中的错误处理行为的所有信息。</span><span class="yiyi-st" id="yiyi-16"><a class="reference internal" href="#numpy.geterrobj" title="numpy.geterrobj"><code class="xref py py-obj docutils literal"><span class="pre">geterrobj</span></code></a>在其他函数内部使用get和set错误处理行为（<a class="reference internal" href="numpy.geterr.html#numpy.geterr" title="numpy.geterr"><code class="xref py py-obj docutils literal"><span class="pre">geterr</span></code></a>，<a class="reference internal" href="numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>，<a class="reference internal" href="numpy.geterrcall.html#numpy.geterrcall" title="numpy.geterrcall"><code class="xref py py-obj docutils literal"><span class="pre">geterrcall</span></code></a> <a class="reference internal" href="numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-obj docutils literal"><span class="pre">seterrcall</span></code></a>）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>errobj</strong>：list</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-19">error对象，一个包含三个元素的列表：[内部numpy缓冲区大小，错误掩码，错误回调函数]。</span></p>
+<p><span class="yiyi-st" id="yiyi-20">错误掩码是一个单个整数，它保存有关所有四个浮点错误的处理信息。</span><span class="yiyi-st" id="yiyi-21">每个错误类型的信息包含在整数的三个位中。</span><span class="yiyi-st" id="yiyi-22">如果我们在base 8中打印，我们可以看到对“invalid”，“under”，“over”和“divide”（按顺序）设置了什么处理。</span><span class="yiyi-st" id="yiyi-23">打印的字符串可以用解释</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-24">0：&apos;ignore&apos;</span></li>
+<li><span class="yiyi-st" id="yiyi-25">1：&apos;warn&apos;</span></li>
+<li><span class="yiyi-st" id="yiyi-26">2：&apos;raise&apos;</span></li>
+<li><span class="yiyi-st" id="yiyi-27">3：&apos;call&apos;</span></li>
+<li><span class="yiyi-st" id="yiyi-28">4：&apos;print&apos;</span></li>
+<li><span class="yiyi-st" id="yiyi-29">5：&apos;log&apos;</span></li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.seterrobj.html#numpy.seterrobj" title="numpy.seterrobj"><code class="xref py py-obj docutils literal"><span class="pre">seterrobj</span></code></a>, <a class="reference internal" href="numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>, <a class="reference internal" href="numpy.geterr.html#numpy.geterr" title="numpy.geterr"><code class="xref py py-obj docutils literal"><span class="pre">geterr</span></code></a>, <a class="reference internal" href="numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-obj docutils literal"><span class="pre">seterrcall</span></code></a>, <a class="reference internal" href="numpy.geterrcall.html#numpy.geterrcall" title="numpy.geterrcall"><code class="xref py py-obj docutils literal"><span class="pre">geterrcall</span></code></a>, <a class="reference internal" href="numpy.getbufsize.html#numpy.getbufsize" title="numpy.getbufsize"><code class="xref py py-obj docutils literal"><span class="pre">getbufsize</span></code></a>, <a class="reference internal" href="numpy.setbufsize.html#numpy.setbufsize" title="numpy.setbufsize"><code class="xref py py-obj docutils literal"><span class="pre">setbufsize</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-33">有关浮点异常和处理选项类型的完整文档，请参见<a class="reference internal" href="numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">geterrobj</span><span class="p">()</span>  <span class="c1"># first get the defaults</span>
+<span class="go">[10000, 0, None]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">err_handler</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Floating point error (</span><span class="si">%s</span><span class="s2">), with flag </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">flag</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">old_bufsize</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setbufsize</span><span class="p">(</span><span class="mi">20000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">old_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s1">&apos;raise&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">old_handler</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterrcall</span><span class="p">(</span><span class="n">err_handler</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">geterrobj</span><span class="p">()</span>
+<span class="go">[20000, 2, &lt;function err_handler at 0x91dcaac&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">old_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s1">&apos;ignore&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">base_repr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">geterrobj</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">&apos;0&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">old_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s1">&apos;warn&apos;</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="s1">&apos;log&apos;</span><span class="p">,</span> <span class="n">under</span><span class="o">=</span><span class="s1">&apos;call&apos;</span><span class="p">,</span>
+<span class="go">                        invalid=&apos;print&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">base_repr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">geterrobj</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">&apos;4351&apos;</span>
+</pre></div>
+</div>
+</dd></dl>

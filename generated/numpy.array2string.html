@@ -1,0 +1,112 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.array2string</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array2string.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.array2string.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.array2string"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">array2string</code><span class="sig-paren">(</span><em>a</em>, <em>max_line_width=None</em>, <em>precision=None</em>, <em>suppress_small=None</em>, <em>separator=&apos; &apos;</em>, <em>prefix=&apos;&apos;</em>, <em>style=&lt;built-in function repr&gt;</em>, <em>formatter=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/arrayprint.py#L340-L448"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回数组的字符串表示形式。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>max_line_width</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">字符串应该跨越的最大列数。</span><span class="yiyi-st" id="yiyi-20">换行符在数组元素后适当地拆分字符串。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>precision</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">浮点精度。</span><span class="yiyi-st" id="yiyi-23">默认值是当前打印精度（通常为8），可以使用<a class="reference internal" href="numpy.set_printoptions.html#numpy.set_printoptions" title="numpy.set_printoptions"><code class="xref py py-obj docutils literal"><span class="pre">set_printoptions</span></code></a>更改。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>suppress_small</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">将非常小的数字表示为零。</span><span class="yiyi-st" id="yiyi-26">如果它小于当前打印精度，则数字是“非常小”。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>separator</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">插入元素之间。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>前缀</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">数组通常打印为：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s1">&apos;prefix(&apos;</span> <span class="o">+</span> <span class="n">array2string</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&apos;)&apos;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-31">前缀字符串的长度用于正确对齐输出。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>style</strong>：function，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">接受ndarray并返回字符串的函数。</span><span class="yiyi-st" id="yiyi-34">仅在<em class="xref py py-obj">a</em>的形状等于<code class="docutils literal"><span class="pre">()</span></code>时使用，即对于0-D数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35"><strong>格式化程序</strong>：可调用的dict，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-36">如果不是无，键应该指示相应格式化功能应用的类型。</span><span class="yiyi-st" id="yiyi-37">Callables应该返回一个字符串。</span><span class="yiyi-st" id="yiyi-38">未指定的类型（通过其相应的键）由默认格式化程序处理。</span><span class="yiyi-st" id="yiyi-39">可以设置格式化程序的单个类型有：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>- &apos;bool&apos;
+- &apos;int&apos;
+- &apos;timedelta&apos; : a `numpy.timedelta64`
+- &apos;datetime&apos; : a `numpy.datetime64`
+- &apos;float&apos;
+- &apos;longfloat&apos; : 128-bit floats
+- &apos;complexfloat&apos;
+- &apos;longcomplexfloat&apos; : composed of two 128-bit floats
+- &apos;numpy_str&apos; : types `numpy.string_` and `numpy.unicode_`
+- &apos;str&apos; : all other strings
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">可用于一次设置一组类型的其他键有：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="s1">&apos;all&apos;</span> <span class="p">:</span> <span class="n">sets</span> <span class="nb">all</span> <span class="n">types</span>
+<span class="o">-</span> <span class="s1">&apos;int_kind&apos;</span> <span class="p">:</span> <span class="n">sets</span> <span class="s1">&apos;int&apos;</span>
+<span class="o">-</span> <span class="s1">&apos;float_kind&apos;</span> <span class="p">:</span> <span class="n">sets</span> <span class="s1">&apos;float&apos;</span> <span class="ow">and</span> <span class="s1">&apos;longfloat&apos;</span>
+<span class="o">-</span> <span class="s1">&apos;complex_kind&apos;</span> <span class="p">:</span> <span class="n">sets</span> <span class="s1">&apos;complexfloat&apos;</span> <span class="ow">and</span> <span class="s1">&apos;longcomplexfloat&apos;</span>
+<span class="o">-</span> <span class="s1">&apos;str_kind&apos;</span> <span class="p">:</span> <span class="n">sets</span> <span class="s1">&apos;str&apos;</span> <span class="ow">and</span> <span class="s1">&apos;numpystr&apos;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-41">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-42"><strong>array_str</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-43">数组的字符串表示形式。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-44">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-45"><strong>TypeError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-46">如果<a class="reference external" href="https://docs.python.org/dev/library/formatter.html#module-formatter" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">formatter</span></code></a>中的可调用方未返回字符串。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-47">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="numpy.array_str.html#numpy.array_str" title="numpy.array_str"><code class="xref py py-obj docutils literal"><span class="pre">array_str</span></code></a>，<a class="reference internal" href="numpy.array_repr.html#numpy.array_repr" title="numpy.array_repr"><code class="xref py py-obj docutils literal"><span class="pre">array_repr</span></code></a>，<a class="reference internal" href="numpy.set_printoptions.html#numpy.set_printoptions" title="numpy.set_printoptions"><code class="xref py py-obj docutils literal"><span class="pre">set_printoptions</span></code></a>，<a class="reference internal" href="numpy.get_printoptions.html#numpy.get_printoptions" title="numpy.get_printoptions"><code class="xref py py-obj docutils literal"><span class="pre">get_printoptions</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-49">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-50">如果为某个类型指定了格式化程序，则会忽略该类型的<em class="xref py py-obj">precision</em>关键字。</span></p>
+<p><span class="yiyi-st" id="yiyi-51">这是一个非常灵活的功能； <a class="reference internal" href="numpy.array_repr.html#numpy.array_repr" title="numpy.array_repr"><code class="xref py py-obj docutils literal"><span class="pre">array_repr</span></code></a>和<a class="reference internal" href="numpy.array_str.html#numpy.array_str" title="numpy.array_str"><code class="xref py py-obj docutils literal"><span class="pre">array_str</span></code></a>在内部使用<a class="reference internal" href="#numpy.array2string" title="numpy.array2string"><code class="xref py py-obj docutils literal"><span class="pre">array2string</span></code></a>，因此具有相同名称的关键字在所有三个函数中应该工作相同。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-52">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">16</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s1">&apos;,&apos;</span><span class="p">,</span>
+<span class="gp">... </span>                      <span class="n">suppress_small</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="go">[ 0., 1., 2., 3.]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">formatter</span><span class="o">=</span><span class="p">{</span><span class="s1">&apos;float_kind&apos;</span><span class="p">:</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x</span><span class="p">})</span>
+<span class="go">&apos;[0.00 1.00 2.00]&apos;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array2string</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">formatter</span><span class="o">=</span><span class="p">{</span><span class="s1">&apos;int&apos;</span><span class="p">:</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">hex</span><span class="p">(</span><span class="n">x</span><span class="p">)})</span>
+<span class="go">&apos;[0x0L 0x1L 0x2L]&apos;</span>
+</pre></div>
+</div>
+</dd></dl>

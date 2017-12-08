@@ -1,0 +1,73 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.kron</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.kron.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.kron.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.kron"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">kron</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/shape_base.py#L686-L782"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">克罗内克两个数组的乘积。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">计算Kronecker乘积，由第一个缩放的第二个数组的块组成的复合数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><span class="yiyi-st" id="yiyi-17"><strong>a，b</strong>：array_like</span></td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><span class="yiyi-st" id="yiyi-19"><strong>out</strong>：ndarray</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-20">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="numpy.outer.html#numpy.outer" title="numpy.outer"><code class="xref py py-obj docutils literal"><span class="pre">outer</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-22">外部产品</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-24">该函数假定<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>的维数相同，如果必要，在前面加上最小的一个。</span><span class="yiyi-st" id="yiyi-25">如果<em class="xref py py-obj">a.shape =（r0，r1，...，rN）</em>和<em class="xref py py-obj">b.shape =（s0，s1，...，sN）形状<em class="xref py py-obj">（r0 * s0，r1 * s1，...，rN * SN）</em>。</em></span><span class="yiyi-st" id="yiyi-26">元素是来自<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>的元素的产物，由以下组织显式组成：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">kron</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)[</span><span class="n">k0</span><span class="p">,</span><span class="n">k1</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">kN</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i0</span><span class="p">,</span><span class="n">i1</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">iN</span><span class="p">]</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="n">j0</span><span class="p">,</span><span class="n">j1</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">jN</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-27">哪里：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">kt</span> <span class="o">=</span> <span class="n">it</span> <span class="o">*</span> <span class="n">st</span> <span class="o">+</span> <span class="n">jt</span><span class="p">,</span>  <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">N</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-28">在常见的2-D情况（N = 1）中，块结构可以被可视化：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[[</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">,</span>   <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">,</span>  <span class="o">...</span> <span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">b</span>  <span class="p">],</span>
+ <span class="p">[</span>  <span class="o">...</span>                              <span class="o">...</span>   <span class="p">],</span>
+ <span class="p">[</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">,</span>  <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="o">...</span> <span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">b</span> <span class="p">]]</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+<span class="go">array([  5,   6,   7,  50,  60,  70, 500, 600, 700])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+<span class="go">array([  5,  50, 500,   6,  60, 600,   7,  70, 700])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="go">array([[ 1.,  1.,  0.,  0.],</span>
+<span class="go">       [ 1.,  1.,  0.,  0.],</span>
+<span class="go">       [ 0.,  0.,  1.,  1.],</span>
+<span class="go">       [ 0.,  0.,  1.,  1.]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 10, 6, 20)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">J</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">J1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span> <span class="o">+</span> <span class="n">J</span>             <span class="c1"># extend to ndim=4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">S1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">J1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">[</span><span class="n">K</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="n">I</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="n">J</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,130 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.cross</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.cross.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.cross.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.cross"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">cross</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>axisa=-1</em>, <em>axisb=-1</em>, <em>axisc=-1</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L1553-L1751"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回两个（数组）向量的叉积。</span></p>
+<p><span class="yiyi-st" id="yiyi-15"><img alt="R^3" class="math" src="../../_images/math/ccefd47a2c46e878bf0b6d71caf8e180307ef4cb.png" style="vertical-align: 0px">中的<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>的叉积是垂直于<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>的向量。</span><span class="yiyi-st" id="yiyi-16">如果<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>是向量的数组，则向量由<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>的最后一个轴定义默认值，这些轴可以具有尺寸2或3。</span><span class="yiyi-st" id="yiyi-17">当<em class="xref py py-obj">a</em>或<em class="xref py py-obj">b</em>的维度为2时，输入向量的第三个分量假定为零，并相应地计算叉积。</span><span class="yiyi-st" id="yiyi-18">在两个输入向量都具有维度2的情况下，返回叉积的z分量。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">第一向量的分量。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>b</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">第二向量的分量。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>axisa</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">定义向量的<em class="xref py py-obj">a</em>轴。</span><span class="yiyi-st" id="yiyi-26">默认情况下，最后一根轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>axisb</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">定义向量的<em class="xref py py-obj">b</em>轴。</span><span class="yiyi-st" id="yiyi-29">默认情况下，最后一根轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>axisc</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">包含交叉乘积向量的<em class="xref py py-obj">c</em>轴。</span><span class="yiyi-st" id="yiyi-32">如果两个输入向量都具有维数2，则忽略，因为返回是标量的。</span><span class="yiyi-st" id="yiyi-33">默认情况下，最后一根轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-34"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-35">如果定义，定义向量和交叉乘积的<em class="xref py py-obj">a</em>，<em class="xref py py-obj">b</em>和<em class="xref py py-obj">c</em>的轴。</span><span class="yiyi-st" id="yiyi-36">覆盖<em class="xref py py-obj">axisa</em>，<em class="xref py py-obj">axisb</em>和<em class="xref py py-obj">axisc</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-37">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-38"><strong>c</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-39">矢量交叉产品。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-40">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-41"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-42">当<em class="xref py py-obj">a</em>和/或<em class="xref py py-obj">b</em>中的向量的维数不等于2或3时。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-43">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.inner.html#numpy.inner" title="numpy.inner"><code class="xref py py-obj docutils literal"><span class="pre">inner</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-45">內积</span></dd>
+<dt><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.outer.html#numpy.outer" title="numpy.outer"><code class="xref py py-obj docutils literal"><span class="pre">outer</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-47">外积</span></dd>
+<dt><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="numpy.ix_.html#numpy.ix_" title="numpy.ix_"><code class="xref py py-obj docutils literal"><span class="pre">ix_</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-49">构造索引数组。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-50">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-51"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-52">支持输入的完全广播。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-53">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-54">矢量交叉产品。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">array([-3,  6, -3])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-55">一个向量与维度2。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">array([12, -6, -3])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-56">等同地：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">array([12, -6, -3])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-57">两个向量与维度2。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">-3</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-58">多向量叉积。</span><span class="yiyi-st" id="yiyi-59">注意，叉积矢量的方向由<em class="xref py py-obj">右手规则</em>定义。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">array([[-3,  6, -3],</span>
+<span class="go">       [ 3, -6,  3]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-60">可以使用<em class="xref py py-obj">axisc</em>关键字更改<em class="xref py py-obj">c</em>的方向。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">axisc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[-3,  3],</span>
+<span class="go">       [ 6, -6],</span>
+<span class="go">       [-3,  3]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-61">使用<em class="xref py py-obj">axisa</em>和<em class="xref py py-obj">axisb</em>更改<em class="xref py py-obj">x</em>和<em class="xref py py-obj">y</em>的向量定义。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">array([[ -6,  12,  -6],</span>
+<span class="go">       [  0,   0,   0],</span>
+<span class="go">       [  6, -12,   6]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">axisa</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">axisb</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[-24,  48, -24],</span>
+<span class="go">       [-30,  60, -30],</span>
+<span class="go">       [-36,  72, -36]])</span>
+</pre></div>
+</div>
+</dd></dl>

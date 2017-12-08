@@ -1,0 +1,41 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.chararray.tolist</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.chararray.tolist.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.chararray.tolist.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.chararray.tolist"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">chararray.</code><code class="descname">tolist</code><span class="sig-paren">(</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将数组返回为（可能是嵌套的）列表。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">将数组数据的副本作为（嵌套）Python列表返回。</span><span class="yiyi-st" id="yiyi-17">数据项转换为最近的兼容Python类型。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>无</strong></span></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>y</strong>：list</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">数组元素的可能嵌套列表。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-24">可以重新创建数组，<code class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">np.array（a.tolist()）</span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[1, 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">[array([1, 2]), array([3, 4])]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="go">[[1, 2], [3, 4]]</span>
+</pre></div>
+</div>
+</dd></dl>

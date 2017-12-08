@@ -1,0 +1,260 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.nditer</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.nditer.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.nditer.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.nditer"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">nditer</code><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/__init__.py"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">有效的多维迭代器对象迭代数组。</span><span class="yiyi-st" id="yiyi-15">要开始使用此对象，请参阅<a class="reference internal" href="../arrays.nditer.html#arrays-nditer"><span class="std std-ref">introductory guide to array iteration</span></a>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>op</strong>：ndarray或array_like的序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">数组（s）迭代。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>flags</strong>：str的序列，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">控制迭代器行为的标志。</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-21">“buffered”在需要时启用缓冲。</span></li>
+<li><span class="yiyi-st" id="yiyi-22">“c_index”使C序索引被跟踪。</span></li>
+<li><span class="yiyi-st" id="yiyi-23">“f_index”导致跟踪Fortran顺序索引。</span></li>
+<li><span class="yiyi-st" id="yiyi-24">“multi_index”导致跟踪具有每迭代维度一个的多索引或索引的元组。</span></li>
+<li><span class="yiyi-st" id="yiyi-25">“common_dtype”使所有操作数被转换为公共数据类型，根据需要进行复制或缓冲。</span></li>
+<li><span class="yiyi-st" id="yiyi-26">“delay_bufalloc”延迟缓冲器的分配，直到进行reset()调用。</span><span class="yiyi-st" id="yiyi-27">允许在将值复制到缓冲区之前对“分配”操作数进行初始化。</span></li>
+<li><span class="yiyi-st" id="yiyi-28">“external_loop”使得给定的<em class="xref py py-obj">值</em>是具有多个值的一维数组，而不是零维数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-29">“grow_inner”允许在使用“buffered”和“external_loop”时，使<a class="reference internal" href="numpy.nditer.value.html#numpy.nditer.value" title="numpy.nditer.value"><code class="xref py py-obj docutils literal"><span class="pre">value</span></code></a>数组大小大于缓冲区大小。</span></li>
+<li><span class="yiyi-st" id="yiyi-30">“ranged”允许迭代器被限制到iterindex值的子范围。</span></li>
+<li><span class="yiyi-st" id="yiyi-31">“refs_ok”启用引用类型的迭代，例如对象数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-32">“reduce_ok”启用广播的“读写”操作数的迭代，也称为缩减操作数。</span></li>
+<li><span class="yiyi-st" id="yiyi-33">“zerosize_ok”允许<a class="reference internal" href="numpy.nditer.itersize.html#numpy.nditer.itersize" title="numpy.nditer.itersize"><code class="xref py py-obj docutils literal"><span class="pre">itersize</span></code></a>为零。</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-34"><strong>op_flags</strong>：str列表的列表，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-35">这是每个操作数的标志列表。</span><span class="yiyi-st" id="yiyi-36">至少，必须指定“readonly”，“readwrite”或“writeonly”之一。</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-37">“readonly”表示只读操作数。</span></li>
+<li><span class="yiyi-st" id="yiyi-38">“readwrite”表示操作数将被读取和写入。</span></li>
+<li><span class="yiyi-st" id="yiyi-39">“writeonly”表示操作数将只被写入。</span></li>
+<li><span class="yiyi-st" id="yiyi-40">“no_broadcast”防止操作数被广播。</span></li>
+<li><span class="yiyi-st" id="yiyi-41">“contig”强制操作数数据是连续的。</span></li>
+<li><span class="yiyi-st" id="yiyi-42">“aligned”强制操作数数据对齐。</span></li>
+<li><span class="yiyi-st" id="yiyi-43">“nbo”强制操作数数据为原生字节顺序。</span></li>
+<li><span class="yiyi-st" id="yiyi-44">如果需要，“copy”允许临时只读副本。</span></li>
+<li><span class="yiyi-st" id="yiyi-45">如果需要，“updateifcopy”允许临时读写副本。</span></li>
+<li><span class="yiyi-st" id="yiyi-46">如果在<em class="xref py py-obj">op</em>参数中为“None”，则“allocate”将导致分配数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-47">“no_subtype”防止“分配”操作数使用子类型。</span></li>
+<li><span class="yiyi-st" id="yiyi-48">“arraymask”表示该操作数是在使用&apos;writemasked&apos;标志设置写入操作数时用于选择元素的掩码。</span><span class="yiyi-st" id="yiyi-49">迭代器不强制这样做，但是当从缓冲区写回数组时，它只复制由该掩码指示的那些元素。</span></li>
+<li><span class="yiyi-st" id="yiyi-50">&apos;writemasked&apos;表示只有选择的“arraymask”操作数为True的元素才会被写入。</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-51"><strong>op_dtypes</strong>：dtype（s）的dtype或tuple，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-52">操作数所需的数据类型。</span><span class="yiyi-st" id="yiyi-53">如果启用复制或缓冲，数据将转换为/从其原始类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-54"><strong>订单</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;，&apos;K&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-55">控制迭代顺序。</span><span class="yiyi-st" id="yiyi-56">&apos;C&apos;表示C顺序，&apos;F&apos;表示Fortran顺序，&apos;A&apos;表示&apos;F&apos;顺序，如果所有数组都是Fortran连续的，&apos;C&apos;顺序否则，&apos;K&apos;表示接近数组元素出现的顺序在内存中。</span><span class="yiyi-st" id="yiyi-57">这也影响“分配”操作数的元素存储顺序，因为它们被分配为与迭代顺序兼容。</span><span class="yiyi-st" id="yiyi-58">默认值为“K”。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-59"><strong>投射</strong>：{&apos;no&apos;，&apos;equiv&apos;，&apos;safe&apos;，&apos;same_kind&apos;，&apos;unsafe&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-60">控制在进行复制或缓冲时可能发生的数据转换类型。</span><span class="yiyi-st" id="yiyi-61">不建议将此设置为“不安全”，因为它会对累积产生不利影响。</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-62">&apos;no&apos;意味着不应该转换数据类型。</span></li>
+<li><span class="yiyi-st" id="yiyi-63">&apos;equiv&apos;意味着只允许字节顺序改变。</span></li>
+<li><span class="yiyi-st" id="yiyi-64">“安全”意味着只允许保留值的转换。</span></li>
+<li><span class="yiyi-st" id="yiyi-65">&apos;same_kind&apos;表示只允许一种类型中的安全类型转换，例如float64到float32。</span></li>
+<li><span class="yiyi-st" id="yiyi-66">“不安全”表示可以进行任何数据转换。</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-67"><strong>op_axes</strong>：ints列表列表，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-68">如果提供，则是每个操作数的int或None列表。</span><span class="yiyi-st" id="yiyi-69">操作数的轴列表是从迭代器的维度到操作数的维度的映射。</span><span class="yiyi-st" id="yiyi-70">可以为条目放置值-1，从而将该维度视为“newaxis”。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-71"><strong>itershape</strong>：ints的tuple，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-72">迭代器的期望形状。</span><span class="yiyi-st" id="yiyi-73">这允许“分配”具有由op_ax映射的维度的操作数不对应于不同操作数的维度以获得对于该维度不等于1的值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-74"><strong>buffersize</strong>：int，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-75">启用缓冲时，控制临时缓冲区的大小。</span><span class="yiyi-st" id="yiyi-76">对于默认值，设置为0。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-77">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-78"><a class="reference internal" href="#numpy.nditer" title="numpy.nditer"><code class="xref py py-obj docutils literal"><span class="pre">nditer</span></code></a>取代<a class="reference internal" href="numpy.flatiter.html#numpy.flatiter" title="numpy.flatiter"><code class="xref py py-obj docutils literal"><span class="pre">flatiter</span></code></a>。</span><span class="yiyi-st" id="yiyi-79"><a class="reference internal" href="#numpy.nditer" title="numpy.nditer"><code class="xref py py-obj docutils literal"><span class="pre">nditer</span></code></a>后的迭代器实现也由Numpy C API公开。</span></p>
+<p><span class="yiyi-st" id="yiyi-80">Python暴露提供了两个迭代接口，一个遵循Python迭代器协议，另一个镜像C风格的do-while模式。</span><span class="yiyi-st" id="yiyi-81">原生Python方法在大多数情况下更好，但如果你需要迭代器的坐标或索引，使用C风格模式。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-82">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-83">下面是我们如何使用Python迭代器协议编写一个<code class="docutils literal"><span class="pre">iter_add</span></code>函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">iter_add_py</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">addop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span>
+    <span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">out</span><span class="p">],</span> <span class="p">[],</span>
+                <span class="p">[[</span><span class="s1">&apos;readonly&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;readonly&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;writeonly&apos;</span><span class="p">,</span><span class="s1">&apos;allocate&apos;</span><span class="p">]])</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+        <span class="n">addop</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-84">这里是同样的功能，但遵循C风格模式：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">iter_add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">addop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span>
+
+    <span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">out</span><span class="p">],</span> <span class="p">[],</span>
+                <span class="p">[[</span><span class="s1">&apos;readonly&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;readonly&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;writeonly&apos;</span><span class="p">,</span><span class="s1">&apos;allocate&apos;</span><span class="p">]])</span>
+
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">it</span><span class="o">.</span><span class="n">finished</span><span class="p">:</span>
+        <span class="n">addop</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">out</span><span class="o">=</span><span class="n">it</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">it</span><span class="o">.</span><span class="n">iternext</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-85">这里是一个示例外部产品函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">outer_it</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">mulop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span>
+
+    <span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">out</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;external_loop&apos;</span><span class="p">],</span>
+            <span class="p">[[</span><span class="s1">&apos;readonly&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;readonly&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;writeonly&apos;</span><span class="p">,</span> <span class="s1">&apos;allocate&apos;</span><span class="p">]],</span>
+            <span class="n">op_axes</span><span class="o">=</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span><span class="o">+</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="p">,</span>
+                     <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">.</span><span class="n">ndim</span><span class="o">+</span><span class="nb">range</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="p">),</span>
+                     <span class="kc">None</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+        <span class="n">mulop</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">outer_it</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-86">这里是一个示例函数，其操作类似于“lambda”ufunc：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">luf</span><span class="p">(</span><span class="n">lamdaexpr</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="s2">&quot;luf(lambdaexpr, op1, ..., opn, out=None, order=&apos;K&apos;, casting=&apos;safe&apos;, buffersize=0)&quot;</span>
+    <span class="n">nargs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">op</span> <span class="o">=</span> <span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&apos;out&apos;</span><span class="p">,</span><span class="kc">None</span><span class="p">),)</span> <span class="o">+</span> <span class="n">args</span>
+    <span class="n">it</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nditer</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="p">[</span><span class="s1">&apos;buffered&apos;</span><span class="p">,</span><span class="s1">&apos;external_loop&apos;</span><span class="p">],</span>
+            <span class="p">[[</span><span class="s1">&apos;writeonly&apos;</span><span class="p">,</span><span class="s1">&apos;allocate&apos;</span><span class="p">,</span><span class="s1">&apos;no_broadcast&apos;</span><span class="p">]]</span> <span class="o">+</span>
+                            <span class="p">[[</span><span class="s1">&apos;readonly&apos;</span><span class="p">,</span><span class="s1">&apos;nbo&apos;</span><span class="p">,</span><span class="s1">&apos;aligned&apos;</span><span class="p">]]</span><span class="o">*</span><span class="n">nargs</span><span class="p">,</span>
+            <span class="n">order</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&apos;order&apos;</span><span class="p">,</span><span class="s1">&apos;K&apos;</span><span class="p">),</span>
+            <span class="n">casting</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&apos;casting&apos;</span><span class="p">,</span><span class="s1">&apos;safe&apos;</span><span class="p">),</span>
+            <span class="n">buffersize</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&apos;buffersize&apos;</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">it</span><span class="o">.</span><span class="n">finished</span><span class="p">:</span>
+        <span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lamdaexpr</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">it</span><span class="o">.</span><span class="n">iternext</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">it</span><span class="o">.</span><span class="n">operands</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">luf</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">:</span><span class="n">i</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span>  <span class="mf">0.5</span><span class="p">,</span>   <span class="mf">1.5</span><span class="p">,</span>   <span class="mf">4.5</span><span class="p">,</span>   <span class="mf">9.5</span><span class="p">,</span>  <span class="mf">16.5</span><span class="p">])</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-87">属性</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%">
+<col width="89%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-88">dtypes</span></td>
+<td><span class="yiyi-st" id="yiyi-89">（dtype（s）的元组）<a class="reference internal" href="numpy.nditer.value.html#numpy.nditer.value" title="numpy.nditer.value"><code class="xref py py-obj docutils literal"><span class="pre">value</span></code></a>中提供的值的数据类型。</span><span class="yiyi-st" id="yiyi-90">如果启用缓冲，这可能不同于操作数数据类型。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-91">完成</span></td>
+<td><span class="yiyi-st" id="yiyi-92">（bool）操作数上的迭代是否完成。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-93">has_delayed_bufalloc</span></td>
+<td><span class="yiyi-st" id="yiyi-94">（bool）如果为True，迭代器使用“delay_bufalloc”标志创建，并且尚未调用reset()函数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-95">has_index</span></td>
+<td><span class="yiyi-st" id="yiyi-96">（bool）如果为True，迭代器使用“c_index”或“f_index”标志创建，并且属性<a class="reference internal" href="numpy.nditer.index.html#numpy.nditer.index" title="numpy.nditer.index"><code class="xref py py-obj docutils literal"><span class="pre">index</span></code></a>可用于检索它。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-97">has_multi_index</span></td>
+<td><span class="yiyi-st" id="yiyi-98">（bool）如果为True，迭代器使用“multi_index”标志创建，并且属性<a class="reference internal" href="numpy.nditer.multi_index.html#numpy.nditer.multi_index" title="numpy.nditer.multi_index"><code class="xref py py-obj docutils literal"><span class="pre">multi_index</span></code></a>可用于检索它。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-99">指数：</span></td>
+<td><span class="yiyi-st" id="yiyi-100">当使用“c_index”或“f_index”标志时，此属性提供对索引的访问。</span><span class="yiyi-st" id="yiyi-101">如果访问时引发ValueError，并且<a class="reference internal" href="numpy.nditer.has_index.html#numpy.nditer.has_index" title="numpy.nditer.has_index"><code class="xref py py-obj docutils literal"><span class="pre">has_index</span></code></a>为False。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-102">iterationneedsapi</span></td>
+<td><span class="yiyi-st" id="yiyi-103">（bool）迭代是否需要访问Python API，例如，如果其中一个操作数是对象数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-104">iterindex</span></td>
+<td><span class="yiyi-st" id="yiyi-105">（int）匹配迭代次序的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-106">itersize</span></td>
+<td><span class="yiyi-st" id="yiyi-107">（int）迭代器的大小。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-108">itviews：</span></td>
+<td><span class="yiyi-st" id="yiyi-109">存储器中<a class="reference internal" href="numpy.nditer.operands.html#numpy.nditer.operands" title="numpy.nditer.operands"><code class="xref py py-obj docutils literal"><span class="pre">operands</span></code></a>的结构化视图，匹配重新排序和优化的迭代器访问模式。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-110">multi_index：</span></td>
+<td><span class="yiyi-st" id="yiyi-111">当使用“multi_index”标志时，此属性提供对索引的访问。</span><span class="yiyi-st" id="yiyi-112">如果访问访问并且<a class="reference internal" href="numpy.nditer.has_multi_index.html#numpy.nditer.has_multi_index" title="numpy.nditer.has_multi_index"><code class="xref py py-obj docutils literal"><span class="pre">has_multi_index</span></code></a>为False，则引发ValueError。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-113">ndim</span></td>
+<td><span class="yiyi-st" id="yiyi-114">（int）迭代器的维度。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-115">nop</span></td>
+<td><span class="yiyi-st" id="yiyi-116">（int）迭代器操作数的数量。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-117">操作数</span></td>
+<td><span class="yiyi-st" id="yiyi-118">（操作数的元组）要迭代的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-119">形状</span></td>
+<td><span class="yiyi-st" id="yiyi-120">（intup的tuple）形状元组，迭代器的形状。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-121">值：</span></td>
+<td><span class="yiyi-st" id="yiyi-122">在当前迭代的<a class="reference internal" href="numpy.nditer.operands.html#numpy.nditer.operands" title="numpy.nditer.operands"><code class="xref py py-obj docutils literal"><span class="pre">operands</span></code></a>的值。</span><span class="yiyi-st" id="yiyi-123">通常，这是一个数组的数组标量，但如果使用标志“external_loop”，它是一维数组的元组。</span></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-124">方法</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-125"><a class="reference internal" href="numpy.nditer.copy.html#numpy.nditer.copy" title="numpy.nditer.copy"><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-126">获取迭代器的当前状态的副本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-127"><a class="reference internal" href="numpy.nditer.debug_print.html#numpy.nditer.debug_print" title="numpy.nditer.debug_print"><code class="xref py py-obj docutils literal"><span class="pre">debug_print</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-128">打印<a class="reference internal" href="#numpy.nditer" title="numpy.nditer"><code class="xref py py-obj docutils literal"><span class="pre">nditer</span></code></a>实例的当前状态并将调试信息输出到stdout。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-129"><a class="reference internal" href="numpy.nditer.enable_external_loop.html#numpy.nditer.enable_external_loop" title="numpy.nditer.enable_external_loop"><code class="xref py py-obj docutils literal"><span class="pre">enable_external_loop</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-130">当在构造期间没有使用“external_loop”时，这是修改迭代器的行为，如同指定了标志。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-131"><a class="reference internal" href="numpy.nditer.iternext.html#numpy.nditer.iternext" title="numpy.nditer.iternext"><code class="xref py py-obj docutils literal"><span class="pre">iternext</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-132">检查是否留下迭代，并执行单个内部迭代，而不返回结果。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-133"><a class="reference internal" href="numpy.nditer.next.html#numpy.nditer.next" title="numpy.nditer.next"><code class="xref py py-obj docutils literal"><span class="pre">next</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-134"><a class="reference internal" href="numpy.nditer.remove_axis.html#numpy.nditer.remove_axis" title="numpy.nditer.remove_axis"><code class="xref py py-obj docutils literal"><span class="pre">remove_axis</span></code></a>（i）</span></td>
+<td><span class="yiyi-st" id="yiyi-135">从迭代器中删除轴<em class="xref py py-obj">i</em>。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-136"><a class="reference internal" href="numpy.nditer.remove_multi_index.html#numpy.nditer.remove_multi_index" title="numpy.nditer.remove_multi_index"><code class="xref py py-obj docutils literal"><span class="pre">remove_multi_index</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-137">当指定“multi_index”标志时，这将删除它，允许内部迭代结构进一步优化。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-138"><a class="reference internal" href="numpy.nditer.reset.html#numpy.nditer.reset" title="numpy.nditer.reset"><code class="xref py py-obj docutils literal"><span class="pre">reset</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-139">将迭代器重置为其初始状态。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

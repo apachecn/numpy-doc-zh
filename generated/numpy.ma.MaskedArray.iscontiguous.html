@@ -1,0 +1,36 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.iscontiguous</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.iscontiguous.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.iscontiguous.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.iscontiguous"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">iscontiguous</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L4595-L4620"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回一个布尔值，表示数据是否是连续的。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><span class="yiyi-st" id="yiyi-17"><strong>无</strong></span></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-18">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">iscontiguous</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="#numpy.ma.MaskedArray.iscontiguous" title="numpy.ma.MaskedArray.iscontiguous"><code class="xref py py-obj docutils literal"><span class="pre">iscontiguous</span></code></a>返回掩码数组的标志之一：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">flags</span>
+<span class="go">  C_CONTIGUOUS : True</span>
+<span class="go">  F_CONTIGUOUS : True</span>
+<span class="go">  OWNDATA : False</span>
+<span class="go">  WRITEABLE : True</span>
+<span class="go">  ALIGNED : True</span>
+<span class="go">  UPDATEIFCOPY : False</span>
+</pre></div>
+</div>
+</dd></dl>

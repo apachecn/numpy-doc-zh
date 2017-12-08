@@ -1,0 +1,88 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.asarray</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.asarray.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.asarray.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.asarray"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">asarray</code><span class="sig-paren">(</span><em>a</em>, <em>dtype=None</em>, <em>order=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L414-L482"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将输入转换为数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数据，可以转换为数组的任何形式。</span><span class="yiyi-st" id="yiyi-18">这包括列表、元组组成的列表、元组、元组组成的元组，列表组成的元组和ndarrays。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">默认情况下，从输入数据推断数据类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">使用以行为主（C风格）还是以列为主（Fortran风格）的内存表示。</span><span class="yiyi-st" id="yiyi-23">默认为&apos;C&apos;。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26"><em class="xref py py-obj">a</em>的数组解释。</span><span class="yiyi-st" id="yiyi-27">如果输入已经是ndarray，则不执行复制。</span><span class="yiyi-st" id="yiyi-28">如果<em class="xref py py-obj">a</em>是ndarray的子​​类，则返回基类ndarray。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">另见</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.asanyarray.html#numpy.asanyarray" title="numpy.asanyarray"><code class="xref py py-obj docutils literal"><span class="pre">asanyarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">类似的函数，子类可以原样返回。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.ascontiguousarray.html#numpy.ascontiguousarray" title="numpy.ascontiguousarray"><code class="xref py py-obj docutils literal"><span class="pre">ascontiguousarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">将输入转换为连续数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.asfarray.html#numpy.asfarray" title="numpy.asfarray"><code class="xref py py-obj docutils literal"><span class="pre">asfarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">将输入转换为浮点数。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="numpy.asfortranarray.html#numpy.asfortranarray" title="numpy.asfortranarray"><code class="xref py py-obj docutils literal"><span class="pre">asfortranarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-37">将输入转换为具有列主存储器顺序的ndarray。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="numpy.asarray_chkfinite.html#numpy.asarray_chkfinite" title="numpy.asarray_chkfinite"><code class="xref py py-obj docutils literal"><span class="pre">asarray_chkfinite</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-39">检查NaN和Infs的输入的类似函数。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.fromiter.html#numpy.fromiter" title="numpy.fromiter"><code class="xref py py-obj docutils literal"><span class="pre">fromiter</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-41">从迭代器创建数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.fromfunction.html#numpy.fromfunction" title="numpy.fromfunction"><code class="xref py py-obj docutils literal"><span class="pre">fromfunction</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">通过在网格位置上执行函数来构造数组。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-45">将列表转换为数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([1, 2])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">不复制现有数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">is</span> <span class="n">a</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-47">如果设置了<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，则只有在dtype不匹配时才复制数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="ow">is</span> <span class="n">a</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="ow">is</span> <span class="n">a</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-48">与<a class="reference internal" href="numpy.asanyarray.html#numpy.asanyarray" title="numpy.asanyarray"><code class="xref py py-obj docutils literal"><span class="pre">asanyarray</span></code></a>相反，ndarray的子类不会原样返回：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">issubclass</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">is</span> <span class="n">a</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">is</span> <span class="n">a</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

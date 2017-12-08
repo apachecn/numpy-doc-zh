@@ -1,0 +1,46 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.isnan</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.isnan.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.isnan.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.isnan"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">isnan</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;isnan&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">测试元素方面的NaN和返回结果作为一个布尔数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>y</strong>：ndarray或bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20">对于标量输入，结果是一个新的布尔值，如果输入为NaN，则值为True；否则值为False。</span></p>
+<p><span class="yiyi-st" id="yiyi-21">对于数组输入，结果是与输入相同维数的布尔数组，如果输入的相应元素为NaN，则值为True；否则值为False。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-22">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="numpy.isinf.html#numpy.isinf" title="numpy.isinf"><code class="xref py py-obj docutils literal"><span class="pre">isinf</span></code></a>，<a class="reference internal" href="numpy.isneginf.html#numpy.isneginf" title="numpy.isneginf"><code class="xref py py-obj docutils literal"><span class="pre">isneginf</span></code></a>，<a class="reference internal" href="numpy.isposinf.html#numpy.isposinf" title="numpy.isposinf"><code class="xref py py-obj docutils literal"><span class="pre">isposinf</span></code></a>，<a class="reference internal" href="numpy.isfinite.html#numpy.isfinite" title="numpy.isfinite"><code class="xref py py-obj docutils literal"><span class="pre">isfinite</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-25">Numpy使用IEEE标准二进制浮点运算（IEEE 754）。</span><span class="yiyi-st" id="yiyi-26">这意味着不是数字不等于无穷大。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">),</span><span class="mf">1.</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">0</span><span class="p">)])</span>
+<span class="go">array([ True, False, False], dtype=bool)</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,48 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.issctype</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.issctype.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.issctype.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.issctype"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">issctype</code><span class="sig-paren">(</span><em>rep</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numerictypes.py#L559-L601"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">确定给定对象是否表示标量数据类型。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>rep</strong>：any</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">如果<em class="xref py py-obj">rep</em>是标量dtype的实例，则返回True。</span><span class="yiyi-st" id="yiyi-18">如果不是，则返回False。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>out</strong>：bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">检查<em class="xref py py-obj">rep</em>是否是标量类型的布尔结果。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-22">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="numpy.issubsctype.html#numpy.issubsctype" title="numpy.issubsctype"><code class="xref py py-obj docutils literal"><span class="pre">issubsctype</span></code></a>，<a class="reference internal" href="numpy.issubdtype.html#numpy.issubdtype" title="numpy.issubdtype"><code class="xref py py-obj docutils literal"><span class="pre">issubdtype</span></code></a>，<a class="reference internal" href="numpy.obj2sctype.html#numpy.obj2sctype" title="numpy.obj2sctype"><code class="xref py py-obj docutils literal"><span class="pre">obj2sctype</span></code></a>，<a class="reference internal" href="numpy.sctype2char.html#numpy.sctype2char" title="numpy.sctype2char"><code class="xref py py-obj docutils literal"><span class="pre">sctype2char</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">issctype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">issctype</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">issctype</span><span class="p">(</span><span class="mf">1.1</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-25">字符串也是标量类型：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">issctype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;str&apos;</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

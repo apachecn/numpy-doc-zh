@@ -1,0 +1,96 @@
+
+<h1><span class="yiyi-st" id="yiyi-9">numpy.logspace</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.logspace.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.logspace.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.logspace"><span class="yiyi-st" id="yiyi-10"> <code class="descclassname">numpy.</code><code class="descname">logspace</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em>, <em>num=50</em>, <em>endpoint=True</em>, <em>base=10.0</em>, <em>dtype=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/function_base.py#L128-L208"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-11">返回以对数刻度均匀分布的数字。</span></p>
+<p><span class="yiyi-st" id="yiyi-12">In linear space, the sequence starts at <code class="docutils literal"><span class="pre">base</span> <span class="pre">**</span> <span class="pre">start</span></code> (<em class="xref py py-obj">base</em> to the power of <em class="xref py py-obj">start</em>) and ends with <code class="docutils literal"><span class="pre">base</span> <span class="pre">**</span> <span class="pre">stop</span></code> (see <em class="xref py py-obj">endpoint</em> below).</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-13">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-14"><strong>start</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-15"><code class="docutils literal"><span class="pre">base</span> <span class="pre">**</span> <span class="pre">start</span></code>是序列的起始值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-16"><strong>停止</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17"><code class="docutils literal"><span class="pre">基本</span> <span class="pre">**</span> <span class="pre">停止</span></code>是序列的最终值，除非<em class="xref py py-obj">endpoint</em>假。</span><span class="yiyi-st" id="yiyi-18">在这种情况下，<code class="docutils literal"><span class="pre">num</span> <span class="pre">+</span> <span class="pre">1</span></code>值在对数空间中间隔，最后一个（长度<code class="docutils literal"><span class="pre">num</span></code>的序列）被返回。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>num</strong>：integer，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">要生成的样本数。</span><span class="yiyi-st" id="yiyi-21">默认值为50。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>endpoint</strong>：boolean，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">如果为true，则<em class="xref py py-obj">停止</em>是最后一个样本。</span><span class="yiyi-st" id="yiyi-24">否则，不包括在内。</span><span class="yiyi-st" id="yiyi-25">默认值为True。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>base</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">日志空间的基础。</span><span class="yiyi-st" id="yiyi-28"><code class="docutils literal"><span class="pre">ln（samples）</span> <span class="pre">/</span> <span class="pre">ln（base）</span></code>（或<code class="docutils literal"><span class="pre">log_base(samples)</span></code>）是均匀的。</span><span class="yiyi-st" id="yiyi-29">默认值为10.0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>dtype</strong>：dtype</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">输出数组的类型。</span><span class="yiyi-st" id="yiyi-32">如果未给出<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，则从其他输入参数推断数据类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-33">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-34"><strong>samples</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-35"><em class="xref py py-obj">num</em>个样本，以对数标度等间隔。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-36">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.arange.html#numpy.arange" title="numpy.arange"><code class="xref py py-obj docutils literal"><span class="pre">arange</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-38">类似于linspace，指定步长而不是样本数。</span><span class="yiyi-st" id="yiyi-39">注意，当与浮点端点一起使用时，可以包括或可以不包括端点。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.linspace.html#numpy.linspace" title="numpy.linspace"><code class="xref py py-obj docutils literal"><span class="pre">linspace</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-41">类似于logspace，但是样本均匀分布在线性空间中，而不是日志空间。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-42">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-43">Logspace等价于代码</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">num</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">)</span>
+<span class="gp">... </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">power</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
+<span class="gp">... </span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">    array([  100.        ,   215.443469  ,   464.15888336,  1000.        ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">    array([ 100.        ,  177.827941  ,  316.22776602,  562.34132519])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="go">    array([ 4.        ,  5.0396842 ,  6.34960421,  8.        ])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">图形图：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&apos;o&apos;</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&apos;o&apos;</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">(-0.5, 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">（<a class="reference external" href="../../reference/generated/numpy-logspace-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-logspace-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-logspace-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-logspace-1.png" src="../../_images/numpy-logspace-1.png">
+</div>
+</dd></dl>

@@ -1,0 +1,78 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.polyint</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyint.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyint.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polyint"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.</code><code class="descname">polyint</code><span class="sig-paren">(</span><em>p</em>, <em>m=1</em>, <em>k=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/polynomial.py#L241-L332"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回多项式的反演性（不确定积分）。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">多项式<em class="xref py py-obj">p</em>的返回顺序<em class="xref py py-obj">m</em>反向性<em class="xref py py-obj">P</em>满足<img alt="\frac{d^m}{dx^m}P(x) = p(x)" class="math" src="../../_images/math/4c695080debf26a6fc00ab35c5be79a1f03ce944.png" style="vertical-align: -5px">且被定义为<em class="xref py py-obj">m-1</em>积分常数<em class="xref py py-obj">k</em>。常数确定低阶多项式部分</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-17">的<em class="xref py py-obj">P</em>，使得<img alt="P^{(j)}(0) = k_{m-j-1}" class="math" src="../../_images/math/a622397ef333b372450be79d7df9d019252e5e7b.png" style="vertical-align: -4px">。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>p</strong>：array_like或poly1d</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">多项式区分。</span><span class="yiyi-st" id="yiyi-21">序列被解释为多项式系数，参见<a class="reference internal" href="numpy.poly1d.html#numpy.poly1d" title="numpy.poly1d"><code class="xref py py-obj docutils literal"><span class="pre">poly1d</span></code></a>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>m</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">反倾销的顺序。</span><span class="yiyi-st" id="yiyi-24">（默认值：1）</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>k</strong>：<em class="xref py py-obj">m</em>标量或标量的列表，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">积分常数。</span><span class="yiyi-st" id="yiyi-27">它们是按照整合的顺序给出的：对应于最高阶项的那些是先。</span></p>
+<p><span class="yiyi-st" id="yiyi-28">如果<code class="docutils literal"><span class="pre">None</span></code>（默认值），则假定所有常量为零。</span><span class="yiyi-st" id="yiyi-29">如果<em class="xref py py-obj">m = 1</em>，则可以给出单个标量而不是列表。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.polyder.html#numpy.polyder" title="numpy.polyder"><code class="xref py py-obj docutils literal"><span class="pre">polyder</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">多项式的导数</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.poly1d.integ.html#numpy.poly1d.integ" title="numpy.poly1d.integ"><code class="xref py py-obj docutils literal"><span class="pre">poly1d.integ</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">等效法</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-36">反诱因的定义属性：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyint</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span>
+<span class="go">poly1d([ 0.33333333,  0.5       ,  1.        ,  0.        ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polyder</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">==</span> <span class="n">p</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37">积分常数默认为零，但可以指定：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyint</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polyder</span><span class="p">(</span><span class="n">P</span><span class="p">)(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polyder</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="mi">2</span><span class="p">)(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyint</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span>
+<span class="go">poly1d([ 0.01666667,  0.04166667,  0.16666667,  3. ,  5. ,  3. ])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">注意，3 = 6/2 !,并且常数以积分的顺序给出。</span><span class="yiyi-st" id="yiyi-39">首先是最高次多项式项的常数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polyder</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="mi">2</span><span class="p">)(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">6.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polyder</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="mi">1</span><span class="p">)(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">3.0</span>
+</pre></div>
+</div>
+</dd></dl>

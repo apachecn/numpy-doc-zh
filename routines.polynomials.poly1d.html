@@ -1,0 +1,99 @@
+
+<h1><span class="yiyi-st" id="yiyi-19">Poly1d</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.polynomials.poly1d.html">https://docs.scipy.org/doc/numpy/reference/routines.polynomials.poly1d.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="basics">
+<h2><span class="yiyi-st" id="yiyi-20">Basics</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="generated/numpy.poly1d.html#numpy.poly1d" title="numpy.poly1d"><code class="xref py py-obj docutils literal"><span class="pre">poly1d</span></code></a>(c_or_r[, r, variable])</span></td>
+<td><span class="yiyi-st" id="yiyi-22">一维多项式类。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="generated/numpy.polyval.html#numpy.polyval" title="numpy.polyval"><code class="xref py py-obj docutils literal"><span class="pre">polyval</span></code></a>(p, x)</span></td>
+<td><span class="yiyi-st" id="yiyi-24">以特定值评估多项式。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="generated/numpy.poly.html#numpy.poly" title="numpy.poly"><code class="xref py py-obj docutils literal"><span class="pre">poly</span></code></a>(seq_of_zeros)</span></td>
+<td><span class="yiyi-st" id="yiyi-26">找到具有给定的根序列的多项式的系数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="generated/numpy.roots.html#numpy.roots" title="numpy.roots"><code class="xref py py-obj docutils literal"><span class="pre">roots</span></code></a>(p)</span></td>
+<td><span class="yiyi-st" id="yiyi-28">返回具有在p中给出的系数的多项式的根。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fitting">
+<h2><span class="yiyi-st" id="yiyi-29">Fitting</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.polyfit.html#numpy.polyfit" title="numpy.polyfit"><code class="xref py py-obj docutils literal"><span class="pre">polyfit</span></code></a>(x, y, deg[, rcond, full, w, cov])</span></td>
+<td><span class="yiyi-st" id="yiyi-31">Least squares polynomial fit.</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="calculus">
+<h2><span class="yiyi-st" id="yiyi-32">Calculus</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="generated/numpy.polyder.html#numpy.polyder" title="numpy.polyder"><code class="xref py py-obj docutils literal"><span class="pre">polyder</span></code></a>(p[, m])</span></td>
+<td><span class="yiyi-st" id="yiyi-34">返回多项式的指定阶数的导数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="generated/numpy.polyint.html#numpy.polyint" title="numpy.polyint"><code class="xref py py-obj docutils literal"><span class="pre">polyint</span></code></a>(p[, m, k])</span></td>
+<td><span class="yiyi-st" id="yiyi-36">返回多项式的反演性（不确定积分）。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="arithmetic">
+<h2><span class="yiyi-st" id="yiyi-37">Arithmetic</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="generated/numpy.polyadd.html#numpy.polyadd" title="numpy.polyadd"><code class="xref py py-obj docutils literal"><span class="pre">polyadd</span></code></a>(a1, a2)</span></td>
+<td><span class="yiyi-st" id="yiyi-39">找到两个多项式的和。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="generated/numpy.polydiv.html#numpy.polydiv" title="numpy.polydiv"><code class="xref py py-obj docutils literal"><span class="pre">polydiv</span></code></a>(u, v)</span></td>
+<td><span class="yiyi-st" id="yiyi-41">返回多项式除法的商和余数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="generated/numpy.polymul.html#numpy.polymul" title="numpy.polymul"><code class="xref py py-obj docutils literal"><span class="pre">polymul</span></code></a>(a1, a2)</span></td>
+<td><span class="yiyi-st" id="yiyi-43">找到两个多项式的乘积。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="generated/numpy.polysub.html#numpy.polysub" title="numpy.polysub"><code class="xref py py-obj docutils literal"><span class="pre">polysub</span></code></a>(a1, a2)</span></td>
+<td><span class="yiyi-st" id="yiyi-45">两个多项式的差值（减法）。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="warnings">
+<h2><span class="yiyi-st" id="yiyi-46">Warnings</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.RankWarning.html#numpy.RankWarning" title="numpy.RankWarning"><code class="xref py py-obj docutils literal"><span class="pre">RankWarning</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-48">当Vandermonde矩阵为秩不足时由<a class="reference internal" href="generated/numpy.polyfit.html#numpy.polyfit" title="numpy.polyfit"><code class="xref py py-obj docutils literal"><span class="pre">polyfit</span></code></a>发布。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

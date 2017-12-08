@@ -1,0 +1,73 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.in1d</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.in1d.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.in1d.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.in1d"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">in1d</code><span class="sig-paren">(</span><em>ar1</em>, <em>ar2</em>, <em>assume_unique=False</em>, <em>invert=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/arraysetops.py#L305-L404"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">测试1-D数组的每个元素是否也存在于第二个数组中。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回与<em class="xref py py-obj">ar1</em>相同的长度为True的布尔数组，其中<em class="xref py py-obj">ar1</em>的元素在<em class="xref py py-obj">ar2</em>中为真，否则为False。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>ar1</strong>：（M，）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>ar2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">用于测试<em class="xref py py-obj">ar1</em>的每个值的值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>assume_unique</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">如果为真，则输入数组都被假定为唯一的，这可以加速计算。</span><span class="yiyi-st" id="yiyi-23">默认值为False。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>反转</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">如果为True，则返回的数组中的值被反转（即，其中<em class="xref py py-obj">ar1</em>的元素在<em class="xref py py-obj">ar2</em>中为False，否则为True）。</span><span class="yiyi-st" id="yiyi-26">默认值为False。</span><span class="yiyi-st" id="yiyi-27"><code class="docutils literal"><span class="pre">np.in1d(a,</span> <span class="pre">b,</span> <span class="pre">invert=True)</span></code> is equivalent to (but is faster than) <code class="docutils literal"><span class="pre">np.invert(in1d(a,</span> <span class="pre">b))</span></code>.</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-28"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>in1d</strong>：（M，）ndarray，bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">值<em class="xref py py-obj">ar1 [in1d]</em>在<em class="xref py py-obj">ar2</em>中。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-32">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-33"><code class="xref py py-obj docutils literal"><span class="pre">numpy.lib.arraysetops</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">具有用于对数组执行设置操作的多个其他功能的模块。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="#numpy.in1d" title="numpy.in1d"><code class="xref py py-obj docutils literal"><span class="pre">in1d</span></code></a>可以被视为1-D序列中的中的python关键字<em class="xref py py-obj">的元素级函数版本。</em></span><span class="yiyi-st" id="yiyi-37"><code class="docutils literal"><span class="pre">in1d(a,</span> <span class="pre">b)</span></code> is roughly equivalent to <code class="docutils literal"><span class="pre">np.array([item</span> <span class="pre">in</span> <span class="pre">b</span> <span class="pre">for</span> <span class="pre">item</span> <span class="pre">in</span> <span class="pre">a])</span></code>. </span><span class="yiyi-st" id="yiyi-38">但是，如果<em class="xref py py-obj">ar2</em>是一个集合或类似（非序列）容器，则此构思失败：As <code class="docutils literal"><span class="pre">ar2</span></code>被转换为数组，在这些情况下<code class="docutils literal"><span class="pre">asarray(ar2)</span></code>是一个对象数组，而不是包含值的预期数组。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-39"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-40">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span>
+<span class="go">array([ True, False,  True, False,  True], dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="go">array([0, 2, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span>
+<span class="go">array([False,  True, False,  True, False], dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="go">array([1, 5])</span>
+</pre></div>
+</div>
+</dd></dl>

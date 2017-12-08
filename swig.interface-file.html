@@ -1,0 +1,696 @@
+
+<h1><span class="yiyi-st" id="yiyi-34">numpy.i: a SWIG Interface File for NumPy</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/swig.interface-file.html">https://docs.scipy.org/doc/numpy/reference/swig.interface-file.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="introduction">
+<h2><span class="yiyi-st" id="yiyi-35">Introduction</span></h2>
+<p><span class="yiyi-st" id="yiyi-36">简单包装和接口生成器（或<a class="reference external" href="http://www.swig.org">SWIG</a>）是一种用于生成用于连接到各种脚本语言的包装代码的强大工具。</span><span class="yiyi-st" id="yiyi-37"><a class="reference external" href="http://www.swig.org">SWIG</a>可以解析头文件，并仅使用代码原型，创建目标语言的接口。</span><span class="yiyi-st" id="yiyi-38">但<a class="reference external" href="http://www.swig.org">SWIG</a>不是万能的。</span><span class="yiyi-st" id="yiyi-39">例如，它不能从原型知道：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">double</span> <span class="n">rms</span><span class="p">(</span><span class="n">double</span><span class="o">*</span> <span class="n">seq</span><span class="p">,</span> <span class="nb">int</span> <span class="n">n</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40"><code class="docutils literal"><span class="pre">seq</span></code>是什么。</span><span class="yiyi-st" id="yiyi-41">它是一个单一的值在现场改变？</span><span class="yiyi-st" id="yiyi-42">它是一个数组，如果是，它的长度是多少？</span><span class="yiyi-st" id="yiyi-43">它是仅输入的吗？</span><span class="yiyi-st" id="yiyi-44">仅输出？</span><span class="yiyi-st" id="yiyi-45">输入输出？</span><span class="yiyi-st" id="yiyi-46"><a class="reference external" href="http://www.swig.org">SWIG</a>无法确定这些详细信息，并且不尝试这样做。</span></p>
+<p><span class="yiyi-st" id="yiyi-47">If we designed <code class="docutils literal"><span class="pre">rms</span></code>, we probably made it a routine that takes an input-only array of length <code class="docutils literal"><span class="pre">n</span></code> of <code class="docutils literal"><span class="pre">double</span></code> values called <code class="docutils literal"><span class="pre">seq</span></code> and returns the root mean square. </span><span class="yiyi-st" id="yiyi-48">但是，<a class="reference external" href="http://www.swig.org">SWIG</a>的默认行为是创建一个包装器函数，该函数编译，但是几乎不可能从脚本语言以C程序的方式使用。</span></p>
+<p><span class="yiyi-st" id="yiyi-49">对于Python，处理连续（或技术上，<em>stride</em>）同质数据块的首选方法是使用NumPy，它提供了对多维数据数据组的完全面向对象的访问。</span><span class="yiyi-st" id="yiyi-50">因此，<code class="docutils literal"><span class="pre">rms</span></code>函数的最逻辑的Python接口是（包括doc字符串）：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rms</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    rms: return the root mean square of a sequence</span>
+<span class="sd">    rms(numpy.ndarray) -&gt; double</span>
+<span class="sd">    rms(list) -&gt; double</span>
+<span class="sd">    rms(tuple) -&gt; double</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-51">其中<code class="docutils literal"><span class="pre">seq</span></code>将是<code class="docutils literal"><span class="pre">double</span></code>值的NumPy数组，并且其长度<code class="docutils literal"><span class="pre">n</span></code>将在内部从<code class="docutils literal"><span class="pre">seq</span></code>被传递给C例程。</span><span class="yiyi-st" id="yiyi-52">更好的是，由于NumPy支持从任意Python序列构造数组，<code class="docutils literal"><span class="pre">seq</span></code>本身可以是一个几乎任意的序列（只要每个元素都可以转换为<code class="docutils literal"><span class="pre">double</span></code>）包装器代码将在提取其数据和长度之前将其内部转换为NumPy数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-53"><a class="reference external" href="http://www.swig.org">SWIG</a>允许通过称为<em>类型映射</em>的机制定义这些类型的转换。</span><span class="yiyi-st" id="yiyi-54">本文档提供了有关如何使用<code class="docutils literal"><span class="pre">numpy.i</span></code>（一个<a class="reference external" href="http://www.swig.org">SWIG</a>界面文件）的信息，该界面文件定义了一系列旨在使上述类型的阵列相关转换相对简单的类型实施。</span><span class="yiyi-st" id="yiyi-55">例如，假设上面定义的<code class="docutils literal"><span class="pre">rms</span></code>函数原型位于名为<code class="docutils literal"><span class="pre">rms.h</span></code>的头文件中。</span><span class="yiyi-st" id="yiyi-56">要获取上述Python界面，您的<a class="reference external" href="http://www.swig.org">SWIG</a>界面文件需要以下内容：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="p">{</span>
+<span class="c1">#define SWIG_FILE_WITH_INIT</span>
+<span class="c1">#include &quot;rms.h&quot;</span>
+<span class="o">%</span><span class="p">}</span>
+
+<span class="o">%</span><span class="n">include</span> <span class="s2">&quot;numpy.i&quot;</span>
+
+<span class="o">%</span><span class="n">init</span> <span class="o">%</span><span class="p">{</span>
+<span class="n">import_array</span><span class="p">();</span>
+<span class="o">%</span><span class="p">}</span>
+
+<span class="o">%</span><span class="n">apply</span> <span class="p">(</span><span class="n">double</span><span class="o">*</span> <span class="n">IN_ARRAY1</span><span class="p">,</span> <span class="nb">int</span> <span class="n">DIM1</span><span class="p">)</span> <span class="p">{(</span><span class="n">double</span><span class="o">*</span> <span class="n">seq</span><span class="p">,</span> <span class="nb">int</span> <span class="n">n</span><span class="p">)};</span>
+<span class="o">%</span><span class="n">include</span> <span class="s2">&quot;rms.h&quot;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-57">类型映射由一个或多个函数参数的列表组成，按类型或按类型和名称。</span><span class="yiyi-st" id="yiyi-58">我们将引用这样的列表作为<em>签名</em>。</span><span class="yiyi-st" id="yiyi-59">上面使用了由<code class="docutils literal"><span class="pre">numpy.i</span></code>定义的许多类型映射之一，并且具有签名<code class="docutils literal"><span class="pre">（double *</span> <span class="pre">IN_ARRAY1，</span> <span class="pre">int </span> <span class="pre">DIM1）</span></code>。</span><span class="yiyi-st" id="yiyi-60">参数名称旨在表明<code class="docutils literal"><span class="pre">double*</span></code>参数是一个维度的输入数组，<code class="docutils literal"><span class="pre">int</span></code>表示该维度的大小。</span><span class="yiyi-st" id="yiyi-61">这正是<code class="docutils literal"><span class="pre">rms</span></code>原型中的模式。</span></p>
+<p><span class="yiyi-st" id="yiyi-62">最有可能的是，没有要包装的实际原型将具有参数名称<code class="docutils literal"><span class="pre">IN_ARRAY1</span></code>和<code class="docutils literal"><span class="pre">DIM1</span></code>。</span><span class="yiyi-st" id="yiyi-63">我们使用<a class="reference external" href="http://www.swig.org">SWIG</a> <code class="docutils literal"><span class="pre">%apply</span></code>指令将<code class="docutils literal"><span class="pre">double</span></code>类型的一维输入数组的typemap应用于<code class="docutils literal"><span class="pre">rms</span></code>。</span><span class="yiyi-st" id="yiyi-64">因此，有效地使用<code class="docutils literal"><span class="pre">numpy.i</span></code>需要知道什么类型的电子书可用以及它们做什么。</span></p>
+<p><span class="yiyi-st" id="yiyi-65">包含上面给出的<a class="reference external" href="http://www.swig.org">SWIG</a>指令的<a class="reference external" href="http://www.swig.org">SWIG</a>接口文件将产生如下的包装代码：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span> 1 PyObject *_wrap_rms(PyObject *args) {
+ 2   PyObject *resultobj = 0;
+ 3   double *arg1 = (double *) 0 ;
+ 4   int arg2 ;
+ 5   double result;
+ 6   PyArrayObject *array1 = NULL ;
+ 7   int is_new_object1 = 0 ;
+ 8   PyObject * obj0 = 0 ;
+ 9
+10   if (!PyArg_ParseTuple(args,(char *)&quot;O:rms&quot;,&amp;obj0)) SWIG_fail;
+11   {
+12     array1 = obj_to_array_contiguous_allow_conversion(
+13                  obj0, NPY_DOUBLE, &amp;is_new_object1);
+14     npy_intp size[1] = {
+15       -1
+16     };
+17     if (!array1 || !require_dimensions(array1, 1) ||
+18         !require_size(array1, size, 1)) SWIG_fail;
+19     arg1 = (double*) array1-&gt;data;
+20     arg2 = (int) array1-&gt;dimensions[0];
+21   }
+22   result = (double)rms(arg1,arg2);
+23   resultobj = SWIG_From_double((double)(result));
+24   {
+25     if (is_new_object1 &amp;&amp; array1) Py_DECREF(array1);
+26   }
+27   return resultobj;
+28 fail:
+29   {
+30     if (is_new_object1 &amp;&amp; array1) Py_DECREF(array1);
+31   }
+32   return NULL;
+33 }
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-66">来自<code class="docutils literal"><span class="pre">numpy.i</span></code>的typemaps负责以下代码行：12-20,25和30。</span><span class="yiyi-st" id="yiyi-67">第10行解析<code class="docutils literal"><span class="pre">rms</span></code>函数的输入。</span><span class="yiyi-st" id="yiyi-68">从格式字符串<code class="docutils literal"><span class="pre">&quot;O:rms&quot;</span></code>，我们可以看到，参数列表应该是一个单独的Python对象（由冒号之前的<code class="docutils literal"><span class="pre">O</span></code>指定）指针存储在<code class="docutils literal"><span class="pre">obj0</span></code>中。</span><span class="yiyi-st" id="yiyi-69">调用由<code class="docutils literal"><span class="pre">numpy.i</span></code>提供的许多函数来进行和检查从通用Python对象到NumPy数组的（可能的）转换。</span><span class="yiyi-st" id="yiyi-70">这些函数在<a class="reference internal" href="#helper-functions">帮助函数</a>部分解释，但希望他们的名字是不言自明的。</span><span class="yiyi-st" id="yiyi-71">在第12行，我们使用<code class="docutils literal"><span class="pre">obj0</span></code>构造一个NumPy数组。</span><span class="yiyi-st" id="yiyi-72">在第17行，我们检查结果的有效性：它是非空的，并且它具有任意长度的单维。</span><span class="yiyi-st" id="yiyi-73">一旦这些状态被验证，我们提取数据缓冲区和长度在行19和20，使我们可以调用底层C函数在第22行。</span><span class="yiyi-st" id="yiyi-74">第25行对我们创建了不再需要的新数组的情况执行内存管理。</span></p>
+<p><span class="yiyi-st" id="yiyi-75">此代码具有大量的错误处理。</span><span class="yiyi-st" id="yiyi-76">请注意，<code class="docutils literal"><span class="pre">SWIG_fail</span></code>是<code class="docutils literal"><span class="pre">goto</span> <span class="pre">fail</span></code>的宏，引用第28行的标签。</span><span class="yiyi-st" id="yiyi-77">如果用户提供的参数数量不正确，将在第10行捕获。</span><span class="yiyi-st" id="yiyi-78">如果NumPy数组的构造失败或产生具有错误维数的数组，则这些错误在第17行被捕获。</span><span class="yiyi-st" id="yiyi-79">最后，如果检测到错误，则在线30仍然正确地管理存储器。</span></p>
+<p><span class="yiyi-st" id="yiyi-80">请注意，如果C函数签名的顺序不同：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">double</span> <span class="n">rms</span><span class="p">(</span><span class="nb">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">double</span><span class="o">*</span> <span class="n">seq</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-81"><a class="reference external" href="http://www.swig.org">SWIG</a>与上面给出的typemap签名与<code class="docutils literal"><span class="pre">rms</span></code>的参数列表不匹配。</span><span class="yiyi-st" id="yiyi-82">幸运的是，<code class="docutils literal"><span class="pre">numpy.i</span></code>有一组带有最后一个数据指针的类型：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">apply</span> <span class="p">(</span><span class="nb">int</span> <span class="n">DIM1</span><span class="p">,</span> <span class="n">double</span><span class="o">*</span> <span class="n">IN_ARRAY1</span><span class="p">)</span> <span class="p">{(</span><span class="nb">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">double</span><span class="o">*</span> <span class="n">seq</span><span class="p">)};</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-83">这简单地具有在上面生成的代码的第3行和第4行中切换<code class="docutils literal"><span class="pre">arg1</span></code>和<code class="docutils literal"><span class="pre">arg2</span></code>的定义的效果，以及它们在行19和20中的分配。</span></p>
+</div>
+<div class="section" id="using-numpy-i">
+<h2><span class="yiyi-st" id="yiyi-84">Using numpy.i</span></h2>
+<p><span class="yiyi-st" id="yiyi-85"><code class="docutils literal"><span class="pre">numpy.i</span></code>文件目前位于<code class="docutils literal"><span class="pre">numpy</span></code>安装目录下的<code class="docutils literal"><span class="pre">tools/swig</span></code>子目录中。</span><span class="yiyi-st" id="yiyi-86">通常，你需要将它复制到你开发你的包装器的目录。</span></p>
+<p><span class="yiyi-st" id="yiyi-87">只使用单个<a class="reference external" href="http://www.swig.org">SWIG</a>接口文件的简单模块应包括以下内容：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="p">{</span>
+<span class="c1">#define SWIG_FILE_WITH_INIT</span>
+<span class="o">%</span><span class="p">}</span>
+<span class="o">%</span><span class="n">include</span> <span class="s2">&quot;numpy.i&quot;</span>
+<span class="o">%</span><span class="n">init</span> <span class="o">%</span><span class="p">{</span>
+<span class="n">import_array</span><span class="p">();</span>
+<span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-88">在编译的Python模块中，<code class="docutils literal"><span class="pre">import_array()</span></code>应该只调用一次。</span><span class="yiyi-st" id="yiyi-89">这可能在您已经写入并链接到模块的C / C ++文件中。</span><span class="yiyi-st" id="yiyi-90">如果是这种情况，则您的所有接口文件都不应<code class="docutils literal"><span class="pre">#define</span> <span class="pre">SWIG_FILE_WITH_INIT</span></code>或调用<code class="docutils literal"><span class="pre">import_array()</span></code>。</span><span class="yiyi-st" id="yiyi-91">或者，此初始化调用可以在由具有<code class="docutils literal"><span class="pre">%init</span></code>块的接口文件中由<a class="reference external" href="http://www.swig.org">SWIG</a>生成的包装文件中。</span><span class="yiyi-st" id="yiyi-92">如果是这种情况，并且您有多个<a class="reference external" href="http://www.swig.org">SWIG</a>接口文件，则只有一个接口文件应<code class="docutils literal"><span class="pre">#define</span> <span class="pre">SWIG_FILE_WITH_INIT</span> / t1&gt;并调用<code class="docutils literal"><span class="pre">import_array()</span></code>。</code></span></p>
+</div>
+<div class="section" id="available-typemaps">
+<h2><span class="yiyi-st" id="yiyi-93">Available Typemaps</span></h2>
+<p><span class="yiyi-st" id="yiyi-94">不同数据类型的数组（<code class="docutils literal"><span class="pre">double</span></code>和<code class="docutils literal"><span class="pre">int</span></code>）的<code class="docutils literal"><span class="pre">numpy.i</span></code>提供的typemap指令以及不同类型的维度，例如<code class="docutils literal"><span class="pre">int</span></code>或<code class="docutils literal"><span class="pre">long</span></code>除了C和NumPy类型规范之外彼此相同。</span><span class="yiyi-st" id="yiyi-95">因此，通过宏来实现类型映射（通常在幕后）：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">numpy_typemaps</span><span class="p">(</span><span class="n">DATA_TYPE</span><span class="p">,</span> <span class="n">DATA_TYPECODE</span><span class="p">,</span> <span class="n">DIM_TYPE</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-96">可以针对适当的<code class="docutils literal"><span class="pre">（DATA_TYPE，</span> <span class="pre">DATA_TYPECODE，</span> <span class="pre">DIM_TYPE）</span></code>三元组调用。</span><span class="yiyi-st" id="yiyi-97">例如：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">numpy_typemaps</span><span class="p">(</span><span class="n">double</span><span class="p">,</span> <span class="n">NPY_DOUBLE</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="o">%</span><span class="n">numpy_typemaps</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span>    <span class="n">NPY_INT</span>   <span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-98"><code class="docutils literal"><span class="pre">numpy.i</span></code>接口文件使用<code class="docutils literal"><span class="pre">%numpy_typemaps</span></code>宏实现以下C数据类型和<code class="docutils literal"><span class="pre">int</span></code>维类型的类型映射：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-99"><code class="docutils literal"><span class="pre">签名</span> <span class="pre">char</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-100"><code class="docutils literal"><span class="pre">无符号</span> <span class="pre">char</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-101"><code class="docutils literal"><span class="pre">short</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-102"><code class="docutils literal"><span class="pre">无符号</span> <span class="pre">短</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-103"><code class="docutils literal"><span class="pre">int</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-104"><code class="docutils literal"><span class="pre">无符号</span> <span class="pre">int</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-105"><code class="docutils literal"><span class="pre">long</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-106"><code class="docutils literal"><span class="pre">无符号</span> <span class="pre">长</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-107"><code class="docutils literal"><span class="pre">long</span> <span class="pre">long</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-108"><code class="docutils literal"><span class="pre">无符号</span> <span class="pre">长</span> <span class="pre">长</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-109"><code class="docutils literal"><span class="pre">float</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-110"><code class="docutils literal"><span class="pre">double</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-111">在下面的描述中，我们引用一个通用的<code class="docutils literal"><span class="pre">DATA_TYPE</span></code>，它可以是上面列出的任何C数据类型和<code class="docutils literal"><span class="pre">DIM_TYPE</span></code>，它应该是许多类型的整数之一。</span></p>
+<p><span class="yiyi-st" id="yiyi-112">typemap签名在提供给缓冲区指针的名称上有很大区别。</span><span class="yiyi-st" id="yiyi-113">具有<code class="docutils literal"><span class="pre">FARRAY</span></code>的名称用于Fortran排序的数组，名为<code class="docutils literal"><span class="pre">ARRAY</span></code>的名称用于C序列（或1D数组）。</span></p>
+<div class="section" id="input-arrays">
+<h3><span class="yiyi-st" id="yiyi-114">Input Arrays</span></h3>
+<p><span class="yiyi-st" id="yiyi-115">输入数组被定义为传递到例程中但未在现场更改或返回给用户的数据的数组。</span><span class="yiyi-st" id="yiyi-116">因此，允许Python输入数组几乎是任何可以转换为所请求类型的数组的Python序列（例如列表）。</span><span class="yiyi-st" id="yiyi-117">输入数组签名为</span></p>
+<p><span class="yiyi-st" id="yiyi-118">1D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-119"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE</span> <span class="pre">IN_ARRAY1 [ANY]</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-120"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE *</span> <span class="pre">IN_ARRAY1，</span> <span class="pre">int</span> <span class="pre">DIM1</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-121"><code class="docutils literal"><span class="pre">（</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">DATA_TYPE *</span> <span class="pre">IN_ARRAY1</span> <span class="pre">/ t6&gt;</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-122">2D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-123"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE</span> <span class="pre">IN_ARRAY2 [ANY] [ANY]</span> <span class="pre">）</span> </code></span></li>
+<li><span class="yiyi-st" id="yiyi-124"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE *</span> <span class="pre">IN_ARRAY2，</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int </span> <span class="pre">DIM2</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-125"><code class="docutils literal"><span class="pre">（</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int</span> <span class="pre">DIM2，</span> <span class="pre">DATA_TYPE * </span> <span class="pre">IN_ARRAY2</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-126"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE *</span> <span class="pre">IN_FARRAY2，</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int </span> <span class="pre">DIM2</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-127"><code class="docutils literal"><span class="pre">（</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int</span> <span class="pre">DIM2，</span> <span class="pre">DATA_TYPE * </span> <span class="pre">IN_FARRAY2</span> <span class="pre">）</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-128">3D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-129"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE</span> <span class="pre">IN_ARRAY3 [ANY] [ANY] [ANY]</span> <span class="pre">）</span> </code></span></li>
+<li><span class="yiyi-st" id="yiyi-130"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE *</span> <span class="pre">IN_ARRAY3，</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int </span> <span class="pre">DIM2，</span> <span class="pre">int</span> <span class="pre">DIM3</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-131"><code class="docutils literal"><span class="pre">（</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int</span> <span class="pre">DIM2，</span> <span class="pre">/ t6&gt; <span class="pre">DIM3，</span> <span class="pre">DATA_TYPE *</span> <span class="pre">IN_ARRAY3</span> <span class="pre">）</span> </span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-132"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE *</span> <span class="pre">IN_FARRAY3，</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int </span> <span class="pre">DIM2，</span> <span class="pre">int</span> <span class="pre">DIM3</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-133"><code class="docutils literal"><span class="pre">（</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int</span> <span class="pre">DIM2，</span> <span class="pre">/ t6&gt; <span class="pre">DIM3，</span> <span class="pre">DATA_TYPE *</span> <span class="pre">IN_FARRAY3</span> <span class="pre">）</span> </span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-134">4D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-135"><code class="docutils literal"><span class="pre">（DATA_TYPE</span> <span class="pre">IN_ARRAY4 [ANY] [ANY] [ANY] [ANY]）</span> </code></span></li>
+<li><span class="yiyi-st" id="yiyi-136"><code class="docutils literal"><span class="pre">（DATA_TYPE *</span> <span class="pre">IN_ARRAY4，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM3，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM4）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-137"><code class="docutils literal"><span class="pre">（DIM_TYPE</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE</span> <span class="pre">，</span> <span class="pre">，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM4，</span> <span class="pre">DATA_TYPE *</span> <span class="pre">IN_ARRAY4） t0&gt;</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-138"><code class="docutils literal"><span class="pre">（DATA_TYPE *</span> <span class="pre">IN_FARRAY4，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM3，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM4）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-139"><code class="docutils literal"><span class="pre">（DIM_TYPE</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM3 ，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM4，</span> <span class="pre">DATA_TYPE *</span> <span class="pre">IN_FARRAY4）</span> </code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-140">列出的第一个签名，<code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE</span> <span class="pre">IN_ARRAY [ANY]</span> <span class="pre">）</span> 具有硬编码尺寸的二维数组。</code></span><span class="yiyi-st" id="yiyi-141">同样，<code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE</span> <span class="pre">IN_ARRAY2 [ANY] [ANY]</span> <span class="pre">）</span></code>具有硬编码尺寸的三维数组，并且类似地用于三维。</span></p>
+</div>
+<div class="section" id="in-place-arrays">
+<h3><span class="yiyi-st" id="yiyi-142">In-Place Arrays</span></h3>
+<p><span class="yiyi-st" id="yiyi-143">就地数组定义为就地修改的数组。</span><span class="yiyi-st" id="yiyi-144">输入值可以使用也可以不使用，但函数返回时的值是重要的。</span><span class="yiyi-st" id="yiyi-145">因此，提供的Python参数必须是必需类型的NumPy数组。</span><span class="yiyi-st" id="yiyi-146">就地签名是</span></p>
+<p><span class="yiyi-st" id="yiyi-147">1D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-148"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE</span> <span class="pre">INPLACE_ARRAY1 [ANY]</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-149"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE *</span> <span class="pre">INPLACE_ARRAY1，</span> <span class="pre">int</span> <span class="pre">DIM1</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-150"><code class="docutils literal"><span class="pre">（</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">DATA_TYPE *</span> <span class="pre">INPLACE_ARRAY1</span> <span class="pre">/ t6&gt;</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-151">2D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-152"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE</span> <span class="pre">INPLACE_ARRAY2 [ANY] [ANY]</span> <span class="pre">）</span> </code></span></li>
+<li><span class="yiyi-st" id="yiyi-153"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE *</span> <span class="pre">INPLACE_ARRAY2，</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int </span> <span class="pre">DIM2</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-154"><code class="docutils literal"><span class="pre">（</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int</span> <span class="pre">DIM2，</span> <span class="pre">DATA_TYPE * </span> <span class="pre">INPLACE_ARRAY2</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-155"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE *</span> <span class="pre">INPLACE_FARRAY2，</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int </span> <span class="pre">DIM2</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-156"><code class="docutils literal"><span class="pre">（</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int</span> <span class="pre">DIM2，</span> <span class="pre">DATA_TYPE * </span> <span class="pre">INPLACE_FARRAY2</span> <span class="pre">）</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-157">3D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-158"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE</span> <span class="pre">INPLACE_ARRAY3 [ANY] [ANY] [ANY]</span> <span class="pre">）</span> </code></span></li>
+<li><span class="yiyi-st" id="yiyi-159"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE *</span> <span class="pre">INPLACE_ARRAY3，</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int </span> <span class="pre">DIM2，</span> <span class="pre">int</span> <span class="pre">DIM3</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-160"><code class="docutils literal"><span class="pre">（</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int</span> <span class="pre">DIM2，</span> <span class="pre">/ t6&gt; <span class="pre">DIM3，</span> <span class="pre">DATA_TYPE *</span> <span class="pre">INPLACE_ARRAY3</span> <span class="pre">）</span> </span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-161"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE *</span> <span class="pre">INPLACE_FARRAY3，</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int </span> <span class="pre">DIM2，</span> <span class="pre">int</span> <span class="pre">DIM3</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-162"><code class="docutils literal"><span class="pre">（</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">int</span> <span class="pre">DIM2，</span> <span class="pre">/ t6&gt; <span class="pre">DIM3，</span> <span class="pre">DATA_TYPE *</span> <span class="pre">INPLACE_FARRAY3</span> <span class="pre">）</span> </span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-163">4D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-164"><code class="docutils literal"><span class="pre">（DATA_TYPE</span> <span class="pre">INPLACE_ARRAY4 [ANY] [ANY] [ANY] [ANY]）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-165"><code class="docutils literal"><span class="pre">（DATA_TYPE *</span> <span class="pre">INPLACE_ARRAY4，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM3，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM4）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-166"><code class="docutils literal"><span class="pre">（DIM_TYPE</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE</span> <span class="pre">，</span> <span class="pre">，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM4，</span> <span class="pre">DATA_TYPE *</span> <span class="pre">INPLACE_ARRAY4） t0&gt;</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-167"><code class="docutils literal"><span class="pre">（DATA_TYPE *</span> <span class="pre">INPLACE_FARRAY4，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM3，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM4）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-168"><code class="docutils literal"><span class="pre">（DIM_TYPE</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM3 ，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM4，</span> <span class="pre">DATA_TYPE *</span> <span class="pre">INPLACE_FARRAY4）</span> </code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-169">这些类型的映射现在检查以确保<code class="docutils literal"><span class="pre">INPLACE_ARRAY</span></code>参数使用本机字节顺序。</span><span class="yiyi-st" id="yiyi-170">如果不是，则引发异常。</span></p>
+<p><span class="yiyi-st" id="yiyi-171">对于您希望修改或处理每个元素的情况，还有一个“平面”就地数组，而不考虑维数。</span><span class="yiyi-st" id="yiyi-172">一个例子是“量化”函数，其将数组的每个元素就地量化，无论是1D，2D还是其它。</span><span class="yiyi-st" id="yiyi-173">此表单检查连续性，但允许C或Fortran排序。</span></p>
+<p><span class="yiyi-st" id="yiyi-174">ND：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-175"><code class="docutils literal"><span class="pre">（DATA_TYPE *</span> <span class="pre">INPLACE_ARRAY_FLAT，</span> <span class="pre">DIM_TYPE</span> <span class="pre">DIM_FLAT）</span> </code></span></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="argout-arrays">
+<h3><span class="yiyi-st" id="yiyi-176">Argout Arrays</span></h3>
+<p><span class="yiyi-st" id="yiyi-177">Argout数组是出现在C中的输入参数中的数组，但实际上是输出数组。</span><span class="yiyi-st" id="yiyi-178">当有多个输出变量并且单个返回参数不足时，通常会出现此模式。</span><span class="yiyi-st" id="yiyi-179">在Python中，返回多个参数的常规方法是将它们打包成一个序列（元组，列表等）</span><span class="yiyi-st" id="yiyi-180">并返回序列。</span><span class="yiyi-st" id="yiyi-181">这是argout typemaps做的。</span><span class="yiyi-st" id="yiyi-182">如果使用这些argout类型映射的包装函数具有多个返回参数，则根据Python的版本将它们打包到元组或列表中。</span><span class="yiyi-st" id="yiyi-183">Python用户不传递这些数组，它们只是简单地返回。</span><span class="yiyi-st" id="yiyi-184">对于指定维度的情况，python用户必须提供该维度作为参数。</span><span class="yiyi-st" id="yiyi-185">argout签名是</span></p>
+<p><span class="yiyi-st" id="yiyi-186">1D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-187"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE</span> <span class="pre">ARGOUT_ARRAY1 [ANY]</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-188"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE *</span> <span class="pre">ARGOUT_ARRAY1，</span> <span class="pre">int</span> <span class="pre">DIM1</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-189"><code class="docutils literal"><span class="pre">（</span> <span class="pre">int</span> <span class="pre">DIM1，</span> <span class="pre">DATA_TYPE *</span> <span class="pre">ARGOUT_ARRAY1</span> <span class="pre">/ t6&gt;</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-190">2D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-191"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE</span> <span class="pre">ARGOUT_ARRAY2 [ANY] [ANY]</span> <span class="pre">）</span> </code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-192">3D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-193"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE</span> <span class="pre">ARGOUT_ARRAY3 [ANY] [ANY] [ANY]</span> <span class="pre">）</span> </code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-194">4D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-195"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE</span> <span class="pre">ARGOUT_ARRAY4 [ANY] [ANY] [ANY] [ANY]</span> <span class="pre">）</span>  t0 &gt;</code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-196">这些通常用于在C / C ++中，您将在堆上分配一个（n）数组，并调用该函数来填充数组的情况。</span><span class="yiyi-st" id="yiyi-197">在Python中，数组被分配给你，并作为新的数组对象返回。</span></p>
+<p><span class="yiyi-st" id="yiyi-198">请注意，我们支持1D中的<code class="docutils literal"><span class="pre">DATA_TYPE*</span></code> argout类型映射，但不支持2D或3D。</span><span class="yiyi-st" id="yiyi-199">这是因为使用<a class="reference external" href="http://www.swig.org">SWIG</a> typemap语法的一个怪癖，并且无法避免。</span><span class="yiyi-st" id="yiyi-200">请注意，对于这些类型的1D类型映射，Python函数将使用表示<code class="docutils literal"><span class="pre">DIM1</span></code>的单个参数。</span></p>
+</div>
+<div class="section" id="argout-view-arrays">
+<h3><span class="yiyi-st" id="yiyi-201">Argout View Arrays</span></h3>
+<p><span class="yiyi-st" id="yiyi-202">Argoutview数组用于当你的C代码为你提供它的内部数据的视图，并且不需要用户分配任何内存。</span><span class="yiyi-st" id="yiyi-203">这可能是危险的。</span><span class="yiyi-st" id="yiyi-204">几乎没有办法保证C代码的内部数据在封装它的NumPy数组的整个生命周期内保持存在。</span><span class="yiyi-st" id="yiyi-205">如果用户在销毁NumPy数组之前破坏提供数据视图的对象，则使用该数组可能导致不良的内存引用或分段故障。</span><span class="yiyi-st" id="yiyi-206">然而，有些情况下，使用大数据集，你根本没有别的选择。</span></p>
+<p><span class="yiyi-st" id="yiyi-207">要为argoutview数组包装的C代码的特征在于指针：指向数据的维度和双指针的指针，以便这些值可以传递回用户。</span><span class="yiyi-st" id="yiyi-208">因此，argoutview类型的地图签名</span></p>
+<p><span class="yiyi-st" id="yiyi-209">1D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-210"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE **</span> <span class="pre">ARGOUTVIEW_ARRAY1，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-211"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre">DATA_TYPE **</span> <span class="pre">ARGOUTVIEW_ARRAY1</span> <span class="pre">）</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-212">2D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-213"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE **</span> <span class="pre">ARGOUTVIEW_ARRAY2，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre"> DIM_TYPE *</span> <span class="pre">DIM2</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-214"><code class="docutils literal"><span class="pre">(</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM1,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM2,</span> <span class="pre">DATA_TYPE**</span> <span class="pre">ARGOUTVIEW_ARRAY2</span> <span class="pre">)</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-215"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE **</span> <span class="pre">ARGOUTVIEW_FARRAY2，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre"> DIM_TYPE *</span> <span class="pre">DIM2</span> <span class="pre">）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-216"><code class="docutils literal"><span class="pre">(</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM1,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM2,</span> <span class="pre">DATA_TYPE**</span> <span class="pre">ARGOUTVIEW_FARRAY2</span> <span class="pre">)</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-217">3D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-218"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE **</span> <span class="pre">ARGOUTVIEW_ARRAY3，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre"> DIM_TYPE *</span> <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM3）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-219"><code class="docutils literal"><span class="pre">(</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM1,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM2,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM3,</span> <span class="pre">DATA_TYPE**</span> <span class="pre">ARGOUTVIEW_ARRAY3)</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-220"><code class="docutils literal"><span class="pre">（</span> <span class="pre">DATA_TYPE **</span> <span class="pre">ARGOUTVIEW_FARRAY3，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre"> DIM_TYPE *</span> <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM3）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-221"><code class="docutils literal"><span class="pre">(</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM1,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM2,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM3,</span> <span class="pre">DATA_TYPE**</span> <span class="pre">ARGOUTVIEW_FARRAY3)</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-222">4D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-223"><code class="docutils literal"><span class="pre">（DATA_TYPE **</span> <span class="pre">ARGOUTVIEW_ARRAY4，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE *  <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM3，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM4）</span> </span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-224"><code class="docutils literal"><span class="pre">(DIM_TYPE*</span> <span class="pre">DIM1,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM2,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM3,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM4,</span> <span class="pre">DATA_TYPE**</span> <span class="pre">ARGOUTVIEW_ARRAY4)</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-225"><code class="docutils literal"><span class="pre">（DATA_TYPE **</span> <span class="pre">ARGOUTVIEW_FARRAY4，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE *  <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM3，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM4）</span> </span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-226"><code class="docutils literal"><span class="pre">(DIM_TYPE*</span> <span class="pre">DIM1,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM2,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM3,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM4,</span> <span class="pre">DATA_TYPE**</span> <span class="pre">ARGOUTVIEW_FARRAY4)</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-227">请注意，不支持带有硬编码尺寸的数组。</span><span class="yiyi-st" id="yiyi-228">这些不能遵循这些类型映射的双指针签名。</span></p>
+</div>
+<div class="section" id="memory-managed-argout-view-arrays">
+<h3><span class="yiyi-st" id="yiyi-229">Memory Managed Argout View Arrays</span></h3>
+<p><span class="yiyi-st" id="yiyi-230"><code class="docutils literal"><span class="pre">numpy.i</span></code>的最近添加是允许argout数组将视图插入到受管内存中的类型映射。</span><span class="yiyi-st" id="yiyi-231">请参阅<a class="reference external" href="http://blog.enthought.com/python/numpy-arrays-with-pre-allocated-memory">此处</a>的讨论。</span></p>
+<p><span class="yiyi-st" id="yiyi-232">1D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-233"><code class="docutils literal"><span class="pre">（DATA_TYPE **</span> <span class="pre">ARGOUTVIEWM_ARRAY1，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1）</span> </code></span></li>
+<li><span class="yiyi-st" id="yiyi-234"><code class="docutils literal"><span class="pre">（DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre">DATA_TYPE **</span> <span class="pre">ARGOUTVIEWM_ARRAY1）</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-235">2D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-236"><code class="docutils literal"><span class="pre">（DATA_TYPE **</span> <span class="pre">ARGOUTVIEWM_ARRAY2，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1,</span> <span class="pre">DIM_TYPE *  <span class="pre">DIM2）</span></span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-237"><code class="docutils literal"><span class="pre">（DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM2，</span> <span class="pre">DATA_TYPE **</span> <span class="pre">ARGOUTVIEWM_ARRAY2）</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-238"><code class="docutils literal"><span class="pre">（DATA_TYPE **</span> <span class="pre">ARGOUTVIEWM_FARRAY2，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE *  <span class="pre">DIM2）</span></span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-239"><code class="docutils literal"><span class="pre">（DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM2，</span> <span class="pre">DATA_TYPE **</span> <span class="pre">ARGOUTVIEWM_FARRAY2）</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-240">3D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-241"><code class="docutils literal"><span class="pre">（DATA_TYPE **</span> <span class="pre">ARGOUTVIEWM_ARRAY3，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE *  <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM3）</span></span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-242"><code class="docutils literal"><span class="pre">(DIM_TYPE*</span> <span class="pre">DIM1,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM2,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM3,</span> <span class="pre">DATA_TYPE**</span> <span class="pre">ARGOUTVIEWM_ARRAY3)</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-243"><code class="docutils literal"><span class="pre">（DATA_TYPE **</span> <span class="pre">ARGOUTVIEWM_FARRAY3，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE *  <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM3）</span></span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-244"><code class="docutils literal"><span class="pre">(DIM_TYPE*</span> <span class="pre">DIM1,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM2,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM3,</span> <span class="pre">DATA_TYPE**</span> <span class="pre">ARGOUTVIEWM_FARRAY3)</span></code></span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-245">4D：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-246"><code class="docutils literal"><span class="pre">（DATA_TYPE **</span> <span class="pre">ARGOUTVIEWM_ARRAY4，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM1，</span> <span class="pre">DIM_TYPE *  <span class="pre">DIM2，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM3，</span> <span class="pre">DIM_TYPE *</span> <span class="pre">DIM4）</span> </span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-247"><code class="docutils literal"><span class="pre">(DIM_TYPE*</span> <span class="pre">DIM1,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM2,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM3,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM4,</span> <span class="pre">DATA_TYPE**</span> <span class="pre">ARGOUTVIEWM_ARRAY4)</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-248"><code class="docutils literal"><span class="pre">(DATA_TYPE**</span> <span class="pre">ARGOUTVIEWM_FARRAY4,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM1,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM2,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM3,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM4)</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-249"><code class="docutils literal"><span class="pre">(DIM_TYPE*</span> <span class="pre">DIM1,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM2,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM3,</span> <span class="pre">DIM_TYPE*</span> <span class="pre">DIM4,</span> <span class="pre">DATA_TYPE**</span> <span class="pre">ARGOUTVIEWM_FARRAY4)</span></code></span></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="output-arrays">
+<h3><span class="yiyi-st" id="yiyi-250">Output Arrays</span></h3>
+<p><span class="yiyi-st" id="yiyi-251"><code class="docutils literal"><span class="pre">numpy.i</span></code>接口文件不支持输出数组的类型映射，原因有几个。</span><span class="yiyi-st" id="yiyi-252">首先，C / C ++返回参数被限制为单个值。</span><span class="yiyi-st" id="yiyi-253">这防止以通常的方式获得尺寸信息。</span><span class="yiyi-st" id="yiyi-254">第二，不允许具有硬编码长度的数组作为返回参数。</span><span class="yiyi-st" id="yiyi-255">换一种说法：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">double</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">newVector</span><span class="p">(</span><span class="n">double</span> <span class="n">x</span><span class="p">,</span> <span class="n">double</span> <span class="n">y</span><span class="p">,</span> <span class="n">double</span> <span class="n">z</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-256">不是合法的C / C ++语法。</span><span class="yiyi-st" id="yiyi-257">因此，我们不能提供形式的typemaps：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">typemap</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="p">(</span><span class="n">TYPE</span><span class="p">[</span><span class="n">ANY</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-258">如果你遇到一个函数或方法返回一个指向数组的指针的情况，你最好的办法是写你自己的版本的函数要包装，或者用<code class="docutils literal"><span class="pre">%extend</span></code>类方法或<code class="docutils literal"><span class="pre">%ignore</span></code>和<code class="docutils literal"><span class="pre">%rename</span></code>。</span></p>
+</div>
+<div class="section" id="other-common-types-bool">
+<h3><span class="yiyi-st" id="yiyi-259">Other Common Types: bool</span></h3>
+<p><span class="yiyi-st" id="yiyi-260">请注意，<a class="reference internal" href="#available-typemaps">可用类型图</a>部分的列表不支持C ++类型<code class="docutils literal"><span class="pre">bool</span></code>。</span><span class="yiyi-st" id="yiyi-261">NumPy bool是一个单字节，而C ++ <code class="docutils literal"><span class="pre">bool</span></code>是四个字节（至少在我的系统上）。</span><span class="yiyi-st" id="yiyi-262">因此：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">numpy_typemaps</span><span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="n">NPY_BOOL</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-263">将导致会产生引用不正确数据长度的代码的typemaps。</span><span class="yiyi-st" id="yiyi-264">你可以实现以下宏扩展：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">numpy_typemaps</span><span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="n">NPY_UINT</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-265">以修复数据长度问题，并且<a class="reference internal" href="#input-arrays">输入数组</a>将正常工作，但<a class="reference internal" href="#in-place-arrays">就地数组</a>可能会失败类型检查。</span></p>
+</div>
+<div class="section" id="other-common-types-complex">
+<h3><span class="yiyi-st" id="yiyi-266">Other Common Types: complex</span></h3>
+<p><span class="yiyi-st" id="yiyi-267">也不自动支持复杂浮点类型的字形图转换。</span><span class="yiyi-st" id="yiyi-268">这是因为Python和NumPy是用C编写的，它没有本机复杂类型。</span><span class="yiyi-st" id="yiyi-269">Python和NumPy对复杂变量实现了自己的（实质上等效的）<code class="docutils literal"><span class="pre">struct</span></code>定义：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">Python</span> <span class="o">*/</span>
+<span class="n">typedef</span> <span class="n">struct</span> <span class="p">{</span><span class="n">double</span> <span class="n">real</span><span class="p">;</span> <span class="n">double</span> <span class="n">imag</span><span class="p">;}</span> <span class="n">Py_complex</span><span class="p">;</span>
+
+<span class="o">/*</span> <span class="n">NumPy</span> <span class="o">*/</span>
+<span class="n">typedef</span> <span class="n">struct</span> <span class="p">{</span><span class="nb">float</span>  <span class="n">real</span><span class="p">,</span> <span class="n">imag</span><span class="p">;}</span> <span class="n">npy_cfloat</span><span class="p">;</span>
+<span class="n">typedef</span> <span class="n">struct</span> <span class="p">{</span><span class="n">double</span> <span class="n">real</span><span class="p">,</span> <span class="n">imag</span><span class="p">;}</span> <span class="n">npy_cdouble</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-270">我们可以实现：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">numpy_typemaps</span><span class="p">(</span><span class="n">Py_complex</span> <span class="p">,</span> <span class="n">NPY_CDOUBLE</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="o">%</span><span class="n">numpy_typemaps</span><span class="p">(</span><span class="n">npy_cfloat</span> <span class="p">,</span> <span class="n">NPY_CFLOAT</span> <span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="o">%</span><span class="n">numpy_typemaps</span><span class="p">(</span><span class="n">npy_cdouble</span><span class="p">,</span> <span class="n">NPY_CDOUBLE</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-271">这将为类型<code class="docutils literal"><span class="pre">Py_complex</span></code>，<code class="docutils literal"><span class="pre">npy_cfloat</span></code>和<code class="docutils literal"><span class="pre">npy_cdouble</span></code>的数组提供自动类型转换。</span><span class="yiyi-st" id="yiyi-272">但是，似乎不太可能有任何独立的（非Python，非NumPy）应用程序代码，人们将使用<a class="reference external" href="http://www.swig.org">SWIG</a>生成一个Python接口，也使用这些定义复杂类型。</span><span class="yiyi-st" id="yiyi-273">更有可能的是，这些应用程序代码将定义自己的复杂类型，或者在C ++的情况下，使用<code class="docutils literal"><span class="pre">std::complex</span></code>。</span><span class="yiyi-st" id="yiyi-274">假设这些数据结构与Python和NumPy复杂类型兼容，则如上所示的<code class="docutils literal"><span class="pre">%numpy_typemap</span></code>扩展（用用户的复杂类型替换第一个参数）应该工作。</span></p>
+</div>
+</div>
+<div class="section" id="numpy-array-scalars-and-swig">
+<h2><span class="yiyi-st" id="yiyi-275">NumPy Array Scalars and SWIG</span></h2>
+<p><span class="yiyi-st" id="yiyi-276"><a class="reference external" href="http://www.swig.org">SWIG</a>对数值类型进行了复杂的类型检查。</span><span class="yiyi-st" id="yiyi-277">例如，如果您的C / C ++例程需要一个整数作为输入，则由<a class="reference external" href="http://www.swig.org">SWIG</a>生成的代码将检查Python整数和Python长整数，如果提供的Python整数太大，则会引发溢出错误大到强制转换为C整数。</span><span class="yiyi-st" id="yiyi-278">随着NumPy标量数组到你的Python代码中的引入，你可能会想到从NumPy数组中提取一个整数，并试图将它传递给一个<a class="reference external" href="http://www.swig.org">SWIG</a>  - 包装的C / C ++函数，期望一个<code class="docutils literal"><span class="pre">int</span></code>，但是<a class="reference external" href="http://www.swig.org">SWIG</a>类型检查不会将NumPy数组标量识别为整数。</span><span class="yiyi-st" id="yiyi-279">（通常，这实际上是工作 - 这取决于NumPy是否识别您正在使用的整数类型继承自您正在使用的平台上的Python整数类型。</span><span class="yiyi-st" id="yiyi-280">有时，这意味着在32位计算机上工作的代码在64位计算机上将失败。）</span></p>
+<p><span class="yiyi-st" id="yiyi-281">如果你得到一个Python错误，如下所示：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ne">TypeError</span><span class="p">:</span> <span class="ow">in</span> <span class="n">method</span> <span class="s1">&apos;MyClass_MyMethod&apos;</span><span class="p">,</span> <span class="n">argument</span> <span class="mi">2</span> <span class="n">of</span> <span class="nb">type</span> <span class="s1">&apos;int&apos;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-282">和你传递的参数是从NumPy数组提取的整数，那么你已经偶然发现了这个问题。</span><span class="yiyi-st" id="yiyi-283">解决方案是修改<a class="reference external" href="http://www.swig.org">SWIG</a>类型转换系统以接受NumPy数组标量以及标准整数类型。</span><span class="yiyi-st" id="yiyi-284">幸运的是，这个能力已经提供给你。</span><span class="yiyi-st" id="yiyi-285">只需复制文件：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pyfragments</span><span class="o">.</span><span class="n">swg</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-286">到你的项目的工作构建目录，这个问题将被修复。</span><span class="yiyi-st" id="yiyi-287">建议你这么做，这只是增加了你的Python接口的能力。</span></p>
+<div class="section" id="why-is-there-a-second-file">
+<h3><span class="yiyi-st" id="yiyi-288">Why is There a Second File?</span></h3>
+<p><span class="yiyi-st" id="yiyi-289"><a class="reference external" href="http://www.swig.org">SWIG</a>类型检查和转换系统是C宏，<a class="reference external" href="http://www.swig.org">SWIG</a>宏，<a class="reference external" href="http://www.swig.org">SWIG</a>类型映射和<a class="reference external" href="http://www.swig.org">SWIG</a>片段。</span><span class="yiyi-st" id="yiyi-290">片段是一种在需要时有条件地将代码插入到包装文件中的方法，如果不需要，则不插入它。</span><span class="yiyi-st" id="yiyi-291">如果多个类型图片需要相同的片段，片段只会插入一次您的包装代码。</span></p>
+<p><span class="yiyi-st" id="yiyi-292">有一个片段用于将Python整数转换为C <code class="docutils literal"><span class="pre">long</span></code>。</span><span class="yiyi-st" id="yiyi-293">有一个不同的片段将Python整数转换为C <code class="docutils literal"><span class="pre">int</span></code>，调用在<code class="docutils literal"><span class="pre">long</span></code>片段中定义的rountine。</span><span class="yiyi-st" id="yiyi-294">我们可以通过更改<code class="docutils literal"><span class="pre">long</span></code>片段的定义来进行我们想要的更改。</span><span class="yiyi-st" id="yiyi-295"><a class="reference external" href="http://www.swig.org">SWIG</a>使用“先到先服务”系统确定片段的活动定义。</span><span class="yiyi-st" id="yiyi-296">也就是说，我们需要在<a class="reference external" href="http://www.swig.org">SWIG</a>之前定义<code class="docutils literal"><span class="pre">long</span></code>转换的片段。</span><span class="yiyi-st" id="yiyi-297"><a class="reference external" href="http://www.swig.org">SWIG</a>允许我们将片段定义放在文件<code class="docutils literal"><span class="pre">pyfragments.swg</span></code>中。</span><span class="yiyi-st" id="yiyi-298">如果我们将新的片段定义放在<code class="docutils literal"><span class="pre">numpy.i</span></code>中，它们将被忽略。</span></p>
+</div>
+</div>
+<div class="section" id="helper-functions">
+<h2><span class="yiyi-st" id="yiyi-299">Helper Functions</span></h2>
+<p><span class="yiyi-st" id="yiyi-300"><code class="docutils literal"><span class="pre">numpy.i</span></code>文件包含几个宏和例程，它们在内部使用它来构建其类型映射。</span><span class="yiyi-st" id="yiyi-301">但是，这些函数可能在您的接口文件中的其他位置有用。</span><span class="yiyi-st" id="yiyi-302">这些宏和例程被实现为片段，在上一节中简要描述。</span><span class="yiyi-st" id="yiyi-303">如果你尝试使用一个或多个下面的宏或函数，但是你的编译器抱怨它不能识别符号，那么你需要强制这些片段出现在代码中：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">fragment</span><span class="p">(</span><span class="s2">&quot;NumPy_Fragments&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-304">在<a class="reference external" href="http://www.swig.org">SWIG</a>接口文件中。</span></p>
+<div class="section" id="macros">
+<h3><span class="yiyi-st" id="yiyi-305">Macros</span></h3>
+<blockquote>
+<div><dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-306"><strong>is_array（a）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-307">如果<code class="docutils literal"><span class="pre">a</span></code>是非<code class="docutils literal"><span class="pre">NULL</span></code>，可以转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>，则计算为true。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-308"><strong>array_type（a）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-309">评估<code class="docutils literal"><span class="pre">a</span></code>的整数数据类型代码，假设<code class="docutils literal"><span class="pre">a</span></code>可以转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-310"><strong>array_numdims（a）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-311">计算<code class="docutils literal"><span class="pre">a</span></code>的整数维数，假设<code class="docutils literal"><span class="pre">a</span></code>可以转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-312"><strong>array_dimensions（a）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-313">评估类型<code class="docutils literal"><span class="pre">npy_intp</span></code>和长度<code class="docutils literal"><span class="pre">array_numdims(a)</span></code>的数组，给出<code class="docutils literal"><span class="pre">a</span></code>的所有维度的长度，假设<code class="docutils literal"><span class="pre">a</span></code>可以转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-314"><strong>array_size（a，i）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-315">估计<code class="docutils literal"><span class="pre">a</span></code>的<code class="docutils literal"><span class="pre">i</span></code>尺寸大小，假设<code class="docutils literal"><span class="pre">a</span></code>可以转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-316"><strong>array_strides（a）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-317">评估类型<code class="docutils literal"><span class="pre">npy_intp</span></code>和长度<code class="docutils literal"><span class="pre">array_numdims(a)</span></code>的数组，给出<code class="docutils literal"><span class="pre">a</span></code>的所有维度的stridess，假设<code class="docutils literal"><span class="pre">a</span></code>可以转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>。</span><span class="yiyi-st" id="yiyi-318">步幅是沿着同一轴的元素与其直接相邻元素之间的距离（以字节为单位）。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-319"><strong>array_stride（a，i）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-320">评估<code class="docutils literal"><span class="pre">a</span></code>的<code class="docutils literal"><span class="pre">i</span></code>步长，假设<code class="docutils literal"><span class="pre">a</span></code>可以转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-321"><strong>array_data（a）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-322">评估指向<code class="docutils literal"><span class="pre">a</span></code>的数据缓冲区的类型<code class="docutils literal"><span class="pre">void*</span></code>的指针，假设<code class="docutils literal"><span class="pre">a</span></code>可以转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-323"><strong>array_descr（a）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-324">返回对<code class="docutils literal"><span class="pre">a</span></code>的dtype属性（<code class="docutils literal"><span class="pre">PyArray_Descr*</span></code>）借用的引用，假设<code class="docutils literal"><span class="pre">a</span></code>可以转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code></span></dd>
+<dt><span class="yiyi-st" id="yiyi-325"><strong>array_flags（a）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-326">返回表示<code class="docutils literal"><span class="pre">a</span></code>的标志的整数，假设<code class="docutils literal"><span class="pre">a</span></code>可以转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-327"><strong>array_enableflags（a，f）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-328">设置由<code class="docutils literal"><span class="pre">a</span></code>的<code class="docutils literal"><span class="pre">f</span></code>表示的标志，假设<code class="docutils literal"><span class="pre">a</span></code>可以转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-329"><strong>array_is_contiguous（a）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-330">如果<code class="docutils literal"><span class="pre">a</span></code>是连续数组，则计算为true。</span><span class="yiyi-st" id="yiyi-331">等效于<code class="docutils literal"><span class="pre">(PyArray_ISCONTIGUOUS(a))</span></code>。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-332"><strong>array_is_native（a）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-333">如果<code class="docutils literal"><span class="pre">a</span></code>的数据缓冲区使用本机字节顺序，则计算为真。</span><span class="yiyi-st" id="yiyi-334">等同于<code class="docutils literal"><span class="pre">(PyArray_ISNOTSWAPPED(a))</span></code>。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-335"><strong>array_is_fortran（a）</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-336">如果<code class="docutils literal"><span class="pre">a</span></code>是FORTRAN有序，则计算为真。</span></dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="routines">
+<h3><span class="yiyi-st" id="yiyi-337">Routines</span></h3>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-338"><strong>pytype_string()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-339">返回类型：<code class="docutils literal"><span class="pre">const</span> <span class="pre">char *</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-340">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-341"><code class="docutils literal"><span class="pre">PyObject *</span> <span class="pre">py_obj</span></code>，一个通用的Python对象。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-342">返回一个描述<code class="docutils literal"><span class="pre">py_obj</span></code>类型的字符串。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-343"><strong>typecode_string()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-344">返回类型：<code class="docutils literal"><span class="pre">const</span> <span class="pre">char *</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-345">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-346"><code class="docutils literal"><span class="pre">int</span> <span class="pre">类型代码</span></code>，NumPy整数类型代码。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-347">返回一个描述与NumPy <code class="docutils literal"><span class="pre">typecode</span></code>对应的类型的字符串。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-348"><strong>type_match()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-349">返回类型：<code class="docutils literal"><span class="pre">int</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-350">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-351"><code class="docutils literal"><span class="pre">int</span> <span class="pre">actual_type</span></code>，NumPy数组的NumPy类型代码。</span></li>
+<li><span class="yiyi-st" id="yiyi-352"><code class="docutils literal"><span class="pre">int</span> <span class="pre">desired_type</span></code>，所需的NumPy类型代码。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-353">请确保<code class="docutils literal"><span class="pre">actual_type</span></code>与<code class="docutils literal"><span class="pre">desired_type</span></code>兼容。</span><span class="yiyi-st" id="yiyi-354">例如，这允许字符和字节类型，或int和long类型匹配。</span><span class="yiyi-st" id="yiyi-355">这现在等效于<code class="docutils literal"><span class="pre">PyArray_EquivTypenums()</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-356"><strong>obj_to_array_no_conversion()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-357">返回类型：<code class="docutils literal"><span class="pre">PyArrayObject*</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-358">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-359"><code class="docutils literal"><span class="pre">PyObject *</span> <span class="pre">输入</span></code>，一个通用的Python对象。</span></li>
+<li><span class="yiyi-st" id="yiyi-360"><code class="docutils literal"><span class="pre">int</span> <span class="pre">类型代码</span></code>，所需的NumPy类型代码。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-361">如果合法，则将<code class="docutils literal"><span class="pre">input</span></code>转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>，并确保其类型为<code class="docutils literal"><span class="pre">typecode</span></code>。</span><span class="yiyi-st" id="yiyi-362">如果<code class="docutils literal"><span class="pre">input</span></code>无法转换，或<code class="docutils literal"><span class="pre">typecode</span></code>错误，请设置Python错误并返回<code class="docutils literal"><span class="pre">NULL</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-363"><strong>obj_to_array_allow_conversion()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-364">返回类型：<code class="docutils literal"><span class="pre">PyArrayObject*</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-365">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-366"><code class="docutils literal"><span class="pre">PyObject *</span> <span class="pre">输入</span></code>，一个通用的Python对象。</span></li>
+<li><span class="yiyi-st" id="yiyi-367"><code class="docutils literal"><span class="pre">int</span> <span class="pre">类型代码</span></code>，结果数组的所需NumPy类型代码。</span></li>
+<li><span class="yiyi-st" id="yiyi-368"><code class="docutils literal"><span class="pre">int *</span> <span class="pre">is_new_object</span></code>，如果未执行转换，则返回值0，否则返回1。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-369">使用给定的<code class="docutils literal"><span class="pre">typecode</span></code>将<code class="docutils literal"><span class="pre">input</span></code>转换为NumPy数组。</span><span class="yiyi-st" id="yiyi-370">成功后，返回有效的<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>，类型正确。</span><span class="yiyi-st" id="yiyi-371">失败时，Python错误字符串将被设置，并且例程返回<code class="docutils literal"><span class="pre">NULL</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-372"><strong>make_contiguous()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-373">返回类型：<code class="docutils literal"><span class="pre">PyArrayObject*</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-374">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-375"><code class="docutils literal"><span class="pre">PyArrayObject *</span> <span class="pre">ary</span></code>，一个NumPy数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-376"><code class="docutils literal"><span class="pre">int *</span> <span class="pre">is_new_object</span></code>，如果未执行转换，则返回值0，否则返回1。</span></li>
+<li><span class="yiyi-st" id="yiyi-377"><code class="docutils literal"><span class="pre">int</span> <span class="pre">min_dims</span></code>，允许的最小尺寸。</span></li>
+<li><span class="yiyi-st" id="yiyi-378"><code class="docutils literal"><span class="pre">int</span> <span class="pre">max_dims</span></code>，允许的最大尺寸。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-379">检查<code class="docutils literal"><span class="pre">ary</span></code>是否连续。</span><span class="yiyi-st" id="yiyi-380">如果是这样，返回输入指针并将其标记为不是新对象。</span><span class="yiyi-st" id="yiyi-381">如果不是连续的，使用原始数据创建一个新的<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>，将它标记为一个新对象并返回指针。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-382"><strong>make_fortran()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-383">返回类型：<code class="docutils literal"><span class="pre">PyArrayObject*</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-384">参数</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-385"><code class="docutils literal"><span class="pre">PyArrayObject *</span> <span class="pre">ary</span></code>，一个NumPy数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-386"><code class="docutils literal"><span class="pre">int *</span> <span class="pre">is_new_object</span></code>，如果未执行转换，则返回值0，否则返回1。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-387">检查<code class="docutils literal"><span class="pre">ary</span></code>是否为Fortran连续。</span><span class="yiyi-st" id="yiyi-388">如果是这样，返回输入指针并将其标记为不是新对象。</span><span class="yiyi-st" id="yiyi-389">如果它不是Fortran连续的，使用原始数据创建一个新的<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>，将其标记为一个新对象并返回指针。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-390"><strong>obj_to_array_contiguous_allow_conversion()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-391">返回类型：<code class="docutils literal"><span class="pre">PyArrayObject*</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-392">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-393"><code class="docutils literal"><span class="pre">PyObject *</span> <span class="pre">输入</span></code>，一个通用的Python对象。</span></li>
+<li><span class="yiyi-st" id="yiyi-394"><code class="docutils literal"><span class="pre">int</span> <span class="pre">类型代码</span></code>，结果数组的所需NumPy类型代码。</span></li>
+<li><span class="yiyi-st" id="yiyi-395"><code class="docutils literal"><span class="pre">int *</span> <span class="pre">is_new_object</span></code>，如果未执行转换，则返回值0，否则返回1。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-396">将<code class="docutils literal"><span class="pre">input</span></code>转换为指定类型的连续<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>。</span><span class="yiyi-st" id="yiyi-397">如果输入对象不是连续的<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>，那么将创建一个新对象并设置新的对象标志。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-398"><strong>obj_to_array_fortran_allow_conversion()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-399">返回类型：<code class="docutils literal"><span class="pre">PyArrayObject*</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-400">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-401"><code class="docutils literal"><span class="pre">PyObject *</span> <span class="pre">输入</span></code>，一个通用的Python对象。</span></li>
+<li><span class="yiyi-st" id="yiyi-402"><code class="docutils literal"><span class="pre">int</span> <span class="pre">类型代码</span></code>，结果数组的所需NumPy类型代码。</span></li>
+<li><span class="yiyi-st" id="yiyi-403"><code class="docutils literal"><span class="pre">int *</span> <span class="pre">is_new_object</span></code>，如果未执行转换，则返回值0，否则返回1。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-404">将<code class="docutils literal"><span class="pre">input</span></code>转换为指定类型的Fortran连续<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>。</span><span class="yiyi-st" id="yiyi-405">如果输入对象不是Fortran连续的<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>，那么将创建一个新对象并设置新的对象标志。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-406"><strong>require_contiguous()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-407">返回类型：<code class="docutils literal"><span class="pre">int</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-408">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-409"><code class="docutils literal"><span class="pre">PyArrayObject *</span> <span class="pre">ary</span></code>，一个NumPy数组。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-410">测试<code class="docutils literal"><span class="pre">ary</span></code>是否连续。</span><span class="yiyi-st" id="yiyi-411">如果是，返回1。</span><span class="yiyi-st" id="yiyi-412">否则，设置Python错误并返回0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-413"><strong>require_native()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-414">返回类型：<code class="docutils literal"><span class="pre">int</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-415">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-416"><code class="docutils literal"><span class="pre">PyArray_Object *</span> <span class="pre">ary</span></code>，一个NumPy数组。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-417">要求<code class="docutils literal"><span class="pre">ary</span></code>不是字节交换。</span><span class="yiyi-st" id="yiyi-418">如果数组不是字节交换，则返回1。</span><span class="yiyi-st" id="yiyi-419">否则，设置Python错误并返回0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-420"><strong>require_dimensions()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-421">返回类型：<code class="docutils literal"><span class="pre">int</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-422">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-423"><code class="docutils literal"><span class="pre">PyArrayObject *</span> <span class="pre">ary</span></code>，一个NumPy数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-424"><code class="docutils literal"><span class="pre">int</span> <span class="pre">exact_dimensions</span></code>，所需的维数。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-425">要求<code class="docutils literal"><span class="pre">ary</span></code>具有指定数量的维度。</span><span class="yiyi-st" id="yiyi-426">如果数组具有指定的维数，则返回1。</span><span class="yiyi-st" id="yiyi-427">否则，设置Python错误并返回0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-428"><strong>require_dimensions_n()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-429">返回类型：<code class="docutils literal"><span class="pre">int</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-430">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-431"><code class="docutils literal"><span class="pre">PyArrayObject *</span> <span class="pre">ary</span></code>，一个NumPy数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-432"><code class="docutils literal"><span class="pre">int *</span> <span class="pre">exact_dimensions</span></code>，表示可接受的维数的整数数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-433"><code class="docutils literal"><span class="pre">int</span> <span class="pre">n</span></code>，长度为<code class="docutils literal"><span class="pre">exact_dimensions</span></code>。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-434">要求<code class="docutils literal"><span class="pre">ary</span></code>具有指定数量维度的列表之一。</span><span class="yiyi-st" id="yiyi-435">如果数组具有指定数目的维度之一，则返回1。</span><span class="yiyi-st" id="yiyi-436">否则，设置Python错误字符串并返回0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-437"><strong>require_size()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-438">返回类型：<code class="docutils literal"><span class="pre">int</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-439">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-440"><code class="docutils literal"><span class="pre">PyArrayObject *</span> <span class="pre">ary</span></code>，一个NumPy数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-441"><code class="docutils literal"><span class="pre">npy_int *</span> <span class="pre">size</span></code>，表示每个维度所需长度的数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-442"><code class="docutils literal"><span class="pre">int</span> <span class="pre">n</span></code>，长度<code class="docutils literal"><span class="pre">size</span></code>。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-443">要求<code class="docutils literal"><span class="pre">ary</span></code>具有指定的形状。</span><span class="yiyi-st" id="yiyi-444">如果数组具有指定的形状，则返回1。</span><span class="yiyi-st" id="yiyi-445">否则，设置Python错误字符串并返回0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-446"><strong>require_fortran()</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-447">返回类型：<code class="docutils literal"><span class="pre">int</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-448">参数：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-449"><code class="docutils literal"><span class="pre">PyArrayObject *</span> <span class="pre">ary</span></code>，一个NumPy数组。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-450">要求给定的<code class="docutils literal"><span class="pre">PyArrayObject</span></code>是Fortran排序。</span><span class="yiyi-st" id="yiyi-451">如果<code class="docutils literal"><span class="pre">PyArrayObject</span></code>已经是Fortran排序，则不执行任何操作。</span><span class="yiyi-st" id="yiyi-452">否则，设置Fortran排序标志并重新计算步幅。</span></p>
+</div></blockquote>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="beyond-the-provided-typemaps">
+<h2><span class="yiyi-st" id="yiyi-453">Beyond the Provided Typemaps</span></h2>
+<p><span class="yiyi-st" id="yiyi-454">There are many C or C++ array/NumPy array situations not covered by a simple <code class="docutils literal"><span class="pre">%include</span> <span class="pre">&quot;numpy.i&quot;</span></code> and subsequent <code class="docutils literal"><span class="pre">%apply</span></code> directives.</span></p>
+<div class="section" id="a-common-example">
+<h3><span class="yiyi-st" id="yiyi-455">A Common Example</span></h3>
+<p><span class="yiyi-st" id="yiyi-456">考虑点积函数的合理原型：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">double</span> <span class="n">dot</span><span class="p">(</span><span class="nb">int</span> <span class="nb">len</span><span class="p">,</span> <span class="n">double</span><span class="o">*</span> <span class="n">vec1</span><span class="p">,</span> <span class="n">double</span><span class="o">*</span> <span class="n">vec2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-457">我们想要的Python接口是：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dot</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    dot(PyObject,PyObject) -&gt; double</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-458">这里的问题是有一个维度参数和两个数组参数，并且我们的类型图是为适用于单个数组的维设置的（事实上，<a class="reference external" href="http://www.swig.org">SWIG</a>不提供将<code class="docutils literal"><span class="pre">len</span></code>与使用两个Python输入参数的<code class="docutils literal"><span class="pre">vec2</span></code>）。</span><span class="yiyi-st" id="yiyi-459">推荐的解决方案如下：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>%apply (int DIM1, double* IN_ARRAY1) {(int len1, double* vec1),
+                                      (int len2, double* vec2)}
+%rename (dot) my_dot;
+%exception my_dot {
+    $action
+    if (PyErr_Occurred()) SWIG_fail;
+}
+%inline %{
+double my_dot(int len1, double* vec1, int len2, double* vec2) {
+    if (len1 != len2) {
+        PyErr_Format(PyExc_ValueError,
+                     &quot;Arrays of lengths (%d,%d) given&quot;,
+                     len1, len2);
+        return 0.0;
+    }
+    return dot(len1, vec1, vec2);
+}
+%}
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-460">If the header file that contains the prototype for <code class="docutils literal"><span class="pre">double</span> <span class="pre">dot()</span></code> also contains other prototypes that you want to wrap, so that you need to <code class="docutils literal"><span class="pre">%include</span></code> this header file, then you will also need a <code class="docutils literal"><span class="pre">%ignore</span> <span class="pre">dot;</span></code> directive, placed after the <code class="docutils literal"><span class="pre">%rename</span></code> and before the <code class="docutils literal"><span class="pre">%include</span></code> directives. </span><span class="yiyi-st" id="yiyi-461">或者，如果所讨论的函数是类方法，除了<code class="docutils literal"><span class="pre">%ignore</span></code>，您将要使用<code class="docutils literal"><span class="pre">%extend</span></code>而不是<code class="docutils literal"><span class="pre">%inline</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-462"><strong>错误处理注意事项：</strong>请注意，<code class="docutils literal"><span class="pre">my_dot</span></code>会传回<code class="docutils literal"><span class="pre">double</span></code>，但也可能会引发Python错误。</span><span class="yiyi-st" id="yiyi-463">当向量长度不匹配时，生成的wrapper函数将返回一个Python浮点值0.0。</span><span class="yiyi-st" id="yiyi-464">由于这不是<code class="docutils literal"><span class="pre">NULL</span></code>，Python解释器不会知道检查错误。</span><span class="yiyi-st" id="yiyi-465">为此，我们为<code class="docutils literal"><span class="pre">my_dot</span></code>添加上面的<code class="docutils literal"><span class="pre">%exception</span></code>指令以获取我们想要的行为（注意，<code class="docutils literal"><span class="pre">$action</span></code>展开为对<code class="docutils literal"><span class="pre">my_dot</span></code>的有效调用）。</span><span class="yiyi-st" id="yiyi-466">一般来说，你可能需要写一个<a class="reference external" href="http://www.swig.org">SWIG</a>宏来执行此任务。</span></p>
+</div>
+<div class="section" id="other-situations">
+<h3><span class="yiyi-st" id="yiyi-467">Other Situations</span></h3>
+<p><span class="yiyi-st" id="yiyi-468">还有其他包装情况，其中<code class="docutils literal"><span class="pre">numpy.i</span></code>在您遇到它们时可能会有帮助。</span></p>
+<blockquote>
+<div><ul>
+<li><p class="first"><span class="yiyi-st" id="yiyi-469">在某些情况下，可以使用<code class="docutils literal"><span class="pre">%numpy_typemaps</span></code>宏为您自己的类型实现类型映射。</span><span class="yiyi-st" id="yiyi-470">有关示例，请参见<a class="reference internal" href="#other-common-types-bool">其他常见类型：bool</a>或<a class="reference internal" href="#other-common-types-complex">其他常见类型：复杂</a>部分。</span><span class="yiyi-st" id="yiyi-471">另一种情况是，如果您的维度的类型不是<code class="docutils literal"><span class="pre">int</span></code>（例如：<code class="docutils literal"><span class="pre">long</span></code>）：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">numpy_typemaps</span><span class="p">(</span><span class="n">double</span><span class="p">,</span> <span class="n">NPY_DOUBLE</span><span class="p">,</span> <span class="n">long</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-472">你可以使用<code class="docutils literal"><span class="pre">numpy.i</span></code>中的代码来编写自己的类型映射。</span><span class="yiyi-st" id="yiyi-473">例如，如果你有一个五维数组作为函数参数，你可以将适当的四维类型映射剪切并粘贴到你的接口文件中。</span><span class="yiyi-st" id="yiyi-474">对第四维的修改将是微不足道的。</span></p>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-475">有时，最好的方法是使用<code class="docutils literal"><span class="pre">%extend</span></code>指令为您的类定义新方法（或重载现有方法），它采用<code class="docutils literal"><span class="pre">PyObject*</span></code>被转换为<code class="docutils literal"><span class="pre">PyArrayObject*</span></code>），而不是指向缓冲区的指针。</span><span class="yiyi-st" id="yiyi-476">在这种情况下，<code class="docutils literal"><span class="pre">numpy.i</span></code>中的帮助程序可能非常有用。</span></p>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-477">写类型电子书可能有点不直观。</span><span class="yiyi-st" id="yiyi-478">如果你有关于为NumPy编写<a class="reference external" href="http://www.swig.org">SWIG</a>类型映射的特定问题，<code class="docutils literal"><span class="pre">numpy.i</span></code>的开发人员会监视<a class="reference external" href="mailto:Numpy-discussion%40scipy.org">讨论讨论</a>和<a class="reference external" href="mailto:Swig-user%40lists.sourceforge.net">Swig -user</a>邮件列表。</span></p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="a-final-note">
+<h3><span class="yiyi-st" id="yiyi-479">A Final Note</span></h3>
+<p><span class="yiyi-st" id="yiyi-480">当你使用<code class="docutils literal"><span class="pre">%apply</span></code>指令时，通常需要使用<code class="docutils literal"><span class="pre">numpy.i</span></code>，它会保持有效，直到你告诉<a class="reference external" href="http://www.swig.org">SWIG</a>不应该。</span><span class="yiyi-st" id="yiyi-481">如果你要包装的函数或方法的参数具有通用名称，例如<code class="docutils literal"><span class="pre">length</span></code>或<code class="docutils literal"><span class="pre">vector</span></code>，这些类型映射可能会在你不期望或想要的情况下应用。</span><span class="yiyi-st" id="yiyi-482">因此，在完成特定类型的映射之后添加<code class="docutils literal"><span class="pre">%clear</span></code>指令始终是个好主意：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">apply</span> <span class="p">(</span><span class="n">double</span><span class="o">*</span> <span class="n">IN_ARRAY1</span><span class="p">,</span> <span class="nb">int</span> <span class="n">DIM1</span><span class="p">)</span> <span class="p">{(</span><span class="n">double</span><span class="o">*</span> <span class="n">vector</span><span class="p">,</span> <span class="nb">int</span> <span class="n">length</span><span class="p">)}</span>
+<span class="o">%</span><span class="n">include</span> <span class="s2">&quot;my_header.h&quot;</span>
+<span class="o">%</span><span class="n">clear</span> <span class="p">(</span><span class="n">double</span><span class="o">*</span> <span class="n">vector</span><span class="p">,</span> <span class="nb">int</span> <span class="n">length</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-483">一般来说，你应该把这些typemap签名具体放在你想要的地方，然后在你完成后清除它们。</span></p>
+</div>
+</div>
+<div class="section" id="summary">
+<h2><span class="yiyi-st" id="yiyi-484">Summary</span></h2>
+<p><span class="yiyi-st" id="yiyi-485">开箱即用的<code class="docutils literal"><span class="pre">numpy.i</span></code>提供了支持NumPy数组和C数组之间转换的类型映射：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-486">这可以是12种不同标量类型之一：<code class="docutils literal"><span class="pre">签名</span> <span class="pre">char</span></code>，<code class="docutils literal"><span class="pre">无符号</span> <span class="pre">/ t5&gt;</span></code>，<code class="docutils literal"><span class="pre">short</span></code>，<code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">short</span></code>，<code class="docutils literal"><span class="pre">int</span></code> <code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span></code>，<code class="docutils literal"><span class="pre">long</span></code>，<code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">t20&gt;</span></code>，<code class="docutils literal"><span class="pre">long</span> <span class="pre">long</span></code>，<code class="docutils literal"><span class="pre">unsigned</span> <span class="pre"><span class="pre">long</span></span></code>，<code class="docutils literal"><span class="pre">float</span></code>和<code class="docutils literal"><span class="pre">double</span></code>。</span></li>
+<li><span class="yiyi-st" id="yiyi-491">这支持每种数据类型的74个不同的参数签名，包括：</span><ul>
+<li><span class="yiyi-st" id="yiyi-487">一维，二维，三维和四维数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-488">只输入，in-place，argout，argoutview和内存管理的argoutview行为。</span></li>
+<li><span class="yiyi-st" id="yiyi-489">硬编码尺寸，数据缓冲区尺寸规范和尺寸 - 数据缓冲区规范。</span></li>
+<li><span class="yiyi-st" id="yiyi-490">对于2D，3D和4D数组，C排序（“最后一维最快”）或Fortran排序（“第一维最快”）。</span></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-492"><code class="docutils literal"><span class="pre">numpy.i</span></code>接口文件还为包装程序开发人员提供了其他工具，包括：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-493">具有用于实现用户选择（1）C数据类型的74个参数签名的三个参数的<a class="reference external" href="http://www.swig.org">SWIG</a>宏（<code class="docutils literal"><span class="pre">%numpy_typemaps</span></code>），（2）NumPy数据类型他们匹配），和（3）维度类型。</span></li>
+<li><span class="yiyi-st" id="yiyi-494">十四个C宏和十五个C函数，可用于编写专门的类型映射，扩展或内联函数来处理所提供的类型映射不包括的情况。</span><span class="yiyi-st" id="yiyi-495">请注意，在版本1.6之后的API的某些方面弃用之前和之后，宏和函数都被特别编码为与NumPy C / API无关，而与NumPy版本号无关。</span></li>
+</ul>
+</div></blockquote>
+</div>

@@ -1,0 +1,40 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.legendre.leggauss</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.legendre.leggauss.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.legendre.leggauss.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.legendre.leggauss"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.legendre.</code><code class="descname">leggauss</code><span class="sig-paren">(</span><em>deg</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/legendre.py#L1696-L1761"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">高斯 - 勒让德正交。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">计算高斯 - 勒让德正交的采样点和权重。</span><span class="yiyi-st" id="yiyi-18">These sample points and weights will correctly integrate polynomials of degree <img alt="2*deg - 1" class="math" src="../../_images/math/cd15eed20fa79ee66b7e4abe2a40d9b13ab0bfc4.png" style="vertical-align: -3px"> or less over the interval <img alt="[-1, 1]" class="math" src="../../_images/math/f08b1a2f0aaf98a3ec3af1adeb1bb5b269c814d4.png" style="vertical-align: -4px"> with the weight function <img alt="f(x) = 1" class="math" src="../../_images/math/5153e8664f9d327d346b0e55f4533ffcc82c96bc.png" style="vertical-align: -4px">.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>deg</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">采样点数和权重。</span><span class="yiyi-st" id="yiyi-22">它必须&gt; = 1。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>x</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">包含采样点的1-D阵列。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">包含权重的1-D字符串。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-29">结果只测试到100度，更高的程度可能有问题。</span><span class="yiyi-st" id="yiyi-30">权重通过使用以下事实来确定</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-31">其中<img alt="c" class="math" src="../../_images/math/e76342811b06d3703a2794f9744a8df6906f358f.png" style="vertical-align: 0px">是独立于<img alt="k" class="math" src="../../_images/math/c8ff6dc362a9a07153582909d5a26898fae59569.png" style="vertical-align: 0px">的常数，并且<img alt="x_k" class="math" src="../../_images/math/5a79068e7cb8b4f52d93a4502fc37e8fa106d62f.png" style="vertical-align: -2px">是<img alt="L_n" class="math" src="../../_images/math/7156f0fdc4742da88ae15c8c6551071544f8e93c.png" style="vertical-align: -2px">的第k个根，然后缩放结果以在积分1时获得正确的值。</span></p>
+</dd></dl>

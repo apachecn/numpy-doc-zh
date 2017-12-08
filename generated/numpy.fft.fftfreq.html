@@ -1,0 +1,50 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fft.fftfreq</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fftfreq.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fftfreq.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fft.fftfreq"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.fft.</code><code class="descname">fftfreq</code><span class="sig-paren">(</span><em>n</em>, <em>d=1.0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/fft/helper.py#L127-L172"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回离散傅里叶变换采样频率。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回的浮点数组<em class="xref py py-obj">f</em>包含以单位采样间隔的周期为单位的频率仓中心（零开始处）。</span><span class="yiyi-st" id="yiyi-16">例如，如果采样间隔以秒为单位，则频率单位为周期/秒。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">给定窗口长度<em class="xref py py-obj">n</em>和采样间隔<em class="xref py py-obj">d</em>：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span>   <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>     <span class="o">-</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>   <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="n">even</span>
+<span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>   <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="n">odd</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>n</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">窗口长度。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>d</strong>：标量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">采样间隔（采样率的倒数）。</span><span class="yiyi-st" id="yiyi-23">默认值为1。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>f</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">长度<em class="xref py py-obj">n</em>的数组包含采样频率。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fourier</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">size</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timestep</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">timestep</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span>
+<span class="go">array([ 0.  ,  1.25,  2.5 ,  3.75, -5.  , -3.75, -2.5 , -1.25])</span>
+</pre></div>
+</div>
+</dd></dl>

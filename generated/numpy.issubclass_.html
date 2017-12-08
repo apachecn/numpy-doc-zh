@@ -1,0 +1,46 @@
+
+<h1><span class="yiyi-st" id="yiyi-12"><a class="reference internal" href="#numpy-issubclass">numpy.issubclass</a></span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.issubclass_.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.issubclass_.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.issubclass_"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">issubclass_</code><span class="sig-paren">(</span><em>arg1</em>, <em>arg2</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numerictypes.py#L660-L696"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">确定类是否是第二个类的子类。</span></p>
+<p><span class="yiyi-st" id="yiyi-15"><a class="reference internal" href="#numpy.issubclass_" title="numpy.issubclass_"><code class="xref py py-obj docutils literal"><span class="pre">issubclass_</span></code></a>等效于Python内置<code class="docutils literal"><span class="pre">issubclass</span></code>，除了它返回False，而不是在其中一个参数不是类时引发TypeError。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>arg1</strong>：class</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入类。</span><span class="yiyi-st" id="yiyi-19">如果<em class="xref py py-obj">arg1</em>是<em class="xref py py-obj">arg2</em>的子类，则返回True。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>arg2</strong>：类或类的元组。</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">输入类。</span><span class="yiyi-st" id="yiyi-22">如果是元组，如果<em class="xref py py-obj">arg1</em>是任何元组元素的子类，则返回True。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>out</strong>：bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">是否<em class="xref py py-obj">arg1</em>是<em class="xref py py-obj">arg2</em>的子类。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.issubsctype.html#numpy.issubsctype" title="numpy.issubsctype"><code class="xref py py-obj docutils literal"><span class="pre">issubsctype</span></code></a>，<a class="reference internal" href="numpy.issubdtype.html#numpy.issubdtype" title="numpy.issubdtype"><code class="xref py py-obj docutils literal"><span class="pre">issubdtype</span></code></a>，<a class="reference internal" href="numpy.issctype.html#numpy.issctype" title="numpy.issctype"><code class="xref py py-obj docutils literal"><span class="pre">issctype</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">issubclass_</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">issubclass_</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>

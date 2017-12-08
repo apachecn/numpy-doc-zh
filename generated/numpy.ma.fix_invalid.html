@@ -1,0 +1,65 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.fix_invalid</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.fix_invalid.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.fix_invalid.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.fix_invalid"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">fix_invalid</code><span class="sig-paren">(</span><em>a</em>, <em>mask=False</em>, <em>copy=True</em>, <em>fill_value=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L727-L784"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回带有无效数据的输入，并用填充值替换。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">无效数据表示<em class="xref py py-obj">nan</em>，<em class="xref py py-obj">inf</em>等的值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输入数组，一个（子类）ndarray。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>掩码</strong>：sequence，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">面具。</span><span class="yiyi-st" id="yiyi-22">必须可转换为与<em class="xref py py-obj">数据</em>相同形状的布尔数组。</span><span class="yiyi-st" id="yiyi-23">True表示屏蔽（即无效）数据。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>copy</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">是否使用<em class="xref py py-obj">a</em>（True）的副本或将<em class="xref py py-obj">a</em>修复（False）。</span><span class="yiyi-st" id="yiyi-26">默认值为True。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>fill_value</strong>：标量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">用于修复无效数据的值。</span><span class="yiyi-st" id="yiyi-29">默认值为None，在这种情况下使用<code class="docutils literal"><span class="pre">a.fill_value</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>b</strong>：MaskedArray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">输入带有无效条目的数组固定。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-34">默认情况下执行复制。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">masked_array(data = [-- -1.0 nan inf],</span>
+<span class="go">             mask = [ True False False False],</span>
+<span class="go">       fill_value = 1e+20)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">fix_invalid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">masked_array(data = [-- -1.0 -- --],</span>
+<span class="go">             mask = [ True False  True  True],</span>
+<span class="go">       fill_value = 1e+20)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fixed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">fix_invalid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fixed</span><span class="o">.</span><span class="n">data</span>
+<span class="go">array([  1.00000000e+00,  -1.00000000e+00,   1.00000000e+20,</span>
+<span class="go">         1.00000000e+20])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">data</span>
+<span class="go">array([  1.,  -1.,  NaN,  Inf])</span>
+</pre></div>
+</div>
+</dd></dl>

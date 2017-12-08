@@ -1,0 +1,131 @@
+
+<span id="numpy-distutils-exec-command"></span><h1><span class="yiyi-st" id="yiyi-11">numpy.distutils.exec_command</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.distutils.exec_command.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.distutils.exec_command.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-12">exec_command</span></p>
+<p><span class="yiyi-st" id="yiyi-13">实现exec_command函数（几乎）等同于commands.getstatusoutput函数，但是在NT，DOS系统上返回的状态实际上是正确的（尽管返回的状态值可能因为一个因素而不同）。</span><span class="yiyi-st" id="yiyi-14">此外，exec_command使用关键字参数（重新）定义环境变量。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">提供功能：</span></p>
+<blockquote>
+<div><dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-16">exec_command  - 在指定的目录和执行命令</span></dt>
+<dd><span class="yiyi-st" id="yiyi-17">在修改的环境中。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-18">find_executable  - 使用环境中的info查找命令</span></dt>
+<dd><span class="yiyi-st" id="yiyi-19">变量PATH。</span><span class="yiyi-st" id="yiyi-20">等效于posix <em class="xref py py-obj">which</em>命令。</span></dd>
+</dl>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21">Author: Pearu Peterson &lt;<a class="reference external" href="mailto:pearu%40cens.ioc.ee">pearu<span>@</span>cens<span>.</span>ioc<span>.</span>ee</a>&gt; Created: 11 January 2003</span></p>
+<p><span class="yiyi-st" id="yiyi-22">需要：Python 2.x</span></p>
+<p><span class="yiyi-st" id="yiyi-23">成功测试：</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%">
+<col width="17%">
+<col width="71%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><span class="yiyi-st" id="yiyi-24">os.name</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-25">sys.platform</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-26">注释</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-27">posix</span></td>
+<td><span class="yiyi-st" id="yiyi-28">linux2</span></td>
+<td><span class="yiyi-st" id="yiyi-29">Debian（sid）Linux，Python 2.1.3+，2.2.3+，2.3.3 PyCrust 0.9.3，Idle 1.0.2</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-30">posix</span></td>
+<td><span class="yiyi-st" id="yiyi-31">linux2</span></td>
+<td><span class="yiyi-st" id="yiyi-32">Red Hat 9 Linux，Python 2.1.3，2.2.2，2.3.2</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-33">posix</span></td>
+<td><span class="yiyi-st" id="yiyi-34">sunos5</span></td>
+<td><span class="yiyi-st" id="yiyi-35">SunOS 5.9，Python 2.2,2.3.2</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-36">posix</span></td>
+<td><span class="yiyi-st" id="yiyi-37">达尔文</span></td>
+<td><span class="yiyi-st" id="yiyi-38">达尔文7.2.0，Python 2.3</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-39">nt</span></td>
+<td><span class="yiyi-st" id="yiyi-40">win32</span></td>
+<td><span class="yiyi-st" id="yiyi-41">Windows Me Python 2.3（EE），Idle 1.0，PyCrust 0.7.2 Python 2.1.1 Idle 0.8</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-42">nt</span></td>
+<td><span class="yiyi-st" id="yiyi-43">win32</span></td>
+<td><span class="yiyi-st" id="yiyi-44">Windows 98，Python 2.1.1。</span><span class="yiyi-st" id="yiyi-45">空闲0.8</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-46">nt</span></td>
+<td><span class="yiyi-st" id="yiyi-47">win32</span></td>
+<td><span class="yiyi-st" id="yiyi-48">Cygwin 98-4.10，Python 2.1.1（MSC） - 回声测试失败，即重新定义环境变量可能不工作。</span><span class="yiyi-st" id="yiyi-49">固定：不要使用cygwin echo！</span><span class="yiyi-st" id="yiyi-50">注释：<em class="xref py py-obj">cmd / c echo</em>将无法工作，但是重新定义环境变量会起作用。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-51">posix</span></td>
+<td><span class="yiyi-st" id="yiyi-52">cygwin</span></td>
+<td><span class="yiyi-st" id="yiyi-53">Cygwin 98-4.10，Python 2.3.3（cygming special）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-54">nt</span></td>
+<td><span class="yiyi-st" id="yiyi-55">win32</span></td>
+<td><span class="yiyi-st" id="yiyi-56">Windows XP，Python 2.3.3</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-57">已知错误：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-58">发送消息到stderr的测试从MSYS提示执行时失败，因为消息在某些点丢失。</span></li>
+</ul>
+<p class="rubric"><span class="yiyi-st" id="yiyi-59">功能</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-60"><code class="xref py py-obj docutils literal"><span class="pre">exec_command</span></code>（command [，execute_in，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-61">执行命令的返回（状态，输出）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-62"><code class="xref py py-obj docutils literal"><span class="pre">find_executable</span></code>（exe [，path，_cache]）</span></td>
+<td><span class="yiyi-st" id="yiyi-63">返回可执行文件的完整路径或无。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-64"><code class="xref py py-obj docutils literal"><span class="pre">get_exception</span></code>()</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-65"><code class="xref py py-obj docutils literal"><span class="pre">get_pythonexe</span></code>()</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-66"><code class="xref py py-obj docutils literal"><span class="pre">is_sequence</span></code>（seq）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-67"><code class="xref py py-obj docutils literal"><span class="pre">make_temp_file</span></code>（[suffix，prefix，text]）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-68"><code class="xref py py-obj docutils literal"><span class="pre">open_latin1</span></code>（filename [，mode]）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-69"><code class="xref py py-obj docutils literal"><span class="pre">quote_arg</span></code>（arg）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-70"><code class="xref py py-obj docutils literal"><span class="pre">temp_file_name</span></code>()</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-71"><code class="xref py py-obj docutils literal"><span class="pre">test</span></code>（\ * \ * kws）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-72"><code class="xref py py-obj docutils literal"><span class="pre">test_cl</span></code>（\ * \ * kws）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-73"><code class="xref py py-obj docutils literal"><span class="pre">test_execute_in</span></code>（\ * \ * kws）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-74"><code class="xref py py-obj docutils literal"><span class="pre">test_nt</span></code>（\ * \ * kws）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-75"><code class="xref py py-obj docutils literal"><span class="pre">test_posix</span></code>（\ * \ * kws）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-76"><code class="xref py py-obj docutils literal"><span class="pre">test_svn</span></code>（\ * \ * kws）</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>

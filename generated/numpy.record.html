@@ -1,0 +1,234 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.record</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.record.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.record.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.record"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">record</code><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/__init__.py"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">允许字段访问作为属性查找的数据类型标量。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-15">属性</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-16"><a class="reference internal" href="numpy.record.T.html#numpy.record.T" title="numpy.record.T"><code class="xref py py-obj docutils literal"><span class="pre">T</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-17">转置</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="numpy.record.base.html#numpy.record.base" title="numpy.record.base"><code class="xref py py-obj docutils literal"><span class="pre">base</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-19">基础对象</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="numpy.record.data.html#numpy.record.data" title="numpy.record.data"><code class="xref py py-obj docutils literal"><span class="pre">data</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-21">指向数据开始的指针</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="numpy.record.dtype.html#numpy.record.dtype" title="numpy.record.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-23">dtype对象</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="numpy.record.flags.html#numpy.record.flags" title="numpy.record.flags"><code class="xref py py-obj docutils literal"><span class="pre">flags</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-25">标志的整数值</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.record.flat.html#numpy.record.flat" title="numpy.record.flat"><code class="xref py py-obj docutils literal"><span class="pre">flat</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-27">标量的1-d视图</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.record.imag.html#numpy.record.imag" title="numpy.record.imag"><code class="xref py py-obj docutils literal"><span class="pre">imag</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-29">标量的虚部</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.record.itemsize.html#numpy.record.itemsize" title="numpy.record.itemsize"><code class="xref py py-obj docutils literal"><span class="pre">itemsize</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-31">一个元素的长度（以字节为单位）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.record.nbytes.html#numpy.record.nbytes" title="numpy.record.nbytes"><code class="xref py py-obj docutils literal"><span class="pre">nbytes</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-33">项目的长度（以字节为单位）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.record.ndim.html#numpy.record.ndim" title="numpy.record.ndim"><code class="xref py py-obj docutils literal"><span class="pre">ndim</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-35">数组维数</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="numpy.record.real.html#numpy.record.real" title="numpy.record.real"><code class="xref py py-obj docutils literal"><span class="pre">real</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-37">实数部分</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="numpy.record.shape.html#numpy.record.shape" title="numpy.record.shape"><code class="xref py py-obj docutils literal"><span class="pre">shape</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-39">数组维度的元组</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.record.size.html#numpy.record.size" title="numpy.record.size"><code class="xref py py-obj docutils literal"><span class="pre">size</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-41">gentype中的元素数</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.record.strides.html#numpy.record.strides" title="numpy.record.strides"><code class="xref py py-obj docutils literal"><span class="pre">strides</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-43">每个维度中的字节步长</span></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">方法</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="numpy.record.all.html#numpy.record.all" title="numpy.record.all"><code class="xref py py-obj docutils literal"><span class="pre">all</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-46">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="numpy.record.any.html#numpy.record.any" title="numpy.record.any"><code class="xref py py-obj docutils literal"><span class="pre">any</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-48">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="numpy.record.argmax.html#numpy.record.argmax" title="numpy.record.argmax"><code class="xref py py-obj docutils literal"><span class="pre">argmax</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-50">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="numpy.record.argmin.html#numpy.record.argmin" title="numpy.record.argmin"><code class="xref py py-obj docutils literal"><span class="pre">argmin</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-52">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="numpy.record.argsort.html#numpy.record.argsort" title="numpy.record.argsort"><code class="xref py py-obj docutils literal"><span class="pre">argsort</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-54">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="numpy.record.astype.html#numpy.record.astype" title="numpy.record.astype"><code class="xref py py-obj docutils literal"><span class="pre">astype</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-56">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="numpy.record.byteswap.html#numpy.record.byteswap" title="numpy.record.byteswap"><code class="xref py py-obj docutils literal"><span class="pre">byteswap</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-58">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="numpy.record.choose.html#numpy.record.choose" title="numpy.record.choose"><code class="xref py py-obj docutils literal"><span class="pre">choose</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-60">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="numpy.record.clip.html#numpy.record.clip" title="numpy.record.clip"><code class="xref py py-obj docutils literal"><span class="pre">clip</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-62">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="numpy.record.compress.html#numpy.record.compress" title="numpy.record.compress"><code class="xref py py-obj docutils literal"><span class="pre">compress</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-64">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="numpy.record.conj.html#numpy.record.conj" title="numpy.record.conj"><code class="xref py py-obj docutils literal"><span class="pre">conj</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-66"><a class="reference internal" href="numpy.record.conjugate.html#numpy.record.conjugate" title="numpy.record.conjugate"><code class="xref py py-obj docutils literal"><span class="pre">conjugate</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-67">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-68"><a class="reference internal" href="numpy.record.copy.html#numpy.record.copy" title="numpy.record.copy"><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-69">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-70"><a class="reference internal" href="numpy.record.cumprod.html#numpy.record.cumprod" title="numpy.record.cumprod"><code class="xref py py-obj docutils literal"><span class="pre">cumprod</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-71">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="numpy.record.cumsum.html#numpy.record.cumsum" title="numpy.record.cumsum"><code class="xref py py-obj docutils literal"><span class="pre">cumsum</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-73">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="numpy.record.diagonal.html#numpy.record.diagonal" title="numpy.record.diagonal"><code class="xref py py-obj docutils literal"><span class="pre">diagonal</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-75">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-76"><a class="reference internal" href="numpy.record.dump.html#numpy.record.dump" title="numpy.record.dump"><code class="xref py py-obj docutils literal"><span class="pre">dump</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-77">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-78"><a class="reference internal" href="numpy.record.dumps.html#numpy.record.dumps" title="numpy.record.dumps"><code class="xref py py-obj docutils literal"><span class="pre">dumps</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-79">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="numpy.record.fill.html#numpy.record.fill" title="numpy.record.fill"><code class="xref py py-obj docutils literal"><span class="pre">fill</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-81">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-82"><a class="reference internal" href="numpy.record.flatten.html#numpy.record.flatten" title="numpy.record.flatten"><code class="xref py py-obj docutils literal"><span class="pre">flatten</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-83">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-84"><a class="reference internal" href="numpy.record.getfield.html#numpy.record.getfield" title="numpy.record.getfield"><code class="xref py py-obj docutils literal"><span class="pre">getfield</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-85"><a class="reference internal" href="numpy.record.item.html#numpy.record.item" title="numpy.record.item"><code class="xref py py-obj docutils literal"><span class="pre">item</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-86">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-87"><a class="reference internal" href="numpy.record.itemset.html#numpy.record.itemset" title="numpy.record.itemset"><code class="xref py py-obj docutils literal"><span class="pre">itemset</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-88">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-89"><a class="reference internal" href="numpy.record.max.html#numpy.record.max" title="numpy.record.max"><code class="xref py py-obj docutils literal"><span class="pre">max</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-90">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-91"><a class="reference internal" href="numpy.record.mean.html#numpy.record.mean" title="numpy.record.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-92">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-93"><a class="reference internal" href="numpy.record.min.html#numpy.record.min" title="numpy.record.min"><code class="xref py py-obj docutils literal"><span class="pre">min</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-94">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-95"><a class="reference internal" href="numpy.record.newbyteorder.html#numpy.record.newbyteorder" title="numpy.record.newbyteorder"><code class="xref py py-obj docutils literal"><span class="pre">newbyteorder</span></code></a>（[new_order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-96">以不同的字节顺序返回新的<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-97"><a class="reference internal" href="numpy.record.nonzero.html#numpy.record.nonzero" title="numpy.record.nonzero"><code class="xref py py-obj docutils literal"><span class="pre">nonzero</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-98">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-99"><a class="reference internal" href="numpy.record.pprint.html#numpy.record.pprint" title="numpy.record.pprint"><code class="xref py py-obj docutils literal"><span class="pre">pprint</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-100">美丽打印所有字段。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-101"><a class="reference internal" href="numpy.record.prod.html#numpy.record.prod" title="numpy.record.prod"><code class="xref py py-obj docutils literal"><span class="pre">prod</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-102">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-103"><a class="reference internal" href="numpy.record.ptp.html#numpy.record.ptp" title="numpy.record.ptp"><code class="xref py py-obj docutils literal"><span class="pre">ptp</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-104">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-105"><a class="reference internal" href="numpy.record.put.html#numpy.record.put" title="numpy.record.put"><code class="xref py py-obj docutils literal"><span class="pre">put</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-106">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-107"><a class="reference internal" href="numpy.record.ravel.html#numpy.record.ravel" title="numpy.record.ravel"><code class="xref py py-obj docutils literal"><span class="pre">ravel</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-108">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-109"><a class="reference internal" href="numpy.record.repeat.html#numpy.record.repeat" title="numpy.record.repeat"><code class="xref py py-obj docutils literal"><span class="pre">repeat</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-110">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-111"><a class="reference internal" href="numpy.record.reshape.html#numpy.record.reshape" title="numpy.record.reshape"><code class="xref py py-obj docutils literal"><span class="pre">reshape</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-112">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-113"><a class="reference internal" href="numpy.record.resize.html#numpy.record.resize" title="numpy.record.resize"><code class="xref py py-obj docutils literal"><span class="pre">resize</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-114">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-115"><a class="reference internal" href="numpy.record.round.html#numpy.record.round" title="numpy.record.round"><code class="xref py py-obj docutils literal"><span class="pre">round</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-116">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-117"><a class="reference internal" href="numpy.record.searchsorted.html#numpy.record.searchsorted" title="numpy.record.searchsorted"><code class="xref py py-obj docutils literal"><span class="pre">searchsorted</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-118">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-119"><a class="reference internal" href="numpy.record.setfield.html#numpy.record.setfield" title="numpy.record.setfield"><code class="xref py py-obj docutils literal"><span class="pre">setfield</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-120"><a class="reference internal" href="numpy.record.setflags.html#numpy.record.setflags" title="numpy.record.setflags"><code class="xref py py-obj docutils literal"><span class="pre">setflags</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-121">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-122"><a class="reference internal" href="numpy.record.sort.html#numpy.record.sort" title="numpy.record.sort"><code class="xref py py-obj docutils literal"><span class="pre">sort</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-123">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-124"><a class="reference internal" href="numpy.record.squeeze.html#numpy.record.squeeze" title="numpy.record.squeeze"><code class="xref py py-obj docutils literal"><span class="pre">squeeze</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-125">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-126"><a class="reference internal" href="numpy.record.std.html#numpy.record.std" title="numpy.record.std"><code class="xref py py-obj docutils literal"><span class="pre">std</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-127">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-128"><a class="reference internal" href="numpy.record.sum.html#numpy.record.sum" title="numpy.record.sum"><code class="xref py py-obj docutils literal"><span class="pre">sum</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-129">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-130"><a class="reference internal" href="numpy.record.swapaxes.html#numpy.record.swapaxes" title="numpy.record.swapaxes"><code class="xref py py-obj docutils literal"><span class="pre">swapaxes</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-131">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-132"><a class="reference internal" href="numpy.record.take.html#numpy.record.take" title="numpy.record.take"><code class="xref py py-obj docutils literal"><span class="pre">take</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-133">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-134"><a class="reference internal" href="numpy.record.tobytes.html#numpy.record.tobytes" title="numpy.record.tobytes"><code class="xref py py-obj docutils literal"><span class="pre">tobytes</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-135"><a class="reference internal" href="numpy.record.tofile.html#numpy.record.tofile" title="numpy.record.tofile"><code class="xref py py-obj docutils literal"><span class="pre">tofile</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-136">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-137"><a class="reference internal" href="numpy.record.tolist.html#numpy.record.tolist" title="numpy.record.tolist"><code class="xref py py-obj docutils literal"><span class="pre">tolist</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-138">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-139"><a class="reference internal" href="numpy.record.tostring.html#numpy.record.tostring" title="numpy.record.tostring"><code class="xref py py-obj docutils literal"><span class="pre">tostring</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-140">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-141"><a class="reference internal" href="numpy.record.trace.html#numpy.record.trace" title="numpy.record.trace"><code class="xref py py-obj docutils literal"><span class="pre">trace</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-142">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-143"><a class="reference internal" href="numpy.record.transpose.html#numpy.record.transpose" title="numpy.record.transpose"><code class="xref py py-obj docutils literal"><span class="pre">transpose</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-144">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-145"><a class="reference internal" href="numpy.record.var.html#numpy.record.var" title="numpy.record.var"><code class="xref py py-obj docutils literal"><span class="pre">var</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-146">未实现（虚拟属性）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-147"><a class="reference internal" href="numpy.record.view.html#numpy.record.view" title="numpy.record.view"><code class="xref py py-obj docutils literal"><span class="pre">view</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-148">未实现（虚拟属性）</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

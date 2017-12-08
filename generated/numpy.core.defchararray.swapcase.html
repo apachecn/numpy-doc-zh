@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.core.defchararray.swapcase</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.swapcase.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.swapcase.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.core.defchararray.swapcase"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.core.defchararray.</code><code class="descname">swapcase</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/defchararray.py#L1429-L1463"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回单元格的字符串的副本，大写字符转换为小写，反之亦然。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">逐个调用<em class="xref py py-obj">str.swapcase</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">对于8位字符串，此方法依赖于区域设置。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：array_like，{str，unicode}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输入数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：ndarray，{str，unicode}</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">输出str或unicode的数组，取决于输入类型</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-24"><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str.swapcase" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">str.swapcase</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;a1B c&apos;</span><span class="p">,</span><span class="s1">&apos;1b Ca&apos;</span><span class="p">,</span><span class="s1">&apos;b Ca1&apos;</span><span class="p">,</span><span class="s1">&apos;cA1b&apos;</span><span class="p">],</span><span class="s1">&apos;S5&apos;</span><span class="p">);</span> <span class="n">c</span>
+<span class="go">array([&apos;a1B c&apos;, &apos;1b Ca&apos;, &apos;b Ca1&apos;, &apos;cA1b&apos;],</span>
+<span class="go">    dtype=&apos;|S5&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">swapcase</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="go">array([&apos;A1b C&apos;, &apos;1B cA&apos;, &apos;B cA1&apos;, &apos;Ca1B&apos;],</span>
+<span class="go">    dtype=&apos;|S5&apos;)</span>
+</pre></div>
+</div>
+</dd></dl>

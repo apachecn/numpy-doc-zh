@@ -1,0 +1,51 @@
+
+<h1><span class="yiyi-st" id="yiyi-15">Floating point error handling</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.err.html">https://docs.scipy.org/doc/numpy/reference/routines.err.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="setting-and-getting-error-handling">
+<h2><span class="yiyi-st" id="yiyi-16">Setting and getting error handling</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-17"><a class="reference internal" href="generated/numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>（[all，divide，over，under，invalid]）</span></td>
+<td><span class="yiyi-st" id="yiyi-18">设置如何处理浮点错误。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="generated/numpy.geterr.html#numpy.geterr" title="numpy.geterr"><code class="xref py py-obj docutils literal"><span class="pre">geterr</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-20">获取当前处理浮点错误的方法。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="generated/numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-obj docutils literal"><span class="pre">seterrcall</span></code></a>（func）</span></td>
+<td><span class="yiyi-st" id="yiyi-22">设置浮点错误回调函数或日志对象。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="generated/numpy.geterrcall.html#numpy.geterrcall" title="numpy.geterrcall"><code class="xref py py-obj docutils literal"><span class="pre">geterrcall</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-24">返回当前用于浮点错误的回调函数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="generated/numpy.errstate.html#numpy.errstate" title="numpy.errstate"><code class="xref py py-obj docutils literal"><span class="pre">errstate</span></code></a>（\ * \ * kwargs）</span></td>
+<td><span class="yiyi-st" id="yiyi-26">浮点错误处理的上下文管理器。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="internal-functions">
+<h2><span class="yiyi-st" id="yiyi-27">Internal functions</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="generated/numpy.seterrobj.html#numpy.seterrobj" title="numpy.seterrobj"><code class="xref py py-obj docutils literal"><span class="pre">seterrobj</span></code></a>（errobj）</span></td>
+<td><span class="yiyi-st" id="yiyi-29">设置定义浮点错误处理的对象。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.geterrobj.html#numpy.geterrobj" title="numpy.geterrobj"><code class="xref py py-obj docutils literal"><span class="pre">geterrobj</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-31">返回定义浮点错误处理的当前对象。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

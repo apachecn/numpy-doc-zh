@@ -1,0 +1,55 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.mintypecode</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.mintypecode.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.mintypecode.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.mintypecode"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">mintypecode</code><span class="sig-paren">(</span><em>typechars</em>, <em>typeset=&apos;GDFgdf&apos;</em>, <em>default=&apos;d&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/type_check.py#L18-L73"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回可以安全地转换给定类型的最小大小类型的字符。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回的类型字符必须表示最小的dtype，以便返回类型的数组可以处理来自<em class="xref py py-obj">typechars</em>中所有类型的数组的数据（或者如果<em class="xref py py-obj">typechars 数组，然后是它的dtype.char）。</em></span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>typechars</strong>：str或array_like的列表</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">如果是字符串列表，每个字符串应该代表一个dtype。</span><span class="yiyi-st" id="yiyi-19">如果array_like，则使用数组dtype的字符表示。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>typeset</strong>：str或str的列表，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">返回的字符从中选择的字符集。</span><span class="yiyi-st" id="yiyi-22">默认设置为“GDFgdf”。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>默认</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">如果<em class="xref py py-obj">typechars</em>中没有字符与<em class="xref py py-obj">typeset</em>中的字符匹配，则返回默认字符。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>typechar</strong>：str</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">表示找到的最小大小类型的字符。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，<a class="reference internal" href="numpy.sctype2char.html#numpy.sctype2char" title="numpy.sctype2char"><code class="xref py py-obj docutils literal"><span class="pre">sctype2char</span></code></a>，<code class="xref py py-obj docutils literal"><span class="pre">maximum_sctype</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mintypecode</span><span class="p">([</span><span class="s1">&apos;d&apos;</span><span class="p">,</span> <span class="s1">&apos;f&apos;</span><span class="p">,</span> <span class="s1">&apos;S&apos;</span><span class="p">])</span>
+<span class="go">&apos;d&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span> <span class="mi">2</span><span class="o">-</span><span class="mf">3.</span><span class="n">j</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mintypecode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">&apos;D&apos;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mintypecode</span><span class="p">(</span><span class="s1">&apos;abceh&apos;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&apos;G&apos;</span><span class="p">)</span>
+<span class="go">&apos;G&apos;</span>
+</pre></div>
+</div>
+</dd></dl>

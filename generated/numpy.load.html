@@ -1,0 +1,107 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.load</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.load.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.load.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.load"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">load</code><span class="sig-paren">(</span><em>file</em>, <em>mmap_mode=None</em>, <em>allow_pickle=True</em>, <em>fix_imports=True</em>, <em>encoding=&apos;ASCII&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/npyio.py#L257-L419"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从<code class="docutils literal"><span class="pre">.npy</span></code>，<code class="docutils literal"><span class="pre">.npz</span></code>或pickled文件加载数组或腌制对象。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>文件</strong>：类文件对象或字符串</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">要读取的文件。</span><span class="yiyi-st" id="yiyi-18">类文件对象必须支持<code class="docutils literal"><span class="pre">seek()</span></code>和<code class="docutils literal"><span class="pre">read()</span></code>方法。</span><span class="yiyi-st" id="yiyi-19">Pickled文件要求文件样对象也支持<code class="docutils literal"><span class="pre">readline()</span></code>方法。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>mmap_mode</strong>：{None，&apos;r +&apos;，&apos;r&apos;，&apos;w +&apos;，&apos;c&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">如果不是None，那么使用给定的模式对内存映射文件（有关模式的详细描述，请参阅<a class="reference internal" href="numpy.memmap.html#numpy.memmap" title="numpy.memmap"><code class="xref py py-obj docutils literal"><span class="pre">numpy.memmap</span></code></a>）。</span><span class="yiyi-st" id="yiyi-22">内存映射数组保存在磁盘上。</span><span class="yiyi-st" id="yiyi-23">但是，它可以像任何ndarray访问和切片。</span><span class="yiyi-st" id="yiyi-24">内存映射对于访问大文件的小片段而不将整个文件读入内存特别有用。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>allow_pickle</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">允许加载pickled对象数组存储在npy文件中。</span><span class="yiyi-st" id="yiyi-27">禁止pickles的原因包括安全性，因为加载pickled数据可以执行任意代码。</span><span class="yiyi-st" id="yiyi-28">如果不允许腌菜，加载对象数组将失败。</span><span class="yiyi-st" id="yiyi-29">默认值：True</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>fix_imports</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">仅当在Python 3上加载Python 2生成的pickled文件时有用，其中包括包含对象数组的npy / npz文件。</span><span class="yiyi-st" id="yiyi-32">如果<em class="xref py py-obj">fix_imports</em>为True，pickle将尝试将旧的Python 2名称映射到Python 3中使用的新名称。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>encoding</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">读取Python 2字符串时使用的编码。</span><span class="yiyi-st" id="yiyi-35">仅当在Python 3上加载Python 2生成的pickled文件时有用，其中包括包含对象数组的npy / npz文件。</span><span class="yiyi-st" id="yiyi-36">不允许使用“latin1”，“ASCII”和“bytes”以外的值，因为它们可能损坏数值数据。</span><span class="yiyi-st" id="yiyi-37">默认值：&apos;ASCII&apos;</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-38">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-39"><strong>result</strong>：数组，tuple，dict等</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-40">数据存储在文件中。</span><span class="yiyi-st" id="yiyi-41">对于<code class="docutils literal"><span class="pre">.npz</span></code>文件，返回的NpzFile类的实例必须关闭以避免泄露文件描述符。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-42">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-43"><strong>IOError</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-44">如果输入文件不存在或无法读取。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-45"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-46">该文件包含一个对象数组，但allow_pickle = False给定。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-47">也可以看看</span></p>
+<p><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="numpy.save.html#numpy.save" title="numpy.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>，<a class="reference internal" href="numpy.savez.html#numpy.savez" title="numpy.savez"><code class="xref py py-obj docutils literal"><span class="pre">savez</span></code></a>，<a class="reference internal" href="numpy.savez_compressed.html#numpy.savez_compressed" title="numpy.savez_compressed"><code class="xref py py-obj docutils literal"><span class="pre">savez_compressed</span></code></a>，<a class="reference internal" href="numpy.loadtxt.html#numpy.loadtxt" title="numpy.loadtxt"><code class="xref py py-obj docutils literal"><span class="pre">loadtxt</span></code></a></span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="numpy.memmap.html#numpy.memmap" title="numpy.memmap"><code class="xref py py-obj docutils literal"><span class="pre">memmap</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-50">创建存储在磁盘上的文件中的数组的内存映射。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-51">笔记</span></p>
+<ul>
+<li><p class="first"><span class="yiyi-st" id="yiyi-52">如果文件包含pickle数据，则返回存储在pickle中的任何对象。</span></p>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-53">如果文件是<code class="docutils literal"><span class="pre">.npy</span></code>文件，则返回单个数组。</span></p>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-54">如果文件是<code class="docutils literal"><span class="pre">.npz</span></code>文件，则返回包含<code class="docutils literal"><span class="pre">{filename：</span> <span class="pre">数组}  t2&gt;键值对，一个用于归档中的每个文件。</span></code></span></p>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-55">如果文件是<code class="docutils literal"><span class="pre">.npz</span></code>文件，则返回值以类似于open函数的方式支持上下文管理器协议：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">load</span><span class="p">(</span><span class="s1">&apos;foo.npz&apos;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&apos;a&apos;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-56">当退出“with”块时，底层文件描述符被关闭。</span></p>
+</li>
+</ul>
+<p class="rubric"><span class="yiyi-st" id="yiyi-57">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-58">将数据存储到磁盘，然后重新加载：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&apos;/tmp/123&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&apos;/tmp/123.npy&apos;</span><span class="p">)</span>
+<span class="go">array([[1, 2, 3],</span>
+<span class="go">       [4, 5, 6]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-59">将压缩数据存储到磁盘，然后重新加载：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="s1">&apos;/tmp/123.npz&apos;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&apos;/tmp/123.npz&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="s1">&apos;a&apos;</span><span class="p">]</span>
+<span class="go">array([[1, 2, 3],</span>
+<span class="go">       [4, 5, 6]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="s1">&apos;b&apos;</span><span class="p">]</span>
+<span class="go">array([1, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-60">Mem-map存储的数组，然后直接从磁盘访问第二行：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&apos;/tmp/123.npy&apos;</span><span class="p">,</span> <span class="n">mmap_mode</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+<span class="go">memmap([4, 5, 6])</span>
+</pre></div>
+</div>
+</dd></dl>

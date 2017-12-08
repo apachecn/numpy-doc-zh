@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.where</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.where.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.where.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.where"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">where</code><span class="sig-paren">(</span><em>condition</em>, <em>x=&lt;class numpy._globals._NoValue&gt;</em>, <em>y=&lt;class numpy._globals._NoValue&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L6935-L7019"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">根据条件返回带有x或y元素的蒙版数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">返回一个屏蔽数组，形状像条件，其中<em class="xref py py-obj">条件</em>为True时，元素为<em class="xref py py-obj">x</em>，否则为<em class="xref py py-obj">y</em>。</span><span class="yiyi-st" id="yiyi-17">如果既没有给出<em class="xref py py-obj">x</em>也没有给出<em class="xref py py-obj">y</em>，则函数返回其中<em class="xref py py-obj">条件</em>为True的索引的元组（<code class="docutils literal"><span class="pre">condition.nonzero()</span></code>）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>condition</strong>：array_like，bool</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">满足的条件。</span><span class="yiyi-st" id="yiyi-21">对于每个True元素，从<em class="xref py py-obj">x</em>产生相应的元素，否则从<em class="xref py py-obj">y</em>产生相应的元素。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>x，y</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">要选择的值。</span><span class="yiyi-st" id="yiyi-24"><em class="xref py py-obj">x</em>和<em class="xref py py-obj">y</em>需要具有与条件相同的形状，或者可以广播到该形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>out</strong>：MaskedArray或ndarrays的元组</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">给出了得到的掩蔽数组if <em class="xref py py-obj">x</em>和<em class="xref py py-obj">y</em>，否则返回<code class="docutils literal"><span class="pre">condition.nonzero()</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.where.html#numpy.where" title="numpy.where"><code class="xref py py-obj docutils literal"><span class="pre">numpy.where</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">顶层NumPy模块中的等效函数。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">9.</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">mask</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                                                   <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                                                   <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">[[0.0 -- 2.0]</span>
+<span class="go"> [-- 4.0 --]</span>
+<span class="go"> [6.0 -- 8.0]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span>    <span class="c1"># return the indices where x &gt; 5</span>
+<span class="go">(array([2, 2]), array([0, 2]))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.1416</span><span class="p">))</span>
+<span class="go">[[-3.1416 -- -3.1416]</span>
+<span class="go"> [-- -3.1416 --]</span>
+<span class="go"> [6.0 -- 8.0]]</span>
+</pre></div>
+</div>
+</dd></dl>

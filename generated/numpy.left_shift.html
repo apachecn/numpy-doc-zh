@@ -1,0 +1,57 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.left_shift</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.left_shift.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.left_shift.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.left_shift"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">left_shift</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;left_shift&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将整数的位向左移位。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">通过在<em class="xref py py-obj">x1</em>右侧添加<em class="xref py py-obj">x2</em> 0，位向左移动。</span><span class="yiyi-st" id="yiyi-16">由于数字的内部表示是二进制格式，因此该操作等效于<em class="xref py py-obj">x1</em>乘以<code class="docutils literal"><span class="pre">2**x2</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>x1</strong>：array_like为整数类型</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输入值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>x2</strong>：array_like为整数类型</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">附加到<em class="xref py py-obj">x1</em>的零数。</span><span class="yiyi-st" id="yiyi-22">必须是非负数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>out</strong>：整数类型的数组</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">返回<em class="xref py py-obj">x1</em>，位向左移动<em class="xref py py-obj">x2</em>次。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.right_shift.html#numpy.right_shift" title="numpy.right_shift"><code class="xref py py-obj docutils literal"><span class="pre">right_shift</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28">将整数的位向右移位。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.binary_repr.html#numpy.binary_repr" title="numpy.binary_repr"><code class="xref py py-obj docutils literal"><span class="pre">binary_repr</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">返回输入号码的二进制表示为字符串。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">&apos;101&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">left_shift</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">&apos;10100&apos;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">left_shift</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="go">array([10, 20, 40])</span>
+</pre></div>
+</div>
+</dd></dl>

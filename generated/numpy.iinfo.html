@@ -1,0 +1,68 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.iinfo</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.iinfo.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.iinfo.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.iinfo"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">iinfo</code><span class="sig-paren">(</span><em>type</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/getlimits.py#L195-L297"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">整数类型的机器限制。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>int_type</strong>：整数类型，dtype或实例</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-17">要获取有关信息的整数数据类型的种类。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-18">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="numpy.finfo.html#numpy.finfo" title="numpy.finfo"><code class="xref py py-obj docutils literal"><span class="pre">finfo</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-20">浮点数据类型的等价物。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-21">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-22">类型：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ii16</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ii16</span><span class="o">.</span><span class="n">min</span>
+<span class="go">-32768</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ii16</span><span class="o">.</span><span class="n">max</span>
+<span class="go">32767</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ii32</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ii32</span><span class="o">.</span><span class="n">min</span>
+<span class="go">-2147483648</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ii32</span><span class="o">.</span><span class="n">max</span>
+<span class="go">2147483647</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-23">使用实例：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ii32</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">iinfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ii32</span><span class="o">.</span><span class="n">min</span>
+<span class="go">-2147483648</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ii32</span><span class="o">.</span><span class="n">max</span>
+<span class="go">2147483647</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">属性</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.iinfo.min.html#numpy.iinfo.min" title="numpy.iinfo.min"><code class="xref py py-obj docutils literal"><span class="pre">min</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-26">给定dtype的最小值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.iinfo.max.html#numpy.iinfo.max" title="numpy.iinfo.max"><code class="xref py py-obj docutils literal"><span class="pre">max</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-28">给定dtype的最大值。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

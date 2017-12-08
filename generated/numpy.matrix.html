@@ -1,0 +1,306 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.matrix</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.matrix"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">matrix</code><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/matrixlib/defmatrix.py#L208-L1140"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从数组类对象或数据字符串返回一个矩阵。</span><span class="yiyi-st" id="yiyi-15">矩阵是通过操作保留其2-D性质的专用2-D数字组。</span><span class="yiyi-st" id="yiyi-16">它具有某些特殊运算符，例如<code class="docutils literal"><span class="pre">*</span></code>（矩阵乘法）和<code class="docutils literal"><span class="pre">**</span></code>（矩阵求幂）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>data</strong>：array_like或string</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">如果<a class="reference internal" href="numpy.matrix.data.html#numpy.matrix.data" title="numpy.matrix.data"><code class="xref py py-obj docutils literal"><span class="pre">data</span></code></a>是字符串，它将被解释为一个以逗号或空格分隔列的矩阵，以及分隔行的分号。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>dtype</strong>：数据类型</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">输出矩阵的数据类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>copy</strong>：bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">如果<a class="reference internal" href="numpy.matrix.data.html#numpy.matrix.data" title="numpy.matrix.data"><code class="xref py py-obj docutils literal"><span class="pre">data</span></code></a>已经是<a class="reference internal" href="numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a>，则此标志确定是否复制数据（默认值）或是否构造视图。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.array.html#numpy.array" title="numpy.array"><code class="xref py py-obj docutils literal"><span class="pre">array</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="s1">&apos;1 2; 3 4&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">[[1 2]</span>
+<span class="go"> [3 4]]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="go">matrix([[1, 2],</span>
+<span class="go">        [3, 4]])</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">属性</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.matrix.A.html#numpy.matrix.A" title="numpy.matrix.A"><code class="xref py py-obj docutils literal"><span class="pre">A</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-29">将<em class="xref py py-obj">self</em>作为<a class="reference internal" href="numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a>对象返回。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.matrix.A1.html#numpy.matrix.A1" title="numpy.matrix.A1"><code class="xref py py-obj docutils literal"><span class="pre">A1</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-31">将<em class="xref py py-obj">self</em>作为展平的<a class="reference internal" href="numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a>返回。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.matrix.H.html#numpy.matrix.H" title="numpy.matrix.H"><code class="xref py py-obj docutils literal"><span class="pre">H</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-33">返回<em class="xref py py-obj">self</em>的（复数）共轭转置。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.matrix.I.html#numpy.matrix.I" title="numpy.matrix.I"><code class="xref py py-obj docutils literal"><span class="pre">I</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-35">返回可逆<em class="xref py py-obj">self</em>的（乘法）逆。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="numpy.matrix.T.html#numpy.matrix.T" title="numpy.matrix.T"><code class="xref py py-obj docutils literal"><span class="pre">T</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-37">返回矩阵的转置。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="numpy.matrix.base.html#numpy.matrix.base" title="numpy.matrix.base"><code class="xref py py-obj docutils literal"><span class="pre">base</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-39">如果内存是来自某个其他对象的基本对象。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.matrix.ctypes.html#numpy.matrix.ctypes" title="numpy.matrix.ctypes"><code class="xref py py-obj docutils literal"><span class="pre">ctypes</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-41">一个对象，用于简化数组与ctypes模块的交互。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.matrix.data.html#numpy.matrix.data" title="numpy.matrix.data"><code class="xref py py-obj docutils literal"><span class="pre">data</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-43">Python缓冲区对象指向数组的数据的开始。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.matrix.dtype.html#numpy.matrix.dtype" title="numpy.matrix.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-45">数组元素的数据类型。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.matrix.flags.html#numpy.matrix.flags" title="numpy.matrix.flags"><code class="xref py py-obj docutils literal"><span class="pre">flags</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-47">有关数组的内存布局的信息。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="numpy.matrix.flat.html#numpy.matrix.flat" title="numpy.matrix.flat"><code class="xref py py-obj docutils literal"><span class="pre">flat</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-49">数组上的1-D迭代器。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="numpy.matrix.imag.html#numpy.matrix.imag" title="numpy.matrix.imag"><code class="xref py py-obj docutils literal"><span class="pre">imag</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-51">数组的虚部。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="numpy.matrix.itemsize.html#numpy.matrix.itemsize" title="numpy.matrix.itemsize"><code class="xref py py-obj docutils literal"><span class="pre">itemsize</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-53">一个数组元素的长度（以字节为单位）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="numpy.matrix.nbytes.html#numpy.matrix.nbytes" title="numpy.matrix.nbytes"><code class="xref py py-obj docutils literal"><span class="pre">nbytes</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-55">数组的元素消耗的总字节数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="numpy.matrix.ndim.html#numpy.matrix.ndim" title="numpy.matrix.ndim"><code class="xref py py-obj docutils literal"><span class="pre">ndim</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-57">数组尺寸数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-58"><a class="reference internal" href="numpy.matrix.real.html#numpy.matrix.real" title="numpy.matrix.real"><code class="xref py py-obj docutils literal"><span class="pre">real</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-59">数组的真实部分。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-60"><a class="reference internal" href="numpy.matrix.shape.html#numpy.matrix.shape" title="numpy.matrix.shape"><code class="xref py py-obj docutils literal"><span class="pre">shape</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-61">数组维数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-62"><a class="reference internal" href="numpy.matrix.size.html#numpy.matrix.size" title="numpy.matrix.size"><code class="xref py py-obj docutils literal"><span class="pre">size</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-63">数组中的元素数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="numpy.matrix.strides.html#numpy.matrix.strides" title="numpy.matrix.strides"><code class="xref py py-obj docutils literal"><span class="pre">strides</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-65">遍历数组时，在每个维度中步进的字节数组。</span></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-66">方法</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="numpy.matrix.all.html#numpy.matrix.all" title="numpy.matrix.all"><code class="xref py py-obj docutils literal"><span class="pre">all</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-68">测试沿给定轴的所有矩阵元素是否为True。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="numpy.matrix.any.html#numpy.matrix.any" title="numpy.matrix.any"><code class="xref py py-obj docutils literal"><span class="pre">any</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-70">测试沿给定轴的任何数组元素是否为True。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-71"><a class="reference internal" href="numpy.matrix.argmax.html#numpy.matrix.argmax" title="numpy.matrix.argmax"><code class="xref py py-obj docutils literal"><span class="pre">argmax</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-72">沿轴的最大值的索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-73"><a class="reference internal" href="numpy.matrix.argmin.html#numpy.matrix.argmin" title="numpy.matrix.argmin"><code class="xref py py-obj docutils literal"><span class="pre">argmin</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-74">沿轴的最小值的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-75"><a class="reference internal" href="numpy.matrix.argpartition.html#numpy.matrix.argpartition" title="numpy.matrix.argpartition"><code class="xref py py-obj docutils literal"><span class="pre">argpartition</span></code></a>（kth [，axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-76">返回将对此数组进行分区的索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-77"><a class="reference internal" href="numpy.matrix.argsort.html#numpy.matrix.argsort" title="numpy.matrix.argsort"><code class="xref py py-obj docutils literal"><span class="pre">argsort</span></code></a>（[axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-78">返回将此数组排序的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-79"><a class="reference internal" href="numpy.matrix.astype.html#numpy.matrix.astype" title="numpy.matrix.astype"><code class="xref py py-obj docutils literal"><span class="pre">astype</span></code></a>（dtype [，order，casting，subok，copy]）</span></td>
+<td><span class="yiyi-st" id="yiyi-80">数组的复制，强制转换为指定的类型。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-81"><a class="reference internal" href="numpy.matrix.byteswap.html#numpy.matrix.byteswap" title="numpy.matrix.byteswap"><code class="xref py py-obj docutils literal"><span class="pre">byteswap</span></code></a>（inplace）</span></td>
+<td><span class="yiyi-st" id="yiyi-82">交换数组元素的字节</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-83"><a class="reference internal" href="numpy.matrix.choose.html#numpy.matrix.choose" title="numpy.matrix.choose"><code class="xref py py-obj docutils literal"><span class="pre">choose</span></code></a>（choices [，out，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-84">使用索引数组从一组选择中构造新的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-85"><a class="reference internal" href="numpy.matrix.clip.html#numpy.matrix.clip" title="numpy.matrix.clip"><code class="xref py py-obj docutils literal"><span class="pre">clip</span></code></a>（[min，max，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-86">返回值限于<code class="docutils literal"><span class="pre">[min，</span> <span class="pre">max]</span></code>的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-87"><a class="reference internal" href="numpy.matrix.compress.html#numpy.matrix.compress" title="numpy.matrix.compress"><code class="xref py py-obj docutils literal"><span class="pre">compress</span></code></a>（condition [，axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-88">沿给定轴返回此数组的所选切片。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-89"><a class="reference internal" href="numpy.matrix.conj.html#numpy.matrix.conj" title="numpy.matrix.conj"><code class="xref py py-obj docutils literal"><span class="pre">conj</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-90">复共轭所有元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-91"><a class="reference internal" href="numpy.matrix.conjugate.html#numpy.matrix.conjugate" title="numpy.matrix.conjugate"><code class="xref py py-obj docutils literal"><span class="pre">conjugate</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-92">按元素方式返回复共轭。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-93"><a class="reference internal" href="numpy.matrix.copy.html#numpy.matrix.copy" title="numpy.matrix.copy"><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-94">返回数组的副本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-95"><a class="reference internal" href="numpy.matrix.cumprod.html#numpy.matrix.cumprod" title="numpy.matrix.cumprod"><code class="xref py py-obj docutils literal"><span class="pre">cumprod</span></code></a>（[axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-96">返回沿给定轴的元素的累积乘积。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-97"><a class="reference internal" href="numpy.matrix.cumsum.html#numpy.matrix.cumsum" title="numpy.matrix.cumsum"><code class="xref py py-obj docutils literal"><span class="pre">cumsum</span></code></a>（[axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-98">返回沿给定轴的元素的累积和。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-99"><a class="reference internal" href="numpy.matrix.diagonal.html#numpy.matrix.diagonal" title="numpy.matrix.diagonal"><code class="xref py py-obj docutils literal"><span class="pre">diagonal</span></code></a>（[offset，axis1，axis2]）</span></td>
+<td><span class="yiyi-st" id="yiyi-100">返回指定的对角线。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-101"><a class="reference internal" href="numpy.matrix.dot.html#numpy.matrix.dot" title="numpy.matrix.dot"><code class="xref py py-obj docutils literal"><span class="pre">dot</span></code></a>（b [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-102">两个数组的点积。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-103"><a class="reference internal" href="numpy.matrix.dump.html#numpy.matrix.dump" title="numpy.matrix.dump"><code class="xref py py-obj docutils literal"><span class="pre">dump</span></code></a>（file）</span></td>
+<td><span class="yiyi-st" id="yiyi-104">将数组的pickle转储到指定的文件。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-105"><a class="reference internal" href="numpy.matrix.dumps.html#numpy.matrix.dumps" title="numpy.matrix.dumps"><code class="xref py py-obj docutils literal"><span class="pre">dumps</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-106">以字符串形式返回数组的pickle。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-107"><a class="reference internal" href="numpy.matrix.fill.html#numpy.matrix.fill" title="numpy.matrix.fill"><code class="xref py py-obj docutils literal"><span class="pre">fill</span></code></a>（value）</span></td>
+<td><span class="yiyi-st" id="yiyi-108">使用标量值填充数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-109"><a class="reference internal" href="numpy.matrix.flatten.html#numpy.matrix.flatten" title="numpy.matrix.flatten"><code class="xref py py-obj docutils literal"><span class="pre">flatten</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-110">返回矩阵的扁平副本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-111"><a class="reference internal" href="numpy.matrix.getA.html#numpy.matrix.getA" title="numpy.matrix.getA"><code class="xref py py-obj docutils literal"><span class="pre">getA</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-112">将<em class="xref py py-obj">self</em>作为<a class="reference internal" href="numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a>对象返回。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-113"><a class="reference internal" href="numpy.matrix.getA1.html#numpy.matrix.getA1" title="numpy.matrix.getA1"><code class="xref py py-obj docutils literal"><span class="pre">getA1</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-114">将<em class="xref py py-obj">self</em>作为展平的<a class="reference internal" href="numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a>返回。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-115"><a class="reference internal" href="numpy.matrix.getH.html#numpy.matrix.getH" title="numpy.matrix.getH"><code class="xref py py-obj docutils literal"><span class="pre">getH</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-116">返回<em class="xref py py-obj">self</em>的（复数）共轭转置。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-117"><a class="reference internal" href="numpy.matrix.getI.html#numpy.matrix.getI" title="numpy.matrix.getI"><code class="xref py py-obj docutils literal"><span class="pre">getI</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-118">返回可逆<em class="xref py py-obj">self</em>的（乘法）逆。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-119"><a class="reference internal" href="numpy.matrix.getT.html#numpy.matrix.getT" title="numpy.matrix.getT"><code class="xref py py-obj docutils literal"><span class="pre">getT</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-120">返回矩阵的转置。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-121"><a class="reference internal" href="numpy.matrix.getfield.html#numpy.matrix.getfield" title="numpy.matrix.getfield"><code class="xref py py-obj docutils literal"><span class="pre">getfield</span></code></a>（dtype [，offset]）</span></td>
+<td><span class="yiyi-st" id="yiyi-122">将给定数组的字段返回为特定类型。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-123"><a class="reference internal" href="numpy.matrix.item.html#numpy.matrix.item" title="numpy.matrix.item"><code class="xref py py-obj docutils literal"><span class="pre">item</span></code></a>（\ * args）</span></td>
+<td><span class="yiyi-st" id="yiyi-124">将数组的元素复制到标准Python标量并返回。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-125"><a class="reference internal" href="numpy.matrix.itemset.html#numpy.matrix.itemset" title="numpy.matrix.itemset"><code class="xref py py-obj docutils literal"><span class="pre">itemset</span></code></a>（\ * args）</span></td>
+<td><span class="yiyi-st" id="yiyi-126">将标量插入到数组中（如果可能，将标量转换为数组的dtype）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-127"><a class="reference internal" href="numpy.matrix.max.html#numpy.matrix.max" title="numpy.matrix.max"><code class="xref py py-obj docutils literal"><span class="pre">max</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-128">沿轴返回最大值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-129"><a class="reference internal" href="numpy.matrix.mean.html#numpy.matrix.mean" title="numpy.matrix.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a>（[axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-130">返回沿给定轴的矩阵元素的平均值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-131"><a class="reference internal" href="numpy.matrix.min.html#numpy.matrix.min" title="numpy.matrix.min"><code class="xref py py-obj docutils literal"><span class="pre">min</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-132">沿轴返回最小值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-133"><a class="reference internal" href="numpy.matrix.newbyteorder.html#numpy.matrix.newbyteorder" title="numpy.matrix.newbyteorder"><code class="xref py py-obj docutils literal"><span class="pre">newbyteorder</span></code></a>（[new_order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-134">返回具有以不同字节顺序查看的相同数据的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-135"><a class="reference internal" href="numpy.matrix.nonzero.html#numpy.matrix.nonzero" title="numpy.matrix.nonzero"><code class="xref py py-obj docutils literal"><span class="pre">nonzero</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-136">返回非零元素的索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-137"><a class="reference internal" href="numpy.matrix.partition.html#numpy.matrix.partition" title="numpy.matrix.partition"><code class="xref py py-obj docutils literal"><span class="pre">partition</span></code></a>（kth [，axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-138">重新排列数组中的元素，使得第k个位置的元素的值在排序数组中的位置。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-139"><a class="reference internal" href="numpy.matrix.prod.html#numpy.matrix.prod" title="numpy.matrix.prod"><code class="xref py py-obj docutils literal"><span class="pre">prod</span></code></a>（[axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-140">返回给定轴上的数组元素的乘积。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-141"><a class="reference internal" href="numpy.matrix.ptp.html#numpy.matrix.ptp" title="numpy.matrix.ptp"><code class="xref py py-obj docutils literal"><span class="pre">ptp</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-142">沿给定轴的峰峰值（最大 - 最小）值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-143"><a class="reference internal" href="numpy.matrix.put.html#numpy.matrix.put" title="numpy.matrix.put"><code class="xref py py-obj docutils literal"><span class="pre">put</span></code></a>（indices，values [，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-144">对于所有<em class="xref py py-obj">n</em>，设置<code class="docutils literal"><span class="pre">a.flat [n]</span> <span class="pre">=</span> <span class="pre">在指数。</span></code></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-145"><a class="reference internal" href="numpy.matrix.ravel.html#numpy.matrix.ravel" title="numpy.matrix.ravel"><code class="xref py py-obj docutils literal"><span class="pre">ravel</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-146">返回一个扁平矩阵。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-147"><a class="reference internal" href="numpy.matrix.repeat.html#numpy.matrix.repeat" title="numpy.matrix.repeat"><code class="xref py py-obj docutils literal"><span class="pre">repeat</span></code></a>（重复[，轴]）</span></td>
+<td><span class="yiyi-st" id="yiyi-148">重复数组的元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-149"><a class="reference internal" href="numpy.matrix.reshape.html#numpy.matrix.reshape" title="numpy.matrix.reshape"><code class="xref py py-obj docutils literal"><span class="pre">reshape</span></code></a>（shape [，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-150">返回包含具有新形状的相同数据的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-151"><a class="reference internal" href="numpy.matrix.resize.html#numpy.matrix.resize" title="numpy.matrix.resize"><code class="xref py py-obj docutils literal"><span class="pre">resize</span></code></a>（new_shape [，refcheck]）</span></td>
+<td><span class="yiyi-st" id="yiyi-152">就地更改数组的形状和大小。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-153"><a class="reference internal" href="numpy.matrix.round.html#numpy.matrix.round" title="numpy.matrix.round"><code class="xref py py-obj docutils literal"><span class="pre">round</span></code></a>（[小数，输出]）</span></td>
+<td><span class="yiyi-st" id="yiyi-154">返回<em class="xref py py-obj">a</em>，每个元素四舍五入为给定的小数位数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-155"><a class="reference internal" href="numpy.matrix.searchsorted.html#numpy.matrix.searchsorted" title="numpy.matrix.searchsorted"><code class="xref py py-obj docutils literal"><span class="pre">searchsorted</span></code></a>（v [，side，sorter]）</span></td>
+<td><span class="yiyi-st" id="yiyi-156">查找索引，其中v的元素应插入到a以维持顺序。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-157"><a class="reference internal" href="numpy.matrix.setfield.html#numpy.matrix.setfield" title="numpy.matrix.setfield"><code class="xref py py-obj docutils literal"><span class="pre">setfield</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-158">将值放入由数据类型定义的字段中的指定位置。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-159"><a class="reference internal" href="numpy.matrix.setflags.html#numpy.matrix.setflags" title="numpy.matrix.setflags"><code class="xref py py-obj docutils literal"><span class="pre">setflags</span></code></a>（[write，align，uic]）</span></td>
+<td><span class="yiyi-st" id="yiyi-160">分别设置数组标志WRITEABLE，ALIGNED和UPDATEIFCOPY。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-161"><a class="reference internal" href="numpy.matrix.sort.html#numpy.matrix.sort" title="numpy.matrix.sort"><code class="xref py py-obj docutils literal"><span class="pre">sort</span></code></a>（[axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-162">就地对数组进行排序。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-163"><a class="reference internal" href="numpy.matrix.squeeze.html#numpy.matrix.squeeze" title="numpy.matrix.squeeze"><code class="xref py py-obj docutils literal"><span class="pre">squeeze</span></code></a>（[axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-164">返回一个可能的重新整形矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-165"><a class="reference internal" href="numpy.matrix.std.html#numpy.matrix.std" title="numpy.matrix.std"><code class="xref py py-obj docutils literal"><span class="pre">std</span></code></a>（[axis，dtype，out，ddof]）</span></td>
+<td><span class="yiyi-st" id="yiyi-166">返回数组元素沿给定轴的标准偏差。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-167"><a class="reference internal" href="numpy.matrix.sum.html#numpy.matrix.sum" title="numpy.matrix.sum"><code class="xref py py-obj docutils literal"><span class="pre">sum</span></code></a>（[axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-168">沿给定轴返回矩阵元素的总和。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-169"><a class="reference internal" href="numpy.matrix.swapaxes.html#numpy.matrix.swapaxes" title="numpy.matrix.swapaxes"><code class="xref py py-obj docutils literal"><span class="pre">swapaxes</span></code></a>（axis1，axis2）</span></td>
+<td><span class="yiyi-st" id="yiyi-170">返回数组的视图，其中<em class="xref py py-obj">axis1</em>和<em class="xref py py-obj">axis2</em>互换。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-171"><a class="reference internal" href="numpy.matrix.take.html#numpy.matrix.take" title="numpy.matrix.take"><code class="xref py py-obj docutils literal"><span class="pre">take</span></code></a>（indices [，axis，out，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-172">返回由给定索引处的<em class="xref py py-obj">a</em>元素形成的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-173"><a class="reference internal" href="numpy.matrix.tobytes.html#numpy.matrix.tobytes" title="numpy.matrix.tobytes"><code class="xref py py-obj docutils literal"><span class="pre">tobytes</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-174">在数组中构造包含原始数据字节的Python字节。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-175"><a class="reference internal" href="numpy.matrix.tofile.html#numpy.matrix.tofile" title="numpy.matrix.tofile"><code class="xref py py-obj docutils literal"><span class="pre">tofile</span></code></a>（fid [，sep，format]）</span></td>
+<td><span class="yiyi-st" id="yiyi-176">将数组作为文本或二进制（默认）写入文件。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-177"><a class="reference internal" href="numpy.matrix.tolist.html#numpy.matrix.tolist" title="numpy.matrix.tolist"><code class="xref py py-obj docutils literal"><span class="pre">tolist</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-178">将矩阵返回为（可能是嵌套的）列表。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-179"><a class="reference internal" href="numpy.matrix.tostring.html#numpy.matrix.tostring" title="numpy.matrix.tostring"><code class="xref py py-obj docutils literal"><span class="pre">tostring</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-180">在数组中构造包含原始数据字节的Python字节。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-181"><a class="reference internal" href="numpy.matrix.trace.html#numpy.matrix.trace" title="numpy.matrix.trace"><code class="xref py py-obj docutils literal"><span class="pre">trace</span></code></a>（[offset，axis1，axis2，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-182">沿数组的对角线返回总和。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-183"><a class="reference internal" href="numpy.matrix.transpose.html#numpy.matrix.transpose" title="numpy.matrix.transpose"><code class="xref py py-obj docutils literal"><span class="pre">transpose</span></code></a>（\ * axes）</span></td>
+<td><span class="yiyi-st" id="yiyi-184">返回具有轴转置的数组的视图。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-185"><a class="reference internal" href="numpy.matrix.var.html#numpy.matrix.var" title="numpy.matrix.var"><code class="xref py py-obj docutils literal"><span class="pre">var</span></code></a>（[axis，dtype，out，ddof]）</span></td>
+<td><span class="yiyi-st" id="yiyi-186">沿给定轴返回矩阵元素的方差。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-187"><a class="reference internal" href="numpy.matrix.view.html#numpy.matrix.view" title="numpy.matrix.view"><code class="xref py py-obj docutils literal"><span class="pre">view</span></code></a>（[dtype，type]）</span></td>
+<td><span class="yiyi-st" id="yiyi-188">数组的新视图与相同的数据。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

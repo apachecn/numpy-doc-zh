@@ -1,0 +1,42 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.identity</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.identity.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.identity.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.identity"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">identity</code><span class="sig-paren">(</span><em>n</em>, <em>dtype=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L2279-L2308"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回身份数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">身份数组是一个正方形数组，在主对角线上有一个数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>n</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18"><em class="xref py py-obj">n</em> x <em class="xref py py-obj">n</em>输出中的行（和列）数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输出的数据类型。</span><span class="yiyi-st" id="yiyi-21">默认为<code class="docutils literal"><span class="pre">float</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24"><em class="xref py py-obj">n</em> x <em class="xref py py-obj">n</em>数组，其主对角线设置为1，所有其他元素为0。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([[ 1.,  0.,  0.],</span>
+<span class="go">       [ 0.,  1.,  0.],</span>
+<span class="go">       [ 0.,  0.,  1.]])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,53 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.matlib.randn</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matlib.randn.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matlib.randn.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.matlib.randn"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.matlib.</code><code class="descname">randn</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/matlib.py#L260-L308"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回具有来自“标准正态”分布的数据的随机矩阵。</span></p>
+<p><span class="yiyi-st" id="yiyi-15"><a class="reference internal" href="#numpy.matlib.randn" title="numpy.matlib.randn"><code class="xref py py-obj docutils literal"><span class="pre">randn</span></code></a>生成填充有从平均值0和方差1的单变量“正态”（高斯）分布采样的随机浮点的矩阵。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>* args</strong>：参数</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输出形状。</span><span class="yiyi-st" id="yiyi-19">如果给定为N个整数，每个整数指定一个维度的大小。</span><span class="yiyi-st" id="yiyi-20">如果给出一个元组，这个元组给出完整的形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>Z</strong>：浮点矩阵</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">从标准正态分布绘制的浮点样本矩阵。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.matlib.rand.html#numpy.matlib.rand" title="numpy.matlib.rand"><code class="xref py py-obj docutils literal"><span class="pre">rand</span></code></a>，<code class="xref py py-obj docutils literal"><span class="pre">random.randn</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">对于<img alt="N(\mu, \sigma^2)" class="math" src="../../_images/math/93af1f49bf6bbf05f549f49609becdb5f7039538.png" style="vertical-align: -4px">的随机样本，使用：</span></p>
+<p><span class="yiyi-st" id="yiyi-28"><code class="docutils literal"><span class="pre">sigma</span> <span class="pre">*</span> <span class="pre">np.matlib.randn（...）</span> <span class="pre">+</span> <span class="pre">t5&gt;</span></code></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.matlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matlib</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">matrix([[-0.09542833]])                                 #random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matlib</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">matrix([[ 0.16198284,  0.0194571 ,  0.18312985],</span>
+<span class="go">        [-0.7509172 ,  1.61055   ,  0.45298599]])       #random</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-30">来自<img alt="N(3, 6.25)" class="math" src="../../_images/math/08a5821b1285dfdf2e828600c79e28c85a15ac28.png" style="vertical-align: -4px">的样本的两乘四矩阵：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">matlib</span><span class="o">.</span><span class="n">randn</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="go">matrix([[ 4.74085004,  8.89381862,  4.09042411,  4.83721922],</span>
+<span class="go">        [ 7.52373709,  5.07933944, -2.64043543,  0.45610557]])  #random</span>
+</pre></div>
+</div>
+</dd></dl>

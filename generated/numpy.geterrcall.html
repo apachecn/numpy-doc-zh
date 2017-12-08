@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.geterrcall</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.geterrcall.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.geterrcall.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.geterrcall"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">geterrcall</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L2852-L2894"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回当前用于浮点错误的回调函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">当浮点错误（“divide”，“over”，“under”或“invalid”之一）的错误处理设置为“call”或“log”时，调用的函数或日志实例由<a class="reference internal" href="#numpy.geterrcall" title="numpy.geterrcall"><code class="xref py py-obj docutils literal"><span class="pre">geterrcall</span></code></a>返回。</span><span class="yiyi-st" id="yiyi-16">此函数或日志实例已使用<a class="reference internal" href="numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-obj docutils literal"><span class="pre">seterrcall</span></code></a>设置。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>errobj</strong>：可调用，日志实例或无</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-19">当前错误处理程序。</span><span class="yiyi-st" id="yiyi-20">如果没有通过<a class="reference internal" href="numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-obj docutils literal"><span class="pre">seterrcall</span></code></a>设置处理程序，则返回<code class="docutils literal"><span class="pre">None</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-21">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-obj docutils literal"><span class="pre">seterrcall</span></code></a>，<a class="reference internal" href="numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>，<a class="reference internal" href="numpy.geterr.html#numpy.geterr" title="numpy.geterr"><code class="xref py py-obj docutils literal"><span class="pre">geterr</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-24">有关浮点异常和处理选项类型的完整文档，请参见<a class="reference internal" href="numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">geterrcall</span><span class="p">()</span>  <span class="c1"># we did not yet set a handler, returns None</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oldsettings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s1">&apos;call&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">err_handler</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Floating point error (</span><span class="si">%s</span><span class="s2">), with flag </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">flag</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oldhandler</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterrcall</span><span class="p">(</span><span class="n">err_handler</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">/</span> <span class="mf">0.0</span>
+<span class="go">Floating point error (divide by zero), with flag 1</span>
+<span class="go">array([ Inf,  Inf,  Inf])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cur_handler</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geterrcall</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cur_handler</span> <span class="ow">is</span> <span class="n">err_handler</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

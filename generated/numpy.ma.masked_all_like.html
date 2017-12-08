@@ -1,0 +1,67 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.masked_all_like</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.masked_all_like.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.masked_all_like.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.masked_all_like"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">masked_all_like</code><span class="sig-paren">(</span><em>arr</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/extras.py#L157-L209"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">使用现有数组的属性空掩码数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">返回与数组<em class="xref py py-obj">arr</em>相同形状和类型的空屏蔽数组，其中所有数据都被屏蔽。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>arr</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">描述所需MaskedArray的shape和dtype的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>a</strong>：MaskedArray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">所有数据被屏蔽的屏蔽数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>AttributeError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">如果<em class="xref py py-obj">arr</em>没有形状属性（即不是ndarray）</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.ma.masked_all.html#numpy.ma.masked_all" title="numpy.ma.masked_all"><code class="xref py py-obj docutils literal"><span class="pre">masked_all</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28">与被掩没的所有元素的空的被掩没的数组。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span>
+<span class="go">array([[ 0.,  0.,  0.],</span>
+<span class="go">       [ 0.,  0.,  0.]], dtype=float32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">masked_all_like</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[-- -- --]</span>
+<span class="go"> [-- -- --]],</span>
+<span class="go">      mask =</span>
+<span class="go"> [[ True  True  True]</span>
+<span class="go"> [ True  True  True]],</span>
+<span class="go">      fill_value=1e+20)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-30">masked数组的dtype与<em class="xref py py-obj">arr</em>的dtype匹配。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype(&apos;float32&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">masked_all_like</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype(&apos;float32&apos;)</span>
+</pre></div>
+</div>
+</dd></dl>

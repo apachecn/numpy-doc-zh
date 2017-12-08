@@ -1,0 +1,166 @@
+
+<h1><span class="yiyi-st" id="yiyi-21">Input and output</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.io.html">https://docs.scipy.org/doc/numpy/reference/routines.io.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="numpy-binary-files-npy-npz">
+<h2><span class="yiyi-st" id="yiyi-22">NumPy binary files (NPY, NPZ)</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="generated/numpy.load.html#numpy.load" title="numpy.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>（文件[，mmap_mode，allow_pickle，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-24">从<code class="docutils literal"><span class="pre">.npy</span></code>，<code class="docutils literal"><span class="pre">.npz</span></code>或pickled文件加载数组或腌制对象。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="generated/numpy.save.html#numpy.save" title="numpy.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a>（file，arr [，allow_pickle，fix_imports]）</span></td>
+<td><span class="yiyi-st" id="yiyi-26">将数组以NumPy <code class="docutils literal"><span class="pre">.npy</span></code>格式保存到二进制文件。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="generated/numpy.savez.html#numpy.savez" title="numpy.savez"><code class="xref py py-obj docutils literal"><span class="pre">savez</span></code></a>（file，\ * args，\ * \ * kwds）</span></td>
+<td><span class="yiyi-st" id="yiyi-28">将多个数组以未压缩的<code class="docutils literal"><span class="pre">.npz</span></code>格式保存到单个文件中。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="generated/numpy.savez_compressed.html#numpy.savez_compressed" title="numpy.savez_compressed"><code class="xref py py-obj docutils literal"><span class="pre">savez_compressed</span></code></a>（file，\ * args，\ * \ * kwds）</span></td>
+<td><span class="yiyi-st" id="yiyi-30">将多个数组以压缩的<code class="docutils literal"><span class="pre">.npz</span></code>格式保存到单个文件中。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-31">这些二进制文件类型的格式记录在<a class="reference external" href="http://docs.scipy.org/doc/numpy/neps/npy-format.html">http://docs.scipy.org/doc/numpy/neps/npy-format.html</a></span></p>
+</div>
+<div class="section" id="text-files">
+<h2><span class="yiyi-st" id="yiyi-32">Text files</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="generated/numpy.loadtxt.html#numpy.loadtxt" title="numpy.loadtxt"><code class="xref py py-obj docutils literal"><span class="pre">loadtxt</span></code></a>（fname [，dtype，comments，delimiter，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-34">从文本文件加载数据。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="generated/numpy.savetxt.html#numpy.savetxt" title="numpy.savetxt"><code class="xref py py-obj docutils literal"><span class="pre">savetxt</span></code></a>（fname，X [，fmt，delimiter，newline，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-36">将数组保存到文本文件。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="generated/numpy.genfromtxt.html#numpy.genfromtxt" title="numpy.genfromtxt"><code class="xref py py-obj docutils literal"><span class="pre">genfromtxt</span></code></a>（fname [，dtype，comments，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-38">从文本文件加载数据，缺少值按指定处理。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="generated/numpy.fromregex.html#numpy.fromregex" title="numpy.fromregex"><code class="xref py py-obj docutils literal"><span class="pre">fromregex</span></code></a>（file，regexp，dtype）</span></td>
+<td><span class="yiyi-st" id="yiyi-40">使用正则表达式解析从文本文件构造数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="generated/numpy.fromstring.html#numpy.fromstring" title="numpy.fromstring"><code class="xref py py-obj docutils literal"><span class="pre">fromstring</span></code></a>（string [，dtype，count，sep]）</span></td>
+<td><span class="yiyi-st" id="yiyi-42">根据字符串中的原始二进制或文本数据初始化的新1-D数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="generated/numpy.ndarray.tofile.html#numpy.ndarray.tofile" title="numpy.ndarray.tofile"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.tofile</span></code></a>（fid [，sep，format]）</span></td>
+<td><span class="yiyi-st" id="yiyi-44">将数组作为文本或二进制（默认）写入文件。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.ndarray.tolist.html#numpy.ndarray.tolist" title="numpy.ndarray.tolist"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.tolist</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-46">将数组返回为（可能是嵌套的）列表。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="raw-binary-files">
+<h2><span class="yiyi-st" id="yiyi-47">Raw binary files</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="generated/numpy.fromfile.html#numpy.fromfile" title="numpy.fromfile"><code class="xref py py-obj docutils literal"><span class="pre">fromfile</span></code></a>（file [，dtype，count，sep]）</span></td>
+<td><span class="yiyi-st" id="yiyi-49">从文本或二进制文件中的数据构造数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="generated/numpy.ndarray.tofile.html#numpy.ndarray.tofile" title="numpy.ndarray.tofile"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.tofile</span></code></a>（fid [，sep，format]）</span></td>
+<td><span class="yiyi-st" id="yiyi-51">将数组作为文本或二进制（默认）写入文件。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="string-formatting">
+<h2><span class="yiyi-st" id="yiyi-52">String formatting</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="generated/numpy.array2string.html#numpy.array2string" title="numpy.array2string"><code class="xref py py-obj docutils literal"><span class="pre">array2string</span></code></a>（a [，max_line_width，precision，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">返回数组的字符串表示形式。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="generated/numpy.array_repr.html#numpy.array_repr" title="numpy.array_repr"><code class="xref py py-obj docutils literal"><span class="pre">array_repr</span></code></a>（arr [，max_line_width，precision，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-56">返回数组的字符串表示形式。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="generated/numpy.array_str.html#numpy.array_str" title="numpy.array_str"><code class="xref py py-obj docutils literal"><span class="pre">array_str</span></code></a>（a [，max_line_width，precision，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-58">返回数组中数据的字符串表示形式。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="memory-mapping-files">
+<h2><span class="yiyi-st" id="yiyi-59">Memory mapping files</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-60"><a class="reference internal" href="generated/numpy.memmap.html#numpy.memmap" title="numpy.memmap"><code class="xref py py-obj docutils literal"><span class="pre">memmap</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-61">创建存储在磁盘上的<em>二进制</em>文件中的数组的内存映射。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="text-formatting-options">
+<h2><span class="yiyi-st" id="yiyi-62">Text formatting options</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="generated/numpy.set_printoptions.html#numpy.set_printoptions" title="numpy.set_printoptions"><code class="xref py py-obj docutils literal"><span class="pre">set_printoptions</span></code></a>（[precision，threshold，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-64">设置打印选项。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="generated/numpy.get_printoptions.html#numpy.get_printoptions" title="numpy.get_printoptions"><code class="xref py py-obj docutils literal"><span class="pre">get_printoptions</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-66">返回当前打印选项。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="generated/numpy.set_string_function.html#numpy.set_string_function" title="numpy.set_string_function"><code class="xref py py-obj docutils literal"><span class="pre">set_string_function</span></code></a>（f [，repr]）</span></td>
+<td><span class="yiyi-st" id="yiyi-68">设置当漂亮打印数组时使用的Python函数。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="base-n-representations">
+<h2><span class="yiyi-st" id="yiyi-69">Base-n representations</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-70"><a class="reference internal" href="generated/numpy.binary_repr.html#numpy.binary_repr" title="numpy.binary_repr"><code class="xref py py-obj docutils literal"><span class="pre">binary_repr</span></code></a>（num [，width]）</span></td>
+<td><span class="yiyi-st" id="yiyi-71">返回输入号码的二进制表示为字符串。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="generated/numpy.base_repr.html#numpy.base_repr" title="numpy.base_repr"><code class="xref py py-obj docutils literal"><span class="pre">base_repr</span></code></a>（number [，base，padding]）</span></td>
+<td><span class="yiyi-st" id="yiyi-73">返回给定基本系统中数字的字符串表示形式。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="data-sources">
+<h2><span class="yiyi-st" id="yiyi-74">Data sources</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-75"><a class="reference internal" href="generated/numpy.DataSource.html#numpy.DataSource" title="numpy.DataSource"><code class="xref py py-obj docutils literal"><span class="pre">DataSource</span></code></a>（[destpath]）</span></td>
+<td><span class="yiyi-st" id="yiyi-76">通用数据源文件（文件，http，ftp，...）。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

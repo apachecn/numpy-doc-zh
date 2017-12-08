@@ -1,0 +1,65 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.polyval</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyval.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyval.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polyval"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.</code><code class="descname">polyval</code><span class="sig-paren">(</span><em>p</em>, <em>x</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/polynomial.py#L615-L682"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">以特定值评估多项式。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">如果<em class="xref py py-obj">p</em>的长度为N，则此函数返回值：</span></p>
+<blockquote>
+<div><span class="yiyi-st" id="yiyi-17"><code class="docutils literal"><span class="pre">p [0] * x **（N-1）</span> <span class="pre">+</span> <span class="pre">p [1] * x ** &gt; <span class="pre">+</span> <span class="pre">...</span> <span class="pre">+</span> <span class="pre">p [N-2] * x</span> <span class="pre">+</span> <span class="pre">p [N-1]</span></span></code></span></div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18">如果<em class="xref py py-obj">x</em>是序列，则对于<em class="xref py py-obj">x</em>的每个元素返回<em class="xref py py-obj">p（x）</em>。</span><span class="yiyi-st" id="yiyi-19">如果<em class="xref py py-obj">x</em>是另一个多项式，则返回复合多项式<em class="xref py py-obj">p（x（t））</em>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>p</strong>：array_like或poly1d对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">1D从最高度到常数项的多项式系数（包括系数等于零）的数组，或poly1d的实例。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>x</strong>：array_like或poly1d对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">数字，数字数组或poly1d的实例，用于评估<em class="xref py py-obj">p</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>值</strong>：ndarray或poly1d</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">如果<em class="xref py py-obj">x</em>是poly1d实例，则结果是在<em class="xref py py-obj">p</em>中的两个多项式的组合，即<em class="xref py py-obj">x</em>返回结果。</span><span class="yiyi-st" id="yiyi-28">此外，<em class="xref py py-obj">x</em>  -  array_like或poly1d的类型控制输出的类型：<em class="xref py py-obj">x</em> array_like =&gt; <em class="xref py py-obj">值</em> array_like，<em class="xref py py-obj">x</em> a poly1d object =&gt; <em class="xref py py-obj">values</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.poly1d.html#numpy.poly1d" title="numpy.poly1d"><code class="xref py py-obj docutils literal"><span class="pre">poly1d</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">多项式类。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-33">霍纳方案<a class="reference internal" href="#r65" id="id1">[R65]</a>用于计算多项式。</span><span class="yiyi-st" id="yiyi-34">即使如此，对于高度的多项式，由于舍入误差，值可能不准确。</span><span class="yiyi-st" id="yiyi-35">小心使用。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r65" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-37">[R65]</span></td><td><span class="yiyi-st" id="yiyi-38"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em> I.N. Bronshtein，K.A.Semendyayev和K.A.Hirsch</span><span class="yiyi-st" id="yiyi-39">反式。</span><span class="yiyi-st" id="yiyi-40">Ed。</span><span class="yiyi-st" id="yiyi-41">），<em>Handbook of Mathematics</em>，New York，Van Nostrand Reinhold Co.，1985，</span><span class="yiyi-st" id="yiyi-42">720.</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 3 * 5**2 + 0 * 5**1 + 1</span>
+<span class="go">76</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="go">poly1d([ 76.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">76</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="go">poly1d([ 76.])</span>
+</pre></div>
+</div>
+</dd></dl>

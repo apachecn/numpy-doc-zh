@@ -1,0 +1,318 @@
+
+<span id="arrays-indexing"></span><h1><span class="yiyi-st" id="yiyi-22">Indexing</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/arrays.indexing.html">https://docs.scipy.org/doc/numpy/reference/arrays.indexing.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p id="index-0"><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarrays</span></code></a>可以使用标准Python <code class="docutils literal"><span class="pre">x[obj]</span></code>语法建立索引，其中<em>x</em>是数组和<em>obj</em>选择。</span><span class="yiyi-st" id="yiyi-24">有三种索引可用：字段访问，基本分片，高级索引。</span><span class="yiyi-st" id="yiyi-25">哪一个发生取决于<em>obj</em>。</span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-27">在Python中，<code class="docutils literal"><span class="pre">x [（exp1，</span> <span class="pre">exp2，</span> <span class="pre">...，</span> <span class="pre">expN）]</span> t0&gt;等效于<code class="docutils literal"><span class="pre">x [exp1，</span> <span class="pre">exp2，</span> <span class="pre">...，</span> <span class="pre">expN]</span> t5&gt;；后者只是前者的语法糖。</code></code></span></p>
+</div>
+<div class="section" id="basic-slicing-and-indexing">
+<h2><span class="yiyi-st" id="yiyi-28">Basic Slicing and Indexing</span></h2>
+<p><span class="yiyi-st" id="yiyi-29">基本切片将Python的切片基本概念扩展到N维。</span><span class="yiyi-st" id="yiyi-30">当<em>obj</em>是<a class="reference external" href="https://docs.python.org/dev/library/functions.html#slice" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a>对象（由括号内的<code class="docutils literal"><span class="pre">start:stop:step</span></code>符号构造），整数或元组切片对象和整数。</span><span class="yiyi-st" id="yiyi-31"><code class="xref py py-const docutils literal"><span class="pre">Ellipsis</span></code>和<a class="reference internal" href="#numpy.newaxis" title="numpy.newaxis"><code class="xref py py-const docutils literal"><span class="pre">newaxis</span></code></a>对象也可以与这些对象穿插。</span><span class="yiyi-st" id="yiyi-32">为了保持与数字中的通用用法向后兼容，如果选择对象是包含<a class="reference external" href="https://docs.python.org/dev/library/functions.html#slice" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a>的任何非ndarray序列（例如<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#list" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">list</span></code></a>），对象，<code class="xref py py-const docutils literal"><span class="pre">Ellipsis</span></code>对象或<a class="reference internal" href="#numpy.newaxis" title="numpy.newaxis"><code class="xref py py-const docutils literal"><span class="pre">newaxis</span></code></a>对象，但不适用于整数数组或其他嵌入序列。</span></p>
+<p id="index-1"><span class="yiyi-st" id="yiyi-33">使用<em>N</em>整数索引的最简单的情况返回表示相应项的<a class="reference internal" href="arrays.scalars.html#arrays-scalars"><span class="std std-ref">array scalar</span></a>。</span><span class="yiyi-st" id="yiyi-34">在Python中，所有索引都是从零开始的：对于<em>i</em>索引<img alt="n_i" class="math" src="../_images/math/8002a14dfa8d5544df2a972c6fa862705464d4fc.png" style="vertical-align: -2px">，有效范围是<img alt="0 \le n_i &lt; d_i" class="math" src="../_images/math/ce29481448dcc47ec904767e71d98c82619f3d6a.png" style="vertical-align: -2px">，其中<img alt="d_i" class="math" src="../_images/math/ae410da349d05c4fb338df88cd9a205e562e4701.png" style="vertical-align: -2px">是<em>数组的形状的第t个元素。</em></span><span class="yiyi-st" id="yiyi-35">负指数被解释为从数组结束计数（<em>，即</em>，如果<img alt="n_i &lt; 0" class="math" src="../_images/math/5d7ec70ed2ef7b9456b4b7a73686f2369fbb7071.png" style="vertical-align: -2px">，则意味着<img alt="n_i + d_i" class="math" src="../_images/math/f7d9c302059f023f0dc8854bad19bb6b791b4326.png" style="vertical-align: -2px">）。</span></p>
+<p><span class="yiyi-st" id="yiyi-36">通过基本切片生成的所有数组始终为原始数组的<a class="reference internal" href="../glossary.html#term-view"><span class="xref std std-term">views</span></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-37">序列切片的标准规则适用于基于每维的基本切片（包括使用阶跃索引）。</span><span class="yiyi-st" id="yiyi-38">一些有用的概念要记住包括：</span></p>
+<ul>
+<li><p class="first"><span class="yiyi-st" id="yiyi-39">The basic slice syntax is <code class="docutils literal"><span class="pre">i:j:k</span></code> where <em>i</em> is the starting index, <em>j</em> is the stopping index, and <em>k</em> is the step (<img alt="k\neq0" class="math" src="../_images/math/cbd5bf4758bd9b43dfef3dcbf87587b12f87c9df.png" style="vertical-align: -4px">). </span><span class="yiyi-st" id="yiyi-40">这选择具有索引值<em>i</em>，<em>i + k</em>，...，<em>i + 1的<em>m</em> （m-1）k  t&gt;其中<img alt="m = q + (r\neq0)" class="math" src="../_images/math/bb1f6d132d0ad4542e8b3151bcb56de2246f1291.png" style="vertical-align: -4px">和<em>q</em>和<em>r</em>是通过将<em>j-i  <em>k</em>：<em>j_i = qk + r</em>，使得<em>i +（m-1） j</em>。</em></em></span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-41">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">array([1, 3, 5])</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-42">负<em>i</em>和<em>j</em>被解释为<em>n + i</em>和<em>n + j</em>其中<em>n  t4 &gt;是对应维度中的元素数。</em></span><span class="yiyi-st" id="yiyi-43">负<em>k</em>使得向更小的指数迈进。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-44">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<span class="go">array([8, 9])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">array([7, 6, 5, 4])</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-45">假设<em>n</em>是要切片的维度中的元素数。</span><span class="yiyi-st" id="yiyi-46">然后，如果不给出<em>i</em>，则对于<em>k&gt;默认为0.  0</em>和<em>n-1</em>，对于<em>k 。</em></span><span class="yiyi-st" id="yiyi-47">如果没有给出<em>j</em>，则对于<em>k&gt;，默认为<em>n</em> 0</em>和-1，对于<em>k 。</em></span><span class="yiyi-st" id="yiyi-48">如果未给出<em>k</em>，则其默认为1。</span><span class="yiyi-st" id="yiyi-49">注意，<code class="docutils literal"><span class="pre">::</span></code>与<code class="docutils literal"><span class="pre">:</span></code>相同，表示选择沿此轴的所有索引。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-50">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span>
+<span class="go">array([5, 6, 7, 8, 9])</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-51">如果选择元组中的对象数小于<em>N</em>，则对任何后续维都假定为<code class="docutils literal"><span class="pre">:</span></code>。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-52">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">4</span><span class="p">],[</span><span class="mi">5</span><span class="p">],[</span><span class="mi">6</span><span class="p">]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 3, 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">array([[[4],</span>
+<span class="go">        [5],</span>
+<span class="go">        [6]]])</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-53"><code class="xref py py-const docutils literal"><span class="pre">Ellipsis</span></code>展开为与<code class="docutils literal"><span class="pre">x.ndim</span></code>相同长度的选择元组所需的<code class="docutils literal"><span class="pre">:</span></code>对象的数量。</span><span class="yiyi-st" id="yiyi-54">可能只有一个省略号。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-55">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">array([[1, 2, 3],</span>
+<span class="go">       [4, 5, 6]])</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-56">选择元组中的每个<a class="reference internal" href="#numpy.newaxis" title="numpy.newaxis"><code class="xref py py-const docutils literal"><span class="pre">newaxis</span></code></a>对象用于将生成的选择的维度扩展一个单位长度维度。</span><span class="yiyi-st" id="yiyi-57">添加的维度是选择元组中<a class="reference internal" href="#numpy.newaxis" title="numpy.newaxis"><code class="xref py py-const docutils literal"><span class="pre">newaxis</span></code></a>对象的位置。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-58">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,:,:]</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 1, 3, 1)</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-59">整数<em>i</em>返回与<code class="docutils literal"><span class="pre">i:i+1</span></code> <strong>相同的值，除非</strong>返回对象的维数减少1。</span><span class="yiyi-st" id="yiyi-60">特别地，具有<em>p</em>元素为整数（以及所有其他条目<code class="docutils literal"><span class="pre">:</span></code>）的选择元组返回具有维度<em>N-1 。</em></span><span class="yiyi-st" id="yiyi-61">如果<em>N = 1</em>，则返回的对象是数组标量。</span><span class="yiyi-st" id="yiyi-62">这些对象在<a class="reference internal" href="arrays.scalars.html#arrays-scalars"><span class="std std-ref">Scalars</span></a>中进行了说明。</span></p>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-63">If the selection tuple has all entries <code class="docutils literal"><span class="pre">:</span></code> except the <em>p</em>-th entry which is a slice object <code class="docutils literal"><span class="pre">i:j:k</span></code>, then the returned array has dimension <em>N</em> formed by concatenating the sub-arrays returned by integer indexing of elements <em>i</em>, <em>i+k</em>, ..., <em>i + (m - 1) k &lt; j</em>,</span></p>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-64">具有切片元组中的多于一个非<code class="docutils literal"><span class="pre">:</span></code>条目的基本切片，像使用单个非<code class="docutils literal"><span class="pre">:</span></code>条目重复应用切片，其中非<code class="docutils literal"><span class="pre">:</span></code>条目（所有其他非<code class="docutils literal"><span class="pre">:</span></code>条目替换为<code class="docutils literal"><span class="pre">:</span></code>）。</span><span class="yiyi-st" id="yiyi-65">因此，在基本切片下，<code class="docutils literal"><span class="pre">x[ind1,...,ind2,:]</span></code>像<code class="docutils literal"><span class="pre">x[ind1][...,ind2,:]</span></code></span></p>
+<div class="admonition warning">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-66">警告</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-67">以上是高级索引的<strong>不</strong> true。</span></p>
+</div>
+</li>
+<li><p class="first"><span class="yiyi-st" id="yiyi-68">你可以使用切片来设置数组中的值，但（不同于列表）你永远不能增长数组。</span><span class="yiyi-st" id="yiyi-69">要在<code class="docutils literal"><span class="pre">x [obj]</span> <span class="pre">=</span> <span class="pre">值</span></code>中设置的值的大小必须（可广播）形状与<code class="docutils literal"><span class="pre">x[obj]</span></code>相同。</span></p>
+</li>
+</ul>
+<div class="admonition note" id="index-2">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-70">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-71">请记住，切片元组总是可以构造为<em>obj</em>并在<code class="docutils literal"><span class="pre">x[obj]</span></code>表示法中使用。</span><span class="yiyi-st" id="yiyi-72">切片对象可以在构造中用于替换<code class="docutils literal"><span class="pre">[start:stop:step]</span></code>符号。</span><span class="yiyi-st" id="yiyi-73">例如，<code class="docutils literal"><span class="pre">x[1:10:5,::-1]</span></code>也可以实现为<code class="docutils literal"><span class="pre">obj</span> <span class="pre">=</span> <span class="pre">（slice（1,10,5），</span> <span class="pre">slice（None，None，-1））；</span> <span class="pre">x [obj]</span></code>。</span><span class="yiyi-st" id="yiyi-74">这对于构造对任意维度的数组起作用的通用代码是有用的。</span></p>
+</div>
+<dl class="data">
+<dt id="numpy.newaxis"><span class="yiyi-st" id="yiyi-75"> <code class="descclassname">numpy.</code><code class="descname">newaxis</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-76"><a class="reference internal" href="#numpy.newaxis" title="numpy.newaxis"><code class="xref py py-const docutils literal"><span class="pre">newaxis</span></code></a>对象可用于所有切片操作，以创建长度为1的轴。</span><span class="yiyi-st" id="yiyi-77"><a class="reference internal" href="#numpy.newaxis" title="numpy.newaxis"><code class="xref py py-const docutils literal"><span class="pre">newaxis</span></code></a>是“无”的别名，可以使用“无”代替此结果，并返回相同的结果。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="advanced-indexing">
+<h2><span class="yiyi-st" id="yiyi-78">Advanced Indexing</span></h2>
+<p><span class="yiyi-st" id="yiyi-79">当选择对象<em>obj</em>是非元组序列对象，<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>（数据类型为integer或bool）或至少具有一个序列对象或ndarray（数据类型为integer或bool）。</span><span class="yiyi-st" id="yiyi-80">有两种类型的高级索引：integer和Boolean。</span></p>
+<p><span class="yiyi-st" id="yiyi-81">高级索引始终返回数据的<em>副本</em>（与返回<a class="reference internal" href="../glossary.html#term-view"><span class="xref std std-term">view</span></a>形成对比）。</span></p>
+<div class="admonition warning">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-82">警告</span></p>
+<p><span class="yiyi-st" id="yiyi-83">高级索引的定义意味着<code class="docutils literal"><span class="pre">x[(1,2,3),]</span></code>根本不同于<code class="docutils literal"><span class="pre">x[(1,2,3)]</span></code>。</span><span class="yiyi-st" id="yiyi-84">后者等效于<code class="docutils literal"><span class="pre">x[1,2,3]</span></code>，它将触发基本选择，而前者将触发高级索引。</span><span class="yiyi-st" id="yiyi-85">一定要明白为什么会发生这种情况。</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-86">也认识到<code class="docutils literal"><span class="pre">x[[1,2,3]]</span></code>将触发高级索引，而<code class="docutils literal"><span class="pre">x[[1,2,slice(None)]]</span></code></span></p>
+</div>
+<div class="section" id="integer-array-indexing">
+<h3><span class="yiyi-st" id="yiyi-87">Integer array indexing</span></h3>
+<p><span class="yiyi-st" id="yiyi-88">整数数组索引允许根据数组中的<em>N</em>维索引选择数组中的任意项。</span><span class="yiyi-st" id="yiyi-89">每个整数数组表示到该维度的索引数。</span></p>
+<div class="section" id="purely-integer-array-indexing">
+<h4><span class="yiyi-st" id="yiyi-90">Purely integer array indexing</span></h4>
+<p><span class="yiyi-st" id="yiyi-91">当索引包括与索引的数组具有维数一样多的整数数组时，索引是直接的，但不同于切片。</span></p>
+<p><span class="yiyi-st" id="yiyi-92">高级索引始终为<a class="reference internal" href="ufuncs.html#ufuncs-broadcasting"><span class="std std-ref">broadcast</span></a>，并迭代为<em>一个</em>：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">result</span><span class="p">[</span><span class="n">i_1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">i_M</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">[</span><span class="n">ind_1</span><span class="p">[</span><span class="n">i_1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">i_M</span><span class="p">],</span> <span class="n">ind_2</span><span class="p">[</span><span class="n">i_1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">i_M</span><span class="p">],</span>
+                           <span class="o">...</span><span class="p">,</span> <span class="n">ind_N</span><span class="p">[</span><span class="n">i_1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">i_M</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-93">注意，结果形状与（广播）索引数字形状<code class="docutils literal"><span class="pre">ind_1，</span> <span class="pre">...，</span> <span class="pre">ind_N</span></code> 。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-94">例</span></p>
+<p><span class="yiyi-st" id="yiyi-95">从每一行，应该选择一个特定的元素。</span><span class="yiyi-st" id="yiyi-96">行索引只是<code class="docutils literal"><span class="pre">[0，</span> <span class="pre">1，</span> <span class="pre">2]</span></code>，列索引指定要选择的元素对应的行，这里<code class="docutils literal"><span class="pre">[0，</span> <span class="pre">1，</span> <span class="pre">0]</span></code>。</span><span class="yiyi-st" id="yiyi-97">一起使用这两个任务可以使用高级索引来解决：</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<span class="go">array([1, 4, 5])</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-98">为了实现类似于上面的基本切片的行为，可以使用广播。</span><span class="yiyi-st" id="yiyi-99">功能<a class="reference internal" href="generated/numpy.ix_.html#numpy.ix_" title="numpy.ix_"><code class="xref py py-func docutils literal"><span class="pre">ix_</span></code></a>可以帮助进行此广播。</span><span class="yiyi-st" id="yiyi-100">这是最好的理解与一个例子。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-101">例</span></p>
+<p><span class="yiyi-st" id="yiyi-102">从4x3数组中，角元素应使用高级索引选择。</span><span class="yiyi-st" id="yiyi-103">因此，列为<code class="docutils literal"><span class="pre">[0，</span> <span class="pre">2]</span></code>之一的所有元素，并且该行是<code class="docutils literal"><span class="pre">[0 ，</span> <span class="pre">3]</span></code>。</span><span class="yiyi-st" id="yiyi-104">要使用高级索引，需要明确选择所有元素<em></em>。</span><span class="yiyi-st" id="yiyi-105">使用前面解释的方法可以写：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>           <span class="p">[</span> <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">],</span>
+<span class="gp">... </span>           <span class="p">[</span> <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>           <span class="p">[</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">intp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">columns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">intp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">columns</span><span class="p">]</span>
+<span class="go">array([[ 0,  2],</span>
+<span class="go">       [ 9, 11]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-106">然而，由于上面的索引数组只是重复自身，所以可以使用广播（比较诸如<code class="docutils literal"><span class="pre">行[：，</span> <span class="pre">np.newaxis]</span> <span class="pre">/ t3&gt; <span class="pre">列</span></span></code>）以简化此操作：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">intp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">columns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">intp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="go">array([[0],</span>
+<span class="go">       [3]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">rows</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">columns</span><span class="p">]</span>
+<span class="go">array([[ 0,  2],</span>
+<span class="go">       [ 9, 11]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-107">也可以使用功能<a class="reference internal" href="generated/numpy.ix_.html#numpy.ix_" title="numpy.ix_"><code class="xref py py-func docutils literal"><span class="pre">ix_</span></code></a>实现此广播：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">columns</span><span class="p">)]</span>
+<span class="go">array([[ 0,  2],</span>
+<span class="go">       [ 9, 11]])</span>
+</pre></div>
+</div>
+<p class="last"><span class="yiyi-st" id="yiyi-108">注意，如果不使用<code class="docutils literal"><span class="pre">np.ix_</span></code>调用，将只选择对角元素，如前面的示例中所使用的那样。</span><span class="yiyi-st" id="yiyi-109">这个差异是使用多个高级索引建立索引时最重要的事情。</span></p>
+</div>
+</div>
+<div class="section" id="combining-advanced-and-basic-indexing">
+<h4><span class="yiyi-st" id="yiyi-110">Combining advanced and basic indexing</span></h4>
+<p><span class="yiyi-st" id="yiyi-111">当索引中有至少一个切片（<code class="docutils literal"><span class="pre">:</span></code>），省略号（<code class="docutils literal"><span class="pre">...</span></code>）或<code class="docutils literal"><span class="pre">np.newaxis</span></code>更多的维度比高级索引），那么行为可能更复杂。</span><span class="yiyi-st" id="yiyi-112">它就像连接每个高级索引元素的索引结果</span></p>
+<p><span class="yiyi-st" id="yiyi-113">在最简单的情况下，只有<em>单个</em>高级索引。</span><span class="yiyi-st" id="yiyi-114">单个高级索引可以例如替换切片，并且结果数组将是相同的，然而，其是副本并且可以具有不同的存储器布局。</span><span class="yiyi-st" id="yiyi-115">当可能时，切片是优选的。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-116">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">array([[4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="go">array([[4, 5]])</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-117">理解情况的最简单的方法可能是根据结果形状来思考。</span><span class="yiyi-st" id="yiyi-118">索引操作有两个部分，由基本索引（不包括整数）定义的子空间和来自高级索引部分的子空间。</span><span class="yiyi-st" id="yiyi-119">需要区分两种情况的索引组合：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-120">高级索引由切片，省略号或newaxis分隔。</span><span class="yiyi-st" id="yiyi-121">例如<code class="docutils literal"><span class="pre">x [arr1，</span> <span class="pre">：，</span> <span class="pre">arr2]</span></code>。</span></li>
+<li><span class="yiyi-st" id="yiyi-122">高级索引都是彼此相邻的。</span><span class="yiyi-st" id="yiyi-123">For example <code class="docutils literal"><span class="pre">x[...,</span> <span class="pre">arr1,</span> <span class="pre">arr2,</span> <span class="pre">:]</span></code> but <em>not</em> <code class="docutils literal"><span class="pre">x[arr1,</span> <span class="pre">:,</span> <span class="pre">1]</span></code> since <code class="docutils literal"><span class="pre">1</span></code> is an advanced index in this regard.</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-124">在第一种情况下，从高级索引操作得到的维度首先出现在结果数组中，然后是子空间维度。</span><span class="yiyi-st" id="yiyi-125">在第二种情况下，来自高级索引操作的维度被插入到结果数组中，与它们在初始数组中的位置相同（后一个逻辑是使简单的高级索引与切片行为相同）。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-126">例</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-127">假设<code class="docutils literal"><span class="pre">x.shape</span></code>是（10,20,30）并且<code class="docutils literal"><span class="pre">ind</span></code>是（2,3,4）形索引<code class="xref py py-class docutils literal"><span class="pre">intp</span></code>数组，那么<code class="docutils literal"><span class="pre">结果</span> <span class="pre">=</span> <span class="pre">x [...，ind，：] 4,30），因为（20，）形子空间已经被（2,3,4）形广播的索引子空间替换。</span></code></span><span class="yiyi-st" id="yiyi-128">如果我们让（2,3,4）形子循环<em>i，j，k</em>，则<code class="docutils literal"><span class="pre">结果[...，i，j，k， / t2&gt; <span class="pre">=</span> <span class="pre">x [...，ind [i，j，k]，：]</span> </span></code></span><span class="yiyi-st" id="yiyi-129">此示例生成与<a class="reference internal" href="generated/numpy.ndarray.take.html#numpy.ndarray.take" title="numpy.ndarray.take"><code class="xref py py-meth docutils literal"><span class="pre">x.take(ind,</span> <span class="pre">axis=-2)</span></code></a>相同的结果。</span></p>
+</div>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-130">例</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-131">让<code class="docutils literal"><span class="pre">x.shape</span></code>为（10,20,30,40,50），并假设<code class="docutils literal"><span class="pre">ind_1</span></code>和<code class="docutils literal"><span class="pre">ind_2</span></code>可以广播到形状，3,4）。</span><span class="yiyi-st" id="yiyi-132">然后<code class="docutils literal"><span class="pre">x[:,ind_1,ind_2]</span></code>具有形状（10,2,3,4,40,50），因为来自X的（20,30）形子空间已经被替换为，3,4）个子空间。</span><span class="yiyi-st" id="yiyi-133">但是，<code class="docutils literal"><span class="pre">x[:,ind_1,:,ind_2]</span></code>具有形状（2,3,4,10,30,50），因为在索引子空间中没有明确的位置，因此它是坚持到开始。</span><span class="yiyi-st" id="yiyi-134">始终可以使用<a class="reference internal" href="generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="numpy.ndarray.transpose"><code class="xref py py-meth docutils literal"><span class="pre">.transpose()</span></code></a>将子空间移动到任何需要的位置。</span><span class="yiyi-st" id="yiyi-135">请注意，此示例无法使用<a class="reference internal" href="generated/numpy.take.html#numpy.take" title="numpy.take"><code class="xref py py-func docutils literal"><span class="pre">take</span></code></a>进行复制。</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="boolean-array-indexing">
+<h3><span class="yiyi-st" id="yiyi-136">Boolean array indexing</span></h3>
+<p><span class="yiyi-st" id="yiyi-137">当obj是布尔类型的数组对象时，例如可以从比较运算符返回时，发生此高级索引。</span><span class="yiyi-st" id="yiyi-138">单个布尔索引数组实际上等同于<code class="docutils literal"><span class="pre">x[obj.nonzero()]</span></code>其中，如上所述，<a class="reference internal" href="generated/numpy.ndarray.nonzero.html#numpy.ndarray.nonzero" title="numpy.ndarray.nonzero"><code class="xref py py-meth docutils literal"><span class="pre">obj.nonzero()</span></code></a>返回长度<a class="reference internal" href="generated/numpy.ndarray.ndim.html#numpy.ndarray.ndim" title="numpy.ndarray.ndim"><code class="xref py py-attr docutils literal"><span class="pre">obj.ndim</span></code></a>），其显示<code class="xref py py-const docutils literal"><span class="pre">True</span></code>的元素<em>obj</em>。</span><span class="yiyi-st" id="yiyi-139">但是，<code class="docutils literal"><span class="pre">obj.shape</span> <span class="pre">==</span> <span class="pre">x.shape</span></code>时更快。</span></p>
+<p><span class="yiyi-st" id="yiyi-140">If <code class="docutils literal"><span class="pre">obj.ndim</span> <span class="pre">==</span> <span class="pre">x.ndim</span></code>, <code class="docutils literal"><span class="pre">x[obj]</span></code> returns a 1-dimensional array filled with the elements of <em>x</em> corresponding to the <code class="xref py py-const docutils literal"><span class="pre">True</span></code> values of <em>obj</em>. </span><span class="yiyi-st" id="yiyi-141">搜索顺序为<a class="reference internal" href="../glossary.html#term-row-major"><span class="xref std std-term">row-major</span></a>，C风格。</span><span class="yiyi-st" id="yiyi-142">如果<em>obj</em>在<em>x</em>的边界之外的条目处具有<code class="xref py py-const docutils literal"><span class="pre">True</span></code>值，则将引发索引错误。</span><span class="yiyi-st" id="yiyi-143">如果<em>obj</em>小于<em>x</em>，则与填充<code class="xref py py-const docutils literal"><span class="pre">False</span></code>相同。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-144">例</span></p>
+<p><span class="yiyi-st" id="yiyi-145">一个常见的用例是过滤所需的元素值。</span><span class="yiyi-st" id="yiyi-146">例如，可能希望从数组中选择不是NaN的所有条目：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">3.</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+<span class="go">array([ 1.,  2.,  3.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-147">或者希望向所有负面元素添加一个常数：</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([  1.,  19.,  18.,   3.])</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-148">通常，如果索引包括布尔数组，则结果将与将<code class="docutils literal"><span class="pre">obj.nonzero()</span></code>插入到相同位置并使用上述整数数组索引机制相同。</span><span class="yiyi-st" id="yiyi-149"><code class="docutils literal"><span class="pre">x [ind_1，</span> <span class="pre">boolean_array，</span> <span class="pre">ind_2]</span></code>等效于<code class="docutils literal"><span class="pre">）</span> <span class="pre">+</span> <span class="pre">boolean_array.nonzero()</span> <span class="pre">+</span> <span class="pre">（ind_2，）]</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-150">如果只有一个布尔数组，并且没有整数索引数组，这是直接的。</span><span class="yiyi-st" id="yiyi-151">必须注意确保布尔索引的精确<em></em>多少维度，因为它应该使用。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-152">例</span></p>
+<p><span class="yiyi-st" id="yiyi-153">从数组中，选择总和小于或等于两个的所有行：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rowsum</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">rowsum</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
+<span class="go">array([[0, 1],</span>
+<span class="go">       [1, 1]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-154">但如果<code class="docutils literal"><span class="pre">rowsum</span></code>也有两个维度：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rowsum</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rowsum</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">rowsum</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>    <span class="c1"># fails</span>
+<span class="go">IndexError: too many indices</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">rowsum</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">]</span>
+<span class="go">array([0, 1])</span>
+</pre></div>
+</div>
+<p class="last"><span class="yiyi-st" id="yiyi-155">最后一个只给出第一个元素，因为额外的维度。</span><span class="yiyi-st" id="yiyi-156">比较<code class="docutils literal"><span class="pre">rowsum.nonzero()</span></code>以了解此示例。</span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-157">使用<a class="reference internal" href="generated/numpy.ndarray.nonzero.html#numpy.ndarray.nonzero" title="numpy.ndarray.nonzero"><code class="xref py py-meth docutils literal"><span class="pre">obj.nonzero()</span></code></a>的类比可以最好地理解组合多个布尔索引数组或布尔值与整数索引数组。</span><span class="yiyi-st" id="yiyi-158">函数<a class="reference internal" href="generated/numpy.ix_.html#numpy.ix_" title="numpy.ix_"><code class="xref py py-func docutils literal"><span class="pre">ix_</span></code></a>也支持布尔数组，并且不会出现任何惊喜。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-159">例</span></p>
+<p><span class="yiyi-st" id="yiyi-160">使用布尔索引选择所有行加起来为偶数。</span><span class="yiyi-st" id="yiyi-161">同时，应使用高级整数索引选择列0和2。</span><span class="yiyi-st" id="yiyi-162">使用<a class="reference internal" href="generated/numpy.ix_.html#numpy.ix_" title="numpy.ix_"><code class="xref py py-func docutils literal"><span class="pre">ix_</span></code></a>函数，可以这样做：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>           <span class="p">[</span> <span class="mi">3</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">],</span>
+<span class="gp">... </span>           <span class="p">[</span> <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">8</span><span class="p">],</span>
+<span class="gp">... </span>           <span class="p">[</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span>
+<span class="go">array([False,  True, False,  True], dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">columns</span><span class="p">)]</span>
+<span class="go">array([[ 3,  5],</span>
+<span class="go">       [ 9, 11]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-163">没有<code class="docutils literal"><span class="pre">np.ix_</span></code>调用或只选择对角元素。</span></p>
+<p><span class="yiyi-st" id="yiyi-164">或没有<code class="docutils literal"><span class="pre">np.ix_</span></code>（比较整数数组示例）：</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="n">rows</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">rows</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">columns</span><span class="p">]</span>
+<span class="go">array([[ 3,  5],</span>
+<span class="go">       [ 9, 11]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="detailed-notes">
+<h2><span class="yiyi-st" id="yiyi-165">Detailed notes</span></h2>
+<p><span class="yiyi-st" id="yiyi-166">这些是一些详细的注释，这对于日常索引（没有特定的顺序）是不重要的：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-167">本机NumPy索引类型为<code class="docutils literal"><span class="pre">intp</span></code>，可能与默认整数数组类型不同。</span><span class="yiyi-st" id="yiyi-168"><code class="docutils literal"><span class="pre">intp</span></code>是足以安全索引任何数组的最小数据类型；对于高级索引，它可能比其他类型更快。</span></li>
+<li><span class="yiyi-st" id="yiyi-169">对于高级分配，通常不能保证迭代顺序。</span><span class="yiyi-st" id="yiyi-170">这意味着如果一个元素被多次设置，则不可能预测最终结果。</span></li>
+<li><span class="yiyi-st" id="yiyi-171">空（元组）索引是零维数组的完整标量索引。</span><span class="yiyi-st" id="yiyi-172"><code class="docutils literal"><span class="pre">x[()]</span></code>如果<code class="docutils literal"><span class="pre">x</span></code>是零维，则返回<em>标量</em>，否则返回视图。</span><span class="yiyi-st" id="yiyi-173">另一方面，<code class="docutils literal"><span class="pre">x[...]</span></code>总是返回一个视图。</span></li>
+<li><span class="yiyi-st" id="yiyi-174">如果零索引数组存在于索引<em>和</em>中，它是一个完整的整数索引，结果将是一个<em>标量</em>，而不是零维数组。</span><span class="yiyi-st" id="yiyi-175">（不触发高级索引。）</span></li>
+<li><span class="yiyi-st" id="yiyi-176">当存在省略号（<code class="docutils literal"><span class="pre">...</span></code>）但没有大小（即替换零<code class="docutils literal"><span class="pre">:</span></code>）时，结果仍然总是数组。</span><span class="yiyi-st" id="yiyi-177">如果没有高级索引的视图，否则为副本。</span></li>
+<li><span class="yiyi-st" id="yiyi-178">对于零维布尔数组，布尔数组的<code class="docutils literal"><span class="pre">nonzero</span></code>等价性不成立。</span></li>
+<li><span class="yiyi-st" id="yiyi-179">当高级索引操作的结果没有元素但是单个索引超出边界时，无论是否引起<code class="docutils literal"><span class="pre">IndexError</span></code>都是未定义的（例如，<code class="docutils literal"><span class="pre">x [[] / t3&gt; <span class="pre">[123]]</span></span></code>，其中<code class="docutils literal"><span class="pre">123</span></code>超出范围）。</span></li>
+<li><span class="yiyi-st" id="yiyi-180">当在分配期间发生<em>转换</em>错误（例如使用字符串序列更新数值数组）时，分配给的数组可能会以不可预测的部分更新状态结束。</span><span class="yiyi-st" id="yiyi-181">但是，如果发生任何其他错误（例如超出范围索引），数组将保持不变。</span></li>
+<li><span class="yiyi-st" id="yiyi-182">高级索引结果的存储器布局针对每个索引操作进行优化，并且可以假设没有特定的存储器顺序。</span></li>
+<li><span class="yiyi-st" id="yiyi-183">When using a subclass (especially one which manipulates its shape), the default <code class="docutils literal"><span class="pre">ndarray.__setitem__</span></code> behaviour will call <code class="docutils literal"><span class="pre">__getitem__</span></code> for <em>basic</em> indexing but not for <em>advanced</em> indexing. </span><span class="yiyi-st" id="yiyi-184">对于这样的子类，可以优选用数据上的<em>基类</em> ndarray视图调用<code class="docutils literal"><span class="pre">ndarray.__setitem__</span></code>。</span><span class="yiyi-st" id="yiyi-185">如果子类<code class="docutils literal"><span class="pre">__getitem__</span></code>不返回视图，则此<em>必须</em>。</span></li>
+</ul>
+</div>
+<div class="section" id="field-access">
+<span id="arrays-indexing-fields"></span><h2><span class="yiyi-st" id="yiyi-186">Field Access</span></h2>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-187">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-188"><a class="reference internal" href="arrays.dtypes.html#arrays-dtypes"><span class="std std-ref">Data type objects (dtype)</span></a>，<a class="reference internal" href="arrays.scalars.html#arrays-scalars"><span class="std std-ref">Scalars</span></a></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-189">如果<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>对象是结构化数组，则可以通过用字符串索引数组来访问数组的<span class="xref std std-term">字段</span>。</span></p>
+<p><span class="yiyi-st" id="yiyi-190">索引<code class="docutils literal"><span class="pre">x[&apos;field-name&apos;]</span></code>向数组返回一个新的<a class="reference internal" href="../glossary.html#term-view"><span class="xref std std-term">view</span></a>，其形状与<em>x</em>相同字段是一个子数组），但是数据类型为<code class="docutils literal"><span class="pre">x.dtype[&apos;field-name&apos;]</span></code>，并且只包含指定字段中数据的一部分。</span><span class="yiyi-st" id="yiyi-191">此外，<a class="reference internal" href="arrays.classes.html#arrays-classes-rec"><span class="std std-ref">record array</span></a>标量可以以这种方式“索引”。</span></p>
+<p><span class="yiyi-st" id="yiyi-192">索引到结构化数组也可以使用字段名称列表<em>（例如</em> <code class="docutils literal"><span class="pre">x[[&apos;field-name1&apos;,&apos;field-name2&apos;]]</span></code>来完成。</span><span class="yiyi-st" id="yiyi-193">目前，这将返回一个新的数组，其中包含列表中指定字段中值的副本。</span><span class="yiyi-st" id="yiyi-194">从NumPy 1.7，返回一个副本被弃用，有利于返回一个视图。</span><span class="yiyi-st" id="yiyi-195">现在将继续返回副本，但在写入副本时将发出FutureWarning。</span><span class="yiyi-st" id="yiyi-196">如果你依赖于当前行为，那么我们建议显式复制返回的数组，即使用x [[&apos;field-name1&apos;，&apos;field-name2&apos;]]。copy()。</span><span class="yiyi-st" id="yiyi-197">这将与过去和未来版本的NumPy工作。</span></p>
+<p><span class="yiyi-st" id="yiyi-198">如果被访问的字段是子数组，则子数组的维度将附加到结果的形状。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-199">例</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&apos;a&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;b&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="s1">&apos;a&apos;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="s1">&apos;a&apos;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype(&apos;int32&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="s1">&apos;b&apos;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 2, 3, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="s1">&apos;b&apos;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype(&apos;float64&apos;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="flat-iterator-indexing">
+<h2><span class="yiyi-st" id="yiyi-200">Flat Iterator indexing</span></h2>
+<p><span class="yiyi-st" id="yiyi-201"><a class="reference internal" href="generated/numpy.ndarray.flat.html#numpy.ndarray.flat" title="numpy.ndarray.flat"><code class="xref py py-attr docutils literal"><span class="pre">x.flat</span></code></a>返回迭代器，它将遍历整个数组（以C连续样式，最后索引变化最快）。</span><span class="yiyi-st" id="yiyi-202">此迭代器对象也可以使用基本分片或高级索引编制索引，只要选择对象不是元组。</span><span class="yiyi-st" id="yiyi-203">这应该从以下事实中清楚：<a class="reference internal" href="generated/numpy.ndarray.flat.html#numpy.ndarray.flat" title="numpy.ndarray.flat"><code class="xref py py-attr docutils literal"><span class="pre">x.flat</span></code></a>是1维视图。</span><span class="yiyi-st" id="yiyi-204">它可用于具有一维C风格平面索引的整数索引。</span><span class="yiyi-st" id="yiyi-205">因此，任何返回的数组的形状都是整数索引对象的形状。</span></p>
+<span class="target" id="index-3"></span></div>

@@ -1,0 +1,93 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.triu_indices</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.triu_indices.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.triu_indices.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.triu_indices"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">triu_indices</code><span class="sig-paren">(</span><em>n</em>, <em>k=0</em>, <em>m=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/twodim_base.py#L896-L975"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回（n，m）数组的上三角形的索引。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>n</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">返回的索引将有效的数组的大小。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>k</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">对角线偏移（详见<a class="reference internal" href="numpy.triu.html#numpy.triu" title="numpy.triu"><code class="xref py py-obj docutils literal"><span class="pre">triu</span></code></a>）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>m</strong>：int，可选</span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-21"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-22">返回的数组将有效的数组的列维度。</span><span class="yiyi-st" id="yiyi-23">默认情况下，<em class="xref py py-obj">m</em>等于<em class="xref py py-obj">n</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>inds</strong>：元组，形状（2）的数组，形状（<em class="xref py py-obj">n</em>）</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">三角形的索引。</span><span class="yiyi-st" id="yiyi-27">返回的元组包含两个数组，每个数组的索引沿着数组的一个维度。</span><span class="yiyi-st" id="yiyi-28">可用于切割形状的阵列（<em class="xref py py-obj">n</em>，<em class="xref py py-obj">n</em>）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.tril_indices.html#numpy.tril_indices" title="numpy.tril_indices"><code class="xref py py-obj docutils literal"><span class="pre">tril_indices</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">类似的功能，用于下三角形。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.mask_indices.html#numpy.mask_indices" title="numpy.mask_indices"><code class="xref py py-obj docutils literal"><span class="pre">mask_indices</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">通用函数接受任意掩码函数。</span></dd>
+</dl>
+<p class="last"><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.triu.html#numpy.triu" title="numpy.triu"><code class="xref py py-obj docutils literal"><span class="pre">triu</span></code></a>，<a class="reference internal" href="numpy.tril.html#numpy.tril" title="numpy.tril"><code class="xref py py-obj docutils literal"><span class="pre">tril</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-36"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-38">计算两个不同的索引集合以访问4x4数组，一个用于从主对角线开始的上三角形部分，并且一个开始于对角线的右边：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">iu1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iu2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">下面是如何使用示例数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[ 0,  1,  2,  3],</span>
+<span class="go">       [ 4,  5,  6,  7],</span>
+<span class="go">       [ 8,  9, 10, 11],</span>
+<span class="go">       [12, 13, 14, 15]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">两者都用于索引：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="n">iu1</span><span class="p">]</span>
+<span class="go">array([ 0,  1,  2,  3,  5,  6,  7, 10, 11, 15])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-41">并为赋值：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="n">iu1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[-1, -1, -1, -1],</span>
+<span class="go">       [ 4, -1, -1, -1],</span>
+<span class="go">       [ 8,  9, -1, -1],</span>
+<span class="go">       [12, 13, 14, -1]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">这些只覆盖整个数组的一小部分（主要的两个对角线）：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="n">iu2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[ -1,  -1, -10, -10],</span>
+<span class="go">       [  4,  -1,  -1, -10],</span>
+<span class="go">       [  8,   9,  -1,  -1],</span>
+<span class="go">       [ 12,  13,  14,  -1]])</span>
+</pre></div>
+</div>
+</dd></dl>

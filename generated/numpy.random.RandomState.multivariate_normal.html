@@ -1,0 +1,90 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.multivariate_normal</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.multivariate_normal.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.multivariate_normal.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.multivariate_normal"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">multivariate_normal</code><span class="sig-paren">(</span><em>mean</em>, <em>cov</em><span class="optional">[</span>, <em>size</em><span class="optional">]</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从多变量正态分布绘制随机样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">多元正态，多正态或高斯分布是一维正态分布到更高维度的泛化。</span><span class="yiyi-st" id="yiyi-17">这样的分布由其平均和协方差矩阵指定。</span><span class="yiyi-st" id="yiyi-18">这些参数类似于一维正态分布的平均值（平均或“中心”）和方差（标准偏差，或“宽度”，平方）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>表示</strong>：1-D array_like，长度为N</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">N维分布的均值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>cov</strong>：2-D array_like，形状（N，N）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">分布的协方差矩阵。</span><span class="yiyi-st" id="yiyi-24">它必须是对称和正半定的正确采样。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">给定例如<code class="docutils literal"><span class="pre">(m,n,k)</span></code>，<code class="docutils literal"><span class="pre">m*n*k</span></code>个样本的形状，并且在<em class="xref py py-obj">m  t4 &gt; -t <em class="xref py py-obj">n</em> -by- <em class="xref py py-obj">k</em>排列。</em></span><span class="yiyi-st" id="yiyi-27">因为每个样本是<em class="xref py py-obj">N  t0维，所以输出形状是<code class="docutils literal"><span class="pre">(m,n,k,N)</span></code>。</em></span><span class="yiyi-st" id="yiyi-28">如果未指定形状，则返回单个（<em class="xref py py-obj">N</em> -D）样本。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">绘制的样本，如果提供的话，形状<em>大小</em>。</span><span class="yiyi-st" id="yiyi-32">如果不是，则形状为<code class="docutils literal"><span class="pre">(N,)</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-33">换句话说，每个条目<code class="docutils literal"><span class="pre">out[i,j,...,:]</span></code>是从分布绘制的N维值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-35">平均值是N维空间中的坐标，其表示样本最可能被生成的位置。</span><span class="yiyi-st" id="yiyi-36">这类似于一维或单变量正态分布的钟形曲线的峰值。</span></p>
+<p><span class="yiyi-st" id="yiyi-37">协方差表示两个变量一起变化的水平。</span><span class="yiyi-st" id="yiyi-38">从多变量正态分布，我们绘制N维样本，<img alt="X = [x_1, x_2, ... x_N]" class="math" src="../../_images/math/5207fbc5c81de717782578cb4156d60d83c10a94.png" style="vertical-align: -4px">。</span><span class="yiyi-st" id="yiyi-39">协方差矩阵元素<img alt="C_{ij}" class="math" src="../../_images/math/7cd8b54c3097c3343ae058f6be2e7e8888f8cff8.png" style="vertical-align: -4px">是<img alt="x_i" class="math" src="../../_images/math/8f36430327e350fd5583002c178ca1949d485b21.png" style="vertical-align: -2px">和<img alt="x_j" class="math" src="../../_images/math/fd3512e9f7dec13e6defb1a51b94a1e31a8eca67.png" style="vertical-align: -4px">的协方差。</span><span class="yiyi-st" id="yiyi-40">元素<img alt="C_{ii}" class="math" src="../../_images/math/114c5f45409813eddd95cb59fe4d7e618f417d23.png" style="vertical-align: -2px">是<img alt="x_i" class="math" src="../../_images/math/8f36430327e350fd5583002c178ca1949d485b21.png" style="vertical-align: -2px">的方差（即其“扩展”）。</span></p>
+<p><span class="yiyi-st" id="yiyi-41">代替指定完全协方差矩阵，流行的近似包括：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-42">球面协方差（<em>cov</em>是单位矩阵的倍数）</span></li>
+<li><span class="yiyi-st" id="yiyi-43">对角协方差（<em>cov</em>具有非负元素，仅在对角线上）</span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-44">通过绘制生成的数据点，可以在二维中看到该几何属性：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mean</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">]]</span>  <span class="c1"># diagonal covariance</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">对角协方差意味着点沿x或y轴取向：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="mi">5000</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&apos;x&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&apos;equal&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">注意协方差矩阵必须是正半定的（a.k.a.</span><span class="yiyi-st" id="yiyi-47">非负定义）。</span><span class="yiyi-st" id="yiyi-48">否则，此方法的行为未定义，不能保证向后兼容性。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-49">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r170" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-50"><a class="fn-backref" href="#id1">[R170]</a></span></td><td><span class="yiyi-st" id="yiyi-51">Papoulis，A.，“Probability，Random Variables，and Stochastic Processes，”3rd ed。，New York：McGraw-Hill，1991。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r171" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-52"><a class="fn-backref" href="#id2">[R171]</a></span></td><td><span class="yiyi-st" id="yiyi-53">Duda，R.O.，Hart，P.E.，and Stork，D.G。，“Pattern Classification，”2nd ed。，New York：Wiley，2001。</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-54">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mean</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 3, 2)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-55">以下是可能是真的，因为0.6大约是标准偏差的两倍：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">((</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="go">[True, True]</span>
+</pre></div>
+</div>
+</dd></dl>

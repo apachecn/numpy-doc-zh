@@ -1,0 +1,64 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.getmaskarray</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.getmaskarray.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.getmaskarray.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.getmaskarray"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">getmaskarray</code><span class="sig-paren">(</span><em>arr</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L1403-L1455"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回掩码数组的掩码，或者返回False的完全布尔数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">如果<em class="xref py py-obj">arr</em>是<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.MaskedArray" title="numpy.ma.MaskedArray"><code class="xref py py-obj docutils literal"><span class="pre">MaskedArray</span></code></a>且掩码不是<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.nomask" title="numpy.ma.nomask"><code class="xref py py-obj docutils literal"><span class="pre">nomask</span></code></a>，则返回<em class="xref py py-obj">arr</em>的掩码作为ndarray，否则返回一个与<em class="xref py py-obj">arr</em>相同形状的False的完全布尔数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>arr</strong>：array_like</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-19">输入需要掩码的<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.MaskedArray" title="numpy.ma.MaskedArray"><code class="xref py py-obj docutils literal"><span class="pre">MaskedArray</span></code></a>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-20">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="numpy.ma.getmask.html#numpy.ma.getmask" title="numpy.ma.getmask"><code class="xref py py-obj docutils literal"><span class="pre">getmask</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-22">返回掩码数组或掩码的掩码。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="numpy.ma.getdata.html#numpy.ma.getdata" title="numpy.ma.getdata"><code class="xref py py-obj docutils literal"><span class="pre">getdata</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-24">将掩码数组的数据作为ndarray返回。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_equal</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[1 --]</span>
+<span class="go"> [3 4]],</span>
+<span class="go">      mask =</span>
+<span class="go"> [[False  True]</span>
+<span class="go"> [False False]],</span>
+<span class="go">      fill_value=999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">getmaskarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([[False,  True],</span>
+<span class="go">       [False, False]], dtype=bool)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-26">mask == <code class="docutils literal"><span class="pre">nomask</span></code>时的结果</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[1 2]</span>
+<span class="go"> [3 4]],</span>
+<span class="go">      mask =</span>
+<span class="go"> False,</span>
+<span class="go">      fill_value=999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;</span><span class="n">ma</span><span class="o">.</span><span class="n">getmaskarray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="go">array([[False, False],</span>
+<span class="go">       [False, False]], dtype=bool)</span>
+</pre></div>
+</div>
+</dd></dl>

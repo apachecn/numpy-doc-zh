@@ -1,0 +1,76 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.apply_along_axis</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.apply_along_axis.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.apply_along_axis.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.apply_along_axis"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">apply_along_axis</code><span class="sig-paren">(</span><em>func1d</em>, <em>axis</em>, <em>arr</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/shape_base.py#L20-L131"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">沿着给定轴向1-D切片应用函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">Execute <em class="xref py py-obj">func1d(a, *args)</em> where <em class="xref py py-obj">func1d</em> operates on 1-D arrays and <em class="xref py py-obj">a</em> is a 1-D slice of <em class="xref py py-obj">arr</em> along <em class="xref py py-obj">axis</em>.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>func1d</strong>：function</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">此功能应接受1-D数组。</span><span class="yiyi-st" id="yiyi-19">它沿着指定的轴应用于<em class="xref py py-obj">arr</em>的1-D切片。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>axis</strong>：integer</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">沿着<em class="xref py py-obj">arr</em>切割的轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>arr</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>args</strong>：any</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25"><em class="xref py py-obj">func1d</em>的其他参数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>kwargs：any</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27"><em class="xref py py-obj">func1d</em>的其他命名参数。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-28"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>apply_along_axis</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">输出数组。</span><span class="yiyi-st" id="yiyi-32"><em class="xref py py-obj">outarr</em>的形状与<em class="xref py py-obj">arr</em>的形状相同，除了沿<em class="xref py py-obj">轴</em>尺寸，其中<em class="xref py py-obj">outarr  t3 &gt;等于<em class="xref py py-obj">func1d</em>的返回值的大小。</em></span><span class="yiyi-st" id="yiyi-33">如果<em class="xref py py-obj">func1d</em>返回标量<em class="xref py py-obj">，则</em>的维数将少于<em class="xref py py-obj">arr</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-34">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.apply_over_axes.html#numpy.apply_over_axes" title="numpy.apply_over_axes"><code class="xref py py-obj docutils literal"><span class="pre">apply_over_axes</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">在多个轴上重复应用一个函数。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">my_func</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="sd">&quot;&quot;&quot;Average first and last element of a 1-D array&quot;&quot;&quot;</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mf">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="n">my_func</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([ 4.,  5.,  6.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="n">my_func</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([ 2.,  5.,  8.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">对于不返回标量的函数，<em class="xref py py-obj">outarr</em>中的维数与<em class="xref py py-obj">arr</em>相同。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="nb">sorted</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([[1, 7, 8],</span>
+<span class="go">       [3, 4, 9],</span>
+<span class="go">       [2, 5, 6]])</span>
+</pre></div>
+</div>
+</dd></dl>

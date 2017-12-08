@@ -1,0 +1,66 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.binary_repr</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.binary_repr.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.binary_repr.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.binary_repr"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">binary_repr</code><span class="sig-paren">(</span><em>num</em>, <em>width=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L2118-L2192"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回输入号码的二进制表示为字符串。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">对于负数，如果未给定宽度，则在前面添加减号。</span><span class="yiyi-st" id="yiyi-16">如果给定了宽度，则相对于该宽度返回数字的二的补码。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">在二进制补码系统中，负数由绝对值的二进制补码表示。</span><span class="yiyi-st" id="yiyi-18">这是在计算机上表示有符号整数的最常用方法<a class="reference internal" href="#r16" id="id1">[R16]</a>。</span><span class="yiyi-st" id="yiyi-19">N位二进制补码系统可以表示<img alt="-2^{N-1}" class="math" src="../../_images/math/2c9edaec65f82b211c6a6b27a1277458d581b74a.png" style="vertical-align: 0px">至<img alt="+2^{N-1}-1" class="math" src="../../_images/math/85a60abbb0de95e06cfa9133d6356870c68d1dc4.png" style="vertical-align: -2px">范围内的每个整数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>num</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">只能使用整数十进制数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>width</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">如果<em class="xref py py-obj">num</em>为正，则返回的字符串的长度，如果<em class="xref py py-obj">num</em>为负，则为二进制补码的长度。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>bin</strong>：str</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">二进制表示<em class="xref py py-obj">num</em>或<em class="xref py py-obj">num</em>的二进制补码。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.base_repr.html#numpy.base_repr" title="numpy.base_repr"><code class="xref py py-obj docutils literal"><span class="pre">base_repr</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">返回给定基本系统中数字的字符串表示形式。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="#numpy.binary_repr" title="numpy.binary_repr"><code class="xref py py-obj docutils literal"><span class="pre">binary_repr</span></code></a>等同于使用基准2的<a class="reference internal" href="numpy.base_repr.html#numpy.base_repr" title="numpy.base_repr"><code class="xref py py-obj docutils literal"><span class="pre">base_repr</span></code></a>，但速度快了25倍。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r16" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-34">[R16]</span></td><td><span class="yiyi-st" id="yiyi-35"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em>维基百科，“Two&apos;s complement”，<a class="reference external" href="http://en.wikipedia.org/wiki/Two&apos;s_complement">http://en.wikipedia.org/wiki/Two&apos; s_complement</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">&apos;11&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">&apos;-11&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">&apos;0011&apos;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37">当输入数字为负数且指定宽度时，返回二进制补码：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">&apos;1101&apos;</span>
+</pre></div>
+</div>
+</dd></dl>

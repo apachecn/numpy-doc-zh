@@ -1,0 +1,56 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.assert_array_max_ulp</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_array_max_ulp.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_array_max_ulp.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.assert_array_max_ulp"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.</code><code class="descname">assert_array_max_ulp</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>maxulp=1</em>, <em>dtype=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/utils.py#L1456-L1498"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">检查数组的所有项目在最后一个位置的最多N个单位不同。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a，b</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入要比较的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>maxulp</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">最后一个元素<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>的最大单位数可以不同。</span><span class="yiyi-st" id="yiyi-20">默认值为1。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">数据类型将<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>转换为if。</span><span class="yiyi-st" id="yiyi-23">默认值为None。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>ret</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">包含<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>中的项之间的可表示浮点数的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>AssertionError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">如果一个或多个元素的差异大于<em class="xref py py-obj">maxulp</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.testing.assert_array_almost_equal_nulp.html#numpy.testing.assert_array_almost_equal_nulp" title="numpy.testing.assert_array_almost_equal_nulp"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_almost_equal_nulp</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">比较两个数组与它们的间距。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_max_ulp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
+</pre></div>
+</div>
+</dd></dl>

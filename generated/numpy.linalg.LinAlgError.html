@@ -1,0 +1,34 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.LinAlgError</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.LinAlgError.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.LinAlgError.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="exception">
+<dt id="numpy.linalg.LinAlgError"><span class="yiyi-st" id="yiyi-13"> <em class="property">exception </em><code class="descclassname">numpy.linalg.</code><code class="descname">LinAlgError</code><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L43-L70"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">linalg函数引发的通用Python异常派生对象。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">通用异常类，从Python的exception.Exception类派生，在线性代数相关条件阻止进一步正确执行函数时，在linalg函数中以编程方式引发。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><span class="yiyi-st" id="yiyi-17"><strong>无</strong></span></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-18">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">linalg</span> <span class="k">as</span> <span class="n">LA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">  File &quot;...linalg.py&quot;, line 350,</span>
+<span class="gr">    in inv return wrap(solve(a, identity(a.shape[0], dtype=a.dtype)))</span>
+<span class="gr">  File &quot;...linalg.py&quot;, line 249,</span>
+<span class="gr">    in solve</span>
+<span class="gr">    raise LinAlgError(&apos;Singular matrix&apos;)</span>
+<span class="gr">numpy.linalg.LinAlgError</span>: <span class="n">Singular matrix</span>
+</pre></div>
+</div>
+</dd></dl>

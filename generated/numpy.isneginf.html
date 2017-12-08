@@ -1,0 +1,61 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.isneginf</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.isneginf.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.isneginf.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.isneginf"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">isneginf</code><span class="sig-paren">(</span><em>x</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/ufunclike.py#L116-L177"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">测试元素为负无穷大，返回结果为bool数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>y</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">与<em class="xref py py-obj">x</em>具有相同形状和类型的布尔数组，用于存储结果。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">与输入具有相同尺寸的布尔数组。</span><span class="yiyi-st" id="yiyi-23">如果未提供第二个参数，则返回numpy布尔数组，其值为True，其中输入的相应元素为负无穷大，值为False，其中输入的元素不为负无穷大。</span></p>
+<p><span class="yiyi-st" id="yiyi-24">如果提供第二个参数，结果将存储在那里。</span><span class="yiyi-st" id="yiyi-25">如果该数组的类型是数字类型，则结果表示为零和一，如果类型为布尔，则表示为False和True。</span><span class="yiyi-st" id="yiyi-26">返回值<em class="xref py py-obj">y</em>则是该数组的引用。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.isinf.html#numpy.isinf" title="numpy.isinf"><code class="xref py py-obj docutils literal"><span class="pre">isinf</span></code></a>，<a class="reference internal" href="numpy.isposinf.html#numpy.isposinf" title="numpy.isposinf"><code class="xref py py-obj docutils literal"><span class="pre">isposinf</span></code></a>，<a class="reference internal" href="numpy.isnan.html#numpy.isnan" title="numpy.isnan"><code class="xref py py-obj docutils literal"><span class="pre">isnan</span></code></a>，<a class="reference internal" href="numpy.isfinite.html#numpy.isfinite" title="numpy.isfinite"><code class="xref py py-obj docutils literal"><span class="pre">isfinite</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-30">Numpy使用IEEE标准二进制浮点运算（IEEE 754）。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">如果在x是标量输入时，或者如果第一个和第二个参数具有不同的形状时，也提供第二个参数，则会产生错误。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isneginf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">NINF</span><span class="p">)</span>
+<span class="go">array(True, dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isneginf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="go">array(False, dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isneginf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">PINF</span><span class="p">)</span>
+<span class="go">array(False, dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isneginf</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+<span class="go">array([ True, False, False], dtype=bool)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isneginf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">array([1, 0, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([1, 0, 0])</span>
+</pre></div>
+</div>
+</dd></dl>

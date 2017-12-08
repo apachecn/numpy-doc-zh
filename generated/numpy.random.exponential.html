@@ -1,0 +1,52 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.exponential</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.exponential.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.exponential.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.exponential"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">exponential</code><span class="sig-paren">(</span><em>scale=1.0</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从指数分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">其概率密度函数为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-16">对于<code class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>和其他地方为0。</span><span class="yiyi-st" id="yiyi-17"><img alt="\beta" class="math" src="../../_images/math/af66ae03768d95d441cd1f37a0692f006344742c.png" style="vertical-align: -3px">是比例参数，它是速率参数<img alt="\lambda = 1/\beta" class="math" src="../../_images/math/7bbf325e108c6f29b5e02379c54fd021437e3ac8.png" style="vertical-align: -4px">的倒数。</span><span class="yiyi-st" id="yiyi-18">速率参数是指数分布<a class="reference internal" href="#r218" id="id1">[R218]</a>的备选的广泛使用的参数化。</span></p>
+<p><span class="yiyi-st" id="yiyi-19">指数分布是几何分布的连续模拟。</span><span class="yiyi-st" id="yiyi-20">它描述了许多常见的情况，例如在许多暴雨<a class="reference internal" href="#r216" id="id2">[R216]</a>上测量的雨滴的大小，或者在请求到维基百科<a class="reference internal" href="#r217" id="id3">[R217]</a>的页面之间的时间。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>scale</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">缩放参数，<img alt="\beta = 1/\lambda" class="math" src="../../_images/math/c53a95e8e3df4adf767fb26bd1f054691bf92769.png" style="vertical-align: -4px">。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">输出形状。</span><span class="yiyi-st" id="yiyi-26">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-27">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r216" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-29">[R216]</span></td><td><span class="yiyi-st" id="yiyi-30"><em>（<a class="fn-backref" href="#id2">1</a>，<a class="fn-backref" href="#id4">2</a>）</em> Peyton Z.Peebles Jr.，“Probability，Random Variables and Random Signal Principles”，4th ed，2001，p 。 57。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r217" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-31">[R217]</span></td><td><span class="yiyi-st" id="yiyi-32"><em>（<a class="fn-backref" href="#id3">1</a>，<a class="fn-backref" href="#id5">2</a>）</em>“Poisson Process”，Wikipedia，<a class="reference external" href="http://en.wikipedia.org/wiki/Poisson_process">http://en.wikipedia.org/wiki/Poisson_process </a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r218" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-33">[R218]</span></td><td><span class="yiyi-st" id="yiyi-34"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id6">2</a>）</em>指数分布，维基百科，<a class="reference external" href="http://en.wikipedia.org/wiki/Exponential_distribution">http://en.wikipedia.org/wiki/Exponential_distribution </a></span></td></tr>
+</tbody>
+</table>
+</dd></dl>

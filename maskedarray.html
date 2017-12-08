@@ -1,0 +1,63 @@
+
+<span id="maskedarray"></span><h1><span class="yiyi-st" id="yiyi-11">Masked arrays</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/maskedarray.html">https://docs.scipy.org/doc/numpy/reference/maskedarray.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-12">屏蔽数组是可能具有缺失或无效条目的数组。</span><span class="yiyi-st" id="yiyi-13"><code class="xref py py-mod docutils literal"><span class="pre">numpy.ma</span></code>模块为numpy提供了几乎与工作相似的替换，支持带有掩码的数据数组。</span></p>
+<div class="toctree-wrapper compound" id="index-0">
+<ul>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-17"><a class="reference internal" href="maskedarray.generic.html"><code class="docutils literal"><span class="pre">numpy.ma</span></code>模块</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-14"><a class="reference internal" href="maskedarray.generic.html#rationale">理由</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-15"><a class="reference internal" href="maskedarray.generic.html#what-is-a-masked-array">什么是屏蔽数组？</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-16"><a class="reference internal" href="maskedarray.generic.html#id1"><code class="docutils literal"><span class="pre">numpy.ma</span></code>模块</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="maskedarray.generic.html#using-numpy-ma">使用numpy.ma</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="maskedarray.generic.html#constructing-masked-arrays">构造屏蔽数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="maskedarray.generic.html#accessing-the-data">访问数据</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="maskedarray.generic.html#accessing-the-mask">访问掩码</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="maskedarray.generic.html#accessing-only-the-valid-entries">只能存取有效的项目</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="maskedarray.generic.html#modifying-the-mask">修改遮罩</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="maskedarray.generic.html#indexing-and-slicing">索引和切片</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="maskedarray.generic.html#operations-on-masked-arrays">对掩码数组</a>的操作</span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="maskedarray.generic.html#examples">示例</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="maskedarray.generic.html#data-with-a-given-value-representing-missing-data">具有表示缺失数据的给定值的数据</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="maskedarray.generic.html#filling-in-the-missing-data">填写缺少的数据</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="maskedarray.generic.html#numerical-operations">数值运算</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="maskedarray.generic.html#ignoring-extreme-values">忽略极值</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="maskedarray.baseclass.html"><code class="docutils literal"><span class="pre">numpy.ma</span></code>模块的常数</a></span></li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="maskedarray.baseclass.html#the-maskedarray-class"><code class="docutils literal"><span class="pre">MaskedArray</span></code>类</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="maskedarray.baseclass.html#attributes-and-properties-of-masked-arrays">掩码数组</a>的属性和属性</span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="maskedarray.baseclass.html#maskedarray-methods"><code class="docutils literal"><span class="pre">MaskedArray</span></code>方法</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="maskedarray.baseclass.html#conversion">转换</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="maskedarray.baseclass.html#shape-manipulation">形状操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="maskedarray.baseclass.html#item-selection-and-manipulation">项目选择和处理</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="maskedarray.baseclass.html#pickling-and-copy">腌制和复制</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="maskedarray.baseclass.html#calculations">计算</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="maskedarray.baseclass.html#arithmetic-and-comparison-operations">算术和比较操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="maskedarray.baseclass.html#representation">表示</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="maskedarray.baseclass.html#special-methods">特殊方法</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="maskedarray.baseclass.html#specific-methods">具体方法</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="routines.ma.html">屏蔽数组操作</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="routines.ma.html#constants">常量</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="routines.ma.html#creation">创建</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="routines.ma.html#inspecting-the-array">检查数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="routines.ma.html#manipulating-a-maskedarray">操作MaskedArray</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="routines.ma.html#operations-on-masks">面罩操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="routines.ma.html#conversion-operations">转换操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="routines.ma.html#masked-arrays-arithmetics">掩蔽数组算术</a></span></li>
+</ul>
+</li>
+</ul>
+</div>

@@ -1,0 +1,57 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.true_divide</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.true_divide.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.true_divide.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.true_divide"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">true_divide</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;true_divide&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">按元素方式返回输入的真正除法。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">而不是Python传统的“分区”，这返回了一个真正的分裂。</span><span class="yiyi-st" id="yiyi-16">True除法调整输出类型以呈现最佳答案，而不考虑输入类型。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>x1</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">股息数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>x2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">除数数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">如果两个输入都是标量，则结果是标量，否则为ndarray。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-26">在Python 2.2中添加了分区运算符<code class="docutils literal"><span class="pre">//</span></code>，使得<code class="docutils literal"><span class="pre">//</span></code>和<code class="docutils literal"><span class="pre">/</span></code>等效运算符。</span><span class="yiyi-st" id="yiyi-27">The default floor division operation of <code class="docutils literal"><span class="pre">/</span></code> can be replaced by true division with <code class="docutils literal"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span> <span class="pre">division</span></code>.</span></p>
+<p><span class="yiyi-st" id="yiyi-28">在Python 3.0中，<code class="docutils literal"><span class="pre">//</span></code>是底除法运算符，<code class="docutils literal"><span class="pre">/</span></code>是真正的除法运算符。</span><span class="yiyi-st" id="yiyi-29"><code class="docutils literal"><span class="pre">true_divide（x1，</span> <span class="pre">x2）</span></code>函数相当于Python中的真正除法。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">true_divide</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">array([ 0.  ,  0.25,  0.5 ,  0.75,  1.  ])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">/</span><span class="mi">4</span>
+<span class="go">array([0, 0, 0, 0, 1])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">//</span><span class="mi">4</span>
+<span class="go">array([0, 0, 0, 0, 1])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">/</span><span class="mi">4</span>
+<span class="go">array([ 0.  ,  0.25,  0.5 ,  0.75,  1.  ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">//</span><span class="mi">4</span>
+<span class="go">array([0, 0, 0, 0, 1])</span>
+</pre></div>
+</div>
+</dd></dl>

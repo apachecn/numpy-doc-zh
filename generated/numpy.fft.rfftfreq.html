@@ -1,0 +1,54 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fft.rfftfreq</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.rfftfreq.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.rfftfreq.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fft.rfftfreq"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.fft.</code><code class="descname">rfftfreq</code><span class="sig-paren">(</span><em>n</em>, <em>d=1.0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/fft/helper.py#L176-L224"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回离散傅立叶变换采样频率（用于rfft，irfft）。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回的浮点数组<em class="xref py py-obj">f</em>包含以每个单位采样间隔的周期为单位的频率仓中心（零开始处）。</span><span class="yiyi-st" id="yiyi-16">例如，如果采样间隔以秒为单位，则频率单位为周期/秒。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">给定窗口长度<em class="xref py py-obj">n</em>和采样间隔<em class="xref py py-obj">d</em>：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span>     <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>     <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>   <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="n">even</span>
+<span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>   <span class="k">if</span> <span class="n">n</span> <span class="ow">is</span> <span class="n">odd</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-18">与<a class="reference internal" href="numpy.fft.fftfreq.html#numpy.fft.fftfreq" title="numpy.fft.fftfreq"><code class="xref py py-obj docutils literal"><span class="pre">fftfreq</span></code></a>（但像<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.fftpack.rfftfreq.html#scipy.fftpack.rfftfreq" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.fftpack.rfftfreq</span></code></a>）不同，奈奎斯特频率分量被认为是正的。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>n</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">窗口长度。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>d</strong>：标量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">采样间隔（采样率的倒数）。</span><span class="yiyi-st" id="yiyi-24">默认值为1。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>f</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">包含采样频率的长度<code class="docutils literal"><span class="pre">n // 2</span> <span class="pre">+</span> <span class="pre">1</span></code></span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fourier</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">size</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sample_rate</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">1.</span><span class="o">/</span><span class="n">sample_rate</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span>
+<span class="go">array([  0.,  10.,  20.,  30.,  40., -50., -40., -30., -20., -10.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfftfreq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">1.</span><span class="o">/</span><span class="n">sample_rate</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span>
+<span class="go">array([  0.,  10.,  20.,  30.,  40.,  50.])</span>
+</pre></div>
+</div>
+</dd></dl>

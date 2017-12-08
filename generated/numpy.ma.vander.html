@@ -1,0 +1,85 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.vander</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.vander.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.vander.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.vander"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">vander</code><span class="sig-paren">(</span><em>x</em>, <em>n=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/extras.py#L1754-L1763"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">生成Vandermonde矩阵。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">输出矩阵的列是输入向量的幂。</span><span class="yiyi-st" id="yiyi-17">幂的阶数由<em class="xref py py-obj">增加的</em>布尔参数决定。</span><span class="yiyi-st" id="yiyi-18">具体地，当<em class="xref py py-obj">增加</em>为False时，<em class="xref py py-obj">i</em>输出列是按<code class="docutils literal"><span class="pre">N</span> <span class="pre"> - </span> <span class="pre">i</span> <span class="pre"> - </span> <span class="pre">1</span></code>。</span><span class="yiyi-st" id="yiyi-19">这样的在每行中具有几何级数的矩阵被命名为Alexandre-Theophile Vandermonde。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">1-D输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>N</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">输出中的列数。</span><span class="yiyi-st" id="yiyi-25">如果未指定<em class="xref py py-obj">N</em>，则返回正方形数组（<code class="docutils literal"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">len（x）</span> / t1&gt;）。</code></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>增加</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">列的权力的顺序。</span><span class="yiyi-st" id="yiyi-28">如果为True，则功率从左到右增加，如果为False（默认值），则它们相反。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-29"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">Vandermonde矩阵。</span><span class="yiyi-st" id="yiyi-33">如果<em class="xref py py-obj">增加</em>是假，则第一列是<code class="docutils literal"><span class="pre">x^(N-1)</span></code>，第二个<code class="docutils literal"><span class="pre">x^(N-2)</span></code></span><span class="yiyi-st" id="yiyi-34">如果<em class="xref py py-obj">增加</em>为真，则列为<code class="docutils literal"><span class="pre">x ^ 0，</span> <span class="pre">x ^ 1，</span> <span class="pre">...， t4 &gt; <span class="pre">x ^（N-1）</span></span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-35">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-36"><code class="xref py py-obj docutils literal"><span class="pre">polynomial.polynomial.polyvander</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-38">输入数组中的掩码值导致零行。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="go">array([[ 1,  1,  1],</span>
+<span class="go">       [ 4,  2,  1],</span>
+<span class="go">       [ 9,  3,  1],</span>
+<span class="go">       [25,  5,  1]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)])</span>
+<span class="go">array([[ 1,  1,  1],</span>
+<span class="go">       [ 4,  2,  1],</span>
+<span class="go">       [ 9,  3,  1],</span>
+<span class="go">       [25,  5,  1]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([[  1,   1,   1,   1],</span>
+<span class="go">       [  8,   4,   2,   1],</span>
+<span class="go">       [ 27,   9,   3,   1],</span>
+<span class="go">       [125,  25,   5,   1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">increasing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([[  1,   1,   1,   1],</span>
+<span class="go">       [  1,   2,   4,   8],</span>
+<span class="go">       [  1,   3,   9,  27],</span>
+<span class="go">       [  1,   5,  25, 125]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">正方形Vandermonde矩阵的行列式是输入向量的值之间的差的乘积：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="go">48.000000000000043</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">5</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">5</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">5</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">48</span>
+</pre></div>
+</div>
+</dd></dl>

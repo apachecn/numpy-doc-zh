@@ -1,0 +1,52 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.chararray.copy</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.chararray.copy.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.chararray.copy.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.chararray.copy"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">chararray.</code><code class="descname">copy</code><span class="sig-paren">(</span><em>order=&apos;C&apos;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回数组的副本。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>订单</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;，&apos;K&apos;}，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-18">控制副本的内存布局。</span><span class="yiyi-st" id="yiyi-19">&apos;C&apos;表示C阶，&apos;F&apos;表示F阶，&apos;A&apos;表示如果<em class="xref py py-obj">a</em>是Fortran连续的&apos;F&apos;，否则为&apos;C&apos;。</span><span class="yiyi-st" id="yiyi-20">&apos;K&apos;表示尽可能接近<em class="xref py py-obj">a</em>的布局。</span><span class="yiyi-st" id="yiyi-21">（请注意，此函数和：func：numpy.copy非常相似，但它们的order = arguments具有不同的默认值。）</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-22">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="numpy.copy.html#numpy.copy" title="numpy.copy"><code class="xref py py-obj docutils literal"><span class="pre">numpy.copy</span></code></a>，<a class="reference internal" href="numpy.copyto.html#numpy.copyto" title="numpy.copyto"><code class="xref py py-obj docutils literal"><span class="pre">numpy.copyto</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[0, 0, 0],</span>
+<span class="go">       [0, 0, 0]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([[1, 2, 3],</span>
+<span class="go">       [4, 5, 6]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&apos;C_CONTIGUOUS&apos;</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

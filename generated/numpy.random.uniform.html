@@ -1,0 +1,82 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.uniform</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.uniform.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.uniform.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.uniform"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">uniform</code><span class="sig-paren">(</span><em>low=0.0</em>, <em>high=1.0</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从均匀分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">样本在半开区间<code class="docutils literal"><span class="pre">[低，</span> <span class="pre">高）</span></code>（包括低，但不包括高）上均匀分布。</span><span class="yiyi-st" id="yiyi-16">换句话说，给定间隔内的任何值同样可能由<a class="reference internal" href="#numpy.random.uniform" title="numpy.random.uniform"><code class="xref py py-obj docutils literal"><span class="pre">uniform</span></code></a>来绘制。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>低</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输出间隔的下限。</span><span class="yiyi-st" id="yiyi-20">所有生成的值将大于或等于低。</span><span class="yiyi-st" id="yiyi-21">默认值为0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>高</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">输出间隔的上边界。</span><span class="yiyi-st" id="yiyi-24">所有生成的值将小于高。</span><span class="yiyi-st" id="yiyi-25">默认值为1.0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">输出形状。</span><span class="yiyi-st" id="yiyi-28">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-29">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">绘制样本，形状<em class="xref py py-obj">大小</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-33">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.random.randint.html#numpy.random.randint" title="numpy.random.randint"><code class="xref py py-obj docutils literal"><span class="pre">randint</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">离散均匀分布，产生整数。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="numpy.random.random_integers.html#numpy.random.random_integers" title="numpy.random.random_integers"><code class="xref py py-obj docutils literal"><span class="pre">random_integers</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-37">在闭合间隔<code class="docutils literal"><span class="pre">[低，</span> <span class="pre">高]</span></code>上离散均匀分布。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="numpy.random.random_sample.html#numpy.random.random_sample" title="numpy.random.random_sample"><code class="xref py py-obj docutils literal"><span class="pre">random_sample</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-39">浮点均匀分布在<code class="docutils literal"><span class="pre">[0，</span> <span class="pre">1）</span></code>“。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.random.random.html#numpy.random.random" title="numpy.random.random"><code class="xref py py-obj docutils literal"><span class="pre">random</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="numpy.random.random_sample.html#numpy.random.random_sample" title="numpy.random.random_sample"><code class="xref py py-obj docutils literal"><span class="pre">random_sample</span></code></a>的别名。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.random.rand.html#numpy.random.rand" title="numpy.random.rand"><code class="xref py py-obj docutils literal"><span class="pre">rand</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">接受维度作为输入的便利函数，例如<code class="docutils literal"><span class="pre">rand(2,2)</span></code>将生成2&#xD7;2的浮点数组，均匀分布在<code class="docutils literal"><span class="pre">[0， t3 &gt; <span class="pre">1）</span></span></code>。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-45">均匀分布的概率密度函数为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-46">区间<code class="docutils literal"><span class="pre">[a，</span> <span class="pre">b）</span></code>中的任何地方，其他地方为零。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-47">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-48">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-49">所有值都在给定的时间间隔内：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">s</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">s</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-50">显示样本的直方图，以及概率密度函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">bins</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-51">（<a class="reference external" href="../../reference/generated/numpy-random-uniform-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-uniform-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-uniform-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-uniform-1.png" src="../../_images/numpy-random-uniform-1.png">
+</div>
+</dd></dl>

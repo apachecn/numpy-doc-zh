@@ -1,0 +1,85 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.standard_t</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.standard_t.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.standard_t.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.standard_t"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">standard_t</code><span class="sig-paren">(</span><em>df</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从具有<em class="xref py py-obj">df</em>自由度的标准学生t分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">双曲线分布的特殊情况。</span><span class="yiyi-st" id="yiyi-16">随着<em class="xref py py-obj">df</em>变大，结果类似于标准正态分布（<a class="reference internal" href="numpy.random.standard_normal.html#numpy.random.standard_normal" title="numpy.random.standard_normal"><code class="xref py py-obj docutils literal"><span class="pre">standard_normal</span></code></a>）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>df</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">自由度，应&gt; 0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">输出形状。</span><span class="yiyi-st" id="yiyi-22">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-23">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>samples</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">绘制样品。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">t分布的概率密度函数为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-29">t检验基于数据来自正态分布的假设。</span><span class="yiyi-st" id="yiyi-30">t检验提供了一种方法来测试样本平均值（即从数据计算的平均值）是否是真实平均值的良好估计。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">t分布的推导最初于1908年由William Gisset在都柏林的吉尼斯啤酒厂工作时发表。</span><span class="yiyi-st" id="yiyi-32">由于专有问题，他不得不用假名发布，所以他使用学生的名字。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r267" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-34">[R267]</span></td><td><span class="yiyi-st" id="yiyi-35"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id3">2</a>）</em> Dalgaard，Peter，“Introductory Statistics With R”，Springer，</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r268" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-36"><a class="fn-backref" href="#id2">[R268]</a></span></td><td><span class="yiyi-st" id="yiyi-37">维基百科，“学生t分布”<a class="reference external" href="http://en.wikipedia.org/wiki/Student&apos;s_t-distribution">http://en.wikipedia.org/wiki/Student&apos;s_t-distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-39">从Dalgaard第83页<a class="reference internal" href="#r267" id="id3">[R267]</a>，假设Kj中11名妇女的日能量摄入量为：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">intake</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5260.</span><span class="p">,</span> <span class="mi">5470</span><span class="p">,</span> <span class="mi">5640</span><span class="p">,</span> <span class="mi">6180</span><span class="p">,</span> <span class="mi">6390</span><span class="p">,</span> <span class="mi">6515</span><span class="p">,</span> <span class="mi">6805</span><span class="p">,</span> <span class="mi">7515</span><span class="p">,</span> \
+<span class="gp">... </span>                   <span class="mi">7515</span><span class="p">,</span> <span class="mi">8230</span><span class="p">,</span> <span class="mi">8770</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">他们的能量摄入是否偏离建议的7725 kJ的值？</span></p>
+<p><span class="yiyi-st" id="yiyi-41">我们有10个自由度，那么样本平均值是否在推荐值的95％以内？</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_t</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">intake</span><span class="p">)</span>
+<span class="go">6753.636363636364</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">intake</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1142.1232221373727</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">计算t统计量，将ddof参数设置为未偏置值，因此标准差中的除数将是自由度N-1。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">intake</span><span class="p">)</span><span class="o">-</span><span class="mi">7725</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">intake</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">intake</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">对于单边t检验，分布中的t有多远出现？</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s</span><span class="o">&lt;</span><span class="n">t</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+<span class="go">0.0090699999999999999  #random</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-44">因此，p值约为0.009，这表示零假设具有约99％的真实的概率。</span></p>
+<p><span class="yiyi-st" id="yiyi-45">（<a class="reference external" href="../../reference/generated/numpy-random-standard_t-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-standard_t-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-standard_t-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-standard_t-1.png" src="../../_images/numpy-random-standard_t-1.png">
+</div>
+</dd></dl>

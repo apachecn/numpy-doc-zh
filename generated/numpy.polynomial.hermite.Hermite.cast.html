@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-15">numpy.polynomial.hermite.Hermite.cast</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.hermite.Hermite.cast.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.hermite.Hermite.cast.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.polynomial.hermite.Hermite.cast"><span class="yiyi-st" id="yiyi-16"> <code class="descclassname">Hermite.</code><code class="descname">cast</code><span class="sig-paren">(</span><em>series</em>, <em>domain=None</em>, <em>window=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/_polybase.py#L925-L965"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-17">将系列转换为此类的系列。</span></p>
+<p><span class="yiyi-st" id="yiyi-18"><em class="xref py py-obj">系列</em>应为numpy.polynomial模块支持的某种类型的多项式系列的实例，但可以是支持convert方法的其他类。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-19"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>系列</strong>：系列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">要转换的系列实例。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>domain</strong>：{None，array_like}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">如果给定，数组必须是<code class="docutils literal"><span class="pre">[beg，</span> <span class="pre">end]</span></code>的形式，其中<code class="docutils literal"><span class="pre">beg</span></code>和<code class="docutils literal"><span class="pre">end</span></code>是域的端点。</span><span class="yiyi-st" id="yiyi-25">如果给出了None，则使用类域。</span><span class="yiyi-st" id="yiyi-26">默认值为None。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>窗口</strong>：{None，array_like}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">如果给定，则结果数组必须是如果形式<code class="docutils literal"><span class="pre">[beg，</span> <span class="pre">end]</span></code>，其中<code class="docutils literal"><span class="pre">beg</span></code>和<code class="docutils literal"><span class="pre">end</span></code>是窗口的端点。</span><span class="yiyi-st" id="yiyi-29">如果给出了None，则使用类窗口。</span><span class="yiyi-st" id="yiyi-30">默认值为None。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>new_series</strong>：series</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-33">一系列与调用类相同的类，并且在求值时等于<em class="xref py py-obj">系列</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-34">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.polynomial.hermite.Hermite.convert.html#numpy.polynomial.hermite.Hermite.convert" title="numpy.polynomial.hermite.Hermite.convert"><code class="xref py py-obj docutils literal"><span class="pre">convert</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">类似实例方法</span></dd>
+</dl>
+</div>
+</dd></dl>

@@ -1,0 +1,59 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.diagflat</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.diagflat.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.diagflat.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.diagflat"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">diagflat</code><span class="sig-paren">(</span><em>v</em>, <em>k=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/twodim_base.py#L315-L371"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">创建一个二维数组，将扁平输入作为对角线。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>v</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数据，被平展并设置为输出的<em class="xref py py-obj">k</em>对角线。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>k</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">对角线设置； 0，默认，对应于“主”对角线，一个正（负）<em class="xref py py-obj">k</em>给出对角线上方（下方）的对数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">2-D输出数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="numpy.diag.html#numpy.diag" title="numpy.diag"><code class="xref py py-obj docutils literal"><span class="pre">diag</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-25">MATLAB工作类似于1-D和2-D数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.diagonal.html#numpy.diagonal" title="numpy.diagonal"><code class="xref py py-obj docutils literal"><span class="pre">diagonal</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-27">返回指定的对角线。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.trace.html#numpy.trace" title="numpy.trace"><code class="xref py py-obj docutils literal"><span class="pre">trace</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">沿对角线求和。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">diagflat</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+<span class="go">array([[1, 0, 0, 0],</span>
+<span class="go">       [0, 2, 0, 0],</span>
+<span class="go">       [0, 0, 3, 0],</span>
+<span class="go">       [0, 0, 0, 4]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">diagflat</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[0, 1, 0],</span>
+<span class="go">       [0, 0, 2],</span>
+<span class="go">       [0, 0, 0]])</span>
+</pre></div>
+</div>
+</dd></dl>

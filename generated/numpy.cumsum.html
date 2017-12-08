@@ -1,0 +1,74 @@
+
+<h1><span class="yiyi-st" id="yiyi-9">numpy.cumsum</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.cumsum.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.cumsum.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.cumsum"><span class="yiyi-st" id="yiyi-10"> <code class="descclassname">numpy.</code><code class="descname">cumsum</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em>, <em>dtype=None</em>, <em>out=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L2067-L2135"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-11">返回沿给定轴的元素的累积和。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-12">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-13"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-14">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-15"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-16">计算累加和的轴。</span><span class="yiyi-st" id="yiyi-17">默认值（None）是计算扁平数组上的累加。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">返回数组和累加器元素的累加器类型。</span><span class="yiyi-st" id="yiyi-20">如果未指定<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，则默认为<em class="xref py py-obj">a</em>的dtype，除非<em class="xref py py-obj">a</em>具有精度小于默认值的整数dtype平台整数。</span><span class="yiyi-st" id="yiyi-21">在这种情况下，使用默认平台整数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">用于放置结果的替代输出数组。</span><span class="yiyi-st" id="yiyi-24">它必须具有与预期输出相同的形状和缓冲区长度，但如果需要，将转换类型。</span><span class="yiyi-st" id="yiyi-25">有关更多详细信息，请参阅<code class="xref py py-obj docutils literal"><span class="pre">doc.ufuncs</span></code>（“输出参数”部分）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>cumsum_along_axis</strong>：ndarray。</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">除非指定<em class="xref py py-obj">out</em>，否则将返回保存结果的新数组，在这种情况下将返回对<em class="xref py py-obj">out</em>的引用。</span><span class="yiyi-st" id="yiyi-29">The result has the same size as <em class="xref py py-obj">a</em>, and the same shape as <em class="xref py py-obj">a</em> if <em class="xref py py-obj">axis</em> is not None or <em class="xref py py-obj">a</em> is a 1-d array.</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.sum.html#numpy.sum" title="numpy.sum"><code class="xref py py-obj docutils literal"><span class="pre">sum</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">总数组元素。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.trapz.html#numpy.trapz" title="numpy.trapz"><code class="xref py py-obj docutils literal"><span class="pre">trapz</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">使用复合梯形法则集合数组值。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.diff.html#numpy.diff" title="numpy.diff"><code class="xref py py-obj docutils literal"><span class="pre">diff</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">计算沿给定轴的第n个离散差分。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-38">当使用整数类型时，算术是模块化的，并且在溢出时不产生错误。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[1, 2, 3],</span>
+<span class="go">       [4, 5, 6]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([ 1,  3,  6, 10, 15, 21])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>     <span class="c1"># specifies type of output value(s)</span>
+<span class="go">array([  1.,   3.,   6.,  10.,  15.,  21.])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>      <span class="c1"># sum over rows for each of the 3 columns</span>
+<span class="go">array([[1, 2, 3],</span>
+<span class="go">       [5, 7, 9]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>      <span class="c1"># sum over columns for each of the 2 rows</span>
+<span class="go">array([[ 1,  3,  6],</span>
+<span class="go">       [ 4,  9, 15]])</span>
+</pre></div>
+</div>
+</dd></dl>

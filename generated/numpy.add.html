@@ -1,0 +1,43 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.add</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.add.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.add.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.add"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">add</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;add&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">按元素添加参数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x1，x2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">要添加的数组。</span><span class="yiyi-st" id="yiyi-18">如果<code class="docutils literal"><span class="pre">x1.shape</span> <span class="pre">！=  t&gt;&gt; <span class="pre">x2.shape</span></span></code>，它们必须可以广播到一个通用形状一个或另一个的形状）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>添加</strong>：ndarray或标量</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">元素方面的<em class="xref py py-obj">x1</em>和<em class="xref py py-obj">x2</em>之和。</span><span class="yiyi-st" id="yiyi-22">如果<em class="xref py py-obj">x1</em>和<em class="xref py py-obj">x2</em>都是标量，则返回标量。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-24">在数组广播方面等同于<em class="xref py py-obj">x1</em> + <em class="xref py py-obj">x2</em>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span>
+<span class="go">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">9.0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+<span class="go">array([[  0.,   2.,   4.],</span>
+<span class="go">       [  3.,   5.,   7.],</span>
+<span class="go">       [  6.,   8.,  10.]])</span>
+</pre></div>
+</div>
+</dd></dl>

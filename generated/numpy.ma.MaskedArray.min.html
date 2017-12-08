@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.min</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.min.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.min.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.min"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">min</code><span class="sig-paren">(</span><em>axis=None</em>, <em>out=None</em>, <em>fill_value=None</em>, <em>keepdims=&lt;class numpy._globals._NoValue&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L5435-L5495"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">沿给定轴返回最小值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>axis</strong>：{None，int}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">要操作的轴。</span><span class="yiyi-st" id="yiyi-19">默认情况下，<code class="docutils literal"><span class="pre">axis</span></code>为None，使用平展输入。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>out</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">用于放置结果的替代输出数组。</span><span class="yiyi-st" id="yiyi-22">必须与预期输出具有相同的形状和缓冲区长度。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>fill_value</strong>：{var}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">用于填充屏蔽值的值。</span><span class="yiyi-st" id="yiyi-25">如果为“无”，请使用<code class="xref py py-obj docutils literal"><span class="pre">minimum_fill_value</span></code>的输出。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>amin</strong>：array_like</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">保存结果的新数组。</span><span class="yiyi-st" id="yiyi-29">如果指定<code class="docutils literal"><span class="pre">out</span></code>，则返回<code class="docutils literal"><span class="pre">out</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-31"><code class="xref py py-obj docutils literal"><span class="pre">minimum_fill_value</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">返回给定数据类型的最小填充值。</span></dd>
+</dl>
+</div>
+</dd></dl>

@@ -1,0 +1,71 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.histogramdd</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.histogramdd.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.histogramdd.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.histogramdd"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">histogramdd</code><span class="sig-paren">(</span><em>sample</em>, <em>bins=10</em>, <em>range=None</em>, <em>normed=False</em>, <em>weights=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L660-L854"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算一些数据的多维直方图。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>sample</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">要进行直方图处理的数据。</span><span class="yiyi-st" id="yiyi-18">它必须是（N，D）数组或可以转换为这样的数据。</span><span class="yiyi-st" id="yiyi-19">结果数组的行是D维多面体中的点的坐标。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>bin</strong>：sequence或int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">bin规范：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-22">描述沿着每个维度的块边缘的数组序列。</span></li>
+<li><span class="yiyi-st" id="yiyi-23">每个维度的块数（nx，ny，... = bin）</span></li>
+<li><span class="yiyi-st" id="yiyi-24">所有维度的箱数（nx = ny = ... =箱柜）。</span></li>
+</ul>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>范围</strong>：sequence，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">如果在<em class="xref py py-obj">bin</em>中未明确给出边，则使用下边框和上边框边缘的序列。</span><span class="yiyi-st" id="yiyi-27">默认为每个维度的最小值和最大值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>normed</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">如果为False，则返回每个bin中的样本数。</span><span class="yiyi-st" id="yiyi-30">如果为True，返回bin密度<code class="docutils literal"><span class="pre">bin_count</span> <span class="pre">/</span> <span class="pre">sample_count</span> <span class="pre">/</span> <span class="pre">bin_volume</span> </code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>权重</strong>：（N，）array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">对每个样本<em class="xref py py-obj">（x_i，y_i，z_i，...）进行加权的值<em class="xref py py-obj">w_i</em>的数组。</em></span><span class="yiyi-st" id="yiyi-33">如果normed为True，则权重归一化为1。</span><span class="yiyi-st" id="yiyi-34">如果normed为False，则返回的直方图的值等于属于落入每个仓中的样本的权重的和。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-35">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-36"><strong>H</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-37">样本x的多维直方图。</span><span class="yiyi-st" id="yiyi-38">请参阅不同可能语义的规范和权重。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-39"><strong>edges</strong>：list</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-40">描述每个维度的块边缘的D数组的列表。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-41">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.histogram.html#numpy.histogram" title="numpy.histogram"><code class="xref py py-obj docutils literal"><span class="pre">histogram</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">1-D直方图</span></dd>
+<dt><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.histogram2d.html#numpy.histogram2d" title="numpy.histogram2d"><code class="xref py py-obj docutils literal"><span class="pre">histogram2d</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-45">2-D直方图</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-46">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogramdd</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">H</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">edges</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+<span class="go">((5, 8, 4), 6, 9, 5)</span>
+</pre></div>
+</div>
+</dd></dl>

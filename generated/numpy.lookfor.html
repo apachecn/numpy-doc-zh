@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.lookfor</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.lookfor.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.lookfor.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.lookfor"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">lookfor</code><span class="sig-paren">(</span><em>what</em>, <em>module=None</em>, <em>import_modules=True</em>, <em>regenerate=False</em>, <em>output=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/utils.py#L704-L830"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">在docstrings上执行关键字搜索。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">将显示与搜索匹配的对象的列表，并按相关性排序。</span><span class="yiyi-st" id="yiyi-16">所有给定的关键字都需要在文档字符串中找到，以便作为结果返回，但顺序并不重要。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>什么</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">包含要查找的字词的字符串。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>模块</strong>：str或list，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">文档字符串经过的模块的名称。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>import_modules</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">是否在包中导入子模块。</span><span class="yiyi-st" id="yiyi-24">默认值为True。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>重新生成</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">是否重新生成docstring缓存。</span><span class="yiyi-st" id="yiyi-27">默认值为False。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>输出</strong>：类文件，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">类似文件的对象将输出写入。</span><span class="yiyi-st" id="yiyi-30">如果省略，请使用寻呼机。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.source.html#numpy.source" title="numpy.source"><code class="xref py py-obj docutils literal"><span class="pre">source</span></code></a>，<a class="reference internal" href="numpy.info.html#numpy.info" title="numpy.info"><code class="xref py py-obj docutils literal"><span class="pre">info</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-34">通过检查关键字是否出现在函数名称中，在文档字符串的开始处等，大致确定相关性。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">lookfor</span><span class="p">(</span><span class="s1">&apos;binary representation&apos;</span><span class="p">)</span>
+<span class="go">Search results for &apos;binary representation&apos;</span>
+<span class="go">------------------------------------------</span>
+<span class="go">numpy.binary_repr</span>
+<span class="go">    Return the binary representation of the input number as a string.</span>
+<span class="go">numpy.core.setup_common.long_double_representation</span>
+<span class="go">    Given a binary dump as given by GNU od -b, look for long double</span>
+<span class="go">numpy.base_repr</span>
+<span class="go">    Return a string representation of a number in the given base system.</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,82 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fft.hfft</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.hfft.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.hfft.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fft.hfft"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.fft.</code><code class="descname">hfft</code><span class="sig-paren">(</span><em>a</em>, <em>n=None</em>, <em>axis=-1</em>, <em>norm=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/fft/fftpack.py#L462-L536"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算具有厄密对称（实际频谱）的信号的FFT。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>n</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输出的变换轴的长度。</span><span class="yiyi-st" id="yiyi-20">对于<em class="xref py py-obj">n</em>输出点，需要<code class="docutils literal"><span class="pre">n//2+1</span></code>个输入点。</span><span class="yiyi-st" id="yiyi-21">如果输入长于此，则会裁剪。</span><span class="yiyi-st" id="yiyi-22">如果它比这短，用零填充。</span><span class="yiyi-st" id="yiyi-23">如果未给出<em class="xref py py-obj">n</em>，则根据沿<em class="xref py py-obj">轴</em>指定的轴的输入长度确定。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">用于计算FFT的轴。</span><span class="yiyi-st" id="yiyi-26">如果未给出，则使用最后一个轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>norm</strong>：{None，“ortho”}，可选</span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-28"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-29">规范化模式（参见<a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a>）。</span><span class="yiyi-st" id="yiyi-30">默认值为None。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>out</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">未指定沿<em class="xref py py-obj">轴</em>指示的轴变换的截断或零填充输入，如果<em class="xref py py-obj">轴</em>指定最后一个输入。</span><span class="yiyi-st" id="yiyi-34">变换轴的长度为<em class="xref py py-obj">n</em>，或者如果未给出<em class="xref py py-obj">n</em>，则<code class="docutils literal"><span class="pre">2*(m-1)</span></code>其中<code class="docutils literal"><span class="pre">m</span></code>是输入的变换轴的长度。</span><span class="yiyi-st" id="yiyi-35">要获得奇数个输出点，必须指定<em class="xref py py-obj">n</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-36">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-37"><strong>IndexError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-38">如果<em class="xref py py-obj">axis</em>大于<em class="xref py py-obj">a</em>的最后一个轴。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-39">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.fft.rfft.html#numpy.fft.rfft" title="numpy.fft.rfft"><code class="xref py py-obj docutils literal"><span class="pre">rfft</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-41">计算实际输入的一维FFT。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.fft.ihfft.html#numpy.fft.ihfft" title="numpy.fft.ihfft"><code class="xref py py-obj docutils literal"><span class="pre">ihfft</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="#numpy.fft.hfft" title="numpy.fft.hfft"><code class="xref py py-obj docutils literal"><span class="pre">hfft</span></code></a>的逆。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="#numpy.fft.hfft" title="numpy.fft.hfft"><code class="xref py py-obj docutils literal"><span class="pre">hfft</span></code></a> / <a class="reference internal" href="numpy.fft.ihfft.html#numpy.fft.ihfft" title="numpy.fft.ihfft"><code class="xref py py-obj docutils literal"><span class="pre">ihfft</span></code></a>是类似于<a class="reference internal" href="numpy.fft.rfft.html#numpy.fft.rfft" title="numpy.fft.rfft"><code class="xref py py-obj docutils literal"><span class="pre">rfft</span></code></a> / <a class="reference internal" href="numpy.fft.irfft.html#numpy.fft.irfft" title="numpy.fft.irfft"><code class="xref py py-obj docutils literal"><span class="pre">irfft</span></code></a>的对，但是对于相反的情况： Hermitian在时域中的对称性，并且在频域中是真实的。</span><span class="yiyi-st" id="yiyi-46">所以这里是<a class="reference internal" href="#numpy.fft.hfft" title="numpy.fft.hfft"><code class="xref py py-obj docutils literal"><span class="pre">hfft</span></code></a>，如果它是奇数，你必须提供结果的长度：<code class="docutils literal"><span class="pre">ihfft（hfft（a），</span> <span class="pre">len a））</span> <span class="pre">==</span> <span class="pre">a</span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-47">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+<span class="go">array([ 15.+0.j,  -4.+0.j,   0.+0.j,  -1.-0.j,   0.+0.j,  -4.+0.j])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">hfft</span><span class="p">(</span><span class="n">signal</span><span class="p">[:</span><span class="mi">4</span><span class="p">])</span> <span class="c1"># Input first half of signal</span>
+<span class="go">array([ 15.,  -4.,   0.,  -1.,   0.,  -4.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">hfft</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># Input entire signal and truncate</span>
+<span class="go">array([ 15.,  -4.,   0.,  -1.,   0.,  -4.])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">signal</span>   <span class="c1"># check Hermitian symmetry</span>
+<span class="go">array([[ 0.-0.j,  0.+0.j],</span>
+<span class="go">       [ 0.+0.j,  0.-0.j]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq_spectrum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">hfft</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq_spectrum</span>
+<span class="go">array([[ 1.,  1.],</span>
+<span class="go">       [ 2., -2.]])</span>
+</pre></div>
+</div>
+</dd></dl>

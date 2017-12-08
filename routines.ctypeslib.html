@@ -1,0 +1,144 @@
+
+<h1><span class="yiyi-st" id="yiyi-11">C-Types Foreign Function Interface (<code class="xref py py-mod docutils literal"><span class="pre">numpy.ctypeslib</span></code>)</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.ctypeslib.html">https://docs.scipy.org/doc/numpy/reference/routines.ctypeslib.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ctypeslib.as_array"><span class="yiyi-st" id="yiyi-12"> <code class="descclassname">numpy.ctypeslib.</code><code class="descname">as_array</code><span class="sig-paren">(</span><em>obj</em>, <em>shape=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ctypeslib.py#L421-L435"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-13">从ctypes数组或ctypes POINTER创建numpy数组。</span><span class="yiyi-st" id="yiyi-14">numpy数组与ctypes对象共享内存。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">如果从ctypes POINTER转换，则必须提供size参数。</span><span class="yiyi-st" id="yiyi-16">如果从ctypes数组转换，size参数将被忽略</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="numpy.ctypeslib.as_ctypes"><span class="yiyi-st" id="yiyi-17"> <code class="descclassname">numpy.ctypeslib.</code><code class="descname">as_ctypes</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ctypeslib.py#L437-L453"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-18">从numpy数组创建并返回ctypes对象。</span><span class="yiyi-st" id="yiyi-19">实际上接受暴露__array_interface__的任何东西。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="numpy.ctypeslib.ctypes_load_library"><span class="yiyi-st" id="yiyi-20"> <code class="descclassname">numpy.ctypeslib.</code><code class="descname">ctypes_load_library</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/utils.py#L97-L100"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="#numpy.ctypeslib.ctypes_load_library" title="numpy.ctypeslib.ctypes_load_library"><code class="xref py py-obj docutils literal"><span class="pre">ctypes_load_library</span></code></a>已弃用，请改用<a class="reference internal" href="#numpy.ctypeslib.load_library" title="numpy.ctypeslib.load_library"><code class="xref py py-obj docutils literal"><span class="pre">load_library</span></code></a>！</span></p>
+<p><span class="yiyi-st" id="yiyi-22">可以使用&gt;&gt;&gt; lib = ctypes.cdll [<full_path_name>]</full_path_name>加载库</span></p>
+<p><span class="yiyi-st" id="yiyi-23">但有跨平台的考虑，如库文件扩展，加上事实上，Windows将加载它找到的第一个库名称。</span><span class="yiyi-st" id="yiyi-24">Numpy提供了load_library函数作为方便。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>libname</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">库的名称，它可以有&apos;lib&apos;作为前缀，但没有扩展名。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>loader_path</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">在哪里可以找到库。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>ctypes.cdll [libpath]</strong>：库对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">一个ctypes库对象</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-33">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-34"><strong>OSError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-35">如果没有预期扩展名的库，或者库有缺陷，无法加载。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="function">
+<dt id="numpy.ctypeslib.load_library"><span class="yiyi-st" id="yiyi-36"> <code class="descclassname">numpy.ctypeslib.</code><code class="descname">load_library</code><span class="sig-paren">(</span><em>libname</em>, <em>loader_path</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ctypeslib.py#L91-L155"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-37">可以使用&gt;&gt;&gt; lib = ctypes.cdll [<full_path_name>]</full_path_name>加载库</span></p>
+<p><span class="yiyi-st" id="yiyi-38">但有跨平台的考虑，如库文件扩展，加上事实上，Windows将加载它找到的第一个库名称。</span><span class="yiyi-st" id="yiyi-39">Numpy提供了load_library函数作为方便。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-40">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-41"><strong>libname</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-42">库的名称，它可以有&apos;lib&apos;作为前缀，但没有扩展名。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-43"><strong>loader_path</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-44">在哪里可以找到库。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-45">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-46"><strong>ctypes.cdll [libpath]</strong>：库对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-47">一个ctypes库对象</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-48">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-49"><strong>OSError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-50">如果没有预期扩展名的库，或者库有缺陷，无法加载。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="function">
+<dt id="numpy.ctypeslib.ndpointer"><span class="yiyi-st" id="yiyi-51"> <code class="descclassname">numpy.ctypeslib.</code><code class="descname">ndpointer</code><span class="sig-paren">(</span><em>dtype=None</em>, <em>ndim=None</em>, <em>shape=None</em>, <em>flags=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ctypeslib.py#L219-L319"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-52">数组检查restype / argtypes。</span></p>
+<p><span class="yiyi-st" id="yiyi-53">ndpointer实例用于在resttype和argtypes规范中描述一个ndarray。</span><span class="yiyi-st" id="yiyi-54">此方法比使用例如<code class="docutils literal"><span class="pre">POINTER(c_double)</span></code>更灵活，因为可以指定多个限制，这些限制在调用ctypes函数时验证。</span><span class="yiyi-st" id="yiyi-55">这些包括数据类型，维数，形状和标志。</span><span class="yiyi-st" id="yiyi-56">如果给定的数组不满足指定的限制，则会引发<code class="docutils literal"><span class="pre">TypeError</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-57">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-58"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-59">数组数据类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-60"><strong>ndim</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-61">数组尺寸数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-62"><strong>shape</strong>：ints的tuple，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-63">数组形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-64"><strong>标志</strong>：str或str的元组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-65">数组标志；可以是以下的一个或多个：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-66">C_CONTIGUOUS / C / CONTIGUOUS</span></li>
+<li><span class="yiyi-st" id="yiyi-67">F_CONTIGUOUS / F / FORTRAN</span></li>
+<li><span class="yiyi-st" id="yiyi-68">OWNDATA / O</span></li>
+<li><span class="yiyi-st" id="yiyi-69">WRITEABLE / W</span></li>
+<li><span class="yiyi-st" id="yiyi-70">对齐/ A</span></li>
+<li><span class="yiyi-st" id="yiyi-71">UPDATEIFCOPY / U</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-72">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-73"><strong>klass</strong>：ndpointer类型对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-74">类型对象，它是一个包含dtype，ndim，shape和flags信息的<code class="docutils literal"><span class="pre">_ndtpr</span></code>实例。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-75">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-76"><strong>TypeError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-77">如果给定的数组不满足指定的限制。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-78">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clib</span><span class="o">.</span><span class="n">somefunc</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ctypeslib</span><span class="o">.</span><span class="n">ndpointer</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<span class="gp">... </span>                                                 <span class="n">ndim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                                                 <span class="n">flags</span><span class="o">=</span><span class="s1">&apos;C_CONTIGUOUS&apos;</span><span class="p">)]</span>
+<span class="gp">... </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clib</span><span class="o">.</span><span class="n">somefunc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+<span class="gp">... </span>
+</pre></div>
+</div>
+</dd></dl>

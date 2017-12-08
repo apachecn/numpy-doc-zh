@@ -1,0 +1,182 @@
+
+<h1><span class="yiyi-st" id="yiyi-22">Laguerre Module (<code class="xref py py-mod docutils literal"><span class="pre">numpy.polynomial.laguerre</span></code>)</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.polynomials.laguerre.html">https://docs.scipy.org/doc/numpy/reference/routines.polynomials.laguerre.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-23"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-24">这个模块提供了许多对处理Laguerre系列有用的对象（主要是函数），包括封装了通常的算术运算的<a class="reference internal" href="generated/numpy.polynomial.laguerre.Laguerre.html#numpy.polynomial.laguerre.Laguerre" title="numpy.polynomial.laguerre.Laguerre"><code class="xref py py-obj docutils literal"><span class="pre">Laguerre</span></code></a>类。</span><span class="yiyi-st" id="yiyi-25">（关于此模块如何表示和使用这样的多项式的一般信息在其“父”子包的文档字符串中，<code class="xref py py-obj docutils literal"><span class="pre">numpy.polynomial</span></code>）。</span></p>
+<div class="section" id="laguerre-class">
+<h2><span class="yiyi-st" id="yiyi-26">Laguerre Class</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="generated/numpy.polynomial.laguerre.Laguerre.html#numpy.polynomial.laguerre.Laguerre" title="numpy.polynomial.laguerre.Laguerre"><code class="xref py py-obj docutils literal"><span class="pre">Laguerre</span></code></a>（coef [，domain，window]）</span></td>
+<td><span class="yiyi-st" id="yiyi-28">Laguerre系列类。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="basics">
+<h2><span class="yiyi-st" id="yiyi-29">Basics</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagval.html#numpy.polynomial.laguerre.lagval" title="numpy.polynomial.laguerre.lagval"><code class="xref py py-obj docutils literal"><span class="pre">lagval</span></code></a>（x，c [，张量]）</span></td>
+<td><span class="yiyi-st" id="yiyi-31">在x点评估Laguerre系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagval2d.html#numpy.polynomial.laguerre.lagval2d" title="numpy.polynomial.laguerre.lagval2d"><code class="xref py py-obj docutils literal"><span class="pre">lagval2d</span></code></a>（x，y，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-33">在点（x，y）评估2-D Laguerre系列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagval3d.html#numpy.polynomial.laguerre.lagval3d" title="numpy.polynomial.laguerre.lagval3d"><code class="xref py py-obj docutils literal"><span class="pre">lagval3d</span></code></a>（x，y，z，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-35">在点（x，y，z）评估3-D Laguerre系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="generated/numpy.polynomial.laguerre.laggrid2d.html#numpy.polynomial.laguerre.laggrid2d" title="numpy.polynomial.laguerre.laggrid2d"><code class="xref py py-obj docutils literal"><span class="pre">laggrid2d</span></code></a>（x，y，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-37">对x和y的笛卡尔积计算2-D Laguerre系列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="generated/numpy.polynomial.laguerre.laggrid3d.html#numpy.polynomial.laguerre.laggrid3d" title="numpy.polynomial.laguerre.laggrid3d"><code class="xref py py-obj docutils literal"><span class="pre">laggrid3d</span></code></a>（x，y，z，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-39">对x，y和z的笛卡尔乘积评估3-D Laguerre系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagroots.html#numpy.polynomial.laguerre.lagroots" title="numpy.polynomial.laguerre.lagroots"><code class="xref py py-obj docutils literal"><span class="pre">lagroots</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-41">计算Laguerre系列的根。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagfromroots.html#numpy.polynomial.laguerre.lagfromroots" title="numpy.polynomial.laguerre.lagfromroots"><code class="xref py py-obj docutils literal"><span class="pre">lagfromroots</span></code></a>（根）</span></td>
+<td><span class="yiyi-st" id="yiyi-43">用给定的根生成Laguerre系列。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fitting">
+<h2><span class="yiyi-st" id="yiyi-44">Fitting</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagfit.html#numpy.polynomial.laguerre.lagfit" title="numpy.polynomial.laguerre.lagfit"><code class="xref py py-obj docutils literal"><span class="pre">lagfit</span></code></a>（x，y，deg [，rcond，full，w]）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">Laguerre系列的最小二乘拟合数据。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagvander.html#numpy.polynomial.laguerre.lagvander" title="numpy.polynomial.laguerre.lagvander"><code class="xref py py-obj docutils literal"><span class="pre">lagvander</span></code></a>（x，deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-48">给定程度的伪Vandermonde矩阵。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagvander2d.html#numpy.polynomial.laguerre.lagvander2d" title="numpy.polynomial.laguerre.lagvander2d"><code class="xref py py-obj docutils literal"><span class="pre">lagvander2d</span></code></a>（x，y，deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">给定度的伪Vandermonde矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagvander3d.html#numpy.polynomial.laguerre.lagvander3d" title="numpy.polynomial.laguerre.lagvander3d"><code class="xref py py-obj docutils literal"><span class="pre">lagvander3d</span></code></a>（x，y，z，deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">给定度的伪Vandermonde矩阵。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="calculus">
+<h2><span class="yiyi-st" id="yiyi-53">Calculus</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagder.html#numpy.polynomial.laguerre.lagder" title="numpy.polynomial.laguerre.lagder"><code class="xref py py-obj docutils literal"><span class="pre">lagder</span></code></a>（c [，m，scl，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-55">区分Laguerre系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagint.html#numpy.polynomial.laguerre.lagint" title="numpy.polynomial.laguerre.lagint"><code class="xref py py-obj docutils literal"><span class="pre">lagint</span></code></a>（c [，m，k，lbnd，scl，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-57">集成Laguerre系列。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="algebra">
+<h2><span class="yiyi-st" id="yiyi-58">Algebra</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagadd.html#numpy.polynomial.laguerre.lagadd" title="numpy.polynomial.laguerre.lagadd"><code class="xref py py-obj docutils literal"><span class="pre">lagadd</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">将一个Laguerre系列添加到另一个。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagsub.html#numpy.polynomial.laguerre.lagsub" title="numpy.polynomial.laguerre.lagsub"><code class="xref py py-obj docutils literal"><span class="pre">lagsub</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-62">从另一个减去一个Laguerre系列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagmul.html#numpy.polynomial.laguerre.lagmul" title="numpy.polynomial.laguerre.lagmul"><code class="xref py py-obj docutils literal"><span class="pre">lagmul</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-64">将一个Laguerre系列乘以另一个。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagmulx.html#numpy.polynomial.laguerre.lagmulx" title="numpy.polynomial.laguerre.lagmulx"><code class="xref py py-obj docutils literal"><span class="pre">lagmulx</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-66">将Laguerre系列乘以x。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagdiv.html#numpy.polynomial.laguerre.lagdiv" title="numpy.polynomial.laguerre.lagdiv"><code class="xref py py-obj docutils literal"><span class="pre">lagdiv</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-68">将一个Laguerre系列除以另一个。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagpow.html#numpy.polynomial.laguerre.lagpow" title="numpy.polynomial.laguerre.lagpow"><code class="xref py py-obj docutils literal"><span class="pre">lagpow</span></code></a>（c，pow [，maxpower]）</span></td>
+<td><span class="yiyi-st" id="yiyi-70">提升Laguerre系列的力量。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="quadrature">
+<h2><span class="yiyi-st" id="yiyi-71">Quadrature</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="generated/numpy.polynomial.laguerre.laggauss.html#numpy.polynomial.laguerre.laggauss" title="numpy.polynomial.laguerre.laggauss"><code class="xref py py-obj docutils literal"><span class="pre">laggauss</span></code></a>（deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-73">高斯 - 拉盖尔正交。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagweight.html#numpy.polynomial.laguerre.lagweight" title="numpy.polynomial.laguerre.lagweight"><code class="xref py py-obj docutils literal"><span class="pre">lagweight</span></code></a>（x）</span></td>
+<td><span class="yiyi-st" id="yiyi-75">Laguerre多项式的权重函数。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="miscellaneous">
+<h2><span class="yiyi-st" id="yiyi-76">Miscellaneous</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-77"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagcompanion.html#numpy.polynomial.laguerre.lagcompanion" title="numpy.polynomial.laguerre.lagcompanion"><code class="xref py py-obj docutils literal"><span class="pre">lagcompanion</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-78">返回c的伴随矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-79"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagdomain.html#numpy.polynomial.laguerre.lagdomain" title="numpy.polynomial.laguerre.lagdomain"><code class="xref py py-obj docutils literal"><span class="pre">lagdomain</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagzero.html#numpy.polynomial.laguerre.lagzero" title="numpy.polynomial.laguerre.lagzero"><code class="xref py py-obj docutils literal"><span class="pre">lagzero</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-81"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagone.html#numpy.polynomial.laguerre.lagone" title="numpy.polynomial.laguerre.lagone"><code class="xref py py-obj docutils literal"><span class="pre">lagone</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-82"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagx.html#numpy.polynomial.laguerre.lagx" title="numpy.polynomial.laguerre.lagx"><code class="xref py py-obj docutils literal"><span class="pre">lagx</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-83"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagtrim.html#numpy.polynomial.laguerre.lagtrim" title="numpy.polynomial.laguerre.lagtrim"><code class="xref py py-obj docutils literal"><span class="pre">lagtrim</span></code></a>（c [，tol]）</span></td>
+<td><span class="yiyi-st" id="yiyi-84">从多项式中删除“小”“拖尾”系数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-85"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lagline.html#numpy.polynomial.laguerre.lagline" title="numpy.polynomial.laguerre.lagline"><code class="xref py py-obj docutils literal"><span class="pre">lagline</span></code></a>（off，scl）</span></td>
+<td><span class="yiyi-st" id="yiyi-86">Laguerre系列的图形是一条直线。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-87"><a class="reference internal" href="generated/numpy.polynomial.laguerre.lag2poly.html#numpy.polynomial.laguerre.lag2poly" title="numpy.polynomial.laguerre.lag2poly"><code class="xref py py-obj docutils literal"><span class="pre">lag2poly</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-88">将Laguerre系列转换为多项式。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-89"><a class="reference internal" href="generated/numpy.polynomial.laguerre.poly2lag.html#numpy.polynomial.laguerre.poly2lag" title="numpy.polynomial.laguerre.poly2lag"><code class="xref py py-obj docutils literal"><span class="pre">poly2lag</span></code></a>（pol）</span></td>
+<td><span class="yiyi-st" id="yiyi-90">将多项式转换为Laguerre系列。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

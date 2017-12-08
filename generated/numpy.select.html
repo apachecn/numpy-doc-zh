@@ -1,0 +1,54 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.select</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.select.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.select.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.select"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">select</code><span class="sig-paren">(</span><em>condlist</em>, <em>choicelist</em>, <em>default=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L1161-L1261"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回根据条件从选择列表中的元素绘制的数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>condlist</strong>：bool ndarrays列表</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">确定从<em class="xref py py-obj">选择列表</em>中的哪个数组取得输出元素的条件列表。</span><span class="yiyi-st" id="yiyi-18">当满足多个条件时，使用<em class="xref py py-obj">condlist</em>中遇到的第一个条件。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>choicelist</strong>：ndarrays列表</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">从中获取输出元素的数组的列表。</span><span class="yiyi-st" id="yiyi-21">它的长度必须与<em class="xref py py-obj">condlist</em>相同。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>默认</strong>：标量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">当所有条件求值为False时，在<em class="xref py py-obj">输出</em>中插入的元素。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>输出</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">位置m处的输出是<em class="xref py py-obj">选择列表</em>中数组的第m个元素，其中<em class="xref py py-obj">condlist</em>中对应数组的第m个元素为True。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.where.html#numpy.where" title="numpy.where"><code class="xref py py-obj docutils literal"><span class="pre">where</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">根据条件从两个数组之一返回元素。</span></dd>
+</dl>
+<p class="last"><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.take.html#numpy.take" title="numpy.take"><code class="xref py py-obj docutils literal"><span class="pre">take</span></code></a>，<a class="reference internal" href="numpy.choose.html#numpy.choose" title="numpy.choose"><code class="xref py py-obj docutils literal"><span class="pre">choose</span></code></a>，<a class="reference internal" href="numpy.compress.html#numpy.compress" title="numpy.compress"><code class="xref py py-obj docutils literal"><span class="pre">compress</span></code></a>，<a class="reference internal" href="numpy.diag.html#numpy.diag" title="numpy.diag"><code class="xref py py-obj docutils literal"><span class="pre">diag</span></code></a>，<a class="reference internal" href="numpy.diagonal.html#numpy.diagonal" title="numpy.diagonal"><code class="xref py py-obj docutils literal"><span class="pre">diagonal</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">condlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="o">&gt;</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">choicelist</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">condlist</span><span class="p">,</span> <span class="n">choicelist</span><span class="p">)</span>
+<span class="go">array([ 0,  1,  2,  0,  0,  0, 36, 49, 64, 81])</span>
+</pre></div>
+</div>
+</dd></dl>

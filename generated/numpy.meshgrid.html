@@ -1,0 +1,105 @@
+
+<h1><span class="yiyi-st" id="yiyi-9">numpy.meshgrid</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.meshgrid.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.meshgrid.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.meshgrid"><span class="yiyi-st" id="yiyi-10"> <code class="descclassname">numpy.</code><code class="descname">meshgrid</code><span class="sig-paren">(</span><em>*xi</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L3979-L4118"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-11">从坐标向量返回坐标矩阵。</span></p>
+<p><span class="yiyi-st" id="yiyi-12">给定一维坐标数组x1，x2，...，xn，使N-D坐标数组用于N-D标量/矢量场在N-D网格上的向量化评估。</span></p>
+<div class="versionchanged">
+<p><span class="yiyi-st" id="yiyi-13"><span class="versionmodified">在版本1.9中更改：</span>允许1-D和0-D情况。</span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-14">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-15"><strong>x1，x2，...，xn</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-16">表示网格的坐标的1-D数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-17"><strong>索引</strong>：{&apos;xy&apos;，&apos;ij&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">笛卡尔（&apos;xy&apos;，默认）或矩阵（&apos;ij&apos;）输出索引。</span><span class="yiyi-st" id="yiyi-19">有关详细信息，请参阅注释。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-20"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>稀疏</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">如果为True，则返回稀疏网格以节省内存。</span><span class="yiyi-st" id="yiyi-23">默认值为False。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-24"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>copy</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">如果为False，将返回原始数组的视图，以节省内存。</span><span class="yiyi-st" id="yiyi-27">默认值为True。</span><span class="yiyi-st" id="yiyi-28">请注意，<code class="docutils literal"><span class="pre">sparse = False，</span> <span class="pre">copy = False</span></code>可能会返回非连续数组。</span><span class="yiyi-st" id="yiyi-29">此外，广播数组的多于一个元件可以指代单个存储器位置。</span><span class="yiyi-st" id="yiyi-30">如果你需要写入数组，首先复制。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-31"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-32">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-33"><strong>X1，X2，...，XN</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-34">For vectors <em class="xref py py-obj">x1</em>, <em class="xref py py-obj">x2</em>,..., ‘xn’ with lengths <code class="docutils literal"><span class="pre">Ni=len(xi)</span></code> , return <code class="docutils literal"><span class="pre">(N1,</span> <span class="pre">N2,</span> <span class="pre">N3,...Nn)</span></code> shaped arrays if indexing=’ij’ or <code class="docutils literal"><span class="pre">(N2,</span> <span class="pre">N1,</span> <span class="pre">N3,...Nn)</span></code> shaped arrays if indexing=’xy’ with the elements of <em class="xref py py-obj">xi</em> repeated to fill the matrix along the first dimension for <em class="xref py py-obj">x1</em>, the second for <em class="xref py py-obj">x2</em> and so on.</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-35">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-36"><code class="xref py py-obj docutils literal"><span class="pre">index_tricks.mgrid</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-37">使用索引符号构造多维“网格网格”。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-38"><code class="xref py py-obj docutils literal"><span class="pre">index_tricks.ogrid</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-39">使用索引符号构造一个开放的多维“网格网格”。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-40">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-41">此函数通过indexing关键字参数支持两种索引约定。</span><span class="yiyi-st" id="yiyi-42">给字符串&apos;ij&apos;返回一个带有矩阵索引的meshgrid，而&apos;xy&apos;返回一个带有笛卡尔索引的meshgrid。</span><span class="yiyi-st" id="yiyi-43">在具有长度M和N的输入的2-D情况下，对于&apos;xy&apos;索引，输出具有形状（N，M），而对于&apos;ij&apos;索引，输出具有（M，N）。</span><span class="yiyi-st" id="yiyi-44">在具有长度M，N和P的输入的3-D情况下，对于&apos;xy&apos;索引，输出具有形状（N，M，P），而对于&apos;ij&apos;索引，输出具有（M，N，P）。</span><span class="yiyi-st" id="yiyi-45">差异由以下代码段说明：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">xv</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&apos;ij&apos;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nx</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ny</span><span class="p">):</span>
+        <span class="c1"># treat xv[i,j], yv[i,j]</span>
+
+<span class="n">xv</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&apos;xy&apos;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nx</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ny</span><span class="p">):</span>
+        <span class="c1"># treat xv[j,i], yv[j,i]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">在1-D和0-D情况下，索引和稀疏关键字没有效果。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-47">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xv</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xv</span>
+<span class="go">array([[ 0. ,  0.5,  1. ],</span>
+<span class="go">       [ 0. ,  0.5,  1. ]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yv</span>
+<span class="go">array([[ 0.,  0.,  0.],</span>
+<span class="go">       [ 1.,  1.,  1.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xv</span><span class="p">,</span> <span class="n">yv</span> <span class="o">=</span> <span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># make sparse output arrays</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xv</span>
+<span class="go">array([[ 0. ,  0.5,  1. ]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">yv</span>
+<span class="go">array([[ 0.],</span>
+<span class="go">       [ 1.]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="#numpy.meshgrid" title="numpy.meshgrid"><code class="xref py py-obj docutils literal"><span class="pre">meshgrid</span></code></a>对于评估网格上的函数非常有用。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">xx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">yy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">xx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">yy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,89 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.convolve</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.convolve.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.convolve.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.convolve"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">convolve</code><span class="sig-paren">(</span><em>a</em>, <em>v</em>, <em>mode=&apos;full&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L918-L1013"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回两个一维序列的离散，线性卷积。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">卷积算子常常出现在信号处理中，其中它模拟线性时不变系统对信号<a class="reference internal" href="#r17" id="id1">[R17]</a>的影响。</span><span class="yiyi-st" id="yiyi-16">在概率理论中，两个独立的随机变量的和根据它们各自的分布的卷积来分布。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">如果<em class="xref py py-obj">v</em>长于<em class="xref py py-obj">a</em>，则在计算之前交换数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：（N，）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">第一维一维输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>v</strong>：（M，）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">第二维一维输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>mode</strong>：{&apos;full&apos;，&apos;valid&apos;，&apos;same&apos;}，可选</span></p>
+<blockquote>
+<div><dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-24">&apos;充分&apos;：</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-25">默认情况下，模式为“full”。</span><span class="yiyi-st" id="yiyi-26">这在每个重叠点处返回卷积，其输出形状为（N + M-1，）。</span><span class="yiyi-st" id="yiyi-27">在卷积的端点，信号不完全重叠，并且可以看到边界效应。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-28">&apos;相同&apos;：</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-29">模式“相同”返回长度<code class="docutils literal"><span class="pre">max（M，</span> <span class="pre">N）</span></code>的输出。</span><span class="yiyi-st" id="yiyi-30">边界效应仍然可见。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-31">&apos;有效&apos;：</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-32">模式&apos;有效&apos;返回长度<code class="docutils literal"><span class="pre">max（M，</span> <span class="pre">N）</span> <span class="pre"> - </span> <span class="pre"><span class="pre">N）</span> <span class="pre">+</span> <span class="pre">1</span></span></code>。</span><span class="yiyi-st" id="yiyi-33">卷积积仅用于信号完全重叠的点。</span><span class="yiyi-st" id="yiyi-34">信号边界外的值没有效果。</span></p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-35">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-36"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-37"><em class="xref py py-obj">a</em>和<em class="xref py py-obj">v</em>的离散，线性卷积。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-38">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-39"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.fftconvolve.html#scipy.signal.fftconvolve" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.signal.fftconvolve</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-40">使用快速傅里叶变换卷积两个数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-41"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.toeplitz.html#scipy.linalg.toeplitz" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.linalg.toeplitz</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-42">用于构造卷积运算符。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="numpy.polymul.html#numpy.polymul" title="numpy.polymul"><code class="xref py py-obj docutils literal"><span class="pre">polymul</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-44">多项式乘法。</span><span class="yiyi-st" id="yiyi-45">与卷积相同的输出，但也接受poly1d对象作为输入。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-46">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-47">离散卷积运算定义为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-48">It can be shown that a convolution <img alt="x(t) * y(t)" class="math" src="../../_images/math/19e028e172248b5d4535373cc29c60c9a36bcf19.png" style="vertical-align: -4px"> in time/space is equivalent to the multiplication <img alt="X(f) Y(f)" class="math" src="../../_images/math/d2180b01936e5e97f5afa2049603094b85d03bb4.png" style="vertical-align: -4px"> in the Fourier domain, after appropriate padding (padding is necessary to prevent circular convolution). </span><span class="yiyi-st" id="yiyi-49">由于乘法比卷积更有效（更快），函数<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.fftconvolve.html#scipy.signal.fftconvolve" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.signal.fftconvolve</span></code></a>利用FFT来计算大数据集的卷积。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-50">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r17" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-51">[R17]</span></td><td><span class="yiyi-st" id="yiyi-52"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em> Wikipedia，“Convolution”，<a class="reference external" href="http://en.wikipedia.org/wiki/Convolution">http://en.wikipedia.org/wiki/Convolution 。</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-53">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-54">注意卷积运算符如何在“滑动”两个数组之前翻转第二个数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="go">array([ 0. ,  1. ,  2.5,  4. ,  1.5])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-55">只返回卷积的中间值。</span><span class="yiyi-st" id="yiyi-56">包含边界效应，其中考虑零：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span> <span class="s1">&apos;same&apos;</span><span class="p">)</span>
+<span class="go">array([ 1. ,  2.5,  4. ])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-57">两个数组具有相同的长度，因此只有一个位置，它们完全重叠：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span> <span class="s1">&apos;valid&apos;</span><span class="p">)</span>
+<span class="go">array([ 2.5])</span>
+</pre></div>
+</div>
+</dd></dl>

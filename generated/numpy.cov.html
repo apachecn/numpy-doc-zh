@@ -1,0 +1,111 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.cov</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.cov.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.cov.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.cov"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">cov</code><span class="sig-paren">(</span><em>m</em>, <em>y=None</em>, <em>rowvar=True</em>, <em>bias=False</em>, <em>ddof=None</em>, <em>fweights=None</em>, <em>aweights=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L2298-L2497"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">估计协方差矩阵，给定数据和权重。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">协方差表示两个变量一起变化的水平。</span><span class="yiyi-st" id="yiyi-16">If we examine N-dimensional samples, <img alt="X = [x_1, x_2, ... x_N]^T" class="math" src="../../_images/math/8d14fb48024fc0aaeed58a8b7e012bf142402c41.png" style="vertical-align: -4px">, then the covariance matrix element <img alt="C_{ij}" class="math" src="../../_images/math/7cd8b54c3097c3343ae058f6be2e7e8888f8cff8.png" style="vertical-align: -4px"> is the covariance of <img alt="x_i" class="math" src="../../_images/math/8f36430327e350fd5583002c178ca1949d485b21.png" style="vertical-align: -2px"> and <img alt="x_j" class="math" src="../../_images/math/fd3512e9f7dec13e6defb1a51b94a1e31a8eca67.png" style="vertical-align: -4px">. </span><span class="yiyi-st" id="yiyi-17">元素<img alt="C_{ii}" class="math" src="../../_images/math/114c5f45409813eddd95cb59fe4d7e618f417d23.png" style="vertical-align: -2px">是<img alt="x_i" class="math" src="../../_images/math/8f36430327e350fd5583002c178ca1949d485b21.png" style="vertical-align: -2px">的方差。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">有关算法的概述，请参见注释。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>m</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">包含多个变量和观察值的1-D或2-D数组。</span><span class="yiyi-st" id="yiyi-22"><em class="xref py py-obj">m</em>的每一行代表一个变量，每一列都是对所有这些变量的单次观察。</span><span class="yiyi-st" id="yiyi-23">另请参阅下面的<em class="xref py py-obj">rowvar</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>y</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">另一组变量和观察值。</span><span class="yiyi-st" id="yiyi-26"><em class="xref py py-obj">y</em>具有与<em class="xref py py-obj">m</em>相同的形式。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>rowvar</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">如果<em class="xref py py-obj">rowvar</em>为True（默认值），则每行代表一个变量，在列中有观察值。</span><span class="yiyi-st" id="yiyi-29">否则，关系会转置：每个列表示一个变量，而行包含观察值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>bias</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">默认规范化（False）为<code class="docutils literal"><span class="pre">（N</span> <span class="pre"> - </span> <span class="pre">1）</span></code>，其中<code class="docutils literal"><span class="pre">N</span></code>是给出的观察的数量（无偏估计）。</span><span class="yiyi-st" id="yiyi-32">如果<em class="xref py py-obj">bias</em>为True，则归一化为<code class="docutils literal"><span class="pre">N</span></code>。这些值可以通过在numpy versions&gt; = 1.5中使用关键字<code class="docutils literal"><span class="pre">ddof</span></code>来覆盖。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>ddof</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">如果<code class="docutils literal"><span class="pre">None</span></code>，<em class="xref py py-obj">bias</em>所隐含的默认值将被覆盖。</span><span class="yiyi-st" id="yiyi-35">Note that <code class="docutils literal"><span class="pre">ddof=1</span></code> will return the unbiased estimate, even if both <em class="xref py py-obj">fweights</em> and <em class="xref py py-obj">aweights</em> are specified, and <code class="docutils literal"><span class="pre">ddof=0</span></code> will return the simple average. </span><span class="yiyi-st" id="yiyi-36">有关详细信息，请参阅注释。</span><span class="yiyi-st" id="yiyi-37">默认值为<code class="docutils literal"><span class="pre">None</span></code>。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-38"><span class="versionmodified">版本1.5中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-39"><strong>fweights</strong>：array_like，int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-40">1-D数组整数频率权重；每个观察向量应当重复的次数。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-41"><span class="versionmodified">版本1.10中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-42"><strong>aweights</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-43">1-D数组的观测向量权重。</span><span class="yiyi-st" id="yiyi-44">这些相对权重对于被认为“重要”的观察来说通常较大，对于被认为较不“重要”的观察来说较小。</span><span class="yiyi-st" id="yiyi-45">如果<code class="docutils literal"><span class="pre">ddof=0</span></code>，权重的数组可以用于向观察向量分配概率。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-46"><span class="versionmodified">版本1.10中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-47">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-48"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-49">变量的协方差矩阵。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-50">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="numpy.corrcoef.html#numpy.corrcoef" title="numpy.corrcoef"><code class="xref py py-obj docutils literal"><span class="pre">corrcoef</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-52">归一化协方差矩阵</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-53">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-54">Assume that the observations are in the columns of the observation array <em class="xref py py-obj">m</em> and let <code class="docutils literal"><span class="pre">f</span> <span class="pre">=</span> <span class="pre">fweights</span></code> and <code class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">aweights</span></code> for brevity. </span><span class="yiyi-st" id="yiyi-55">计算加权协方差的步骤如下：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">w</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">/</span> <span class="n">v1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">v1</span> <span class="o">/</span> <span class="p">(</span><span class="n">v1</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">ddof</span> <span class="o">*</span> <span class="n">v2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-56">注意，当<code class="docutils literal"><span class="pre">a</span> <span class="pre">==</span> <span class="pre">1</span></code>时，归一化因子<code class="docutils literal"><span class="pre">v1</span> <span class="pre">/</span> <span class="pre">（v1 ** 2</span> <span class="pre"> - </span> <span class="pre">ddof</span> <span class="pre">*</span> <span class="pre">v2） / t11&gt;</span></code>转到<code class="docutils literal"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">（np.sum（f）</span> <span class="pre"> -   t16 &gt; <span class="pre">ddof）</span></span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-57">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-58">考虑两个变量，<img alt="x_0" class="math" src="../../_images/math/5e127c8b3220e24da5a3dc9bfcb5d64ca53cb594.png" style="vertical-align: -2px">和<img alt="x_1" class="math" src="../../_images/math/9655d43328526b2b7a337dba3e45750ed2a448e6.png" style="vertical-align: -3px">，它们完全相关，但方向相反：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[0, 1, 2],</span>
+<span class="go">       [2, 1, 0]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-59">注意<img alt="x_0" class="math" src="../../_images/math/5e127c8b3220e24da5a3dc9bfcb5d64ca53cb594.png" style="vertical-align: -2px">增加而<img alt="x_1" class="math" src="../../_images/math/9655d43328526b2b7a337dba3e45750ed2a448e6.png" style="vertical-align: -3px">减少。</span><span class="yiyi-st" id="yiyi-60">协方差矩阵清楚地表明：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([[ 1., -1.],</span>
+<span class="go">       [-1.,  1.]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-61">注意，示出<img alt="x_0" class="math" src="../../_images/math/5e127c8b3220e24da5a3dc9bfcb5d64ca53cb594.png" style="vertical-align: -2px">和<img alt="x_1" class="math" src="../../_images/math/9655d43328526b2b7a337dba3e45750ed2a448e6.png" style="vertical-align: -3px">之间的相关性的元素<img alt="C_{0,1}" class="math" src="../../_images/math/00c3354e39e0ddafa0166158dc0d48f016b514d5.png" style="vertical-align: -4px">是负的。</span></p>
+<p><span class="yiyi-st" id="yiyi-62">此外，请注意<em class="xref py py-obj">x</em>和<em class="xref py py-obj">y</em>是如何组合的：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">2.1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="mf">4.3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span>  <span class="mf">1.1</span><span class="p">,</span>  <span class="mf">0.12</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="go">[[ 11.71        -4.286     ]</span>
+<span class="go"> [ -4.286        2.14413333]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+<span class="go">[[ 11.71        -4.286     ]</span>
+<span class="go"> [ -4.286        2.14413333]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="go">11.71</span>
+</pre></div>
+</div>
+</dd></dl>

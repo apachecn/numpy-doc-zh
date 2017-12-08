@@ -1,0 +1,75 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.gradient</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.gradient.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.gradient.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.gradient"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">gradient</code><span class="sig-paren">(</span><em>f</em>, <em>*varargs</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L1313-L1515"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回N维数组的梯度。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">计算梯度：内部使用二阶精确中心差，边界处使用一阶差或二阶精确单边（向前或向后）差。</span><span class="yiyi-st" id="yiyi-16">因此，返回的梯度具有与输入数组相同的形状。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>f</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">包含标量函数样本的N维数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>varargs</strong>：标量或标量列表，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">N个标量，其指定每个维度的样本距离，即<em class="xref py py-obj">dx</em>、<em class="xref py py-obj">dy</em>、<em class="xref py py-obj">dz</em>等。</span><span class="yiyi-st" id="yiyi-22">默认距离：1。只有一个标量表示所有维度的样本距离。</span><span class="yiyi-st" id="yiyi-23">如果给定<em class="xref py py-obj">axis</em>，则varargs的数量必须等于轴的数量。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>edge_order</strong>：{1,2}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">边界处使用的N<sup>th</sup>阶精度差来计算梯度。</span><span class="yiyi-st" id="yiyi-26">默认值：1。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-27"><span class="versionmodified">版本1.9.1中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>axis</strong>：None、整数或整数元组，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">仅沿给定轴计算梯度。默认值（axis = None）用于计算输入数组的所有轴的梯度。</span><span class="yiyi-st" id="yiyi-30">轴可以为负，在这种情况下，从最后一个轴计数到第一个轴。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-31"><span class="versionmodified">版本1.11.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-32">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-33"><strong>gradient</strong> : ndarray列表</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-34"><em class="xref py py-obj">列表</em>的每个元素具有与<em class="xref py py-obj">f</em>相同的形状，给出相对于每个维度的<em class="xref py py-obj">f</em>的导数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([ 1. ,  1.5,  2.5,  3.5,  4.5,  5. ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([ 0.5 ,  0.75,  1.25,  1.75,  2.25,  2.5 ])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-36">对于二维数组，返回将是按轴排序的两个数组。</span><span class="yiyi-st" id="yiyi-37">在这个例子中，第一个数组代表行中的梯度，第二个数组代表列方向上的梯度：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">))</span>
+<span class="go">[array([[ 2.,  2., -1.],</span>
+<span class="go">        [ 2.,  2., -1.]]), array([[ 1. ,  2.5,  4. ],</span>
+<span class="go">        [ 1. ,  1. ,  1. ]])]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">edge_order</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([-0.,  2.,  4.,  6.,  8.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">axis关键字可用于指定轴的一个子集来计算梯度</span></p>
+<blockquote>
+<div class="highlight"><pre><span class="go"><span class="yiyi-st" id="yiyi-39">&gt;&gt;&gt; np.gradient(np.array([[1, 2, 6], [3, 4, 5]], dtype=np.float), axis=0)</span></span>
+<span class="go"><span class="yiyi-st" id="yiyi-40">array([[ 2., 2., -1.], [ 2., 2., -1.]]</span></span></pre></div></blockquote>
+</dd></dl>

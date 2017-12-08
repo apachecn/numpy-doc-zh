@@ -1,0 +1,86 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.sinc</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.sinc.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.sinc.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.sinc"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">sinc</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L3262-L3338"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回sinc函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">sinc函数为<img alt="\sin(\pi x)/(\pi x)" class="math" src="../../_images/math/fa79d996b59313c80b0971975825213b7b2ca11a.png" style="vertical-align: -4px">。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>x</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">要计算<code class="docutils literal"><span class="pre">sinc(x)</span></code>的值的数组（可能是多维的）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21"><code class="docutils literal"><span class="pre">sinc(x)</span></code>，其具有与输入相同的形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-23"><code class="docutils literal"><span class="pre">sinc(0)</span></code>是极限值1。</span></p>
+<p><span class="yiyi-st" id="yiyi-24">名称sinc是“sine cardinal”或“sinus cardinalis”的缩写。</span></p>
+<p><span class="yiyi-st" id="yiyi-25">sinc函数用于各种信号处理应用中，包括抗锯齿，Lanczos重采样滤波器的构造和插值。</span></p>
+<p><span class="yiyi-st" id="yiyi-26">对于离散时间信号的带限内插，理想内插核与sinc函数成比例。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r282" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-28"><a class="fn-backref" href="#id1">[R282]</a></span></td><td><span class="yiyi-st" id="yiyi-29">Weisstein，Eric W.“Sinc Function。”来自MathWorld-Wolfram Web资源。</span><span class="yiyi-st" id="yiyi-30"><a class="reference external" href="http://mathworld.wolfram.com/SincFunction.html">http://mathworld.wolfram.com/SincFunction.html</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r283" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-31"><a class="fn-backref" href="#id2">[R283]</a></span></td><td><span class="yiyi-st" id="yiyi-32">维基百科，“Sinc函数”，<a class="reference external" href="http://en.wikipedia.org/wiki/Sinc_function">http://en.wikipedia.org/wiki/Sinc_function</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">41</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([ -3.89804309e-17,  -4.92362781e-02,  -8.40918587e-02,</span>
+<span class="go">        -8.90384387e-02,  -5.84680802e-02,   3.89804309e-17,</span>
+<span class="go">         6.68206631e-02,   1.16434881e-01,   1.26137788e-01,</span>
+<span class="go">         8.50444803e-02,  -3.89804309e-17,  -1.03943254e-01,</span>
+<span class="go">        -1.89206682e-01,  -2.16236208e-01,  -1.55914881e-01,</span>
+<span class="go">         3.89804309e-17,   2.33872321e-01,   5.04551152e-01,</span>
+<span class="go">         7.56826729e-01,   9.35489284e-01,   1.00000000e+00,</span>
+<span class="go">         9.35489284e-01,   7.56826729e-01,   5.04551152e-01,</span>
+<span class="go">         2.33872321e-01,   3.89804309e-17,  -1.55914881e-01,</span>
+<span class="go">        -2.16236208e-01,  -1.89206682e-01,  -1.03943254e-01,</span>
+<span class="go">        -3.89804309e-17,   8.50444803e-02,   1.26137788e-01,</span>
+<span class="go">         1.16434881e-01,   6.68206631e-02,   3.89804309e-17,</span>
+<span class="go">        -5.84680802e-02,  -8.90384387e-02,  -8.40918587e-02,</span>
+<span class="go">        -4.92362781e-02,  -3.89804309e-17])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sinc Function&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-34">它也工作在2-D：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">401</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
+<span class="go">&lt;matplotlib.image.AxesImage object at 0x...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>

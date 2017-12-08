@@ -1,0 +1,83 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.chebyshev.chebint</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.chebint.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.chebint.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.chebyshev.chebint"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.chebyshev.</code><code class="descname">chebint</code><span class="sig-paren">(</span><em>c</em>, <em>m=1</em>, <em>k=[]</em>, <em>lbnd=0</em>, <em>scl=1</em>, <em>axis=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/chebyshev.py#L967-L1095"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">集成Chebyshev系列。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">返回沿<em class="xref py py-obj">轴</em>从<em class="xref py py-obj">lbnd</em>积分<em class="xref py py-obj">m</em>次的切比雪夫系数<em class="xref py py-obj">c</em>。</span><span class="yiyi-st" id="yiyi-18">在每次迭代中，通过<em class="xref py py-obj">scl</em>将所得到的系列<strong>相乘</strong>，并且添加积分常数<em class="xref py py-obj">k</em>。</span><span class="yiyi-st" id="yiyi-19">缩放因子用于变量的线性变化。</span><span class="yiyi-st" id="yiyi-20">（“买方谨慎”：请注意，根据所做的操作，可能希望<em class="xref py py-obj">scl</em>是所期望的倒数；有关详细信息，请参阅下面的“注释”部分。</span><span class="yiyi-st" id="yiyi-21">The argument <em class="xref py py-obj">c</em> is an array of coefficients from low to high degree along each axis, e.g., [1,2,3] represents the series <code class="docutils literal"><span class="pre">T_0</span> <span class="pre">+</span> <span class="pre">2*T_1</span> <span class="pre">+</span> <span class="pre">3*T_2</span></code> while [[1,2],[1,2]] represents <code class="docutils literal"><span class="pre">1*T_0(x)*T_0(y)</span> <span class="pre">+</span> <span class="pre">1*T_1(x)*T_0(y)</span> <span class="pre">+</span> <span class="pre">2*T_0(x)*T_1(y)</span> <span class="pre">+</span> <span class="pre">2*T_1(x)*T_1(y)</span></code> if axis=0 is <code class="docutils literal"><span class="pre">x</span></code> and axis=1 is <code class="docutils literal"><span class="pre">y</span></code>.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>c</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">切比雪夫系数系数。</span><span class="yiyi-st" id="yiyi-25">如果c是多维的，则不同的轴对应于不同的变量，每个轴中的度由相应的索引给出。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>m</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">整合顺序，必须是积极的。</span><span class="yiyi-st" id="yiyi-28">（默认值：1）</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>k</strong>：{[]，list，scalar}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">积分常数。</span><span class="yiyi-st" id="yiyi-31">在零处的第一积分的值是列表中的第一值，在零处的第二积分的值是第二值等。</span><span class="yiyi-st" id="yiyi-32">如果<code class="docutils literal"><span class="pre">k</span> <span class="pre">==</span> <span class="pre">[]</span></code>（默认值），所有常数都设置为零。</span><span class="yiyi-st" id="yiyi-33">如果<code class="docutils literal"><span class="pre">m</span> <span class="pre">==</span> <span class="pre">1</span></code>，可以给出单个标量而不是列表。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-34"><strong>lbnd</strong>：标量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-35">积分的下限。</span><span class="yiyi-st" id="yiyi-36">（默认值：0）</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-37"><strong>scl</strong>：标量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-38">Following each integration the result is <em>multiplied</em> by <em class="xref py py-obj">scl</em> before the integration constant is added. </span><span class="yiyi-st" id="yiyi-39">（默认值：1）</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-40"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-41">进行积分的轴。</span><span class="yiyi-st" id="yiyi-42">（默认值：0）。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-43"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-44">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-45"><strong>S</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-46">C系数积分的系数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-47">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-48"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-49">如果<code class="docutils literal"><span class="pre">m</span> <span class="pre"></span> <span class="pre">1</span></code>，<code class="docutils literal"><span class="pre">len（k）</span> <span class="pre">＆gt；</span> <span class="pre">m</span></code>，<code class="docutils literal"><span class="pre">np.isscalar（lbnd）</span> <span class="pre">==</span> <span class="pre">/ t11&gt;</span></code>或<code class="docutils literal"><span class="pre">np.isscalar（scl）</span> <span class="pre">==</span> <span class="pre">False</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-50">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="numpy.polynomial.chebyshev.chebder.html#numpy.polynomial.chebyshev.chebder" title="numpy.polynomial.chebyshev.chebder"><code class="xref py py-obj docutils literal"><span class="pre">chebder</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-52">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-53">请注意，每次积分的结果<em>乘</em>乘以<em class="xref py py-obj">scl</em>。</span><span class="yiyi-st" id="yiyi-54">为什么这一点很重要？</span><span class="yiyi-st" id="yiyi-55">假设变量<img alt="u = ax + b" class="math" src="../../_images/math/0fd237ce10d293b0e64ed3fb4b45e59ad541a794.png" style="vertical-align: -2px">在相对于<em class="xref py py-obj">x</em>的积分中进行线性变化。</span><span class="yiyi-st" id="yiyi-56">然后.. math :: <em class="xref py py-obj">dx = du / a</em>，因此需要设置<em class="xref py py-obj">scl</em>等于<img alt="1/a" class="math" src="../../_images/math/991aa4b1f8dc7e87dc834a2b161a376e1b0d1e7e.png" style="vertical-align: -4px">  - 也许不是一开始就想到的。</span></p>
+<p><span class="yiyi-st" id="yiyi-57">还要注意，一般来说，集成C系列的结果需要“重新投射”到C系列基本集上。</span><span class="yiyi-st" id="yiyi-58">因此，通常，该函数的结果是“不直观的”，虽然正确；请参阅下面的示例部分。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-59">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">chebyshev</span> <span class="k">as</span> <span class="n">C</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span><span class="o">.</span><span class="n">chebint</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="go">array([ 0.5, -0.5,  0.5,  0.5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span><span class="o">.</span><span class="n">chebint</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([ 0.03125   , -0.1875    ,  0.04166667, -0.05208333,  0.01041667,</span>
+<span class="go">        0.00625   ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span><span class="o">.</span><span class="n">chebint</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([ 3.5, -0.5,  0.5,  0.5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span><span class="o">.</span><span class="n">chebint</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">lbnd</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([ 8.5, -0.5,  0.5,  0.5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span><span class="o">.</span><span class="n">chebint</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">scl</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([-1.,  1., -1., -1.])</span>
+</pre></div>
+</div>
+</dd></dl>

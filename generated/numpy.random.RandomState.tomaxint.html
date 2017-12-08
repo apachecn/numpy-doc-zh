@@ -1,0 +1,57 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.tomaxint</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.tomaxint.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.tomaxint.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.tomaxint"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">tomaxint</code><span class="sig-paren">(</span><em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">0和<code class="docutils literal"><span class="pre">sys.maxint</span></code>之间的随机整数，包括0和。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">在区间[0，<code class="docutils literal"><span class="pre">sys.maxint</span></code>]中返回均匀分布的随机整数的样本。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输出形状。</span><span class="yiyi-st" id="yiyi-20">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-21">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">绘制样本，形状<em class="xref py py-obj">大小</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.random.randint.html#numpy.random.randint" title="numpy.random.randint"><code class="xref py py-obj docutils literal"><span class="pre">randint</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-27">在整数的给定半开间隔上的均匀采样。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.random.random_integers.html#numpy.random.random_integers" title="numpy.random.random_integers"><code class="xref py py-obj docutils literal"><span class="pre">random_integers</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">在给定的整数闭合区间内进行均匀采样。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">mtrand</span><span class="o">.</span><span class="n">RandomState</span><span class="p">()</span> <span class="c1"># need a RandomState object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RS</span><span class="o">.</span><span class="n">tomaxint</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">array([[[1170048599, 1600360186],</span>
+<span class="go">        [ 739731006, 1947757578]],</span>
+<span class="go">       [[1871712945,  752307660],</span>
+<span class="go">        [1601631370, 1479324245]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">maxint</span>
+<span class="go">2147483647</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RS</span><span class="o">.</span><span class="n">tomaxint</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxint</span>
+<span class="go">array([[[ True,  True],</span>
+<span class="go">        [ True,  True]],</span>
+<span class="go">       [[ True,  True],</span>
+<span class="go">        [ True,  True]]], dtype=bool)</span>
+</pre></div>
+</div>
+</dd></dl>

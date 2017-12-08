@@ -1,0 +1,67 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.bmat</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.bmat.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.bmat.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.bmat"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">bmat</code><span class="sig-paren">(</span><em>obj</em>, <em>ldict=None</em>, <em>gdict=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/matrixlib/defmatrix.py#L1167-L1240"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从字符串，嵌套序列或数组构建一个矩阵对象。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>obj</strong>：str或array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数据。</span><span class="yiyi-st" id="yiyi-18">即使<em class="xref py py-obj">obj</em>是字符串，也可以引用当前作用域中的变量名称。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>ldict</strong>：dict，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">替换当前帧中的本地操作数的字典。</span><span class="yiyi-st" id="yiyi-21">如果<em class="xref py py-obj">obj</em>不是字符串或<em class="xref py py-obj">gdict</em>是<em class="xref py py-obj">无</em>，则忽略。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>gdict</strong>：dict，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">替换当前帧中的全局操作数的字典。</span><span class="yiyi-st" id="yiyi-24">如果<em class="xref py py-obj">obj</em>不是字符串，则忽略。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>out</strong>：matrix</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">返回一个矩阵对象，它是一个专用的2-D数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.matrix.html#numpy.matrix" title="numpy.matrix"><code class="xref py py-obj docutils literal"><span class="pre">matrix</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s1">&apos;1 1; 1 1&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s1">&apos;2 2; 2 2&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s1">&apos;3 4; 5 6&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s1">&apos;7 8; 9 0&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-31">所有以下表达式构造相同的块矩阵：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">bmat</span><span class="p">([[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">],</span> <span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">]])</span>
+<span class="go">matrix([[1, 1, 2, 2],</span>
+<span class="go">        [1, 1, 2, 2],</span>
+<span class="go">        [3, 4, 7, 8],</span>
+<span class="go">        [5, 6, 9, 0]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">bmat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">]])</span>
+<span class="go">matrix([[1, 1, 2, 2],</span>
+<span class="go">        [1, 1, 2, 2],</span>
+<span class="go">        [3, 4, 7, 8],</span>
+<span class="go">        [5, 6, 9, 0]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">bmat</span><span class="p">(</span><span class="s1">&apos;A,B; C,D&apos;</span><span class="p">)</span>
+<span class="go">matrix([[1, 1, 2, 2],</span>
+<span class="go">        [1, 1, 2, 2],</span>
+<span class="go">        [3, 4, 7, 8],</span>
+<span class="go">        [5, 6, 9, 0]])</span>
+</pre></div>
+</div>
+</dd></dl>

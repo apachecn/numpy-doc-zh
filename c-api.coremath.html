@@ -1,0 +1,360 @@
+
+<h1><span class="yiyi-st" id="yiyi-20">NumPy core libraries</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/c-api.coremath.html">https://docs.scipy.org/doc/numpy/reference/c-api.coremath.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-21"><span class="versionmodified">版本1.3.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-22">从numpy 1.3.0开始，我们正在努力将纯C，“计算”代码与python相关代码分离。</span><span class="yiyi-st" id="yiyi-23">目标是两个方面：使代码更清洁，并启用代码重用由numpy（scipy等）外的其他扩展。</span></p>
+<div class="section" id="numpy-core-math-library">
+<h2><span class="yiyi-st" id="yiyi-24">NumPy core math library</span></h2>
+<p><span class="yiyi-st" id="yiyi-25">numpy核心数学库（&apos;npymath&apos;）是这个方向的第一步。</span><span class="yiyi-st" id="yiyi-26">这个库包含大多数与数学相关的C99功能，可以在没有很好支持C99的平台上使用。</span><span class="yiyi-st" id="yiyi-27">核心数学函数具有与C99相同的API，除了npy_ *前缀。</span></p>
+<p><span class="yiyi-st" id="yiyi-28">The available functions are defined in <numpy npy_math.h=""> - please refer to this header when in doubt.</numpy></span></p>
+<div class="section" id="floating-point-classification">
+<h3><span class="yiyi-st" id="yiyi-29">Floating point classification</span></h3>
+<dl class="var">
+<dt id="c.NPY_NAN"><span class="yiyi-st" id="yiyi-30"> <code class="descname">NPY_NAN</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-31">这个宏定义为NaN（不是数字），并且保证未设置signbit（&apos;positive&apos;NaN）。</span><span class="yiyi-st" id="yiyi-32">相应的单精度宏和扩展精度宏可用后缀F和L.</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_INFINITY"><span class="yiyi-st" id="yiyi-33"> <code class="descname">NPY_INFINITY</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-34">此宏定义为正inf。</span><span class="yiyi-st" id="yiyi-35">相应的单精度宏和扩展精度宏可用后缀F和L.</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_PZERO"><span class="yiyi-st" id="yiyi-36"> <code class="descname">NPY_PZERO</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-37">此宏定义为正零。</span><span class="yiyi-st" id="yiyi-38">相应的单精度宏和扩展精度宏可用后缀F和L.</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_NZERO"><span class="yiyi-st" id="yiyi-39"> <code class="descname">NPY_NZERO</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-40">此宏定义为负零（即已设置符号位）。</span><span class="yiyi-st" id="yiyi-41">相应的单精度宏和扩展精度宏可用后缀F和L.</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_isnan"><span class="yiyi-st" id="yiyi-42"> int <code class="descname">npy_isnan</code><span class="sig-paren">(</span>x<span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-43">这是一个宏，并且等价于C99 isnan：适用于单精度，双精度和扩展精度，并返回非0值，x是NaN。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_isfinite"><span class="yiyi-st" id="yiyi-44"> int <code class="descname">npy_isfinite</code><span class="sig-paren">(</span>x<span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-45">这是一个宏，并且等效于C99 isfinite：适用于单精度，双精度和扩展精度，并返回非0值，x不是NaN也不是无穷大。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_isinf"><span class="yiyi-st" id="yiyi-46"> int <code class="descname">npy_isinf</code><span class="sig-paren">(</span>x<span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-47">这是一个宏，相当于C99 isinf：适用于单精度，双精度和扩展精度，返回一个非0值，x是无穷大（正和负）。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_signbit"><span class="yiyi-st" id="yiyi-48"> int <code class="descname">npy_signbit</code><span class="sig-paren">(</span>x<span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-49">这是一个宏，相当于C99 signbit：适用于单精度，双精度和扩展精度，并返回一个非0值，即x具有signbit集合（即数字为负）。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_copysign"><span class="yiyi-st" id="yiyi-50"> double <code class="descname">npy_copysign</code><span class="sig-paren">(</span>double<em> x</em>, double<em> y</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-51">这是一个等价于C99 copysign的函数：返回x与y相同的符号。</span><span class="yiyi-st" id="yiyi-52">适用于任何值，包括inf和nan。</span><span class="yiyi-st" id="yiyi-53">单和扩展精度可用后缀f和l。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-54"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+</dd></dl>
+</div>
+<div class="section" id="useful-math-constants">
+<h3><span class="yiyi-st" id="yiyi-55">Useful math constants</span></h3>
+<p><span class="yiyi-st" id="yiyi-56">以下数学常数在npy_math.h中可用。</span><span class="yiyi-st" id="yiyi-57">还可以通过分别添加F和L后缀来获得单精度和扩展精度。</span></p>
+<dl class="var">
+<dt id="c.NPY_E"><span class="yiyi-st" id="yiyi-58"> <code class="descname">NPY_E</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-59">自然对数底（<img alt="e" class="math" src="../_images/math/ca907ab79fe0188f51d0a5db04642f8042f779d5.png" style="vertical-align: 0px">）</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_LOG2E"><span class="yiyi-st" id="yiyi-60"> <code class="descname">NPY_LOG2E</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-61">欧拉常数的基底2的对数（<img alt="\frac{\ln(e)}{\ln(2)}" class="math" src="../_images/math/f23b7585b585e4c1237a6424ef72595c19d3445a.png" style="vertical-align: -8px">）</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_LOG10E"><span class="yiyi-st" id="yiyi-62"> <code class="descname">NPY_LOG10E</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-63">欧拉常数（<img alt="\frac{\ln(e)}{\ln(10)}" class="math" src="../_images/math/257bb150bb440e2c2068e77118d1886097d1619a.png" style="vertical-align: -8px">）的以10为底的对数</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_LOGE2"><span class="yiyi-st" id="yiyi-64"> <code class="descname">NPY_LOGE2</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-65">2的自然对数（<img alt="\ln(2)" class="math" src="../_images/math/ee2815119b4f9fbcb9e964b6252313c8bd075b23.png" style="vertical-align: -4px">）</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_LOGE10"><span class="yiyi-st" id="yiyi-66"> <code class="descname">NPY_LOGE10</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-67">10的自然对数（<img alt="\ln(10)" class="math" src="../_images/math/03eb2554999615a1e4e44880b814ca24bfb3fda8.png" style="vertical-align: -4px">）</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_PI"><span class="yiyi-st" id="yiyi-68"> <code class="descname">NPY_PI</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-69">Pi（<img alt="\pi" class="math" src="../_images/math/7321e712e2b80bb4b00be0d9faaa525e3f53cde4.png" style="vertical-align: 0px">）</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_PI_2"><span class="yiyi-st" id="yiyi-70"> <code class="descname">NPY_PI_2</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-71">Pi除以2（<img alt="\frac{\pi}{2}" class="math" src="../_images/math/4204552f1f6533576c2b1ec914f4abf1cdaeddcd.png" style="vertical-align: -5px">）</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_PI_4"><span class="yiyi-st" id="yiyi-72"> <code class="descname">NPY_PI_4</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-73">Pi除以4（<img alt="\frac{\pi}{4}" class="math" src="../_images/math/1f4f2fabb9b30baa436bd54998b80a49f601aa17.png" style="vertical-align: -5px">）</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_1_PI"><span class="yiyi-st" id="yiyi-74"> <code class="descname">NPY_1_PI</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-75">p1（<img alt="\frac{1}{\pi}" class="math" src="../_images/math/4c062e7a23e76e4d2667da92fd0146485cabf899.png" style="vertical-align: -5px">）的倒数</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_2_PI"><span class="yiyi-st" id="yiyi-76"> <code class="descname">NPY_2_PI</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-77">两倍于pi的倒数（<img alt="\frac{2}{\pi}" class="math" src="../_images/math/862e4f6aea189d29854606d9c6596981cdebae3c.png" style="vertical-align: -5px">）</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_EULER"><span class="yiyi-st" id="yiyi-78"> <code class="descname">NPY_EULER</code></span></dt>
+<dd><dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-79">欧拉常数</span></dt>
+<dd></dd>
+</dl>
+</dd></dl>
+</div>
+<div class="section" id="low-level-floating-point-manipulation">
+<h3><span class="yiyi-st" id="yiyi-80">Low-level floating point manipulation</span></h3>
+<p><span class="yiyi-st" id="yiyi-81">这些可用于精确的浮点比较。</span></p>
+<dl class="function">
+<dt id="c.npy_nextafter"><span class="yiyi-st" id="yiyi-82"> double <code class="descname">npy_nextafter</code><span class="sig-paren">(</span>double<em> x</em>, double<em> y</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-83">这是相当于C99 nextafter的函数：从y的方向返回下一个可表示的浮点值。</span><span class="yiyi-st" id="yiyi-84">单和扩展精度可用后缀f和l。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-85"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_spacing"><span class="yiyi-st" id="yiyi-86"> double <code class="descname">npy_spacing</code><span class="sig-paren">(</span>double<em> x</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-87">这是一个等价于Fortran本质的函数。</span><span class="yiyi-st" id="yiyi-88">从x返回x和下一个可表示浮点值之间的距离，例如spacing（1）== eps。</span><span class="yiyi-st" id="yiyi-89">纳米的间距和+/- inf返回纳米。</span><span class="yiyi-st" id="yiyi-90">单和扩展精度可用后缀f和l。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-91"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_set_floatstatus_divbyzero"><span class="yiyi-st" id="yiyi-92"> void <code class="descname">npy_set_floatstatus_divbyzero</code><span class="sig-paren">(</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-93">设置除零浮点异常</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-94"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_set_floatstatus_overflow"><span class="yiyi-st" id="yiyi-95"> void <code class="descname">npy_set_floatstatus_overflow</code><span class="sig-paren">(</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-96">设置溢出浮点异常</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-97"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_set_floatstatus_underflow"><span class="yiyi-st" id="yiyi-98"> void <code class="descname">npy_set_floatstatus_underflow</code><span class="sig-paren">(</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-99">设置下溢浮点异常</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-100"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_set_floatstatus_invalid"><span class="yiyi-st" id="yiyi-101"> void <code class="descname">npy_set_floatstatus_invalid</code><span class="sig-paren">(</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-102">设置无效浮点异常</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-103"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_get_floatstatus"><span class="yiyi-st" id="yiyi-104"> int <code class="descname">npy_get_floatstatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-105">获取浮点状态。</span><span class="yiyi-st" id="yiyi-106">返回具有以下可能标志的位掩码：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-107">NPY_FPE_DIVIDEBYZERO</span></li>
+<li><span class="yiyi-st" id="yiyi-108">NPY_FPE_OVERFLOW</span></li>
+<li><span class="yiyi-st" id="yiyi-109">NPY_FPE_UNDERFLOW</span></li>
+<li><span class="yiyi-st" id="yiyi-110">NPY_FPE_INVALID</span></li>
+</ul>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-111"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_clear_floatstatus"><span class="yiyi-st" id="yiyi-112"> int <code class="descname">npy_clear_floatstatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-113">清除浮点状态。</span><span class="yiyi-st" id="yiyi-114">返回先前的状态掩码。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-115"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+</dd></dl>
+</div>
+<div class="section" id="complex-functions">
+<h3><span class="yiyi-st" id="yiyi-116">Complex functions</span></h3>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-117"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-118">已添加C99-样复合物功能。</span><span class="yiyi-st" id="yiyi-119">如果你想实现便携式C扩展，那么可以使用。</span><span class="yiyi-st" id="yiyi-120">由于我们仍然支持没有C99复杂类型的平台，你需要限制为C90兼容语法，例如：</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cm">/* a = 1 + 2i \*/</span>
+<span class="n">npy_complex</span> <span class="n">a</span> <span class="o">=</span> <span class="n">npy_cpack</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="n">npy_complex</span> <span class="n">b</span><span class="p">;</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">npy_log</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="linking-against-the-core-math-library-in-an-extension">
+<h3><span class="yiyi-st" id="yiyi-121">Linking against the core math library in an extension</span></h3>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-122"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-123">要在您自己的扩展中使用核心数学库，您需要在setup.py中的扩展中添加npymath编译和链接选项：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.distutils.misc_util</span> <span class="k">import</span> <span class="n">get_info</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">info</span> <span class="o">=</span> <span class="n">get_info</span><span class="p">(</span><span class="s1">&apos;npymath&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">config</span><span class="o">.</span><span class="n">add_extension</span><span class="p">(</span><span class="s1">&apos;foo&apos;</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s1">&apos;foo.c&apos;</span><span class="p">],</span> <span class="n">extra_info</span><span class="o">=</span><span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-124">换句话说，info的使用与使用blas_info和co时完全相同。</span></p>
+</div>
+<div class="section" id="half-precision-functions">
+<h3><span class="yiyi-st" id="yiyi-125">Half-precision functions</span></h3>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-126"><span class="versionmodified">版本2.0.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-127">The header file <numpy halffloat.h=""> provides functions to work with IEEE 754-2008 16-bit floating point values. </numpy></span><span class="yiyi-st" id="yiyi-128">虽然此格式通常不用于数值计算，但它对于存储需要浮点但不需要很多精度的值很有用。</span><span class="yiyi-st" id="yiyi-129">它也可以用作一个教育工具来理解浮点舍入误差的性质。</span></p>
+<p><span class="yiyi-st" id="yiyi-130">像其他类型一样，NumPy包括16位浮点型的typedef npy_half。</span><span class="yiyi-st" id="yiyi-131">与大多数其他类型不同，你不能使用它作为C中的正常类型，因为is是npy_uint16的typedef。</span><span class="yiyi-st" id="yiyi-132">例如，1.0看起来像0x3c00到C，如果你做不同的有符号零之间的等式比较，你会得到-0.0！= 0.0（0x8000！= 0x0000），这是不正确的。</span></p>
+<p><span class="yiyi-st" id="yiyi-133">For these reasons, NumPy provides an API to work with npy_half values accessible by including <numpy halffloat.h=""> and linking to ‘npymath’. </numpy></span><span class="yiyi-st" id="yiyi-134">对于未直接提供的函数（如算术运算），首选方法是转换为float或double并再次返回，如以下示例所示。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">npy_half</span> <span class="nf">sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">npy_half</span> <span class="o">*</span><span class="n">array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="n">npy_half_to_float</span><span class="p">(</span><span class="o">*</span><span class="n">array</span><span class="o">++</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">npy_float_to_half</span><span class="p">(</span><span class="n">ret</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-135">外部链接：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-136"><a class="reference external" href="http://ieeexplore.ieee.org/servlet/opac?punumber=4610933">754-2008 IEEE浮点算术标准</a></span></li>
+<li><span class="yiyi-st" id="yiyi-137"><a class="reference external" href="http://en.wikipedia.org/wiki/Half_precision_floating-point_format">半精度浮动维基百科文章</a>。</span></li>
+<li><span class="yiyi-st" id="yiyi-138"><a class="reference external" href="http://www.opengl.org/registry/specs/ARB/half_float_pixel.txt">OpenGL半浮动像素支持</a></span></li>
+<li><span class="yiyi-st" id="yiyi-139"><a class="reference external" href="http://www.openexr.com/about.html">OpenEXR图片格式</a>。</span></li>
+</ul>
+<dl class="var">
+<dt id="c.NPY_HALF_ZERO"><span class="yiyi-st" id="yiyi-140"> <code class="descname">NPY_HALF_ZERO</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-141">此宏定义为正零。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_HALF_PZERO"><span class="yiyi-st" id="yiyi-142"> <code class="descname">NPY_HALF_PZERO</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-143">此宏定义为正零。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_HALF_NZERO"><span class="yiyi-st" id="yiyi-144"> <code class="descname">NPY_HALF_NZERO</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-145">此宏定义为负零。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_HALF_ONE"><span class="yiyi-st" id="yiyi-146"> <code class="descname">NPY_HALF_ONE</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-147">此宏定义为1.0。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_HALF_NEGONE"><span class="yiyi-st" id="yiyi-148"> <code class="descname">NPY_HALF_NEGONE</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-149">此宏定义为-1.0。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_HALF_PINF"><span class="yiyi-st" id="yiyi-150"> <code class="descname">NPY_HALF_PINF</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-151">此宏定义为+ inf。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_HALF_NINF"><span class="yiyi-st" id="yiyi-152"> <code class="descname">NPY_HALF_NINF</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-153">此宏定义为-inf。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_HALF_NAN"><span class="yiyi-st" id="yiyi-154"> <code class="descname">NPY_HALF_NAN</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-155">此宏定义为NaN值，保证未设置其符号位。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_to_float"><span class="yiyi-st" id="yiyi-156"> float <code class="descname">npy_half_to_float</code><span class="sig-paren">(</span>npy_half<em> h</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-157">将半精度浮点数转换为单精度浮点数。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_to_double"><span class="yiyi-st" id="yiyi-158"> double <code class="descname">npy_half_to_double</code><span class="sig-paren">(</span>npy_half<em> h</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-159">将半精度浮点数转换为双精度浮点数。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_float_to_half"><span class="yiyi-st" id="yiyi-160"> npy_half <code class="descname">npy_float_to_half</code><span class="sig-paren">(</span>float<em> f</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-161">将单精度浮点数转换为半精度浮点数。</span><span class="yiyi-st" id="yiyi-162">该值四舍五入到最接近的可表示的一半，连接到最接近的偶数。</span><span class="yiyi-st" id="yiyi-163">如果值太小或太大，系统的浮点下溢或溢出位将被置1。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_double_to_half"><span class="yiyi-st" id="yiyi-164"> npy_half <code class="descname">npy_double_to_half</code><span class="sig-paren">(</span>double<em> d</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-165">将双精度浮点数转换为半精度浮点数。</span><span class="yiyi-st" id="yiyi-166">该值四舍五入到最接近的可表示的一半，连接到最接近的偶数。</span><span class="yiyi-st" id="yiyi-167">如果值太小或太大，系统的浮点下溢或溢出位将被置1。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_eq"><span class="yiyi-st" id="yiyi-168"> int <code class="descname">npy_half_eq</code><span class="sig-paren">(</span>npy_half<em> h1</em>, npy_half<em> h2</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-169">比较两个半精度浮点数（h1 == h2）。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_ne"><span class="yiyi-st" id="yiyi-170"> int <code class="descname">npy_half_ne</code><span class="sig-paren">(</span>npy_half<em> h1</em>, npy_half<em> h2</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-171">比较两个半精度浮点数（h1！= h2）。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_le"><span class="yiyi-st" id="yiyi-172"> int <code class="descname">npy_half_le</code><span class="sig-paren">(</span>npy_half<em> h1</em>, npy_half<em> h2</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-173">比较两个半精度浮点数（h1</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_lt"><span class="yiyi-st" id="yiyi-174"> int <code class="descname">npy_half_lt</code><span class="sig-paren">(</span>npy_half<em> h1</em>, npy_half<em> h2</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-175">比较两个半精度浮点数（h1</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_ge"><span class="yiyi-st" id="yiyi-176"> int <code class="descname">npy_half_ge</code><span class="sig-paren">(</span>npy_half<em> h1</em>, npy_half<em> h2</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-177">比较两个半精度浮点（h1&gt; = h2）。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_gt"><span class="yiyi-st" id="yiyi-178"> int <code class="descname">npy_half_gt</code><span class="sig-paren">(</span>npy_half<em> h1</em>, npy_half<em> h2</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-179">比较两个半精度浮点数（h1&gt; h2）。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_eq_nonan"><span class="yiyi-st" id="yiyi-180"> int <code class="descname">npy_half_eq_nonan</code><span class="sig-paren">(</span>npy_half<em> h1</em>, npy_half<em> h2</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-181">比较两个已知不是NaN（h1 == h2）的半精度浮点数。</span><span class="yiyi-st" id="yiyi-182">如果值为NaN，则结果未定义。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_lt_nonan"><span class="yiyi-st" id="yiyi-183"> int <code class="descname">npy_half_lt_nonan</code><span class="sig-paren">(</span>npy_half<em> h1</em>, npy_half<em> h2</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-184">比较两个已知不是NaN的半精度浮点数（h1</span><span class="yiyi-st" id="yiyi-185">如果值为NaN，则结果未定义。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_le_nonan"><span class="yiyi-st" id="yiyi-186"> int <code class="descname">npy_half_le_nonan</code><span class="sig-paren">(</span>npy_half<em> h1</em>, npy_half<em> h2</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-187">比较两个已知不是NaN的半精度浮点数（h1</span><span class="yiyi-st" id="yiyi-188">如果值为NaN，则结果未定义。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_iszero"><span class="yiyi-st" id="yiyi-189"> int <code class="descname">npy_half_iszero</code><span class="sig-paren">(</span>npy_half<em> h</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-190">测试半精度浮点是否具有等于零的值。</span><span class="yiyi-st" id="yiyi-191">这可能比调用npy_half_eq（h，NPY_ZERO）稍快。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_isnan"><span class="yiyi-st" id="yiyi-192"> int <code class="descname">npy_half_isnan</code><span class="sig-paren">(</span>npy_half<em> h</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-193">测试半精度浮点是否为NaN。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_isinf"><span class="yiyi-st" id="yiyi-194"> int <code class="descname">npy_half_isinf</code><span class="sig-paren">(</span>npy_half<em> h</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-195">测试半精度浮点是加或减Inf。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_isfinite"><span class="yiyi-st" id="yiyi-196"> int <code class="descname">npy_half_isfinite</code><span class="sig-paren">(</span>npy_half<em> h</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-197">测试半精度浮点是否是有限的（不是NaN或Inf）。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_signbit"><span class="yiyi-st" id="yiyi-198"> int <code class="descname">npy_half_signbit</code><span class="sig-paren">(</span>npy_half<em> h</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-199">返回1是h是负数，否则为0。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_copysign"><span class="yiyi-st" id="yiyi-200"> npy_half <code class="descname">npy_half_copysign</code><span class="sig-paren">(</span>npy_half<em> x</em>, npy_half<em> y</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-201">返回从y复制的符号位的x值。</span><span class="yiyi-st" id="yiyi-202">适用于任何值，包括Inf和NaN。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_spacing"><span class="yiyi-st" id="yiyi-203"> npy_half <code class="descname">npy_half_spacing</code><span class="sig-paren">(</span>npy_half<em> h</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-204">这与半精度浮点相同，如在低级浮点部分中描述的npy_spacing和npy_spacingf。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_half_nextafter"><span class="yiyi-st" id="yiyi-205"> npy_half <code class="descname">npy_half_nextafter</code><span class="sig-paren">(</span>npy_half<em> x</em>, npy_half<em> y</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-206">这与半精度浮点相同，与低级浮点部分中描述的npy_nextafter和npy_nextafterf相同。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_floatbits_to_halfbits"><span class="yiyi-st" id="yiyi-207"> npy_uint16 <code class="descname">npy_floatbits_to_halfbits</code><span class="sig-paren">(</span>npy_uint32<em> f</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-208">低级函数，将作为uint32存储的32位单精度浮点数转换为16位半精度浮点数。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_doublebits_to_halfbits"><span class="yiyi-st" id="yiyi-209"> npy_uint16 <code class="descname">npy_doublebits_to_halfbits</code><span class="sig-paren">(</span>npy_uint64<em> d</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-210">低级函数，将64位双精度浮点数转换为16位半精度浮点数，存储为uint64。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_halfbits_to_floatbits"><span class="yiyi-st" id="yiyi-211"> npy_uint32 <code class="descname">npy_halfbits_to_floatbits</code><span class="sig-paren">(</span>npy_uint16<em> h</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-212">低级函数，将16位半精度浮点数转换为32位单精度浮点数，存储为uint32。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.npy_halfbits_to_doublebits"><span class="yiyi-st" id="yiyi-213"> npy_uint64 <code class="descname">npy_halfbits_to_doublebits</code><span class="sig-paren">(</span>npy_uint16<em> h</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-214">低级函数，将16位半精度浮点数转换为64位双精度浮点数，存储为uint64。</span></p>
+</dd></dl>
+</div>
+</div>

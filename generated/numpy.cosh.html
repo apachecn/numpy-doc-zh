@@ -1,0 +1,47 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.cosh</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.cosh.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.cosh.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.cosh"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">cosh</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;cosh&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">双曲余弦，元素。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">等于<code class="docutils literal"><span class="pre">1/2</span> <span class="pre">*</span> <span class="pre">（np.exp（x）</span> <span class="pre">+</span> <span class="pre">np。 exp（-x））</span></code>和<code class="docutils literal"><span class="pre">np.cos(1j*x)</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">与<em class="xref py py-obj">x</em>形状相同的输出数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-23">双曲余弦描述悬挂电缆的形状：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-24">（<a class="reference external" href="../../reference/generated/numpy-cosh-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-cosh-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-cosh-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-cosh-1.png" src="../../_images/numpy-cosh-1.png">
+</div>
+</dd></dl>

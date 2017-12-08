@@ -1,0 +1,67 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.recarray.ctypes</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.ctypes.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.ctypes.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="attribute">
+<dt id="numpy.recarray.ctypes"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">recarray.</code><code class="descname">ctypes</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">一个对象，用于简化数组与ctypes模块的交互。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">此属性创建一个对象，使得在使用ctypes模块调用共享库时更容易使用数组。</span><span class="yiyi-st" id="yiyi-17">返回的对象包括数据，形状和步长属性（见下面的注释），它们本身返回可以用作共享库的参数的ctypes对象。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>无</strong></span></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>c</strong>：Python对象</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">拥有属性数据，形状，步幅等</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-24"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ctypeslib</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-26">下面是这个对象的公共属性，它们被记录在“NumPy指南”中（我们省略了未记录的公共属性，以及记录的私有属性）：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-27">data：指向数组的内存区域的指针，为Python整数。</span><span class="yiyi-st" id="yiyi-28">该存储器区域可以包含未对齐的数据，或者不以正确的字节顺序。</span><span class="yiyi-st" id="yiyi-29">存储区域甚至可能不可写。</span><span class="yiyi-st" id="yiyi-30">当将此属性传递给任意C代码时，应尊重此数组的数组标志和数据类型，以避免可能包括Python崩溃的故障。</span><span class="yiyi-st" id="yiyi-31">用户当心！</span><span class="yiyi-st" id="yiyi-32">此属性的值与self._array_interface _ [&apos;data&apos;] [0]完全相同。</span></li>
+<li><span class="yiyi-st" id="yiyi-33">shape（c_intp * self.ndim）：长度为self.ndim的ctypes数组，其中basetype是与此平台上的dtype（&apos;p&apos;）对应的C整数。</span><span class="yiyi-st" id="yiyi-34">这个基本类型可以是c_int，c_long或c_longlong，具体取决于平台。</span><span class="yiyi-st" id="yiyi-35">c_intp类型在numpy.ctypeslib中相应定义。</span><span class="yiyi-st" id="yiyi-36">ctypes数组包含基础数组的形状。</span></li>
+<li><span class="yiyi-st" id="yiyi-37">strides（c_intp * self.ndim）：长度为self.ndim的ctypes数组，其中basetype与shape属性相同。</span><span class="yiyi-st" id="yiyi-38">这个ctypes数组包含来自底层数组的strides信息。</span><span class="yiyi-st" id="yiyi-39">这个步长信息对于显示必须跳转多少字节以获得数组中的下一个元素是重要的。</span></li>
+<li><span class="yiyi-st" id="yiyi-40">data_as（obj）：返回转换为特定c类型对象的数据指针。</span><span class="yiyi-st" id="yiyi-41">例如，调用self._as_parameter_等效于self.data_as（ctypes.c_void_p）。</span><span class="yiyi-st" id="yiyi-42">也许你想使用数据作为指向浮点数据的ctypes数组的指针：self.data_as（ctypes.POINTER（ctypes.c_double））。</span></li>
+<li><span class="yiyi-st" id="yiyi-43">shape_as（obj）：返回形状元组作为一些其他c类型的数组。</span><span class="yiyi-st" id="yiyi-44">例如：self.shape_as（ctypes.c_short）。</span></li>
+<li><span class="yiyi-st" id="yiyi-45">strides_as（obj）：返回strides元组作为一些其他c类型的数组。</span><span class="yiyi-st" id="yiyi-46">例如：self.strides_as（ctypes.c_longlong）。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-47">小心使用ctypes属性 - 特别是临时构建的数组或数组。</span><span class="yiyi-st" id="yiyi-48">例如，调用<code class="docutils literal"><span class="pre">(a+b).ctypes.data_as(ctypes.c_void_p)</span></code>会返回一个无效的指针，因为创建为（a + b）的数组在下一个Python语句之前被释放。</span><span class="yiyi-st" id="yiyi-49">你可以使用<code class="docutils literal"><span class="pre">c=a+b</span></code>或<code class="docutils literal"><span class="pre">ct=(a+b).ctypes</span></code>避免此问题。</span><span class="yiyi-st" id="yiyi-50">在后一种情况下，ct将保存对数组的引用，直到ct被删除或重新分配。</span></p>
+<p><span class="yiyi-st" id="yiyi-51">如果ctypes模块不可用，那么数组对象的ctypes属性仍会返回有用的信息，但不会返回ctypes对象，而是可能会出现错误。</span><span class="yiyi-st" id="yiyi-52">特别地，对象仍然具有as参数属性，该属性将返回等于data属性的整数。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-53">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[0, 1],</span>
+<span class="go">       [2, 3]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data</span>
+<span class="go">30439712</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_long</span><span class="p">))</span>
+<span class="go">&lt;ctypes.LP_c_long object at 0x01F01300&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_long</span><span class="p">))</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">c_long(0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_longlong</span><span class="p">))</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">c_longlong(4294967296L)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">&lt;numpy.core._internal.c_long_Array_2 object at 0x01FFD580&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">shape_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_long</span><span class="p">)</span>
+<span class="go">&lt;numpy.core._internal.c_long_Array_2 object at 0x01FCE620&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">strides</span>
+<span class="go">&lt;numpy.core._internal.c_long_Array_2 object at 0x01FCE620&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">strides_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_longlong</span><span class="p">)</span>
+<span class="go">&lt;numpy.core._internal.c_longlong_Array_2 object at 0x01F01300&gt;</span>
+</pre></div>
+</div>
+</dd></dl>

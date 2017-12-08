@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.hermite.hermder</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.hermite.hermder.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.hermite.hermder.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.hermite.hermder"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.hermite.</code><code class="descname">hermder</code><span class="sig-paren">(</span><em>c</em>, <em>m=1</em>, <em>scl=1</em>, <em>axis=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/hermite.py#L637-L724"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">区分一个Hermite系列。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">返回沿<em class="xref py py-obj">轴</em>的Hermite系数<em class="xref py py-obj">c</em>微分<em class="xref py py-obj">m</em></span><span class="yiyi-st" id="yiyi-18">在每次迭代时，结果乘以<em class="xref py py-obj">scl</em>（比例因子用于变量的线性变化）。</span><span class="yiyi-st" id="yiyi-19">The argument <em class="xref py py-obj">c</em> is an array of coefficients from low to high degree along each axis, e.g., [1,2,3] represents the series <code class="docutils literal"><span class="pre">1*H_0</span> <span class="pre">+</span> <span class="pre">2*H_1</span> <span class="pre">+</span> <span class="pre">3*H_2</span></code> while [[1,2],[1,2]] represents <code class="docutils literal"><span class="pre">1*H_0(x)*H_0(y)</span> <span class="pre">+</span> <span class="pre">1*H_1(x)*H_0(y)</span> <span class="pre">+</span> <span class="pre">2*H_0(x)*H_1(y)</span> <span class="pre">+</span> <span class="pre">2*H_1(x)*H_1(y)</span></code> if axis=0 is <code class="docutils literal"><span class="pre">x</span></code> and axis=1 is <code class="docutils literal"><span class="pre">y</span></code>.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>c</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">Hermite系数的数组。</span><span class="yiyi-st" id="yiyi-23">如果<em class="xref py py-obj">c</em>是多维的，则不同的轴对应于不同的变量，每个轴中的度由相应的索引给出。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>m</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">所采用的导数数量，必须是非负数。</span><span class="yiyi-st" id="yiyi-26">（默认值：1）</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>scl</strong>：标量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">每个微分乘以<em class="xref py py-obj">scl</em>。</span><span class="yiyi-st" id="yiyi-29">最终结果是乘以<code class="docutils literal"><span class="pre">scl**m</span></code>。这是用于变量的线性变化。</span><span class="yiyi-st" id="yiyi-30">（默认值：1）</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">采用导数的轴。</span><span class="yiyi-st" id="yiyi-33">（默认值：0）。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-34"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-35">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-36"><strong>der</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-37">Hermite系列的衍生物。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-38">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="numpy.polynomial.hermite.hermint.html#numpy.polynomial.hermite.hermint" title="numpy.polynomial.hermite.hermint"><code class="xref py py-obj docutils literal"><span class="pre">hermint</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-40">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-41">一般来说，区分Hermite系列的结果与功率系列上的操作不相似。</span><span class="yiyi-st" id="yiyi-42">因此，这个函数的结果可能是“不直观的”，虽然正确；请参阅下面的示例部分。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial.hermite</span> <span class="k">import</span> <span class="n">hermder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hermder</span><span class="p">([</span> <span class="mf">1.</span> <span class="p">,</span>  <span class="mf">0.5</span><span class="p">,</span>  <span class="mf">0.5</span><span class="p">,</span>  <span class="mf">0.5</span><span class="p">])</span>
+<span class="go">array([ 1.,  2.,  3.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hermder</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span>  <span class="mf">1.</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span>  <span class="mf">1.</span><span class="o">/</span><span class="mf">8.</span><span class="p">,</span>  <span class="mf">1.</span><span class="o">/</span><span class="mf">12.</span><span class="p">,</span>  <span class="mf">1.</span><span class="o">/</span><span class="mf">16.</span><span class="p">],</span> <span class="n">m</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([ 1.,  2.,  3.])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,68 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.roots</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.roots.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.roots.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.roots"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.</code><code class="descname">roots</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/polynomial.py#L157-L239"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回具有在p中给出的系数的多项式的根。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">rank-1数组<em class="xref py py-obj">p</em>中的值是多项式的系数。</span><span class="yiyi-st" id="yiyi-17">如果<em class="xref py py-obj">p</em>的长度为n + 1，则多项式描述为：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="n">n</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>p</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">多项式系数的秩-1数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>out</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">包含多项式的复根的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">当<em class="xref py py-obj">p</em>无法转换为rank-1数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.poly.html#numpy.poly" title="numpy.poly"><code class="xref py py-obj docutils literal"><span class="pre">poly</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">找到具有给定的根序列的多项式的系数。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.polyval.html#numpy.polyval" title="numpy.polyval"><code class="xref py py-obj docutils literal"><span class="pre">polyval</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">计算多项式值。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.polyfit.html#numpy.polyfit" title="numpy.polyfit"><code class="xref py py-obj docutils literal"><span class="pre">polyfit</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">最小二乘多项式拟合。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.poly1d.html#numpy.poly1d" title="numpy.poly1d"><code class="xref py py-obj docutils literal"><span class="pre">poly1d</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">一维多项式类。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-37">该算法依赖于计算伴随矩阵的特征值<a class="reference internal" href="#r279" id="id1">[R279]</a>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r279" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-39">[R279]</span></td><td><span class="yiyi-st" id="yiyi-40"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em> R.A.Horn＆C.R.Johnson，<em>矩阵分析</em>。</span><span class="yiyi-st" id="yiyi-41">Cambridge，UK：Cambridge University Press，1999，</span><span class="yiyi-st" id="yiyi-42">146-7。</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coeff</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">roots</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
+<span class="go">array([-0.3125+0.46351241j, -0.3125-0.46351241j])</span>
+</pre></div>
+</div>
+</dd></dl>

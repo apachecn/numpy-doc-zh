@@ -1,0 +1,48 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.hermite.hermvander</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.hermite.hermvander.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.hermite.hermvander.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.hermite.hermvander"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.hermite.</code><code class="descname">hermvander</code><span class="sig-paren">(</span><em>x</em>, <em>deg</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/hermite.py#L1177-L1237"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">给定程度的伪Vandermonde矩阵。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">返回度为<em class="xref py py-obj">deg</em>和采样点<em class="xref py py-obj">x</em>的伪Vandermonde矩阵。</span><span class="yiyi-st" id="yiyi-18">伪Vandermonde矩阵定义为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-19">其中<em class="xref py py-obj">0 。</em></span><span class="yiyi-st" id="yiyi-20"><em class="xref py py-obj">V</em>的前导索引<em class="xref py py-obj">x</em>的元素，最后一个索引是Hermite多项式的度。</span></p>
+<p><span class="yiyi-st" id="yiyi-21">如果<em class="xref py py-obj">c</em>是长度<em class="xref py py-obj">n + 1</em>和<em class="xref py py-obj">V</em>的系数的1-D数字组是数组<code class="docutils literal"><span class="pre">t4&gt; <span class="pre">=</span> <span class="pre">hermvander（x，</span> <span class="pre">n）</span></span></code>，则<code class="docutils literal"><span class="pre">t8&gt; t9&gt; <span class="pre">c）</span></span></code>和<code class="docutils literal"><span class="pre">hermval（x，</span> <span class="pre">c）</span></code></span><span class="yiyi-st" id="yiyi-22">这种等价性对于最小二乘拟合和用于评估相同程度和样本点的大量Hermite系列都是有用的。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">数组的点。</span><span class="yiyi-st" id="yiyi-26">根据任何元素是否复杂，将dtype转换为float64或complex128。</span><span class="yiyi-st" id="yiyi-27">如果<em class="xref py py-obj">x</em>是标量，它被转换为1-D数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>deg</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">所得矩阵的度。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>vander</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">伪Vandermonde矩阵。</span><span class="yiyi-st" id="yiyi-33">返回矩阵的形状是<code class="docutils literal"><span class="pre">x.shape</span> <span class="pre">+</span> <span class="pre">（deg</span> <span class="pre">+</span> <span class="pre">）</span></code>，其中最后一个索引是相应的Hermite多项式的度数。</span><span class="yiyi-st" id="yiyi-34">dtype将与转换的<em class="xref py py-obj">x</em>相同。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial.hermite</span> <span class="k">import</span> <span class="n">hermvander</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hermvander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">array([[ 1., -2.,  2.,  4.],</span>
+<span class="go">       [ 1.,  0., -2., -0.],</span>
+<span class="go">       [ 1.,  2.,  2., -4.]])</span>
+</pre></div>
+</div>
+</dd></dl>

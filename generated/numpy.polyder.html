@@ -1,0 +1,70 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.polyder</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyder.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyder.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polyder"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.</code><code class="descname">polyder</code><span class="sig-paren">(</span><em>p</em>, <em>m=1</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/polynomial.py#L334-L400"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回多项式的指定阶数的导数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>p</strong>：poly1d或序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">多项式区分。</span><span class="yiyi-st" id="yiyi-19">序列被解释为多项式系数，参见<a class="reference internal" href="numpy.poly1d.html#numpy.poly1d" title="numpy.poly1d"><code class="xref py py-obj docutils literal"><span class="pre">poly1d</span></code></a>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>m</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">区分顺序（默认值：1）</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>der</strong>：poly1d</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">表示导数的新多项式。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.polyint.html#numpy.polyint" title="numpy.polyint"><code class="xref py py-obj docutils literal"><span class="pre">polyint</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-27">多项式的反微分。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.poly1d.html#numpy.poly1d" title="numpy.poly1d"><code class="xref py py-obj docutils literal"><span class="pre">poly1d</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">一维多项式的类。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-31">多项式<img alt="x^3 + x^2 + x^1 + 1" class="math" src="../../_images/math/251c7b125ab9e2fd94938d97c29340026bafd769.png" style="vertical-align: -2px">的导数为：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyder</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span>
+<span class="go">poly1d([3, 2, 1])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-32">其评价为：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="p">(</span><span class="mf">2.</span><span class="p">)</span>
+<span class="go">17.0</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-33">We can verify this, approximating the derivative with <code class="docutils literal"><span class="pre">(f(x</span> <span class="pre">+</span> <span class="pre">h)</span> <span class="pre">-</span> <span class="pre">f(x))/h</span></code>:</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="mf">2.</span> <span class="o">+</span> <span class="mf">0.001</span><span class="p">)</span> <span class="o">-</span> <span class="n">p</span><span class="p">(</span><span class="mf">2.</span><span class="p">))</span> <span class="o">/</span> <span class="mf">0.001</span>
+<span class="go">17.007000999997857</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-34">三阶多项式的四阶导数为零：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polyder</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">poly1d([6, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polyder</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">poly1d([6])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">polyder</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">poly1d([ 0.])</span>
+</pre></div>
+</div>
+</dd></dl>

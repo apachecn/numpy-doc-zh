@@ -1,0 +1,57 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.arcsinh</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arcsinh.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.arcsinh.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.arcsinh"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">arcsinh</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;arcsinh&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">逆双曲正弦元。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">数组，其中放置输出。</span><span class="yiyi-st" id="yiyi-20">它的类型被保留，并且它必须是保持输出的正确形状。</span><span class="yiyi-st" id="yiyi-21">请参见<code class="xref py py-obj docutils literal"><span class="pre">doc.ufuncs</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">数组的形状与<em class="xref py py-obj">x</em>相同。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="#numpy.arcsinh" title="numpy.arcsinh"><code class="xref py py-obj docutils literal"><span class="pre">arcsinh</span></code></a>是多值函数：对于每个<em class="xref py py-obj">x</em>，存在无穷多个数字<em class="xref py py-obj">z</em>，使得<em class="xref py py-obj">sinh（z）= x  t5 &gt;。</em></span><span class="yiyi-st" id="yiyi-27">约定是返回其虚部在<em class="xref py py-obj">[ -  pi / 2，pi / 2]</em>中的<em class="xref py py-obj">z</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-28">对于实值输入数据类型，<a class="reference internal" href="#numpy.arcsinh" title="numpy.arcsinh"><code class="xref py py-obj docutils literal"><span class="pre">arcsinh</span></code></a>始终返回实际输出。</span><span class="yiyi-st" id="yiyi-29">对于不能表示为实数或无穷大的每个值，它返回<code class="docutils literal"><span class="pre">nan</span></code>并设置<em class="xref py py-obj">无效</em>浮点错误标志。</span></p>
+<p><span class="yiyi-st" id="yiyi-30">对于复值输入，<a class="reference internal" href="numpy.arccos.html#numpy.arccos" title="numpy.arccos"><code class="xref py py-obj docutils literal"><span class="pre">arccos</span></code></a>是具有分支切口<em class="xref py py-obj">[1j，infj]</em>和<em class="xref py py-obj">[ -  1j，-infj]</em>并且从前者的右边和后者的左边是连续的。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">反双曲正弦也称为<em class="xref py py-obj">asinh</em>或<code class="docutils literal"><span class="pre">sinh^-1</span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r4" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-33"><a class="fn-backref" href="#id1">[R4]</a></span></td><td><span class="yiyi-st" id="yiyi-34">Abramowitz和I.A.</span><span class="yiyi-st" id="yiyi-35">Stegun，“Handbook of Mathematical Functions”，10th printing，1964，pp。</span><span class="yiyi-st" id="yiyi-36"><a class="reference external" href="http://www.math.sfu.ca/~cbm/aands/">http://www.math.sfu.ca/~cbm/aands/</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r5" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-37"><a class="fn-backref" href="#id2">[R5]</a></span></td><td><span class="yiyi-st" id="yiyi-38">维基百科，“反双曲函数”，<a class="reference external" href="http://en.wikipedia.org/wiki/Arcsinh">http://en.wikipedia.org/wiki/Arcsinh</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arcsinh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]))</span>
+<span class="go">array([ 1.72538256,  2.99822295])</span>
+</pre></div>
+</div>
+</dd></dl>

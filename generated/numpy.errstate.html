@@ -1,0 +1,61 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.errstate</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.errstate.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.errstate.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.errstate"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">errstate</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L2900-L2975"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">浮点错误处理的上下文管理器。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">使用<a class="reference internal" href="#numpy.errstate" title="numpy.errstate"><code class="xref py py-obj docutils literal"><span class="pre">errstate</span></code></a>的实例作为上下文管理器允许在该上下文中的语句以已知的错误处理行为执行。</span><span class="yiyi-st" id="yiyi-16">在进入上下文时，错误处理用<a class="reference internal" href="numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>和<a class="reference internal" href="numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-obj docutils literal"><span class="pre">seterrcall</span></code></a>设置，并且在退出时将其重置为之前的状态。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>kwargs</strong>：{divide，over，under，invalid}</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-19">关键字参数。</span><span class="yiyi-st" id="yiyi-20">有效的关键字是可能的浮点异常。</span><span class="yiyi-st" id="yiyi-21">每个关键字都应该有一个字符串值来定义特定错误的处理。</span><span class="yiyi-st" id="yiyi-22">可能的值为{&apos;ignore&apos;，&apos;warn&apos;，&apos;raise&apos;，&apos;call&apos;，&apos;print&apos;，&apos;log&apos;}。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>，<a class="reference internal" href="numpy.geterr.html#numpy.geterr" title="numpy.geterr"><code class="xref py py-obj docutils literal"><span class="pre">geterr</span></code></a>，<a class="reference internal" href="numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-obj docutils literal"><span class="pre">seterrcall</span></code></a>，<a class="reference internal" href="numpy.geterrcall.html#numpy.geterrcall" title="numpy.geterrcall"><code class="xref py py-obj docutils literal"><span class="pre">geterrcall</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-26"><code class="docutils literal"><span class="pre">with</span></code>语句在Python 2.5中引入，只能通过导入使用：<code class="docutils literal"><span class="pre">从</span> <span class="pre">__ future __</span> <span class="pre">import  <span class="pre">with_statement</span></span></code>。</span><span class="yiyi-st" id="yiyi-27">在早期的Python版本中，<code class="docutils literal"><span class="pre">with</span></code>语句不可用。</span></p>
+<p><span class="yiyi-st" id="yiyi-28">有关浮点异常和处理选项类型的完整文档，请参见<a class="reference internal" href="numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-obj docutils literal"><span class="pre">seterr</span></code></a>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">with_statement</span>  <span class="c1"># use &apos;with&apos; in Python 2.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">olderr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s1">&apos;ignore&apos;</span><span class="p">)</span>  <span class="c1"># Set error handling to known state.</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.</span>
+<span class="go">array([ NaN,  Inf,  Inf])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s1">&apos;warn&apos;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.</span>
+<span class="gp">...</span>
+<span class="go">__main__:2: RuntimeWarning: divide by zero encountered in divide</span>
+<span class="go">array([ NaN,  Inf,  Inf])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">nan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&apos;raise&apos;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">2</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">FloatingPointError</span>: <span class="n">invalid value encountered in sqrt</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-30">在上下文之外，错误处理行为未更改：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">geterr</span><span class="p">()</span>
+<span class="go">{&apos;over&apos;: &apos;warn&apos;, &apos;divide&apos;: &apos;warn&apos;, &apos;invalid&apos;: &apos;warn&apos;,</span>
+<span class="go">&apos;under&apos;: &apos;ignore&apos;}</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.may_share_memory</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.may_share_memory.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.may_share_memory.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.may_share_memory"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">may_share_memory</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>max_work=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">确定两个数组是否可能共享内存</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回True不一定意味着两个数组共享任何元素。</span><span class="yiyi-st" id="yiyi-16">它只是意味着他们<em>可能</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">默认情况下只检查a和b的内存边界。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a，b</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输入数组</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>max_work</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">花费在解决重叠问题上的努力。</span><span class="yiyi-st" id="yiyi-23">有关详细信息，请参阅<a class="reference internal" href="numpy.shares_memory.html#numpy.shares_memory" title="numpy.shares_memory"><code class="xref py py-obj docutils literal"><span class="pre">shares_memory</span></code></a>。</span><span class="yiyi-st" id="yiyi-24"><code class="docutils literal"><span class="pre">may_share_memory</span></code>的默认值是进行边界检查。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-26"><strong>out</strong>：bool</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.shares_memory.html#numpy.shares_memory" title="numpy.shares_memory"><code class="xref py py-obj docutils literal"><span class="pre">shares_memory</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">may_share_memory</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]))</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">may_share_memory</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

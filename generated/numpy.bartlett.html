@@ -1,0 +1,112 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.bartlett</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.bartlett.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.bartlett.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.bartlett"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">bartlett</code><span class="sig-paren">(</span><em>M</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L2680-L2784"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回Bartlett窗口。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">Bartlett窗口非常类似于三角形窗口，除了端点为零。</span><span class="yiyi-st" id="yiyi-16">它通常用于信号处理中，用于逐渐减小信号，而不会在频域中产生太多的纹波。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>M</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输出窗口中的点数。</span><span class="yiyi-st" id="yiyi-20">如果为零或更小，则返回一个空数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>out</strong>：数组</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">三角形窗口，最大值归一化为1（仅当采样数为奇数时，值才出现），第一个和最后一个采样等于零。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.blackman.html#numpy.blackman" title="numpy.blackman"><code class="xref py py-obj docutils literal"><span class="pre">blackman</span></code></a>，<a class="reference internal" href="numpy.hamming.html#numpy.hamming" title="numpy.hamming"><code class="xref py py-obj docutils literal"><span class="pre">hamming</span></code></a>，<a class="reference internal" href="numpy.hanning.html#numpy.hanning" title="numpy.hanning"><code class="xref py py-obj docutils literal"><span class="pre">hanning</span></code></a>，<a class="reference internal" href="numpy.kaiser.html#numpy.kaiser" title="numpy.kaiser"><code class="xref py py-obj docutils literal"><span class="pre">kaiser</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">Bartlett窗口定义为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-28">大多数对Bartlett窗口的引用来自信号处理文献，其中它被用作用于平滑值的许多窗口函数中的一个。</span><span class="yiyi-st" id="yiyi-29">注意，使用此窗口的卷积产生线性插值。</span><span class="yiyi-st" id="yiyi-30">它也称为变迹（意指“去除脚”，即在采样信号的开始和结束处的平滑不连续性）或渐变函数。</span><span class="yiyi-st" id="yiyi-31">Bartlett的傅立叶变换是两个sinc函数的乘积。</span><span class="yiyi-st" id="yiyi-32">注意在Kanasewich的极好的讨论。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r11" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-34"><a class="fn-backref" href="#id1">[R11]</a></span></td><td><span class="yiyi-st" id="yiyi-35">女士。</span><span class="yiyi-st" id="yiyi-36">Bartlett，“Periodogram Analysis and Continuous Spectra”，Biometrika 37,1-16,1950。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r12" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-37"><a class="fn-backref" href="#id2">[R12]</a></span></td><td><span class="yiyi-st" id="yiyi-38">E.R.</span><span class="yiyi-st" id="yiyi-39">Kanasewich，“Time Sequence Analysis in Geophysics”，The University of Alberta Press，1975，pp。</span><span class="yiyi-st" id="yiyi-40">109-110。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r13" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-41"><a class="fn-backref" href="#id3">[R13]</a></span></td><td><span class="yiyi-st" id="yiyi-42">A.V.</span><span class="yiyi-st" id="yiyi-43">奥本海姆</span><span class="yiyi-st" id="yiyi-44">Schafer，“Discrete-Time Signal Processing”，Prentice-Hall，1999，</span><span class="yiyi-st" id="yiyi-45">468-471。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r14" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-46"><a class="fn-backref" href="#id4">[R14]</a></span></td><td><span class="yiyi-st" id="yiyi-47">维基百科，“窗口函数”，<a class="reference external" href="http://en.wikipedia.org/wiki/Window_function">http://en.wikipedia.org/wiki/Window_function</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r15" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-48"><a class="fn-backref" href="#id5">[R15]</a></span></td><td><span class="yiyi-st" id="yiyi-49">W.H.</span><span class="yiyi-st" id="yiyi-50">Press，B.P.</span><span class="yiyi-st" id="yiyi-51">Flannery，S.A.Teukolsky和W.T.</span><span class="yiyi-st" id="yiyi-52">Vetterling，“Numerical Recipes”，Cambridge University Press，1986，第429页。</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-53">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">bartlett</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="go">array([ 0.        ,  0.18181818,  0.36363636,  0.54545455,  0.72727273,</span>
+<span class="go">        0.90909091,  0.90909091,  0.72727273,  0.54545455,  0.36363636,</span>
+<span class="go">        0.18181818,  0.        ])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-54">绘制窗口及其频率响应（需要SciPy和matplotlib）：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.fft</span> <span class="k">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">fftshift</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bartlett</span><span class="p">(</span><span class="mi">51</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Bartlett window&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Sample&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="go">&lt;matplotlib.figure.Figure object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="mi">2048</span><span class="p">)</span> <span class="o">/</span> <span class="mf">25.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fftshift</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mag</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Frequency response of Bartlett window&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitude [dB]&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Normalized frequency [cycles per sample]&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&apos;tight&apos;</span><span class="p">)</span>
+<span class="go">(-0.5, 0.5, -100.0, ...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,67 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.searchsorted</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.searchsorted.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.searchsorted.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.searchsorted"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">searchsorted</code><span class="sig-paren">(</span><em>a</em>, <em>v</em>, <em>side=&apos;left&apos;</em>, <em>sorter=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L1036-L1093"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">查找要插入元素以维持顺序的索引。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">找到索引到经排序的数组<em class="xref py py-obj">a</em>中，使得如果<em class="xref py py-obj">v</em>中的对应元素被插入在索引之前，则<em class="xref py py-obj">a</em>的顺序将是保存。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：1-D array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入数组。</span><span class="yiyi-st" id="yiyi-19">如果<em class="xref py py-obj">分拣机</em>为无，则必须按升序排序，否则<em class="xref py py-obj">分拣机</em>必须是对其进行排序的索引的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>v</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">要插入<em class="xref py py-obj">a</em>的值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>侧</strong>：{&apos;left&apos;，&apos;right&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">如果“向左”，则给出找到的第一合适位置的索引。</span><span class="yiyi-st" id="yiyi-24">如果&apos;right&apos;，返回最后这样的索引。</span><span class="yiyi-st" id="yiyi-25">如果没有合适的索引，返回0或N（其中N是<em class="xref py py-obj">a</em>的长度）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>排序器</strong>：1-D array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">将数组a按升序排序的整数索引的可选数组。</span><span class="yiyi-st" id="yiyi-28">它们通常是argsort的结果。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-29"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>indices</strong>：数组的整数</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">具有与<em class="xref py py-obj">v</em>相同形状的插入点的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-33">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.sort.html#numpy.sort" title="numpy.sort"><code class="xref py py-obj docutils literal"><span class="pre">sort</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">返回数组的排序副本。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="numpy.histogram.html#numpy.histogram" title="numpy.histogram"><code class="xref py py-obj docutils literal"><span class="pre">histogram</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-37">从1-D数据生成直方图。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-39">二进制搜索用于查找所需的插入点。</span></p>
+<p><span class="yiyi-st" id="yiyi-40">从Numpy 1.4.0 <a class="reference internal" href="#numpy.searchsorted" title="numpy.searchsorted"><code class="xref py py-obj docutils literal"><span class="pre">searchsorted</span></code></a>起，使用包含<code class="xref py py-obj docutils literal"><span class="pre">nan</span></code>值的实数/复数数组。</span><span class="yiyi-st" id="yiyi-41">增强的排序顺序记录在<a class="reference internal" href="numpy.sort.html#numpy.sort" title="numpy.sort"><code class="xref py py-obj docutils literal"><span class="pre">sort</span></code></a>中。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-42">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="mi">3</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="s1">&apos;right&apos;</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">array([0, 5, 1, 2])</span>
+</pre></div>
+</div>
+</dd></dl>

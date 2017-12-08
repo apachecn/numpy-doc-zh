@@ -1,0 +1,55 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.notmasked_contiguous</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.notmasked_contiguous.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.notmasked_contiguous.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.notmasked_contiguous"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">notmasked_contiguous</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/extras.py#L1582-L1639"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">沿给定轴在屏蔽数组中找到连续的未屏蔽数据。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">沿其执行操作的轴。</span><span class="yiyi-st" id="yiyi-21">如果为无（默认值），则适用于数组的展平版本。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>端点</strong>：list</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">数组中未屏蔽索引的切片列表（开始和结束索引）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.ma.flatnotmasked_edges.html#numpy.ma.flatnotmasked_edges" title="numpy.ma.flatnotmasked_edges"><code class="xref py py-obj docutils literal"><span class="pre">flatnotmasked_edges</span></code></a>，<a class="reference internal" href="numpy.ma.flatnotmasked_contiguous.html#numpy.ma.flatnotmasked_contiguous" title="numpy.ma.flatnotmasked_contiguous"><code class="xref py py-obj docutils literal"><span class="pre">flatnotmasked_contiguous</span></code></a>，<a class="reference internal" href="numpy.ma.notmasked_edges.html#numpy.ma.notmasked_edges" title="numpy.ma.notmasked_edges"><code class="xref py py-obj docutils literal"><span class="pre">notmasked_edges</span></code></a>，<a class="reference internal" href="numpy.ma.clump_masked.html#numpy.ma.clump_masked" title="numpy.ma.clump_masked"><code class="xref py py-obj docutils literal"><span class="pre">clump_masked</span></code></a>，<a class="reference internal" href="numpy.ma.clump_unmasked.html#numpy.ma.clump_unmasked" title="numpy.ma.clump_unmasked"><code class="xref py py-obj docutils literal"><span class="pre">clump_unmasked</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">只能接受2-D数组。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mask</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ma</span><span class="p">[</span><span class="o">~</span><span class="n">ma</span><span class="o">.</span><span class="n">mask</span><span class="p">])</span>
+<span class="go">array([0, 1, 2, 3, 6])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">notmasked_contiguous</span><span class="p">(</span><span class="n">ma</span><span class="p">)</span>
+<span class="go">[slice(0, 4, None), slice(6, 7, None)]</span>
+</pre></div>
+</div>
+</dd></dl>

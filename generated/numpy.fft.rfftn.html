@@ -1,0 +1,90 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fft.rfftn</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.rfftn.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.rfftn.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fft.rfftn"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.fft.</code><code class="descname">rfftn</code><span class="sig-paren">(</span><em>a</em>, <em>s=None</em>, <em>axes=None</em>, <em>norm=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/fft/fftpack.py#L994-L1082"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算实际输入的N维离散傅里叶变换。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">该函数通过快速傅里叶变换（FFT）计算M维实数组中任何数量的轴上的N维离散傅里叶变换。</span><span class="yiyi-st" id="yiyi-16">默认情况下，所有轴都进行变换，实际变换在最后一个轴上执行，而其余变换则复杂。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输入数组，取实数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>s</strong>：ints序列，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">从输入使用的形状（沿每个变换轴的长度）。</span><span class="yiyi-st" id="yiyi-22">（<code class="docutils literal"><span class="pre">s[0]</span></code>是指轴0，<code class="docutils literal"><span class="pre">s[1]</span></code>到轴1等）。</span><span class="yiyi-st" id="yiyi-23">The final element of <em class="xref py py-obj">s</em> corresponds to <em class="xref py py-obj">n</em> for <code class="docutils literal"><span class="pre">rfft(x,</span> <span class="pre">n)</span></code>, while for the remaining axes, it corresponds to <em class="xref py py-obj">n</em> for <code class="docutils literal"><span class="pre">fft(x,</span> <span class="pre">n)</span></code>. </span><span class="yiyi-st" id="yiyi-24">沿任何轴，如果给定的形状小于输入的形状，则输入被裁剪。</span><span class="yiyi-st" id="yiyi-25">如果它较大，输入将用零填充。</span><span class="yiyi-st" id="yiyi-26">如果未给出<em class="xref py py-obj">s</em>，则使用沿<em class="xref py py-obj">轴</em>指定的轴的输入形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>axes</strong>：ints序列，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">计算FFT的轴。</span><span class="yiyi-st" id="yiyi-29">如果未给出，则使用最后的<code class="docutils literal"><span class="pre">len(s)</span></code>轴，如果<em class="xref py py-obj">s</em>也未指定，则使用所有轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>norm</strong>：{None，“ortho”}，可选</span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-31"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-32">规范化模式（参见<a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a>）。</span><span class="yiyi-st" id="yiyi-33">默认值为None。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-34">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-35"><strong>out</strong>：complex ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-36">沿着<em class="xref py py-obj">轴</em>指示的轴或者通过<em class="xref py py-obj">s</em>和<em class="xref py py-obj">a</em>的组合变换的截断或补零输入，如参数部分。</span><span class="yiyi-st" id="yiyi-37">变换的最后一个轴的长度将为<code class="docutils literal"><span class="pre">s[-1]//2+1</span></code>，而剩余的变换轴将具有根据<em class="xref py py-obj">s</em>的长度，输入。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-38">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-39"><strong>ValueError</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-40">如果<em class="xref py py-obj">s</em>和<em class="xref py py-obj">轴</em>具有不同的长度。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-41"><strong>IndexError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-42">如果<em class="xref py py-obj">axes</em>的元素大于<em class="xref py py-obj">a</em>的轴数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-43">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.fft.irfftn.html#numpy.fft.irfftn" title="numpy.fft.irfftn"><code class="xref py py-obj docutils literal"><span class="pre">irfftn</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="#numpy.fft.rfftn" title="numpy.fft.rfftn"><code class="xref py py-obj docutils literal"><span class="pre">rfftn</span></code></a>的倒数，即实数输入的n维FFT的倒数。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.fft.fft.html#numpy.fft.fft" title="numpy.fft.fft"><code class="xref py py-obj docutils literal"><span class="pre">fft</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-47">一维FFT，使用定义和约定。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="numpy.fft.rfft.html#numpy.fft.rfft" title="numpy.fft.rfft"><code class="xref py py-obj docutils literal"><span class="pre">rfft</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-49">实数输入的一维FFT。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="numpy.fft.fftn.html#numpy.fft.fftn" title="numpy.fft.fftn"><code class="xref py py-obj docutils literal"><span class="pre">fftn</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-51">n维FFT。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="numpy.fft.rfft2.html#numpy.fft.rfft2" title="numpy.fft.rfft2"><code class="xref py py-obj docutils literal"><span class="pre">rfft2</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-53">实数输入的二维FFT。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-54">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-55">实际输入的变换在最后一个变换轴上执行，如<a class="reference internal" href="numpy.fft.rfft.html#numpy.fft.rfft" title="numpy.fft.rfft"><code class="xref py py-obj docutils literal"><span class="pre">rfft</span></code></a>，则其余轴上的变换通过<a class="reference internal" href="numpy.fft.fftn.html#numpy.fft.fftn" title="numpy.fft.fftn"><code class="xref py py-obj docutils literal"><span class="pre">fftn</span></code></a>执行。</span><span class="yiyi-st" id="yiyi-56">对于最终变换轴，输出的顺序与<a class="reference internal" href="numpy.fft.rfft.html#numpy.fft.rfft" title="numpy.fft.rfft"><code class="xref py py-obj docutils literal"><span class="pre">rfft</span></code></a>相同，对于其余变换轴，输出的顺序与<a class="reference internal" href="numpy.fft.fftn.html#numpy.fft.fftn" title="numpy.fft.fftn"><code class="xref py py-obj docutils literal"><span class="pre">fftn</span></code></a>相同。</span></p>
+<p><span class="yiyi-st" id="yiyi-57">有关详细信息，所使用的定义和约定，请参见<a class="reference internal" href="numpy.fft.fft.html#numpy.fft.fft" title="numpy.fft.fft"><code class="xref py py-obj docutils literal"><span class="pre">fft</span></code></a>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-58">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfftn</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([[[ 8.+0.j,  0.+0.j],</span>
+<span class="go">        [ 0.+0.j,  0.+0.j]],</span>
+<span class="go">       [[ 0.+0.j,  0.+0.j],</span>
+<span class="go">        [ 0.+0.j,  0.+0.j]]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfftn</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="go">array([[[ 4.+0.j,  0.+0.j],</span>
+<span class="go">        [ 4.+0.j,  0.+0.j]],</span>
+<span class="go">       [[ 0.+0.j,  0.+0.j],</span>
+<span class="go">        [ 0.+0.j,  0.+0.j]]])</span>
+</pre></div>
+</div>
+</dd></dl>

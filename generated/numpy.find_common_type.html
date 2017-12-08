@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.find_common_type</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.find_common_type.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.find_common_type.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.find_common_type"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">find_common_type</code><span class="sig-paren">(</span><em>array_types</em>, <em>scalar_types</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numerictypes.py#L964-L1036"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">遵循标准强制规则确定通用类型。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>array_types</strong>：sequence</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">表示数组的dtypes或dtype可转换对象的列表。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>scalar_types</strong>：sequence</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">表示标量的dtypes或dtype可转换对象的列表。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>数据类型</strong>：dtype</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">The common data type, which is the maximum of <em class="xref py py-obj">array_types</em> ignoring <em class="xref py py-obj">scalar_types</em>, unless the maximum of <em class="xref py py-obj">scalar_types</em> is of a different kind (<a class="reference internal" href="numpy.dtype.kind.html#numpy.dtype.kind" title="numpy.dtype.kind"><code class="xref py py-obj docutils literal"><span class="pre">dtype.kind</span></code></a>). </span><span class="yiyi-st" id="yiyi-23">如果种类不明白，则返回None。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，<a class="reference internal" href="numpy.common_type.html#numpy.common_type" title="numpy.common_type"><code class="xref py py-obj docutils literal"><span class="pre">common_type</span></code></a>，<a class="reference internal" href="numpy.can_cast.html#numpy.can_cast" title="numpy.can_cast"><code class="xref py py-obj docutils literal"><span class="pre">can_cast</span></code></a>，<a class="reference internal" href="numpy.mintypecode.html#numpy.mintypecode" title="numpy.mintypecode"><code class="xref py py-obj docutils literal"><span class="pre">mintypecode</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">find_common_type</span><span class="p">([],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">complex</span><span class="p">])</span>
+<span class="go">dtype(&apos;complex128&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">find_common_type</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span> <span class="p">[])</span>
+<span class="go">dtype(&apos;float64&apos;)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-27">标准转换规则确保标量不能对数组进行上转换，除非标量是基本不同类型的数据（即在数据类型层次结构中的不同层次），然后数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">find_common_type</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">])</span>
+<span class="go">dtype(&apos;float32&apos;)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-28">Complex是不同类型的，因此它在<em class="xref py py-obj">array_types</em>参数中转换浮点数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">find_common_type</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">complex</span><span class="p">])</span>
+<span class="go">dtype(&apos;complex128&apos;)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-29">类型说明符字符串可以转换为dtypes，因此可以使用而不是dtypes：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">find_common_type</span><span class="p">([</span><span class="s1">&apos;f4&apos;</span><span class="p">,</span> <span class="s1">&apos;f4&apos;</span><span class="p">,</span> <span class="s1">&apos;i4&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;c8&apos;</span><span class="p">])</span>
+<span class="go">dtype(&apos;complex128&apos;)</span>
+</pre></div>
+</div>
+</dd></dl>

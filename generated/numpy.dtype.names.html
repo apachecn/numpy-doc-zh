@@ -1,0 +1,19 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.dtype.names</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.names.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.names.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="attribute">
+<dt id="numpy.dtype.names"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">dtype.</code><code class="descname">names</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">字段名称的有序列表，如果没有字段，则为<code class="docutils literal"><span class="pre">None</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">这些名称根据增加的字节偏移量排序。</span><span class="yiyi-st" id="yiyi-17">这可以用于，例如，以偏移顺序遍历所有命名的字段。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-18">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&apos;name&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;grades&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">names</span>
+<span class="go">(&apos;name&apos;, &apos;grades&apos;)</span>
+</pre></div>
+</div>
+</dd></dl>

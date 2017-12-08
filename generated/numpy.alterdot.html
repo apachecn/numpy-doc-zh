@@ -1,0 +1,25 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.alterdot</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.alterdot.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.alterdot.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.alterdot"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">alterdot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L1096-L1123"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">更改<a class="reference internal" href="numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-obj docutils literal"><span class="pre">dot</span></code></a>，<a class="reference internal" href="numpy.vdot.html#numpy.vdot" title="numpy.vdot"><code class="xref py py-obj docutils literal"><span class="pre">vdot</span></code></a>和<a class="reference internal" href="numpy.inner.html#numpy.inner" title="numpy.inner"><code class="xref py py-obj docutils literal"><span class="pre">inner</span></code></a>以使用加速的BLAS功能。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">通常，作为Numpy的用户，你不显式调用此函数。</span><span class="yiyi-st" id="yiyi-16">如果Numpy使用加速BLAS构建，则在导入Numpy时会自动调用此函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">当Numpy用像ATLAS这样的加速BLAS构建时，这些函数被替换以利用更快的实现。</span><span class="yiyi-st" id="yiyi-18">更快的实现只影响float32，float64，complex64和complex128数组。</span><span class="yiyi-st" id="yiyi-19">此外，BLAS API仅包括矩阵矩阵，矩阵向量和向量向量乘积。</span><span class="yiyi-st" id="yiyi-20">具有较大维数的数组的产品使用内置函数并且不加速。</span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-21">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-22">在Numpy中弃用1.10 cblas函数已经集成到多阵列模块中，而alterdot现在更长了。</span><span class="yiyi-st" id="yiyi-23">它会在Numpy 1.11.0中删除。</span></p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.restoredot.html#numpy.restoredot" title="numpy.restoredot"><code class="xref py py-obj docutils literal"><span class="pre">restoredot</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.restoredot.html#numpy.restoredot" title="numpy.restoredot"><code class="xref py py-obj docutils literal"><span class="pre">restoredot</span></code></a>撤销<a class="reference internal" href="#numpy.alterdot" title="numpy.alterdot"><code class="xref py py-obj docutils literal"><span class="pre">alterdot</span></code></a>的效果。</span></dd>
+</dl>
+</div>
+</dd></dl>

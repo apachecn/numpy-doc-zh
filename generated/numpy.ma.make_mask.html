@@ -1,0 +1,85 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.make_mask</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.make_mask.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.make_mask.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.make_mask"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">make_mask</code><span class="sig-paren">(</span><em>m</em>, <em>copy=False</em>, <em>shrink=True</em>, <em>dtype=&lt;type &apos;numpy.bool_&apos;&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L1526-L1618"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从数组中创建一个布尔掩码。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">返回<em class="xref py py-obj">m</em>作为布尔掩码，如果需要或请求创建副本。</span><span class="yiyi-st" id="yiyi-17">函数可以接受可转换为整数的任何序列，也可以接受<code class="docutils literal"><span class="pre">nomask</span></code>。</span><span class="yiyi-st" id="yiyi-18">不要求内容必须是0和1，值0解释为False，其他都为True。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>m</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">潜在面具。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>copy</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">是否返回<em class="xref py py-obj">m</em>（True）或<em class="xref py py-obj">m</em>本身（False）的副本。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>shrink</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">是否将<em class="xref py py-obj">m</em>缩小为<code class="docutils literal"><span class="pre">nomask</span></code>（如果其所有值都为False）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">输出掩码的数据类型。</span><span class="yiyi-st" id="yiyi-28">默认情况下，输出掩码具有MaskType（bool）的dtype。</span><span class="yiyi-st" id="yiyi-29">如果dtype是灵活的，每个字段都有一个boolean dtype。</span><span class="yiyi-st" id="yiyi-30">在<em class="xref py py-obj">m</em>为<code class="docutils literal"><span class="pre">nomask</span></code>时忽略此操作，在这种情况下始终返回<code class="docutils literal"><span class="pre">nomask</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>result</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-33">从<em class="xref py py-obj">m</em>派生的布尔掩码。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">make_mask</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="go">array([ True, False,  True,  True], dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">make_mask</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="go">array([ True, False,  True,  True], dtype=bool)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">make_mask</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="go">array([ True, False,  True,  True], dtype=bool)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-35"><em class="xref py py-obj">收缩</em>参数的影响。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span>
+<span class="go">array([ 0.,  0.,  0.,  0.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">make_mask</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">make_mask</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">array([False, False, False, False], dtype=bool)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-36">使用灵活的<em class="xref py py-obj">dtype</em>。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">man</span><span class="p">,</span> <span class="n">mouse</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">arr</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">man</span><span class="p">,</span> <span class="n">mouse</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span>
+<span class="go">[(1, 0), (0, 1), (1, 0), (1, 0)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">({</span><span class="s1">&apos;names&apos;</span><span class="p">:[</span><span class="s1">&apos;man&apos;</span><span class="p">,</span> <span class="s1">&apos;mouse&apos;</span><span class="p">],</span>
+<span class="go">                      &apos;formats&apos;:[np.int, np.int]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span>
+<span class="go">array([(1, 0), (0, 1), (1, 0), (1, 0)],</span>
+<span class="go">      dtype=[(&apos;man&apos;, &apos;&lt;i4&apos;), (&apos;mouse&apos;, &apos;&lt;i4&apos;)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">make_mask</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+<span class="go">array([(True, False), (False, True), (True, False), (True, False)],</span>
+<span class="go">      dtype=[(&apos;man&apos;, &apos;|b1&apos;), (&apos;mouse&apos;, &apos;|b1&apos;)])</span>
+</pre></div>
+</div>
+</dd></dl>

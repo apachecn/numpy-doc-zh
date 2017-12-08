@@ -1,0 +1,67 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fromregex</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fromregex.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fromregex.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fromregex"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">fromregex</code><span class="sig-paren">(</span><em>file</em>, <em>regexp</em>, <em>dtype</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/npyio.py#L1171-L1251"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">使用正则表达式解析从文本文件构造数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回的数组总是一个结构化数组，并且是从文件中正则表达式的所有匹配项构造的。</span><span class="yiyi-st" id="yiyi-16">正则表达式中的组将转换为结构化数组的字段。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>文件</strong>：str或文件</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">要读取的文件名或文件对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>regexp</strong>：str或regexp</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">用于解析文件的正则表达式。</span><span class="yiyi-st" id="yiyi-22">正则表达式中的组对应于dtype中的字段。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>dtype</strong>：dtype或dtypes列表</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">Dtype为结构化数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>输出</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">输出数组，包含由<em class="xref py py-obj">regexp</em>匹配的<em class="xref py py-obj">文件</em>内容的一部分。</span><span class="yiyi-st" id="yiyi-28"><em class="xref py py-obj">输出</em>始终是结构化数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>TypeError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">当<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>不是结构化数组的有效类型时。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-32">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.fromstring.html#numpy.fromstring" title="numpy.fromstring"><code class="xref py py-obj docutils literal"><span class="pre">fromstring</span></code></a>，<a class="reference internal" href="numpy.loadtxt.html#numpy.loadtxt" title="numpy.loadtxt"><code class="xref py py-obj docutils literal"><span class="pre">loadtxt</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-35">结构化数组的类型可以以多种形式指定，但所有形式至少指定数据类型和字段名称。</span><span class="yiyi-st" id="yiyi-36">For details see <a class="reference internal" href="../../user/basics.rec.html#module-numpy.doc.structured_arrays" title="numpy.doc.structured_arrays"><code class="xref py py-obj docutils literal"><span class="pre">doc.structured_arrays</span></code></a>.</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&apos;test.dat&apos;</span><span class="p">,</span> <span class="s1">&apos;w&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;1312 foo</span><span class="se">\n</span><span class="s2">1534  bar</span><span class="se">\n</span><span class="s2">444   qux&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">regexp</span> <span class="o">=</span> <span class="s2">r&quot;(\d+)\s+(...)&quot;</span>  <span class="c1"># match [digits, whitespace, anything]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromregex</span><span class="p">(</span><span class="s1">&apos;test.dat&apos;</span><span class="p">,</span> <span class="n">regexp</span><span class="p">,</span>
+<span class="gp">... </span>                      <span class="p">[(</span><span class="s1">&apos;num&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;key&apos;</span><span class="p">,</span> <span class="s1">&apos;S3&apos;</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span>
+<span class="go">array([(1312L, &apos;foo&apos;), (1534L, &apos;bar&apos;), (444L, &apos;qux&apos;)],</span>
+<span class="go">      dtype=[(&apos;num&apos;, &apos;&lt;i8&apos;), (&apos;key&apos;, &apos;|S3&apos;)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span><span class="p">[</span><span class="s1">&apos;num&apos;</span><span class="p">]</span>
+<span class="go">array([1312, 1534,  444], dtype=int64)</span>
+</pre></div>
+</div>
+</dd></dl>

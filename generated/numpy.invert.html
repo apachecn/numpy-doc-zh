@@ -1,0 +1,84 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.invert</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.invert.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.invert.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.invert"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">invert</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;invert&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">逐位计算逐位反转，或逐位非单元。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">计算输入数组中整数的基本二进制表示的逐位非零。</span><span class="yiyi-st" id="yiyi-16">这个ufunc实现了C / Python运算符<code class="docutils literal"><span class="pre">~</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">对于有符号整数输入，返回二的补码。</span><span class="yiyi-st" id="yiyi-18">在二进制补码系统中，负数由绝对值的二进制补码表示。</span><span class="yiyi-st" id="yiyi-19">这是在计算机上表示有符号整数的最常用方法<a class="reference internal" href="#r32" id="id1">[R32]</a>。</span><span class="yiyi-st" id="yiyi-20">N位二进制补码系统可以表示<img alt="-2^{N-1}" class="math" src="../../_images/math/2c9edaec65f82b211c6a6b27a1277458d581b74a.png" style="vertical-align: 0px">至<img alt="+2^{N-1}-1" class="math" src="../../_images/math/85a60abbb0de95e06cfa9133d6356870c68d1dc4.png" style="vertical-align: -2px">范围内的每个整数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>x1</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">只处理整数和布尔类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>out</strong>：array_like</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">结果。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<p><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.bitwise_and.html#numpy.bitwise_and" title="numpy.bitwise_and"><code class="xref py py-obj docutils literal"><span class="pre">bitwise_and</span></code></a>，<a class="reference internal" href="numpy.bitwise_or.html#numpy.bitwise_or" title="numpy.bitwise_or"><code class="xref py py-obj docutils literal"><span class="pre">bitwise_or</span></code></a>，<a class="reference internal" href="numpy.bitwise_xor.html#numpy.bitwise_xor" title="numpy.bitwise_xor"><code class="xref py py-obj docutils literal"><span class="pre">bitwise_xor</span></code></a>，<a class="reference internal" href="numpy.logical_not.html#numpy.logical_not" title="numpy.logical_not"><code class="xref py py-obj docutils literal"><span class="pre">logical_not</span></code></a></span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.binary_repr.html#numpy.binary_repr" title="numpy.binary_repr"><code class="xref py py-obj docutils literal"><span class="pre">binary_repr</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">以字符串形式返回输入数字的二进制表示。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-32"><code class="xref py py-obj docutils literal"><span class="pre">bitwise_not</span></code>是<a class="reference internal" href="#numpy.invert" title="numpy.invert"><code class="xref py py-obj docutils literal"><span class="pre">invert</span></code></a>的别名：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">bitwise_not</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">invert</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r32" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-34">[R32]</span></td><td><span class="yiyi-st" id="yiyi-35"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em>维基百科，“Two&apos;s complement”，<a class="reference external" href="http://en.wikipedia.org/wiki/Two&apos;s_complement">http://en.wikipedia.org/wiki/Two&apos; s_complement</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-37">我们已经看到13由<code class="docutils literal"><span class="pre">00001101</span></code>表示。</span><span class="yiyi-st" id="yiyi-38">13的反转或按位的NOT是：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">13</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">uint8</span><span class="p">))</span>
+<span class="go">array([242], dtype=uint8)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="go">&apos;00001101&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="mi">242</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="go">&apos;11110010&apos;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">结果取决于位宽：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">13</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">uint16</span><span class="p">))</span>
+<span class="go">array([65522], dtype=uint16)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="go">&apos;0000000000001101&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="mi">65522</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="go">&apos;1111111111110010&apos;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">当使用有符号整数类型时，结果是无符号类型的结果的二进制补码：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">13</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int8</span><span class="p">))</span>
+<span class="go">array([-14], dtype=int8)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">binary_repr</span><span class="p">(</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="go">&apos;11110010&apos;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-41">也接受布尔：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]))</span>
+<span class="go">array([False,  True], dtype=bool)</span>
+</pre></div>
+</div>
+</dd></dl>

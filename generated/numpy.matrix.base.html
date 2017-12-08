@@ -1,0 +1,25 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.matrix.base</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.base.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.base.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="attribute">
+<dt id="numpy.matrix.base"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">matrix.</code><code class="descname">base</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">如果内存是来自某个其他对象的基本对象。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-16">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-17">拥有其内存的数组的基数为None：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">base</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-18">切片创建一个视图，其内存与x共享：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">base</span> <span class="ow">is</span> <span class="n">x</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

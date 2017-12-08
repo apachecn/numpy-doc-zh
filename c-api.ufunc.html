@@ -1,0 +1,271 @@
+
+<h1><span class="yiyi-st" id="yiyi-18">UFunc API</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/c-api.ufunc.html">https://docs.scipy.org/doc/numpy/reference/c-api.ufunc.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="constants">
+<span id="index-0"></span><h2><span class="yiyi-st" id="yiyi-19">Constants</span></h2>
+<dl class="var">
+<dt><span class="yiyi-st" id="yiyi-20"><code class="descname">UFUNC_ERR_ {HANDLER}</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-21"><code class="docutils literal"><span class="pre">{HANDLER}</span></code>可以是<strong>IGNORE</strong>，<strong>WARN</strong>，<strong>RAISE</strong>或<strong>CALL</strong></span></p>
+</dd></dl>
+<dl class="var">
+<dt><span class="yiyi-st" id="yiyi-22"><code class="descname">UFUNC_ {THING} _ {ERR}</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-23"><code class="docutils literal"><span class="pre">{THING}</span></code> can be <strong>MASK</strong>, <strong>SHIFT</strong>, or <strong>FPE</strong>, and <code class="docutils literal"><span class="pre">{ERR}</span></code> can be <strong>DIVIDEBYZERO</strong>, <strong>OVERFLOW</strong>, <strong>UNDERFLOW</strong>, and <strong>INVALID</strong>.</span></p>
+</dd></dl>
+<dl class="var">
+<dt><span class="yiyi-st" id="yiyi-24"><code class="descname">PyUFunc_ {VALUE}</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-25"><code class="docutils literal"><span class="pre">{VALUE}</span></code>可以是<strong>一个</strong>（1），<strong>零</strong>（0）或<strong>无</strong></span></p>
+</dd></dl>
+</div>
+<div class="section" id="macros">
+<h2><span class="yiyi-st" id="yiyi-26">Macros</span></h2>
+<dl class="macro">
+<dt id="c.NPY_LOOP_BEGIN_THREADS"><span class="yiyi-st" id="yiyi-27"> <code class="descname">NPY_LOOP_BEGIN_THREADS</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-28">在通用函数代码中只用于释放Python GIL，如果loop-&gt; obj不为true（<em>即</em>这不是OBJECT数组循环）。</span><span class="yiyi-st" id="yiyi-29">需要在变量声明区中使用<a class="reference internal" href="c-api.array.html#c.NPY_BEGIN_THREADS_DEF" title="NPY_BEGIN_THREADS_DEF"><code class="xref c c-macro docutils literal"><span class="pre">NPY_BEGIN_THREADS_DEF</span></code></a>。</span></p>
+</dd></dl>
+<dl class="macro">
+<dt id="c.NPY_LOOP_END_THREADS"><span class="yiyi-st" id="yiyi-30"> <code class="descname">NPY_LOOP_END_THREADS</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-31">用于通用函数代码，以重新获取Python GIL，如果它被释放（因为loop-&gt; obj不是true）。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.UFUNC_CHECK_ERROR"><span class="yiyi-st" id="yiyi-32"> <code class="descname">UFUNC_CHECK_ERROR</code><span class="sig-paren">(</span>loop<span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-33">一个宏用于内部检查错误和goto失败，如果发现。</span><span class="yiyi-st" id="yiyi-34">此宏需要当前代码块中的失败标签。</span><span class="yiyi-st" id="yiyi-35"><em>循环</em>变量​​必须至少具有成员（obj，errormask和errorobj）。</span><span class="yiyi-st" id="yiyi-36">如果<em>loop</em>  - &gt; obj非零，则调用<a class="reference external" href="https://docs.python.org/dev/c-api/exceptions.html#c.PyErr_Occurred" title="(in Python v3.7)"><code class="xref c c-func docutils literal"><span class="pre">PyErr_Occurred</span></code></a>()（意味着必须保持GIL）。</span><span class="yiyi-st" id="yiyi-37">If <em>loop</em> -&gt;obj is zero, then if <em>loop</em> -&gt;errormask is nonzero, <a class="reference internal" href="#c.PyUFunc_checkfperr" title="PyUFunc_checkfperr"><code class="xref c c-func docutils literal"><span class="pre">PyUFunc_checkfperr</span></code></a> is called with arguments <em>loop</em> -&gt;errormask and <em>loop</em> -&gt;errobj. </span><span class="yiyi-st" id="yiyi-38">如果IEEE浮点寄存器的这个检查的结果为真，则代码重定向到必须定义的故障标签。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.UFUNC_CHECK_STATUS"><span class="yiyi-st" id="yiyi-39"> <code class="descname">UFUNC_CHECK_STATUS</code><span class="sig-paren">(</span>ret<span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-40">已弃用：请改用npy_math.h使用npy_clear_floatstatus。</span></p>
+<p><span class="yiyi-st" id="yiyi-41">扩展为与平台相关的代码的宏。</span><span class="yiyi-st" id="yiyi-42"><em>ret</em>变量​​可以是任何整数。</span><span class="yiyi-st" id="yiyi-43">根据浮点处理器的相应错误标志的状态，<code class="xref c c-data docutils literal"><span class="pre">UFUNC_FPE_{ERR}</span></code>位设置在<em>ret</em>中。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="functions">
+<h2><span class="yiyi-st" id="yiyi-44">Functions</span></h2>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-45"><code class="descname">PyObject * PyUFunc_FromFuncAndData（PyUFuncGenericFunction * func，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-46"><code class="descname">void ** data，char * types，int ntypes，int nin，int nout，int identity，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-47"><code class="descname">char * name，char * doc，int unused）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-48">从所需变量创建新的广播通用函数。</span><span class="yiyi-st" id="yiyi-49">每个ufunc围绕元素到元素操作的概念构建。</span><span class="yiyi-st" id="yiyi-50">每个ufunc对象包含指向1-d循环的指针，实现每种支持类型的基本功能。</span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-51">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-52">不复制<em>func</em>，<em>数据</em>，<em>类型</em>，<em>名称</em>和<em>doc</em>由<code class="xref c c-func docutils literal"><span class="pre">PyUFunc_FromFuncAndData</span></code>。</span><span class="yiyi-st" id="yiyi-53">调用者必须确保这些数组使用的内存不会被释放，只要ufunc对象是活的。</span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-54">参数：</span></th><td class="field-body"><ul class="first last simple">
+<li><span class="yiyi-st" id="yiyi-55"><strong>func</strong>  - 必须包含<code class="xref c c-type docutils literal"><span class="pre">PyUFuncGenericFunction</span></code>项目的长度<em>ntypes</em>的数组。</span><span class="yiyi-st" id="yiyi-56">这些项是指向实际实现底层（逐个元素）函数<img alt="N" class="math" src="../_images/math/10f77f12438cb385098c4d2344aaa427d0a462a8.png" style="vertical-align: 0px">次的函数的指针。</span></li>
+<li><span class="yiyi-st" id="yiyi-57"><strong>data</strong>  - 应为<code class="docutils literal"><span class="pre">NULL</span></code>或指向大小为<em>ntypes</em>的数组的指针。</span><span class="yiyi-st" id="yiyi-58">该数组可以包含要传递到func数组中相应的1-d循环函数的任意附加数据。</span></li>
+<li><span class="yiyi-st" id="yiyi-59"><strong>类型</strong>  - 必须为长度（<em>nin</em> + <em>nout</em>）* <em>ntypes</em>，并且包含数据类型内置），在<em>func</em>数组中的相应函数可以处理。</span></li>
+<li><span class="yiyi-st" id="yiyi-60"><strong>ntypes</strong>  -  ufunc已实现了多少个不同的数据类型“签名”。</span></li>
+<li><span class="yiyi-st" id="yiyi-61"><strong>nin</strong>  - 此操作的输入数。</span></li>
+<li><span class="yiyi-st" id="yiyi-62"><strong>nout</strong>  - 输出数</span></li>
+<li><span class="yiyi-st" id="yiyi-63"><strong>name</strong>  -  ufunc的名称。</span><span class="yiyi-st" id="yiyi-64">指定“add”或“multiply”的名称会启用不指定dtype时整数类型缩减的特殊行为。</span><span class="yiyi-st" id="yiyi-65">如果输入类型是小于<a href="#id1"><span class="problematic" id="id2">int_</span></a>数据类型大小的整数（或布尔）数据类型，则它将在<a href="#id3"><span class="problematic" id="id4">int_</span></a>（或uint）数据类型。</span></li>
+<li><span class="yiyi-st" id="yiyi-66"><strong>doc</strong>  - 允许传入要与ufunc一起存储的文档字符串。</span><span class="yiyi-st" id="yiyi-67">文档字符串不应包含函数或调用签名的名称，因为它将根据对象动态确定，并且在访问ufunc的<strong>__ doc __</strong>属性时可用。</span></li>
+<li><span class="yiyi-st" id="yiyi-68"><strong>未使用</strong>  - 未使用，并且用于C-API的向后兼容性。</span></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-69"><code class="descname">PyObject * PyUFunc_FromFuncAndDataAndSignature（PyUFuncGenericFunction * func，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-70"><code class="descname">void ** data，char * types，int ntypes，int nin，int nout，int identity，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-71"><code class="descname">char * name，char * doc，int unused，char * signature）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-72">这个函数与上面的PyUFunc_FromFuncAndData非常相似，但是有一个额外的<em>签名</em>参数，用于定义通用的通用函数。</span><span class="yiyi-st" id="yiyi-73">类似于ufuncs是如何围绕元素操作构建的，gufuncs是子数组 - 子数组操作，签名定义了要操作的子数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-74">参数：</span></th><td class="field-body"><ul class="first last simple">
+<li><span class="yiyi-st" id="yiyi-75"><strong>signature</strong>  - 新gufunc的签名。</span><span class="yiyi-st" id="yiyi-76">将其设置为NULL等效于调用PyUFunc_FromFuncAndData。</span><span class="yiyi-st" id="yiyi-77">将创建字符串的副本，因此可以释放传入的缓冲区。</span></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-78"><code class="descname">int PyUFunc_RegisterLoopF​​orType（PyUFuncObject * ufunc，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-79"><code class="descname">int usertype，PyUFuncGenericFunction function，int * arg_types，void * data）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-80">该函数允许用户使用已创建的ufunc注册1-d循环，以便在使用任何输入参数作为用户定义的数据类型调用ufunc时使用。</span><span class="yiyi-st" id="yiyi-81">这是需要的，以使ufuncs与内置的数据类型工作。</span><span class="yiyi-st" id="yiyi-82">数据类型必须已预先注册到numpy系统。</span><span class="yiyi-st" id="yiyi-83">循环作为<em>函数</em>传递。</span><span class="yiyi-st" id="yiyi-84">此循环可以获取应作为<em>数据</em>传递的任意数据。</span><span class="yiyi-st" id="yiyi-85">循环需要的数据类型作为<em>arg_types</em>传递，它必须是指向内存的指针，至少与ufunc-&gt; nargs一样大。</span></p>
+</dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-86"><code class="descname">int PyUFunc_RegisterLoopF​​orDescr（PyUFuncObject * ufunc，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-87"><code class="descname">PyArray_Descr * userdtype，PyUFuncGenericFunction function，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-88"><code class="descname">PyArray_Descr ** arg_dtypes，void * data）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-89">此函数的行为类似于上面的PyUFunc_RegisterLoopF​​orType，除了它允许用户使用PyArray_Descr对象而不是dtype类型num值注册1-d循环。</span><span class="yiyi-st" id="yiyi-90">这允许为结构化数组数据类型和自定义数据类型而不是标量数据类型注册1-d循环。</span></p>
+</dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-91"><code class="descname">int PyUFunc_ReplaceLoopBySignature（PyUFuncObject * ufunc，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-92"><code class="descname">PyUFuncGenericFunction newfunc，int * signature，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-93"><code class="descname">PyUFuncGenericFunction * oldfunc）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-94">将已经创建的<em>ufunc</em>中给定<em>签名</em>的1-d循环替换为新的1-d循环newfunc。</span><span class="yiyi-st" id="yiyi-95">返回<em>oldfunc</em>中的旧1-d循环函数。</span><span class="yiyi-st" id="yiyi-96">成功返回0，失败返回-1。</span><span class="yiyi-st" id="yiyi-97">此函数仅适用于内置类型（对于用户定义的类型使用<code class="xref c c-func docutils literal"><span class="pre">PyUFunc_RegisterLoopForType</span></code>）。</span><span class="yiyi-st" id="yiyi-98">签名是数据类型数字的数组，指示由1-d循环采用的输出所遵循的输入。</span></p>
+</dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-99"><code class="descname">int PyUFunc_GenericFunction（PyUFuncObject * self，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-100"><code class="descname">PyObject * args，PyObject * kwds，PyArrayObject ** mps）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-101">一个通用的ufunc调用。</span><span class="yiyi-st" id="yiyi-102">ufunc作为<em>self</em>传递，ufunc的参数为<em>args</em>和<em>kwds</em>。</span><span class="yiyi-st" id="yiyi-103"><em>mps</em>参数是<a class="reference internal" href="c-api.types-and-structures.html#c.PyArrayObject" title="PyArrayObject"><code class="xref c c-type docutils literal"><span class="pre">PyArrayObject</span></code></a>指针的数组，其值被丢弃，并且在返回成功时接收转换的输入参数以及ufunc输出。</span><span class="yiyi-st" id="yiyi-104">用户负责管理此数组，并接收<em>mps</em>中每个数组的新引用。</span><span class="yiyi-st" id="yiyi-105">在<em>mps</em>中的数组的总数由<em>self</em>  - &gt; nin + <em>self</em>  - &gt; nout给出。</span></p>
+<p><span class="yiyi-st" id="yiyi-106">成功返回0，错误返回-1。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.PyUFunc_checkfperr"><span class="yiyi-st" id="yiyi-107"> int <code class="descname">PyUFunc_checkfperr</code><span class="sig-paren">(</span>int<em> errmask</em>, <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a>*<em> errobj</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-108">一个简单的接口，用于IEEE错误标志检查支持。</span><span class="yiyi-st" id="yiyi-109"><em>errmask</em>参数是<code class="xref c c-data docutils literal"><span class="pre">UFUNC_MASK_{ERR}</span></code>位掩码的掩码，指示要检查哪些错误（以及如何检查它们）。</span><span class="yiyi-st" id="yiyi-110"><em>errobj</em>必须是一个包含两个元素的Python元组：一个包含将在任何错误通信中使用的名称的字符串和一个可调用的Python对象（回调函数）或<a class="reference external" href="https://docs.python.org/dev/c-api/none.html#c.Py_None" title="(in Python v3.7)"><code class="xref c c-data docutils literal"><span class="pre">Py_None</span></code></a></span><span class="yiyi-st" id="yiyi-111">只有在将<code class="xref c c-data docutils literal"><span class="pre">UFUNC_ERR_CALL</span></code>设置为所需的错误检查方法时，才能使用可调用对象。</span><span class="yiyi-st" id="yiyi-112">此例程管理GIL，即使释放GIL后也可安全调用。</span><span class="yiyi-st" id="yiyi-113">如果IEEE兼容性硬件中的错误被确定，则返回-1，否则返回0。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.PyUFunc_clearfperr"><span class="yiyi-st" id="yiyi-114"> void <code class="descname">PyUFunc_clearfperr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-115">清除IEEE错误标志。</span></p>
+</dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-116"><code class="descname">void PyUFunc_GetPyValues（char * name，int * bufsize，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-117"><code class="descname">int * errmask，PyObject ** errobj）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-118">从线程本地存储区域获取用于ufunc处理的Python值，除非已设置默认值，在这种情况下绕过名称查找。</span><span class="yiyi-st" id="yiyi-119">该名称作为字符串放置在<em>* errobj</em>的第一个元素中。</span><span class="yiyi-st" id="yiyi-120">第二个元素是调用错误回调的查找函数。</span><span class="yiyi-st" id="yiyi-121">要使用的查找缓冲区大小的值传递到<em>bufsize</em>，并且错误掩码的值放在<em>errmask</em>中。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="generic-functions">
+<h2><span class="yiyi-st" id="yiyi-122">Generic functions</span></h2>
+<p><span class="yiyi-st" id="yiyi-123">每个ufunc的核心是一个类型特定函数的集合，它定义了每种支持类型的基本功能。</span><span class="yiyi-st" id="yiyi-124">这些函数必须评估底层函数<img alt="N\geq1" class="math" src="../_images/math/ea56421a60292c53ce4a89b27741853349268d71.png" style="vertical-align: -2px"> times。</span><span class="yiyi-st" id="yiyi-125">可以传递额外数据，其可以在计算期间使用。</span><span class="yiyi-st" id="yiyi-126">此功能允许一些一般功能用作这些基本循环功能。</span><span class="yiyi-st" id="yiyi-127">一般函数具有将变量指向正确位置并设置函数调用所需的所有代码。</span><span class="yiyi-st" id="yiyi-128">一般函数假定实际调用的函数作为额外数据传入，并用正确的值调用它。</span><span class="yiyi-st" id="yiyi-129">所有这些函数都适合直接放置在存储在PyUFuncObject结构的functions成员中的函数的数组中。</span></p>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-130"><code class="descname">void PyUFunc_f_f_As_d_d（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-131"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-132"><code class="descname">void PyUFunc_d_d（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-133"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-134"><code class="descname">void PyUFunc_f_f（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-135"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-136"><code class="descname">void PyUFunc_g_g（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-137"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-138"><code class="descname">void PyUFunc_F_F_As_D_D（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-139"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-140"><code class="descname">void PyUFunc_F_F（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-141"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-142"><code class="descname">void PyUFunc_D_D（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-143"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-144"><code class="descname">void PyUFunc_G_G（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-145"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-146"><code class="descname">void PyUFunc_e_e（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-147"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-148"><code class="descname">void PyUFunc_e_e_As_f_f（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-149"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-150"><code class="descname">void PyUFunc_e_e_As_d_d（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-151"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-152">为ufuncs类型特定的核心1-d函数，其中每个计算通过调用一个接受一个输入参数并返回一个输出的函数来获得。</span><span class="yiyi-st" id="yiyi-153">此函数在<code class="docutils literal"><span class="pre">func</span></code>中传递。</span><span class="yiyi-st" id="yiyi-154">The letters correspond to dtypechar’s of the supported data types ( <code class="docutils literal"><span class="pre">e</span></code> - half, <code class="docutils literal"><span class="pre">f</span></code> - float, <code class="docutils literal"><span class="pre">d</span></code> - double, <code class="docutils literal"><span class="pre">g</span></code> - long double, <code class="docutils literal"><span class="pre">F</span></code> - cfloat, <code class="docutils literal"><span class="pre">D</span></code> - cdouble, <code class="docutils literal"><span class="pre">G</span></code> - clongdouble). </span><span class="yiyi-st" id="yiyi-155">参数<em>func</em>必须支持相同的签名。</span><span class="yiyi-st" id="yiyi-156">_As_X_X变体假定一个数据类型的ndarray，但是转换这些值以使用采用不同数据类型的基础函数。</span><span class="yiyi-st" id="yiyi-157">因此，<code class="xref c c-func docutils literal"><span class="pre">PyUFunc_f_f_As_d_d</span></code>使用数据类型<a class="reference internal" href="c-api.dtype.html#c.NPY_FLOAT" title="NPY_FLOAT"><code class="xref c c-data docutils literal"><span class="pre">NPY_FLOAT</span></code></a>的ndarrays，但调用一个接受double并返回double的C函数。</span></p>
+</dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-158"><code class="descname">void PyUFunc_ff_f_As_dd_d（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-159"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-160"><code class="descname">void PyUFunc_ff_f（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-161"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-162"><code class="descname">void PyUFunc_dd_d（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-163"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-164"><code class="descname">void PyUFunc_gg_g（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-165"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-166"><code class="descname">void PyUFunc_FF_F_As_DD_D（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-167"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-168"><code class="descname">void PyUFunc_DD_D（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-169"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-170"><code class="descname">void PyUFunc_FF_F（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-171"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-172"><code class="descname">void PyUFunc_GG_G（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-173"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-174"><code class="descname">void PyUFunc_ee_e（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-175"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-176"><code class="descname">void PyUFunc_ee_e_As_ff_f（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-177"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-178"><code class="descname">void PyUFunc_ee_e_As_dd_d（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-179"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-180">为ufuncs键入特定的核心1-d函数，其中每个计算通过调用具有两个输入参数并返回一个输出的函数来获得。</span><span class="yiyi-st" id="yiyi-181">要调用的底层函数以<em>func</em>形式传递。</span><span class="yiyi-st" id="yiyi-182">字母对应于通用函数支持的特定数据类型的dtypechar。</span><span class="yiyi-st" id="yiyi-183">参数<code class="docutils literal"><span class="pre">func</span></code>必须支持相应的签名。</span><span class="yiyi-st" id="yiyi-184"><code class="docutils literal"><span class="pre">_As_XX_X</span></code>变体假定一种数据类型的narrays，但在循环的每次迭代中转换值，以使用采用不同数据类型的基础函数。</span></p>
+</dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-185"><code class="descname">void PyUFunc_O_O（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-186"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-187"><code class="descname">void PyUFunc_OO_O（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-188"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-189">数据类型为<a class="reference internal" href="c-api.dtype.html#c.NPY_OBJECT" title="NPY_OBJECT"><code class="xref c c-data docutils literal"><span class="pre">NPY_OBJECT</span></code></a>的单输入，单输出和双输入，单输出核心1-d功能。</span><span class="yiyi-st" id="yiyi-190">这些函数处理引用计数问题，并及早返回错误。</span><span class="yiyi-st" id="yiyi-191">要调用的实际函数是<em>func</em>，它必须接受签名<code class="docutils literal"><span class="pre">（PyObject *）</span> <span class="pre">（PyObject *）</span>  t1对于<code class="xref c c-func docutils literal"><span class="pre">PyUFunc_O_O</span></code>或<code class="docutils literal"><span class="pre">（PyObject *）（PyObject</span> <span class="pre">*，</span> <span class="pre">PyObject</span> <span class="pre">*） / t10&gt;</span></code>用于<code class="xref c c-func docutils literal"><span class="pre">PyUFunc_OO_O</span></code>。</code></span></p>
+</dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-192"><code class="descname">void PyUFunc_O_O_method（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-193"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-194">这个通用1-d核函数假定<em>func</em>是表示输入对象的方法的字符串。</span><span class="yiyi-st" id="yiyi-195">对于循环的每次迭代，从数组中提取Python对象，并调用其<em>func</em>方法将结果返回到输出数组。</span></p>
+</dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-196"><code class="descname">void PyUFunc_OO_O_method（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-197"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-198">这个通用1-d核函数假设<em>func</em>是一个字符串，表示一个参数的输入对象的方法。</span><span class="yiyi-st" id="yiyi-199"><em>args</em>中的第一个参数是函数被调用的方法，<em>args</em>中的第二个参数是传递给函数的参数。</span><span class="yiyi-st" id="yiyi-200">函数的输出存储在<em>args</em>的第三个条目中。</span></p>
+</dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-201"><code class="descname">void PyUFunc_On_Om（char ** args，npy_intp * dimensions，</code></span></dt>
+<dt><span class="yiyi-st" id="yiyi-202"><code class="descname">npy_intp * steps，void * func）</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-203">这是由umath.frompyfunc（function，nin，nout）创建的动态ufuncs使用的1-d核心函数。</span><span class="yiyi-st" id="yiyi-204">在这种情况下，<em>func</em>是指向<a class="reference internal" href="#c.PyUFunc_PyFuncData" title="PyUFunc_PyFuncData"><code class="xref c c-type docutils literal"><span class="pre">PyUFunc_PyFuncData</span></code></a>结构的指针，它具有定义</span></p>
+<dl class="type">
+<dt id="c.PyUFunc_PyFuncData"><span class="yiyi-st" id="yiyi-205"> <code class="descname">PyUFunc_PyFuncData</code></span></dt>
+<dd><div class="highlight-c"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">nin</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">nout</span><span class="p">;</span>
+    <span class="n">PyObject</span> <span class="o">*</span><span class="n">callable</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">PyUFunc_PyFuncData</span><span class="p">;</span>
+</pre></div>
+</div>
+</dd></dl>
+<p><span class="yiyi-st" id="yiyi-206">在循环的每次迭代中，<em>nin</em>输入对象都从它们的对象数组中提取，并放入参数元组中，使用输入参数调用Python <em>可调用</em> nout输出放置到它们的对象数组中。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="importing-the-api">
+<h2><span class="yiyi-st" id="yiyi-207">Importing the API</span></h2>
+<dl class="var">
+<dt id="c.PY_UFUNC_UNIQUE_SYMBOL"><span class="yiyi-st" id="yiyi-208"> <code class="descname">PY_UFUNC_UNIQUE_SYMBOL</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NO_IMPORT_UFUNC"><span class="yiyi-st" id="yiyi-209"> <code class="descname">NO_IMPORT_UFUNC</code></span></dt>
+<dd></dd></dl>
+<dl class="function">
+<dt id="c.import_ufunc"><span class="yiyi-st" id="yiyi-210"> void <code class="descname">import_ufunc</code><span class="sig-paren">(</span>void<span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-211">这些是用于从扩展模块访问ufunc C-API的常数和函数，正如可以访问数组C-API一样。</span><span class="yiyi-st" id="yiyi-212">必须始终调用<code class="docutils literal"><span class="pre">import_ufunc</span></code>()函数（在扩展模块的初始化子程序中）。</span><span class="yiyi-st" id="yiyi-213">如果您的扩展模块在一个文件中，那就是所有必需的。</span><span class="yiyi-st" id="yiyi-214">如果您的扩展模块使用多个文件，其他两个常数是有用的。</span><span class="yiyi-st" id="yiyi-215">在这种情况下，将<a class="reference internal" href="#c.PY_UFUNC_UNIQUE_SYMBOL" title="PY_UFUNC_UNIQUE_SYMBOL"><code class="xref c c-data docutils literal"><span class="pre">PY_UFUNC_UNIQUE_SYMBOL</span></code></a>定义为代码的唯一属性，然后在不包含模块初始化函数但仍需要访问UFUNC API的源文件中定义<a class="reference internal" href="#c.PY_UFUNC_UNIQUE_SYMBOL" title="PY_UFUNC_UNIQUE_SYMBOL"><code class="xref c c-data docutils literal"><span class="pre">PY_UFUNC_UNIQUE_SYMBOL</span></code></a>到以前使用的相同名称，并且还定义<a class="reference internal" href="#c.NO_IMPORT_UFUNC" title="NO_IMPORT_UFUNC"><code class="xref c c-data docutils literal"><span class="pre">NO_IMPORT_UFUNC</span></code></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-216">C-API实际上是一个数组的函数指针。</span><span class="yiyi-st" id="yiyi-217">此数组由import_ufunc创建（并由全局变量指向）。</span><span class="yiyi-st" id="yiyi-218">根据<code class="xref c c-data docutils literal"><span class="pre">Py_UFUNC_UNIQUE_SYMBOL</span></code>和<a class="reference internal" href="#c.NO_IMPORT_UFUNC" title="NO_IMPORT_UFUNC"><code class="xref c c-data docutils literal"><span class="pre">NO_IMPORT_UFUNC</span></code></a>的状态，全局变量被静态定义或允许被其他文件看到。</span></p>
+</dd></dl>
+<span class="target" id="index-1"></span></div>

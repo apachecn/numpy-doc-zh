@@ -1,0 +1,152 @@
+
+<span id="routines-indexing"></span><h1><span class="yiyi-st" id="yiyi-17">Indexing routines</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.indexing.html">https://docs.scipy.org/doc/numpy/reference/routines.indexing.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-18">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="arrays.indexing.html#arrays-indexing"><span class="std std-ref">Indexing</span></a></span></p>
+</div>
+<div class="section" id="generating-index-arrays">
+<h2><span class="yiyi-st" id="yiyi-20">Generating index arrays</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="generated/numpy.c_.html#numpy.c_" title="numpy.c_"><code class="xref py py-obj docutils literal"><span class="pre">c_</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-22">将切片对象转换为沿第二轴的连接。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="generated/numpy.r_.html#numpy.r_" title="numpy.r_"><code class="xref py py-obj docutils literal"><span class="pre">r_</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-24">将切片对象翻译为沿第一轴的连接。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="generated/numpy.s_.html#numpy.s_" title="numpy.s_"><code class="xref py py-obj docutils literal"><span class="pre">s_</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-26">为数组构建索引元组的更好方法。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="generated/numpy.nonzero.html#numpy.nonzero" title="numpy.nonzero"><code class="xref py py-obj docutils literal"><span class="pre">nonzero</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-28">返回非零元素的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="generated/numpy.where.html#numpy.where" title="numpy.where"><code class="xref py py-obj docutils literal"><span class="pre">where</span></code></a>（条件，[x，y]）</span></td>
+<td><span class="yiyi-st" id="yiyi-30">根据<em class="xref py py-obj">条件</em>，从<em class="xref py py-obj">x</em>或<em class="xref py py-obj">y</em>返回元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="generated/numpy.indices.html#numpy.indices" title="numpy.indices"><code class="xref py py-obj docutils literal"><span class="pre">indices</span></code></a>（dimensions [，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-32">返回表示网格索引的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="generated/numpy.ix_.html#numpy.ix_" title="numpy.ix_"><code class="xref py py-obj docutils literal"><span class="pre">ix_</span></code></a>（\ * args）</span></td>
+<td><span class="yiyi-st" id="yiyi-34">从多个序列构造一个打开的网格。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="generated/numpy.ogrid.html#numpy.ogrid" title="numpy.ogrid"><code class="xref py py-obj docutils literal"><span class="pre">ogrid</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-36"><em class="xref py py-obj">nd_grid</em>实例，返回一个打开的多维“meshgrid”。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="generated/numpy.ravel_multi_index.html#numpy.ravel_multi_index" title="numpy.ravel_multi_index"><code class="xref py py-obj docutils literal"><span class="pre">ravel_multi_index</span></code></a>（multi_index，dims [，mode，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-38">将索引数组的元组转换为平面索引的数组，将边界模式应用于多索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="generated/numpy.unravel_index.html#numpy.unravel_index" title="numpy.unravel_index"><code class="xref py py-obj docutils literal"><span class="pre">unravel_index</span></code></a>（indices，dims [，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-40">将平面索引的平面索引或数组转换为坐标数组的元组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="generated/numpy.diag_indices.html#numpy.diag_indices" title="numpy.diag_indices"><code class="xref py py-obj docutils literal"><span class="pre">diag_indices</span></code></a>（n [，ndim]）</span></td>
+<td><span class="yiyi-st" id="yiyi-42">返回索引以访问数组的主对角线。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="generated/numpy.diag_indices_from.html#numpy.diag_indices_from" title="numpy.diag_indices_from"><code class="xref py py-obj docutils literal"><span class="pre">diag_indices_from</span></code></a>（arr）</span></td>
+<td><span class="yiyi-st" id="yiyi-44">返回索引以访问n维数组的主对角线。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.mask_indices.html#numpy.mask_indices" title="numpy.mask_indices"><code class="xref py py-obj docutils literal"><span class="pre">mask_indices</span></code></a>（n，mask_func [，k]）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">给定掩蔽函数，返回索引以访问（n，n）数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.tril_indices.html#numpy.tril_indices" title="numpy.tril_indices"><code class="xref py py-obj docutils literal"><span class="pre">tril_indices</span></code></a>（n [，k，m]）</span></td>
+<td><span class="yiyi-st" id="yiyi-48">返回（n，m）数组的下三角形的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.tril_indices_from.html#numpy.tril_indices_from" title="numpy.tril_indices_from"><code class="xref py py-obj docutils literal"><span class="pre">tril_indices_from</span></code></a>（arr [，k]）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">返回arr的下三角形的索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.triu_indices.html#numpy.triu_indices" title="numpy.triu_indices"><code class="xref py py-obj docutils literal"><span class="pre">triu_indices</span></code></a>（n [，k，m]）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">返回（n，m）数组的上三角形的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="generated/numpy.triu_indices_from.html#numpy.triu_indices_from" title="numpy.triu_indices_from"><code class="xref py py-obj docutils literal"><span class="pre">triu_indices_from</span></code></a>（arr [，k]）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">返回arr的上三角形的索引。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="indexing-like-operations">
+<h2><span class="yiyi-st" id="yiyi-55">Indexing-like operations</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="generated/numpy.take.html#numpy.take" title="numpy.take"><code class="xref py py-obj docutils literal"><span class="pre">take</span></code></a>（a，indices [，axis，out，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-57">从轴沿一个数组中取元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-58"><a class="reference internal" href="generated/numpy.choose.html#numpy.choose" title="numpy.choose"><code class="xref py py-obj docutils literal"><span class="pre">choose</span></code></a>（a，choices [，out，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-59">从索引数组和一组数组构造数组以供选择。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-60"><a class="reference internal" href="generated/numpy.compress.html#numpy.compress" title="numpy.compress"><code class="xref py py-obj docutils literal"><span class="pre">compress</span></code></a>（condition，a [，axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-61">沿给定轴返回数组的所选切片。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-62"><a class="reference internal" href="generated/numpy.diag.html#numpy.diag" title="numpy.diag"><code class="xref py py-obj docutils literal"><span class="pre">diag</span></code></a>（v [，k]）</span></td>
+<td><span class="yiyi-st" id="yiyi-63">提取对角线或构造对角数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="generated/numpy.diagonal.html#numpy.diagonal" title="numpy.diagonal"><code class="xref py py-obj docutils literal"><span class="pre">diagonal</span></code></a>（a [，offset，axis1，axis2]）</span></td>
+<td><span class="yiyi-st" id="yiyi-65">返回指定的对角线。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-66"><a class="reference internal" href="generated/numpy.select.html#numpy.select" title="numpy.select"><code class="xref py py-obj docutils literal"><span class="pre">select</span></code></a>（condlist，choicelist [，default]）</span></td>
+<td><span class="yiyi-st" id="yiyi-67">返回根据条件从选择列表中的元素绘制的数组。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="inserting-data-into-arrays">
+<h2><span class="yiyi-st" id="yiyi-68">Inserting data into arrays</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="generated/numpy.place.html#numpy.place" title="numpy.place"><code class="xref py py-obj docutils literal"><span class="pre">place</span></code></a>（arr，mask，vals）</span></td>
+<td><span class="yiyi-st" id="yiyi-70">基于条件和输入值更改数组的元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-71"><a class="reference internal" href="generated/numpy.put.html#numpy.put" title="numpy.put"><code class="xref py py-obj docutils literal"><span class="pre">put</span></code></a>（a，ind，v [，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-72">用给定值替换数组的指定元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-73"><a class="reference internal" href="generated/numpy.putmask.html#numpy.putmask" title="numpy.putmask"><code class="xref py py-obj docutils literal"><span class="pre">putmask</span></code></a>（a，mask，values）</span></td>
+<td><span class="yiyi-st" id="yiyi-74">基于条件和输入值更改数组的元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-75"><a class="reference internal" href="generated/numpy.fill_diagonal.html#numpy.fill_diagonal" title="numpy.fill_diagonal"><code class="xref py py-obj docutils literal"><span class="pre">fill_diagonal</span></code></a>（a，val [，wrap]）</span></td>
+<td><span class="yiyi-st" id="yiyi-76">填充给定数组的任何维数的主对角线。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="iterating-over-arrays">
+<h2><span class="yiyi-st" id="yiyi-77">Iterating over arrays</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-78"><a class="reference internal" href="generated/numpy.nditer.html#numpy.nditer" title="numpy.nditer"><code class="xref py py-obj docutils literal"><span class="pre">nditer</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-79">有效的多维迭代器对象迭代数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="generated/numpy.ndenumerate.html#numpy.ndenumerate" title="numpy.ndenumerate"><code class="xref py py-obj docutils literal"><span class="pre">ndenumerate</span></code></a>（arr）</span></td>
+<td><span class="yiyi-st" id="yiyi-81">多维索引迭代器。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-82"><a class="reference internal" href="generated/numpy.ndindex.html#numpy.ndindex" title="numpy.ndindex"><code class="xref py py-obj docutils literal"><span class="pre">ndindex</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-83">用于索引数组的N维迭代器对象。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-84"><a class="reference internal" href="generated/numpy.flatiter.html#numpy.flatiter" title="numpy.flatiter"><code class="xref py py-obj docutils literal"><span class="pre">flatiter</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-85">平面迭代器对象在数组上进行迭代。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-86"><a class="reference internal" href="generated/numpy.lib.Arrayterator.html#numpy.lib.Arrayterator" title="numpy.lib.Arrayterator"><code class="xref py py-obj docutils literal"><span class="pre">lib.Arrayterator</span></code></a>（var [，buf_size]）</span></td>
+<td><span class="yiyi-st" id="yiyi-87">大数组的缓冲迭代器。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

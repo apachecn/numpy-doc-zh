@@ -1,0 +1,87 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.nanmax</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanmax.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanmax.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.nanmax"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">nanmax</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em>, <em>out=None</em>, <em>keepdims=&lt;class numpy._globals._NoValue&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/nanfunctions.py#L252-L356"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回沿轴的数组或最大值的最大值，忽略任何NaN。</span><span class="yiyi-st" id="yiyi-15">当遇到all-NaN切片时，会出现<code class="docutils literal"><span class="pre">RuntimeWarning</span></code>，并返回该切片的NaN。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">数组包含需要最大值的数字。</span><span class="yiyi-st" id="yiyi-19">如果<em class="xref py py-obj">a</em>不是数组，则尝试进行转换。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">计算最大值的轴。</span><span class="yiyi-st" id="yiyi-22">默认值是计算展平数组的最大值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">备用输出放置结果的数组。</span><span class="yiyi-st" id="yiyi-25">默认值为<code class="docutils literal"><span class="pre">None</span></code>；如果提供，它必须具有与预期输出相同的形状，但如果必要，将投射类型。</span><span class="yiyi-st" id="yiyi-26">有关详细信息，请参阅<code class="xref py py-obj docutils literal"><span class="pre">doc.ufuncs</span></code>。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-27"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>keepdims</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">如果设置为True，则缩小的轴在结果中保留为尺寸为1的尺寸。</span><span class="yiyi-st" id="yiyi-30">使用此选项，结果将与原始<em class="xref py py-obj">a</em>正确地广播。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">如果值不是默认值，则<em class="xref py py-obj">keepdims</em>将传递到<a class="reference internal" href="numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a>子类的<a class="reference external" href="https://docs.python.org/dev/library/functions.html#max" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">max</span></code></a>方法。</span><span class="yiyi-st" id="yiyi-32">如果子类方法不实现<em class="xref py py-obj">keepdims</em>，则会引发任何异常。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-33"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-34">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-35"><strong>nanmax</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-36">与<em class="xref py py-obj">a</em>形状相同的数组，指定的轴已删除。</span><span class="yiyi-st" id="yiyi-37">如果<em class="xref py py-obj">a</em>是0-d数组，或者如果轴为None，则返回ndarray标量。</span><span class="yiyi-st" id="yiyi-38">返回与<em class="xref py py-obj">a</em>相同的dtype。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-39">也可以看看</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.nanmin.html#numpy.nanmin" title="numpy.nanmin"><code class="xref py py-obj docutils literal"><span class="pre">nanmin</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-41">沿给定轴的数组的最小值，忽略任何NaN。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.amax.html#numpy.amax" title="numpy.amax"><code class="xref py py-obj docutils literal"><span class="pre">amax</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">沿给定轴的数组的最大值，传播任何NaN。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.fmax.html#numpy.fmax" title="numpy.fmax"><code class="xref py py-obj docutils literal"><span class="pre">fmax</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-45">元素最大两个数组，忽略任何NaN。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.maximum.html#numpy.maximum" title="numpy.maximum"><code class="xref py py-obj docutils literal"><span class="pre">maximum</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-47">元素最大值为两个数组，传播任何NaN。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="numpy.isnan.html#numpy.isnan" title="numpy.isnan"><code class="xref py py-obj docutils literal"><span class="pre">isnan</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-49">显示哪些元素不是数字（NaN）。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="numpy.isfinite.html#numpy.isfinite" title="numpy.isfinite"><code class="xref py py-obj docutils literal"><span class="pre">isfinite</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-51">显示哪些元素既不是NaN也不是无穷大。</span></dd>
+</dl>
+<p class="last"><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="numpy.amin.html#numpy.amin" title="numpy.amin"><code class="xref py py-obj docutils literal"><span class="pre">amin</span></code></a>，<a class="reference internal" href="numpy.fmin.html#numpy.fmin" title="numpy.fmin"><code class="xref py py-obj docutils literal"><span class="pre">fmin</span></code></a>，<a class="reference internal" href="numpy.minimum.html#numpy.minimum" title="numpy.minimum"><code class="xref py py-obj docutils literal"><span class="pre">minimum</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-53">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-54">Numpy使用IEEE标准二进制浮点运算（IEEE 754）。</span><span class="yiyi-st" id="yiyi-55">这意味着不是数字不等于无穷大。</span><span class="yiyi-st" id="yiyi-56">正无穷大被视为非常大的数，负无穷大被视为非常小（即负）数。</span></p>
+<p><span class="yiyi-st" id="yiyi-57">如果输入具有整数类型，该函数等效于np.max。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-58">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([ 3.,  2.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 2.,  3.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-59">当存在正无穷大和负无穷大时：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">NINF</span><span class="p">])</span>
+<span class="go">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+<span class="go">inf</span>
+</pre></div>
+</div>
+</dd></dl>

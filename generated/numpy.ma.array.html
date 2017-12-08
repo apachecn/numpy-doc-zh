@@ -1,0 +1,71 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.array</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.array.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.array.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.array"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">array</code><span class="sig-paren">(</span><em>data</em>, <em>dtype=None</em>, <em>copy=False</em>, <em>order=None</em>, <em>mask=False</em>, <em>fill_value=None</em>, <em>keep_mask=True</em>, <em>hard_mask=False</em>, <em>shrink=True</em>, <em>subok=True</em>, <em>ndmin=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L6139-L6152"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">可能带有掩码值的数组类。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">True的掩蔽值从任何计算中排除相应的元素。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">施工：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">MaskedArray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">nomask</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">ndmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keep_mask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">hard_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">shrink</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>data</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输入数据。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>掩码</strong>：sequence，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">面具。</span><span class="yiyi-st" id="yiyi-23">必须可转换为与<em class="xref py py-obj">数据</em>相同形状的布尔数组。</span><span class="yiyi-st" id="yiyi-24">True表示屏蔽（即无效）数据。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">输出的数据类型。</span><span class="yiyi-st" id="yiyi-27">如果<em class="xref py py-obj">dtype</em>为None，则使用数据参数的类型（<code class="docutils literal"><span class="pre">data.dtype</span></code>）。</span><span class="yiyi-st" id="yiyi-28">如果<em class="xref py py-obj">dtype</em>不为None且与<code class="docutils literal"><span class="pre">data.dtype</span></code>不同，则执行复制。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>copy</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">是否复制输入数据（True），或使用引用。</span><span class="yiyi-st" id="yiyi-31">默认值为False。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>subok</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">是否返回<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.MaskedArray" title="numpy.ma.MaskedArray"><code class="xref py py-obj docutils literal"><span class="pre">MaskedArray</span></code></a>的子类（True）或平面<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.MaskedArray" title="numpy.ma.MaskedArray"><code class="xref py py-obj docutils literal"><span class="pre">MaskedArray</span></code></a>。</span><span class="yiyi-st" id="yiyi-34">默认值为True。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35"><strong>ndmin</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-36">最小维数。</span><span class="yiyi-st" id="yiyi-37">默认值为0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-38"><strong>fill_value</strong>：标量，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-39">必要时用于填写屏蔽值的值。</span><span class="yiyi-st" id="yiyi-40">如果为None，则使用基于数据类型的默认值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-41"><strong>keep_mask</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-42">是否将<em class="xref py py-obj">掩码</em>与输入数据的掩码（如果有）（True）组合，或仅对输出（False）使用<em class="xref py py-obj">掩码</em>。</span><span class="yiyi-st" id="yiyi-43">默认值为True。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-44"><strong>hard_mask</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-45">是否使用硬掩模。</span><span class="yiyi-st" id="yiyi-46">使用硬掩码，掩码值不能取消掩码。</span><span class="yiyi-st" id="yiyi-47">默认值为False。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-48"><strong>shrink</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-49">是否强制压缩空掩码。</span><span class="yiyi-st" id="yiyi-50">默认值为True。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-51"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;}，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-52">指定数组的顺序。</span><span class="yiyi-st" id="yiyi-53">如果顺序是&apos;C&apos;，那么数组将是C连续的顺序（last-index变化最快）。</span><span class="yiyi-st" id="yiyi-54">如果顺序是&apos;F&apos;，则返回的数组将是Fortran连续的顺序（first-index变化最快）。</span><span class="yiyi-st" id="yiyi-55">如果顺序是“A”（默认），则返回的数组可以是任何顺序（C-，Fortran连续，或甚至不连续），除非需要副本，在这种情况下它将是C连续的。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

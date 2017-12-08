@@ -1,0 +1,52 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.real_if_close</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.real_if_close.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.real_if_close.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.real_if_close"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">real_if_close</code><span class="sig-paren">(</span><em>a</em>, <em>tol=100</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/type_check.py#L377-L429"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">如果复杂的输入返回一个真实的数组，如果复杂的零件接近零。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">“接近零”定义为<em class="xref py py-obj">tol</em> *（<em class="xref py py-obj">a</em>类型的机器&#x3B5;）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>tol</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">对于数组中元素的复杂部分，机器epsilons中的公差。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">如果<em class="xref py py-obj">a</em>是实数，则<em class="xref py py-obj">a</em>的类型用于输出。</span><span class="yiyi-st" id="yiyi-24">如果<em class="xref py py-obj">a</em>有复杂元素，则返回的类型为float。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.real.html#numpy.real" title="numpy.real"><code class="xref py py-obj docutils literal"><span class="pre">real</span></code></a>，<a class="reference internal" href="numpy.imag.html#numpy.imag" title="numpy.imag"><code class="xref py py-obj docutils literal"><span class="pre">imag</span></code></a>，<a class="reference internal" href="numpy.angle.html#numpy.angle" title="numpy.angle"><code class="xref py py-obj docutils literal"><span class="pre">angle</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">机器&#x3B5;在机器之间和数据类型之间不同，但是在大多数平台上的Python浮点数具有等于2.2204460492503131e-16的机器epsilon。</span><span class="yiyi-st" id="yiyi-29">你可以使用&apos;np.finfo（np.float）.eps&apos;打印机的epsilon浮动。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span>
+<span class="go">2.2204460492503131e-16</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">real_if_close</span><span class="p">([</span><span class="mf">2.1</span> <span class="o">+</span> <span class="mi">4</span><span class="n">e</span><span class="o">-</span><span class="mi">14</span><span class="n">j</span><span class="p">],</span> <span class="n">tol</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="go">array([ 2.1])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">real_if_close</span><span class="p">([</span><span class="mf">2.1</span> <span class="o">+</span> <span class="mi">4</span><span class="n">e</span><span class="o">-</span><span class="mi">13</span><span class="n">j</span><span class="p">],</span> <span class="n">tol</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="go">array([ 2.1 +4.00000000e-13j])</span>
+</pre></div>
+</div>
+</dd></dl>

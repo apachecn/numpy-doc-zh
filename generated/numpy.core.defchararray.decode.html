@@ -1,0 +1,50 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.core.defchararray.decode</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.decode.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.decode.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.core.defchararray.decode"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.core.defchararray.</code><code class="descname">decode</code><span class="sig-paren">(</span><em>a</em>, <em>encoding=None</em>, <em>errors=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/defchararray.py#L462-L505"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">逐个调用<em class="xref py py-obj">str.decode</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">可用的编解码器集来自Python标准库，并且可以在运行时扩展。</span><span class="yiyi-st" id="yiyi-16">有关详细信息，请参阅<a class="reference external" href="https://docs.python.org/dev/library/codecs.html#module-codecs" title="(in Python v3.7)"><code class="xref py py-mod docutils literal"><span class="pre">codecs</span></code></a>模块。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：array_like of str或unicode</span></p>
+<p><span class="yiyi-st" id="yiyi-19"><strong>encoding</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">编码的名称</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>错误</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">指定如何处理编码错误</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-24"><strong>out</strong>：ndarray</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><code class="xref py py-obj docutils literal"><span class="pre">str.decode</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">结果的类型将取决于指定的编码。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;aAaAaA&apos;</span><span class="p">,</span> <span class="s1">&apos;  aA  &apos;</span><span class="p">,</span> <span class="s1">&apos;abBABba&apos;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">array([&apos;aAaAaA&apos;, &apos;  aA  &apos;, &apos;abBABba&apos;],</span>
+<span class="go">    dtype=&apos;|S7&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&apos;cp037&apos;</span><span class="p">)</span>
+<span class="go">array([&apos;\x81\xc1\x81\xc1\x81\xc1&apos;, &apos;@@\x81\xc1@@&apos;,</span>
+<span class="go">    &apos;\x81\x82\xc2\xc1\xc2\x82\x81&apos;],</span>
+<span class="go">    dtype=&apos;|S7&apos;)</span>
+</pre></div>
+</div>
+</dd></dl>

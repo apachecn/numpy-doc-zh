@@ -1,0 +1,67 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.arange</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arange.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.arange.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.arange"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">arange</code><span class="sig-paren">(</span><span class="optional">[</span><em>start</em>, <span class="optional">]</span><em>stop</em>, <span class="optional">[</span><em>step</em>, <span class="optional">]</span><em>dtype=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">在给定间隔内返回均匀间隔的值。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">在半开区间<code class="docutils literal"><span class="pre">[开始，</span> <span class="pre">停止）</span></code>（换句话说，包括<em class="xref py py-obj">开始 t3 &gt;但不包括<em class="xref py py-obj">停止</em>）。</em></span><span class="yiyi-st" id="yiyi-16">对于整数参数，该函数等效于Python内置的<a class="reference external" href="http://docs.python.org/lib/built-in-funcs.html">range</a>函数，但返回一个ndarray而不是一个列表。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">当使用非整数步长（如0.1）时，结果通常不一致。</span><span class="yiyi-st" id="yiyi-18">对于这些情况，最好使用<code class="docutils literal"><span class="pre">linspace</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>start</strong>：number，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">间隔开始。</span><span class="yiyi-st" id="yiyi-22">间隔包括此值。</span><span class="yiyi-st" id="yiyi-23">默认开始值为0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>停止</strong>：数字</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">间隔结束。</span><span class="yiyi-st" id="yiyi-26">间隔不包括此值，除非在<em class="xref py py-obj">步长</em>不是整数并且浮点舍入影响<em class="xref py py-obj">out</em>的长度的某些情况下。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>步骤</strong>：number，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">值之间的间距。</span><span class="yiyi-st" id="yiyi-29">对于任何输出<em class="xref py py-obj">out</em>，这是两个相邻值之间的距离，<code class="docutils literal"><span class="pre">out [i + 1]</span> <span class="pre"> - </span> <span class="pre">i]</span></code>。</span><span class="yiyi-st" id="yiyi-30">默认步长为1。</span><span class="yiyi-st" id="yiyi-31">如果指定<em class="xref py py-obj">步</em>，还必须给出<em class="xref py py-obj">开始</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>dtype</strong>：dtype</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">输出数组的类型。</span><span class="yiyi-st" id="yiyi-34">如果未给出<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，则从其他输入参数推断数据类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-35">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-36"><strong>arange</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-37">均匀间隔值的数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-38">对于浮点参数，结果的长度为<code class="docutils literal"><span class="pre">ceil（（stop</span> <span class="pre"> - </span> <span class="pre">start）/ step）</span></code>。</span><span class="yiyi-st" id="yiyi-39">由于浮点溢出，此规则可能导致<em class="xref py py-obj">out</em>的最后一个元素大于<em class="xref py py-obj">停止</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-40">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="numpy.linspace.html#numpy.linspace" title="numpy.linspace"><code class="xref py py-obj docutils literal"><span class="pre">linspace</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-42">均匀间隔的数字，仔细处理端点。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="numpy.ogrid.html#numpy.ogrid" title="numpy.ogrid"><code class="xref py py-obj docutils literal"><span class="pre">ogrid</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-44">N维中均匀间隔数字的数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="numpy.mgrid.html#numpy.mgrid" title="numpy.mgrid"><code class="xref py py-obj docutils literal"><span class="pre">mgrid</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-46">N维中均匀间隔数字的网格形数组。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-47">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([0, 1, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="go">array([ 0.,  1.,  2.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">array([3, 4, 5, 6])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([3, 5])</span>
+</pre></div>
+</div>
+</dd></dl>

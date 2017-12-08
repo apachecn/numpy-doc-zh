@@ -1,0 +1,83 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.median</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.median"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">median</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em>, <em>out=None</em>, <em>overwrite_input=False</em>, <em>keepdims=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L3429-L3515"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算沿指定轴的中值。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回数组元素的中位数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入可以转换为数组的数组或对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>axis</strong>：{int，int，None}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">计算中值的轴或轴。</span><span class="yiyi-st" id="yiyi-21">默认值是计算数组的平面版本中的中值。</span><span class="yiyi-st" id="yiyi-22">自版本1.9.0起，支持一系列轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">用于放置结果的替代输出数组。</span><span class="yiyi-st" id="yiyi-25">它必须具有与预期输出相同的形状和缓冲区长度，但如果需要，将转换类型（输出）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>overwrite_input</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">如果为True，则允许使用输入数组<em class="xref py py-obj">a</em>的内存进行计算。</span><span class="yiyi-st" id="yiyi-28">输入数组将通过调用<a class="reference internal" href="#numpy.median" title="numpy.median"><code class="xref py py-obj docutils literal"><span class="pre">median</span></code></a>进行修改。</span><span class="yiyi-st" id="yiyi-29">当您不需要保留输入数组的内容时，这将节省内存。</span><span class="yiyi-st" id="yiyi-30">将输入视为未定义，但可能会完全或部分排序。</span><span class="yiyi-st" id="yiyi-31">默认值为False。</span><span class="yiyi-st" id="yiyi-32">如果<em class="xref py py-obj">overwrite_input</em>是<code class="docutils literal"><span class="pre">True</span></code>和<em class="xref py py-obj">a</em>不是<a class="reference internal" href="numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a>，则会引发错误。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>keepdims</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">如果设置为True，则缩小的轴在结果中保留为尺寸为1的尺寸。</span><span class="yiyi-st" id="yiyi-35">使用此选项，结果将相对于原始<em class="xref py py-obj">arr</em>正确广播。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-36"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-37">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-38"><strong>median</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-39">保存结果的新数组。</span><span class="yiyi-st" id="yiyi-40">如果输入包含小于<code class="docutils literal"><span class="pre">float64</span></code>的整数或浮点数，则输出数据类型为<code class="docutils literal"><span class="pre">np.float64</span></code>。</span><span class="yiyi-st" id="yiyi-41">否则，输出的数据类型与输入的数据类型相同。</span><span class="yiyi-st" id="yiyi-42">如果指定<em class="xref py py-obj">out</em>，则返回该数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-43">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.mean.html#numpy.mean" title="numpy.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a>，<a class="reference internal" href="numpy.percentile.html#numpy.percentile" title="numpy.percentile"><code class="xref py py-obj docutils literal"><span class="pre">percentile</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-45">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-46">给定长度<code class="docutils literal"><span class="pre">N</span></code>的向量<code class="docutils literal"><span class="pre">V</span></code>，<code class="docutils literal"><span class="pre">V</span></code>的中间值是<code class="docutils literal"><span class="pre">V</span></code>的排序副本的中间值， ，<code class="docutils literal"><span class="pre">V_sorted</span></code>  - 即，<code class="docutils literal"><span class="pre">V_sorted[(N-1)/2]</span></code>，当<code class="docutils literal"><span class="pre">N</span></code>当<code class="docutils literal"><span class="pre">N</span></code>是偶数时，<code class="docutils literal"><span class="pre">V_sorted</span></code>的中间值。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-47">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[10,  7,  4],</span>
+<span class="go">       [ 3,  2,  1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">3.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([ 6.5,  4.5,  2.5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 7.,  2.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+<span class="go">array([ 6.5,  4.5,  2.5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span>
+<span class="go">array([ 6.5,  4.5,  2.5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">overwrite_input</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([ 7.,  2.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overwrite_input</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">3.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>

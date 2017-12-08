@@ -1,0 +1,104 @@
+
+<h1><span class="yiyi-st" id="yiyi-11">numpy.seterr</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.seterr.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.seterr.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.seterr"><span class="yiyi-st" id="yiyi-12"> <code class="descclassname">numpy.</code><code class="descname">seterr</code><span class="sig-paren">(</span><em>all=None</em>, <em>divide=None</em>, <em>over=None</em>, <em>under=None</em>, <em>invalid=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L2576-L2673"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-13">设置如何处理浮点错误。</span></p>
+<p><span class="yiyi-st" id="yiyi-14">请注意，对整数标量类型（例如<code class="xref py py-obj docutils literal"><span class="pre">int16</span></code>）的操作将像浮点一样处理，并受这些设置的影响。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>all</strong>：{&apos;ignore&apos;，&apos;warn&apos;，&apos;raise&apos;，&apos;call&apos;，&apos;print&apos;，&apos;log&apos;}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">一次为所有类型的浮点错误设置处理：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-18">ignore：在发生异常时不采取任何操作。</span></li>
+<li><span class="yiyi-st" id="yiyi-19">warn：打印<em class="xref py py-obj">RuntimeWarning</em>（通过Python <a class="reference external" href="https://docs.python.org/dev/library/warnings.html#module-warnings" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">warnings</span></code></a>模块）。</span></li>
+<li><span class="yiyi-st" id="yiyi-20">raise：提高<em class="xref py py-obj">FloatingPointError</em>。</span></li>
+<li><span class="yiyi-st" id="yiyi-21">call：使用<a class="reference internal" href="numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-obj docutils literal"><span class="pre">seterrcall</span></code></a>函数调用指定的函数。</span></li>
+<li><span class="yiyi-st" id="yiyi-22">print：直接向<code class="docutils literal"><span class="pre">stdout</span></code>打印警告。</span></li>
+<li><span class="yiyi-st" id="yiyi-23">log：在由<a class="reference internal" href="numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-obj docutils literal"><span class="pre">seterrcall</span></code></a>指定的Log对象中记录错误。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-24">默认不是改变当前行为。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>divide</strong>：{&apos;ignore&apos;，&apos;warn&apos;，&apos;raise&apos;，&apos;call&apos;，&apos;print&apos;，&apos;log&apos;}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">除以零的处理。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>over</strong>：{&apos;ignore&apos;，&apos;warn&apos;，&apos;raise&apos;，&apos;call&apos;，&apos;print&apos;，&apos;log&apos;}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">浮点溢出的处理。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>在</strong>下：{&apos;ignore&apos;，&apos;warn&apos;，&apos;raise&apos;，&apos;call&apos;，&apos;print&apos;，&apos;log&apos;}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">浮点下溢的处理。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>无效</strong>：{&apos;ignore&apos;，&apos;warn&apos;，&apos;raise&apos;，&apos;call&apos;，&apos;print&apos;，&apos;log&apos;}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">无效浮点运算的处理。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-33">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-34"><strong>old_settings</strong>：dict</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-35">包含旧设置的字典。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-36">也可以看看</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-obj docutils literal"><span class="pre">seterrcall</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-38">为“呼叫”模式设置回调函数。</span></dd>
+</dl>
+<p class="last"><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="numpy.geterr.html#numpy.geterr" title="numpy.geterr"><code class="xref py py-obj docutils literal"><span class="pre">geterr</span></code></a>，<a class="reference internal" href="numpy.geterrcall.html#numpy.geterrcall" title="numpy.geterrcall"><code class="xref py py-obj docutils literal"><span class="pre">geterrcall</span></code></a>，<a class="reference internal" href="numpy.errstate.html#numpy.errstate" title="numpy.errstate"><code class="xref py py-obj docutils literal"><span class="pre">errstate</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-40">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-41">浮点异常在IEEE 754标准[1]中定义：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-42">除以零：从有限数字获得的无限结果。</span></li>
+<li><span class="yiyi-st" id="yiyi-43">溢出：结果太大，无法表达。</span></li>
+<li><span class="yiyi-st" id="yiyi-44">下溢：结果接近零，一些精度丢失。</span></li>
+<li><span class="yiyi-st" id="yiyi-45">操作无效：结果不是可表达的数字，通常表示生成了NaN。</span></li>
+</ul>
+<table class="docutils citation" frame="void" id="r281" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-46">[R281]</span></td><td><span class="yiyi-st" id="yiyi-47"><a class="reference external" href="http://en.wikipedia.org/wiki/IEEE_754">http://en.wikipedia.org/wiki/IEEE_754</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">old_settings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s1">&apos;ignore&apos;</span><span class="p">)</span>  <span class="c1">#seterr to known value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">over</span><span class="o">=</span><span class="s1">&apos;raise&apos;</span><span class="p">)</span>
+<span class="go">{&apos;over&apos;: &apos;ignore&apos;, &apos;divide&apos;: &apos;ignore&apos;, &apos;invalid&apos;: &apos;ignore&apos;,</span>
+<span class="go"> &apos;under&apos;: &apos;ignore&apos;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="o">**</span><span class="n">old_settings</span><span class="p">)</span>  <span class="c1"># reset to default</span>
+<span class="go">{&apos;over&apos;: &apos;raise&apos;, &apos;divide&apos;: &apos;ignore&apos;, &apos;invalid&apos;: &apos;ignore&apos;, &apos;under&apos;: &apos;ignore&apos;}</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">(</span><span class="mi">32000</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">30464</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">old_settings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s1">&apos;warn&apos;</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="s1">&apos;raise&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">(</span><span class="mi">32000</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">FloatingPointError</span>: <span class="n">overflow encountered in short_scalars</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">old_settings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="nb">all</span><span class="o">=</span><span class="s1">&apos;print&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">geterr</span><span class="p">()</span>
+<span class="go">{&apos;over&apos;: &apos;print&apos;, &apos;divide&apos;: &apos;print&apos;, &apos;invalid&apos;: &apos;print&apos;, &apos;under&apos;: &apos;print&apos;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">(</span><span class="mi">32000</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">Warning: overflow encountered in short_scalars</span>
+<span class="go">30464</span>
+</pre></div>
+</div>
+</dd></dl>

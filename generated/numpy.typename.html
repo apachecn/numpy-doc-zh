@@ -1,0 +1,64 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.typename</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.typename.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.typename.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.typename"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">typename</code><span class="sig-paren">(</span><em>char</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/type_check.py#L481-L530"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回给定数据类型代码的描述。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>char</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">数据类型代码。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>out</strong>：str</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20">输入数据类型代码的说明。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-21">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，<code class="xref py py-obj docutils literal"><span class="pre">typecodes</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">typechars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&apos;S1&apos;</span><span class="p">,</span> <span class="s1">&apos;?&apos;</span><span class="p">,</span> <span class="s1">&apos;B&apos;</span><span class="p">,</span> <span class="s1">&apos;D&apos;</span><span class="p">,</span> <span class="s1">&apos;G&apos;</span><span class="p">,</span> <span class="s1">&apos;F&apos;</span><span class="p">,</span> <span class="s1">&apos;I&apos;</span><span class="p">,</span> <span class="s1">&apos;H&apos;</span><span class="p">,</span> <span class="s1">&apos;L&apos;</span><span class="p">,</span> <span class="s1">&apos;O&apos;</span><span class="p">,</span> <span class="s1">&apos;Q&apos;</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="s1">&apos;S&apos;</span><span class="p">,</span> <span class="s1">&apos;U&apos;</span><span class="p">,</span> <span class="s1">&apos;V&apos;</span><span class="p">,</span> <span class="s1">&apos;b&apos;</span><span class="p">,</span> <span class="s1">&apos;d&apos;</span><span class="p">,</span> <span class="s1">&apos;g&apos;</span><span class="p">,</span> <span class="s1">&apos;f&apos;</span><span class="p">,</span> <span class="s1">&apos;i&apos;</span><span class="p">,</span> <span class="s1">&apos;h&apos;</span><span class="p">,</span> <span class="s1">&apos;l&apos;</span><span class="p">,</span> <span class="s1">&apos;q&apos;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">typechar</span> <span class="ow">in</span> <span class="n">typechars</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">typechar</span><span class="p">,</span> <span class="s1">&apos; : &apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">typename</span><span class="p">(</span><span class="n">typechar</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">S1  :  character</span>
+<span class="go">?  :  bool</span>
+<span class="go">B  :  unsigned char</span>
+<span class="go">D  :  complex double precision</span>
+<span class="go">G  :  complex long double precision</span>
+<span class="go">F  :  complex single precision</span>
+<span class="go">I  :  unsigned integer</span>
+<span class="go">H  :  unsigned short</span>
+<span class="go">L  :  unsigned long integer</span>
+<span class="go">O  :  object</span>
+<span class="go">Q  :  unsigned long long integer</span>
+<span class="go">S  :  string</span>
+<span class="go">U  :  unicode</span>
+<span class="go">V  :  void</span>
+<span class="go">b  :  signed char</span>
+<span class="go">d  :  double precision</span>
+<span class="go">g  :  long precision</span>
+<span class="go">f  :  single precision</span>
+<span class="go">i  :  integer</span>
+<span class="go">h  :  short</span>
+<span class="go">l  :  long integer</span>
+<span class="go">q  :  long long integer</span>
+</pre></div>
+</div>
+</dd></dl>

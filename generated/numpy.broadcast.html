@@ -1,0 +1,88 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.broadcast</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.broadcast.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.broadcast.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.broadcast"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">broadcast</code><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/__init__.py"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">产生模仿广播的对象。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>in1，in2，...</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入参数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>b</strong>：广播对象</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20">相互广播输入参数，并返回封装结果的对象。</span><span class="yiyi-st" id="yiyi-21">其中，它具有<code class="docutils literal"><span class="pre">shape</span></code>和<code class="docutils literal"><span class="pre">nd</span></code>属性，并且可以用作迭代器。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-23">手动添加两个向量，使用广播：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span><span class="o">.</span><span class="n">flat</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="o">+</span><span class="n">v</span> <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">b</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span>
+<span class="go">array([[ 5.,  6.,  7.],</span>
+<span class="go">       [ 6.,  7.,  8.],</span>
+<span class="go">       [ 7.,  8.,  9.]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-24">与内置广播进行比较：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="go">array([[5, 6, 7],</span>
+<span class="go">       [6, 7, 8],</span>
+<span class="go">       [7, 8, 9]])</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">属性</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.broadcast.index.html#numpy.broadcast.index" title="numpy.broadcast.index"><code class="xref py py-obj docutils literal"><span class="pre">index</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-27">广播结果中的当前索引</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.broadcast.iters.html#numpy.broadcast.iters" title="numpy.broadcast.iters"><code class="xref py py-obj docutils literal"><span class="pre">iters</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-29">沿着<code class="docutils literal"><span class="pre">self</span></code>的“组件”的迭代器的元组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.broadcast.shape.html#numpy.broadcast.shape" title="numpy.broadcast.shape"><code class="xref py py-obj docutils literal"><span class="pre">shape</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-31">广播结果的形状。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.broadcast.size.html#numpy.broadcast.size" title="numpy.broadcast.size"><code class="xref py py-obj docutils literal"><span class="pre">size</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-33">广播结果的总大小。</span></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">方法</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.broadcast.next.html#numpy.broadcast.next" title="numpy.broadcast.next"><code class="xref py py-obj docutils literal"><span class="pre">next</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="numpy.broadcast.reset.html#numpy.broadcast.reset" title="numpy.broadcast.reset"><code class="xref py py-obj docutils literal"><span class="pre">reset</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-37">重置广播结果的迭代器。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

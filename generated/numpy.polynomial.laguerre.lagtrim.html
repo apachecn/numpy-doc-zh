@@ -1,0 +1,56 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.laguerre.lagtrim</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.laguerre.lagtrim.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.laguerre.lagtrim.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.laguerre.lagtrim"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.laguerre.</code><code class="descname">lagtrim</code><span class="sig-paren">(</span><em>c</em>, <em>tol=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/polyutils.py#L191-L243"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">从多项式中删除“小”“拖尾”系数。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">“Small” means “small in absolute value” and is controlled by the parameter <em class="xref py py-obj">tol</em>; “trailing” means highest order coefficient(s), e.g., in <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0]</span></code> (which represents <code class="docutils literal"><span class="pre">0</span> <span class="pre">+</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">x**2</span> <span class="pre">+</span> <span class="pre">0*x**3</span> <span class="pre">+</span> <span class="pre">0*x**4</span></code>) both the 3-rd and 4-th order coefficients would be “trimmed.”</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>c</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">1-d数组的系数，从最低到最高排序。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>tol</strong>：number，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">移除绝对值小于或等于<em class="xref py py-obj">to1</em>（默认值为零）的尾随（即，最高阶）元素。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>修剪</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">删除尾随零的1-d数组。</span><span class="yiyi-st" id="yiyi-26">如果结果序列为空，则返回包含单个零的序列。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">如果<em class="xref py py-obj">tol</em></span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-31"><code class="xref py py-obj docutils literal"><span class="pre">trimseq</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">polynomial</span> <span class="k">as</span> <span class="n">P</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span><span class="o">.</span><span class="n">trimcoef</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="go">array([ 0.,  0.,  3.,  0.,  5.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span><span class="o">.</span><span class="n">trimcoef</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># item == tol is trimmed</span>
+<span class="go">array([ 0.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># works for complex</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span><span class="o">.</span><span class="n">trimcoef</span><span class="p">((</span><span class="mi">3</span><span class="n">e</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">),</span><span class="mi">5</span><span class="n">e</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">i</span><span class="p">)),</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">array([ 0.0003+0.j   ,  0.0010-0.001j])</span>
+</pre></div>
+</div>
+</dd></dl>

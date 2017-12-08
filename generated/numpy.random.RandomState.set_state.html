@@ -1,0 +1,52 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.set_state</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.set_state.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.set_state.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.set_state"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">set_state</code><span class="sig-paren">(</span><em>state</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从元组中设置发生器的内部状态。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">如果有理由手动（重新）设置“Mersenne Twister”<a class="reference internal" href="#r190" id="id1">[R190]</a>伪随机数生成算法的内部状态，请使用。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>state</strong>：tuple（str，ndarray of 624 uints，int，int，float）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19"><em class="xref py py-obj">状态</em>元组具有以下项：</span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-20">字符串&apos;MT19937&apos;，指定Mersenne Twister算法。</span></li>
+<li><span class="yiyi-st" id="yiyi-21">624个无符号整数<code class="docutils literal"><span class="pre">keys</span></code>的1-D数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-22">整数<code class="docutils literal"><span class="pre">pos</span></code>。</span></li>
+<li><span class="yiyi-st" id="yiyi-23">整数<code class="docutils literal"><span class="pre">has_gauss</span></code>。</span></li>
+<li><span class="yiyi-st" id="yiyi-24">浮动<code class="docutils literal"><span class="pre">cached_gaussian</span></code>。</span></li>
+</ol>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>out</strong>：无</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">成功返回“无”。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.random.get_state.html#numpy.random.get_state" title="numpy.random.get_state"><code class="xref py py-obj docutils literal"><span class="pre">get_state</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-31">不需要<a class="reference internal" href="numpy.random.set_state.html#numpy.random.set_state" title="numpy.random.set_state"><code class="xref py py-obj docutils literal"><span class="pre">set_state</span></code></a>和<a class="reference internal" href="numpy.random.get_state.html#numpy.random.get_state" title="numpy.random.get_state"><code class="xref py py-obj docutils literal"><span class="pre">get_state</span></code></a>来处理NumPy中的任何随机分布。</span><span class="yiyi-st" id="yiyi-32">如果内部状态被手动改变，则用户应该准确地知道他/她正在做什么。</span></p>
+<p><span class="yiyi-st" id="yiyi-33">对于向后兼容性，也接受形式（str，数组的624 uints，int），尽管它缺少关于缓存的高斯值的一些信息：<code class="docutils literal"><span class="pre">state</span> <span class="pre">=</span> <span class="pre">（&apos;MT19937&apos;，</span> <span class="pre">键，</span> <span class="pre">pos）</span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r190" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-35">[R190]</span></td><td><span class="yiyi-st" id="yiyi-36"><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> M. Matsumoto and T. Nishimura, “Mersenne Twister: A 623-dimensionally equidistributed uniform pseudorandom number generator,” <em>ACM Trans. on Modeling and Computer Simulation</em>, Vol. </span><span class="yiyi-st" id="yiyi-37">8，No.</span><span class="yiyi-st" id="yiyi-38">1，pp。</span><span class="yiyi-st" id="yiyi-39">3-30，1998年1月。</span></td></tr>
+</tbody>
+</table>
+</dd></dl>

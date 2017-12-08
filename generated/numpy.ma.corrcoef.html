@@ -1,0 +1,62 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.corrcoef</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.corrcoef.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.corrcoef.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.corrcoef"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">corrcoef</code><span class="sig-paren">(</span><em>x</em>, <em>y=None</em>, <em>rowvar=True</em>, <em>bias=&lt;class numpy._globals._NoValue&gt;</em>, <em>allow_masked=True</em>, <em>ddof=&lt;class numpy._globals._NoValue&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/extras.py#L1242-L1326"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回Pearson乘积矩相关系数。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">除了处理缺少的数据，此函数与<a class="reference internal" href="numpy.corrcoef.html#numpy.corrcoef" title="numpy.corrcoef"><code class="xref py py-obj docutils literal"><span class="pre">numpy.corrcoef</span></code></a>相同。</span><span class="yiyi-st" id="yiyi-17">有关更多详细信息和示例，请参阅<a class="reference internal" href="numpy.corrcoef.html#numpy.corrcoef" title="numpy.corrcoef"><code class="xref py py-obj docutils literal"><span class="pre">numpy.corrcoef</span></code></a>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">包含多个变量和观察值的1-D或2-D数组。</span><span class="yiyi-st" id="yiyi-21"><em class="xref py py-obj">x</em>的每一行代表一个变量，每一列都是对所有这些变量的单次观察。</span><span class="yiyi-st" id="yiyi-22">另请参阅下面的<em class="xref py py-obj">rowvar</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>y</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">另一组变量和观察值。</span><span class="yiyi-st" id="yiyi-25"><em class="xref py py-obj">y</em>具有与<em class="xref py py-obj">x</em>相同的形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>rowvar</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">如果<em class="xref py py-obj">rowvar</em>为True（默认值），则每行代表一个变量，在列中有观察值。</span><span class="yiyi-st" id="yiyi-28">否则，关系会转置：每个列表示一个变量，而行包含观察值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>bias</strong>：_NoValue，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">没有效果，不使用。</span></p>
+<div class="deprecated">
+<p><span class="yiyi-st" id="yiyi-31"><span class="versionmodified">自1.10.0版起已弃用。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>allow_masked</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">如果为True，屏蔽值将成对传播：如果在<em class="xref py py-obj">x</em>中屏蔽了某个值，则相应的值将在<em class="xref py py-obj">y</em>中屏蔽。</span><span class="yiyi-st" id="yiyi-34">如果为False，则引发异常。</span><span class="yiyi-st" id="yiyi-35">因为不建议使用<em class="xref py py-obj">bias</em>，所以此参数需要被视为关键字才能避免警告。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-36"><strong>ddof</strong>：_NoValue，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-37">没有效果，不使用。</span></p>
+<div class="deprecated">
+<p><span class="yiyi-st" id="yiyi-38"><span class="versionmodified">自1.10.0版起已弃用。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-39">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.corrcoef.html#numpy.corrcoef" title="numpy.corrcoef"><code class="xref py py-obj docutils literal"><span class="pre">numpy.corrcoef</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-41">顶级NumPy模块中的等效函数。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.ma.cov.html#numpy.ma.cov" title="numpy.ma.cov"><code class="xref py py-obj docutils literal"><span class="pre">cov</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">估计协方差矩阵。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-45">此函数接受但舍弃参数<em class="xref py py-obj">bias</em>和<em class="xref py py-obj">ddof</em>。</span><span class="yiyi-st" id="yiyi-46">这是为了向后兼容此功能的以前版本。</span><span class="yiyi-st" id="yiyi-47">这些参数对函数的返回值没有影响，并且可以在numpy的此版本和以前版本中安全地忽略。</span></p>
+</dd></dl>

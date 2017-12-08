@@ -1,0 +1,62 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.asanyarray</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.asanyarray.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.asanyarray.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.asanyarray"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">asanyarray</code><span class="sig-paren">(</span><em>a</em>, <em>dtype=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L7566-L7609"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将输入转换为屏蔽的数组，保留子类。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">如果<em class="xref py py-obj">a</em>是<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.MaskedArray" title="numpy.ma.MaskedArray"><code class="xref py py-obj docutils literal"><span class="pre">MaskedArray</span></code></a>的子类，则其类保守。</span><span class="yiyi-st" id="yiyi-17">如果输入已经是<em class="xref py py-obj">ndarray</em>，则不执行复制。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输入数据，以任何形式可以转换为数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">默认情况下，从输入数据推断数据类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">是否使用行主（&apos;C&apos;）或列主（&apos;FORTRAN&apos;）内存表示。</span><span class="yiyi-st" id="yiyi-25">默认值为“C”。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>out</strong>：MaskedArray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">MaskedArray解释<em class="xref py py-obj">a</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.ma.asarray.html#numpy.ma.asarray" title="numpy.ma.asarray"><code class="xref py py-obj docutils literal"><span class="pre">asarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">类似于<a class="reference internal" href="#numpy.ma.asanyarray" title="numpy.ma.asanyarray"><code class="xref py py-obj docutils literal"><span class="pre">asanyarray</span></code></a>，但不保留子类。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">10.</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[ 0.,  1.,  2.,  3.,  4.],</span>
+<span class="go">       [ 5.,  6.,  7.,  8.,  9.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[ 0.  1.  2.  3.  4.]</span>
+<span class="go"> [ 5.  6.  7.  8.  9.]],</span>
+<span class="go">             mask =</span>
+<span class="go"> False,</span>
+<span class="go">       fill_value = 1e+20)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="go">&lt;class &apos;numpy.ma.core.MaskedArray&apos;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>

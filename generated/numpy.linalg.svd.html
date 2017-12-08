@@ -1,0 +1,86 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.svd</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.svd.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.svd.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.svd"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">svd</code><span class="sig-paren">(</span><em>a</em>, <em>full_matrices=1</em>, <em>compute_uv=1</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L1254-L1373"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">奇异值分解。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">将矩阵<em class="xref py py-obj">a</em>视为<code class="docutils literal"><span class="pre">u</span> <span class="pre">*</span> <span class="pre">np.diag（s）</span> <span class="pre">t5&gt; <span class="pre">v</span></span></code>，其中<em class="xref py py-obj">u</em>和<em class="xref py py-obj">v</em>是幺正的且<em class="xref py py-obj">s</em>的<em class="xref py py-obj">a</em>的奇异值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：（...，M，N）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">形状的实数或复数矩阵（<em class="xref py py-obj">M</em>，<em class="xref py py-obj">N</em>）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>full_matrices</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">If True (default), <em class="xref py py-obj">u</em> and <em class="xref py py-obj">v</em> have the shapes (<em class="xref py py-obj">M</em>, <em class="xref py py-obj">M</em>) and (<em class="xref py py-obj">N</em>, <em class="xref py py-obj">N</em>), respectively. </span><span class="yiyi-st" id="yiyi-21">否则，形状分别为（<em class="xref py py-obj">M</em>，<em class="xref py py-obj">K</em>）和（<em class="xref py py-obj">K</em>，<em class="xref py py-obj">N</em>），其中<em class="xref py py-obj"> K</em> = min（<em class="xref py py-obj">M</em>，<em class="xref py py-obj">N</em>）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>compute_uv</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">除了<em class="xref py py-obj">s</em>之外是否计算<em class="xref py py-obj">u</em>和<em class="xref py py-obj">v</em>。默认为True。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>u</strong>：{（...，M，M），（...，M，K）}数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">酉矩阵。</span><span class="yiyi-st" id="yiyi-27">实际形状取决于<code class="docutils literal"><span class="pre">full_matrices</span></code>的值。</span><span class="yiyi-st" id="yiyi-28">仅当<code class="docutils literal"><span class="pre">compute_uv</span></code>为True时返回。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>s</strong>：（...，K）数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">每个矩阵的奇异值，按降序排列。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>v</strong>：{（...，N，N），（...，K，N）}数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">酉矩阵。</span><span class="yiyi-st" id="yiyi-33">实际形状取决于<code class="docutils literal"><span class="pre">full_matrices</span></code>的值。</span><span class="yiyi-st" id="yiyi-34">仅当<code class="docutils literal"><span class="pre">compute_uv</span></code>为True时返回。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-35">异常:</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-36"><strong>LinAlgError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-37">如果SVD计算不收敛。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-39"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">广播规则适用，有关详细信息，请参阅<code class="xref py py-obj docutils literal"><span class="pre">numpy.linalg</span></code>文档。</span></p>
+<p><span class="yiyi-st" id="yiyi-41">使用LAPACK程序_gesdd执行分解</span></p>
+<p><span class="yiyi-st" id="yiyi-42">SVD通常写为<code class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">U</span> <span class="pre">S</span> <span class="pre">VH</span> / t0&gt;。</code></span><span class="yiyi-st" id="yiyi-43">由此函数返回的<em class="xref py py-obj">v</em>是<code class="docutils literal"><span class="pre">V.H</span></code>和<code class="docutils literal"><span class="pre">u</span> <span class="pre">=</span> <span class="pre"></span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-44">如果<code class="docutils literal"><span class="pre">U</span></code>是酉矩阵，则意味着满足<code class="docutils literal"><span class="pre">UH</span> <span class="pre">=</span> <span class="pre">inv（U）</span> / t2&gt;。</code></span></p>
+<p><span class="yiyi-st" id="yiyi-45"><em class="xref py py-obj">v</em>的行是<code class="docutils literal"><span class="pre">a.H</span> <span class="pre">a</span></code>的特征向量。</span><span class="yiyi-st" id="yiyi-46"><em class="xref py py-obj">u</em>的列是<code class="docutils literal"><span class="pre">a</span> <span class="pre">a.H</span></code>的特征向量。对于<em class="xref py py-obj">v</em>中的行<code class="docutils literal"><span class="pre">i</span></code>和<em class="xref py py-obj">u</em>中的列<code class="docutils literal"><span class="pre">i</span></code>，对应的特征值是<code class="docutils literal"><span class="pre">s[i]**2</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-47">如果<em class="xref py py-obj">a</em>是<em class="xref py py-obj">矩阵</em>对象（而不是<em class="xref py py-obj">ndarray</em>），那么所有返回值也是如此。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-49">基于全SVD的重建：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">V</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">((9, 9), (6, 6), (6,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="p">[:</span><span class="mi">6</span><span class="p">,</span> <span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">V</span><span class="p">)))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-50">基于减少SVD的重建：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">V</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">((9, 6), (6, 6), (6,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">V</span><span class="p">)))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,58 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.mod</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.mod.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.mod.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.mod"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">mod</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;remainder&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回元素的除法余数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">计算与<a class="reference internal" href="numpy.floor_divide.html#numpy.floor_divide" title="numpy.floor_divide"><code class="xref py py-obj docutils literal"><span class="pre">floor_divide</span></code></a>函数互补的余数。</span><span class="yiyi-st" id="yiyi-16">它等同于Python模运算符``x1％x2``，并且与除数<em class="xref py py-obj">x2</em>具有相同的符号。</span><span class="yiyi-st" id="yiyi-17">它不应该与Matlab（TM）<code class="docutils literal"><span class="pre">rem</span></code>函数混淆。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>x1</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">股息数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>x2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">除数数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">数组，其中放置输出。</span><span class="yiyi-st" id="yiyi-25">它的类型被保留，并且它必须是保持输出的正确形状。</span><span class="yiyi-st" id="yiyi-26">请参阅doc.ufuncs。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">商的元素取余项<code class="docutils literal"><span class="pre">floor_divide（x1，</span> <span class="pre">x2）</span></code>。</span><span class="yiyi-st" id="yiyi-30">如果<em class="xref py py-obj">x1</em>和<em class="xref py py-obj">x2</em>都是标量，则返回标量。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.floor_divide.html#numpy.floor_divide" title="numpy.floor_divide"><code class="xref py py-obj docutils literal"><span class="pre">floor_divide</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">相当于Python <code class="docutils literal"><span class="pre">//</span></code>运算符。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.fmod.html#numpy.fmod" title="numpy.fmod"><code class="xref py py-obj docutils literal"><span class="pre">fmod</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">等同于Matlab（TM）<code class="docutils literal"><span class="pre">rem</span></code>函数。</span></dd>
+</dl>
+<p class="last"><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="numpy.divide.html#numpy.divide" title="numpy.divide"><code class="xref py py-obj docutils literal"><span class="pre">divide</span></code></a>，<a class="reference internal" href="numpy.floor.html#numpy.floor" title="numpy.floor"><code class="xref py py-obj docutils literal"><span class="pre">floor</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-38">当<em class="xref py py-obj">x2</em>为0并且<em class="xref py py-obj">x1</em>和<em class="xref py py-obj">x2</em>都是（数组）整数时，返回0。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">remainder</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">array([0, 1])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">remainder</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">array([0, 1, 2, 3, 4, 0, 1])</span>
+</pre></div>
+</div>
+</dd></dl>

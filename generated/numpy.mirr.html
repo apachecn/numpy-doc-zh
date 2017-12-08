@@ -1,0 +1,38 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.mirr</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.mirr.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.mirr.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.mirr"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">mirr</code><span class="sig-paren">(</span><em>values</em>, <em>finance_rate</em>, <em>reinvest_rate</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/financial.py#L708-L737"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">修正内部收益率。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>值</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">返回现金流量（必须包含至少一个正值和一个负值）或nan。</span><span class="yiyi-st" id="yiyi-18">第一个值被认为是零时刻的沉没成本。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>finance_rate</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">支付现金流量的利率</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>reinvest_rate</strong>：scalar</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">再投资时的现金流量利率</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>out</strong>：float</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">修正内部收益率</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

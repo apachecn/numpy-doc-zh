@@ -1,0 +1,56 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.asfortranarray</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.asfortranarray.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.asfortranarray.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.asfortranarray"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">asfortranarray</code><span class="sig-paren">(</span><em>a</em>, <em>dtype=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L571-L605"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回在Fortran中排列的数组在内存中的顺序。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>dtype</strong>：str或dtype对象，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">默认情况下，从输入数据推断数据类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">Fortran中的输入<em class="xref py py-obj">a</em>或column-major顺序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="numpy.ascontiguousarray.html#numpy.ascontiguousarray" title="numpy.ascontiguousarray"><code class="xref py py-obj docutils literal"><span class="pre">ascontiguousarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-25">将输入转换为连续（C顺序）数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.asanyarray.html#numpy.asanyarray" title="numpy.asanyarray"><code class="xref py py-obj docutils literal"><span class="pre">asanyarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-27">将输入转换为具有行或列主存储器顺序的ndarray。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.require.html#numpy.require" title="numpy.require"><code class="xref py py-obj docutils literal"><span class="pre">require</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">返回一个满足要求的数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.ndarray.flags.html#numpy.ndarray.flags" title="numpy.ndarray.flags"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.flags</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">有关数组的内存布局的信息。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asfortranarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&apos;F_CONTIGUOUS&apos;</span><span class="p">]</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&apos;F_CONTIGUOUS&apos;</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

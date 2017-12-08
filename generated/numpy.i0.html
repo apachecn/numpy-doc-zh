@@ -1,0 +1,69 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.i0</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.i0.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.i0.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.i0"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">i0</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L3068-L3130"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">修改Bessel函数的第一类，顺序为0。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">通常表示为<img alt="I_0" class="math" src="../../_images/math/2595e12ec58446f99869c7c3ba70ea3be707d26a.png" style="vertical-align: -2px">。</span><span class="yiyi-st" id="yiyi-16">此函数广播，但将<em>不</em>“up-cast”int dtype参数，除非附带至少一个float或complex dtype参数（参见下面的Raises）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>x</strong>：array_like，dtype float或complex</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">贝塞尔函数的参数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：ndarray，shape = x.shape，dtype = x.dtype</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">在<em class="xref py py-obj">x</em>的每个元素处评估的修改的贝塞尔函数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>TypeError：数组无法安全地转换为必需类型</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">如果参数完全由int类型组成。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-27"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.iv.html#scipy.special.iv" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.special.iv</span></code></a>，<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.ive.html#scipy.special.ive" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.special.ive</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-29">我们使用由Clenshaw <a class="reference internal" href="#r29" id="id1">[R29]</a>发布并由Abramowitz和Stegun <a class="reference internal" href="#r30" id="id2">[R30]</a>引用的算法，其中函数域被划分为两个区间[0,8]和（8，inf），并且在每个间隔中采用切比雪夫多项式扩展。</span><span class="yiyi-st" id="yiyi-30">使用IEEE算术在域[0,30]上的相对误差记录为具有5.8e-16的峰值，具有1.4e-16的rms（n = 30000）的<a class="reference internal" href="#r31" id="id3">[R31]</a>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r29" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-32">[R29]</span></td><td><span class="yiyi-st" id="yiyi-33"><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id4">2</a>)</em> C. W. Clenshaw, “Chebyshev series for mathematical functions”, in <em>National Physical Laboratory Mathematical Tables</em>, vol. </span><span class="yiyi-st" id="yiyi-34">5，伦敦：女王陛下文具办公室，1962年。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r30" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-35">[R30]</span></td><td><span class="yiyi-st" id="yiyi-36"><em>（<a class="fn-backref" href="#id2">1</a>，<a class="fn-backref" href="#id5">2</a>）</em> M. Abramowitz和I.</span><span class="yiyi-st" id="yiyi-37">A. Stegun，<em>Handbook of Mathematical Functions</em>，第10次印刷，New York：Dover，1964，</span><span class="yiyi-st" id="yiyi-38"><a class="reference external" href="http://www.math.sfu.ca/~cbm/aands/page_379.htm">http://www.math.sfu.ca/~cbm/aands/page_379.htm</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r31" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-39">[R31]</span></td><td><span class="yiyi-st" id="yiyi-40"><em>（<a class="fn-backref" href="#id3">1</a>，<a class="fn-backref" href="#id6">2</a>）</em> <a class="reference external" href="http://kobesearch.cpan.org/htdocs/Math-Cephes/Math/Cephes.html">http://kobesearch.cpan.org/htdocs/Math-Cephes/Math/Cephes.html </a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">i0</span><span class="p">([</span><span class="mf">0.</span><span class="p">])</span>
+<span class="go">array(1.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">i0</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span> <span class="o">+</span> <span class="mi">2</span><span class="n">j</span><span class="p">])</span>
+<span class="go">array([ 1.00000000+0.j        ,  0.18785373+0.64616944j])</span>
+</pre></div>
+</div>
+</dd></dl>

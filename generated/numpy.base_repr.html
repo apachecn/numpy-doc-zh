@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.base_repr</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.base_repr.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.base_repr.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.base_repr"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">base_repr</code><span class="sig-paren">(</span><em>number</em>, <em>base=2</em>, <em>padding=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L2194-L2245"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回给定基本系统中数字的字符串表示形式。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>number</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">要转换的值。</span><span class="yiyi-st" id="yiyi-18">只处理正值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>base</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">将<code class="xref py py-obj docutils literal"><span class="pre">number</span></code>转换为<em class="xref py py-obj">基本</em>数字系统。</span><span class="yiyi-st" id="yiyi-21">有效范围为2-36，默认值为2。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>padding</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">在左侧填充的零数。</span><span class="yiyi-st" id="yiyi-24">默认值为0（无填充）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>out</strong>：str</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27"><em class="xref py py-obj">基本</em>系统中<code class="xref py py-obj docutils literal"><span class="pre">number</span></code>的字符串表示。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.binary_repr.html#numpy.binary_repr" title="numpy.binary_repr"><code class="xref py py-obj docutils literal"><span class="pre">binary_repr</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">基础2的<a class="reference internal" href="#numpy.base_repr" title="numpy.base_repr"><code class="xref py py-obj docutils literal"><span class="pre">base_repr</span></code></a>版本更快。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">base_repr</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">&apos;101&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">base_repr</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">&apos;11&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">base_repr</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">&apos;00012&apos;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">base_repr</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="go">&apos;A&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">base_repr</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="go">&apos;20&apos;</span>
+</pre></div>
+</div>
+</dd></dl>

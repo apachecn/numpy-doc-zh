@@ -1,0 +1,106 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.percentile</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.percentile.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.percentile.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.percentile"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">percentile</code><span class="sig-paren">(</span><em>a</em>, <em>q</em>, <em>axis=None</em>, <em>out=None</em>, <em>overwrite_input=False</em>, <em>interpolation=&apos;linear&apos;</em>, <em>keepdims=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L3588-L3706"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">沿指定轴计算数据的第q个百分位数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回数组元素的第q个百分位数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入可以转换为数组的数组或对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>q</strong>：浮动范围为[0,100]（或浮点数）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">要计算的百分比，必须介于0和100之间（包括0和100）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>axis</strong>：{int，int，None}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">沿着其计算百分位数的轴或轴。</span><span class="yiyi-st" id="yiyi-23">默认值是计算沿数字组的扁平版本的百分位数。</span><span class="yiyi-st" id="yiyi-24">自版本1.9.0起，支持一系列轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">用于放置结果的替代输出数组。</span><span class="yiyi-st" id="yiyi-27">它必须具有与预期输出相同的形状和缓冲区长度，但如果需要，将转换类型（输出）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>overwrite_input</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">如果为True，则允许使用输入数组<em class="xref py py-obj">a</em>的计算。</span><span class="yiyi-st" id="yiyi-30">输入数组将通过调用<a class="reference internal" href="#numpy.percentile" title="numpy.percentile"><code class="xref py py-obj docutils literal"><span class="pre">percentile</span></code></a>进行修改。</span><span class="yiyi-st" id="yiyi-31">当您不需要保留输入数组的内容时，这将节省内存。</span><span class="yiyi-st" id="yiyi-32">在这种情况下，你不应该对该函数完成后输入<em class="xref py py-obj">a</em>的内容做任何假设 - 将其视为未定义。</span><span class="yiyi-st" id="yiyi-33">默认值为False。</span><span class="yiyi-st" id="yiyi-34">如果<em class="xref py py-obj">a</em>不是数组，则此参数将不起作用，因为<em class="xref py py-obj">a</em>将在内部转换为数组，而不考虑此参数的值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35"><strong>插值</strong>：{&apos;linear&apos;，&apos;lower&apos;，&apos;higher&apos;，&apos;midpoint&apos;，&apos;nearest&apos;}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-36">这个可选参数指定当期望的分位数位于两个数据点之间时使用的插值方法<code class="docutils literal"><span class="pre">i</span> <span class="pre"></span> <span class="pre">j</span></code> ：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-37">linear: <code class="docutils literal"><span class="pre">i</span> <span class="pre">+</span> <span class="pre">(j</span> <span class="pre">-</span> <span class="pre">i)</span> <span class="pre">*</span> <span class="pre">fraction</span></code>, where <code class="docutils literal"><span class="pre">fraction</span></code> is the fractional part of the index surrounded by <code class="docutils literal"><span class="pre">i</span></code> and <code class="docutils literal"><span class="pre">j</span></code>.</span></li>
+<li><span class="yiyi-st" id="yiyi-38">低：<code class="docutils literal"><span class="pre">i</span></code>。</span></li>
+<li><span class="yiyi-st" id="yiyi-39">高：<code class="docutils literal"><span class="pre">j</span></code>。</span></li>
+<li><span class="yiyi-st" id="yiyi-40">最近：<code class="docutils literal"><span class="pre">i</span></code>或<code class="docutils literal"><span class="pre">j</span></code>，取最近者。</span></li>
+<li><span class="yiyi-st" id="yiyi-41">中点：<code class="docutils literal"><span class="pre">（i</span> <span class="pre">+</span> <span class="pre">j）</span> <span class="pre">/</span> <span class="pre">2</span>  t0 &gt;。</code></span></li>
+</ul>
+</div></blockquote>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-42"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-43"><strong>keepdims</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-44">如果设置为True，则缩小的轴在结果中保留为尺寸为1的尺寸。</span><span class="yiyi-st" id="yiyi-45">使用此选项，结果将针对原始数组<em class="xref py py-obj">a正确广播</em>。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-46"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-47">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-48"><strong>百分位</strong>：标量或ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-49">如果<em class="xref py py-obj">q</em>是单个百分点并且<em class="xref py py-obj">axis = None</em>，则结果是标量。</span><span class="yiyi-st" id="yiyi-50">如果给出多个百分位数，则结果的第一轴对应于百分位数。</span><span class="yiyi-st" id="yiyi-51">其他轴是缩小<em class="xref py py-obj">a</em>后保留的轴。</span><span class="yiyi-st" id="yiyi-52">如果输入包含小于<code class="docutils literal"><span class="pre">float64</span></code>的整数或浮点数，则输出数据类型为<code class="docutils literal"><span class="pre">float64</span></code>。</span><span class="yiyi-st" id="yiyi-53">否则，输出数据类型与输入的类型相同。</span><span class="yiyi-st" id="yiyi-54">如果指定<em class="xref py py-obj">out</em>，则返回该数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-55">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="numpy.mean.html#numpy.mean" title="numpy.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a>，<a class="reference internal" href="numpy.median.html#numpy.median" title="numpy.median"><code class="xref py py-obj docutils literal"><span class="pre">median</span></code></a>，<a class="reference internal" href="numpy.nanpercentile.html#numpy.nanpercentile" title="numpy.nanpercentile"><code class="xref py py-obj docutils literal"><span class="pre">nanpercentile</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-57">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-58">Given a vector <code class="docutils literal"><span class="pre">V</span></code> of length <code class="docutils literal"><span class="pre">N</span></code>, the <code class="docutils literal"><span class="pre">q</span></code>-th percentile of <code class="docutils literal"><span class="pre">V</span></code> is the value <code class="docutils literal"><span class="pre">q/100</span></code> of the way from the mimumum to the maximum in in a sorted copy of <code class="docutils literal"><span class="pre">V</span></code>. The values and distances of the two nearest neighbors as well as the <em class="xref py py-obj">interpolation</em> parameter will determine the percentile if the normalized ranking does not match the location of <code class="docutils literal"><span class="pre">q</span></code> exactly. </span><span class="yiyi-st" id="yiyi-59">如果<code class="docutils literal"><span class="pre">q=50</span></code>，则该函数与中值相同，如果<code class="docutils literal"><span class="pre">q=0</span></code>与最小值相同，并且如果<code class="docutils literal"><span class="pre">q=100</span></code></span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-60">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[10,  7,  4],</span>
+<span class="go">       [ 3,  2,  1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="go">3.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[ 6.5,  4.5,  2.5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 7.,  2.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([[ 7.],</span>
+<span class="go">       [ 2.]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+<span class="go">array([[ 6.5,  4.5,  2.5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span>
+<span class="go">array([[ 6.5,  4.5,  2.5]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">overwrite_input</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([ 7.,  2.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>

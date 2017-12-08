@@ -1,0 +1,72 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.noncentral_f</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.noncentral_f.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.noncentral_f.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.noncentral_f"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">noncentral_f</code><span class="sig-paren">(</span><em>dfnum</em>, <em>dfden</em>, <em>nonc</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从非中心F分布中抽取样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">Samples are drawn from an F distribution with specified parameters, <em class="xref py py-obj">dfnum</em> (degrees of freedom in numerator) and <em class="xref py py-obj">dfden</em> (degrees of freedom in denominator), where both parameters &gt; 1. <em class="xref py py-obj">nonc</em> is the non-centrality parameter.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>dfnum</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">参数，应&gt; 1。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>dfden</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">参数，应&gt; 1。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>nonc</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">参数，应为&gt; = 0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">输出形状。</span><span class="yiyi-st" id="yiyi-26">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-27">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>samples</strong>：scalar或ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">绘制样品。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-32">当计算实验的功率（功率=当特定替代为真时拒绝零假设的概率），非中心F统计变得重要。</span><span class="yiyi-st" id="yiyi-33">当零假设为真时，F统计遵循中心F分布。</span><span class="yiyi-st" id="yiyi-34">当零假设不为真时，则遵循非中心F统计量。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r176" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-36"><a class="fn-backref" href="#id1">[R176]</a></span></td><td><span class="yiyi-st" id="yiyi-37">Weisstein，Eric W.“非中心F分布”。来自MathWorld-Wolfram Web资源。</span><span class="yiyi-st" id="yiyi-38"><a class="reference external" href="http://mathworld.wolfram.com/NoncentralF-Distribution.html">http://mathworld.wolfram.com/NoncentralF-Distribution.html</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r177" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-39"><a class="fn-backref" href="#id2">[R177]</a></span></td><td><span class="yiyi-st" id="yiyi-40">维基百科，“非中心F分布”，<a class="reference external" href="http://en.wikipedia.org/wiki/Noncentral_F-distribution">http://en.wikipedia.org/wiki/Noncentral_F-distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-42">在一项研究中，对零假设的特定替代的测试需要使用非中心F分布。</span><span class="yiyi-st" id="yiyi-43">我们需要计算超过零假设的F分布值的分布尾部的面积。</span><span class="yiyi-st" id="yiyi-44">我们将绘制两个概率分布用于比较。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dfnum</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># between group deg of freedom</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dfden</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># within groups degrees of freedom</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nonc</span> <span class="o">=</span> <span class="mf">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nc_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">noncentral_f</span><span class="p">(</span><span class="n">dfnum</span><span class="p">,</span> <span class="n">dfden</span><span class="p">,</span> <span class="n">nonc</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">nc_vals</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">dfnum</span><span class="p">,</span> <span class="n">dfden</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">c_vals</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:],</span> <span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">NF</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:],</span> <span class="n">NF</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>

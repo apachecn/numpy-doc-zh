@@ -1,0 +1,32 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.cumsum</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.cumsum.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.cumsum.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ma.cumsum"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">cumsum</code><span class="sig-paren">(</span><em>self</em>, <em>axis=None</em>, <em>dtype=None</em>, <em>out=None</em><span class="sig-paren">)</span><em class="property"> = &lt;numpy.ma.core._frommethod instance&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回给定轴上的数组元素的累积和。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">在计算期间，屏蔽值在内部设置为0。</span><span class="yiyi-st" id="yiyi-17">但是，它们的位置被保存，并且结果将被掩蔽在相同的位置。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">有关完整文档，请参阅<a class="reference internal" href="numpy.cumsum.html#numpy.cumsum" title="numpy.cumsum"><code class="xref py py-obj docutils literal"><span class="pre">numpy.cumsum</span></code></a>。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-19">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-20"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.cumsum</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-21">ndarrays的相应函数</span></dd>
+<dt><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="numpy.cumsum.html#numpy.cumsum" title="numpy.cumsum"><code class="xref py py-obj docutils literal"><span class="pre">numpy.cumsum</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-23">等效函数</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-25">如果<em class="xref py py-obj">out</em>不是有效的<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.MaskedArray" title="numpy.ma.MaskedArray"><code class="xref py py-class docutils literal"><span class="pre">MaskedArray</span></code></a>，则掩码丢失！</span></p>
+<p><span class="yiyi-st" id="yiyi-26">当使用整数类型时，算术是模块化的，并且在溢出时不产生错误。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">marr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">marr</span><span class="o">.</span><span class="n">cumsum</span><span class="p">())</span>
+<span class="go">[0 1 3 -- -- -- 9 16 24 33]</span>
+</pre></div>
+</div>
+</dd></dl>

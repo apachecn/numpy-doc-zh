@@ -1,0 +1,93 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.concatenate</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.concatenate.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.concatenate.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.concatenate"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">concatenate</code><span class="sig-paren">(</span><em>(a1</em>, <em>a2</em>, <em>...)</em>, <em>axis=0</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">沿现有轴连接数组序列。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a1，a2，...</strong>：array_like的序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">数组必须具有相同的形状，除了在对应于<em class="xref py py-obj">axis</em>（默认情况下为第一个）的维度中。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">数组将沿其连接的轴。</span><span class="yiyi-st" id="yiyi-20">默认值为0。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>res</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">串联的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.ma.concatenate.html#numpy.ma.concatenate" title="numpy.ma.concatenate"><code class="xref py py-obj docutils literal"><span class="pre">ma.concatenate</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-26">连接保留输入掩码的函数。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.array_split.html#numpy.array_split" title="numpy.array_split"><code class="xref py py-obj docutils literal"><span class="pre">array_split</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28">将数组拆分成等于或接近相等大小的多个子数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.split.html#numpy.split" title="numpy.split"><code class="xref py py-obj docutils literal"><span class="pre">split</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">将数组拆分成等大小的多个子数组的列表。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.hsplit.html#numpy.hsplit" title="numpy.hsplit"><code class="xref py py-obj docutils literal"><span class="pre">hsplit</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">水平（列方式）将数组拆分成多个子数组，</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.vsplit.html#numpy.vsplit" title="numpy.vsplit"><code class="xref py py-obj docutils literal"><span class="pre">vsplit</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">垂直（逐行）将数组拆分成多个子数组</span></dd>
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.dsplit.html#numpy.dsplit" title="numpy.dsplit"><code class="xref py py-obj docutils literal"><span class="pre">dsplit</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">将数组沿着第3轴（深度）拆分成多个子数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.stack.html#numpy.stack" title="numpy.stack"><code class="xref py py-obj docutils literal"><span class="pre">stack</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-38">沿着新轴堆叠数组的序列。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="numpy.hstack.html#numpy.hstack" title="numpy.hstack"><code class="xref py py-obj docutils literal"><span class="pre">hstack</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-40">水平（列方式）堆叠数组</span></dd>
+<dt><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="numpy.vstack.html#numpy.vstack" title="numpy.vstack"><code class="xref py py-obj docutils literal"><span class="pre">vstack</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-42">堆栈数组垂直（行）</span></dd>
+<dt><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="numpy.dstack.html#numpy.dstack" title="numpy.dstack"><code class="xref py py-obj docutils literal"><span class="pre">dstack</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-44">按照深度顺序堆叠数组（沿第三维）</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-45">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-46">当要连接的一个或多个数组是MaskedArray时，此函数将返回MaskedArray对象而不是ndarray，但输入掩码<em>不保留</em>。</span><span class="yiyi-st" id="yiyi-47">在期望MaskedArray作为输入的情况下，请使用来自屏蔽数组模块的ma.concatenate函数。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [3, 4],</span>
+<span class="go">       [5, 6]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[1, 2, 5],</span>
+<span class="go">       [3, 4, 6]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-49">此函数不会保留MaskedArray输入的屏蔽。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">masked_array(data = [0 -- 2],</span>
+<span class="go">             mask = [False  True False],</span>
+<span class="go">       fill_value = 999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">array([2, 3, 4])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+<span class="go">masked_array(data = [0 1 2 2 3 4],</span>
+<span class="go">             mask = False,</span>
+<span class="go">       fill_value = 999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+<span class="go">masked_array(data = [0 -- 2 2 3 4],</span>
+<span class="go">             mask = [False  True False False False False],</span>
+<span class="go">       fill_value = 999999)</span>
+</pre></div>
+</div>
+</dd></dl>

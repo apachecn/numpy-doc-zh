@@ -1,0 +1,72 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.format_parser</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.format_parser.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.format_parser.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.format_parser"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">format_parser</code><span class="sig-paren">(</span><em>formats</em>, <em>names</em>, <em>titles</em>, <em>aligned=False</em>, <em>byteorder=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/records.py#L83-L213"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">类将格式，名称，标题描述转换为dtype。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">构造format_parser对象后，dtype属性是转换的数据类型：<code class="docutils literal"><span class="pre">dtype</span> <span class="pre">=</span> <span class="pre">format_parser（formats，</span> <span class="pre">names ，</span> <span class="pre">titles）.dtype</span></code></span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>格式</strong>：str或str的列表</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">格式描述或者指定为具有逗号分隔格式描述的字符串，形式为<code class="docutils literal"><span class="pre">&apos;f8，</span> <span class="pre">i4，</span> <span class="pre">a5&apos;</span> / t0&gt;或以<code class="docutils literal"><span class="pre">[&apos;f8&apos;，</span> <span class="pre">&apos;i4&apos;，</span> <span class="pre">&apos;a5&apos;]  t7格式的格式描述字符串列表&gt;</span></code>。</code></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>名称</strong>：str或列表/元组的str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">字段名称指定为<code class="docutils literal"><span class="pre">&apos;col1，</span> <span class="pre">col2，</span> <span class="pre">col3&apos;</span></code>形式的以逗号分隔的字符串。 ，或作为<code class="docutils literal"><span class="pre">[&apos;col1&apos;，</span> <span class="pre">&apos;col2&apos;，</span> <span class="pre">&apos;col3&apos;]</span>形式的字符串的列表或元组/ t4&gt;。</code></span><span class="yiyi-st" id="yiyi-21">可以使用空列表，在这种情况下使用默认字段名称（&apos;f0&apos;，&apos;f1&apos;，...）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>titles</strong>：sequence</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">标题字符串序列。</span><span class="yiyi-st" id="yiyi-24">一个空列表可以用来留下标题。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>aligned</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">如果为True，通过填充作为C编译器将对齐字段。</span><span class="yiyi-st" id="yiyi-27">默认值为False。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>字节序</strong>：str，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">如果指定，所有字段将更改为提供的字节顺序。</span><span class="yiyi-st" id="yiyi-30">否则，使用默认字节顺序。</span><span class="yiyi-st" id="yiyi-31">对于所有可用的字符串说明符，请参见<a class="reference internal" href="numpy.dtype.newbyteorder.html#numpy.dtype.newbyteorder" title="numpy.dtype.newbyteorder"><code class="xref py py-obj docutils literal"><span class="pre">dtype.newbyteorder</span></code></a>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-32">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，<a class="reference internal" href="numpy.typename.html#numpy.typename" title="numpy.typename"><code class="xref py py-obj docutils literal"><span class="pre">typename</span></code></a>，<a class="reference internal" href="numpy.sctype2char.html#numpy.sctype2char" title="numpy.sctype2char"><code class="xref py py-obj docutils literal"><span class="pre">sctype2char</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">format_parser</span><span class="p">([</span><span class="s1">&apos;f8&apos;</span><span class="p">,</span> <span class="s1">&apos;i4&apos;</span><span class="p">,</span> <span class="s1">&apos;a5&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;col1&apos;</span><span class="p">,</span> <span class="s1">&apos;col2&apos;</span><span class="p">,</span> <span class="s1">&apos;col3&apos;</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[</span><span class="s1">&apos;T1&apos;</span><span class="p">,</span> <span class="s1">&apos;T2&apos;</span><span class="p">,</span> <span class="s1">&apos;T3&apos;</span><span class="p">])</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype([((&apos;T1&apos;, &apos;col1&apos;), &apos;&lt;f8&apos;), ((&apos;T2&apos;, &apos;col2&apos;), &apos;&lt;i4&apos;),</span>
+<span class="go">       ((&apos;T3&apos;, &apos;col3&apos;), &apos;|S5&apos;)])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-35"><em class="xref py py-obj">名称</em>和/或<em class="xref py py-obj">标题</em>可以是空列表。</span><span class="yiyi-st" id="yiyi-36">如果<em class="xref py py-obj">titles</em>是空列表，则标题不会显示。</span><span class="yiyi-st" id="yiyi-37">如果<em class="xref py py-obj">名称</em>为空，将使用默认字段名称。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">format_parser</span><span class="p">([</span><span class="s1">&apos;f8&apos;</span><span class="p">,</span> <span class="s1">&apos;i4&apos;</span><span class="p">,</span> <span class="s1">&apos;a5&apos;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&apos;col1&apos;</span><span class="p">,</span> <span class="s1">&apos;col2&apos;</span><span class="p">,</span> <span class="s1">&apos;col3&apos;</span><span class="p">],</span>
+<span class="gp">... </span>                 <span class="p">[])</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype([(&apos;col1&apos;, &apos;&lt;f8&apos;), (&apos;col2&apos;, &apos;&lt;i4&apos;), (&apos;col3&apos;, &apos;|S5&apos;)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">format_parser</span><span class="p">([</span><span class="s1">&apos;f8&apos;</span><span class="p">,</span> <span class="s1">&apos;i4&apos;</span><span class="p">,</span> <span class="s1">&apos;a5&apos;</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[])</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype([(&apos;f0&apos;, &apos;&lt;f8&apos;), (&apos;f1&apos;, &apos;&lt;i4&apos;), (&apos;f2&apos;, &apos;|S5&apos;)])</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">属性</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%">
+<col width="86%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-39">dtype</span></td>
+<td><span class="yiyi-st" id="yiyi-40">（dtype）转换后的数据类型。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

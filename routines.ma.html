@@ -1,0 +1,859 @@
+
+<span id="routines-ma"></span><h1><span class="yiyi-st" id="yiyi-43">Masked array operations</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.ma.html">https://docs.scipy.org/doc/numpy/reference/routines.ma.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="constants">
+<h2><span class="yiyi-st" id="yiyi-44">Constants</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.ma.MaskType.html#numpy.ma.MaskType" title="numpy.ma.MaskType"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskType</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-46"><code class="xref py py-class docutils literal"><span class="pre">bool_</span></code>的别名</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="creation">
+<h2><span class="yiyi-st" id="yiyi-47">Creation</span></h2>
+<div class="section" id="from-existing-data">
+<h3><span class="yiyi-st" id="yiyi-48">From existing data</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.ma.masked_array.html#numpy.ma.masked_array" title="numpy.ma.masked_array"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_array</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-50"><code class="xref py py-class docutils literal"><span class="pre">MaskedArray</span></code>的别名</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.ma.array.html#numpy.ma.array" title="numpy.ma.array"><code class="xref py py-obj docutils literal"><span class="pre">ma.array</span></code></a>（data [，dtype，copy，order，mask，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">可能带有掩码值的数组类。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="generated/numpy.ma.copy.html#numpy.ma.copy" title="numpy.ma.copy"><code class="xref py py-obj docutils literal"><span class="pre">ma.copy</span></code></a>（self，\ * args，\ * \ * params）a.copy（order =）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">返回数组的副本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="generated/numpy.ma.frombuffer.html#numpy.ma.frombuffer" title="numpy.ma.frombuffer"><code class="xref py py-obj docutils literal"><span class="pre">ma.frombuffer</span></code></a>（buffer [，dtype，count，offset]）</span></td>
+<td><span class="yiyi-st" id="yiyi-56">将缓冲区解释为1维数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="generated/numpy.ma.fromfunction.html#numpy.ma.fromfunction" title="numpy.ma.fromfunction"><code class="xref py py-obj docutils literal"><span class="pre">ma.fromfunction</span></code></a>（function，shape，\ * \ * kwargs）</span></td>
+<td><span class="yiyi-st" id="yiyi-58">通过在每个坐标上执行函数来构造数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="generated/numpy.ma.MaskedArray.copy.html#numpy.ma.MaskedArray.copy" title="numpy.ma.MaskedArray.copy"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.copy</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">返回数组的副本。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="ones-and-zeros">
+<h3><span class="yiyi-st" id="yiyi-61">Ones and zeros</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-62"><a class="reference internal" href="generated/numpy.ma.empty.html#numpy.ma.empty" title="numpy.ma.empty"><code class="xref py py-obj docutils literal"><span class="pre">ma.empty</span></code></a>（shape [，dtype，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-63">返回给定形状和类型的新数组，而不初始化条目。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="generated/numpy.ma.empty_like.html#numpy.ma.empty_like" title="numpy.ma.empty_like"><code class="xref py py-obj docutils literal"><span class="pre">ma.empty_like</span></code></a>（a [，dtype，order，subok]）</span></td>
+<td><span class="yiyi-st" id="yiyi-65">返回具有与给定数组相同的形状和类型的新数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-66"><a class="reference internal" href="generated/numpy.ma.masked_all.html#numpy.ma.masked_all" title="numpy.ma.masked_all"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_all</span></code></a>（shape [，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-67">与被掩没的所有元素的空的被掩没的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-68"><a class="reference internal" href="generated/numpy.ma.masked_all_like.html#numpy.ma.masked_all_like" title="numpy.ma.masked_all_like"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_all_like</span></code></a>（arr）</span></td>
+<td><span class="yiyi-st" id="yiyi-69">使用现有数组的属性空掩码数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-70"><a class="reference internal" href="generated/numpy.ma.ones.html#numpy.ma.ones" title="numpy.ma.ones"><code class="xref py py-obj docutils literal"><span class="pre">ma.ones</span></code></a>（shape [，dtype，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-71">返回给定形状和类型的新数组，用数字填充。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="generated/numpy.ma.zeros.html#numpy.ma.zeros" title="numpy.ma.zeros"><code class="xref py py-obj docutils literal"><span class="pre">ma.zeros</span></code></a>（shape [，dtype，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-73">返回给定形状和类型的新数组，用零填充。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr class="docutils">
+<div class="section" id="inspecting-the-array">
+<h2><span class="yiyi-st" id="yiyi-74">Inspecting the array</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-75"><a class="reference internal" href="generated/numpy.ma.all.html#numpy.ma.all" title="numpy.ma.all"><code class="xref py py-obj docutils literal"><span class="pre">ma.all</span></code></a>（self [，axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-76">如果所有元素均为True，则返回True。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-77"><a class="reference internal" href="generated/numpy.ma.any.html#numpy.ma.any" title="numpy.ma.any"><code class="xref py py-obj docutils literal"><span class="pre">ma.any</span></code></a>（self [，axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-78">如果<em class="xref py py-obj">a</em>的任何元素求值为True，则返回True。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-79"><a class="reference internal" href="generated/numpy.ma.count.html#numpy.ma.count" title="numpy.ma.count"><code class="xref py py-obj docutils literal"><span class="pre">ma.count</span></code></a>（self [，axis，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-80">沿给定轴计算数组的非屏蔽元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-81"><a class="reference internal" href="generated/numpy.ma.count_masked.html#numpy.ma.count_masked" title="numpy.ma.count_masked"><code class="xref py py-obj docutils literal"><span class="pre">ma.count_masked</span></code></a>（arr [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-82">计算沿给定轴的蒙版元素的数量。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-83"><a class="reference internal" href="generated/numpy.ma.getmask.html#numpy.ma.getmask" title="numpy.ma.getmask"><code class="xref py py-obj docutils literal"><span class="pre">ma.getmask</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-84">返回掩码数组或掩码的掩码。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-85"><a class="reference internal" href="generated/numpy.ma.getmaskarray.html#numpy.ma.getmaskarray" title="numpy.ma.getmaskarray"><code class="xref py py-obj docutils literal"><span class="pre">ma.getmaskarray</span></code></a>（arr）</span></td>
+<td><span class="yiyi-st" id="yiyi-86">返回掩码数组的掩码，或者返回False的完全布尔数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-87"><a class="reference internal" href="generated/numpy.ma.getdata.html#numpy.ma.getdata" title="numpy.ma.getdata"><code class="xref py py-obj docutils literal"><span class="pre">ma.getdata</span></code></a>（a [，subok]）</span></td>
+<td><span class="yiyi-st" id="yiyi-88">将掩码数组的数据作为ndarray返回。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-89"><a class="reference internal" href="generated/numpy.ma.nonzero.html#numpy.ma.nonzero" title="numpy.ma.nonzero"><code class="xref py py-obj docutils literal"><span class="pre">ma.nonzero</span></code></a>（self）</span></td>
+<td><span class="yiyi-st" id="yiyi-90">返回非零的未屏蔽元素的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-91"><a class="reference internal" href="generated/numpy.ma.shape.html#numpy.ma.shape" title="numpy.ma.shape"><code class="xref py py-obj docutils literal"><span class="pre">ma.shape</span></code></a>（obj）</span></td>
+<td><span class="yiyi-st" id="yiyi-92">返回数组的形状。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-93"><a class="reference internal" href="generated/numpy.ma.size.html#numpy.ma.size" title="numpy.ma.size"><code class="xref py py-obj docutils literal"><span class="pre">ma.size</span></code></a>（obj [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-94">返回给定轴上的元素数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-95"><a class="reference internal" href="generated/numpy.ma.is_masked.html#numpy.ma.is_masked" title="numpy.ma.is_masked"><code class="xref py py-obj docutils literal"><span class="pre">ma.is_masked</span></code></a>（x）</span></td>
+<td><span class="yiyi-st" id="yiyi-96">确定输入是否具有屏蔽值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-97"><a class="reference internal" href="generated/numpy.ma.is_mask.html#numpy.ma.is_mask" title="numpy.ma.is_mask"><code class="xref py py-obj docutils literal"><span class="pre">ma.is_mask</span></code></a>（m）</span></td>
+<td><span class="yiyi-st" id="yiyi-98">如果m是有效的标准掩码，则返回True。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-99"><a class="reference internal" href="maskedarray.baseclass.html#numpy.ma.MaskedArray.data" title="numpy.ma.MaskedArray.data"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.data</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-100">返回当前数据，作为原始基础数据的视图。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-101"><a class="reference internal" href="maskedarray.baseclass.html#numpy.ma.MaskedArray.mask" title="numpy.ma.MaskedArray.mask"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.mask</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-102">面具</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-103"><a class="reference internal" href="maskedarray.baseclass.html#numpy.ma.MaskedArray.recordmask" title="numpy.ma.MaskedArray.recordmask"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.recordmask</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-104">返回记录的掩码。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-105"><a class="reference internal" href="generated/numpy.ma.MaskedArray.all.html#numpy.ma.MaskedArray.all" title="numpy.ma.MaskedArray.all"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.all</span></code></a>（[axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-106">如果所有元素均为True，则返回True。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-107"><a class="reference internal" href="generated/numpy.ma.MaskedArray.any.html#numpy.ma.MaskedArray.any" title="numpy.ma.MaskedArray.any"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.any</span></code></a>（[axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-108">如果<em class="xref py py-obj">a</em>的任何元素求值为True，则返回True。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-109"><a class="reference internal" href="generated/numpy.ma.MaskedArray.count.html#numpy.ma.MaskedArray.count" title="numpy.ma.MaskedArray.count"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.count</span></code></a>（[axis，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-110">沿给定轴计算数组的非屏蔽元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-111"><a class="reference internal" href="generated/numpy.ma.MaskedArray.nonzero.html#numpy.ma.MaskedArray.nonzero" title="numpy.ma.MaskedArray.nonzero"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.nonzero</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-112">返回非零的未屏蔽元素的索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-113"><a class="reference internal" href="generated/numpy.ma.shape.html#numpy.ma.shape" title="numpy.ma.shape"><code class="xref py py-obj docutils literal"><span class="pre">ma.shape</span></code></a>（obj）</span></td>
+<td><span class="yiyi-st" id="yiyi-114">返回数组的形状。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-115"><a class="reference internal" href="generated/numpy.ma.size.html#numpy.ma.size" title="numpy.ma.size"><code class="xref py py-obj docutils literal"><span class="pre">ma.size</span></code></a>（obj [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-116">返回给定轴上的元素数。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils">
+<div class="section" id="manipulating-a-maskedarray">
+<h2><span class="yiyi-st" id="yiyi-117">Manipulating a MaskedArray</span></h2>
+<div class="section" id="changing-the-shape">
+<h3><span class="yiyi-st" id="yiyi-118">Changing the shape</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-119"><a class="reference internal" href="generated/numpy.ma.ravel.html#numpy.ma.ravel" title="numpy.ma.ravel"><code class="xref py py-obj docutils literal"><span class="pre">ma.ravel</span></code></a>（self [，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-120">作为视图返回self的1D版本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-121"><a class="reference internal" href="generated/numpy.ma.reshape.html#numpy.ma.reshape" title="numpy.ma.reshape"><code class="xref py py-obj docutils literal"><span class="pre">ma.reshape</span></code></a>（a，new_shape [，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-122">返回包含具有新形状的相同数据的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-123"><a class="reference internal" href="generated/numpy.ma.resize.html#numpy.ma.resize" title="numpy.ma.resize"><code class="xref py py-obj docutils literal"><span class="pre">ma.resize</span></code></a>（x，new_shape）</span></td>
+<td><span class="yiyi-st" id="yiyi-124">返回具有指定大小和形状的新的蒙版数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-125"><a class="reference internal" href="generated/numpy.ma.MaskedArray.flatten.html#numpy.ma.MaskedArray.flatten" title="numpy.ma.MaskedArray.flatten"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.flatten</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-126">将折叠的数组的副本返回到一个维度。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-127"><a class="reference internal" href="generated/numpy.ma.MaskedArray.ravel.html#numpy.ma.MaskedArray.ravel" title="numpy.ma.MaskedArray.ravel"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.ravel</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-128">作为视图返回self的1D版本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-129"><a class="reference internal" href="generated/numpy.ma.MaskedArray.reshape.html#numpy.ma.MaskedArray.reshape" title="numpy.ma.MaskedArray.reshape"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.reshape</span></code></a>（\ * s，\ * \ * kwargs）</span></td>
+<td><span class="yiyi-st" id="yiyi-130">为数组提供新形状，而不更改其数据。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-131"><a class="reference internal" href="generated/numpy.ma.MaskedArray.resize.html#numpy.ma.MaskedArray.resize" title="numpy.ma.MaskedArray.resize"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.resize</span></code></a>（newshape [，refcheck，...]）</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="modifying-axes">
+<h3><span class="yiyi-st" id="yiyi-132">Modifying axes</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-133"><a class="reference internal" href="generated/numpy.ma.swapaxes.html#numpy.ma.swapaxes" title="numpy.ma.swapaxes"><code class="xref py py-obj docutils literal"><span class="pre">ma.swapaxes</span></code></a>（self，\ * args，...）</span></td>
+<td><span class="yiyi-st" id="yiyi-134">返回数组的视图，其中<em class="xref py py-obj">axis1</em>和<em class="xref py py-obj">axis2</em>互换。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-135"><a class="reference internal" href="generated/numpy.ma.transpose.html#numpy.ma.transpose" title="numpy.ma.transpose"><code class="xref py py-obj docutils literal"><span class="pre">ma.transpose</span></code></a>（a [，axes]）</span></td>
+<td><span class="yiyi-st" id="yiyi-136">允许数组的尺寸。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-137"><a class="reference internal" href="generated/numpy.ma.MaskedArray.swapaxes.html#numpy.ma.MaskedArray.swapaxes" title="numpy.ma.MaskedArray.swapaxes"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.swapaxes</span></code></a>（axis1，axis2）</span></td>
+<td><span class="yiyi-st" id="yiyi-138">返回数组的视图，其中<em class="xref py py-obj">axis1</em>和<em class="xref py py-obj">axis2</em>互换。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-139"><a class="reference internal" href="generated/numpy.ma.MaskedArray.transpose.html#numpy.ma.MaskedArray.transpose" title="numpy.ma.MaskedArray.transpose"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.transpose</span></code></a>（\ * axes）</span></td>
+<td><span class="yiyi-st" id="yiyi-140">返回具有轴转置的数组的视图。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="changing-the-number-of-dimensions">
+<h3><span class="yiyi-st" id="yiyi-141">Changing the number of dimensions</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-142"><a class="reference internal" href="generated/numpy.ma.atleast_1d.html#numpy.ma.atleast_1d" title="numpy.ma.atleast_1d"><code class="xref py py-obj docutils literal"><span class="pre">ma.atleast_1d</span></code></a>（\ * arys）</span></td>
+<td><span class="yiyi-st" id="yiyi-143">将输入转换为具有至少一个维度的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-144"><a class="reference internal" href="generated/numpy.ma.atleast_2d.html#numpy.ma.atleast_2d" title="numpy.ma.atleast_2d"><code class="xref py py-obj docutils literal"><span class="pre">ma.atleast_2d</span></code></a>（\ * arys）</span></td>
+<td><span class="yiyi-st" id="yiyi-145">将输入视为具有至少两个维度的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-146"><a class="reference internal" href="generated/numpy.ma.atleast_3d.html#numpy.ma.atleast_3d" title="numpy.ma.atleast_3d"><code class="xref py py-obj docutils literal"><span class="pre">ma.atleast_3d</span></code></a>（\ * arys）</span></td>
+<td><span class="yiyi-st" id="yiyi-147">将输入视为至少包含三个维度的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-148"><a class="reference internal" href="generated/numpy.ma.expand_dims.html#numpy.ma.expand_dims" title="numpy.ma.expand_dims"><code class="xref py py-obj docutils literal"><span class="pre">ma.expand_dims</span></code></a>（x，axis）</span></td>
+<td><span class="yiyi-st" id="yiyi-149">展开数组的形状。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-150"><a class="reference internal" href="generated/numpy.ma.squeeze.html#numpy.ma.squeeze" title="numpy.ma.squeeze"><code class="xref py py-obj docutils literal"><span class="pre">ma.squeeze</span></code></a>（a [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-151">从数组的形状中删除单维条目。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-152"><a class="reference internal" href="generated/numpy.ma.MaskedArray.squeeze.html#numpy.ma.MaskedArray.squeeze" title="numpy.ma.MaskedArray.squeeze"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.squeeze</span></code></a>（[axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-153">从<em class="xref py py-obj">a形状删除单维条目</em>。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-154"><a class="reference internal" href="generated/numpy.ma.column_stack.html#numpy.ma.column_stack" title="numpy.ma.column_stack"><code class="xref py py-obj docutils literal"><span class="pre">ma.column_stack</span></code></a>（tup）</span></td>
+<td><span class="yiyi-st" id="yiyi-155">将1-D数组作为列堆叠到2-D数组中。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-156"><a class="reference internal" href="generated/numpy.ma.concatenate.html#numpy.ma.concatenate" title="numpy.ma.concatenate"><code class="xref py py-obj docutils literal"><span class="pre">ma.concatenate</span></code></a>（arrays [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-157">沿给定轴连接数组的序列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-158"><a class="reference internal" href="generated/numpy.ma.dstack.html#numpy.ma.dstack" title="numpy.ma.dstack"><code class="xref py py-obj docutils literal"><span class="pre">ma.dstack</span></code></a>（tup）</span></td>
+<td><span class="yiyi-st" id="yiyi-159">按照深度顺序（沿第三轴）堆叠数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-160"><a class="reference internal" href="generated/numpy.ma.hstack.html#numpy.ma.hstack" title="numpy.ma.hstack"><code class="xref py py-obj docutils literal"><span class="pre">ma.hstack</span></code></a>（tup）</span></td>
+<td><span class="yiyi-st" id="yiyi-161">水平（按列顺序）堆叠数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-162"><a class="reference internal" href="generated/numpy.ma.hsplit.html#numpy.ma.hsplit" title="numpy.ma.hsplit"><code class="xref py py-obj docutils literal"><span class="pre">ma.hsplit</span></code></a>（ary，indices_or_sections）</span></td>
+<td><span class="yiyi-st" id="yiyi-163">将数组水平（逐列）拆分为多个子数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-164"><a class="reference internal" href="generated/numpy.ma.mr_.html#numpy.ma.mr_" title="numpy.ma.mr_"><code class="xref py py-obj docutils literal"><span class="pre">ma.mr_</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-165">将切片对象转换为沿第一轴的连接。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-166"><a class="reference internal" href="generated/numpy.ma.row_stack.html#numpy.ma.row_stack" title="numpy.ma.row_stack"><code class="xref py py-obj docutils literal"><span class="pre">ma.row_stack</span></code></a>（tup）</span></td>
+<td><span class="yiyi-st" id="yiyi-167">垂直（按行）顺序堆叠数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-168"><a class="reference internal" href="generated/numpy.ma.vstack.html#numpy.ma.vstack" title="numpy.ma.vstack"><code class="xref py py-obj docutils literal"><span class="pre">ma.vstack</span></code></a>（tup）</span></td>
+<td><span class="yiyi-st" id="yiyi-169">垂直（按行）顺序堆叠数组。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="joining-arrays">
+<h3><span class="yiyi-st" id="yiyi-170">Joining arrays</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-171"><a class="reference internal" href="generated/numpy.ma.column_stack.html#numpy.ma.column_stack" title="numpy.ma.column_stack"><code class="xref py py-obj docutils literal"><span class="pre">ma.column_stack</span></code></a>（tup）</span></td>
+<td><span class="yiyi-st" id="yiyi-172">将1-D数组作为列堆叠到2-D数组中。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-173"><a class="reference internal" href="generated/numpy.ma.concatenate.html#numpy.ma.concatenate" title="numpy.ma.concatenate"><code class="xref py py-obj docutils literal"><span class="pre">ma.concatenate</span></code></a>（arrays [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-174">沿给定轴连接数组的序列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-175"><a class="reference internal" href="generated/numpy.ma.append.html#numpy.ma.append" title="numpy.ma.append"><code class="xref py py-obj docutils literal"><span class="pre">ma.append</span></code></a>（a，b [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-176">将值附加到数组的末尾。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-177"><a class="reference internal" href="generated/numpy.ma.dstack.html#numpy.ma.dstack" title="numpy.ma.dstack"><code class="xref py py-obj docutils literal"><span class="pre">ma.dstack</span></code></a>（tup）</span></td>
+<td><span class="yiyi-st" id="yiyi-178">按照深度顺序（沿第三轴）堆叠数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-179"><a class="reference internal" href="generated/numpy.ma.hstack.html#numpy.ma.hstack" title="numpy.ma.hstack"><code class="xref py py-obj docutils literal"><span class="pre">ma.hstack</span></code></a>（tup）</span></td>
+<td><span class="yiyi-st" id="yiyi-180">水平（按列顺序）堆叠数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-181"><a class="reference internal" href="generated/numpy.ma.vstack.html#numpy.ma.vstack" title="numpy.ma.vstack"><code class="xref py py-obj docutils literal"><span class="pre">ma.vstack</span></code></a>（tup）</span></td>
+<td><span class="yiyi-st" id="yiyi-182">垂直（按行）顺序堆叠数组。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr class="docutils">
+<div class="section" id="operations-on-masks">
+<h2><span class="yiyi-st" id="yiyi-183">Operations on masks</span></h2>
+<div class="section" id="creating-a-mask">
+<h3><span class="yiyi-st" id="yiyi-184">Creating a mask</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-185"><a class="reference internal" href="generated/numpy.ma.make_mask.html#numpy.ma.make_mask" title="numpy.ma.make_mask"><code class="xref py py-obj docutils literal"><span class="pre">ma.make_mask</span></code></a>（m [，copy，shrink，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-186">从数组中创建一个布尔掩码。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-187"><a class="reference internal" href="generated/numpy.ma.make_mask_none.html#numpy.ma.make_mask_none" title="numpy.ma.make_mask_none"><code class="xref py py-obj docutils literal"><span class="pre">ma.make_mask_none</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-188">返回给定形状的布尔掩码，填充False。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-189"><a class="reference internal" href="generated/numpy.ma.mask_or.html#numpy.ma.mask_or" title="numpy.ma.mask_or"><code class="xref py py-obj docutils literal"><span class="pre">ma.mask_or</span></code></a>（m1，m2 [，copy，shrink]）</span></td>
+<td><span class="yiyi-st" id="yiyi-190">使用<code class="docutils literal"><span class="pre">logical_or</span></code>运算符组合两个掩码。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-191"><a class="reference internal" href="generated/numpy.ma.make_mask_descr.html#numpy.ma.make_mask_descr" title="numpy.ma.make_mask_descr"><code class="xref py py-obj docutils literal"><span class="pre">ma.make_mask_descr</span></code></a>（ndtype）</span></td>
+<td><span class="yiyi-st" id="yiyi-192">从给定的dtype构造dtype描述列表。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="accessing-a-mask">
+<h3><span class="yiyi-st" id="yiyi-193">Accessing a mask</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-194"><a class="reference internal" href="generated/numpy.ma.getmask.html#numpy.ma.getmask" title="numpy.ma.getmask"><code class="xref py py-obj docutils literal"><span class="pre">ma.getmask</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-195">返回掩码数组或掩码的掩码。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-196"><a class="reference internal" href="generated/numpy.ma.getmaskarray.html#numpy.ma.getmaskarray" title="numpy.ma.getmaskarray"><code class="xref py py-obj docutils literal"><span class="pre">ma.getmaskarray</span></code></a>（arr）</span></td>
+<td><span class="yiyi-st" id="yiyi-197">返回掩码数组的掩码，或者返回False的完全布尔数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-198"><a class="reference internal" href="generated/numpy.ma.masked_array.mask.html#numpy.ma.masked_array.mask" title="numpy.ma.masked_array.mask"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_array.mask</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-199">面具</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="finding-masked-data">
+<h3><span class="yiyi-st" id="yiyi-200">Finding masked data</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-201"><a class="reference internal" href="generated/numpy.ma.flatnotmasked_contiguous.html#numpy.ma.flatnotmasked_contiguous" title="numpy.ma.flatnotmasked_contiguous"><code class="xref py py-obj docutils literal"><span class="pre">ma.flatnotmasked_contiguous</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-202">沿给定轴在屏蔽数组中找到连续的未屏蔽数据。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-203"><a class="reference internal" href="generated/numpy.ma.flatnotmasked_edges.html#numpy.ma.flatnotmasked_edges" title="numpy.ma.flatnotmasked_edges"><code class="xref py py-obj docutils literal"><span class="pre">ma.flatnotmasked_edges</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-204">查找第一个和最后一个未屏蔽值的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-205"><a class="reference internal" href="generated/numpy.ma.notmasked_contiguous.html#numpy.ma.notmasked_contiguous" title="numpy.ma.notmasked_contiguous"><code class="xref py py-obj docutils literal"><span class="pre">ma.notmasked_contiguous</span></code></a>（a [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-206">沿给定轴在屏蔽数组中找到连续的未屏蔽数据。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-207"><a class="reference internal" href="generated/numpy.ma.notmasked_edges.html#numpy.ma.notmasked_edges" title="numpy.ma.notmasked_edges"><code class="xref py py-obj docutils literal"><span class="pre">ma.notmasked_edges</span></code></a>（a [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-208">找到沿轴的第一个和最后一个未屏蔽值的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-209"><a class="reference internal" href="generated/numpy.ma.clump_masked.html#numpy.ma.clump_masked" title="numpy.ma.clump_masked"><code class="xref py py-obj docutils literal"><span class="pre">ma.clump_masked</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-210">返回与1-D数组的蒙版簇对应的切片列表。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-211"><a class="reference internal" href="generated/numpy.ma.clump_unmasked.html#numpy.ma.clump_unmasked" title="numpy.ma.clump_unmasked"><code class="xref py py-obj docutils literal"><span class="pre">ma.clump_unmasked</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-212">返回与1-D数组的未屏蔽块相对应的切片的列表。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="modifying-a-mask">
+<h3><span class="yiyi-st" id="yiyi-213">Modifying a mask</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-214"><a class="reference internal" href="generated/numpy.ma.mask_cols.html#numpy.ma.mask_cols" title="numpy.ma.mask_cols"><code class="xref py py-obj docutils literal"><span class="pre">ma.mask_cols</span></code></a>（a [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-215">屏蔽包含屏蔽值的2D数组的列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-216"><a class="reference internal" href="generated/numpy.ma.mask_or.html#numpy.ma.mask_or" title="numpy.ma.mask_or"><code class="xref py py-obj docutils literal"><span class="pre">ma.mask_or</span></code></a>（m1，m2 [，copy，shrink]）</span></td>
+<td><span class="yiyi-st" id="yiyi-217">使用<code class="docutils literal"><span class="pre">logical_or</span></code>运算符组合两个掩码。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-218"><a class="reference internal" href="generated/numpy.ma.mask_rowcols.html#numpy.ma.mask_rowcols" title="numpy.ma.mask_rowcols"><code class="xref py py-obj docutils literal"><span class="pre">ma.mask_rowcols</span></code></a>（a [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-219">屏蔽包含屏蔽值的2D数组的行和/或列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-220"><a class="reference internal" href="generated/numpy.ma.mask_rows.html#numpy.ma.mask_rows" title="numpy.ma.mask_rows"><code class="xref py py-obj docutils literal"><span class="pre">ma.mask_rows</span></code></a>（a [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-221">屏蔽包含屏蔽值的2D数组的行。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-222"><a class="reference internal" href="generated/numpy.ma.harden_mask.html#numpy.ma.harden_mask" title="numpy.ma.harden_mask"><code class="xref py py-obj docutils literal"><span class="pre">ma.harden_mask</span></code></a>（self）</span></td>
+<td><span class="yiyi-st" id="yiyi-223">强迫面罩硬。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-224"><a class="reference internal" href="generated/numpy.ma.soften_mask.html#numpy.ma.soften_mask" title="numpy.ma.soften_mask"><code class="xref py py-obj docutils literal"><span class="pre">ma.soften_mask</span></code></a>（self）</span></td>
+<td><span class="yiyi-st" id="yiyi-225">强迫面罩柔软。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-226"><a class="reference internal" href="generated/numpy.ma.MaskedArray.harden_mask.html#numpy.ma.MaskedArray.harden_mask" title="numpy.ma.MaskedArray.harden_mask"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.harden_mask</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-227">强迫面具硬。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-228"><a class="reference internal" href="generated/numpy.ma.MaskedArray.soften_mask.html#numpy.ma.MaskedArray.soften_mask" title="numpy.ma.MaskedArray.soften_mask"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.soften_mask</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-229">强迫面罩柔软。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-230"><a class="reference internal" href="generated/numpy.ma.MaskedArray.shrink_mask.html#numpy.ma.MaskedArray.shrink_mask" title="numpy.ma.MaskedArray.shrink_mask"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.shrink_mask</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-231">如果可能，减少掩码到nomask。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-232"><a class="reference internal" href="generated/numpy.ma.MaskedArray.unshare_mask.html#numpy.ma.MaskedArray.unshare_mask" title="numpy.ma.MaskedArray.unshare_mask"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.unshare_mask</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-233">复制掩码并将sharedmask标志设置为False。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr class="docutils">
+<div class="section" id="conversion-operations">
+<h2><span class="yiyi-st" id="yiyi-234">Conversion operations</span></h2>
+<div class="section" id="to-a-masked-array">
+<h3><span class="yiyi-st" id="yiyi-235">&gt; to a masked array</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-236"><a class="reference internal" href="generated/numpy.ma.asarray.html#numpy.ma.asarray" title="numpy.ma.asarray"><code class="xref py py-obj docutils literal"><span class="pre">ma.asarray</span></code></a>（a [，dtype，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-237">将输入转换为给定数据类型的屏蔽数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-238"><a class="reference internal" href="generated/numpy.ma.asanyarray.html#numpy.ma.asanyarray" title="numpy.ma.asanyarray"><code class="xref py py-obj docutils literal"><span class="pre">ma.asanyarray</span></code></a>（a [，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-239">将输入转换为屏蔽的数组，保留子类。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-240"><a class="reference internal" href="generated/numpy.ma.fix_invalid.html#numpy.ma.fix_invalid" title="numpy.ma.fix_invalid"><code class="xref py py-obj docutils literal"><span class="pre">ma.fix_invalid</span></code></a>（a [，mask，copy，fill_value]）</span></td>
+<td><span class="yiyi-st" id="yiyi-241">返回带有无效数据的输入，并用填充值替换。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-242"><a class="reference internal" href="generated/numpy.ma.masked_equal.html#numpy.ma.masked_equal" title="numpy.ma.masked_equal"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_equal</span></code></a>（x，value [，copy]）</span></td>
+<td><span class="yiyi-st" id="yiyi-243">屏蔽等于给定值的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-244"><a class="reference internal" href="generated/numpy.ma.masked_greater.html#numpy.ma.masked_greater" title="numpy.ma.masked_greater"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_greater</span></code></a>（x，value [，copy]）</span></td>
+<td><span class="yiyi-st" id="yiyi-245">屏蔽大于给定值的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-246"><a class="reference internal" href="generated/numpy.ma.masked_greater_equal.html#numpy.ma.masked_greater_equal" title="numpy.ma.masked_greater_equal"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_greater_equal</span></code></a>（x，value [，copy]）</span></td>
+<td><span class="yiyi-st" id="yiyi-247">屏蔽大于或等于给定值的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-248"><a class="reference internal" href="generated/numpy.ma.masked_inside.html#numpy.ma.masked_inside" title="numpy.ma.masked_inside"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_inside</span></code></a>（x，v1，v2 [，copy]）</span></td>
+<td><span class="yiyi-st" id="yiyi-249">屏蔽给定间隔内的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-250"><a class="reference internal" href="generated/numpy.ma.masked_invalid.html#numpy.ma.masked_invalid" title="numpy.ma.masked_invalid"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_invalid</span></code></a>（a [，copy]）</span></td>
+<td><span class="yiyi-st" id="yiyi-251">屏蔽发生无效值的数组（NaN或inf）。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-252"><a class="reference internal" href="generated/numpy.ma.masked_less.html#numpy.ma.masked_less" title="numpy.ma.masked_less"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_less</span></code></a>（x，value [，copy]）</span></td>
+<td><span class="yiyi-st" id="yiyi-253">屏蔽小于给定值的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-254"><a class="reference internal" href="generated/numpy.ma.masked_less_equal.html#numpy.ma.masked_less_equal" title="numpy.ma.masked_less_equal"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_less_equal</span></code></a>（x，value [，copy]）</span></td>
+<td><span class="yiyi-st" id="yiyi-255">屏蔽小于或等于给定值的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-256"><a class="reference internal" href="generated/numpy.ma.masked_not_equal.html#numpy.ma.masked_not_equal" title="numpy.ma.masked_not_equal"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_not_equal</span></code></a>（x，value [，copy]）</span></td>
+<td><span class="yiyi-st" id="yiyi-257">屏蔽数组，其中<em class="xref py py-obj">不</em>等于给定值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-258"><a class="reference internal" href="generated/numpy.ma.masked_object.html#numpy.ma.masked_object" title="numpy.ma.masked_object"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_object</span></code></a>（x，value [，copy，shrink]）</span></td>
+<td><span class="yiyi-st" id="yiyi-259">屏蔽数组<em class="xref py py-obj">x</em>，其中数据与值完全相等。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-260"><a class="reference internal" href="generated/numpy.ma.masked_outside.html#numpy.ma.masked_outside" title="numpy.ma.masked_outside"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_outside</span></code></a>（x，v1，v2 [，copy]）</span></td>
+<td><span class="yiyi-st" id="yiyi-261">在给定间隔之外屏蔽数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-262"><a class="reference internal" href="generated/numpy.ma.masked_values.html#numpy.ma.masked_values" title="numpy.ma.masked_values"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_values</span></code></a>（x，value [，rtol，atol，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-263">使用浮点平等的掩码。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-264"><a class="reference internal" href="generated/numpy.ma.masked_where.html#numpy.ma.masked_where" title="numpy.ma.masked_where"><code class="xref py py-obj docutils literal"><span class="pre">ma.masked_where</span></code></a>（condition，a [，copy]）</span></td>
+<td><span class="yiyi-st" id="yiyi-265">屏蔽满足条件的数组。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="to-a-ndarray">
+<h3><span class="yiyi-st" id="yiyi-266">&gt; to a ndarray</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-267"><a class="reference internal" href="generated/numpy.ma.compress_cols.html#numpy.ma.compress_cols" title="numpy.ma.compress_cols"><code class="xref py py-obj docutils literal"><span class="pre">ma.compress_cols</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-268">抑制包含屏蔽值的2-D数组的整列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-269"><a class="reference internal" href="generated/numpy.ma.compress_rowcols.html#numpy.ma.compress_rowcols" title="numpy.ma.compress_rowcols"><code class="xref py py-obj docutils literal"><span class="pre">ma.compress_rowcols</span></code></a>（x [，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-270">抑制包含屏蔽值的2-D数组的行和/或列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-271"><a class="reference internal" href="generated/numpy.ma.compress_rows.html#numpy.ma.compress_rows" title="numpy.ma.compress_rows"><code class="xref py py-obj docutils literal"><span class="pre">ma.compress_rows</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-272">抑制包含屏蔽值的2-D数组的所有行。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-273"><a class="reference internal" href="generated/numpy.ma.compressed.html#numpy.ma.compressed" title="numpy.ma.compressed"><code class="xref py py-obj docutils literal"><span class="pre">ma.compressed</span></code></a>（x）</span></td>
+<td><span class="yiyi-st" id="yiyi-274">将所有非屏蔽数据作为1-D数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-275"><a class="reference internal" href="generated/numpy.ma.filled.html#numpy.ma.filled" title="numpy.ma.filled"><code class="xref py py-obj docutils literal"><span class="pre">ma.filled</span></code></a>（a [，fill_value]）</span></td>
+<td><span class="yiyi-st" id="yiyi-276">将输入作为数组，将掩码数据替换为填充值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-277"><a class="reference internal" href="generated/numpy.ma.MaskedArray.compressed.html#numpy.ma.MaskedArray.compressed" title="numpy.ma.MaskedArray.compressed"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.compressed</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-278">将所有非屏蔽数据作为1-D数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-279"><a class="reference internal" href="generated/numpy.ma.MaskedArray.filled.html#numpy.ma.MaskedArray.filled" title="numpy.ma.MaskedArray.filled"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.filled</span></code></a>（[fill_value]）</span></td>
+<td><span class="yiyi-st" id="yiyi-280">返回self的副本，掩码值填充给定值。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="to-another-object">
+<h3><span class="yiyi-st" id="yiyi-281">&gt; to another object</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-282"><a class="reference internal" href="generated/numpy.ma.MaskedArray.tofile.html#numpy.ma.MaskedArray.tofile" title="numpy.ma.MaskedArray.tofile"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.tofile</span></code></a>（fid [，sep，format]）</span></td>
+<td><span class="yiyi-st" id="yiyi-283">以二进制格式将掩码数组保存到文件。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-284"><a class="reference internal" href="generated/numpy.ma.MaskedArray.tolist.html#numpy.ma.MaskedArray.tolist" title="numpy.ma.MaskedArray.tolist"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.tolist</span></code></a>（[fill_value]）</span></td>
+<td><span class="yiyi-st" id="yiyi-285">将掩码数组的数据部分作为分层Python列表返回。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-286"><a class="reference internal" href="generated/numpy.ma.MaskedArray.torecords.html#numpy.ma.MaskedArray.torecords" title="numpy.ma.MaskedArray.torecords"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.torecords</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-287">将隐藏的数组转换为灵活类型的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-288"><a class="reference internal" href="generated/numpy.ma.MaskedArray.tobytes.html#numpy.ma.MaskedArray.tobytes" title="numpy.ma.MaskedArray.tobytes"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.tobytes</span></code></a>（[fill_value，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-289">将数组数据作为包含数组中原始字节的字符串返回。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pickling-and-unpickling">
+<h3><span class="yiyi-st" id="yiyi-290">Pickling and unpickling</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-291"><a class="reference internal" href="generated/numpy.ma.dump.html#numpy.ma.dump" title="numpy.ma.dump"><code class="xref py py-obj docutils literal"><span class="pre">ma.dump</span></code></a>（a，F）</span></td>
+<td><span class="yiyi-st" id="yiyi-292">选择一个蒙版的数组到文件。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-293"><a class="reference internal" href="generated/numpy.ma.dumps.html#numpy.ma.dumps" title="numpy.ma.dumps"><code class="xref py py-obj docutils literal"><span class="pre">ma.dumps</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-294">返回一个对应于掩蔽数组的pickling的字符串。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-295"><a class="reference internal" href="generated/numpy.ma.load.html#numpy.ma.load" title="numpy.ma.load"><code class="xref py py-obj docutils literal"><span class="pre">ma.load</span></code></a>（F）</span></td>
+<td><span class="yiyi-st" id="yiyi-296">封装在<code class="docutils literal"><span class="pre">cPickle.load</span></code>周围，它接受类似文件的对象或文件名。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-297"><a class="reference internal" href="generated/numpy.ma.loads.html#numpy.ma.loads" title="numpy.ma.loads"><code class="xref py py-obj docutils literal"><span class="pre">ma.loads</span></code></a>（strg）</span></td>
+<td><span class="yiyi-st" id="yiyi-298">从当前字符串加载pickle。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="filling-a-masked-array">
+<h3><span class="yiyi-st" id="yiyi-299">Filling a masked array</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-300"><a class="reference internal" href="generated/numpy.ma.common_fill_value.html#numpy.ma.common_fill_value" title="numpy.ma.common_fill_value"><code class="xref py py-obj docutils literal"><span class="pre">ma.common_fill_value</span></code></a>（a，b）</span></td>
+<td><span class="yiyi-st" id="yiyi-301">返回两个屏蔽数组的公共填充值（如果有）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-302"><a class="reference internal" href="generated/numpy.ma.default_fill_value.html#numpy.ma.default_fill_value" title="numpy.ma.default_fill_value"><code class="xref py py-obj docutils literal"><span class="pre">ma.default_fill_value</span></code></a>（obj）</span></td>
+<td><span class="yiyi-st" id="yiyi-303">返回参数对象的默认填充值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-304"><a class="reference internal" href="generated/numpy.ma.maximum_fill_value.html#numpy.ma.maximum_fill_value" title="numpy.ma.maximum_fill_value"><code class="xref py py-obj docutils literal"><span class="pre">ma.maximum_fill_value</span></code></a>（obj）</span></td>
+<td><span class="yiyi-st" id="yiyi-305">返回可由对象的dtype表示的最小值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-306"><a class="reference internal" href="generated/numpy.ma.maximum_fill_value.html#numpy.ma.maximum_fill_value" title="numpy.ma.maximum_fill_value"><code class="xref py py-obj docutils literal"><span class="pre">ma.maximum_fill_value</span></code></a>（obj）</span></td>
+<td><span class="yiyi-st" id="yiyi-307">返回可由对象的dtype表示的最小值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-308"><a class="reference internal" href="generated/numpy.ma.set_fill_value.html#numpy.ma.set_fill_value" title="numpy.ma.set_fill_value"><code class="xref py py-obj docutils literal"><span class="pre">ma.set_fill_value</span></code></a>（a，fill_value）</span></td>
+<td><span class="yiyi-st" id="yiyi-309">设置a的填充值，如果a是掩码数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-310"><a class="reference internal" href="generated/numpy.ma.MaskedArray.get_fill_value.html#numpy.ma.MaskedArray.get_fill_value" title="numpy.ma.MaskedArray.get_fill_value"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.get_fill_value</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-311">返回掩码数组的填充值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-312"><a class="reference internal" href="generated/numpy.ma.MaskedArray.set_fill_value.html#numpy.ma.MaskedArray.set_fill_value" title="numpy.ma.MaskedArray.set_fill_value"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.set_fill_value</span></code></a>（[value]）</span></td>
+<td><span class="yiyi-st" id="yiyi-313">设置掩码数组的填充值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-314"><a class="reference internal" href="maskedarray.baseclass.html#numpy.ma.MaskedArray.fill_value" title="numpy.ma.MaskedArray.fill_value"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.fill_value</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-315">灌装值。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr class="docutils">
+<div class="section" id="masked-arrays-arithmetics">
+<h2><span class="yiyi-st" id="yiyi-316">Masked arrays arithmetics</span></h2>
+<div class="section" id="arithmetics">
+<h3><span class="yiyi-st" id="yiyi-317">Arithmetics</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-318"><a class="reference internal" href="generated/numpy.ma.anom.html#numpy.ma.anom" title="numpy.ma.anom"><code class="xref py py-obj docutils literal"><span class="pre">ma.anom</span></code></a>（self [，axis，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-319">沿给定轴计算异常（与算术平均值的偏差）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-320"><a class="reference internal" href="generated/numpy.ma.anomalies.html#numpy.ma.anomalies" title="numpy.ma.anomalies"><code class="xref py py-obj docutils literal"><span class="pre">ma.anomalies</span></code></a>（self [，axis，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-321">沿给定轴计算异常（与算术平均值的偏差）。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-322"><a class="reference internal" href="generated/numpy.ma.average.html#numpy.ma.average" title="numpy.ma.average"><code class="xref py py-obj docutils literal"><span class="pre">ma.average</span></code></a>（a [，axis，weights，returned]）</span></td>
+<td><span class="yiyi-st" id="yiyi-323">返回给定轴上数组的加权平均值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-324"><a class="reference internal" href="generated/numpy.ma.conjugate.html#numpy.ma.conjugate" title="numpy.ma.conjugate"><code class="xref py py-obj docutils literal"><span class="pre">ma.conjugate</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-325">按元素方式返回复共轭。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-326"><a class="reference internal" href="generated/numpy.ma.corrcoef.html#numpy.ma.corrcoef" title="numpy.ma.corrcoef"><code class="xref py py-obj docutils literal"><span class="pre">ma.corrcoef</span></code></a>（x [，y，rowvar，bias，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-327">返回Pearson乘积矩相关系数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-328"><a class="reference internal" href="generated/numpy.ma.cov.html#numpy.ma.cov" title="numpy.ma.cov"><code class="xref py py-obj docutils literal"><span class="pre">ma.cov</span></code></a>（x [，y，rowvar，bias，allow_masked，ddof]）</span></td>
+<td><span class="yiyi-st" id="yiyi-329">估计协方差矩阵。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-330"><a class="reference internal" href="generated/numpy.ma.cumsum.html#numpy.ma.cumsum" title="numpy.ma.cumsum"><code class="xref py py-obj docutils literal"><span class="pre">ma.cumsum</span></code></a>（self [，axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-331">返回给定轴上的数组元素的累积和。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-332"><a class="reference internal" href="generated/numpy.ma.cumprod.html#numpy.ma.cumprod" title="numpy.ma.cumprod"><code class="xref py py-obj docutils literal"><span class="pre">ma.cumprod</span></code></a>（self [，axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-333">返回给定轴上的数组元素的累积乘积。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-334"><a class="reference internal" href="generated/numpy.ma.mean.html#numpy.ma.mean" title="numpy.ma.mean"><code class="xref py py-obj docutils literal"><span class="pre">ma.mean</span></code></a>（self [，axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-335">返回沿给定轴的数组元素的平均值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-336"><a class="reference internal" href="generated/numpy.ma.median.html#numpy.ma.median" title="numpy.ma.median"><code class="xref py py-obj docutils literal"><span class="pre">ma.median</span></code></a>（a [，axis，out，overwrite_input，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-337">计算沿指定轴的中值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-338"><a class="reference internal" href="generated/numpy.ma.power.html#numpy.ma.power" title="numpy.ma.power"><code class="xref py py-obj docutils literal"><span class="pre">ma.power</span></code></a>（a，b [，third]）</span></td>
+<td><span class="yiyi-st" id="yiyi-339">返回从第二个数组提升为幂的基于元素的基数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-340"><a class="reference internal" href="generated/numpy.ma.prod.html#numpy.ma.prod" title="numpy.ma.prod"><code class="xref py py-obj docutils literal"><span class="pre">ma.prod</span></code></a>（self [，axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-341">返回给定轴上的数组元素的乘积。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-342"><a class="reference internal" href="generated/numpy.ma.std.html#numpy.ma.std" title="numpy.ma.std"><code class="xref py py-obj docutils literal"><span class="pre">ma.std</span></code></a>（self [，axis，dtype，out，ddof，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-343">返回给定轴上的数组元素的标准偏差。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-344"><a class="reference internal" href="generated/numpy.ma.sum.html#numpy.ma.sum" title="numpy.ma.sum"><code class="xref py py-obj docutils literal"><span class="pre">ma.sum</span></code></a>（self [，axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-345">返回给定轴上的数组元素的总和。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-346"><a class="reference internal" href="generated/numpy.ma.var.html#numpy.ma.var" title="numpy.ma.var"><code class="xref py py-obj docutils literal"><span class="pre">ma.var</span></code></a>（self [，axis，dtype，out，ddof，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-347">计算沿指定轴的方差。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-348"><a class="reference internal" href="generated/numpy.ma.MaskedArray.anom.html#numpy.ma.MaskedArray.anom" title="numpy.ma.MaskedArray.anom"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.anom</span></code></a>（[axis，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-349">沿给定轴计算异常（与算术平均值的偏差）。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-350"><a class="reference internal" href="generated/numpy.ma.MaskedArray.cumprod.html#numpy.ma.MaskedArray.cumprod" title="numpy.ma.MaskedArray.cumprod"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.cumprod</span></code></a>（[axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-351">返回给定轴上的数组元素的累积乘积。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-352"><a class="reference internal" href="generated/numpy.ma.MaskedArray.cumsum.html#numpy.ma.MaskedArray.cumsum" title="numpy.ma.MaskedArray.cumsum"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.cumsum</span></code></a>（[axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-353">返回给定轴上的数组元素的累积和。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-354"><a class="reference internal" href="generated/numpy.ma.MaskedArray.mean.html#numpy.ma.MaskedArray.mean" title="numpy.ma.MaskedArray.mean"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.mean</span></code></a>（[axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-355">返回沿给定轴的数组元素的平均值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-356"><a class="reference internal" href="generated/numpy.ma.MaskedArray.prod.html#numpy.ma.MaskedArray.prod" title="numpy.ma.MaskedArray.prod"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.prod</span></code></a>（[axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-357">返回给定轴上的数组元素的乘积。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-358"><a class="reference internal" href="generated/numpy.ma.MaskedArray.std.html#numpy.ma.MaskedArray.std" title="numpy.ma.MaskedArray.std"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.std</span></code></a>（[axis，dtype，out，ddof，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-359">返回给定轴上的数组元素的标准偏差。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-360"><a class="reference internal" href="generated/numpy.ma.MaskedArray.sum.html#numpy.ma.MaskedArray.sum" title="numpy.ma.MaskedArray.sum"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.sum</span></code></a>（[axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-361">返回给定轴上的数组元素的总和。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-362"><a class="reference internal" href="generated/numpy.ma.MaskedArray.var.html#numpy.ma.MaskedArray.var" title="numpy.ma.MaskedArray.var"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.var</span></code></a>（[axis，dtype，out，ddof，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-363">计算沿指定轴的方差。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="minimum-maximum">
+<h3><span class="yiyi-st" id="yiyi-364">Minimum/maximum</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-365"><a class="reference internal" href="generated/numpy.ma.argmax.html#numpy.ma.argmax" title="numpy.ma.argmax"><code class="xref py py-obj docutils literal"><span class="pre">ma.argmax</span></code></a>（self [，axis，fill_value，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-366">返回沿给定轴的最大值的索引的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-367"><a class="reference internal" href="generated/numpy.ma.argmin.html#numpy.ma.argmin" title="numpy.ma.argmin"><code class="xref py py-obj docutils literal"><span class="pre">ma.argmin</span></code></a>（self [，axis，fill_value，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-368">将指数的数组返回给定轴的最小值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-369"><a class="reference internal" href="generated/numpy.ma.max.html#numpy.ma.max" title="numpy.ma.max"><code class="xref py py-obj docutils literal"><span class="pre">ma.max</span></code></a>（obj [，axis，out，fill_value，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-370">沿给定轴返回最大值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-371"><a class="reference internal" href="generated/numpy.ma.min.html#numpy.ma.min" title="numpy.ma.min"><code class="xref py py-obj docutils literal"><span class="pre">ma.min</span></code></a>（obj [，axis，out，fill_value，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-372">沿给定轴返回最小值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-373"><a class="reference internal" href="generated/numpy.ma.ptp.html#numpy.ma.ptp" title="numpy.ma.ptp"><code class="xref py py-obj docutils literal"><span class="pre">ma.ptp</span></code></a>（obj [，axis，out，fill_value]）</span></td>
+<td><span class="yiyi-st" id="yiyi-374">沿给定尺寸的返回（最大 - 最小）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-375"><a class="reference internal" href="generated/numpy.ma.MaskedArray.argmax.html#numpy.ma.MaskedArray.argmax" title="numpy.ma.MaskedArray.argmax"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.argmax</span></code></a>（[axis，fill_value，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-376">返回沿给定轴的最大值的索引的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-377"><a class="reference internal" href="generated/numpy.ma.MaskedArray.argmin.html#numpy.ma.MaskedArray.argmin" title="numpy.ma.MaskedArray.argmin"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.argmin</span></code></a>（[axis，fill_value，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-378">将指数的数组返回给定轴的最小值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-379"><a class="reference internal" href="generated/numpy.ma.MaskedArray.max.html#numpy.ma.MaskedArray.max" title="numpy.ma.MaskedArray.max"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.max</span></code></a>（[axis，out，fill_value，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-380">沿给定轴返回最大值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-381"><a class="reference internal" href="generated/numpy.ma.MaskedArray.min.html#numpy.ma.MaskedArray.min" title="numpy.ma.MaskedArray.min"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.min</span></code></a>（[axis，out，fill_value，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-382">沿给定轴返回最小值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-383"><a class="reference internal" href="generated/numpy.ma.MaskedArray.ptp.html#numpy.ma.MaskedArray.ptp" title="numpy.ma.MaskedArray.ptp"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.ptp</span></code></a>（[axis，out，fill_value]）</span></td>
+<td><span class="yiyi-st" id="yiyi-384">沿给定尺寸的返回（最大 - 最小）。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sorting">
+<h3><span class="yiyi-st" id="yiyi-385">Sorting</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-386"><a class="reference internal" href="generated/numpy.ma.argsort.html#numpy.ma.argsort" title="numpy.ma.argsort"><code class="xref py py-obj docutils literal"><span class="pre">ma.argsort</span></code></a>（a [，axis，kind，order，fill_value]）</span></td>
+<td><span class="yiyi-st" id="yiyi-387">返回沿指定轴对数组进行排序的索引数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-388"><a class="reference internal" href="generated/numpy.ma.sort.html#numpy.ma.sort" title="numpy.ma.sort"><code class="xref py py-obj docutils literal"><span class="pre">ma.sort</span></code></a>（a [，axis，kind，order，endwith，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-389">就地对数组进行排序</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-390"><a class="reference internal" href="generated/numpy.ma.MaskedArray.argsort.html#numpy.ma.MaskedArray.argsort" title="numpy.ma.MaskedArray.argsort"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.argsort</span></code></a>（[axis，kind，order，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-391">返回沿指定轴对数组进行排序的索引数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-392"><a class="reference internal" href="generated/numpy.ma.MaskedArray.sort.html#numpy.ma.MaskedArray.sort" title="numpy.ma.MaskedArray.sort"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.sort</span></code></a>（[axis，kind，order，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-393">就地对数组进行排序</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="algebra">
+<h3><span class="yiyi-st" id="yiyi-394">Algebra</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-395"><a class="reference internal" href="generated/numpy.ma.diag.html#numpy.ma.diag" title="numpy.ma.diag"><code class="xref py py-obj docutils literal"><span class="pre">ma.diag</span></code></a>（v [，k]）</span></td>
+<td><span class="yiyi-st" id="yiyi-396">提取对角线或构造对角数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-397"><a class="reference internal" href="generated/numpy.ma.dot.html#numpy.ma.dot" title="numpy.ma.dot"><code class="xref py py-obj docutils literal"><span class="pre">ma.dot</span></code></a>（a，b [，strict，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-398">返回两个数组的点积。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-399"><a class="reference internal" href="generated/numpy.ma.identity.html#numpy.ma.identity" title="numpy.ma.identity"><code class="xref py py-obj docutils literal"><span class="pre">ma.identity</span></code></a>（n [，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-400">返回身份数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-401"><a class="reference internal" href="generated/numpy.ma.inner.html#numpy.ma.inner" title="numpy.ma.inner"><code class="xref py py-obj docutils literal"><span class="pre">ma.inner</span></code></a>（a，b）</span></td>
+<td><span class="yiyi-st" id="yiyi-402">两个数组的内积。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-403"><a class="reference internal" href="generated/numpy.ma.innerproduct.html#numpy.ma.innerproduct" title="numpy.ma.innerproduct"><code class="xref py py-obj docutils literal"><span class="pre">ma.innerproduct</span></code></a>（a，b）</span></td>
+<td><span class="yiyi-st" id="yiyi-404">两个数组的内积。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-405"><a class="reference internal" href="generated/numpy.ma.outer.html#numpy.ma.outer" title="numpy.ma.outer"><code class="xref py py-obj docutils literal"><span class="pre">ma.outer</span></code></a>（a，b）</span></td>
+<td><span class="yiyi-st" id="yiyi-406">计算两个向量的外积。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-407"><a class="reference internal" href="generated/numpy.ma.outerproduct.html#numpy.ma.outerproduct" title="numpy.ma.outerproduct"><code class="xref py py-obj docutils literal"><span class="pre">ma.outerproduct</span></code></a>（a，b）</span></td>
+<td><span class="yiyi-st" id="yiyi-408">计算两个向量的外积。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-409"><a class="reference internal" href="generated/numpy.ma.trace.html#numpy.ma.trace" title="numpy.ma.trace"><code class="xref py py-obj docutils literal"><span class="pre">ma.trace</span></code></a>（self [，offset，axis1，axis2，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-410">沿数组的对角线返回总和。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-411"><a class="reference internal" href="generated/numpy.ma.transpose.html#numpy.ma.transpose" title="numpy.ma.transpose"><code class="xref py py-obj docutils literal"><span class="pre">ma.transpose</span></code></a>（a [，axes]）</span></td>
+<td><span class="yiyi-st" id="yiyi-412">允许数组的尺寸。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-413"><a class="reference internal" href="generated/numpy.ma.MaskedArray.trace.html#numpy.ma.MaskedArray.trace" title="numpy.ma.MaskedArray.trace"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.trace</span></code></a>（[offset，axis1，axis2，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-414">沿数组的对角线返回总和。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-415"><a class="reference internal" href="generated/numpy.ma.MaskedArray.transpose.html#numpy.ma.MaskedArray.transpose" title="numpy.ma.MaskedArray.transpose"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.transpose</span></code></a>（\ * axes）</span></td>
+<td><span class="yiyi-st" id="yiyi-416">返回具有轴转置的数组的视图。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="polynomial-fit">
+<h3><span class="yiyi-st" id="yiyi-417">Polynomial fit</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-418"><a class="reference internal" href="generated/numpy.ma.vander.html#numpy.ma.vander" title="numpy.ma.vander"><code class="xref py py-obj docutils literal"><span class="pre">ma.vander</span></code></a>（x [，n]）</span></td>
+<td><span class="yiyi-st" id="yiyi-419">生成Vandermonde矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-420"><a class="reference internal" href="generated/numpy.ma.polyfit.html#numpy.ma.polyfit" title="numpy.ma.polyfit"><code class="xref py py-obj docutils literal"><span class="pre">ma.polyfit</span></code></a>（x，y，deg [，rcond，full，w，cov]）</span></td>
+<td><span class="yiyi-st" id="yiyi-421">最小二乘多项式拟合。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="clipping-and-rounding">
+<h3><span class="yiyi-st" id="yiyi-422">Clipping and rounding</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-423"><a class="reference internal" href="generated/numpy.ma.around.html#numpy.ma.around" title="numpy.ma.around"><code class="xref py py-obj docutils literal"><span class="pre">ma.around</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-424">将数组舍入到给定的小数位数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-425"><a class="reference internal" href="generated/numpy.ma.clip.html#numpy.ma.clip" title="numpy.ma.clip"><code class="xref py py-obj docutils literal"><span class="pre">ma.clip</span></code></a>（a，a_min，a_max [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-426">剪辑（限制）数组中的值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-427"><a class="reference internal" href="generated/numpy.ma.round.html#numpy.ma.round" title="numpy.ma.round"><code class="xref py py-obj docutils literal"><span class="pre">ma.round</span></code></a>（a [，decimals，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-428">返回a的副本，四舍五入为“小数”位。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-429"><a class="reference internal" href="generated/numpy.ma.MaskedArray.clip.html#numpy.ma.MaskedArray.clip" title="numpy.ma.MaskedArray.clip"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.clip</span></code></a>（[min，max，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-430">返回值限于<code class="docutils literal"><span class="pre">[min，</span> <span class="pre">max]</span></code>的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-431"><a class="reference internal" href="generated/numpy.ma.MaskedArray.round.html#numpy.ma.MaskedArray.round" title="numpy.ma.MaskedArray.round"><code class="xref py py-obj docutils literal"><span class="pre">ma.MaskedArray.round</span></code></a>（[decimal，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-432">返回四舍五入到给定小数位数的每个元素。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="miscellanea">
+<h3><span class="yiyi-st" id="yiyi-433">Miscellanea</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-434"><a class="reference internal" href="generated/numpy.ma.allequal.html#numpy.ma.allequal" title="numpy.ma.allequal"><code class="xref py py-obj docutils literal"><span class="pre">ma.allequal</span></code></a>（a，b [，fill_value]）</span></td>
+<td><span class="yiyi-st" id="yiyi-435">如果a和b的所有条目都相等，则返回True，使用fill_value作为其中一个或两者都被掩蔽的真值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-436"><a class="reference internal" href="generated/numpy.ma.allclose.html#numpy.ma.allclose" title="numpy.ma.allclose"><code class="xref py py-obj docutils literal"><span class="pre">ma.allclose</span></code></a>（a，b [，masked_equal，rtol，atol]）</span></td>
+<td><span class="yiyi-st" id="yiyi-437">如果两个数组在元素方面在公差内相等，则返回True。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-438"><a class="reference internal" href="generated/numpy.ma.apply_along_axis.html#numpy.ma.apply_along_axis" title="numpy.ma.apply_along_axis"><code class="xref py py-obj docutils literal"><span class="pre">ma.apply_along_axis</span></code></a>（func1d，axis，arr，...）</span></td>
+<td><span class="yiyi-st" id="yiyi-439">沿着给定轴向1-D切片应用函数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-440"><a class="reference internal" href="generated/numpy.ma.arange.html#numpy.ma.arange" title="numpy.ma.arange"><code class="xref py py-obj docutils literal"><span class="pre">ma.arange</span></code></a>（[start，] stop [，step，] [，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-441">在给定间隔内返回均匀间隔的值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-442"><a class="reference internal" href="generated/numpy.ma.choose.html#numpy.ma.choose" title="numpy.ma.choose"><code class="xref py py-obj docutils literal"><span class="pre">ma.choose</span></code></a>（indices，choices [，out，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-443">使用索引数组从一组选择中构造新的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-444"><a class="reference internal" href="generated/numpy.ma.ediff1d.html#numpy.ma.ediff1d" title="numpy.ma.ediff1d"><code class="xref py py-obj docutils literal"><span class="pre">ma.ediff1d</span></code></a>（arr [，to_end，to_begin]）</span></td>
+<td><span class="yiyi-st" id="yiyi-445">计算数组的连续元素之间的差异。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-446"><a class="reference internal" href="generated/numpy.ma.indices.html#numpy.ma.indices" title="numpy.ma.indices"><code class="xref py py-obj docutils literal"><span class="pre">ma.indices</span></code></a>（dimensions [，dtype]）</span></td>
+<td><span class="yiyi-st" id="yiyi-447">返回表示网格索引的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-448"><a class="reference internal" href="generated/numpy.ma.where.html#numpy.ma.where" title="numpy.ma.where"><code class="xref py py-obj docutils literal"><span class="pre">ma.where</span></code></a>（condition [，x，y]）</span></td>
+<td><span class="yiyi-st" id="yiyi-449">根据条件返回带有x或y元素的蒙版数组。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

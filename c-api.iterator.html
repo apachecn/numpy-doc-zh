@@ -1,0 +1,805 @@
+
+<h1><span class="yiyi-st" id="yiyi-20">Array Iterator API</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/c-api.iterator.html">https://docs.scipy.org/doc/numpy/reference/c-api.iterator.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="versionadded" id="index-0">
+<p><span class="yiyi-st" id="yiyi-21"><span class="versionmodified">版本1.6中的新功能。</span></span></p>
+</div>
+<div class="section" id="array-iterator">
+<h2><span class="yiyi-st" id="yiyi-22">Array Iterator</span></h2>
+<p><span class="yiyi-st" id="yiyi-23">数组迭代器封装了ufuncs中的许多关键特性，允许用户代码支持诸如输出参数，保留存储器布局以及缓冲具有错误对齐或类型的数据的功能，而不需要困难的编码。</span></p>
+<p><span class="yiyi-st" id="yiyi-24">此页面记录了迭代器的API。</span><span class="yiyi-st" id="yiyi-25">迭代器命名为<code class="docutils literal"><span class="pre">NpyIter</span></code>，函数名为<code class="docutils literal"><span class="pre">NpyIter_*</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-26">有一个<a class="reference internal" href="arrays.nditer.html#arrays-nditer"><span class="std std-ref">introductory guide to array iteration</span></a>，对那些使用此C API的用户可能会感兴趣。</span><span class="yiyi-st" id="yiyi-27">在许多情况下，在编写C迭代代码之前，通过在Python中创建迭代器来测试想法是一个好主意。</span></p>
+</div>
+<div class="section" id="simple-iteration-example">
+<h2><span class="yiyi-st" id="yiyi-28">Simple Iteration Example</span></h2>
+<p><span class="yiyi-st" id="yiyi-29">熟悉迭代器的最好方法是查看它在NumPy代码库本身中的用法。</span><span class="yiyi-st" id="yiyi-30">例如，下面是<a class="reference internal" href="c-api.array.html#c.PyArray_CountNonzero" title="PyArray_CountNonzero"><code class="xref c c-func docutils literal"><span class="pre">PyArray_CountNonzero</span></code></a>的一个稍微调整版本的代码，它计算数组中非零元素的数量。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">npy_intp</span> <span class="nf">PyArray_CountNonzero</span><span class="p">(</span><span class="n">PyArrayObject</span><span class="o">*</span> <span class="n">self</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="cm">/* Nonzero boolean function */</span>
+    <span class="n">PyArray_NonzeroFunc</span><span class="o">*</span> <span class="n">nonzero</span> <span class="o">=</span> <span class="n">PyArray_DESCR</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">f</span><span class="o">-&gt;</span><span class="n">nonzero</span><span class="p">;</span>
+
+    <span class="n">NpyIter</span><span class="o">*</span> <span class="n">iter</span><span class="p">;</span>
+    <span class="n">NpyIter_IterNextFunc</span> <span class="o">*</span><span class="n">iternext</span><span class="p">;</span>
+    <span class="kt">char</span><span class="o">**</span> <span class="n">dataptr</span><span class="p">;</span>
+    <span class="n">npy_intp</span> <span class="n">nonzero_count</span><span class="p">;</span>
+    <span class="n">npy_intp</span><span class="o">*</span> <span class="n">strideptr</span><span class="p">,</span><span class="o">*</span> <span class="n">innersizeptr</span><span class="p">;</span>
+
+    <span class="cm">/* Handle zero-sized arrays specially */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">PyArray_SIZE</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/*</span>
+<span class="cm">     * Create and use an iterator to count the nonzeros.</span>
+<span class="cm">     *   flag NPY_ITER_READONLY</span>
+<span class="cm">     *     - The array is never written to.</span>
+<span class="cm">     *   flag NPY_ITER_EXTERNAL_LOOP</span>
+<span class="cm">     *     - Inner loop is done outside the iterator for efficiency.</span>
+<span class="cm">     *   flag NPY_ITER_NPY_ITER_REFS_OK</span>
+<span class="cm">     *     - Reference types are acceptable.</span>
+<span class="cm">     *   order NPY_KEEPORDER</span>
+<span class="cm">     *     - Visit elements in memory order, regardless of strides.</span>
+<span class="cm">     *       This is good for performance when the specific order</span>
+<span class="cm">     *       elements are visited is unimportant.</span>
+<span class="cm">     *   casting NPY_NO_CASTING</span>
+<span class="cm">     *     - No casting is required for this operation.</span>
+<span class="cm">     */</span>
+    <span class="n">iter</span> <span class="o">=</span> <span class="n">NpyIter_New</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">NPY_ITER_READONLY</span><span class="o">|</span>
+                             <span class="n">NPY_ITER_EXTERNAL_LOOP</span><span class="o">|</span>
+                             <span class="n">NPY_ITER_REFS_OK</span><span class="p">,</span>
+                        <span class="n">NPY_KEEPORDER</span><span class="p">,</span> <span class="n">NPY_NO_CASTING</span><span class="p">,</span>
+                        <span class="nb">NULL</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">iter</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/*</span>
+<span class="cm">     * The iternext function gets stored in a local variable</span>
+<span class="cm">     * so it can be called repeatedly in an efficient manner.</span>
+<span class="cm">     */</span>
+    <span class="n">iternext</span> <span class="o">=</span> <span class="n">NpyIter_GetIterNext</span><span class="p">(</span><span class="n">iter</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">iternext</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">NpyIter_Deallocate</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/* The location of the data pointer which the iterator may update */</span>
+    <span class="n">dataptr</span> <span class="o">=</span> <span class="n">NpyIter_GetDataPtrArray</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+    <span class="cm">/* The location of the stride which the iterator may update */</span>
+    <span class="n">strideptr</span> <span class="o">=</span> <span class="n">NpyIter_GetInnerStrideArray</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+    <span class="cm">/* The location of the inner loop size which the iterator may update */</span>
+    <span class="n">innersizeptr</span> <span class="o">=</span> <span class="n">NpyIter_GetInnerLoopSizePtr</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+
+    <span class="n">nonzero_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="cm">/* Get the inner loop data/stride/count values */</span>
+        <span class="kt">char</span><span class="o">*</span> <span class="n">data</span> <span class="o">=</span> <span class="o">*</span><span class="n">dataptr</span><span class="p">;</span>
+        <span class="n">npy_intp</span> <span class="n">stride</span> <span class="o">=</span> <span class="o">*</span><span class="n">strideptr</span><span class="p">;</span>
+        <span class="n">npy_intp</span> <span class="n">count</span> <span class="o">=</span> <span class="o">*</span><span class="n">innersizeptr</span><span class="p">;</span>
+
+        <span class="cm">/* This is a typical inner loop for NPY_ITER_EXTERNAL_LOOP */</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">count</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nonzero</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">self</span><span class="p">))</span> <span class="p">{</span>
+                <span class="o">++</span><span class="n">nonzero_count</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">data</span> <span class="o">+=</span> <span class="n">stride</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="cm">/* Increment the iterator to the next inner loop */</span>
+    <span class="p">}</span> <span class="k">while</span><span class="p">(</span><span class="n">iternext</span><span class="p">(</span><span class="n">iter</span><span class="p">));</span>
+
+    <span class="n">NpyIter_Deallocate</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">nonzero_count</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="simple-multi-iteration-example">
+<h2><span class="yiyi-st" id="yiyi-31">Simple Multi-Iteration Example</span></h2>
+<p><span class="yiyi-st" id="yiyi-32">这里是一个使用迭代器的简单复制函数。</span><span class="yiyi-st" id="yiyi-33"><code class="docutils literal"><span class="pre">order</span></code>参数用于控制分配结果的存储器布局，通常需要<a class="reference internal" href="c-api.array.html#c.NPY_KEEPORDER" title="NPY_KEEPORDER"><code class="xref c c-data docutils literal"><span class="pre">NPY_KEEPORDER</span></code></a>。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">PyObject</span> <span class="o">*</span><span class="nf">CopyArray</span><span class="p">(</span><span class="n">PyObject</span> <span class="o">*</span><span class="n">arr</span><span class="p">,</span> <span class="n">NPY_ORDER</span> <span class="n">order</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">NpyIter</span> <span class="o">*</span><span class="n">iter</span><span class="p">;</span>
+    <span class="n">NpyIter_IterNextFunc</span> <span class="o">*</span><span class="n">iternext</span><span class="p">;</span>
+    <span class="n">PyObject</span> <span class="o">*</span><span class="n">op</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">*</span><span class="n">ret</span><span class="p">;</span>
+    <span class="n">npy_uint32</span> <span class="n">flags</span><span class="p">;</span>
+    <span class="n">npy_uint32</span> <span class="n">op_flags</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    <span class="n">npy_intp</span> <span class="n">itemsize</span><span class="p">,</span> <span class="o">*</span><span class="n">innersizeptr</span><span class="p">,</span> <span class="n">innerstride</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">**</span><span class="n">dataptrarray</span><span class="p">;</span>
+
+    <span class="cm">/*</span>
+<span class="cm">     * No inner iteration - inner loop is handled by CopyArray code</span>
+<span class="cm">     */</span>
+    <span class="n">flags</span> <span class="o">=</span> <span class="n">NPY_ITER_EXTERNAL_LOOP</span><span class="p">;</span>
+    <span class="cm">/*</span>
+<span class="cm">     * Tell the constructor to automatically allocate the output.</span>
+<span class="cm">     * The data type of the output will match that of the input.</span>
+<span class="cm">     */</span>
+    <span class="n">op</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span>
+    <span class="n">op</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="n">op_flags</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">NPY_ITER_READONLY</span><span class="p">;</span>
+    <span class="n">op_flags</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">NPY_ITER_WRITEONLY</span> <span class="o">|</span> <span class="n">NPY_ITER_ALLOCATE</span><span class="p">;</span>
+
+    <span class="cm">/* Construct the iterator */</span>
+    <span class="n">iter</span> <span class="o">=</span> <span class="n">NpyIter_MultiNew</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">NPY_NO_CASTING</span><span class="p">,</span>
+                            <span class="n">op_flags</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">iter</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/*</span>
+<span class="cm">     * Make a copy of the iternext function pointer and</span>
+<span class="cm">     * a few other variables the inner loop needs.</span>
+<span class="cm">     */</span>
+    <span class="n">iternext</span> <span class="o">=</span> <span class="n">NpyIter_GetIterNext</span><span class="p">(</span><span class="n">iter</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">innerstride</span> <span class="o">=</span> <span class="n">NpyIter_GetInnerStrideArray</span><span class="p">(</span><span class="n">iter</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">itemsize</span> <span class="o">=</span> <span class="n">NpyIter_GetDescrArray</span><span class="p">(</span><span class="n">iter</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">elsize</span><span class="p">;</span>
+    <span class="cm">/*</span>
+<span class="cm">     * The inner loop size and data pointers may change during the</span>
+<span class="cm">     * loop, so just cache the addresses.</span>
+<span class="cm">     */</span>
+    <span class="n">innersizeptr</span> <span class="o">=</span> <span class="n">NpyIter_GetInnerLoopSizePtr</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+    <span class="n">dataptrarray</span> <span class="o">=</span> <span class="n">NpyIter_GetDataPtrArray</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+
+    <span class="cm">/*</span>
+<span class="cm">     * Note that because the iterator allocated the output,</span>
+<span class="cm">     * it matches the iteration order and is packed tightly,</span>
+<span class="cm">     * so we don&apos;t need to check it like the input.</span>
+<span class="cm">     */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">innerstride</span> <span class="o">==</span> <span class="n">itemsize</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="n">dataptrarray</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dataptrarray</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                    <span class="n">itemsize</span> <span class="o">*</span> <span class="p">(</span><span class="o">*</span><span class="n">innersizeptr</span><span class="p">));</span>
+        <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">iternext</span><span class="p">(</span><span class="n">iter</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="cm">/* For efficiency, should specialize this based on item size... */</span>
+        <span class="n">npy_intp</span> <span class="n">i</span><span class="p">;</span>
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="n">npy_intp</span> <span class="n">size</span> <span class="o">=</span> <span class="o">*</span><span class="n">innersizeptr</span><span class="p">;</span>
+            <span class="kt">char</span> <span class="o">*</span><span class="n">src</span> <span class="o">=</span> <span class="n">dataptrarray</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="n">dst</span> <span class="o">=</span> <span class="n">dataptrarray</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+            <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">,</span> <span class="n">src</span> <span class="o">+=</span> <span class="n">innerstride</span><span class="p">,</span> <span class="n">dst</span> <span class="o">+=</span> <span class="n">itemsize</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">memcpy</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">itemsize</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">iternext</span><span class="p">(</span><span class="n">iter</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* Get the result from the iterator object array */</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">NpyIter_GetOperandArray</span><span class="p">(</span><span class="n">iter</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="n">Py_INCREF</span><span class="p">(</span><span class="n">ret</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">NpyIter_Deallocate</span><span class="p">(</span><span class="n">iter</span><span class="p">)</span> <span class="o">!=</span> <span class="n">NPY_SUCCEED</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Py_DECREF</span><span class="p">(</span><span class="n">ret</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="iterator-data-types">
+<h2><span class="yiyi-st" id="yiyi-34">Iterator Data Types</span></h2>
+<p><span class="yiyi-st" id="yiyi-35">迭代器布局是一个内部细节，用户代码只看到一个不完整的结构。</span></p>
+<dl class="type">
+<dt id="c.NpyIter"><span class="yiyi-st" id="yiyi-36"> <code class="descname">NpyIter</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-37">这是一个不透明的指针类型的迭代器。</span><span class="yiyi-st" id="yiyi-38">访问其内容只能通过迭代器API完成。</span></p>
+</dd></dl>
+<dl class="type">
+<dt id="c.NpyIter_Type"><span class="yiyi-st" id="yiyi-39"> <code class="descname">NpyIter_Type</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-40">这是将迭代器暴露给Python的类型。</span><span class="yiyi-st" id="yiyi-41">目前，没有公开提供访问Python创建的迭代器的值的API。</span><span class="yiyi-st" id="yiyi-42">如果在Python中创建一个迭代器，它必须在Python中使用，反之亦然。</span><span class="yiyi-st" id="yiyi-43">这样的API很可能在未来的版本中创建。</span></p>
+</dd></dl>
+<dl class="type">
+<dt id="c.NpyIter_IterNextFunc"><span class="yiyi-st" id="yiyi-44"> <code class="descname">NpyIter_IterNextFunc</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-45">这是由<a class="reference internal" href="#c.NpyIter_GetIterNext" title="NpyIter_GetIterNext"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GetIterNext</span></code></a>返回的迭代循环的函数指针。</span></p>
+</dd></dl>
+<dl class="type">
+<dt id="c.NpyIter_GetMultiIndexFunc"><span class="yiyi-st" id="yiyi-46"> <code class="descname">NpyIter_GetMultiIndexFunc</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-47">这是一个函数指针，用于获取当前迭代器多索引，由<a class="reference internal" href="#c.NpyIter_GetGetMultiIndex" title="NpyIter_GetGetMultiIndex"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GetGetMultiIndex</span></code></a>返回。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="construction-and-destruction">
+<h2><span class="yiyi-st" id="yiyi-48">Construction and Destruction</span></h2>
+<dl class="function">
+<dt id="c.NpyIter_New"><span class="yiyi-st" id="yiyi-49"> <a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>* <code class="descname">NpyIter_New</code><span class="sig-paren">(</span><a class="reference internal" href="c-api.types-and-structures.html#c.PyArrayObject" title="PyArrayObject">PyArrayObject</a>*<em> op</em>, npy_uint32<em> flags</em>, <a class="reference internal" href="c-api.array.html#c.NPY_ORDER" title="NPY_ORDER">NPY_ORDER</a><em> order</em>, <a class="reference internal" href="c-api.array.html#c.NPY_CASTING" title="NPY_CASTING">NPY_CASTING</a><em> casting</em>, <a class="reference internal" href="c-api.types-and-structures.html#c.PyArray_Descr" title="PyArray_Descr">PyArray_Descr</a>*<em> dtype</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-50">为给定的numpy数组对象<code class="docutils literal"><span class="pre">op</span></code>创建迭代器。</span></p>
+<p><span class="yiyi-st" id="yiyi-51">可以在<code class="docutils literal"><span class="pre">flags</span></code>中传递的标志是<a class="reference internal" href="#c.NpyIter_MultiNew" title="NpyIter_MultiNew"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_MultiNew</span></code></a>中记录的全局和每个操作数标志的任意组合，除了<a class="reference internal" href="#c.NPY_ITER_ALLOCATE" title="NPY_ITER_ALLOCATE"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_ALLOCATE</span></code></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-52">任何<a class="reference internal" href="c-api.array.html#c.NPY_ORDER" title="NPY_ORDER"><code class="xref c c-type docutils literal"><span class="pre">NPY_ORDER</span></code></a>枚举值都可以传递到<code class="docutils literal"><span class="pre">order</span></code>。</span><span class="yiyi-st" id="yiyi-53">对于有效的迭代，<a class="reference internal" href="c-api.array.html#c.NPY_KEEPORDER" title="NPY_KEEPORDER"><code class="xref c c-type docutils literal"><span class="pre">NPY_KEEPORDER</span></code></a>是最好的选项，其他顺序强制执行特定的迭代模式。</span></p>
+<p><span class="yiyi-st" id="yiyi-54">任何<a class="reference internal" href="c-api.array.html#c.NPY_CASTING" title="NPY_CASTING"><code class="xref c c-type docutils literal"><span class="pre">NPY_CASTING</span></code></a>枚举值都可以传递到<code class="docutils literal"><span class="pre">casting</span></code>。</span><span class="yiyi-st" id="yiyi-55">值包括<a class="reference internal" href="c-api.array.html#c.NPY_NO_CASTING" title="NPY_NO_CASTING"><code class="xref c c-data docutils literal"><span class="pre">NPY_NO_CASTING</span></code></a>，<a class="reference internal" href="c-api.array.html#c.NPY_EQUIV_CASTING" title="NPY_EQUIV_CASTING"><code class="xref c c-data docutils literal"><span class="pre">NPY_EQUIV_CASTING</span></code></a>，<a class="reference internal" href="c-api.array.html#c.NPY_SAFE_CASTING" title="NPY_SAFE_CASTING"><code class="xref c c-data docutils literal"><span class="pre">NPY_SAFE_CASTING</span></code></a>，<a class="reference internal" href="c-api.array.html#c.NPY_SAME_KIND_CASTING" title="NPY_SAME_KIND_CASTING"><code class="xref c c-data docutils literal"><span class="pre">NPY_SAME_KIND_CASTING</span></code></a>和<a class="reference internal" href="c-api.array.html#c.NPY_UNSAFE_CASTING" title="NPY_UNSAFE_CASTING"><code class="xref c c-data docutils literal"><span class="pre">NPY_UNSAFE_CASTING</span></code></a>。</span><span class="yiyi-st" id="yiyi-56">要允许强制转换，还必须启用复制或缓冲。</span></p>
+<p><span class="yiyi-st" id="yiyi-57">如果<code class="docutils literal"><span class="pre">dtype</span></code>不是<code class="docutils literal"><span class="pre">NULL</span></code>，那么它需要数据类型。</span><span class="yiyi-st" id="yiyi-58">如果允许复制，如果数据是可转换的，它将会进行临时复制。</span><span class="yiyi-st" id="yiyi-59">如果启用了<a class="reference internal" href="#c.NPY_ITER_UPDATEIFCOPY" title="NPY_ITER_UPDATEIFCOPY"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_UPDATEIFCOPY</span></code></a>，它也将在迭代器销毁时将数据复制回另一个转换。</span></p>
+<p><span class="yiyi-st" id="yiyi-60">如果有错误则返回NULL，否则返回已分配的迭代器。</span></p>
+<p><span class="yiyi-st" id="yiyi-61">要使迭代器类似于旧的迭代器，这应该工作。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">iter</span> <span class="o">=</span> <span class="n">NpyIter_New</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">NPY_ITER_READWRITE</span><span class="p">,</span>
+                    <span class="n">NPY_CORDER</span><span class="p">,</span> <span class="n">NPY_NO_CASTING</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-62">如果你想编辑对齐的<code class="docutils literal"><span class="pre">double</span></code>代码的数组，但顺序没有关系，你会使用这个。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">dtype</span> <span class="o">=</span> <span class="n">PyArray_DescrFromType</span><span class="p">(</span><span class="n">NPY_DOUBLE</span><span class="p">);</span>
+<span class="n">iter</span> <span class="o">=</span> <span class="n">NpyIter_New</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">NPY_ITER_READWRITE</span><span class="o">|</span>
+                    <span class="n">NPY_ITER_BUFFERED</span><span class="o">|</span>
+                    <span class="n">NPY_ITER_NBO</span><span class="o">|</span>
+                    <span class="n">NPY_ITER_ALIGNED</span><span class="p">,</span>
+                    <span class="n">NPY_KEEPORDER</span><span class="p">,</span>
+                    <span class="n">NPY_SAME_KIND_CASTING</span><span class="p">,</span>
+                    <span class="n">dtype</span><span class="p">);</span>
+<span class="n">Py_DECREF</span><span class="p">(</span><span class="n">dtype</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_MultiNew"><span class="yiyi-st" id="yiyi-63"> <a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>* <code class="descname">NpyIter_MultiNew</code><span class="sig-paren">(</span>npy_intp<em> nop</em>, <a class="reference internal" href="c-api.types-and-structures.html#c.PyArrayObject" title="PyArrayObject">PyArrayObject</a>**<em> op</em>, npy_uint32<em> flags</em>, <a class="reference internal" href="c-api.array.html#c.NPY_ORDER" title="NPY_ORDER">NPY_ORDER</a><em> order</em>, <a class="reference internal" href="c-api.array.html#c.NPY_CASTING" title="NPY_CASTING">NPY_CASTING</a><em> casting</em>, npy_uint32*<em> op_flags</em>, <a class="reference internal" href="c-api.types-and-structures.html#c.PyArray_Descr" title="PyArray_Descr">PyArray_Descr</a>**<em> op_dtypes</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-64">使用常规NumPy广播规则创建用于广播<code class="docutils literal"><span class="pre">op</span></code>中提供的<code class="docutils literal"><span class="pre">nop</span></code>数组对象的迭代器。</span></p>
+<p><span class="yiyi-st" id="yiyi-65">任何<a class="reference internal" href="c-api.array.html#c.NPY_ORDER" title="NPY_ORDER"><code class="xref c c-type docutils literal"><span class="pre">NPY_ORDER</span></code></a>枚举值都可以传递到<code class="docutils literal"><span class="pre">order</span></code>。</span><span class="yiyi-st" id="yiyi-66">对于有效的迭代，<a class="reference internal" href="c-api.array.html#c.NPY_KEEPORDER" title="NPY_KEEPORDER"><code class="xref c c-data docutils literal"><span class="pre">NPY_KEEPORDER</span></code></a>是最好的选项，其他顺序强制执行特定的迭代模式。</span><span class="yiyi-st" id="yiyi-67">当使用<a class="reference internal" href="c-api.array.html#c.NPY_KEEPORDER" title="NPY_KEEPORDER"><code class="xref c c-data docutils literal"><span class="pre">NPY_KEEPORDER</span></code></a>时，如果您还想确保沿轴不反转，您应该传递标志<a class="reference internal" href="#c.NPY_ITER_DONT_NEGATE_STRIDES" title="NPY_ITER_DONT_NEGATE_STRIDES"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_DONT_NEGATE_STRIDES</span></code></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-68">任何<a class="reference internal" href="c-api.array.html#c.NPY_CASTING" title="NPY_CASTING"><code class="xref c c-type docutils literal"><span class="pre">NPY_CASTING</span></code></a>枚举值都可以传递到<code class="docutils literal"><span class="pre">casting</span></code>。</span><span class="yiyi-st" id="yiyi-69">值包括<a class="reference internal" href="c-api.array.html#c.NPY_NO_CASTING" title="NPY_NO_CASTING"><code class="xref c c-data docutils literal"><span class="pre">NPY_NO_CASTING</span></code></a>，<a class="reference internal" href="c-api.array.html#c.NPY_EQUIV_CASTING" title="NPY_EQUIV_CASTING"><code class="xref c c-data docutils literal"><span class="pre">NPY_EQUIV_CASTING</span></code></a>，<a class="reference internal" href="c-api.array.html#c.NPY_SAFE_CASTING" title="NPY_SAFE_CASTING"><code class="xref c c-data docutils literal"><span class="pre">NPY_SAFE_CASTING</span></code></a>，<a class="reference internal" href="c-api.array.html#c.NPY_SAME_KIND_CASTING" title="NPY_SAME_KIND_CASTING"><code class="xref c c-data docutils literal"><span class="pre">NPY_SAME_KIND_CASTING</span></code></a>和<a class="reference internal" href="c-api.array.html#c.NPY_UNSAFE_CASTING" title="NPY_UNSAFE_CASTING"><code class="xref c c-data docutils literal"><span class="pre">NPY_UNSAFE_CASTING</span></code></a>。</span><span class="yiyi-st" id="yiyi-70">要允许强制转换，还必须启用复制或缓冲。</span></p>
+<p><span class="yiyi-st" id="yiyi-71">如果<code class="docutils literal"><span class="pre">op_dtypes</span></code>不是<code class="docutils literal"><span class="pre">NULL</span></code>，则它为每个<code class="docutils literal"><span class="pre">op[i]</span></code>指定数据类型或<code class="docutils literal"><span class="pre">NULL</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-72">如果有错误则返回NULL，否则返回已分配的迭代器。</span></p>
+<p><span class="yiyi-st" id="yiyi-73">可以在<code class="docutils literal"><span class="pre">flags</span></code>中传递的标志适用于整个迭代器，它们是：</span></p>
+<blockquote>
+<div><dl class="var">
+<dt id="c.NPY_ITER_C_INDEX"><span class="yiyi-st" id="yiyi-74"> <code class="descname">NPY_ITER_C_INDEX</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-75">使迭代器跟踪匹配C order的遍历平面索引。</span><span class="yiyi-st" id="yiyi-76">此选项不能与<a class="reference internal" href="#c.NPY_ITER_F_INDEX" title="NPY_ITER_F_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_F_INDEX</span></code></a>一起使用。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_F_INDEX"><span class="yiyi-st" id="yiyi-77"> <code class="descname">NPY_ITER_F_INDEX</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-78">使迭代器跟踪匹配Fortran顺序的平滑折射率。</span><span class="yiyi-st" id="yiyi-79">此选项不能与<a class="reference internal" href="#c.NPY_ITER_C_INDEX" title="NPY_ITER_C_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_C_INDEX</span></code></a>一起使用。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_MULTI_INDEX"><span class="yiyi-st" id="yiyi-80"> <code class="descname">NPY_ITER_MULTI_INDEX</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-81">使迭代器跟踪多索引。</span><span class="yiyi-st" id="yiyi-82">这防止迭代器合并轴以产生更大的内循环。</span><span class="yiyi-st" id="yiyi-83">如果循环也没有缓冲，并且没有跟踪索引（可以调用<em class="xref py py-obj">NpyIter_RemoveAxis</em>），那么迭代器大小可以是<code class="docutils literal"><span class="pre">-1</span></code>，表示迭代器太大。</span><span class="yiyi-st" id="yiyi-84">这可能由于复杂的广播而发生，并且将导致在设置迭代器范围，删除多索引或获取下一个函数时创建错误。</span><span class="yiyi-st" id="yiyi-85">但是，可以再次移除轴，如果移除后尺寸足够小，则可以正常使用迭代器。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_EXTERNAL_LOOP"><span class="yiyi-st" id="yiyi-86"> <code class="descname">NPY_ITER_EXTERNAL_LOOP</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-87">使迭代器跳过最内层循环的迭代，需要迭代器的用户处理它。</span></p>
+<p><span class="yiyi-st" id="yiyi-88">此标记与<a class="reference internal" href="#c.NPY_ITER_C_INDEX" title="NPY_ITER_C_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_C_INDEX</span></code></a>，<a class="reference internal" href="#c.NPY_ITER_F_INDEX" title="NPY_ITER_F_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_F_INDEX</span></code></a>和<a class="reference internal" href="#c.NPY_ITER_MULTI_INDEX" title="NPY_ITER_MULTI_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_MULTI_INDEX</span></code></a>不兼容。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_DONT_NEGATE_STRIDES"><span class="yiyi-st" id="yiyi-89"> <code class="descname">NPY_ITER_DONT_NEGATE_STRIDES</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-90">这只会在为order参数指定<a class="reference internal" href="c-api.array.html#c.NPY_KEEPORDER" title="NPY_KEEPORDER"><code class="xref c c-type docutils literal"><span class="pre">NPY_KEEPORDER</span></code></a>时影响迭代器。</span><span class="yiyi-st" id="yiyi-91">默认情况下，使用<a class="reference internal" href="c-api.array.html#c.NPY_KEEPORDER" title="NPY_KEEPORDER"><code class="xref c c-type docutils literal"><span class="pre">NPY_KEEPORDER</span></code></a>，迭代器会反转具有负步长的轴，以便以正向方向遍历内存。</span><span class="yiyi-st" id="yiyi-92">这将禁用此步骤。</span><span class="yiyi-st" id="yiyi-93">如果您想要使用轴的底层内存排序，但不想使轴反转，请使用此标志。</span><span class="yiyi-st" id="yiyi-94">这是例如<code class="docutils literal"><span class="pre">numpy.ravel（a，</span> <span class="pre">order =&apos;K&apos;）</span></code>的行为。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_COMMON_DTYPE"><span class="yiyi-st" id="yiyi-95"> <code class="descname">NPY_ITER_COMMON_DTYPE</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-96">导致迭代器将所有操作数转换为基于ufunc类型升级规则计算的公共数据类型。</span><span class="yiyi-st" id="yiyi-97">必须启用复制或缓冲。</span></p>
+<p><span class="yiyi-st" id="yiyi-98">如果提前知道公共数据类型，请不要使用此标志。</span><span class="yiyi-st" id="yiyi-99">相反，为所有操作数设置请求的dtype。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_REFS_OK"><span class="yiyi-st" id="yiyi-100"> <code class="descname">NPY_ITER_REFS_OK</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-101">表示具有引用类型的数组（对象数组或包含对象类型的结构化数组）可以在迭代器中接受和使用。</span><span class="yiyi-st" id="yiyi-102">如果启用此标志，调用程序必须确保检查<code class="xref c c-func docutils literal"><span class="pre">NpyIter_IterationNeedsAPI(iter)</span></code>是否为真，在这种情况下，它可能不会在迭代期间释放GIL。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_ZEROSIZE_OK"><span class="yiyi-st" id="yiyi-103"> <code class="descname">NPY_ITER_ZEROSIZE_OK</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-104">表示应允许大小为零的数组。</span><span class="yiyi-st" id="yiyi-105">由于典型的迭代循环不会自然地使用零大小的数组，因此在进入迭代循环之前，必须检查IterSize是否大于零。</span><span class="yiyi-st" id="yiyi-106">目前只检查操作数，而不是强制形状。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_REDUCE_OK"><span class="yiyi-st" id="yiyi-107"> <code class="descname">NPY_ITER_REDUCE_OK</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-108">允许具有零步幅和大小大于1的维度的可写操作数。</span><span class="yiyi-st" id="yiyi-109">注意，这样的操作数必须是读/写。</span></p>
+<p><span class="yiyi-st" id="yiyi-110">当启用缓冲时，这也会切换到特殊缓冲模式，该模式会根据需要减少循环长度，以便不对正在减少的值进行践踏。</span></p>
+<p><span class="yiyi-st" id="yiyi-111">注意，如果你想对一个自动分配的输出进行缩减，你必须使用<a class="reference internal" href="#c.NpyIter_GetOperandArray" title="NpyIter_GetOperandArray"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GetOperandArray</span></code></a>来获得它的引用，然后在迭代循环之前将每个值设置为缩减单元。</span><span class="yiyi-st" id="yiyi-112">在缓冲减少的情况下，这意味着您还必须指定标志<a class="reference internal" href="#c.NPY_ITER_DELAY_BUFALLOC" title="NPY_ITER_DELAY_BUFALLOC"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_DELAY_BUFALLOC</span></code></a>，然后在初始化分配的操作数以准备缓冲区后重置迭代器。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_RANGED"><span class="yiyi-st" id="yiyi-113"> <code class="descname">NPY_ITER_RANGED</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-114">支持对完整<code class="docutils literal"><span class="pre">iterindex</span></code>范围<code class="docutils literal"><span class="pre">[0，</span> <span class="pre">NpyIter_IterSize（iter））</span></code>的子范围的迭代。</span><span class="yiyi-st" id="yiyi-115">使用函数<a class="reference internal" href="#c.NpyIter_ResetToIterIndexRange" title="NpyIter_ResetToIterIndexRange"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_ResetToIterIndexRange</span></code></a>指定迭代的范围。</span></p>
+<p><span class="yiyi-st" id="yiyi-116">只有在启用<a class="reference internal" href="#c.NPY_ITER_BUFFERED" title="NPY_ITER_BUFFERED"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_BUFFERED</span></code></a>时，此标志才能与<a class="reference internal" href="#c.NPY_ITER_EXTERNAL_LOOP" title="NPY_ITER_EXTERNAL_LOOP"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_EXTERNAL_LOOP</span></code></a>一起使用。</span><span class="yiyi-st" id="yiyi-117">这是因为没有缓冲，内部循环总是最内部迭代维度的大小，并且允许它被削减将需要特殊处理，有效地使它更像缓冲版本。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_BUFFERED"><span class="yiyi-st" id="yiyi-118"> <code class="descname">NPY_ITER_BUFFERED</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-119">使迭代器存储缓冲数据，并使用缓冲来满足数据类型，对齐和字节顺序要求。</span><span class="yiyi-st" id="yiyi-120">要缓冲操作数，请不要指定<a class="reference internal" href="#c.NPY_ITER_COPY" title="NPY_ITER_COPY"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_COPY</span></code></a>或<a class="reference internal" href="#c.NPY_ITER_UPDATEIFCOPY" title="NPY_ITER_UPDATEIFCOPY"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_UPDATEIFCOPY</span></code></a>标志，因为它们将覆盖缓冲。</span><span class="yiyi-st" id="yiyi-121">缓冲对于使用迭代器的Python代码特别有用，允许同时使用更大的数据块来摊销Python解释器的开销。</span></p>
+<p><span class="yiyi-st" id="yiyi-122">如果与<a class="reference internal" href="#c.NPY_ITER_EXTERNAL_LOOP" title="NPY_ITER_EXTERNAL_LOOP"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_EXTERNAL_LOOP</span></code></a>一起使用，调用者的内部循环可能获得比没有缓冲的情况下更大的块，因为如何布置步幅。</span></p>
+<p><span class="yiyi-st" id="yiyi-123">注意，如果操作数被赋予标志<a class="reference internal" href="#c.NPY_ITER_COPY" title="NPY_ITER_COPY"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_COPY</span></code></a>或<a class="reference internal" href="#c.NPY_ITER_UPDATEIFCOPY" title="NPY_ITER_UPDATEIFCOPY"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_UPDATEIFCOPY</span></code></a>，则将优先于缓冲进行复制。</span><span class="yiyi-st" id="yiyi-124">当数组被广播时，缓冲仍然会发生，因此元素需要被复制以获得恒定的步幅。</span></p>
+<p><span class="yiyi-st" id="yiyi-125">在正常缓冲中，每个内循环的大小等于缓冲区大小，或者如果指定<a class="reference internal" href="#c.NPY_ITER_GROWINNER" title="NPY_ITER_GROWINNER"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_GROWINNER</span></code></a>，则可能更大。</span><span class="yiyi-st" id="yiyi-126">如果启用<a class="reference internal" href="#c.NPY_ITER_REDUCE_OK" title="NPY_ITER_REDUCE_OK"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_REDUCE_OK</span></code></a>并发生减少，内部循环可能会根据减少的结构而变小。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_GROWINNER"><span class="yiyi-st" id="yiyi-127"> <code class="descname">NPY_ITER_GROWINNER</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-128">当启用缓冲时，这允许内部循环的大小在不需要缓冲时增大。</span><span class="yiyi-st" id="yiyi-129">如果你直接通过所有数据，而不是每个内部循环的缓存友好数组临时值的任何东西，这个选项最好使用。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_DELAY_BUFALLOC"><span class="yiyi-st" id="yiyi-130"> <code class="descname">NPY_ITER_DELAY_BUFALLOC</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-131">当启用缓冲时，会延迟缓冲区的分配，直到<a class="reference internal" href="#c.NpyIter_Reset" title="NpyIter_Reset"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_Reset</span></code></a>或调用另一个复位功能。</span><span class="yiyi-st" id="yiyi-132">当为多线程迭代制作缓冲迭代器的多个副本时，存在该标志以避免浪费地复制缓冲器数据。</span></p>
+<p><span class="yiyi-st" id="yiyi-133">该标志的另一个用途是设置缩减操作。</span><span class="yiyi-st" id="yiyi-134">在创建迭代器之后，迭代器自动分配缩减输出（请务必使用READWRITE访问），其值可以初始化为缩减单元。</span><span class="yiyi-st" id="yiyi-135">使用<a class="reference internal" href="#c.NpyIter_GetOperandArray" title="NpyIter_GetOperandArray"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GetOperandArray</span></code></a>获取对象。</span><span class="yiyi-st" id="yiyi-136">然后，调用<a class="reference internal" href="#c.NpyIter_Reset" title="NpyIter_Reset"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_Reset</span></code></a>以使用其初始值分配和填充缓冲区。</span></p>
+</dd></dl>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-137">可在<code class="docutils literal"><span class="pre">op_flags[i]</span></code>中传递的标志，其中<code class="docutils literal"><span class="pre">0</span> <span class="pre"> <span class="pre">i</span> <span class="pre">＆lt；</span> <span class="pre">nop</span></span></code>：</span></p>
+<blockquote>
+<div><dl class="var">
+<dt id="c.NPY_ITER_READWRITE"><span class="yiyi-st" id="yiyi-138"> <code class="descname">NPY_ITER_READWRITE</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_READONLY"><span class="yiyi-st" id="yiyi-139"> <code class="descname">NPY_ITER_READONLY</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_WRITEONLY"><span class="yiyi-st" id="yiyi-140"> <code class="descname">NPY_ITER_WRITEONLY</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-141">指示迭代器的用户如何读取或写入<code class="docutils literal"><span class="pre">op[i]</span></code>。</span><span class="yiyi-st" id="yiyi-142">每个操作数必须指定这些标志中的一个。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_COPY"><span class="yiyi-st" id="yiyi-143"> <code class="descname">NPY_ITER_COPY</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-144">如果不满足构造函数标志和参数指定的数据类型或对齐要求，则允许创建<code class="docutils literal"><span class="pre">op[i]</span></code>的副本。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_UPDATEIFCOPY"><span class="yiyi-st" id="yiyi-145"> <code class="descname">NPY_ITER_UPDATEIFCOPY</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-146">触发器<a class="reference internal" href="#c.NPY_ITER_COPY" title="NPY_ITER_COPY"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_COPY</span></code></a>，当数组操作数被标记为写入并被复制时，当迭代器被销毁时，使副本中的数据被复制回<code class="docutils literal"><span class="pre">op[i]</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-147">如果操作数被标记为只写并且需要副本，则将创建未初始化的临时数组，然后在销毁时将其复制回<code class="docutils literal"><span class="pre">op[i]</span></code>，而不是进行不必要的复制操作。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_NBO"><span class="yiyi-st" id="yiyi-148"> <code class="descname">NPY_ITER_NBO</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_ALIGNED"><span class="yiyi-st" id="yiyi-149"> <code class="descname">NPY_ITER_ALIGNED</code></span></dt>
+<dd></dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_CONTIG"><span class="yiyi-st" id="yiyi-150"> <code class="descname">NPY_ITER_CONTIG</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-151">使迭代器为本地字节顺序提供<code class="docutils literal"><span class="pre">op[i]</span></code>的数据，根据dtype要求，连续或任何组合进行对齐。</span></p>
+<p><span class="yiyi-st" id="yiyi-152">默认情况下，迭代器产生指向提供的数组的指针，可以是对齐的或不对齐的，以及任何字节顺序。</span><span class="yiyi-st" id="yiyi-153">如果未启用复制或缓冲，并且操作数数据不满足约束，则会出现错误。</span></p>
+<p><span class="yiyi-st" id="yiyi-154">连续约束仅应用于内循环，连续内循环可以具有任意的指针改变。</span></p>
+<p><span class="yiyi-st" id="yiyi-155">如果请求的数据类型是非本地字节顺序，NBO标志覆盖它，并且请求的数据类型被转换为本地字节顺序。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_ALLOCATE"><span class="yiyi-st" id="yiyi-156"> <code class="descname">NPY_ITER_ALLOCATE</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-157">这是用于输出数组，并要求设置标志<a class="reference internal" href="#c.NPY_ITER_WRITEONLY" title="NPY_ITER_WRITEONLY"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_WRITEONLY</span></code></a>或<a class="reference internal" href="#c.NPY_ITER_READWRITE" title="NPY_ITER_READWRITE"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_READWRITE</span></code></a>。</span><span class="yiyi-st" id="yiyi-158">如果<code class="docutils literal"><span class="pre">op[i]</span></code>为NULL，则创建具有最终广播维度的新数组，以及与迭代器的迭代次序匹配的布局。</span></p>
+<p><span class="yiyi-st" id="yiyi-159">当<code class="docutils literal"><span class="pre">op[i]</span></code>为NULL时，请求的数据类型<code class="docutils literal"><span class="pre">op_dtypes[i]</span></code>也可以为NULL，在这种情况下，它从数组的dtypes自动生成被标记为可读。</span><span class="yiyi-st" id="yiyi-160">生成dtype的规则与UFuncs相同。</span><span class="yiyi-st" id="yiyi-161">特别注意的是处理所选dtype中的字节顺序。</span><span class="yiyi-st" id="yiyi-162">如果只有一个输入，则使用输入的dtype。</span><span class="yiyi-st" id="yiyi-163">否则，如果多个输入dtypes组合在一起，输出将按原生字节顺序。</span></p>
+<p><span class="yiyi-st" id="yiyi-164">分配了此标志后，调用者可以通过调用<a class="reference internal" href="#c.NpyIter_GetOperandArray" title="NpyIter_GetOperandArray"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GetOperandArray</span></code></a>并获取返回的C数组中的第i个对象来检索新的数组。</span><span class="yiyi-st" id="yiyi-165">调用者必须调用Py_INCREF来声明对数组的引用。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_NO_SUBTYPE"><span class="yiyi-st" id="yiyi-166"> <code class="descname">NPY_ITER_NO_SUBTYPE</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-167">对于与<a class="reference internal" href="#c.NPY_ITER_ALLOCATE" title="NPY_ITER_ALLOCATE"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_ALLOCATE</span></code></a>一起使用，此标志禁用为输出分配数组子类型，强制其为直线型。</span></p>
+<p><span class="yiyi-st" id="yiyi-168">TODO：也许最好引入一个函数<code class="docutils literal"><span class="pre">NpyIter_GetWrappedOutput</span></code>并删除这个标志？</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_NO_BROADCAST"><span class="yiyi-st" id="yiyi-169"> <code class="descname">NPY_ITER_NO_BROADCAST</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-170">确保输入或输出与迭代维度完全匹配。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_ARRAYMASK"><span class="yiyi-st" id="yiyi-171"> <code class="descname">NPY_ITER_ARRAYMASK</code></span></dt>
+<dd><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-172"><span class="versionmodified">版本1.7中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-173">表示此操作数是用于在向应用了<a class="reference internal" href="#c.NPY_ITER_WRITEMASKED" title="NPY_ITER_WRITEMASKED"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_WRITEMASKED</span></code></a>标志的操作数写入时用于选择元素的掩码。</span><span class="yiyi-st" id="yiyi-174">只有一个操作数可能应用了<a class="reference internal" href="#c.NPY_ITER_ARRAYMASK" title="NPY_ITER_ARRAYMASK"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_ARRAYMASK</span></code></a>标志。</span></p>
+<p><span class="yiyi-st" id="yiyi-175">具有此标志的操作数的数据类型应为<a class="reference internal" href="c-api.dtype.html#c.NPY_BOOL" title="NPY_BOOL"><code class="xref c c-data docutils literal"><span class="pre">NPY_BOOL</span></code></a>，<a class="reference internal" href="c-api.dtype.html#c.NPY_MASK" title="NPY_MASK"><code class="xref c c-data docutils literal"><span class="pre">NPY_MASK</span></code></a>或字段都是有效掩码dtype的struct dtype。</span><span class="yiyi-st" id="yiyi-176">在后一种情况下，它必须与结构化操作数WRITEMASKED匹配，因为它为该数组的每个字段指定一个掩码。</span></p>
+<p><span class="yiyi-st" id="yiyi-177">此标志只影响从缓冲区写回数组。</span><span class="yiyi-st" id="yiyi-178">这意味着如果操作数也是<a class="reference internal" href="#c.NPY_ITER_READWRITE" title="NPY_ITER_READWRITE"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_READWRITE</span></code></a>或<a class="reference internal" href="#c.NPY_ITER_WRITEONLY" title="NPY_ITER_WRITEONLY"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_WRITEONLY</span></code></a>，则执行迭代的代码可以写入此操作数以控制哪些元素将不被修改，哪些元素将被修改。</span><span class="yiyi-st" id="yiyi-179">当掩码应该是输入掩码的组合时，这是有用的。</span><span class="yiyi-st" id="yiyi-180">可以使用<code class="xref c c-func docutils literal"><span class="pre">NpyMask_Create</span></code>函数创建掩码值。</span></p>
+</dd></dl>
+<dl class="var">
+<dt id="c.NPY_ITER_WRITEMASKED"><span class="yiyi-st" id="yiyi-181"> <code class="descname">NPY_ITER_WRITEMASKED</code></span></dt>
+<dd><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-182"><span class="versionmodified">版本1.7中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-183">表示只有具有ARRAYMASK标志的操作数指示的元素才会被迭代修改。</span><span class="yiyi-st" id="yiyi-184">一般来说，迭代器不强制这样做，它是由执行迭代的代码遵循该承诺。</span><span class="yiyi-st" id="yiyi-185">代码可以使用<code class="xref c c-func docutils literal"><span class="pre">NpyMask_IsExposed</span></code>内联函数来测试特定元素上的掩码是否允许写入。</span></p>
+<p><span class="yiyi-st" id="yiyi-186">当使用此标志，并且此操作数被缓冲时，这将改变数据如何从缓冲区复制到数组。</span><span class="yiyi-st" id="yiyi-187">使用掩蔽复制例程，其仅复制缓冲器中的元素，其中<code class="xref c c-func docutils literal"><span class="pre">NpyMask_IsExposed</span></code>从ARRAYMASK操作数中的相应元素返回true。</span></p>
+</dd></dl>
+</div></blockquote>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_AdvancedNew"><span class="yiyi-st" id="yiyi-188"> <a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>* <code class="descname">NpyIter_AdvancedNew</code><span class="sig-paren">(</span>npy_intp<em> nop</em>, <a class="reference internal" href="c-api.types-and-structures.html#c.PyArrayObject" title="PyArrayObject">PyArrayObject</a>**<em> op</em>, npy_uint32<em> flags</em>, <a class="reference internal" href="c-api.array.html#c.NPY_ORDER" title="NPY_ORDER">NPY_ORDER</a><em> order</em>, <a class="reference internal" href="c-api.array.html#c.NPY_CASTING" title="NPY_CASTING">NPY_CASTING</a><em> casting</em>, npy_uint32*<em> op_flags</em>, <a class="reference internal" href="c-api.types-and-structures.html#c.PyArray_Descr" title="PyArray_Descr">PyArray_Descr</a>**<em> op_dtypes</em>, int<em> oa_ndim</em>, int**<em> op_axes</em>, npy_intp*<em> itershape</em>, npy_intp<em> buffersize</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-189">使用多个高级选项扩展<a class="reference internal" href="#c.NpyIter_MultiNew" title="NpyIter_MultiNew"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_MultiNew</span></code></a>，提供对广播和缓冲的更多控制。</span></p>
+<p><span class="yiyi-st" id="yiyi-190">如果将-1 / NULL值传递给<code class="docutils literal"><span class="pre">oa_ndim</span></code>，<code class="docutils literal"><span class="pre">op_axes</span></code>，<code class="docutils literal"><span class="pre">itershape</span></code>和<code class="docutils literal"><span class="pre">buffersize</span></code> <a class="reference internal" href="#c.NpyIter_MultiNew" title="NpyIter_MultiNew"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_MultiNew</span></code></a>。</span></p>
+<p><span class="yiyi-st" id="yiyi-191">参数<code class="docutils literal"><span class="pre">oa_ndim</span></code>在不为零或-1时指定将使用自定义广播进行迭代的维数。</span><span class="yiyi-st" id="yiyi-192">如果提供，还可以提供<code class="docutils literal"><span class="pre">op_axes</span></code>必须和<code class="docutils literal"><span class="pre">itershape</span></code>。</span><span class="yiyi-st" id="yiyi-193"><code class="docutils literal"><span class="pre">op_axes</span></code>参数让您详细控制操作数数组的轴如何匹配和迭代。</span><span class="yiyi-st" id="yiyi-194">在<code class="docutils literal"><span class="pre">op_axes</span></code>中，您必须向<code class="docutils literal"><span class="pre">npy_intp</span></code>类型的<code class="docutils literal"><span class="pre">oa_ndim</span></code> -sized数组提供<code class="docutils literal"><span class="pre">nop</span></code>的数组。</span><span class="yiyi-st" id="yiyi-195">如果<code class="docutils literal"><span class="pre">op_axes</span></code>中的条目为NULL，则应用正常的广播规则。</span><span class="yiyi-st" id="yiyi-196">在<code class="docutils literal"><span class="pre">op_axes[j][i]</span></code>中存储<code class="docutils literal"><span class="pre">op[j]</span></code>的有效轴，或者表示<code class="docutils literal"><span class="pre">newaxis</span></code>的-1。</span><span class="yiyi-st" id="yiyi-197">在每个<code class="docutils literal"><span class="pre">op_axes[j]</span></code>数组中，可以不重复轴。</span><span class="yiyi-st" id="yiyi-198">以下示例是正常广播如何应用于3-D数字组，2-D数字组，1-D数字组和标量。</span></p>
+<p><span class="yiyi-st" id="yiyi-199"><strong>Note</strong>: Before NumPy 1.8 <code class="docutils literal"><span class="pre">oa_ndim</span> <span class="pre">==</span> <span class="pre">0`</span> <span class="pre">was</span> <span class="pre">used</span> <span class="pre">for</span> <span class="pre">signalling</span> <span class="pre">that</span> <span class="pre">that</span> <span class="pre">``op_axes</span></code> and <code class="docutils literal"><span class="pre">itershape</span></code> are unused. </span><span class="yiyi-st" id="yiyi-200">这已被弃用，应替换为-1。</span><span class="yiyi-st" id="yiyi-201">对于这种情况，可以通过使用<a class="reference internal" href="#c.NpyIter_MultiNew" title="NpyIter_MultiNew"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_MultiNew</span></code></a>来实现更好的向后兼容性。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">oa_ndim</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>               <span class="cm">/* # iteration axes */</span>
+<span class="kt">int</span> <span class="n">op0_axes</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>    <span class="cm">/* 3-D operand */</span>
+<span class="kt">int</span> <span class="n">op1_axes</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>   <span class="cm">/* 2-D operand */</span>
+<span class="kt">int</span> <span class="n">op2_axes</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>  <span class="cm">/* 1-D operand */</span>
+<span class="kt">int</span> <span class="n">op3_axes</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>  <span class="cm">/* 0-D (scalar) operand */</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">op_axes</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">op0_axes</span><span class="p">,</span> <span class="n">op1_axes</span><span class="p">,</span> <span class="n">op2_axes</span><span class="p">,</span> <span class="n">op3_axes</span><span class="p">};</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-202"><code class="docutils literal"><span class="pre">itershape</span></code>参数允许您强制迭代器具有特定的迭代形状。</span><span class="yiyi-st" id="yiyi-203">它是长度<code class="docutils literal"><span class="pre">oa_ndim</span></code>的数组。</span><span class="yiyi-st" id="yiyi-204">当条目为负时，其值由操作数确定。</span><span class="yiyi-st" id="yiyi-205">此参数允许自动分配的输出获得与输入的任何尺寸不匹配的附加尺寸。</span></p>
+<p><span class="yiyi-st" id="yiyi-206">如果<code class="docutils literal"><span class="pre">buffersize</span></code>为零，则使用默认缓冲区大小，否则指定要使用的缓冲区大小。</span><span class="yiyi-st" id="yiyi-207">推荐使用2的幂的缓冲器，例如4096或8192。</span></p>
+<p><span class="yiyi-st" id="yiyi-208">如果有错误则返回NULL，否则返回已分配的迭代器。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_Copy"><span class="yiyi-st" id="yiyi-209"> <a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>* <code class="descname">NpyIter_Copy</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-210">创建给定迭代器的副本。</span><span class="yiyi-st" id="yiyi-211">此函数主要用于启用数据的多线程迭代。</span></p>
+<p><span class="yiyi-st" id="yiyi-212"><em>TODO</em>：将此移动到有关多线程迭代的部分。</span></p>
+<p><span class="yiyi-st" id="yiyi-213">多线程迭代的推荐方法是首先创建一个带有标志<a class="reference internal" href="#c.NPY_ITER_EXTERNAL_LOOP" title="NPY_ITER_EXTERNAL_LOOP"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_EXTERNAL_LOOP</span></code></a>，<a class="reference internal" href="#c.NPY_ITER_RANGED" title="NPY_ITER_RANGED"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_RANGED</span></code></a>，<a class="reference internal" href="#c.NPY_ITER_BUFFERED" title="NPY_ITER_BUFFERED"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_BUFFERED</span></code></a>，<a class="reference internal" href="#c.NPY_ITER_DELAY_BUFALLOC" title="NPY_ITER_DELAY_BUFALLOC"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_DELAY_BUFALLOC</span></code></a> ，以及可能<a class="reference internal" href="#c.NPY_ITER_GROWINNER" title="NPY_ITER_GROWINNER"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_GROWINNER</span></code></a>。</span><span class="yiyi-st" id="yiyi-214">为每个线程创建一个这个迭代器的副本（第一个迭代器减去一个）。</span><span class="yiyi-st" id="yiyi-215">然后，取迭代索引范围<code class="docutils literal"><span class="pre">[0，</span> <span class="pre">NpyIter_GetIterSize（iter））</span></code>并将其拆分成任务，例如使用TBB parallel_for循环。</span><span class="yiyi-st" id="yiyi-216">当线程获得要执行的任务时，它然后通过调用<a class="reference internal" href="#c.NpyIter_ResetToIterIndexRange" title="NpyIter_ResetToIterIndexRange"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_ResetToIterIndexRange</span></code></a>并遍历整个范围来使用其迭代器的副本。</span></p>
+<p><span class="yiyi-st" id="yiyi-217">当在多线程代码中使用迭代器或在不持有Python GIL的代码中使用迭代器时，必须注意只调用在该上下文中安全的函数。</span><span class="yiyi-st" id="yiyi-218"><a class="reference internal" href="#c.NpyIter_Copy" title="NpyIter_Copy"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_Copy</span></code></a>无法安全地调用没有Python GIL，因为它增加Python引用。</span><span class="yiyi-st" id="yiyi-219">通过将<code class="docutils literal"><span class="pre">errmsg</span></code>参数作为非NULL传递，可以安全地调用<code class="docutils literal"><span class="pre">Reset*</span></code>和一些其他函数，以便函数将传回错误，而不是设置Python异常。</span></p>
+</dd></dl>
+<dl class="function">
+<dt><span class="yiyi-st" id="yiyi-220"><code class="descname">int NpyIter_RemoveAxis（NpyIter * iter，int axis）``</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-221">从迭代中删除轴。</span><span class="yiyi-st" id="yiyi-222">这需要为迭代器创建设置<a class="reference internal" href="#c.NPY_ITER_MULTI_INDEX" title="NPY_ITER_MULTI_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_MULTI_INDEX</span></code></a>，如果启用缓冲或正在跟踪索引，则不会工作。</span><span class="yiyi-st" id="yiyi-223">此函数还将迭代器重置为其初始状态。</span></p>
+<p><span class="yiyi-st" id="yiyi-224">这对于设置例如累加循环是有用的。</span><span class="yiyi-st" id="yiyi-225">迭代器可以首先使用所有维度创建，包括累积轴，以便输出正确创建。</span><span class="yiyi-st" id="yiyi-226">然后，可以删除累积轴，并以嵌套方式进行计算。</span></p>
+<p><span class="yiyi-st" id="yiyi-227"><strong>警告</strong>：此函数可能会更改迭代器的内部存储器布局。</span><span class="yiyi-st" id="yiyi-228">必须再次检索来自迭代器的任何缓存函数或指针！</span><span class="yiyi-st" id="yiyi-229">迭代器范围也将被重置。</span></p>
+<p><span class="yiyi-st" id="yiyi-230">返回<code class="docutils literal"><span class="pre">NPY_SUCCEED</span></code>或<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_RemoveMultiIndex"><span class="yiyi-st" id="yiyi-231"> int <code class="descname">NpyIter_RemoveMultiIndex</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-232">如果迭代器正在跟踪多索引，则会剥离它们的支持，并且如果不需要多索引，则可以进行进一步的迭代器优化。</span><span class="yiyi-st" id="yiyi-233">此函数还将迭代器重置为其初始状态。</span></p>
+<p><span class="yiyi-st" id="yiyi-234"><strong>警告</strong>：此函数可能会更改迭代器的内部存储器布局。</span><span class="yiyi-st" id="yiyi-235">必须再次检索来自迭代器的任何缓存函数或指针！</span></p>
+<p><span class="yiyi-st" id="yiyi-236">调用此函数后，<code class="xref c c-func docutils literal"><span class="pre">NpyIter_HasMultiIndex(iter)</span></code>将返回false。</span></p>
+<p><span class="yiyi-st" id="yiyi-237">返回<code class="docutils literal"><span class="pre">NPY_SUCCEED</span></code>或<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_EnableExternalLoop"><span class="yiyi-st" id="yiyi-238"> int <code class="descname">NpyIter_EnableExternalLoop</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-239">如果调用<a class="reference internal" href="#c.NpyIter_RemoveMultiIndex" title="NpyIter_RemoveMultiIndex"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_RemoveMultiIndex</span></code></a>，您可能需要启用标志<a class="reference internal" href="#c.NPY_ITER_EXTERNAL_LOOP" title="NPY_ITER_EXTERNAL_LOOP"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_EXTERNAL_LOOP</span></code></a>。</span><span class="yiyi-st" id="yiyi-240">此标记不能与<a class="reference internal" href="#c.NPY_ITER_MULTI_INDEX" title="NPY_ITER_MULTI_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_MULTI_INDEX</span></code></a>一起使用，因此提供此函数以在调用<a class="reference internal" href="#c.NpyIter_RemoveMultiIndex" title="NpyIter_RemoveMultiIndex"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_RemoveMultiIndex</span></code></a>之后启用该功能。</span><span class="yiyi-st" id="yiyi-241">此函数还将迭代器重置为其初始状态。</span></p>
+<p><span class="yiyi-st" id="yiyi-242"><strong>警告</strong>：此函数更改迭代器的内部逻辑。</span><span class="yiyi-st" id="yiyi-243">必须再次检索来自迭代器的任何缓存函数或指针！</span></p>
+<p><span class="yiyi-st" id="yiyi-244">返回<code class="docutils literal"><span class="pre">NPY_SUCCEED</span></code>或<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_Deallocate"><span class="yiyi-st" id="yiyi-245"> int <code class="descname">NpyIter_Deallocate</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-246">取消分配迭代器对象。</span><span class="yiyi-st" id="yiyi-247">这另外释放所有副本，触发UPDATEIFCOPY行为在必要时。</span></p>
+<p><span class="yiyi-st" id="yiyi-248">返回<code class="docutils literal"><span class="pre">NPY_SUCCEED</span></code>或<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_Reset"><span class="yiyi-st" id="yiyi-249"> int <code class="descname">NpyIter_Reset</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, char**<em> errmsg</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-250">在迭代范围的开始处将迭代器重置为其初始状态。</span></p>
+<p><span class="yiyi-st" id="yiyi-251">返回<code class="docutils literal"><span class="pre">NPY_SUCCEED</span></code>或<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>。</span><span class="yiyi-st" id="yiyi-252">如果errmsg为非NULL，则在返回<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>时，不会设置Python异常。</span><span class="yiyi-st" id="yiyi-253">相反，* errmsg设置为错误消息。</span><span class="yiyi-st" id="yiyi-254">当errmsg是非NULL时，可以安全地调用该函数，而不用保持Python GIL。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_ResetToIterIndexRange"><span class="yiyi-st" id="yiyi-255"> int <code class="descname">NpyIter_ResetToIterIndexRange</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, npy_intp<em> istart</em>, npy_intp<em> iend</em>, char**<em> errmsg</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-256">重置迭代器并将其限制为<code class="docutils literal"><span class="pre">iterindex</span></code>范围<code class="docutils literal"><span class="pre">[istart，</span> <span class="pre">iend）</span></code>。</span><span class="yiyi-st" id="yiyi-257">有关如何将此用于多线程迭代的说明，请参见<a class="reference internal" href="#c.NpyIter_Copy" title="NpyIter_Copy"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_Copy</span></code></a>。</span><span class="yiyi-st" id="yiyi-258">这需要将标志<a class="reference internal" href="#c.NPY_ITER_RANGED" title="NPY_ITER_RANGED"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_RANGED</span></code></a>传递给迭代器构造函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-259">如果你想同时重置<code class="docutils literal"><span class="pre">iterindex</span></code>范围和基本指针，你可以做以下事情，以避免额外的缓冲区复制（一定要添加返回代码错误检查，当你复制这个代码）。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cm">/* Set to a trivial empty range */</span>
+<span class="n">NpyIter_ResetToIterIndexRange</span><span class="p">(</span><span class="n">iter</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="cm">/* Set the base pointers */</span>
+<span class="n">NpyIter_ResetBasePointers</span><span class="p">(</span><span class="n">iter</span><span class="p">,</span> <span class="n">baseptrs</span><span class="p">);</span>
+<span class="cm">/* Set to the desired range */</span>
+<span class="n">NpyIter_ResetToIterIndexRange</span><span class="p">(</span><span class="n">iter</span><span class="p">,</span> <span class="n">istart</span><span class="p">,</span> <span class="n">iend</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-260">返回<code class="docutils literal"><span class="pre">NPY_SUCCEED</span></code>或<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>。</span><span class="yiyi-st" id="yiyi-261">如果errmsg为非NULL，则在返回<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>时，不会设置Python异常。</span><span class="yiyi-st" id="yiyi-262">相反，* errmsg设置为错误消息。</span><span class="yiyi-st" id="yiyi-263">当errmsg是非NULL时，可以安全地调用该函数，而不用保持Python GIL。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_ResetBasePointers"><span class="yiyi-st" id="yiyi-264"> int <code class="descname">NpyIter_ResetBasePointers</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a><em> *iter</em>, char**<em> baseptrs</em>, char**<em> errmsg</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-265">将迭代器重置为其初始状态，但使用<code class="docutils literal"><span class="pre">baseptrs</span></code>中的值替代正在迭代的数组的指针。</span><span class="yiyi-st" id="yiyi-266">此函数旨在与<code class="docutils literal"><span class="pre">op_axes</span></code>参数一起通过嵌套迭代代码与两个或多个迭代器一起使用。</span></p>
+<p><span class="yiyi-st" id="yiyi-267">返回<code class="docutils literal"><span class="pre">NPY_SUCCEED</span></code>或<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>。</span><span class="yiyi-st" id="yiyi-268">如果errmsg为非NULL，则在返回<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>时，不会设置Python异常。</span><span class="yiyi-st" id="yiyi-269">相反，* errmsg设置为错误消息。</span><span class="yiyi-st" id="yiyi-270">当errmsg是非NULL时，可以安全地调用该函数，而不用保持Python GIL。</span></p>
+<p><span class="yiyi-st" id="yiyi-271"><em>TODO</em>：将以下内容移到嵌套迭代器的特殊部分。</span></p>
+<p><span class="yiyi-st" id="yiyi-272">为嵌套迭代创建迭代器需要小心。</span><span class="yiyi-st" id="yiyi-273">所有迭代器操作数必须完全匹配，否则对<a class="reference internal" href="#c.NpyIter_ResetBasePointers" title="NpyIter_ResetBasePointers"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_ResetBasePointers</span></code></a>的调用将无效。</span><span class="yiyi-st" id="yiyi-274">这意味着不应偶然使用自动副本和输出分配。</span><span class="yiyi-st" id="yiyi-275">通过创建一个启用了所有转换参数的迭代器，然后使用<a class="reference internal" href="#c.NpyIter_GetOperandArray" title="NpyIter_GetOperandArray"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GetOperandArray</span></code></a>函数获取分配的操作数，并将它们传递到函数中，仍然可以使用迭代器的自动数据转换和转换功能构造函数为其余的迭代器。</span></p>
+<p><span class="yiyi-st" id="yiyi-276"><strong>警告</strong>：在为嵌套迭代创建迭代器时，代码不得在不同的迭代器中多次使用维度。</span><span class="yiyi-st" id="yiyi-277">如果这样做，嵌套迭代将在迭代期间产生超出界限的指针。</span></p>
+<p><span class="yiyi-st" id="yiyi-278"><strong>警告</strong>：在为嵌套迭代创建迭代器时，缓冲只能应用于最内层迭代器。</span><span class="yiyi-st" id="yiyi-279">如果缓冲迭代器用作<code class="docutils literal"><span class="pre">baseptrs</span></code>的源，它将指向一个小缓冲区而不是数组，内迭代将无效。</span></p>
+<p><span class="yiyi-st" id="yiyi-280">使用嵌套迭代器的模式如下。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">NpyIter</span> <span class="o">*</span><span class="n">iter1</span><span class="p">,</span> <span class="o">*</span><span class="n">iter1</span><span class="p">;</span>
+<span class="n">NpyIter_IterNextFunc</span> <span class="o">*</span><span class="n">iternext1</span><span class="p">,</span> <span class="o">*</span><span class="n">iternext2</span><span class="p">;</span>
+<span class="kt">char</span> <span class="o">**</span><span class="n">dataptrs1</span><span class="p">;</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * With the exact same operands, no copies allowed, and</span>
+<span class="cm"> * no axis in op_axes used both in iter1 and iter2.</span>
+<span class="cm"> * Buffering may be enabled for iter2, but not for iter1.</span>
+<span class="cm"> */</span>
+<span class="n">iter1</span> <span class="o">=</span> <span class="p">...;</span> <span class="n">iter2</span> <span class="o">=</span> <span class="p">...;</span>
+
+<span class="n">iternext1</span> <span class="o">=</span> <span class="n">NpyIter_GetIterNext</span><span class="p">(</span><span class="n">iter1</span><span class="p">);</span>
+<span class="n">iternext2</span> <span class="o">=</span> <span class="n">NpyIter_GetIterNext</span><span class="p">(</span><span class="n">iter2</span><span class="p">);</span>
+<span class="n">dataptrs1</span> <span class="o">=</span> <span class="n">NpyIter_GetDataPtrArray</span><span class="p">(</span><span class="n">iter1</span><span class="p">);</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="n">NpyIter_ResetBasePointers</span><span class="p">(</span><span class="n">iter2</span><span class="p">,</span> <span class="n">dataptrs1</span><span class="p">);</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="cm">/* Use the iter2 values */</span>
+    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">iternext2</span><span class="p">(</span><span class="n">iter2</span><span class="p">));</span>
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">iternext1</span><span class="p">(</span><span class="n">iter1</span><span class="p">));</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GotoMultiIndex"><span class="yiyi-st" id="yiyi-281"> int <code class="descname">NpyIter_GotoMultiIndex</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, npy_intp*<em> multi_index</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-282">调整迭代器以指向<code class="docutils literal"><span class="pre">multi_index</span></code>指向的<code class="docutils literal"><span class="pre">ndim</span></code>索引。</span><span class="yiyi-st" id="yiyi-283">如果未跟踪多索引，索引超出边界或禁用内循环迭代，则返回错误。</span></p>
+<p><span class="yiyi-st" id="yiyi-284">返回<code class="docutils literal"><span class="pre">NPY_SUCCEED</span></code>或<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GotoIndex"><span class="yiyi-st" id="yiyi-285"> int <code class="descname">NpyIter_GotoIndex</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, npy_intp<em> index</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-286">调整迭代器以指向指定的<code class="docutils literal"><span class="pre">index</span></code>。</span><span class="yiyi-st" id="yiyi-287">如果迭代器被构造为具有标志<a class="reference internal" href="#c.NPY_ITER_C_INDEX" title="NPY_ITER_C_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_C_INDEX</span></code></a>，则<code class="docutils literal"><span class="pre">index</span></code>是C阶索引，并且如果迭代器被构造为具有标志<a class="reference internal" href="#c.NPY_ITER_F_INDEX" title="NPY_ITER_F_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_F_INDEX</span></code></a> <code class="docutils literal"><span class="pre">index</span></code>是Fortran顺序索引。</span><span class="yiyi-st" id="yiyi-288">如果没有正在跟踪的索引，索引超出边界或禁用内循环迭代，则返回错误。</span></p>
+<p><span class="yiyi-st" id="yiyi-289">返回<code class="docutils literal"><span class="pre">NPY_SUCCEED</span></code>或<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetIterSize"><span class="yiyi-st" id="yiyi-290"> npy_intp <code class="descname">NpyIter_GetIterSize</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-291">返回要迭代的元素数。</span><span class="yiyi-st" id="yiyi-292">这是所有尺寸的形状的产物。</span><span class="yiyi-st" id="yiyi-293">当正在跟踪多索引（并且可以调用<em class="xref py py-obj">NpyIter_RemoveAxis</em>）时，大小可以是<code class="docutils literal"><span class="pre">-1</span></code>以指示迭代器太大。</span><span class="yiyi-st" id="yiyi-294">这样的迭代器无效，但可以在调用<em class="xref py py-obj">NpyIter_RemoveAxis</em>后生效。</span><span class="yiyi-st" id="yiyi-295">没有必要检查这种情况。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetIterIndex"><span class="yiyi-st" id="yiyi-296"> npy_intp <code class="descname">NpyIter_GetIterIndex</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-297">获取迭代器的<code class="docutils literal"><span class="pre">iterindex</span></code>，它是与迭代器的迭代顺序匹配的索引。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetIterIndexRange"><span class="yiyi-st" id="yiyi-298"> void <code class="descname">NpyIter_GetIterIndexRange</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, npy_intp*<em> istart</em>, npy_intp*<em> iend</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-299">获取要迭代的<code class="docutils literal"><span class="pre">iterindex</span></code>子范围。</span><span class="yiyi-st" id="yiyi-300">如果未指定<a class="reference internal" href="#c.NPY_ITER_RANGED" title="NPY_ITER_RANGED"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_RANGED</span></code></a>，则始终返回范围<code class="docutils literal"><span class="pre">[0，</span> <span class="pre">NpyIter_IterSize（iter））</span></code>。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GotoIterIndex"><span class="yiyi-st" id="yiyi-301"> int <code class="descname">NpyIter_GotoIterIndex</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, npy_intp<em> iterindex</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-302">调整迭代器以指向指定的<code class="docutils literal"><span class="pre">iterindex</span></code>。</span><span class="yiyi-st" id="yiyi-303">IterIndex是与迭代器的迭代次序匹配的索引。</span><span class="yiyi-st" id="yiyi-304">如果<code class="docutils literal"><span class="pre">iterindex</span></code>超出边界，启用缓冲或禁用内循环迭代，则返回错误。</span></p>
+<p><span class="yiyi-st" id="yiyi-305">返回<code class="docutils literal"><span class="pre">NPY_SUCCEED</span></code>或<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_HasDelayedBufAlloc"><span class="yiyi-st" id="yiyi-306"> <a class="reference internal" href="c-api.dtype.html#c.npy_bool" title="npy_bool">npy_bool</a> <code class="descname">NpyIter_HasDelayedBufAlloc</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-307">如果将标志<a class="reference internal" href="#c.NPY_ITER_DELAY_BUFALLOC" title="NPY_ITER_DELAY_BUFALLOC"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_DELAY_BUFALLOC</span></code></a>传递给迭代器构造函数，并且尚未调用任何复位函数，则返回1，否则为0。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_HasExternalLoop"><span class="yiyi-st" id="yiyi-308"> <a class="reference internal" href="c-api.dtype.html#c.npy_bool" title="npy_bool">npy_bool</a> <code class="descname">NpyIter_HasExternalLoop</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-309">如果调用程序需要处理最内层的一维循环，则返回1，如果调用程序处理所有循环，则返回0。</span><span class="yiyi-st" id="yiyi-310">这由构造函数标志<a class="reference internal" href="#c.NPY_ITER_EXTERNAL_LOOP" title="NPY_ITER_EXTERNAL_LOOP"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_EXTERNAL_LOOP</span></code></a>或<a class="reference internal" href="#c.NpyIter_EnableExternalLoop" title="NpyIter_EnableExternalLoop"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_EnableExternalLoop</span></code></a>控制。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_HasMultiIndex"><span class="yiyi-st" id="yiyi-311"> <a class="reference internal" href="c-api.dtype.html#c.npy_bool" title="npy_bool">npy_bool</a> <code class="descname">NpyIter_HasMultiIndex</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-312">如果迭代器是使用<a class="reference internal" href="#c.NPY_ITER_MULTI_INDEX" title="NPY_ITER_MULTI_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_MULTI_INDEX</span></code></a>标志创建的，则返回1，否则返回0。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_HasIndex"><span class="yiyi-st" id="yiyi-313"> <a class="reference internal" href="c-api.dtype.html#c.npy_bool" title="npy_bool">npy_bool</a> <code class="descname">NpyIter_HasIndex</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-314">如果迭代器是使用<a class="reference internal" href="#c.NPY_ITER_C_INDEX" title="NPY_ITER_C_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_C_INDEX</span></code></a>或<a class="reference internal" href="#c.NPY_ITER_F_INDEX" title="NPY_ITER_F_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_F_INDEX</span></code></a>标志创建的，则返回1，否则为0。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_RequiresBuffering"><span class="yiyi-st" id="yiyi-315"> <a class="reference internal" href="c-api.dtype.html#c.npy_bool" title="npy_bool">npy_bool</a> <code class="descname">NpyIter_RequiresBuffering</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-316">如果迭代器需要缓冲，则返回1，这在操作数需要转换或对齐时发生，因此不能直接使用。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_IsBuffered"><span class="yiyi-st" id="yiyi-317"> <a class="reference internal" href="c-api.dtype.html#c.npy_bool" title="npy_bool">npy_bool</a> <code class="descname">NpyIter_IsBuffered</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-318">如果迭代器是使用<a class="reference internal" href="#c.NPY_ITER_BUFFERED" title="NPY_ITER_BUFFERED"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_BUFFERED</span></code></a>标志创建的，则返回1，否则返回0。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_IsGrowInner"><span class="yiyi-st" id="yiyi-319"> <a class="reference internal" href="c-api.dtype.html#c.npy_bool" title="npy_bool">npy_bool</a> <code class="descname">NpyIter_IsGrowInner</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-320">如果迭代器是使用<a class="reference internal" href="#c.NPY_ITER_GROWINNER" title="NPY_ITER_GROWINNER"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_GROWINNER</span></code></a>标志创建的，则返回1，否则返回0。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetBufferSize"><span class="yiyi-st" id="yiyi-321"> npy_intp <code class="descname">NpyIter_GetBufferSize</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-322">如果迭代器被缓冲，返回正在使用的缓冲区的大小，否则返回0。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetNDim"><span class="yiyi-st" id="yiyi-323"> int <code class="descname">NpyIter_GetNDim</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-324">返回正在迭代的维度数。</span><span class="yiyi-st" id="yiyi-325">如果在迭代器构造函数中未请求多索引，则此值可能小于原始对象中的维数。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetNOp"><span class="yiyi-st" id="yiyi-326"> int <code class="descname">NpyIter_GetNOp</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-327">返回迭代器中的操作数的数量。</span></p>
+<p><span class="yiyi-st" id="yiyi-328">当在操作数上使用<code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_USE_MASKNA</span></code>时，会在迭代器中的操作数列表的末尾添加一个新的操作数，以跟踪该操作数的NA掩码。</span><span class="yiyi-st" id="yiyi-329">因此，这等于构造操作数的数目加上指定了标志<code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_USE_MASKNA</span></code>的操作数的数目。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetFirstMaskNAOp"><span class="yiyi-st" id="yiyi-330"> int <code class="descname">NpyIter_GetFirstMaskNAOp</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-331"><span class="versionmodified">版本1.7中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-332">返回数组中第一个NA掩码操作数的索引。</span><span class="yiyi-st" id="yiyi-333">此值等于传递到构造函数中的操作数的数目。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetAxisStrideArray"><span class="yiyi-st" id="yiyi-334"> npy_intp* <code class="descname">NpyIter_GetAxisStrideArray</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, int<em> axis</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-335">获取指定轴的步幅数组。</span><span class="yiyi-st" id="yiyi-336">需要迭代器跟踪多索引，并且缓冲不启用。</span></p>
+<p><span class="yiyi-st" id="yiyi-337">当您想以某种方式匹配操作数轴时，可以使用此选项，然后使用<code class="xref c c-func docutils literal"><span class="pre">NpyIter_RemoveAxis</span></code>删除它们以手动处理它们的处理。</span><span class="yiyi-st" id="yiyi-338">通过在移除轴之前调用此函数，您可以获得手动处理的步幅。</span></p>
+<p><span class="yiyi-st" id="yiyi-339">在错误时返回<code class="docutils literal"><span class="pre">NULL</span></code>。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetShape"><span class="yiyi-st" id="yiyi-340"> int <code class="descname">NpyIter_GetShape</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, npy_intp*<em> outshape</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-341">返回<code class="docutils literal"><span class="pre">outshape</span></code>中迭代器的广播形状。</span><span class="yiyi-st" id="yiyi-342">这只能在跟踪多索引的迭代器上调用。</span></p>
+<p><span class="yiyi-st" id="yiyi-343">返回<code class="docutils literal"><span class="pre">NPY_SUCCEED</span></code>或<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetDescrArray"><span class="yiyi-st" id="yiyi-344"> <a class="reference internal" href="c-api.types-and-structures.html#c.PyArray_Descr" title="PyArray_Descr">PyArray_Descr</a>** <code class="descname">NpyIter_GetDescrArray</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-345">这将返回指向正在迭代的对象的<code class="docutils literal"><span class="pre">nop</span></code>数据类型描述符的指针。</span><span class="yiyi-st" id="yiyi-346">结果指向<code class="docutils literal"><span class="pre">iter</span></code>，因此调用者不会获得对Descr的任何引用。</span></p>
+<p><span class="yiyi-st" id="yiyi-347">这个指针可以在迭代循环之前缓存，调用<code class="docutils literal"><span class="pre">iternext</span></code>将不会改变它。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetOperandArray"><span class="yiyi-st" id="yiyi-348"> <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a>** <code class="descname">NpyIter_GetOperandArray</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-349">这将返回指向正在迭代的<code class="docutils literal"><span class="pre">nop</span></code>操作数PyObject的指针。</span><span class="yiyi-st" id="yiyi-350">结果指向<code class="docutils literal"><span class="pre">iter</span></code>，因此调用者不会获得对PyObjects的任何引用。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetMaskNAIndexArray"><span class="yiyi-st" id="yiyi-351"> npy_int8* <code class="descname">NpyIter_GetMaskNAIndexArray</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-352"><span class="versionmodified">版本1.7中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-353">这返回指向<code class="docutils literal"><span class="pre">nop</span></code>索引的指针，其将具有<code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_USE_MASKNA</span></code>的构造操作数映射到它们对应的NA掩码操作数，反之亦然。</span><span class="yiyi-st" id="yiyi-354">对于未使用<code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_USE_MASKNA</span></code>标记的操作数，此数组包含负值。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetIterView"><span class="yiyi-st" id="yiyi-355"> <a class="reference external" href="https://docs.python.org/dev/c-api/structures.html#c.PyObject" title="(in Python v3.7)">PyObject</a>* <code class="descname">NpyIter_GetIterView</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, npy_intp<em> i</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-356">这返回对新的ndarray视图的引用，该视图是数组<a class="reference internal" href="#c.NpyIter_GetOperandArray" title="NpyIter_GetOperandArray"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GetOperandArray</span></code></a>中的第i个对象的视图，其尺寸和步长与内部优化的迭代模式相匹配。</span><span class="yiyi-st" id="yiyi-357">此视图的C阶迭代等效于迭代器的迭代顺序。</span></p>
+<p><span class="yiyi-st" id="yiyi-358">例如，如果迭代器创建时使用单个数组作为其输入，并且可以重新排列其所有轴，然后将其折叠为单个重叠迭代，则这将返回一个一维数组的视图。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetReadFlags"><span class="yiyi-st" id="yiyi-359"> void <code class="descname">NpyIter_GetReadFlags</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, char*<em> outreadflags</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-360">填充<code class="docutils literal"><span class="pre">nop</span></code>标志。</span><span class="yiyi-st" id="yiyi-361">如果<code class="docutils literal"><span class="pre">op[i]</span></code>可以读取，则将<code class="docutils literal"><span class="pre">outreadflags[i]</span></code>设置为1，如果不能读取，则设置为0。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetWriteFlags"><span class="yiyi-st" id="yiyi-362"> void <code class="descname">NpyIter_GetWriteFlags</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, char*<em> outwriteflags</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-363">填充<code class="docutils literal"><span class="pre">nop</span></code>标志。</span><span class="yiyi-st" id="yiyi-364">如果<code class="docutils literal"><span class="pre">op[i]</span></code>可以写入，则将<code class="docutils literal"><span class="pre">outwriteflags[i]</span></code>设置为1，如果不能，则将其设置为0。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_CreateCompatibleStrides"><span class="yiyi-st" id="yiyi-365"> int <code class="descname">NpyIter_CreateCompatibleStrides</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, npy_intp<em> itemsize</em>, npy_intp*<em> outstrides</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-366">构建一组步幅，与使用<a class="reference internal" href="#c.NPY_ITER_ALLOCATE" title="NPY_ITER_ALLOCATE"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_ALLOCATE</span></code></a>标志创建的输出数组的步幅相同，其中为op_axes传递了NULL。</span><span class="yiyi-st" id="yiyi-367">这是针对连续打包的数据，但不一定是C或Fortran顺序。</span><span class="yiyi-st" id="yiyi-368">这应与<a class="reference internal" href="#c.NpyIter_GetShape" title="NpyIter_GetShape"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GetShape</span></code></a>和<a class="reference internal" href="#c.NpyIter_GetNDim" title="NpyIter_GetNDim"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GetNDim</span></code></a>一起使用，并将标志<a class="reference internal" href="#c.NPY_ITER_MULTI_INDEX" title="NPY_ITER_MULTI_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_MULTI_INDEX</span></code></a>传递到构造函数中。</span></p>
+<p><span class="yiyi-st" id="yiyi-369">此函数的用例是在一个或多个维度上匹配迭代器的形状和布局以及粘性。</span><span class="yiyi-st" id="yiyi-370">例如，为了生成一个数值渐变的输入值的向量，你传入ndim * itemsize为itemsize，然后添加另一个维度到结束与大小ndim和stride itemsize。</span><span class="yiyi-st" id="yiyi-371">要做Hessian矩阵，你做同样的事情，但添加两个维度，或利用对称性，并将它包装到1维与特定的编码。</span></p>
+<p><span class="yiyi-st" id="yiyi-372">仅当迭代器正在跟踪多索引并且如果<a class="reference internal" href="#c.NPY_ITER_DONT_NEGATE_STRIDES" title="NPY_ITER_DONT_NEGATE_STRIDES"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_DONT_NEGATE_STRIDES</span></code></a>用于防止以相反顺序迭代轴时，才可以调用此函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-373">如果使用此方法创建数组，只需为每次迭代添加“itemsize”，就会遍历匹配迭代器的新数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-374">返回<code class="docutils literal"><span class="pre">NPY_SUCCEED</span></code>或<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_IsFirstVisit"><span class="yiyi-st" id="yiyi-375"> <a class="reference internal" href="c-api.dtype.html#c.npy_bool" title="npy_bool">npy_bool</a> <code class="descname">NpyIter_IsFirstVisit</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, int<em> iop</em><span class="sig-paren">)</span></span></dt>
+<dd><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-376"><span class="versionmodified">版本1.7中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-377">检查这是否是第一次首次查看迭代器指向的指定reduce操作数的元素。</span><span class="yiyi-st" id="yiyi-378">该函数为减少操作数和禁用缓冲时返回一个合理的答案。</span><span class="yiyi-st" id="yiyi-379">缓冲的非减少操作数的答案可能不正确。</span></p>
+<p><span class="yiyi-st" id="yiyi-380">此函数仅用于EXTERNAL_LOOP模式，并且当该模式未启用时将产生一些错误的答案。</span></p>
+<p><span class="yiyi-st" id="yiyi-381">如果这个函数返回true，调用者也应该检查操作数的内循环步长，因为如果该步长为0，那么只有第一次访问最内部外部循环的第一个元素。</span></p>
+<p><span class="yiyi-st" id="yiyi-382"><em>警告</em>：出于性能原因，&apos;iop&apos;没有进行边界检查，它没有确认&apos;iop&apos;实际上是一个归约操作数，并且未确认启用了EXTERNAL_LOOP模式。</span><span class="yiyi-st" id="yiyi-383">这些检查是调用者的责任，应该在任何内部循环之外完成。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="functions-for-iteration">
+<h2><span class="yiyi-st" id="yiyi-384">Functions For Iteration</span></h2>
+<dl class="function">
+<dt id="c.NpyIter_GetIterNext"><span class="yiyi-st" id="yiyi-385"> <a class="reference internal" href="#c.NpyIter_IterNextFunc" title="NpyIter_IterNextFunc">NpyIter_IterNextFunc</a>* <code class="descname">NpyIter_GetIterNext</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, char**<em> errmsg</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-386">返回用于迭代的函数指针。</span><span class="yiyi-st" id="yiyi-387">可以通过该函数计算函数指针的专用版本，而不是存储在迭代器结构中。</span><span class="yiyi-st" id="yiyi-388">因此，为了获得良好的性能，需要将函数指针保存在变量中，而不是为每次循环迭代而检索。</span></p>
+<p><span class="yiyi-st" id="yiyi-389">如果有错误，则返回NULL。</span><span class="yiyi-st" id="yiyi-390">如果errmsg为非NULL，则在返回<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>时，不会设置Python异常。</span><span class="yiyi-st" id="yiyi-391">相反，* errmsg设置为错误消息。</span><span class="yiyi-st" id="yiyi-392">当errmsg是非NULL时，可以安全地调用该函数，而不用保持Python GIL。</span></p>
+<p><span class="yiyi-st" id="yiyi-393">典型的循环结构如下。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">NpyIter_IterNextFunc</span> <span class="o">*</span><span class="n">iternext</span> <span class="o">=</span> <span class="n">NpyIter_GetIterNext</span><span class="p">(</span><span class="n">iter</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="kt">char</span><span class="o">**</span> <span class="n">dataptr</span> <span class="o">=</span> <span class="n">NpyIter_GetDataPtrArray</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="cm">/* use the addresses dataptr[0], ... dataptr[nop-1] */</span>
+<span class="p">}</span> <span class="k">while</span><span class="p">(</span><span class="n">iternext</span><span class="p">(</span><span class="n">iter</span><span class="p">));</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-394">当指定<a class="reference internal" href="#c.NPY_ITER_EXTERNAL_LOOP" title="NPY_ITER_EXTERNAL_LOOP"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_EXTERNAL_LOOP</span></code></a>时，典型的内部循环结构如下。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">NpyIter_IterNextFunc</span> <span class="o">*</span><span class="n">iternext</span> <span class="o">=</span> <span class="n">NpyIter_GetIterNext</span><span class="p">(</span><span class="n">iter</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="kt">char</span><span class="o">**</span> <span class="n">dataptr</span> <span class="o">=</span> <span class="n">NpyIter_GetDataPtrArray</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+<span class="n">npy_intp</span><span class="o">*</span> <span class="n">stride</span> <span class="o">=</span> <span class="n">NpyIter_GetInnerStrideArray</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+<span class="n">npy_intp</span><span class="o">*</span> <span class="n">size_ptr</span> <span class="o">=</span> <span class="n">NpyIter_GetInnerLoopSizePtr</span><span class="p">(</span><span class="n">iter</span><span class="p">),</span> <span class="n">size</span><span class="p">;</span>
+<span class="n">npy_intp</span> <span class="n">iop</span><span class="p">,</span> <span class="n">nop</span> <span class="o">=</span> <span class="n">NpyIter_GetNOp</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+
+<span class="k">do</span> <span class="p">{</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="o">*</span><span class="n">size_ptr</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">size</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* use the addresses dataptr[0], ... dataptr[nop-1] */</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">iop</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iop</span> <span class="o">&lt;</span> <span class="n">nop</span><span class="p">;</span> <span class="o">++</span><span class="n">iop</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">dataptr</span><span class="p">[</span><span class="n">iop</span><span class="p">]</span> <span class="o">+=</span> <span class="n">stride</span><span class="p">[</span><span class="n">iop</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">iternext</span><span class="p">());</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-395">观察到我们在迭代器中使用dataptr数组，而不是将值复制到本地临时。</span><span class="yiyi-st" id="yiyi-396">这是可能的，因为当调用<code class="docutils literal"><span class="pre">iternext()</span></code>时，这些指针将被新值覆盖，而不是递增更新。</span></p>
+<p><span class="yiyi-st" id="yiyi-397">如果正在使用编译时固定缓冲区（标志<a class="reference internal" href="#c.NPY_ITER_BUFFERED" title="NPY_ITER_BUFFERED"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_BUFFERED</span></code></a>和<a class="reference internal" href="#c.NPY_ITER_EXTERNAL_LOOP" title="NPY_ITER_EXTERNAL_LOOP"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_EXTERNAL_LOOP</span></code></a>），内部大小也可以用作信号。</span><span class="yiyi-st" id="yiyi-398">当<code class="docutils literal"><span class="pre">iternext()</span></code>返回false时，大小保证为零，从而启用以下循环结构。</span><span class="yiyi-st" id="yiyi-399">注意，如果你使用这个结构，你不应该传递<a class="reference internal" href="#c.NPY_ITER_GROWINNER" title="NPY_ITER_GROWINNER"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_GROWINNER</span></code></a>作为一个标志，因为在某些情况下它会导致更大的尺寸。</span></p>
+<div class="highlight-c"><div class="highlight"><pre><span></span><span class="cm">/* The constructor should have buffersize passed as this value */</span>
+<span class="cp">#define FIXED_BUFFER_SIZE 1024</span>
+
+<span class="n">NpyIter_IterNextFunc</span> <span class="o">*</span><span class="n">iternext</span> <span class="o">=</span> <span class="n">NpyIter_GetIterNext</span><span class="p">(</span><span class="n">iter</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="kt">char</span> <span class="o">**</span><span class="n">dataptr</span> <span class="o">=</span> <span class="n">NpyIter_GetDataPtrArray</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+<span class="n">npy_intp</span> <span class="o">*</span><span class="n">stride</span> <span class="o">=</span> <span class="n">NpyIter_GetInnerStrideArray</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+<span class="n">npy_intp</span> <span class="o">*</span><span class="n">size_ptr</span> <span class="o">=</span> <span class="n">NpyIter_GetInnerLoopSizePtr</span><span class="p">(</span><span class="n">iter</span><span class="p">),</span> <span class="n">size</span><span class="p">;</span>
+<span class="n">npy_intp</span> <span class="n">i</span><span class="p">,</span> <span class="n">iop</span><span class="p">,</span> <span class="n">nop</span> <span class="o">=</span> <span class="n">NpyIter_GetNOp</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+
+<span class="cm">/* One loop with a fixed inner size */</span>
+<span class="n">size</span> <span class="o">=</span> <span class="o">*</span><span class="n">size_ptr</span><span class="p">;</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">size</span> <span class="o">==</span> <span class="n">FIXED_BUFFER_SIZE</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/*</span>
+<span class="cm">     * This loop could be manually unrolled by a factor</span>
+<span class="cm">     * which divides into FIXED_BUFFER_SIZE</span>
+<span class="cm">     */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">FIXED_BUFFER_SIZE</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* use the addresses dataptr[0], ... dataptr[nop-1] */</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">iop</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iop</span> <span class="o">&lt;</span> <span class="n">nop</span><span class="p">;</span> <span class="o">++</span><span class="n">iop</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">dataptr</span><span class="p">[</span><span class="n">iop</span><span class="p">]</span> <span class="o">+=</span> <span class="n">stride</span><span class="p">[</span><span class="n">iop</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">iternext</span><span class="p">();</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="o">*</span><span class="n">size_ptr</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Finish-up loop with variable inner size */</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">do</span> <span class="p">{</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="o">*</span><span class="n">size_ptr</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">size</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="cm">/* use the addresses dataptr[0], ... dataptr[nop-1] */</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">iop</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">iop</span> <span class="o">&lt;</span> <span class="n">nop</span><span class="p">;</span> <span class="o">++</span><span class="n">iop</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">dataptr</span><span class="p">[</span><span class="n">iop</span><span class="p">]</span> <span class="o">+=</span> <span class="n">stride</span><span class="p">[</span><span class="n">iop</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">iternext</span><span class="p">());</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetGetMultiIndex"><span class="yiyi-st" id="yiyi-400"> <a class="reference internal" href="#c.NpyIter_GetMultiIndexFunc" title="NpyIter_GetMultiIndexFunc">NpyIter_GetMultiIndexFunc</a> *<code class="descname">NpyIter_GetGetMultiIndex</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, char**<em> errmsg</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-401">返回一个函数指针，用于获取迭代器的当前多索引。</span><span class="yiyi-st" id="yiyi-402">如果迭代器没有跟踪多索引，则返回NULL。</span><span class="yiyi-st" id="yiyi-403">建议在迭代循环之前将该函数指针缓存在局部变量中。</span></p>
+<p><span class="yiyi-st" id="yiyi-404">如果有错误，则返回NULL。</span><span class="yiyi-st" id="yiyi-405">如果errmsg为非NULL，则在返回<code class="docutils literal"><span class="pre">NPY_FAIL</span></code>时，不会设置Python异常。</span><span class="yiyi-st" id="yiyi-406">相反，* errmsg设置为错误消息。</span><span class="yiyi-st" id="yiyi-407">当errmsg是非NULL时，可以安全地调用该函数，而不用保持Python GIL。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetDataPtrArray"><span class="yiyi-st" id="yiyi-408"> char** <code class="descname">NpyIter_GetDataPtrArray</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-409">这返回指向<code class="docutils literal"><span class="pre">nop</span></code>数据指针的指针。</span><span class="yiyi-st" id="yiyi-410">如果未指定<a class="reference internal" href="#c.NPY_ITER_EXTERNAL_LOOP" title="NPY_ITER_EXTERNAL_LOOP"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_EXTERNAL_LOOP</span></code></a>，则每个数据指针指向迭代器的当前数据项。</span><span class="yiyi-st" id="yiyi-411">如果没有指定内部迭代，它指向内部循环的第一个数据项。</span></p>
+<p><span class="yiyi-st" id="yiyi-412">这个指针可以在迭代循环之前缓存，调用<code class="docutils literal"><span class="pre">iternext</span></code>将不会改变它。</span><span class="yiyi-st" id="yiyi-413">这个函数可以安全地调用而无需持有Python GIL。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetInitialDataPtrArray"><span class="yiyi-st" id="yiyi-414"> char** <code class="descname">NpyIter_GetInitialDataPtrArray</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-415">获取数组指针的数组直接到数组（从不进入缓冲区），对应于迭代索引0。</span></p>
+<p><span class="yiyi-st" id="yiyi-416">这些指针与<code class="docutils literal"><span class="pre">NpyIter_ResetBasePointers</span></code>接受的指针不同，因为某些轴的方向可能已反转。</span></p>
+<p><span class="yiyi-st" id="yiyi-417">这个函数可以安全地调用而无需持有Python GIL。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetIndexPtr"><span class="yiyi-st" id="yiyi-418"> npy_intp* <code class="descname">NpyIter_GetIndexPtr</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-419">这将返回指向正在跟踪的索引的指针，如果没有跟踪索引，则返回NULL。</span><span class="yiyi-st" id="yiyi-420">只有在构建期间指定了标志<a class="reference internal" href="#c.NPY_ITER_C_INDEX" title="NPY_ITER_C_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_C_INDEX</span></code></a>或<a class="reference internal" href="#c.NPY_ITER_F_INDEX" title="NPY_ITER_F_INDEX"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_F_INDEX</span></code></a>之一时，它才可用。</span></p>
+</dd></dl>
+<p><span class="yiyi-st" id="yiyi-421">当使用标志<a class="reference internal" href="#c.NPY_ITER_EXTERNAL_LOOP" title="NPY_ITER_EXTERNAL_LOOP"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_EXTERNAL_LOOP</span></code></a>时，代码需要知道用于执行内循环的参数。</span><span class="yiyi-st" id="yiyi-422">这些函数提供了这些信息。</span></p>
+<dl class="function">
+<dt id="c.NpyIter_GetInnerStrideArray"><span class="yiyi-st" id="yiyi-423"> npy_intp* <code class="descname">NpyIter_GetInnerStrideArray</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-424">返回指向<code class="docutils literal"><span class="pre">nop</span></code>步长的数组的指针，每个迭代对象一个，供内循环使用。</span></p>
+<p><span class="yiyi-st" id="yiyi-425">这个指针可以在迭代循环之前缓存，调用<code class="docutils literal"><span class="pre">iternext</span></code>将不会改变它。</span><span class="yiyi-st" id="yiyi-426">这个函数可以安全地调用而无需持有Python GIL。</span></p>
+<p><span class="yiyi-st" id="yiyi-427"><strong>警告</strong>：虽然指针可能已缓存，但如果迭代器已缓冲，其值可能会更改。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetInnerLoopSizePtr"><span class="yiyi-st" id="yiyi-428"> npy_intp* <code class="descname">NpyIter_GetInnerLoopSizePtr</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-429">返回一个指向内循环应该执行的迭代次数的指针。</span></p>
+<p><span class="yiyi-st" id="yiyi-430">这个地址可以在迭代循环之前缓存，调用<code class="docutils literal"><span class="pre">iternext</span></code>将不会改变它。</span><span class="yiyi-st" id="yiyi-431">值本身可以在迭代期间改变，特别是如果启用缓冲。</span><span class="yiyi-st" id="yiyi-432">这个函数可以安全地调用而无需持有Python GIL。</span></p>
+</dd></dl>
+<dl class="function">
+<dt id="c.NpyIter_GetInnerFixedStrideArray"><span class="yiyi-st" id="yiyi-433"> void <code class="descname">NpyIter_GetInnerFixedStrideArray</code><span class="sig-paren">(</span><a class="reference internal" href="#c.NpyIter" title="NpyIter">NpyIter</a>*<em> iter</em>, npy_intp*<em> out_strides</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-434">获取固定的或在整个迭代过程中不会更改的步长数组。</span><span class="yiyi-st" id="yiyi-435">对于可能改变的步幅，值NPY_MAX_INTP被放置在步幅。</span></p>
+<p><span class="yiyi-st" id="yiyi-436">一旦迭代器准备好迭代（在使用<code class="xref c c-data docutils literal"><span class="pre">NPY_DELAY_BUFALLOC</span></code>的复位之后），调用它以获得可用于选择快速内循环函数的步长。</span><span class="yiyi-st" id="yiyi-437">例如，如果stride为0，那意味着内循环总是可以将其值加载到变量中一次，然后在整个循环中使用该变量，或者如果stride等于itemsize，则可以使用该操作数的连续版本。</span></p>
+<p><span class="yiyi-st" id="yiyi-438">这个函数可以安全地调用而无需持有Python GIL。</span></p>
+</dd></dl>
+</div>
+<div class="section" id="converting-from-previous-numpy-iterators">
+<span id="index-1"></span><h2><span class="yiyi-st" id="yiyi-439">Converting from Previous NumPy Iterators</span></h2>
+<p><span class="yiyi-st" id="yiyi-440">旧的迭代器API包括PyArrayIter_Check，PyArray_Iter *和PyArray_ITER_ *等函数。</span><span class="yiyi-st" id="yiyi-441">多迭代器数组包括PyArray_MultiIter *，PyArray_Broadcast和PyArray_RemoveSmallest。</span><span class="yiyi-st" id="yiyi-442">新的迭代器设计用单个对象和关联的API替换所有这些功能。</span><span class="yiyi-st" id="yiyi-443">新API的一个目标是，现有迭代器的所有使用都应该可以用新的迭代器替换，而无需大量的工作。</span><span class="yiyi-st" id="yiyi-444">在1.6中，主要的例外是邻域迭代器，它在这个迭代器中没有相应的特性。</span></p>
+<p><span class="yiyi-st" id="yiyi-445">这里是一个转换表，用于与新的迭代器一起使用的函数：</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%">
+<col width="58%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-446"><em>迭代器函数</em></span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-447"><a class="reference internal" href="c-api.array.html#c.PyArray_IterNew" title="PyArray_IterNew"><code class="xref c c-func docutils literal"><span class="pre">PyArray_IterNew</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-448"><a class="reference internal" href="#c.NpyIter_New" title="NpyIter_New"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_New</span></code></a></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-449"><a class="reference internal" href="c-api.array.html#c.PyArray_IterAllButAxis" title="PyArray_IterAllButAxis"><code class="xref c c-func docutils literal"><span class="pre">PyArray_IterAllButAxis</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-450"><a class="reference internal" href="#c.NpyIter_New" title="NpyIter_New"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_New</span></code></a> + <code class="docutils literal"><span class="pre">axes</span></code>参数<strong>或</strong>迭代器标志<a class="reference internal" href="#c.NPY_ITER_EXTERNAL_LOOP" title="NPY_ITER_EXTERNAL_LOOP"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_EXTERNAL_LOOP</span></code></a></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-451"><a class="reference internal" href="c-api.array.html#c.PyArray_BroadcastToShape" title="PyArray_BroadcastToShape"><code class="xref c c-func docutils literal"><span class="pre">PyArray_BroadcastToShape</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-452"><strong>不支持</strong>（使用多个操作数的支持）。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-453"><a class="reference internal" href="c-api.array.html#c.PyArrayIter_Check" title="PyArrayIter_Check"><code class="xref c c-func docutils literal"><span class="pre">PyArrayIter_Check</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-454">将需要添加这个在Python暴露</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-455"><a class="reference internal" href="c-api.array.html#c.PyArray_ITER_RESET" title="PyArray_ITER_RESET"><code class="xref c c-func docutils literal"><span class="pre">PyArray_ITER_RESET</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-456"><a class="reference internal" href="#c.NpyIter_Reset" title="NpyIter_Reset"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_Reset</span></code></a></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-457"><a class="reference internal" href="c-api.array.html#c.PyArray_ITER_NEXT" title="PyArray_ITER_NEXT"><code class="xref c c-func docutils literal"><span class="pre">PyArray_ITER_NEXT</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-458"><a class="reference internal" href="#c.NpyIter_GetIterNext" title="NpyIter_GetIterNext"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GetIterNext</span></code></a>的函数指针</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-459"><a class="reference internal" href="c-api.array.html#c.PyArray_ITER_DATA" title="PyArray_ITER_DATA"><code class="xref c c-func docutils literal"><span class="pre">PyArray_ITER_DATA</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-460">c：func：<em class="xref py py-obj">NpyIter_GetDataPtrArray</em></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-461"><a class="reference internal" href="c-api.array.html#c.PyArray_ITER_GOTO" title="PyArray_ITER_GOTO"><code class="xref c c-func docutils literal"><span class="pre">PyArray_ITER_GOTO</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-462"><a class="reference internal" href="#c.NpyIter_GotoMultiIndex" title="NpyIter_GotoMultiIndex"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GotoMultiIndex</span></code></a></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-463"><a class="reference internal" href="c-api.array.html#c.PyArray_ITER_GOTO1D" title="PyArray_ITER_GOTO1D"><code class="xref c c-func docutils literal"><span class="pre">PyArray_ITER_GOTO1D</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-464"><a class="reference internal" href="#c.NpyIter_GotoIndex" title="NpyIter_GotoIndex"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GotoIndex</span></code></a>或<a class="reference internal" href="#c.NpyIter_GotoIterIndex" title="NpyIter_GotoIterIndex"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GotoIterIndex</span></code></a></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-465"><a class="reference internal" href="c-api.array.html#c.PyArray_ITER_NOTDONE" title="PyArray_ITER_NOTDONE"><code class="xref c c-func docutils literal"><span class="pre">PyArray_ITER_NOTDONE</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-466"><code class="docutils literal"><span class="pre">iternext</span></code>函数指针的返回值</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-467"><em>多重迭代器函数</em></span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-468"><a class="reference internal" href="c-api.array.html#c.PyArray_MultiIterNew" title="PyArray_MultiIterNew"><code class="xref c c-func docutils literal"><span class="pre">PyArray_MultiIterNew</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-469"><a class="reference internal" href="#c.NpyIter_MultiNew" title="NpyIter_MultiNew"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_MultiNew</span></code></a></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-470"><a class="reference internal" href="c-api.array.html#c.PyArray_MultiIter_RESET" title="PyArray_MultiIter_RESET"><code class="xref c c-func docutils literal"><span class="pre">PyArray_MultiIter_RESET</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-471"><a class="reference internal" href="#c.NpyIter_Reset" title="NpyIter_Reset"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_Reset</span></code></a></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-472"><a class="reference internal" href="c-api.array.html#c.PyArray_MultiIter_NEXT" title="PyArray_MultiIter_NEXT"><code class="xref c c-func docutils literal"><span class="pre">PyArray_MultiIter_NEXT</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-473"><a class="reference internal" href="#c.NpyIter_GetIterNext" title="NpyIter_GetIterNext"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GetIterNext</span></code></a>的函数指针</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-474"><a class="reference internal" href="c-api.array.html#c.PyArray_MultiIter_DATA" title="PyArray_MultiIter_DATA"><code class="xref c c-func docutils literal"><span class="pre">PyArray_MultiIter_DATA</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-475"><a class="reference internal" href="#c.NpyIter_GetDataPtrArray" title="NpyIter_GetDataPtrArray"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GetDataPtrArray</span></code></a></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-476"><a class="reference internal" href="c-api.array.html#c.PyArray_MultiIter_NEXTi" title="PyArray_MultiIter_NEXTi"><code class="xref c c-func docutils literal"><span class="pre">PyArray_MultiIter_NEXTi</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-477"><strong>不支持</strong>（始终锁定步骤迭代）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-478"><a class="reference internal" href="c-api.array.html#c.PyArray_MultiIter_GOTO" title="PyArray_MultiIter_GOTO"><code class="xref c c-func docutils literal"><span class="pre">PyArray_MultiIter_GOTO</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-479"><a class="reference internal" href="#c.NpyIter_GotoMultiIndex" title="NpyIter_GotoMultiIndex"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GotoMultiIndex</span></code></a></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-480"><a class="reference internal" href="c-api.array.html#c.PyArray_MultiIter_GOTO1D" title="PyArray_MultiIter_GOTO1D"><code class="xref c c-func docutils literal"><span class="pre">PyArray_MultiIter_GOTO1D</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-481"><a class="reference internal" href="#c.NpyIter_GotoIndex" title="NpyIter_GotoIndex"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GotoIndex</span></code></a>或<a class="reference internal" href="#c.NpyIter_GotoIterIndex" title="NpyIter_GotoIterIndex"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_GotoIterIndex</span></code></a></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-482"><a class="reference internal" href="c-api.array.html#c.PyArray_MultiIter_NOTDONE" title="PyArray_MultiIter_NOTDONE"><code class="xref c c-func docutils literal"><span class="pre">PyArray_MultiIter_NOTDONE</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-483"><code class="docutils literal"><span class="pre">iternext</span></code>函数指针的返回值</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-484"><a class="reference internal" href="c-api.array.html#c.PyArray_Broadcast" title="PyArray_Broadcast"><code class="xref c c-func docutils literal"><span class="pre">PyArray_Broadcast</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-485">由<a class="reference internal" href="#c.NpyIter_MultiNew" title="NpyIter_MultiNew"><code class="xref c c-func docutils literal"><span class="pre">NpyIter_MultiNew</span></code></a>处理</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-486"><a class="reference internal" href="c-api.array.html#c.PyArray_RemoveSmallest" title="PyArray_RemoveSmallest"><code class="xref c c-func docutils literal"><span class="pre">PyArray_RemoveSmallest</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-487">迭代器标记<a class="reference internal" href="#c.NPY_ITER_EXTERNAL_LOOP" title="NPY_ITER_EXTERNAL_LOOP"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_EXTERNAL_LOOP</span></code></a></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-488"><em>其他功能</em></span></td>
+<td>&#xA0;</td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-489"><a class="reference internal" href="c-api.array.html#c.PyArray_ConvertToCommonType" title="PyArray_ConvertToCommonType"><code class="xref c c-func docutils literal"><span class="pre">PyArray_ConvertToCommonType</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-490">迭代器标记<a class="reference internal" href="#c.NPY_ITER_COMMON_DTYPE" title="NPY_ITER_COMMON_DTYPE"><code class="xref c c-data docutils literal"><span class="pre">NPY_ITER_COMMON_DTYPE</span></code></a></span></td>
+</tr>
+</tbody>
+</table>
+</div>

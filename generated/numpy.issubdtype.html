@@ -1,0 +1,42 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.issubdtype</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.issubdtype.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.issubdtype.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.issubdtype"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">issubdtype</code><span class="sig-paren">(</span><em>arg1</em>, <em>arg2</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numerictypes.py#L728-L761"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回True如果第一个参数是类型层次结构中的类型代码较低/相等。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>arg1，arg2</strong>：dtype_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">dtype或表示类型代码的字符串。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-19"><strong>out</strong>：bool</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-20">也可以看看</span></p>
+<p><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="numpy.issubsctype.html#numpy.issubsctype" title="numpy.issubsctype"><code class="xref py py-obj docutils literal"><span class="pre">issubsctype</span></code></a>，<a class="reference internal" href="numpy.issubclass_.html#numpy.issubclass_" title="numpy.issubclass_"><code class="xref py py-obj docutils literal"><span class="pre">issubclass_</span></code></a></span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-22"><code class="xref py py-obj docutils literal"><span class="pre">numpy.core.numerictypes</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-23">numpy类型层次结构概述。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="s1">&apos;S1&apos;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>

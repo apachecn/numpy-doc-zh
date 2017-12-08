@@ -1,0 +1,72 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.ravel_multi_index</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ravel_multi_index.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ravel_multi_index.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ravel_multi_index"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">ravel_multi_index</code><span class="sig-paren">(</span><em>multi_index</em>, <em>dims</em>, <em>mode=&apos;raise&apos;</em>, <em>order=&apos;C&apos;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将索引数组的元组转换为平面索引的数组，将边界模式应用于多索引。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>multi_index</strong>：array_like的元组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">整数数组的元组，每个维的一个数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>dims</strong>：ints的tuple</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">应用来自<code class="docutils literal"><span class="pre">multi_index</span></code>的索引的数组的形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>mode</strong>：{&apos;raise&apos;，&apos;wrap&apos;，&apos;clip&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">指定如何处理超越索引。</span><span class="yiyi-st" id="yiyi-22">可以指定一个模式或一个模式的元组，每个索引一个模式。</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-23">&apos;raise&apos; - 引发错误（默认）</span></li>
+<li><span class="yiyi-st" id="yiyi-24">&apos;wrap&apos; -  wrap around</span></li>
+<li><span class="yiyi-st" id="yiyi-25">&apos;clip&apos; - 剪辑到范围</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-26">在“剪辑”模式中，通常包装的负索引将剪切为0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">确定多索引是否应被视为行主（C风格）或列主（Fortran风格）顺序中的索引。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>raveled_indices</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">数组的平面化版本的维度<code class="docutils literal"><span class="pre">dims</span></code>的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-32">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.unravel_index.html#numpy.unravel_index" title="numpy.unravel_index"><code class="xref py py-obj docutils literal"><span class="pre">unravel_index</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-35"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ravel_multi_index</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="go">array([22, 41, 37])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ravel_multi_index</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">)</span>
+<span class="go">array([31, 41, 13])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ravel_multi_index</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&apos;clip&apos;</span><span class="p">)</span>
+<span class="go">array([22, 23, 19])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ravel_multi_index</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="p">(</span><span class="s1">&apos;clip&apos;</span><span class="p">,</span><span class="s1">&apos;wrap&apos;</span><span class="p">))</span>
+<span class="go">array([12, 13, 13])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ravel_multi_index</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
+<span class="go">1621</span>
+</pre></div>
+</div>
+</dd></dl>

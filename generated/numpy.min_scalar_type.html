@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.min_scalar_type</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.min_scalar_type.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.min_scalar_type.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.min_scalar_type"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">min_scalar_type</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">对于标量<code class="docutils literal"><span class="pre">a</span></code>，返回具有最小大小和最小标量种类的数据类型，它可以保存其值。</span><span class="yiyi-st" id="yiyi-15">对于非标量数组<code class="docutils literal"><span class="pre">a</span></code>，返回未修改的向量的dtype。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">浮点值不会降级为整数，复数值不会降级为浮点值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：scalar或array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">要找到其最小数据类型的值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：dtype</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">最小数据类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="numpy.result_type.html#numpy.result_type" title="numpy.result_type"><code class="xref py py-obj docutils literal"><span class="pre">result_type</span></code></a>，<a class="reference internal" href="numpy.promote_types.html#numpy.promote_types" title="numpy.promote_types"><code class="xref py py-obj docutils literal"><span class="pre">promote_types</span></code></a>，<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，<a class="reference internal" href="numpy.can_cast.html#numpy.can_cast" title="numpy.can_cast"><code class="xref py py-obj docutils literal"><span class="pre">can_cast</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-26"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">min_scalar_type</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">dtype(&apos;uint8&apos;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">min_scalar_type</span><span class="p">(</span><span class="o">-</span><span class="mi">260</span><span class="p">)</span>
+<span class="go">dtype(&apos;int16&apos;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">min_scalar_type</span><span class="p">(</span><span class="mf">3.1</span><span class="p">)</span>
+<span class="go">dtype(&apos;float16&apos;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">min_scalar_type</span><span class="p">(</span><span class="mi">1</span><span class="n">e50</span><span class="p">)</span>
+<span class="go">dtype(&apos;float64&apos;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">min_scalar_type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;f8&apos;</span><span class="p">))</span>
+<span class="go">dtype(&apos;float64&apos;)</span>
+</pre></div>
+</div>
+</dd></dl>

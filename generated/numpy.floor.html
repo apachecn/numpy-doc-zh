@@ -1,0 +1,43 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.floor</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.floor.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.floor.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.floor"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">floor</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;floor&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">逐元素地返回输入的底。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">标量<em class="xref py py-obj">x</em>的底是最大整数<em class="xref py py-obj">i</em>，使得<em class="xref py py-obj">i 。</em></span><span class="yiyi-st" id="yiyi-16">它通常表示为<img alt="\lfloor x \rfloor" class="math" src="../../_images/math/8dd7e8aa7b9368772bf158411f5c32bfc2b57e3f.png" style="vertical-align: -4px">。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输入数据。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>y</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22"><em class="xref py py-obj">x</em>中每个元素的下限。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="numpy.ceil.html#numpy.ceil" title="numpy.ceil"><code class="xref py py-obj docutils literal"><span class="pre">ceil</span></code></a>，<a class="reference internal" href="numpy.trunc.html#numpy.trunc" title="numpy.trunc"><code class="xref py py-obj docutils literal"><span class="pre">trunc</span></code></a>，<a class="reference internal" href="numpy.rint.html#numpy.rint" title="numpy.rint"><code class="xref py py-obj docutils literal"><span class="pre">rint</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-26">一些电子表格程序计算“零向零”，换句话说，<code class="docutils literal"><span class="pre">floor（-2.5）</span> <span class="pre">==</span> <span class="pre">-2</span> / t0&gt;。</code></span><span class="yiyi-st" id="yiyi-27">NumPy改为使用<a class="reference internal" href="#numpy.floor" title="numpy.floor"><code class="xref py py-obj docutils literal"><span class="pre">floor</span></code></a>的定义，其中<em class="xref py py-obj">floor（-2.5）== -3</em>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([-2., -2., -1.,  0.,  1.,  1.,  2.])</span>
+</pre></div>
+</div>
+</dd></dl>

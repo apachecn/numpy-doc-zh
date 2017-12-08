@@ -1,0 +1,80 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.logistic</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.logistic.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.logistic.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.logistic"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">logistic</code><span class="sig-paren">(</span><em>loc=0.0</em>, <em>scale=1.0</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从逻辑分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">样本从具有指定参数loc（位置或平均值，也是中值）和比例（&gt; 0）的逻辑分布中绘制。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>loc</strong>：float</span></p>
+<p><span class="yiyi-st" id="yiyi-19"><strong>scale</strong>：float&gt; 0。</span></p>
+<p><span class="yiyi-st" id="yiyi-20"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">输出形状。</span><span class="yiyi-st" id="yiyi-22">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-23">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>samples</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">其中值是[0，n]中的所有整数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-28"><code class="xref py py-obj docutils literal"><span class="pre">scipy.stats.distributions.logistic</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">概率密度函数，分布或累积密度函数等。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-31">Logistic分布的概率密度为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-32">其中<img alt="\mu" class="math" src="../../_images/math/fb6d665bbe0c01fc1af5c5f5fa7df40dc71331d7.png" style="vertical-align: -3px"> =位置和<img alt="s" class="math" src="../../_images/math/60fce0046242b8181cfabc4a0a674e375bc98193.png" style="vertical-align: 0px"> =刻度。</span></p>
+<p><span class="yiyi-st" id="yiyi-33">Logistic分布用于极端值问题，其中它可以作为Gumbel分布，流行病学和世界象棋联合会（FIDE）的混合，在Elo排名系统中使用，假设每个玩家的性能是逻辑分布随机变量。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r161" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-35"><a class="fn-backref" href="#id1">[R161]</a></span></td><td><span class="yiyi-st" id="yiyi-36">Reiss，R.-D.和Thomas M.（2001），“来自保险，金融，水文和其他领域的极端价值的统计分析”，Birkhauser Verlag，Basel，pp 132-133。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r162" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-37"><a class="fn-backref" href="#id2">[R162]</a></span></td><td><span class="yiyi-st" id="yiyi-38">Weisstein，Eric W.“Logistic Distribution。”来自MathWorld-Wolfram Web资源。</span><span class="yiyi-st" id="yiyi-39"><a class="reference external" href="http://mathworld.wolfram.com/LogisticDistribution.html">http://mathworld.wolfram.com/LogisticDistribution.html</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r163" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-40"><a class="fn-backref" href="#id3">[R163]</a></span></td><td><span class="yiyi-st" id="yiyi-41">维基百科，“物流配送”，<a class="reference external" href="http://en.wikipedia.org/wiki/Logistic_distribution">http://en.wikipedia.org/wiki/Logistic_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-42">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-43">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">logistic</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-44">＃图与分布</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">logist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">exp</span><span class="p">((</span><span class="n">loc</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">scale</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">scale</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">exp</span><span class="p">((</span><span class="n">loc</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">scale</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">logist</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span><span class="o">*</span><span class="n">count</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">/</span>\
+<span class="gp">... </span><span class="n">logist</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>

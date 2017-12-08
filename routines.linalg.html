@@ -1,0 +1,169 @@
+
+<span id="routines-linalg"></span><h1><span class="yiyi-st" id="yiyi-20">线性代数（<code class="xref py py-mod docutils literal"><span class="pre">numpy.linalg</span></code>）</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.linalg.html">https://docs.scipy.org/doc/numpy/reference/routines.linalg.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="matrix-and-vector-products">
+<h2><span class="yiyi-st" id="yiyi-21">矩阵和向量积</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="generated/numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-obj docutils literal"><span class="pre">dot</span></code></a>（a，b [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-23">两个数组的点积。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="generated/numpy.vdot.html#numpy.vdot" title="numpy.vdot"><code class="xref py py-obj docutils literal"><span class="pre">vdot</span></code></a>（a，b）</span></td>
+<td><span class="yiyi-st" id="yiyi-25">返回两个向量的点积。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="generated/numpy.inner.html#numpy.inner" title="numpy.inner"><code class="xref py py-obj docutils literal"><span class="pre">inner</span></code></a>（a，b）</span></td>
+<td><span class="yiyi-st" id="yiyi-27">两个数组的内积。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="generated/numpy.outer.html#numpy.outer" title="numpy.outer"><code class="xref py py-obj docutils literal"><span class="pre">outer</span></code></a>（a，b [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-29">计算两个向量的外积。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.matmul.html#numpy.matmul" title="numpy.matmul"><code class="xref py py-obj docutils literal"><span class="pre">matmul</span></code></a>（a，b [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-31">两个数组的矩阵乘积。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="generated/numpy.tensordot.html#numpy.tensordot" title="numpy.tensordot"><code class="xref py py-obj docutils literal"><span class="pre">tensordot</span></code></a>（a，b [，axes]）</span></td>
+<td><span class="yiyi-st" id="yiyi-33">对于数组&gt; = 1-D，沿指定轴计算张量点积。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="generated/numpy.einsum.html#numpy.einsum" title="numpy.einsum"><code class="xref py py-obj docutils literal"><span class="pre">einsum</span></code></a>（下标，\ * operands [，out，dtype，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-35">评估操作数上的爱因斯坦求和约定。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="generated/numpy.linalg.matrix_power.html#numpy.linalg.matrix_power" title="numpy.linalg.matrix_power"><code class="xref py py-obj docutils literal"><span class="pre">linalg.matrix_power</span></code></a>（M，n）</span></td>
+<td><span class="yiyi-st" id="yiyi-37">将方阵转化为（整数）幂<em class="xref py py-obj">n</em>。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="generated/numpy.kron.html#numpy.kron" title="numpy.kron"><code class="xref py py-obj docutils literal"><span class="pre">kron</span></code></a>（a，b）</span></td>
+<td><span class="yiyi-st" id="yiyi-39">克罗内克两个数组的乘积。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="decompositions">
+<h2><span class="yiyi-st" id="yiyi-40">Decompositions</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="generated/numpy.linalg.cholesky.html#numpy.linalg.cholesky" title="numpy.linalg.cholesky"><code class="xref py py-obj docutils literal"><span class="pre">linalg.cholesky</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-42">Cholesky分解。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="generated/numpy.linalg.qr.html#numpy.linalg.qr" title="numpy.linalg.qr"><code class="xref py py-obj docutils literal"><span class="pre">linalg.qr</span></code></a>（a [，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-44">计算矩阵的qr因式分解。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.linalg.svd.html#numpy.linalg.svd" title="numpy.linalg.svd"><code class="xref py py-obj docutils literal"><span class="pre">linalg.svd</span></code></a>（a [，full_matrices，compute_uv]）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">奇异值分解。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="matrix-eigenvalues">
+<h2><span class="yiyi-st" id="yiyi-47">矩阵特征值</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="generated/numpy.linalg.eig.html#numpy.linalg.eig" title="numpy.linalg.eig"><code class="xref py py-obj docutils literal"><span class="pre">linalg.eig</span></code></a>(a)</span></td>
+<td><span class="yiyi-st" id="yiyi-49">计算正方形数组的特征值和右特征向量。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="generated/numpy.linalg.eigh.html#numpy.linalg.eigh" title="numpy.linalg.eigh"><code class="xref py py-obj docutils literal"><span class="pre">linalg.eigh</span></code></a>(a[, UPLO])</span></td>
+<td><span class="yiyi-st" id="yiyi-51">返回Hermitian或对称矩阵的特征值和特征向量。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="generated/numpy.linalg.eigvals.html#numpy.linalg.eigvals" title="numpy.linalg.eigvals"><code class="xref py py-obj docutils literal"><span class="pre">linalg.eigvals</span></code></a>(a)</span></td>
+<td><span class="yiyi-st" id="yiyi-53">计算一般矩阵的特征值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="generated/numpy.linalg.eigvalsh.html#numpy.linalg.eigvalsh" title="numpy.linalg.eigvalsh"><code class="xref py py-obj docutils literal"><span class="pre">linalg.eigvalsh</span></code></a>(a[, UPLO])</span></td>
+<td><span class="yiyi-st" id="yiyi-55">计算Hermitian或真实对称矩阵的特征值。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="norms-and-other-numbers">
+<h2><span class="yiyi-st" id="yiyi-56">Norms and other numbers</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="generated/numpy.linalg.norm.html#numpy.linalg.norm" title="numpy.linalg.norm"><code class="xref py py-obj docutils literal"><span class="pre">linalg.norm</span></code></a>（x [，ord，axis，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-58">矩阵或向量范数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="generated/numpy.linalg.cond.html#numpy.linalg.cond" title="numpy.linalg.cond"><code class="xref py py-obj docutils literal"><span class="pre">linalg.cond</span></code></a>（x [，p]）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">计算矩阵的条件数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="generated/numpy.linalg.det.html#numpy.linalg.det" title="numpy.linalg.det"><code class="xref py py-obj docutils literal"><span class="pre">linalg.det</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-62">计算数组的行列式。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="generated/numpy.linalg.matrix_rank.html#numpy.linalg.matrix_rank" title="numpy.linalg.matrix_rank"><code class="xref py py-obj docutils literal"><span class="pre">linalg.matrix_rank</span></code></a>（M [，tol]）</span></td>
+<td><span class="yiyi-st" id="yiyi-64">使用SVD方法返回数组的矩阵秩</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="generated/numpy.linalg.slogdet.html#numpy.linalg.slogdet" title="numpy.linalg.slogdet"><code class="xref py py-obj docutils literal"><span class="pre">linalg.slogdet</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-66">计算数组的行列式的符号和（自然）对数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="generated/numpy.trace.html#numpy.trace" title="numpy.trace"><code class="xref py py-obj docutils literal"><span class="pre">trace</span></code></a>（a [，offset，axis1，axis2，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-68">沿数组的对角线返回总和。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="solving-equations-and-inverting-matrices">
+<h2><span class="yiyi-st" id="yiyi-69">Solving equations and inverting matrices</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-70"><a class="reference internal" href="generated/numpy.linalg.solve.html#numpy.linalg.solve" title="numpy.linalg.solve"><code class="xref py py-obj docutils literal"><span class="pre">linalg.solve</span></code></a>（a，b）</span></td>
+<td><span class="yiyi-st" id="yiyi-71">求解线性矩阵方程或线性标量方程组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="generated/numpy.linalg.tensorsolve.html#numpy.linalg.tensorsolve" title="numpy.linalg.tensorsolve"><code class="xref py py-obj docutils literal"><span class="pre">linalg.tensorsolve</span></code></a>（a，b [，axes]）</span></td>
+<td><span class="yiyi-st" id="yiyi-73">为x解出张量方程<code class="docutils literal"><span class="pre">a</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">b</span></code></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq" title="numpy.linalg.lstsq"><code class="xref py py-obj docutils literal"><span class="pre">linalg.lstsq</span></code></a>（a，b [，rcond]）</span></td>
+<td><span class="yiyi-st" id="yiyi-75">将最小二乘解返回到线性矩阵方程。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-76"><a class="reference internal" href="generated/numpy.linalg.inv.html#numpy.linalg.inv" title="numpy.linalg.inv"><code class="xref py py-obj docutils literal"><span class="pre">linalg.inv</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-77">计算矩阵的（乘法）逆。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-78"><a class="reference internal" href="generated/numpy.linalg.pinv.html#numpy.linalg.pinv" title="numpy.linalg.pinv"><code class="xref py py-obj docutils literal"><span class="pre">linalg.pinv</span></code></a>（a [，rcond]）</span></td>
+<td><span class="yiyi-st" id="yiyi-79">计算矩阵的（Moore-Penrose）伪逆。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="generated/numpy.linalg.tensorinv.html#numpy.linalg.tensorinv" title="numpy.linalg.tensorinv"><code class="xref py py-obj docutils literal"><span class="pre">linalg.tensorinv</span></code></a>（a [，ind]）</span></td>
+<td><span class="yiyi-st" id="yiyi-81">计算N维数组的“逆”。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="exceptions">
+<h2><span class="yiyi-st" id="yiyi-82">Exceptions</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-83"><a class="reference internal" href="generated/numpy.linalg.LinAlgError.html#numpy.linalg.LinAlgError" title="numpy.linalg.LinAlgError"><code class="xref py py-obj docutils literal"><span class="pre">linalg.LinAlgError</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-84">linalg函数引发的通用Python异常派生对象。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="linear-algebra-on-several-matrices-at-once">
+<h2><span class="yiyi-st" id="yiyi-85">Linear algebra on several matrices at once</span></h2>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-86"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-87">上面列出的几个线性代数例程能够一次计算多个矩阵的结果，如果它们被堆叠到相同的数组中。</span></p>
+<p><span class="yiyi-st" id="yiyi-88">这在文档中通过输入参数规范如<code class="docutils literal"><span class="pre">a</span> <span class="pre">：</span> <span class="pre">（...，</span> <span class="pre">M， t4&gt; <span class="pre">M）</span> <span class="pre">array_like</span></span></code>。</span><span class="yiyi-st" id="yiyi-89">这意味着如果例如给定输入数组<code class="docutils literal"><span class="pre">a.shape</span> <span class="pre">==</span> <span class="pre">（N，</span> <span class="pre">M， t4 &gt; <span class="pre">M）</span></span></code>，它被解释为N个矩阵的“堆栈”，每个矩阵的大小为M乘M。</span><span class="yiyi-st" id="yiyi-90">类似的规范适用于返回值，例如行列式具有<code class="docutils literal"><span class="pre">det</span> <span class="pre">：</span> <span class="pre">（...）</span></code>这种情况下返回形状<code class="docutils literal"><span class="pre">det（a）.shape</span> <span class="pre">==</span> <span class="pre">（N，）</span></code>的数组。</span><span class="yiyi-st" id="yiyi-91">这推广到对更高维数组的线性代数运算：多维数组的最后1或2维被解释为向量或矩阵，适合于每个操作。</span></p>
+</div>

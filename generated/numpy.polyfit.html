@@ -1,0 +1,154 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.polyfit</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyfit.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polyfit.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polyfit"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.</code><code class="descname">polyfit</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>deg</em>, <em>rcond=None</em>, <em>full=False</em>, <em>w=None</em>, <em>cov=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/polynomial.py#L402-L612"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">最小二乘多项式拟合。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">拟合多项式<code class="docutils literal"><span class="pre">p（x）</span> <span class="pre">=</span> <span class="pre">p [0]</span> <span class="pre">*</span> <span class="pre">x **度<em class="xref py py-obj"></em></span> <span class="pre">+</span> <span class="pre">...</span> <span class="pre">+</span> <span class="pre">p [deg] &gt; deg到点<em class="xref py py-obj">（x，y）</em>。</span></code></span><span class="yiyi-st" id="yiyi-17">返回使平方误差最小的系数<em class="xref py py-obj">p</em>的向量。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>x</strong>：array_like，shape（M，）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">M个采样点<code class="docutils literal"><span class="pre">（x [i]，</span> <span class="pre">y [i]）</span></code>的x坐标。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>y</strong>：array_like，shape（M，）或（M，K）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">y坐标。</span><span class="yiyi-st" id="yiyi-23">通过传递每列包含一个数据集的2D阵列，可以一次拟合共享相同x坐标的样本点的若干数据集。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>deg</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">拟合多项式的维度</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>rcond</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">相对条件编号。</span><span class="yiyi-st" id="yiyi-28">相对于最大奇异值小于该值的奇异值将被忽略。</span><span class="yiyi-st" id="yiyi-29">默认值为len（x）* eps，其中eps是float类型的相对精度，在大多数情况下约为2e-16。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>full</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">开关确定返回值的性质。</span><span class="yiyi-st" id="yiyi-32">当它为False（默认值）时，只返回系数，当来自奇异值分解的True诊断信息也返回时。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>w</strong>：array_like，shape（M，），可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">应用于采样点的y坐标的权重。</span><span class="yiyi-st" id="yiyi-35">对于高斯不确定性，使用1 / sigma（不是1 / sigma ** 2）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-36"><strong>cov</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-37">返回估计和估计的协方差矩阵如果full为True，则不返回cov。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-38">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-39"><strong>p</strong>：ndarray，shape（M，）或（M，K）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-40">多项式系数，最高功率先。</span><span class="yiyi-st" id="yiyi-41">如果<em class="xref py py-obj">y</em>是2-D，则<em class="xref py py-obj">k</em>数据集的系数在<code class="docutils literal"><span class="pre">p[:,k]</span></code>中。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-42">残差，秩，奇异值，rcond：</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-43">仅在<a class="reference internal" href="numpy.full.html#numpy.full" title="numpy.full"><code class="xref py py-obj docutils literal"><span class="pre">full</span></code></a> = True时存在。</span><span class="yiyi-st" id="yiyi-44">最小二乘拟合的残差，缩放的Vandermonde系数矩阵的有效秩，其奇异值和<em class="xref py py-obj">rcond</em>的指定值。</span><span class="yiyi-st" id="yiyi-45">有关详细信息，请参阅<a class="reference internal" href="numpy.linalg.lstsq.html#numpy.linalg.lstsq" title="numpy.linalg.lstsq"><code class="xref py py-obj docutils literal"><span class="pre">linalg.lstsq</span></code></a>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-46"><strong>V</strong> : ndarray, shape (M,M) or (M,M,K)</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-47">仅当<a class="reference internal" href="numpy.full.html#numpy.full" title="numpy.full"><code class="xref py py-obj docutils literal"><span class="pre">full</span></code></a> = False且<em class="xref py py-obj">cov` = True时才显示。多项式系数估计的协方差矩阵。该矩阵的对角线是每个系数的方差估计。如果y是2-D数组，则第k个第t个数据集的协方差矩阵在<code class="docutils literal"><span class="pre">V[:,:,k]</span></code></em></span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-48">警告：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-49"><strong>RankWarning</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-50">最小二乘法拟合中的系数矩阵的秩是不足的。</span><span class="yiyi-st" id="yiyi-51">只有在<a class="reference internal" href="numpy.full.html#numpy.full" title="numpy.full"><code class="xref py py-obj docutils literal"><span class="pre">full</span></code></a> = False时，才会发出警告。</span></p>
+<p><span class="yiyi-st" id="yiyi-52">警告可以通过关闭</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&apos;ignore&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">RankWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-53">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="numpy.polyval.html#numpy.polyval" title="numpy.polyval"><code class="xref py py-obj docutils literal"><span class="pre">polyval</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-55">计算多项式值。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="numpy.linalg.lstsq.html#numpy.linalg.lstsq" title="numpy.linalg.lstsq"><code class="xref py py-obj docutils literal"><span class="pre">linalg.lstsq</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-57">计算最小二乘拟合。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-58"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.UnivariateSpline.html#scipy.interpolate.UnivariateSpline" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.interpolate.UnivariateSpline</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-59">计算样条拟合。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-60">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-61">该解最小化平方误差</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-62">在等式中：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="n">n</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="n">n</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="o">...</span>
+<span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">**</span><span class="n">n</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="o">...</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-63">系数<em class="xref py py-obj">p</em>的系数矩阵是Vandermonde矩阵。</span></p>
+<p><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="#numpy.polyfit" title="numpy.polyfit"><code class="xref py py-obj docutils literal"><span class="pre">polyfit</span></code></a>在最小二乘拟合严重时发出<a class="reference internal" href="numpy.RankWarning.html#numpy.RankWarning" title="numpy.RankWarning"><code class="xref py py-obj docutils literal"><span class="pre">RankWarning</span></code></a>。</span><span class="yiyi-st" id="yiyi-65">这意味着最佳拟合由于数值误差而不能很好地定义。</span><span class="yiyi-st" id="yiyi-66">可以通过降低多项式次数或通过将<em class="xref py py-obj">x</em>替换为<em class="xref py py-obj">x</em>  -  <em class="xref py py-obj">x</em> .mean()来改善结果。</span><span class="yiyi-st" id="yiyi-67"><em class="xref py py-obj">rcond</em>参数也可以设置为小于其默认值，但是结果拟合可能是假的：包括来自小奇异值的贡献可以向结果添加数值噪声。</span></p>
+<p><span class="yiyi-st" id="yiyi-68">注意，当多项式的阶数较大或者采样点的间隔严重居中时，拟合多项式系数本身会受到不利的影响。</span><span class="yiyi-st" id="yiyi-69">在这些情况下，应始终检查配合的质量。</span><span class="yiyi-st" id="yiyi-70">当多项式拟合不令人满意时，样条可能是一个好的选择。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-71">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r58" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-72"><a class="fn-backref" href="#id1"> [R58]</a></span></td><td><span class="yiyi-st" id="yiyi-73">维基百科，“曲线拟合”，<a class="reference external" href="http://en.wikipedia.org/wiki/Curve_fitting">http://en.wikipedia.org/wiki/Curve_fitting</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r59" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-74"><a class="fn-backref" href="#id2">[R59]</a></span></td><td><span class="yiyi-st" id="yiyi-75">维基百科，“多项式插值”，<a class="reference external" href="http://en.wikipedia.org/wiki/Polynomial_interpolation">http://en.wikipedia.org/wiki/Polynomial_interpolation</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-76">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span>  <span class="mf">4.0</span><span class="p">,</span>  <span class="mf">5.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span>
+<span class="go">array([ 0.08703704, -0.81349206,  1.69312169, -0.03968254])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-77">使用<a class="reference internal" href="numpy.poly1d.html#numpy.poly1d" title="numpy.poly1d"><code class="xref py py-obj docutils literal"><span class="pre">poly1d</span></code></a>对象来处理多项式很方便：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">0.6143849206349179</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">(</span><span class="mf">3.5</span><span class="p">)</span>
+<span class="go">-0.34732142857143039</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">22.579365079365115</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-78">高阶多项式可能会剧烈振荡：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p30</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+<span class="go">/... RankWarning: Polyfit may be poorly conditioned...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p30</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">-0.80000000000000204</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p30</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">-0.99999999999999445</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p30</span><span class="p">(</span><span class="mf">4.5</span><span class="p">)</span>
+<span class="go">-0.10547061179440398</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-79">插图：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&apos;.&apos;</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">p</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span> <span class="s1">&apos;-&apos;</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">p30</span><span class="p">(</span><span class="n">xp</span><span class="p">),</span> <span class="s1">&apos;--&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">(-2, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-80">（<a class="reference external" href="../../reference/generated/numpy-polyfit-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-polyfit-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-polyfit-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-polyfit-1.png" src="../../_images/numpy-polyfit-1.png">
+</div>
+</dd></dl>

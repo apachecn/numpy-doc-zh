@@ -1,0 +1,38 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.ptp</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.ptp.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.ptp.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.ptp"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">ptp</code><span class="sig-paren">(</span><em>axis=None</em>, <em>out=None</em>, <em>fill_value=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L5600-L5631"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">沿给定维度（即峰 - 峰值）的返回（最大 - 最小）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>axis</strong>：{None，int}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">用于查找峰的轴。</span><span class="yiyi-st" id="yiyi-19">如果为无（默认），则使用展平的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>out</strong>：{None，array_like}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">用于放置结果的替代输出数组。</span><span class="yiyi-st" id="yiyi-22">它必须具有与预期输出相同的形状和缓冲区长度，但如果需要，将转换类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>fill_value</strong>：{var}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">用于填充屏蔽值的值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>ptp</strong>：ndarray。</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">除非指定<code class="docutils literal"><span class="pre">out</span></code>，否则保存结果的新数组将返回<code class="docutils literal"><span class="pre">out</span></code>的引用。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

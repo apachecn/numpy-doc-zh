@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.source</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.source.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.source.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.source"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">source</code><span class="sig-paren">(</span><em>object</em>, <em>output=&lt;open file &apos;&lt;stdout&gt;&apos;</em>, <em>mode &apos;w&apos;&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/utils.py#L647-L692"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">打印或写入文件Numpy对象的源代码。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">只有以Python编写的对象才会返回源代码。</span><span class="yiyi-st" id="yiyi-16">许多函数和类在C中定义，因此不会返回有用的信息。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>对象</strong>：numpy对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输入对象。</span><span class="yiyi-st" id="yiyi-20">这可以是任何对象（函数，类，模块，...）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>输出</strong>：文件对象，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">如果未提供<em class="xref py py-obj">输出</em>，则源代码将打印到屏幕（sys.stdout）。</span><span class="yiyi-st" id="yiyi-23">文件对象必须使用write&apos;w&apos;或append&apos;a&apos;模式创建。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.lookfor.html#numpy.lookfor" title="numpy.lookfor"><code class="xref py py-obj docutils literal"><span class="pre">lookfor</span></code></a>，<a class="reference internal" href="numpy.info.html#numpy.info" title="numpy.info"><code class="xref py py-obj docutils literal"><span class="pre">info</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">source</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">)</span>                        
+<span class="go">In file: /usr/lib/python2.6/dist-packages/numpy/lib/function_base.py</span>
+<span class="go">def interp(x, xp, fp, left=None, right=None):</span>
+<span class="go">    &quot;&quot;&quot;.... (full docstring printed)&quot;&quot;&quot;</span>
+<span class="go">    if isinstance(x, (float, int, number)):</span>
+<span class="go">        return compiled_interp([x], xp, fp, left, right).item()</span>
+<span class="go">    else:</span>
+<span class="go">        return compiled_interp(x, xp, fp, left, right)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-27">只有以Python编写的对象才会返回源代码。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">source</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span>                         
+<span class="go">Not available for this object.</span>
+</pre></div>
+</div>
+</dd></dl>

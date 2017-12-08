@@ -1,0 +1,183 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.memmap</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.memmap.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.memmap.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.memmap"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">memmap</code><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/memmap.py#L20-L311"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">创建存储在磁盘上的<em>二进制</em>文件中的数组的内存映射。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">内存映射文件用于访问磁盘上大文件的小段，而不是将整个文件读入内存。</span><span class="yiyi-st" id="yiyi-16">Numpy的memmap是数组类的对象。</span><span class="yiyi-st" id="yiyi-17">这与Python的<code class="docutils literal"><span class="pre">mmap</span></code>模块不同，后者使用类似文件的对象。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">这个ndarray的子​​类与一些操作有一些令人不快的交互，因为它不太适合作为一个子类。</span><span class="yiyi-st" id="yiyi-19">使用这个子类的替代方法是自己创建<code class="docutils literal"><span class="pre">mmap</span></code>对象，然后直接创建一个带有ndarray .__ new__的ndarray，传递在其&apos;buffer =&apos;参数中创建的对象。</span></p>
+<p><span class="yiyi-st" id="yiyi-20">这个类可以在某些时候变成一个将视图返回到mmap缓冲区的工厂函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-21">删除要关闭的memmap实例。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>filename</strong>：str或类文件对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">要用作数组数据缓冲区的文件名或文件对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">用于解释文件内容的数据类型。</span><span class="yiyi-st" id="yiyi-27">默认值为<code class="xref py py-obj docutils literal"><span class="pre">uint8</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>mode</strong>：{&apos;r +&apos;，&apos;r&apos;，&apos;w +&apos;，&apos;c&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">该文件在此模式下打开：</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%">
+<col width="91%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-30">&apos;r&apos;</span></td>
+<td><span class="yiyi-st" id="yiyi-31">打开现有文件以供阅读。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-32">&apos;r +&apos;</span></td>
+<td><span class="yiyi-st" id="yiyi-33">打开现有文件进行读写。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-34">&apos;w +&apos;</span></td>
+<td><span class="yiyi-st" id="yiyi-35">创建或覆盖现有文件进行读写。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-36">&apos;C&apos;</span></td>
+<td><span class="yiyi-st" id="yiyi-37">写时复制：分配影响内存中的数据，但更改不会保存到磁盘。</span><span class="yiyi-st" id="yiyi-38">磁盘上的文件是只读的。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-39">默认值为&apos;r +&apos;。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-40"><strong>offset</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-41">在文件中，数组数据从此偏移开始。</span><span class="yiyi-st" id="yiyi-42">由于<em class="xref py py-obj">offset</em>以字节为单位，通常应为<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>的字节大小的倍数。</span><span class="yiyi-st" id="yiyi-43">当<code class="docutils literal"><span class="pre">模式</span> <span class="pre">！=</span> <span class="pre">&apos;r&apos;</span></code>，甚至超过文件结尾的正偏移都有效；该文件将被扩展以容纳附加数据。</span><span class="yiyi-st" id="yiyi-44">默认情况下，<code class="docutils literal"><span class="pre">memmap</span></code>将从文件开头开始，即使<code class="docutils literal"><span class="pre">filename</span></code>是文件指针<code class="docutils literal"><span class="pre">fp</span></code>和<code class="docutils literal"><span class="pre">fp .tell()</span> <span class="pre">！=</span> <span class="pre">0</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-45"><strong>shape</strong>：tuple，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-46">数组的所需形状。</span><span class="yiyi-st" id="yiyi-47">If <code class="docutils literal"><span class="pre">mode</span> <span class="pre">==</span> <span class="pre">&apos;r&apos;</span></code> and the number of remaining bytes after <em class="xref py py-obj">offset</em> is not a multiple of the byte-size of <a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>, you must specify <a class="reference internal" href="numpy.memmap.shape.html#numpy.memmap.shape" title="numpy.memmap.shape"><code class="xref py py-obj docutils literal"><span class="pre">shape</span></code></a>. </span><span class="yiyi-st" id="yiyi-48">默认情况下，返回的数组将是1-D，其中元素的数量由文件大小和数据类型决定。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-49"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;}，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-50">指定ndarray内存布局的顺序：<a class="reference internal" href="../../glossary.html#term-row-major"><span class="xref std std-term">row-major</span></a>，C风格或<a class="reference internal" href="../../glossary.html#term-column-major"><span class="xref std std-term">column-major</span></a>，Fortran风格。</span><span class="yiyi-st" id="yiyi-51">这只有在形状大于1-D时才有效果。</span><span class="yiyi-st" id="yiyi-52">默认顺序为“C”。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-53">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-54">memmap对象可以在任何接受ndarray的地方使用。</span><span class="yiyi-st" id="yiyi-55">Given a memmap <code class="docutils literal"><span class="pre">fp</span></code>, <code class="docutils literal"><span class="pre">isinstance(fp,</span> <span class="pre">numpy.ndarray)</span></code> returns <code class="docutils literal"><span class="pre">True</span></code>.</span></p>
+<p><span class="yiyi-st" id="yiyi-56">内存映射数组使用Python内存映射对象（在Python 2.5之前）不允许文件大于某个大小，具体取决于平台。</span><span class="yiyi-st" id="yiyi-57">这个大小总是</span></p>
+<p><span class="yiyi-st" id="yiyi-58">当memmap导致在文件系统中创建或扩展超出其当前大小的文件时，新部分的内容未指定。</span><span class="yiyi-st" id="yiyi-59">在具有POSIX文件系统语义的系统上，扩展部分将填充零字节。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-60">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;float32&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-61">此示例使用临时文件，以便doctest不会将文件写入您的目录。</span><span class="yiyi-st" id="yiyi-62">你会使用一个&apos;正常&apos;文件名。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">mkdtemp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os.path</span> <span class="k">as</span> <span class="nn">path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filename</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">(),</span> <span class="s1">&apos;newfile.dat&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-63">使用与我们的数据匹配的dtype和shape创建memmap：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;float32&apos;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&apos;w+&apos;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span>
+<span class="go">memmap([[ 0.,  0.,  0.,  0.],</span>
+<span class="go">        [ 0.,  0.,  0.,  0.],</span>
+<span class="go">        [ 0.,  0.,  0.,  0.]], dtype=float32)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-64">将数据写入memmap数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span>
+<span class="go">memmap([[  0.,   1.,   2.,   3.],</span>
+<span class="go">        [  4.,   5.,   6.,   7.],</span>
+<span class="go">        [  8.,   9.,  10.,  11.]], dtype=float32)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span><span class="o">.</span><span class="n">filename</span> <span class="o">==</span> <span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-65">删除在删除对象之前将内存更改刷新到磁盘：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">fp</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-66">加载memmap并验证数据是否存储：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">newfp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;float32&apos;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newfp</span>
+<span class="go">memmap([[  0.,   1.,   2.,   3.],</span>
+<span class="go">        [  4.,   5.,   6.,   7.],</span>
+<span class="go">        [  8.,   9.,  10.,  11.]], dtype=float32)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-67">只读memmap：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;float32&apos;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpr</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-68">写时复写memmap：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fpc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;float32&apos;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&apos;c&apos;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpc</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-69">可以分配给写时复制数组，但是值仅写入数组的存储器副本，而不写入磁盘：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fpc</span>
+<span class="go">memmap([[  0.,   1.,   2.,   3.],</span>
+<span class="go">        [  4.,   5.,   6.,   7.],</span>
+<span class="go">        [  8.,   9.,  10.,  11.]], dtype=float32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpc</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpc</span>
+<span class="go">memmap([[  0.,   0.,   0.,   0.],</span>
+<span class="go">        [  4.,   5.,   6.,   7.],</span>
+<span class="go">        [  8.,   9.,  10.,  11.]], dtype=float32)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-70">磁盘上的文件不变：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fpr</span>
+<span class="go">memmap([[  0.,   1.,   2.,   3.],</span>
+<span class="go">        [  4.,   5.,   6.,   7.],</span>
+<span class="go">        [  8.,   9.,  10.,  11.]], dtype=float32)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-71">偏移到memmap中：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fpo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;float32&apos;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpo</span>
+<span class="go">memmap([  4.,   5.,   6.,   7.,   8.,   9.,  10.,  11.], dtype=float32)</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-72">属性</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%">
+<col width="81%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-73">文件名</span></td>
+<td><span class="yiyi-st" id="yiyi-74">（str）映射文件的路径。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-75">抵消</span></td>
+<td><span class="yiyi-st" id="yiyi-76">（int）文件中的偏移位置。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-77">模式</span></td>
+<td><span class="yiyi-st" id="yiyi-78">（str）文件模式。</span></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-79">方法</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="numpy.memmap.flush.html#numpy.memmap.flush" title="numpy.memmap.flush"><code class="xref py py-obj docutils literal"><span class="pre">flush</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-81">将数组中的任何更改写入磁盘上的文件。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

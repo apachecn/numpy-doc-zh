@@ -1,0 +1,91 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.qr</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.qr.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.qr.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.qr"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">qr</code><span class="sig-paren">(</span><em>a</em>, <em>mode=&apos;reduced&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L617-L826"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算矩阵的qr因式分解。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">将矩阵<em class="xref py py-obj">a</em>定义为<em>qr</em>，其中<em class="xref py py-obj">q</em>是正交的，<em class="xref py py-obj">r</em>是上三角形。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like，shape（M，N）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">矩阵作为因子。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>mode</strong>：{&apos;reduced&apos;，&apos;complete&apos;，&apos;r&apos;，&apos;raw&apos;，&apos;full&apos;，&apos;economic&apos;</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">如果K = min（M，N），那么</span></p>
+<p><span class="yiyi-st" id="yiyi-21">&apos;reduced&apos;：返回具有维度（M，K），（K，N）（默认）的q，r&apos; r返回h从&apos;原始&apos;：返回h从&apos;原始&apos;：返回h从&apos;原始&apos;返回h&apos; ，已弃用。</span></p>
+<p><span class="yiyi-st" id="yiyi-22">选项“reduced”，“complete”和“raw”在numpy 1.8中是新增的，有关详细信息，请参见注释。</span><span class="yiyi-st" id="yiyi-23">默认值是&apos;reduced&apos;，并且为了保持与numpy的早期版本的向后兼容性，它和旧的默认&apos;full&apos;可以省略。</span><span class="yiyi-st" id="yiyi-24">注意，以&apos;原始&apos;模式返回的数组h被转置以调用Fortran。</span><span class="yiyi-st" id="yiyi-25">“经济”模式已被弃用。</span><span class="yiyi-st" id="yiyi-26">模式“完全”和“经济”可以仅使用第一个字母向后兼容，但所有其他必须拼写出来。</span><span class="yiyi-st" id="yiyi-27">有关更多说明，请参阅注释。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>q</strong>：float或complex的ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">具有正交列的矩阵。</span><span class="yiyi-st" id="yiyi-31">当mode =&apos;complete&apos;时，结果是一个正交/酉矩阵，取决于a是否是实数/复数。</span><span class="yiyi-st" id="yiyi-32">在这种情况下行列式可以是+/- 1。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>r</strong>：浮点数或复数的数组，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">上三角矩阵。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35"><strong>（h，tau）</strong>：n.pdouble或np.cdouble的ndarrays，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-36">数组h包含产生q和R的Householder反射器。 tau数组包含反射器的缩放因子。</span><span class="yiyi-st" id="yiyi-37">在已弃用的“经济”模式中，仅返回h。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-38">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-39"><strong>LinAlgError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-40">如果分解失败。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-42">这是LAPACK例程dgeqrf，zgeqrf，dorgqr和zungqr的接口。</span></p>
+<p><span class="yiyi-st" id="yiyi-43">有关qr因式分解的更多信息，请参见例如：<a class="reference external" href="http://en.wikipedia.org/wiki/QR_factorization">http://en.wikipedia.org/wiki/QR_factorization</a></span></p>
+<p><span class="yiyi-st" id="yiyi-44"><em class="xref py py-obj">ndarray</em>的子类保留，除了“raw”模式。</span><span class="yiyi-st" id="yiyi-45">因此，如果<em class="xref py py-obj">a</em>的类型为<em class="xref py py-obj">matrix</em>，所有返回值都将是矩阵。</span></p>
+<p><span class="yiyi-st" id="yiyi-46">在Numpy 1.8中添加了用于模式的新&apos;reduced&apos;，&apos;complete&apos;和&apos;raw&apos;选项，旧选项&apos;full&apos;被作为&apos;reduced&apos;的别名。</span><span class="yiyi-st" id="yiyi-47">此外，期权“完全”和“经济”被废弃。</span><span class="yiyi-st" id="yiyi-48">因为“full”是以前的默认值，“reduced”是新的默认值，所以通过让<em class="xref py py-obj">mode</em>默认值可以保持向后兼容性。</span><span class="yiyi-st" id="yiyi-49">添加了&apos;raw&apos;选项，以便可以使用可以使用Householder反射器将数组乘以q的LAPACK例程。</span><span class="yiyi-st" id="yiyi-50">请注意，在这种情况下，返回的数组类型为np.double或np.cdouble，h数组转置为FORTRAN兼容。</span><span class="yiyi-st" id="yiyi-51">没有使用&apos;raw&apos;返回的例程目前由numpy暴露，但是一些在lapack_lite中可用，只是等待必要的工作。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-52">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>  <span class="c1"># a does equal qr</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&apos;economic&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>  <span class="c1"># mode=&apos;r&apos; returns the same r as mode=&apos;full&apos;</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># But only triu parts are guaranteed equal when mode=&apos;economic&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">r3</span><span class="p">[:</span><span class="mi">6</span><span class="p">,:</span><span class="mi">6</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-53">示例说明<a class="reference internal" href="#numpy.linalg.qr" title="numpy.linalg.qr"><code class="xref py py-obj docutils literal"><span class="pre">qr</span></code></a>的常见用法：求解最小二乘问题</span></p>
+<p><span class="yiyi-st" id="yiyi-54">What are the least-squares-best <em class="xref py py-obj">m</em> and <em class="xref py py-obj">y0</em> in <code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">y0</span> <span class="pre">+</span> <span class="pre">mx</span></code> for the following data: {(0,1), (1,0), (1,2), (2,1)}. </span><span class="yiyi-st" id="yiyi-55">（图的点和你会看到它应该是y0 = 0，m = 1）</span><span class="yiyi-st" id="yiyi-56">通过求解过度确定的矩阵方程式提供答案：<code class="docutils literal"><span class="pre">Ax</span> <span class="pre">=</span> <span class="pre">b</span></code></span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="n">y0</span><span class="p">],</span> <span class="p">[</span><span class="n">m</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-57">如果A = qr，使得q是正交的（其总是可能通过Gram-Schmidt），则<code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">inv（r） t3 &gt; <span class="pre">*</span> <span class="pre">（qT）</span> <span class="pre">*</span> <span class="pre">b</span></span></code>。</span><span class="yiyi-st" id="yiyi-58">（但是，在numpy练习中，我们只需使用<a class="reference internal" href="numpy.linalg.lstsq.html#numpy.linalg.lstsq" title="numpy.linalg.lstsq"><code class="xref py py-obj docutils literal"><span class="pre">lstsq</span></code></a>。）</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
+<span class="go">array([[0, 1],</span>
+<span class="go">       [1, 1],</span>
+<span class="go">       [1, 1],</span>
+<span class="go">       [2, 1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">LA</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">LA</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span>
+<span class="go">array([  1.1e-16,   1.0e+00])</span>
+</pre></div>
+</div>
+</dd></dl>

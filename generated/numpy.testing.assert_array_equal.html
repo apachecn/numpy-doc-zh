@@ -1,0 +1,77 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.assert_array_equal</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_array_equal.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_array_equal.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.assert_array_equal"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.</code><code class="descname">assert_array_equal</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>err_msg=&apos;&apos;</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/utils.py#L749-L813"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">如果两个array_like对象不相等，则引发AssertionError。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">给定两个array_like对象，检查形状是否相等，这些对象的所有元素是否相等。</span><span class="yiyi-st" id="yiyi-16">在形状不匹配或冲突值时引发异常。</span><span class="yiyi-st" id="yiyi-17">与numpy中的标准用法相反，NaNs是以数字进行比较的，如果两个对象在相同位置具有NaN，则不会产生断言。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">建议用于验证与浮点数的等同性的通常警告。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">要检查的实际对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>y</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">期望的，期望的对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>err_msg</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">出现故障时打印的错误消息。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>verbose</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">如果为True，则冲突的值将附加到错误消息。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>AssertionError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">如果实际和所需对象不相等。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.testing.assert_allclose.html#numpy.testing.assert_allclose" title="numpy.testing.assert_allclose"><code class="xref py py-obj docutils literal"><span class="pre">assert_allclose</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">将两个array_like对象与所需的相对和/或绝对精度进行比较。</span></dd>
+</dl>
+<p class="last"><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.testing.assert_array_almost_equal_nulp.html#numpy.testing.assert_array_almost_equal_nulp" title="numpy.testing.assert_array_almost_equal_nulp"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_almost_equal_nulp</span></code></a>，<a class="reference internal" href="numpy.testing.assert_array_max_ulp.html#numpy.testing.assert_array_max_ulp" title="numpy.testing.assert_array_max_ulp"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_max_ulp</span></code></a>，<a class="reference internal" href="numpy.testing.assert_equal.html#numpy.testing.assert_equal" title="numpy.testing.assert_equal"><code class="xref py py-obj docutils literal"><span class="pre">assert_equal</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-36">第一个断言不会引发异常：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">2.33333</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span>
+<span class="gp">... </span>                              <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="mf">2.33333</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37">Assert失败，数值不准确，带有浮点数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_array_equal</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span>
+<span class="gp">... </span>                              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+<span class="gp">...</span>
+<span class="go">&lt;type &apos;exceptions.ValueError&apos;&gt;:</span>
+<span class="go">AssertionError:</span>
+<span class="go">Arrays are not equal</span>
+
+<span class="go">(mismatch 50.0%)</span>
+<span class="go"> x: array([ 1.        ,  3.14159265,         NaN])</span>
+<span class="go"> y: array([ 1.        ,  3.14159265,         NaN])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">对于这些情况，请使用<a class="reference internal" href="numpy.testing.assert_allclose.html#numpy.testing.assert_allclose" title="numpy.testing.assert_allclose"><code class="xref py py-obj docutils literal"><span class="pre">assert_allclose</span></code></a>或其中一个nulp（浮点值数量）函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_allclose</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span>
+<span class="gp">... </span>                           <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span>
+<span class="gp">... </span>                           <span class="n">rtol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>

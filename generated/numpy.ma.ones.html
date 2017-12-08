@@ -1,0 +1,62 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.ones</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.ones.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.ones.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ma.ones"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">ones</code><span class="sig-paren">(</span><em>shape</em>, <em>dtype=None</em>, <em>order=&apos;C&apos;</em><span class="sig-paren">)</span><em class="property"> = &lt;numpy.ma.core._convert2ma instance&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回给定形状和类型的新数组，用数字填充。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>shape</strong>：int或ints序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">新数组的形状，例如<code class="docutils literal"><span class="pre">（2，</span> <span class="pre">3）</span></code>或<code class="docutils literal"><span class="pre">2</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">数组的所需数据类型，例如<code class="xref py py-obj docutils literal"><span class="pre">numpy.int8</span></code>。</span><span class="yiyi-st" id="yiyi-21">默认值为<code class="xref py py-obj docutils literal"><span class="pre">numpy.float64</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">是否在存储器中以C或Fortran连续（按行或列方式）存储多维数据。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">具有给定形状，dtype和顺序的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.ma.zeros.html#numpy.ma.zeros" title="numpy.ma.zeros"><code class="xref py py-obj docutils literal"><span class="pre">zeros</span></code></a>，<code class="xref py py-obj docutils literal"><span class="pre">ones_like</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">array([ 1.,  1.,  1.,  1.,  1.])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">5</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+<span class="go">array([1, 1, 1, 1, 1])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">array([[ 1.],</span>
+<span class="go">       [ 1.]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">array([[ 1.,  1.],</span>
+<span class="go">       [ 1.,  1.]])</span>
+</pre></div>
+</div>
+</dd></dl>

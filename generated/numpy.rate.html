@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.rate</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.rate.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.rate.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.rate"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">rate</code><span class="sig-paren">(</span><em>nper</em>, <em>pmt</em>, <em>pv</em>, <em>fv</em>, <em>when=&apos;end&apos;</em>, <em>guess=0.1</em>, <em>tol=1e-06</em>, <em>maxiter=100</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/financial.py#L531-L589"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算每个周期的利率。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong> NPER  T0&gt;：array_like</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">复合周期数</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>pmt</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">付款</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>pv</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">目前价值</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>fv</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">未来价值</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>时</strong>：{{&apos;begin&apos;，1}，{&apos;end&apos;，0}}，{string，int}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">付款到期时（“开始”（1）或“结束”（0））</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>猜测</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">开始猜测解决利率</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>tol</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">解决方案的所需容差</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>maxiter</strong>：int，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">找到解的最大迭代次数</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-33">通过迭代求解（非线性）方程来计算感兴趣速率：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">fv</span> <span class="o">+</span> <span class="n">pv</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">rate</span><span class="p">)</span><span class="o">**</span><span class="n">nper</span> <span class="o">+</span> <span class="n">pmt</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">rate</span><span class="o">*</span><span class="n">when</span><span class="p">)</span><span class="o">/</span><span class="n">rate</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">rate</span><span class="p">)</span><span class="o">**</span><span class="n">nper</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-34"><code class="docutils literal"><span class="pre">rate</span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">参考文献</span></p>
+<p><span class="yiyi-st" id="yiyi-36">Wheeler，D.A.，E.Rathke和R.Weir（Eds。）</span><span class="yiyi-st" id="yiyi-37">（2009年5月）。</span><span class="yiyi-st" id="yiyi-38">Office应用程序的打开文档格式（OpenDocument）v1.2，第2部分：重新计算公式（OpenFormula）格式 - 注释版本，预稿12。</span><span class="yiyi-st" id="yiyi-39">促进结构性信息标准组织（OASIS）。</span><span class="yiyi-st" id="yiyi-40">Billerica，MA，USA。</span><span class="yiyi-st" id="yiyi-41">[ODT文件]。</span><span class="yiyi-st" id="yiyi-42">可用：<a class="reference external" href="http://www.oasis-open.org/committees/documents.php?wg_abbrev=office-formula">http://www.oasis-open.org/committees/documents.php?wg_abbrev=office-formula</a> OpenDocument-formula-20090508.odt</span></p>
+</dd></dl>

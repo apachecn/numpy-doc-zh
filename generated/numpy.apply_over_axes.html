@@ -1,0 +1,73 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.apply_over_axes</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.apply_over_axes.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.apply_over_axes.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.apply_over_axes"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">apply_over_axes</code><span class="sig-paren">(</span><em>func</em>, <em>a</em>, <em>axes</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/shape_base.py#L134-L217"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">在多个轴上重复应用一个函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15"><em class="xref py py-obj">func</em>被称为<em class="xref py py-obj">res = func（a，axis）</em>，其中<em class="xref py py-obj">轴</em>是<em class="xref py py-obj">轴</em>的第一个元素。</span><span class="yiyi-st" id="yiyi-16">函数调用的结果<em class="xref py py-obj">res</em>必须具有与<em class="xref py py-obj">a</em>相同的维或一个更小的维。</span><span class="yiyi-st" id="yiyi-17">如果<em class="xref py py-obj">res</em>的尺寸小于<em class="xref py py-obj">a</em>，则在<em class="xref py py-obj">轴</em>之前插入尺寸。</span><span class="yiyi-st" id="yiyi-18">然后对<em class="xref py py-obj">轴</em>中的每个轴重复对<em class="xref py py-obj">func</em>的调用，<em class="xref py py-obj">res</em>作为第一个参数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>func</strong>：function</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">此函数必须带有两个参数，<em class="xref py py-obj">func（a，axis）</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>axes</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">应用<em class="xref py py-obj">func</em>的轴；元素必须是整数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>apply_over_axis</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">输出数组。</span><span class="yiyi-st" id="yiyi-29">尺寸的数量与<em class="xref py py-obj">a</em>相同，但形状可以不同。</span><span class="yiyi-st" id="yiyi-30">这取决于<em class="xref py py-obj">func</em>是否改变其输出相对于其输入的形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.apply_along_axis.html#numpy.apply_along_axis" title="numpy.apply_along_axis"><code class="xref py py-obj docutils literal"><span class="pre">apply_along_axis</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">沿给定轴向数组的1-D切片应用函数。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-35">这个函数相当于tuple轴参数，可重排序的ufuncs和keepdims = True。</span><span class="yiyi-st" id="yiyi-36">ufuncs的元组轴参数自版本1.7.0起已可用。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[[ 0,  1,  2,  3],</span>
+<span class="go">        [ 4,  5,  6,  7],</span>
+<span class="go">        [ 8,  9, 10, 11]],</span>
+<span class="go">       [[12, 13, 14, 15],</span>
+<span class="go">        [16, 17, 18, 19],</span>
+<span class="go">        [20, 21, 22, 23]]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-38">在轴0和2上求和。</span><span class="yiyi-st" id="yiyi-39">结果具有与原始数组相同的维数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">apply_over_axes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">array([[[ 60],</span>
+<span class="go">        [ 92],</span>
+<span class="go">        [124]]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">ufuncs的元组轴参数是等价的：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([[[ 60],</span>
+<span class="go">        [ 92],</span>
+<span class="go">        [124]]])</span>
+</pre></div>
+</div>
+</dd></dl>

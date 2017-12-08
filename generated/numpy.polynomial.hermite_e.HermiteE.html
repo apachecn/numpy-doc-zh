@@ -1,0 +1,108 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.hermite_e.HermiteE</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.hermite_e.HermiteE.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.hermite_e.HermiteE.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.polynomial.hermite_e.HermiteE"><span class="yiyi-st" id="yiyi-15"> <em class="property">class </em><code class="descclassname">numpy.polynomial.hermite_e.</code><code class="descname">HermiteE</code><span class="sig-paren">(</span><em>coef</em>, <em>domain=None</em>, <em>window=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/hermite_e.py#L1812-L1851"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">一个HermiteE系列类。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">HermiteE类提供了标准的Python数值方法&apos;+&apos;，&apos; - &apos;，&apos;*&apos;，&apos;//&apos;，&apos;％&apos;，&apos;divmod&apos;，&apos;**&apos;和&apos;方法列在<code class="xref py py-obj docutils literal"><span class="pre">ABCPolyBase</span></code>文档中。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>coef</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">HermiteE coefficients in order of increasing degree, i.e, <code class="docutils literal"><span class="pre">(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code> gives <code class="docutils literal"><span class="pre">1*He_0(x)</span> <span class="pre">+</span> <span class="pre">2*He_1(X)</span> <span class="pre">+</span> <span class="pre">3*He_2(x)</span></code>.</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>domain</strong>：（2，）array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">要使用的域。</span><span class="yiyi-st" id="yiyi-23">间隔<code class="docutils literal"><span class="pre">[domain [0]，</span> <span class="pre">domain [1]]</span></code>映​​射到间隔<code class="docutils literal"><span class="pre">，</span> <span class="pre">窗口[1]]</span></code>。</span><span class="yiyi-st" id="yiyi-24">默认值为[-1，1]。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>窗口</strong>：（2，）array_like，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">窗口，请参阅<a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.domain.html#numpy.polynomial.hermite_e.HermiteE.domain" title="numpy.polynomial.hermite_e.HermiteE.domain"><code class="xref py py-obj docutils literal"><span class="pre">domain</span></code></a>以供使用。</span><span class="yiyi-st" id="yiyi-27">默认值为[-1，1]。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-28"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">方法</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.__call__.html#numpy.polynomial.hermite_e.HermiteE.__call__" title="numpy.polynomial.hermite_e.HermiteE.__call__"><code class="xref py py-obj docutils literal"><span class="pre">__call__</span></code></a>（arg）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.basis.html#numpy.polynomial.hermite_e.HermiteE.basis" title="numpy.polynomial.hermite_e.HermiteE.basis"><code class="xref py py-obj docutils literal"><span class="pre">basis</span></code></a>（deg [，domain，window]）</span></td>
+<td><span class="yiyi-st" id="yiyi-32">度数<em class="xref py py-obj">deg</em>的系数基准多项式。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.cast.html#numpy.polynomial.hermite_e.HermiteE.cast" title="numpy.polynomial.hermite_e.HermiteE.cast"><code class="xref py py-obj docutils literal"><span class="pre">cast</span></code></a>（series [，domain，window]）</span></td>
+<td><span class="yiyi-st" id="yiyi-34">将系列转换为此类的系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.convert.html#numpy.polynomial.hermite_e.HermiteE.convert" title="numpy.polynomial.hermite_e.HermiteE.convert"><code class="xref py py-obj docutils literal"><span class="pre">convert</span></code></a>（[domain，kind，window]）</span></td>
+<td><span class="yiyi-st" id="yiyi-36">将系列转换为不同的类型和/或域和/或窗口。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.copy.html#numpy.polynomial.hermite_e.HermiteE.copy" title="numpy.polynomial.hermite_e.HermiteE.copy"><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-38">返回副本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.cutdeg.html#numpy.polynomial.hermite_e.HermiteE.cutdeg" title="numpy.polynomial.hermite_e.HermiteE.cutdeg"><code class="xref py py-obj docutils literal"><span class="pre">cutdeg</span></code></a>（deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-40">截断到给定程度的系列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.degree.html#numpy.polynomial.hermite_e.HermiteE.degree" title="numpy.polynomial.hermite_e.HermiteE.degree"><code class="xref py py-obj docutils literal"><span class="pre">degree</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-42">系列的程度。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.deriv.html#numpy.polynomial.hermite_e.HermiteE.deriv" title="numpy.polynomial.hermite_e.HermiteE.deriv"><code class="xref py py-obj docutils literal"><span class="pre">deriv</span></code></a>（[m]）</span></td>
+<td><span class="yiyi-st" id="yiyi-44">区分。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.fit.html#numpy.polynomial.hermite_e.HermiteE.fit" title="numpy.polynomial.hermite_e.HermiteE.fit"><code class="xref py py-obj docutils literal"><span class="pre">fit</span></code></a>（x，y，deg [，domain，rcond，full，w，window]）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">最小二乘拟合数据。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.fromroots.html#numpy.polynomial.hermite_e.HermiteE.fromroots" title="numpy.polynomial.hermite_e.HermiteE.fromroots"><code class="xref py py-obj docutils literal"><span class="pre">fromroots</span></code></a>（roots [，domain，window]）</span></td>
+<td><span class="yiyi-st" id="yiyi-48">返回具有指定根的序列实例。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.has_samecoef.html#numpy.polynomial.hermite_e.HermiteE.has_samecoef" title="numpy.polynomial.hermite_e.HermiteE.has_samecoef"><code class="xref py py-obj docutils literal"><span class="pre">has_samecoef</span></code></a>（other）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">检查系数是否匹配。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.has_samedomain.html#numpy.polynomial.hermite_e.HermiteE.has_samedomain" title="numpy.polynomial.hermite_e.HermiteE.has_samedomain"><code class="xref py py-obj docutils literal"><span class="pre">has_samedomain</span></code></a>（other）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">检查域是否匹配。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.has_sametype.html#numpy.polynomial.hermite_e.HermiteE.has_sametype" title="numpy.polynomial.hermite_e.HermiteE.has_sametype"><code class="xref py py-obj docutils literal"><span class="pre">has_sametype</span></code></a>（other）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">检查类型是否匹配。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.has_samewindow.html#numpy.polynomial.hermite_e.HermiteE.has_samewindow" title="numpy.polynomial.hermite_e.HermiteE.has_samewindow"><code class="xref py py-obj docutils literal"><span class="pre">has_samewindow</span></code></a>（other）</span></td>
+<td><span class="yiyi-st" id="yiyi-56">检查窗口是否匹配。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.identity.html#numpy.polynomial.hermite_e.HermiteE.identity" title="numpy.polynomial.hermite_e.HermiteE.identity"><code class="xref py py-obj docutils literal"><span class="pre">identity</span></code></a>（[domain，window]）</span></td>
+<td><span class="yiyi-st" id="yiyi-58">身份功能。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.integ.html#numpy.polynomial.hermite_e.HermiteE.integ" title="numpy.polynomial.hermite_e.HermiteE.integ"><code class="xref py py-obj docutils literal"><span class="pre">integ</span></code></a>（[m，k，lbnd]）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">整合。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.linspace.html#numpy.polynomial.hermite_e.HermiteE.linspace" title="numpy.polynomial.hermite_e.HermiteE.linspace"><code class="xref py py-obj docutils literal"><span class="pre">linspace</span></code></a>（[n，domain]）</span></td>
+<td><span class="yiyi-st" id="yiyi-62">在域中的等间隔点处返回x，y值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.mapparms.html#numpy.polynomial.hermite_e.HermiteE.mapparms" title="numpy.polynomial.hermite_e.HermiteE.mapparms"><code class="xref py py-obj docutils literal"><span class="pre">mapparms</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-64">返回映射参数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.roots.html#numpy.polynomial.hermite_e.HermiteE.roots" title="numpy.polynomial.hermite_e.HermiteE.roots"><code class="xref py py-obj docutils literal"><span class="pre">roots</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-66">返回系列多项式的根。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.trim.html#numpy.polynomial.hermite_e.HermiteE.trim" title="numpy.polynomial.hermite_e.HermiteE.trim"><code class="xref py py-obj docutils literal"><span class="pre">trim</span></code></a>（[tol]）</span></td>
+<td><span class="yiyi-st" id="yiyi-68">删除拖尾系数</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="numpy.polynomial.hermite_e.HermiteE.truncate.html#numpy.polynomial.hermite_e.HermiteE.truncate" title="numpy.polynomial.hermite_e.HermiteE.truncate"><code class="xref py py-obj docutils literal"><span class="pre">truncate</span></code></a>（size）</span></td>
+<td><span class="yiyi-st" id="yiyi-70">将序列截断到长度<em class="xref py py-obj">大小</em>。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

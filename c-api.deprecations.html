@@ -1,0 +1,23 @@
+
+<h1><span class="yiyi-st" id="yiyi-15">C API Deprecations</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/c-api.deprecations.html">https://docs.scipy.org/doc/numpy/reference/c-api.deprecations.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="background">
+<h2><span class="yiyi-st" id="yiyi-16">Background</span></h2>
+<p><span class="yiyi-st" id="yiyi-17">NumPy为第三方扩展公开的API在多年的发行版中已经增长，并且允许程序员直接从C访问NumPy功能。该API最好被描述为“有机”。</span><span class="yiyi-st" id="yiyi-18">它已经从多个竞争的愿望和多年来的多个角度出现，强烈地影响了使用户容易移动到NumPy从Numeric和Numarray的愿望。</span><span class="yiyi-st" id="yiyi-19">核心API源于Numeric在1995年，有一些模式，如大量使用宏，写成模仿Python的C-API以及90年代后期的编译器技术。</span><span class="yiyi-st" id="yiyi-20">还有一小部分志愿者只有很少的时间花在改进这个API上。</span></p>
+<p><span class="yiyi-st" id="yiyi-21">目前正在努力改进API。</span><span class="yiyi-st" id="yiyi-22">在这一努力中，确保为NumPy 1.X编译的代码继续编译为NumPy 1.X是很重要的。</span><span class="yiyi-st" id="yiyi-23">同时，某些API将被标记为已弃用，这样未来的代码可以避免这些API并遵循更好的做法。</span></p>
+<p><span class="yiyi-st" id="yiyi-24">C API中的贬低标记所起的另一个重要作用是移向隐藏NumPy实现的内部细节。</span><span class="yiyi-st" id="yiyi-25">对于那些需要直接，容易，访问ndarrays的数据，这不会删除这个能力。</span><span class="yiyi-st" id="yiyi-26">相反，有许多潜在的性能优化，需要更改实现细节，NumPy开发人员已经无法尝试它们，因为保持ABI兼容性的高价值。</span><span class="yiyi-st" id="yiyi-27">通过废弃这种直接访问，我们将来将能够改善NumPy的性能，我们目前不能。</span></p>
+</div>
+<div class="section" id="deprecation-mechanism-npy-no-deprecated-api">
+<h2><span class="yiyi-st" id="yiyi-28">Deprecation Mechanism NPY_NO_DEPRECATED_API</span></h2>
+<p><span class="yiyi-st" id="yiyi-29">在C中，没有相当于Python支持的弃用警告。</span><span class="yiyi-st" id="yiyi-30">执行弃用的一种方法是在文档和发行说明中标记它们，然后在将来的主要版本（NumPy 2.0及更高版本）中删除或更改已弃用的功能。</span><span class="yiyi-st" id="yiyi-31">MinPy的小版本不应该有主要的C-API更改，但是，防止在以前的次版本上工作的代码。</span><span class="yiyi-st" id="yiyi-32">例如，我们将尽力确保编译和工作在NumPy 1.4的代码应该继续工作在NumPy 1.7（但也许与编译器警告）。</span></p>
+<p><span class="yiyi-st" id="yiyi-33">要使用NPY_NO_DEPRECATED_API机制，您需要#define它到NumPy的目标API版本，然后才包括任何NumPy头。</span><span class="yiyi-st" id="yiyi-34">如果你想确认你的代码是干净的1.7，使用：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-35">在支持#warning机制的编译器上，如果您没有定义符号NPY_NO_DEPRECATED_API，NumPy会发出编译器警告。</span><span class="yiyi-st" id="yiyi-36">这样，对于可能没有仔细阅读发行说明的第三方开发者，将标记出有废弃的事实。</span></p>
+</div>

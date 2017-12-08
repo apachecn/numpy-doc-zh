@@ -1,0 +1,92 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.mask_rowcols</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.mask_rowcols.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.mask_rowcols.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.mask_rowcols"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">mask_rowcols</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L7133-L7221"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">屏蔽包含屏蔽值的2D数组的行和/或列。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">屏蔽包含屏蔽值的2D数组的所有行和/或列。</span><span class="yiyi-st" id="yiyi-17">使用<em class="xref py py-obj">axis</em>参数选择屏蔽行为。</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-18">如果<em class="xref py py-obj">axis</em>为None，则行<em>​​和</em>列被屏蔽。</span></li>
+<li><span class="yiyi-st" id="yiyi-19">如果<em class="xref py py-obj">axis</em>为0，则只有行被屏蔽。</span></li>
+<li><span class="yiyi-st" id="yiyi-20">如果<em class="xref py py-obj">axis</em>为1或-1，则只有列被屏蔽。</span></li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>a</strong>：array_like，MaskedArray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">要掩蔽的数组。</span><span class="yiyi-st" id="yiyi-24">如果不是MaskedArray实例（或如果没有屏蔽数组元素）。</span><span class="yiyi-st" id="yiyi-25">结果是<em class="xref py py-obj">掩码</em>设置为<a class="reference internal" href="../maskedarray.baseclass.html#numpy.ma.nomask" title="numpy.ma.nomask"><code class="xref py py-obj docutils literal"><span class="pre">nomask</span></code></a>（False）的MaskedArray。</span><span class="yiyi-st" id="yiyi-26">必须是2D数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">沿其执行操作的轴。</span><span class="yiyi-st" id="yiyi-29">如果为“无”，则应用于数组的展平版本。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>a</strong>：MaskedArray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">输入数组的修改版本，根据<em class="xref py py-obj">axis</em>参数的值进行屏蔽。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-33">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-34"><strong>NotImplementedError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-35">如果输入数组<em class="xref py py-obj">a</em>不是2D。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-36">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.ma.mask_rows.html#numpy.ma.mask_rows" title="numpy.ma.mask_rows"><code class="xref py py-obj docutils literal"><span class="pre">mask_rows</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-38">屏蔽包含屏蔽值的2D数组的行。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="numpy.ma.mask_cols.html#numpy.ma.mask_cols" title="numpy.ma.mask_cols"><code class="xref py py-obj docutils literal"><span class="pre">mask_cols</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-40">包含屏蔽值的2D数组的掩码库。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="numpy.ma.masked_where.html#numpy.ma.masked_where" title="numpy.ma.masked_where"><code class="xref py py-obj docutils literal"><span class="pre">masked_where</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-42">满足条件的掩码。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-44">输入数组的掩码由此函数修改。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-45">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0, 0, 0],</span>
+<span class="go">       [0, 1, 0],</span>
+<span class="go">       [0, 0, 0]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[0 0 0]</span>
+<span class="go"> [0 -- 0]</span>
+<span class="go"> [0 0 0]],</span>
+<span class="go">      mask =</span>
+<span class="go"> [[False False False]</span>
+<span class="go"> [False  True False]</span>
+<span class="go"> [False False False]],</span>
+<span class="go">      fill_value=999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">mask_rowcols</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[0 -- 0]</span>
+<span class="go"> [-- -- --]</span>
+<span class="go"> [0 -- 0]],</span>
+<span class="go">      mask =</span>
+<span class="go"> [[False  True False]</span>
+<span class="go"> [ True  True  True]</span>
+<span class="go"> [False  True False]],</span>
+<span class="go">      fill_value=999999)</span>
+</pre></div>
+</div>
+</dd></dl>

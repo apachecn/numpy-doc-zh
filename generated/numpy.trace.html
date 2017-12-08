@@ -1,0 +1,65 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.trace</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.trace.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.trace.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.trace"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">trace</code><span class="sig-paren">(</span><em>a</em>, <em>offset=0</em>, <em>axis1=0</em>, <em>axis2=1</em>, <em>dtype=None</em>, <em>out=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L1319-L1379"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">沿数组的对角线返回总和。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">如果<em class="xref py py-obj">a</em>是2-D，则返回具有给定偏移的沿其对角线的和，即对于所有i，元素<code class="docutils literal"><span class="pre">a[i,i+offset]</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-16">如果<em class="xref py py-obj">a</em>有两个以上的尺寸，则由axis1和axis2指定的轴用于确定返回其轨迹的2-D子数组。</span><span class="yiyi-st" id="yiyi-17">所得数组的形状与移除<em class="xref py py-obj">axis1</em>和<em class="xref py py-obj">axis2</em>的<em class="xref py py-obj">a</em>的形状相同。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输入数组，从中获取对角线。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>offset</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">对角线与主对角线的偏移。</span><span class="yiyi-st" id="yiyi-23">可以是正面和负面。</span><span class="yiyi-st" id="yiyi-24">默认为0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>axis1，axis2</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">轴将被用作应从中获取对角线的2-D子阵列的第一和第二轴。</span><span class="yiyi-st" id="yiyi-27">默认值是<em class="xref py py-obj">a</em>的前两个轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">确定返回的数组和累加器元素的累加器的数据类型。</span><span class="yiyi-st" id="yiyi-30">如果dtype具有值None且<em class="xref py py-obj">a</em>是小于默认整数精度的整数类型的精度，则使用缺省整数精度。</span><span class="yiyi-st" id="yiyi-31">否则，精度与<em class="xref py py-obj">a</em>的精度相同。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">数组，其中放置输出。</span><span class="yiyi-st" id="yiyi-34">它的类型被保留，并且它必须是保持输出的正确形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-35">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-36"><strong>sum_along_diagonals</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-37">如果<em class="xref py py-obj">a</em>是2-D，则返回沿对角线的和。</span><span class="yiyi-st" id="yiyi-38">如果<em class="xref py py-obj">a</em>具有较大的维，则返回沿对角线的和的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-39">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.diag.html#numpy.diag" title="numpy.diag"><code class="xref py py-obj docutils literal"><span class="pre">diag</span></code></a>，<a class="reference internal" href="numpy.diagonal.html#numpy.diagonal" title="numpy.diagonal"><code class="xref py py-obj docutils literal"><span class="pre">diagonal</span></code></a>，<a class="reference internal" href="numpy.diagflat.html#numpy.diagflat" title="numpy.diagflat"><code class="xref py py-obj docutils literal"><span class="pre">diagflat</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([6, 8])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 3)</span>
+</pre></div>
+</div>
+</dd></dl>

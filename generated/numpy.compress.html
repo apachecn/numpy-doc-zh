@@ -1,0 +1,77 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.compress</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.compress.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.compress.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.compress"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">compress</code><span class="sig-paren">(</span><em>condition</em>, <em>a</em>, <em>axis=None</em>, <em>out=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L1619-L1683"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">沿给定轴返回数组的所选切片。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">当沿给定轴工作时，<em class="xref py py-obj">输出</em>中返回沿该轴的切片，其中<em class="xref py py-obj">条件</em>计算为True。</span><span class="yiyi-st" id="yiyi-16">在处理1-D数组时，<a class="reference internal" href="#numpy.compress" title="numpy.compress"><code class="xref py py-obj docutils literal"><span class="pre">compress</span></code></a>等效于<a class="reference internal" href="numpy.extract.html#numpy.extract" title="numpy.extract"><code class="xref py py-obj docutils literal"><span class="pre">extract</span></code></a>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>condition</strong>：1-D数组的bool</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">数组，用于选择要返回的条目。</span><span class="yiyi-st" id="yiyi-20">如果len（condition）小于沿给定轴的<em class="xref py py-obj">a</em>的大小，那么输出将被截断为条件数组的长度。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">数组从中提取一个零件。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">沿着其采取切片的轴。</span><span class="yiyi-st" id="yiyi-25">如果为无（默认值），则对展平的数组进行处理。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">输出数组。</span><span class="yiyi-st" id="yiyi-28">它的类型被保留，并且它必须是保持输出的正确形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>compressed_array</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">没有<em class="xref py py-obj">条件</em>的沿轴的切片的<em class="xref py py-obj">a  t&gt;的副本为false。</em></span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-32">也可以看看</span></p>
+<p><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.take.html#numpy.take" title="numpy.take"><code class="xref py py-obj docutils literal"><span class="pre">take</span></code></a>, <a class="reference internal" href="numpy.choose.html#numpy.choose" title="numpy.choose"><code class="xref py py-obj docutils literal"><span class="pre">choose</span></code></a>, <a class="reference internal" href="numpy.diag.html#numpy.diag" title="numpy.diag"><code class="xref py py-obj docutils literal"><span class="pre">diag</span></code></a>, <a class="reference internal" href="numpy.diagonal.html#numpy.diagonal" title="numpy.diagonal"><code class="xref py py-obj docutils literal"><span class="pre">diagonal</span></code></a>, <a class="reference internal" href="numpy.select.html#numpy.select" title="numpy.select"><code class="xref py py-obj docutils literal"><span class="pre">select</span></code></a></span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.ndarray.compress.html#numpy.ndarray.compress" title="numpy.ndarray.compress"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.compress</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">ndarray中的等效方法</span></dd>
+<dt><span class="yiyi-st" id="yiyi-36"><code class="xref py py-obj docutils literal"><span class="pre">np.extract</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-37">使用1-D数组时的等效方法</span></dd>
+<dt><span class="yiyi-st" id="yiyi-38"><code class="xref py py-obj docutils literal"><span class="pre">numpy.doc.ufuncs</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-39">节“输出参数”</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-40">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [3, 4],</span>
+<span class="go">       [5, 6]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[3, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[3, 4],</span>
+<span class="go">       [5, 6]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> <span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[2],</span>
+<span class="go">       [4],</span>
+<span class="go">       [6]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-41">在展平的数组上工作不会沿着轴返回切片，而是选择元素。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">compress</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> <span class="n">a</span><span class="p">)</span>
+<span class="go">array([2])</span>
+</pre></div>
+</div>
+</dd></dl>

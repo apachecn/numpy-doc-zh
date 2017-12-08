@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">Financial functions</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.financial.html">https://docs.scipy.org/doc/numpy/reference/routines.financial.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="simple-financial-functions">
+<h2><span class="yiyi-st" id="yiyi-15">Simple financial functions</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-16"><a class="reference internal" href="generated/numpy.fv.html#numpy.fv" title="numpy.fv"><code class="xref py py-obj docutils literal"><span class="pre">fv</span></code></a>（rate，nper，pmt，pv [，when]）</span></td>
+<td><span class="yiyi-st" id="yiyi-17">计算终值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="generated/numpy.pv.html#numpy.pv" title="numpy.pv"><code class="xref py py-obj docutils literal"><span class="pre">pv</span></code></a>（rate，nper，pmt [，fv，when]）</span></td>
+<td><span class="yiyi-st" id="yiyi-19">计算现值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="generated/numpy.npv.html#numpy.npv" title="numpy.npv"><code class="xref py py-obj docutils literal"><span class="pre">npv</span></code></a>（rate，values）</span></td>
+<td><span class="yiyi-st" id="yiyi-21">返回现金流量系列的NPV（净现值）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="generated/numpy.pmt.html#numpy.pmt" title="numpy.pmt"><code class="xref py py-obj docutils literal"><span class="pre">pmt</span></code></a>（rate，nper，pv [，fv，when]）</span></td>
+<td><span class="yiyi-st" id="yiyi-23">计算贷款本金加利息的付款。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="generated/numpy.ppmt.html#numpy.ppmt" title="numpy.ppmt"><code class="xref py py-obj docutils literal"><span class="pre">ppmt</span></code></a>（rate，per，nper，pv [，fv，when]）</span></td>
+<td><span class="yiyi-st" id="yiyi-25">计算贷款本金的付款。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="generated/numpy.ipmt.html#numpy.ipmt" title="numpy.ipmt"><code class="xref py py-obj docutils literal"><span class="pre">ipmt</span></code></a>（rate，per，nper，pv [，fv，when]）</span></td>
+<td><span class="yiyi-st" id="yiyi-27">计算付款的利息部分。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="generated/numpy.irr.html#numpy.irr" title="numpy.irr"><code class="xref py py-obj docutils literal"><span class="pre">irr</span></code></a>（values）</span></td>
+<td><span class="yiyi-st" id="yiyi-29">返回内部收益率（IRR）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.mirr.html#numpy.mirr" title="numpy.mirr"><code class="xref py py-obj docutils literal"><span class="pre">mirr</span></code></a>（values，finance_rate，reinvest_rate）</span></td>
+<td><span class="yiyi-st" id="yiyi-31">修正内部收益率。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="generated/numpy.nper.html#numpy.nper" title="numpy.nper"><code class="xref py py-obj docutils literal"><span class="pre">nper</span></code></a>（rate，pmt，pv [，fv，when]）</span></td>
+<td><span class="yiyi-st" id="yiyi-33">计算定期付款的数量。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="generated/numpy.rate.html#numpy.rate" title="numpy.rate"><code class="xref py py-obj docutils literal"><span class="pre">rate</span></code></a>（nper，pmt，pv，fv [，when，guess，tol，...]</span></td>
+<td><span class="yiyi-st" id="yiyi-35">计算每个周期的利率。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

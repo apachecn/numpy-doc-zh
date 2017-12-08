@@ -1,0 +1,43 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.recarray.newbyteorder</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.newbyteorder.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.newbyteorder.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.recarray.newbyteorder"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">recarray.</code><code class="descname">newbyteorder</code><span class="sig-paren">(</span><em>new_order=&apos;S&apos;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回具有以不同字节顺序查看的相同数据的数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">相当于：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">arr</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">newbytorder</span><span class="p">(</span><span class="n">new_order</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-17">还在数组数据类型的所有字段和子数组中进行更改。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>new_order</strong>：string，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">字节命令强制；下面的字节顺序规范中的值。</span><span class="yiyi-st" id="yiyi-21"><em class="xref py py-obj">new_order</em>代码可以是以下任何一种：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-22">&apos;s&apos; - 将dtype从当前值切换到对端字节序</span></li>
+<li><span class="yiyi-st" id="yiyi-23">{&apos;</span></li>
+<li><span class="yiyi-st" id="yiyi-24">{&apos;&gt;&apos;，&apos;B&apos;}  -  big endian</span></li>
+<li><span class="yiyi-st" id="yiyi-25">{&apos;=&apos;，&apos;N&apos;}  - 本地顺序</span></li>
+<li><span class="yiyi-st" id="yiyi-26">{&apos;|&apos;，&apos;I&apos;}  - 忽略（字节顺序没有改变）</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-27">默认值（&apos;S&apos;）导致交换当前字节顺序。</span><span class="yiyi-st" id="yiyi-28">代码对<em class="xref py py-obj">new_order</em>的第一个字母执行不区分大小写的检查，以检查上述替代方法。</span><span class="yiyi-st" id="yiyi-29">例如，&apos;B&apos;或&apos;b&apos;或&apos;biggish&apos;中的任何一个都适用于指定big-endian。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>new_arr</strong>：数组</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">新数组对象与dtype反映给定的更改字节顺序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

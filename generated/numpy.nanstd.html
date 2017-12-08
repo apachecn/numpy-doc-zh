@@ -1,0 +1,79 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.nanstd</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanstd.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanstd.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.nanstd"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">nanstd</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em>, <em>dtype=None</em>, <em>out=None</em>, <em>ddof=0</em>, <em>keepdims=&lt;class numpy._globals._NoValue&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/nanfunctions.py#L1209-L1309"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算沿着指定轴的标准偏差，而忽略NaN。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回非NaN数组元素的标准偏差，分布的分布的度量。</span><span class="yiyi-st" id="yiyi-16">默认情况下为扁平数组计算标准偏差，否则在指定轴上计算。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">对于具有零自由度的所有NaN切片或切片，返回NaN并且提高<em class="xref py py-obj">RuntimeWarning</em>。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-18"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">计算非NaN值的标准偏差。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">计算标准偏差的轴。</span><span class="yiyi-st" id="yiyi-24">默认值是计算扁平数组的标准偏差。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">用于计算标准偏差的类型。</span><span class="yiyi-st" id="yiyi-27">对于整数类型的数组，默认值为float64，对于float类型的数组，它与数组类型相同。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">用于放置结果的替代输出数组。</span><span class="yiyi-st" id="yiyi-30">它必须具有与预期输出相同的形状，但如果需要，将转换类型（计算值）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>ddof</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">意味着三角自由度。</span><span class="yiyi-st" id="yiyi-33">用于计算的除数是<code class="docutils literal"><span class="pre">N</span> <span class="pre"> - </span> <span class="pre">ddof</span></code>，其中<code class="docutils literal"><span class="pre">N</span></code>的非NaN元素。</span><span class="yiyi-st" id="yiyi-34">默认情况下，<em class="xref py py-obj">ddof</em>为零。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35"><strong>keepdims</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-36">如果设置为True，则缩小的轴在结果中保留为尺寸为1的尺寸。</span><span class="yiyi-st" id="yiyi-37">使用此选项，结果将与原始<em class="xref py py-obj">a</em>正确地广播。</span></p>
+<p><span class="yiyi-st" id="yiyi-38">如果该值是除了默认值之外的任何值，它将按原样传递到子类的相关函数。</span><span class="yiyi-st" id="yiyi-39">如果这些函数没有<em class="xref py py-obj">keepdims</em> kwarg，则会引发RuntimeError。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-40">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-41"><strong>standard_deviation</strong>：ndarray，请参阅上面的dtype参数。</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-42">如果<em class="xref py py-obj">out</em>为None，则返回包含标准偏差的新数组，否则返回对输出数组的引用。</span><span class="yiyi-st" id="yiyi-43">如果ddof&gt; =切片中的非NaN元素的数目或切片仅包含NaN，则该切片的结果为NaN。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-44">也可以看看</span></p>
+<p><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="numpy.var.html#numpy.var" title="numpy.var"><code class="xref py py-obj docutils literal"><span class="pre">var</span></code></a>，<a class="reference internal" href="numpy.mean.html#numpy.mean" title="numpy.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a>，<a class="reference internal" href="numpy.std.html#numpy.std" title="numpy.std"><code class="xref py py-obj docutils literal"><span class="pre">std</span></code></a>，<a class="reference internal" href="numpy.nanvar.html#numpy.nanvar" title="numpy.nanvar"><code class="xref py py-obj docutils literal"><span class="pre">nanvar</span></code></a>，<a class="reference internal" href="numpy.nanmean.html#numpy.nanmean" title="numpy.nanmean"><code class="xref py py-obj docutils literal"><span class="pre">nanmean</span></code></a></span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-46"><code class="xref py py-obj docutils literal"><span class="pre">numpy.doc.ufuncs</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-47">节“输出参数”</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-49">The standard deviation is the square root of the average of the squared deviations from the mean: <code class="docutils literal"><span class="pre">std</span> <span class="pre">=</span> <span class="pre">sqrt(mean(abs(x</span> <span class="pre">-</span> <span class="pre">x.mean())**2))</span></code>.</span></p>
+<p><span class="yiyi-st" id="yiyi-50">The average squared deviation is normally calculated as <code class="docutils literal"><span class="pre">x.sum()</span> <span class="pre">/</span> <span class="pre">N</span></code>, where <code class="docutils literal"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">len(x)</span></code>. </span><span class="yiyi-st" id="yiyi-51">但是，如果指定<em class="xref py py-obj">ddof</em>，则使用除数<code class="docutils literal"><span class="pre">N</span> <span class="pre"> - </span> <span class="pre">ddof</span> 代替。</code></span><span class="yiyi-st" id="yiyi-52">在标准统计实践中，<code class="docutils literal"><span class="pre">ddof=1</span></code>提供无穷总体方差的无偏估计量。</span><span class="yiyi-st" id="yiyi-53"><code class="docutils literal"><span class="pre">ddof=0</span></code>提供正态分布变量的方差的最大似然估计。</span><span class="yiyi-st" id="yiyi-54">在该函数中计算的标准偏差是估计方差的平方根，因此即使在<code class="docutils literal"><span class="pre">ddof=1</span></code>时，它也不是标准偏差本身的无偏估计。</span></p>
+<p><span class="yiyi-st" id="yiyi-55">需要注意的是，对于复数，<a class="reference internal" href="numpy.std.html#numpy.std" title="numpy.std"><code class="xref py py-obj docutils literal"><span class="pre">std</span></code></a></span></p>
+<p><span class="yiyi-st" id="yiyi-56">对于浮点输入，使用输入具有的相同精度计算<em>std</em>。</span><span class="yiyi-st" id="yiyi-57">根据输入数据，这可能导致结果不准确，特别是对于float32（参见下面的示例）。</span><span class="yiyi-st" id="yiyi-58">使用<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>关键字指定更高精度的累加器可以缓解此问题。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-59">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanstd</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">1.247219128924647</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanstd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([ 1.,  0.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nanstd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 0.,  0.5])</span>
+</pre></div>
+</div>
+</dd></dl>

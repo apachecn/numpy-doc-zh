@@ -1,0 +1,33 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.decorate_methods</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.decorate_methods.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.decorate_methods.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.decorate_methods"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.</code><code class="descname">decorate_methods</code><span class="sig-paren">(</span><em>cls</em>, <em>decorator</em>, <em>testmatch=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/utils.py#L1224-L1268"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">对与正则表达式匹配的类中的所有方法应用装饰器。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">给定的装饰器应用于由正则表达式<em class="xref py py-obj">testmatch</em>（<code class="docutils literal"><span class="pre">testmatch.search(methodname)</span></code>）匹配的<em class="xref py py-obj">cls</em>的所有公共方法。</span><span class="yiyi-st" id="yiyi-16">私有方法，即以下划线开头的方法将被忽略。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>cls</strong>：class</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">装饰的方法的类。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>装饰器</strong>：function</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">应用于方法的装饰器</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>testmatch</strong>：编译的regexp或str，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">正则表达式。</span><span class="yiyi-st" id="yiyi-24">Default value is None, in which case the nose default (<code class="docutils literal"><span class="pre">re.compile(r&apos;(?:^|[\b_\.%s-])[Tt]est&apos;</span> <span class="pre">%</span> <span class="pre">os.sep)</span></code>) is used. </span><span class="yiyi-st" id="yiyi-25">如果<em class="xref py py-obj">testmatch</em>是一个字符串，它将首先编译为正则表达式。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

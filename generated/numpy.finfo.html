@@ -1,0 +1,89 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.finfo</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.finfo.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.finfo.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.finfo"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">finfo</code><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/getlimits.py#L25-L192"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">浮点类型的机器限制。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>dtype</strong>：float，dtype或instance</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-17">种获取信息的浮点数据类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-18">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="numpy.MachAr.html#numpy.MachAr" title="numpy.MachAr"><code class="xref py py-obj docutils literal"><span class="pre">MachAr</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-20">执行产生此信息的测试。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="numpy.iinfo.html#numpy.iinfo" title="numpy.iinfo"><code class="xref py py-obj docutils literal"><span class="pre">iinfo</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-22">整数数据类型的等价物。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-24">对于NumPy的开发人员：不要在模块级别实例化。</span><span class="yiyi-st" id="yiyi-25">这些参数的初始计算是昂贵的，并且对进口时间有负面影响。</span><span class="yiyi-st" id="yiyi-26">这些对象被缓存，因此在函数内重复调用<code class="docutils literal"><span class="pre">finfo()</span></code>不是问题。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">属性</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%">
+<col width="93%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-28">eps</span></td>
+<td><span class="yiyi-st" id="yiyi-29">（float）最小可表示的正数，使得<code class="docutils literal"><span class="pre">1.0</span> <span class="pre">+</span> <span class="pre">eps</span> <span class="pre">！=</span> <span class="pre">1.0 </span></code>。</span><span class="yiyi-st" id="yiyi-30">类型<em class="xref py py-obj">eps</em>是一种适当的浮点类型。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-31">epsneg</span></td>
+<td><span class="yiyi-st" id="yiyi-32">（适当类型的浮点数）最小可表示的正数，使得<code class="docutils literal"><span class="pre">1.0</span> <span class="pre"> - </span> <span class="pre">epsneg</span> <span class="pre">！= t4&gt; <span class="pre">1.0</span></span></code>。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33">iexp</span></td>
+<td><span class="yiyi-st" id="yiyi-34">（int）浮点表示的指数部分中的位数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-35">马赫</span></td>
+<td><span class="yiyi-st" id="yiyi-36">（MachAr）计算这些参数并保存更详细信息的对象。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-37">machep</span></td>
+<td><span class="yiyi-st" id="yiyi-38">（int）产生<em class="xref py py-obj">eps</em>的指数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-39">最大</span></td>
+<td><span class="yiyi-st" id="yiyi-40">（适当类型的浮点数）最大可表示数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-41">maxexp</span></td>
+<td><span class="yiyi-st" id="yiyi-42">（int）引起溢出的基极（2）的最小正功率。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-43">min</span></td>
+<td><span class="yiyi-st" id="yiyi-44">（适当类型的浮点数）最小可表示数，通常为<code class="docutils literal"><span class="pre">-max</span></code>。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45">地雷</span></td>
+<td><span class="yiyi-st" id="yiyi-46">（int）基数的最大负数（2）与尾数中没有前导0一致。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-47">negep</span></td>
+<td><span class="yiyi-st" id="yiyi-48">（int）产生<em class="xref py py-obj">epsneg</em>的指数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49">nexp</span></td>
+<td><span class="yiyi-st" id="yiyi-50">（int）指数中的位数，包括其符号和偏差。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51">nmant</span></td>
+<td><span class="yiyi-st" id="yiyi-52">（int）尾数中的位数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-53">精确</span></td>
+<td><span class="yiyi-st" id="yiyi-54">（int）这种浮点数精确的小数位数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-55">解析度</span></td>
+<td><span class="yiyi-st" id="yiyi-56">（适当类型的浮点数）此类型的近似十进制分辨率，即<code class="docutils literal"><span class="pre">10**-precision</span></code>。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-57">小</span></td>
+<td><span class="yiyi-st" id="yiyi-58">（float）最小正可用数。</span><span class="yiyi-st" id="yiyi-59"><em class="xref py py-obj">tiny</em>的类型是一种合适的浮点类型。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

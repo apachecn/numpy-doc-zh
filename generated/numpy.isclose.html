@@ -1,0 +1,68 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.isclose</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.isclose.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.isclose.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.isclose"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">isclose</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>rtol=1e-05</em>, <em>atol=1e-08</em>, <em>equal_nan=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L2375-L2474"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回一个布尔数组，其中两个数组在容差内在元素方面相等。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">公差值为正，通常为非常小的数字。</span><span class="yiyi-st" id="yiyi-16">The relative difference (<em class="xref py py-obj">rtol</em> * abs(<em class="xref py py-obj">b</em>)) and the absolute difference <em class="xref py py-obj">atol</em> are added together to compare against the absolute difference between <em class="xref py py-obj">a</em> and <em class="xref py py-obj">b</em>.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a，b</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输入数组进行比较。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>rtol</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">相对容差参数（请参见注释）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>atol</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">绝对公差参数（见注释）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>equal_nan</strong>：bool</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">是否比较NaN的平等。</span><span class="yiyi-st" id="yiyi-26">如果为True，则在输出数组中，<em class="xref py py-obj">a</em>中的NaN将被视为等于<em class="xref py py-obj">b</em>中的NaN。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>y</strong>：array_like</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">返回其中<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>在给定容差内相等的布尔数组。</span><span class="yiyi-st" id="yiyi-30">如果<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>都是标量，则返回单个布尔值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.allclose.html#numpy.allclose" title="numpy.allclose"><code class="xref py py-obj docutils literal"><span class="pre">allclose</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-34"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-35">对于有限值，isclose使用以下公式来测试两个浮点值是否相等。</span></p>
+<blockquote>
+<div><span class="yiyi-st" id="yiyi-36">absolute(<em class="xref py py-obj">a</em> - <em class="xref py py-obj">b</em>) <= (<em="" class="xref py py-obj">atol + <em class="xref py py-obj">rtol</em> * absolute(<em class="xref py py-obj">b</em>))</=></span></div></blockquote>
+<p><span class="yiyi-st" id="yiyi-37">上述方程在<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>中不对称，因此<em class="xref py py-obj">isclose（a，b）</em>可能不同于<em class="xref py py-obj">isclose ，a）</em>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">([</span><span class="mi">1</span><span class="n">e10</span><span class="p">,</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.00001e10</span><span class="p">,</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">])</span>
+<span class="go">array([True, False])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">([</span><span class="mi">1</span><span class="n">e10</span><span class="p">,</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.00001e10</span><span class="p">,</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">])</span>
+<span class="go">array([True, True])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">([</span><span class="mi">1</span><span class="n">e10</span><span class="p">,</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0001e10</span><span class="p">,</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">9</span><span class="p">])</span>
+<span class="go">array([False, True])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+<span class="go">array([True, False])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span> <span class="n">equal_nan</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([True, True])</span>
+</pre></div>
+</div>
+</dd></dl>

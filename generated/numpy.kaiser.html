@@ -1,0 +1,137 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.kaiser</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.kaiser.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.kaiser.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.kaiser"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">kaiser</code><span class="sig-paren">(</span><em>M</em>, <em>beta</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L3135-L3259"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回Kaiser窗口。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">凯塞窗是使用贝塞尔函数形成的锥形。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>M</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输出窗口中的点数。</span><span class="yiyi-st" id="yiyi-19">如果为零或更小，则返回一个空数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>beta</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">窗口形状参数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：数组</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">窗口，最大值归一化为1（仅当样本数为奇数时才显示该值）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.bartlett.html#numpy.bartlett" title="numpy.bartlett"><code class="xref py py-obj docutils literal"><span class="pre">bartlett</span></code></a>，<a class="reference internal" href="numpy.blackman.html#numpy.blackman" title="numpy.blackman"><code class="xref py py-obj docutils literal"><span class="pre">blackman</span></code></a>，<a class="reference internal" href="numpy.hamming.html#numpy.hamming" title="numpy.hamming"><code class="xref py py-obj docutils literal"><span class="pre">hamming</span></code></a>，<a class="reference internal" href="numpy.hanning.html#numpy.hanning" title="numpy.hanning"><code class="xref py py-obj docutils literal"><span class="pre">hanning</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">Kaiser窗口定义为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-29">与</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-30">其中<img alt="I_0" class="math" src="../../_images/math/2595e12ec58446f99869c7c3ba70ea3be707d26a.png" style="vertical-align: -2px">是修改的零阶贝塞尔函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">Kaiser被命名为Jim Kaiser，他发现了基于Bessel函数的DPSS窗口的简单近似。</span><span class="yiyi-st" id="yiyi-32">Kaiser窗口是数字生成球形序列或Slepian窗口的非常好的近似，其是使窗口的主瓣相对于总能量的能量最大化的变换。</span></p>
+<p><span class="yiyi-st" id="yiyi-33">Kaiser可以通过改变beta参数来近似许多其他窗口。</span></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%">
+<col width="85%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><span class="yiyi-st" id="yiyi-34">beta</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-35">窗口的形状</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-36">0</span></td>
+<td><span class="yiyi-st" id="yiyi-37">长方形</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-38">5</span></td>
+<td><span class="yiyi-st" id="yiyi-39">类似汉明</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-40">6</span></td>
+<td><span class="yiyi-st" id="yiyi-41">类似于汉宁</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-42">8.6</span></td>
+<td><span class="yiyi-st" id="yiyi-43">类似于布莱克曼</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-44">beta值为14可能是一个很好的起点。</span><span class="yiyi-st" id="yiyi-45">注意，当&#x3B2;变大时，窗口变窄，因此样本的数量需要足够大以采样越来越窄的尖峰，否则NaN将被返回。</span></p>
+<p><span class="yiyi-st" id="yiyi-46">大多数对Kaiser窗口的引用来自信号处理文献，其中它被用作用于平滑值的许多窗口函数中的一个。</span><span class="yiyi-st" id="yiyi-47">它也称为变迹（意指“去除脚”，即在采样信号的开始和结束处的平滑不连续性）或渐变函数。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r34" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-49"><a class="fn-backref" href="#id1">[R34]</a></span></td><td><span class="yiyi-st" id="yiyi-50">J.D.Kaiser，“Digital Filters”-Ch7 in“Systems analysis by digital computer”，Editors：F.F.</span><span class="yiyi-st" id="yiyi-51">Kuo和J.F.</span><span class="yiyi-st" id="yiyi-52">Kaiser，第218-285页。</span><span class="yiyi-st" id="yiyi-53">John Wiley and Sons，New York，（1966）。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r35" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-54"><a class="fn-backref" href="#id2">[R35]</a></span></td><td><span class="yiyi-st" id="yiyi-55">E.R.</span><span class="yiyi-st" id="yiyi-56">Kanasewich，“Time Sequence Analysis in Geophysics”，The University of Alberta Press，1975，pp。</span><span class="yiyi-st" id="yiyi-57">177-178。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r36" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-58"><a class="fn-backref" href="#id3">[R36]</a></span></td><td><span class="yiyi-st" id="yiyi-59">维基百科，“窗口函数”，<a class="reference external" href="http://en.wikipedia.org/wiki/Window_function">http://en.wikipedia.org/wiki/Window_function</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-60">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">kaiser</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="go">array([  7.72686684e-06,   3.46009194e-03,   4.65200189e-02,</span>
+<span class="go">         2.29737120e-01,   5.99885316e-01,   9.45674898e-01,</span>
+<span class="go">         9.45674898e-01,   5.99885316e-01,   2.29737120e-01,</span>
+<span class="go">         4.65200189e-02,   3.46009194e-03,   7.72686684e-06])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-61">绘制窗口和频率响应：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.fft</span> <span class="k">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">fftshift</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kaiser</span><span class="p">(</span><span class="mi">51</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Kaiser window&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Sample&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="go">&lt;matplotlib.figure.Figure object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="mi">2048</span><span class="p">)</span> <span class="o">/</span> <span class="mf">25.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fftshift</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mag</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Frequency response of Kaiser window&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Magnitude [dB]&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Normalized frequency [cycles per sample]&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.text.Text object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&apos;tight&apos;</span><span class="p">)</span>
+<span class="go">(-0.5, 0.5, -100.0, ...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>

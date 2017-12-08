@@ -1,0 +1,152 @@
+
+<h1><span class="yiyi-st" id="yiyi-18">逻辑函数</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.logic.html">https://docs.scipy.org/doc/numpy/reference/routines.logic.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="truth-value-testing">
+<h2><span class="yiyi-st" id="yiyi-19">Truth value testing</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="generated/numpy.all.html#numpy.all" title="numpy.all"><code class="xref py py-obj docutils literal"><span class="pre">all</span></code></a>（a [，axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-21">测试沿给定轴的所有数组元素是否为True。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="generated/numpy.any.html#numpy.any" title="numpy.any"><code class="xref py py-obj docutils literal"><span class="pre">any</span></code></a>（a [，axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-23">测试沿给定轴的任何数组元素是否为True。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="array-contents">
+<h2><span class="yiyi-st" id="yiyi-24">Array contents</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="generated/numpy.isfinite.html#numpy.isfinite" title="numpy.isfinite"><code class="xref py py-obj docutils literal"><span class="pre">isfinite</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-26">测试元素的有限性（不是无穷大或不是数字）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="generated/numpy.isinf.html#numpy.isinf" title="numpy.isinf"><code class="xref py py-obj docutils literal"><span class="pre">isinf</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-28">对于正或负无穷大测试元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="generated/numpy.isnan.html#numpy.isnan" title="numpy.isnan"><code class="xref py py-obj docutils literal"><span class="pre">isnan</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-30">测试元素方面的NaN和返回结果作为一个布尔数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="generated/numpy.isneginf.html#numpy.isneginf" title="numpy.isneginf"><code class="xref py py-obj docutils literal"><span class="pre">isneginf</span></code></a>（x [，y]）</span></td>
+<td><span class="yiyi-st" id="yiyi-32">测试元素为负无穷大，返回结果为bool数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="generated/numpy.isposinf.html#numpy.isposinf" title="numpy.isposinf"><code class="xref py py-obj docutils literal"><span class="pre">isposinf</span></code></a>（x [，y]）</span></td>
+<td><span class="yiyi-st" id="yiyi-34">测试元素为正无穷大，返回结果为bool数组。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="array-type-testing">
+<h2><span class="yiyi-st" id="yiyi-35">Array type testing</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="generated/numpy.iscomplex.html#numpy.iscomplex" title="numpy.iscomplex"><code class="xref py py-obj docutils literal"><span class="pre">iscomplex</span></code></a>（x）</span></td>
+<td><span class="yiyi-st" id="yiyi-37">返回bool数组，其中如果输入元素很复杂，则返回True。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="generated/numpy.iscomplexobj.html#numpy.iscomplexobj" title="numpy.iscomplexobj"><code class="xref py py-obj docutils literal"><span class="pre">iscomplexobj</span></code></a>（x）</span></td>
+<td><span class="yiyi-st" id="yiyi-39">检查复杂类型或复数的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="generated/numpy.isfortran.html#numpy.isfortran" title="numpy.isfortran"><code class="xref py py-obj docutils literal"><span class="pre">isfortran</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-41">如果数组是Fortran连续但<em>不是</em> C连续，则返回True。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="generated/numpy.isreal.html#numpy.isreal" title="numpy.isreal"><code class="xref py py-obj docutils literal"><span class="pre">isreal</span></code></a>（x）</span></td>
+<td><span class="yiyi-st" id="yiyi-43">返回bool数组，其中如果输入元素是实数，则返回True。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="generated/numpy.isrealobj.html#numpy.isrealobj" title="numpy.isrealobj"><code class="xref py py-obj docutils literal"><span class="pre">isrealobj</span></code></a>（x）</span></td>
+<td><span class="yiyi-st" id="yiyi-45">如果x不是复数类型或复数数组，则返回True。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="generated/numpy.isscalar.html#numpy.isscalar" title="numpy.isscalar"><code class="xref py py-obj docutils literal"><span class="pre">isscalar</span></code></a>（num）</span></td>
+<td><span class="yiyi-st" id="yiyi-47">如果<em class="xref py py-obj">num</em>的类型是标量类型，则返回True。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="logical-operations">
+<h2><span class="yiyi-st" id="yiyi-48">Logical operations</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.logical_and.html#numpy.logical_and" title="numpy.logical_and"><code class="xref py py-obj docutils literal"><span class="pre">logical_and</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">逐元素计算x1和x2的真值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.logical_or.html#numpy.logical_or" title="numpy.logical_or"><code class="xref py py-obj docutils literal"><span class="pre">logical_or</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">逐元素计算x1或x2的真值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="generated/numpy.logical_not.html#numpy.logical_not" title="numpy.logical_not"><code class="xref py py-obj docutils literal"><span class="pre">logical_not</span></code></a>（x [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-54">逐元素计算NOT x的真值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="generated/numpy.logical_xor.html#numpy.logical_xor" title="numpy.logical_xor"><code class="xref py py-obj docutils literal"><span class="pre">logical_xor</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-56">按元素方式计算x1 XOR x2的真值。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="comparison">
+<h2><span class="yiyi-st" id="yiyi-57">比较</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-58"><a class="reference internal" href="generated/numpy.allclose.html#numpy.allclose" title="numpy.allclose"><code class="xref py py-obj docutils literal"><span class="pre">allclose</span></code></a>(a, b[, rtol, atol, equal_nan])</span></td>
+<td><span class="yiyi-st" id="yiyi-59">如果两个数组在元素级别在公差内相等，则返回True。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-60"><a class="reference internal" href="generated/numpy.isclose.html#numpy.isclose" title="numpy.isclose"><code class="xref py py-obj docutils literal"><span class="pre">isclose</span></code></a>（a，b [，rtol，atol，equal_nan]）</span></td>
+<td><span class="yiyi-st" id="yiyi-61">返回一个布尔数组，其中两个数组在容差内在元素方面相等。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-62"><a class="reference internal" href="generated/numpy.array_equal.html#numpy.array_equal" title="numpy.array_equal"><code class="xref py py-obj docutils literal"><span class="pre">array_equal</span></code></a>（a1，a2）</span></td>
+<td><span class="yiyi-st" id="yiyi-63">如果两个数组具有相同的形状和元素，则为True，否则为False。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="generated/numpy.array_equiv.html#numpy.array_equiv" title="numpy.array_equiv"><code class="xref py py-obj docutils literal"><span class="pre">array_equiv</span></code></a>（a1，a2）</span></td>
+<td><span class="yiyi-st" id="yiyi-65">返回True如果输入数组的形状一致，所有元素相等。</span></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-66"><a class="reference internal" href="generated/numpy.greater.html#numpy.greater" title="numpy.greater"><code class="xref py py-obj docutils literal"><span class="pre">greater</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-67">逐元素地返回（x1&gt; x2）的真值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-68"><a class="reference internal" href="generated/numpy.greater_equal.html#numpy.greater_equal" title="numpy.greater_equal"><code class="xref py py-obj docutils literal"><span class="pre">greater_equal</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-69">逐元素地返回（x1&gt; = x2）的真值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-70"><a class="reference internal" href="generated/numpy.less.html#numpy.less" title="numpy.less"><code class="xref py py-obj docutils literal"><span class="pre">less</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-71">返回（x1的真值</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="generated/numpy.less_equal.html#numpy.less_equal" title="numpy.less_equal"><code class="xref py py-obj docutils literal"><span class="pre">less_equal</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-73">返回（x1 =）的真值</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="generated/numpy.equal.html#numpy.equal" title="numpy.equal"><code class="xref py py-obj docutils literal"><span class="pre">equal</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-75">元素方式返回（x1 == x2）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-76"><a class="reference internal" href="generated/numpy.not_equal.html#numpy.not_equal" title="numpy.not_equal"><code class="xref py py-obj docutils literal"><span class="pre">not_equal</span></code></a>（x1，x2 [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-77">元素方式返回（x1！= x2）。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

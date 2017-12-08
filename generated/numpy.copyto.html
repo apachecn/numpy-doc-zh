@@ -1,0 +1,49 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.copyto</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.copyto.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.copyto.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.copyto"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">copyto</code><span class="sig-paren">(</span><em>dst</em>, <em>src</em>, <em>casting=&apos;same_kind&apos;</em>, <em>where=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将值从一个数组复制到另一个，必要时进行广播。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">如果违反<em class="xref py py-obj">铸造</em>规则，则提高TypeError，如果提供<a class="reference internal" href="numpy.where.html#numpy.where" title="numpy.where"><code class="xref py py-obj docutils literal"><span class="pre">where</span></code></a>，则选择复制哪些元素。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-16"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>dst</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">复制值的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>src</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">复制值的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>投射</strong>：{&apos;no&apos;，&apos;equiv&apos;，&apos;safe&apos;，&apos;same_kind&apos;，&apos;unsafe&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">控制复制时可能发生的数据转换类型。</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-24">&apos;no&apos;意味着不应该转换数据类型。</span></li>
+<li><span class="yiyi-st" id="yiyi-25">&apos;equiv&apos;意味着只允许字节顺序改变。</span></li>
+<li><span class="yiyi-st" id="yiyi-26">“安全”意味着只允许保留值的转换。</span></li>
+<li><span class="yiyi-st" id="yiyi-27">&apos;same_kind&apos;表示只允许一种类型中的安全类型转换，例如float64到float32。</span></li>
+<li><span class="yiyi-st" id="yiyi-28">“不安全”表示可以进行任何数据转换。</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>其中</strong>：array_like of bool，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">广播以匹配<em class="xref py py-obj">dst</em>的维度的布尔数组，并且在其包含值True的情况下选择要从<em class="xref py py-obj">src</em>复制到<em class="xref py py-obj">dst</em>的元素。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

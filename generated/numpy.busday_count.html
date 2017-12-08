@@ -1,0 +1,77 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.busday_count</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.busday_count.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.busday_count.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.busday_count"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">busday_count</code><span class="sig-paren">(</span><em>begindates</em>, <em>enddates</em>, <em>weekmask=&apos;1111100&apos;</em>, <em>holidays=[]</em>, <em>busdaycal=None</em>, <em>out=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算<em class="xref py py-obj">结束</em>和<em class="xref py py-obj">结束</em>之间（不包括<em class="xref py py-obj">结束日期</em>的日期）的有效天数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">如果<code class="docutils literal"><span class="pre">enddates</span></code>指定的日期值早于对应的<code class="docutils literal"><span class="pre">begindates</span></code>日期值，则计数将为负数。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-16"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>begindates</strong>：array_like of datetime64 [D]</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">计数的第一个日期的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>enddates</strong>：array_like of datetime64 [D]</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">计数的结束日期的数组，它们从计数本身中排除。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>weekmask</strong>：str或array_like of bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">一个七元素数组，表示星期一到星期日是有效日期。</span><span class="yiyi-st" id="yiyi-24">可以指定为长度为七的列表或数组，如[1,1,1,1,1,0,0]；一个长度为七的字符串，如&apos;1111100&apos;；或像“星期二星期三星期三星期五”的字符串，由工作日的3个字符的缩写组成，可选地由空格分隔。</span><span class="yiyi-st" id="yiyi-25">有效的缩写是：周一周二周三周四周五周六周日</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>节假日</strong>：array_like of datetime64 [D]，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">要视为无效日期的日期数组。</span><span class="yiyi-st" id="yiyi-28">它们可以以任何顺序指定，并且NaT（非一次性）日期被忽略。</span><span class="yiyi-st" id="yiyi-29">此列表以适用于快速计算有效天数的规范化形式保存。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>busdaycal</strong>：busdaycalendar，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">指定有效天数的<a class="reference internal" href="numpy.busdaycalendar.html#numpy.busdaycalendar" title="numpy.busdaycalendar"><code class="xref py py-obj docutils literal"><span class="pre">busdaycalendar</span></code></a>对象。</span><span class="yiyi-st" id="yiyi-32">如果提供此参数，则不能提供周期掩码和假日。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>out</strong>：int的数组，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">如果提供，此数组将填充结果。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-35">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-36"><strong>out</strong>：数组的整数</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-37">具有来自广播<code class="docutils literal"><span class="pre">begindates</span></code>和<code class="docutils literal"><span class="pre">enddates</span></code>，包含开始日期和结束日期之间的有效天数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-38">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="numpy.busdaycalendar.html#numpy.busdaycalendar" title="numpy.busdaycalendar"><code class="xref py py-obj docutils literal"><span class="pre">busdaycalendar</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-40">指定一组自定义有效天数的对象。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="numpy.is_busday.html#numpy.is_busday" title="numpy.is_busday"><code class="xref py py-obj docutils literal"><span class="pre">is_busday</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-42">返回指示有效天数的布尔数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="numpy.busday_offset.html#numpy.busday_offset" title="numpy.busday_offset"><code class="xref py py-obj docutils literal"><span class="pre">busday_offset</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-44">应用在有效日计数的偏移量。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-45">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Number of weekdays in January 2011</span>
+<span class="gp">... </span><span class="n">np</span><span class="o">.</span><span class="n">busday_count</span><span class="p">(</span><span class="s1">&apos;2011-01&apos;</span><span class="p">,</span> <span class="s1">&apos;2011-02&apos;</span><span class="p">)</span>
+<span class="go">21</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Number of weekdays in 2011</span>
+<span class="gp">... </span> <span class="n">np</span><span class="o">.</span><span class="n">busday_count</span><span class="p">(</span><span class="s1">&apos;2011&apos;</span><span class="p">,</span> <span class="s1">&apos;2012&apos;</span><span class="p">)</span>
+<span class="go">260</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Number of Saturdays in 2011</span>
+<span class="gp">... </span><span class="n">np</span><span class="o">.</span><span class="n">busday_count</span><span class="p">(</span><span class="s1">&apos;2011&apos;</span><span class="p">,</span> <span class="s1">&apos;2012&apos;</span><span class="p">,</span> <span class="n">weekmask</span><span class="o">=</span><span class="s1">&apos;Sat&apos;</span><span class="p">)</span>
+<span class="go">53</span>
+</pre></div>
+</div>
+</dd></dl>

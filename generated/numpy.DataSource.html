@@ -1,0 +1,67 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.DataSource</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.DataSource.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.DataSource.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.DataSource"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">DataSource</code><span class="sig-paren">(</span><em>destpath=&apos;.&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/_datasource.py#L154-L501"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">通用数据源文件（文件，http，ftp，...）。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">DataSources可以是本地文件或远程文件/ URL。</span><span class="yiyi-st" id="yiyi-16">文件也可以是压缩或未压缩的。</span><span class="yiyi-st" id="yiyi-17">DataSource隐藏了下载文件的一些低级细节，允许你简单地传递一个有效的文件路径（或URL）并获取一个文件对象。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>destpath</strong>：str或None，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20">下载源文件以供使用的目录的路径。</span><span class="yiyi-st" id="yiyi-21">如果<em class="xref py py-obj">destpath</em>为None，将创建一个临时目录。</span><span class="yiyi-st" id="yiyi-22">默认路径是当前目录。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-24">网址需要使用方案字符串（<code class="docutils literal"><span class="pre">http://</span></code>），否则它们将失败：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">repos</span> <span class="o">=</span> <span class="n">DataSource</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">repos</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&apos;www.google.com/index.html&apos;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">repos</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&apos;http://www.google.com/index.html&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-25">删除DataSource时，将删除临时目录。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">DataSource</span><span class="p">(</span><span class="s1">&apos;/home/guido&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">urlname</span> <span class="o">=</span> <span class="s1">&apos;http://www.google.com/index.html&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gfile</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&apos;http://www.google.com/index.html&apos;</span><span class="p">)</span>  <span class="c1"># remote file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">urlname</span><span class="p">)</span>
+<span class="go">&apos;/home/guido/www.google.com/site/index.html&apos;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">DataSource</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>  <span class="c1"># use with temporary file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&apos;/home/guido/foobar.txt&apos;</span><span class="p">)</span>
+<span class="go">&lt;open file &apos;/home/guido.foobar.txt&apos;, mode &apos;r&apos; at 0x91d4430&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&apos;/home/guido/foobar.txt&apos;</span><span class="p">)</span>
+<span class="go">&apos;/tmp/tmpy4pgsP/home/guido/foobar.txt&apos;</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">方法</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.DataSource.abspath.html#numpy.DataSource.abspath" title="numpy.DataSource.abspath"><code class="xref py py-obj docutils literal"><span class="pre">abspath</span></code></a>（path）</span></td>
+<td><span class="yiyi-st" id="yiyi-29">返回DataSource目录中文件的绝对路径。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.DataSource.exists.html#numpy.DataSource.exists" title="numpy.DataSource.exists"><code class="xref py py-obj docutils literal"><span class="pre">exists</span></code></a>（路径）</span></td>
+<td><span class="yiyi-st" id="yiyi-31">测试路径是否存在。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.DataSource.open.html#numpy.DataSource.open" title="numpy.DataSource.open"><code class="xref py py-obj docutils literal"><span class="pre">open</span></code></a>（路径[，模式]）</span></td>
+<td><span class="yiyi-st" id="yiyi-33">打开并返回类似文件的对象。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

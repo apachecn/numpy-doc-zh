@@ -1,0 +1,83 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.average</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.average.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.average.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.average"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">average</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em>, <em>weights=None</em>, <em>returned=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L857-L967"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">沿指定轴计算加权平均值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">包含要平均的数据的数组。</span><span class="yiyi-st" id="yiyi-18">如果<em class="xref py py-obj">a</em>不是数组，则尝试进行转换。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">用于平均<em class="xref py py-obj">a</em>的轴。</span><span class="yiyi-st" id="yiyi-21">如果<em class="xref py py-obj">无</em>，则对平展的数组进行平均。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>权重</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">与<em class="xref py py-obj">a</em>中的值相关联的权重数组。</span><span class="yiyi-st" id="yiyi-24"><em class="xref py py-obj">a</em>中的每个值根据其关联权重对平均值作出贡献。</span><span class="yiyi-st" id="yiyi-25">权数数组可以是1-D（在这种情况下，其长度必须是沿给定轴的<em class="xref py py-obj">a</em>的大小）或与<em class="xref py py-obj">a</em>相同的形状。</span><span class="yiyi-st" id="yiyi-26">如果<em class="xref py py-obj">权重=无</em>，则假设<em class="xref py py-obj">a</em>中的所有数据具有等于1的权重。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>返回</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">默认值为<em class="xref py py-obj">False</em>。</span><span class="yiyi-st" id="yiyi-29">如果<em class="xref py py-obj">True</em>，则返回元组（<a class="reference internal" href="#numpy.average" title="numpy.average"><code class="xref py py-obj docutils literal"><span class="pre">average</span></code></a>，<em class="xref py py-obj">sum_of_weights</em>），否则只返回平均值。</span><span class="yiyi-st" id="yiyi-30">如果<em class="xref py py-obj">权重=无</em>，则<em class="xref py py-obj">sum_of_weights</em>等于采用平均值的元素的数量。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>average，[sum_of_weights]</strong>：array_type或double</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">沿指定轴返回平均值。</span><span class="yiyi-st" id="yiyi-34">当返回的是<em class="xref py py-obj">True</em>时，返回一个元组，其中平均值作为第一个元素，权重的和作为第二个元素。</span><span class="yiyi-st" id="yiyi-35">如果<em class="xref py py-obj">a</em>是整数类型，则返回类型为<em class="xref py py-obj">Float</em>，否则返回类型与<em class="xref py py-obj">a</em>的类型相同。 <em class="xref py py-obj">sum_of_weights</em>与<a class="reference internal" href="#numpy.average" title="numpy.average"><code class="xref py py-obj docutils literal"><span class="pre">average</span></code></a>具有相同的类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-36">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-37"><strong>ZeroDivisionError</strong></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-38">当沿轴的所有权重为零时。</span><span class="yiyi-st" id="yiyi-39">有关此类型错误的鲁棒版本，请参见<a class="reference internal" href="numpy.ma.average.html#numpy.ma.average" title="numpy.ma.average"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ma.average</span></code></a>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-40"><strong>TypeError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-41">当1D <em class="xref py py-obj">权重</em>的长度与沿着轴的<em class="xref py py-obj">a</em>的形状不相同时。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-42">也可以看看</span></p>
+<p><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="numpy.mean.html#numpy.mean" title="numpy.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a></span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.ma.average.html#numpy.ma.average" title="numpy.ma.average"><code class="xref py py-obj docutils literal"><span class="pre">ma.average</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-45">masked数组的平均值 - 如果您的数据包含“missing”值，则非常有用</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-46">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>
+<span class="go">[1, 2, 3, 4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="go">2.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">),</span> <span class="n">weights</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">4.0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>
+<span class="go">array([[0, 1],</span>
+<span class="go">       [2, 3],</span>
+<span class="go">       [4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mf">3.</span><span class="o">/</span><span class="mi">4</span><span class="p">])</span>
+<span class="go">array([ 0.75,  2.75,  4.75])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mf">3.</span><span class="o">/</span><span class="mi">4</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">TypeError</span>: <span class="n">Axis must be specified when shapes of a and weights differ.</span>
+</pre></div>
+</div>
+</dd></dl>

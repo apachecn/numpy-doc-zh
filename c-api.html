@@ -1,0 +1,89 @@
+
+<span id="c-api"></span><h1><span class="yiyi-st" id="yiyi-10">NumPy C-API</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/c-api.html">https://docs.scipy.org/doc/numpy/reference/c-api.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="line-block">
+<div class="line"><span class="yiyi-st" id="yiyi-11">注意不会被细节打扰的人。</span></div>
+<div class="line"><span class="yiyi-st" id="yiyi-12"> -  <em>William Feather，Sr。</em></span></div>
+</div>
+<div class="line-block">
+<div class="line"><span class="yiyi-st" id="yiyi-13">真相就在那里。</span></div>
+<div class="line"><span class="yiyi-st" id="yiyi-14"> -  <em>Chris Carter，The X Files</em></span></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-15">NumPy提供了一个C-API，使用户可以扩展系统并访问数组对象，以在其他例程中使用。</span><span class="yiyi-st" id="yiyi-16">真正理解C-API的最好方法是读取源代码。</span><span class="yiyi-st" id="yiyi-17">如果你不熟悉（C）源代码，但是，这可能是一个令人沮丧的经验，首先。</span><span class="yiyi-st" id="yiyi-18">放心，任务变得更容易与实践，你可能会惊讶于C代码可以很容易理解。</span><span class="yiyi-st" id="yiyi-19">即使你不认为你可以从头开始编写C代码，也更容易理解和修改已编写的源代码，然后创建<em>de novo</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-20">Python扩展特别容易理解，因为它们都有非常相似的结构。</span><span class="yiyi-st" id="yiyi-21">不可否认，NumPy不是Python的一个简单的扩展，可能需要更多的窥探来抓住。</span><span class="yiyi-st" id="yiyi-22">这是特别真实的，因为代码生成技术，这简化了非常类似的代码的维护，但可以使代码对初学者更少一点可读性。</span><span class="yiyi-st" id="yiyi-23">仍然，有一点持久性，代码可以打开你的理解。</span><span class="yiyi-st" id="yiyi-24">我希望，这本C-API指南可以帮助熟悉NumPy编译级工作的过程，以便将最后一点必要的速度从你的代码中挤出。</span></p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="c-api.types-and-structures.html">Python类型和C结构</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="c-api.types-and-structures.html#new-python-types-defined">新的Python类型定义</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="c-api.types-and-structures.html#other-c-structures">其他C结构</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="c-api.config.html">系统配置</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="c-api.config.html#data-type-sizes">数据类型大小</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="c-api.config.html#platform-information">平台信息</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="c-api.dtype.html">数据类型API</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="c-api.dtype.html#enumerated-types">枚举类型</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="c-api.dtype.html#defines">定义</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="c-api.dtype.html#c-type-names">C类型名称</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="c-api.dtype.html#printf-formatting">Printf格式</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="c-api.array.html">数组API</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="c-api.array.html#array-structure-and-data-access">数组结构和数据访问</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="c-api.array.html#creating-arrays">创建数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="c-api.array.html#dealing-with-types">处理类型</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="c-api.array.html#array-flags">数组标志</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="c-api.array.html#array-method-alternative-api">数组方法替代API</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="c-api.array.html#functions">函数</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="c-api.array.html#auxiliary-data-with-object-semantics">具有对象语义的辅助数据</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="c-api.array.html#array-iterators">数组迭代器</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="c-api.array.html#broadcasting-multi-iterators">广播（多重迭代器）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="c-api.array.html#neighborhood-iterator">邻域迭代器</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="c-api.array.html#array-scalars">数组标量</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="c-api.array.html#data-type-descriptors">数据类型描述符</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="c-api.array.html#conversion-utilities">转换工具</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="c-api.array.html#miscellaneous">其他</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-58"><a class="reference internal" href="c-api.iterator.html">数组迭代器API</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="c-api.iterator.html#array-iterator">数组迭代器</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="c-api.iterator.html#simple-iteration-example">简单迭代示例</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="c-api.iterator.html#simple-multi-iteration-example">简单多重迭代示例</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="c-api.iterator.html#iterator-data-types">迭代器数据类型</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="c-api.iterator.html#construction-and-destruction">建筑与破坏</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="c-api.iterator.html#functions-for-iteration">迭代函数</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="c-api.iterator.html#converting-from-previous-numpy-iterators">从上一个NumPy迭代器转换</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="c-api.ufunc.html">UFunc API</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="c-api.ufunc.html#constants">常量</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-60"><a class="reference internal" href="c-api.ufunc.html#macros">宏</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="c-api.ufunc.html#functions">函数</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-62"><a class="reference internal" href="c-api.ufunc.html#generic-functions">通用功能</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="c-api.ufunc.html#importing-the-api">导入API</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-68"><a class="reference internal" href="c-api.generalized-ufuncs.html">通用通用函数API</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="c-api.generalized-ufuncs.html#definitions">定义</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-66"><a class="reference internal" href="c-api.generalized-ufuncs.html#details-of-signature">签名详情</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="c-api.generalized-ufuncs.html#c-api-for-implementing-elementary-functions">用于实现基本功能的C-API</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-70"><a class="reference internal" href="c-api.coremath.html">NumPy核心库</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="c-api.coremath.html#numpy-core-math-library">NumPy核心数学库</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-73"><a class="reference internal" href="c-api.deprecations.html">C API弃用</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-71"><a class="reference internal" href="c-api.deprecations.html#background">背景</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="c-api.deprecations.html#deprecation-mechanism-npy-no-deprecated-api">弃用机制NPY_NO_DEPRECATED_API</a></span></li>
+</ul>
+</li>
+</ul>
+</div>

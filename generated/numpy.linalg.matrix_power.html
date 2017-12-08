@@ -1,0 +1,81 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.matrix_power</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.matrix_power.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.matrix_power.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.matrix_power"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">matrix_power</code><span class="sig-paren">(</span><em>M</em>, <em>n</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/matrixlib/defmatrix.py#L100-L205"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将方阵转化为（整数）幂<em class="xref py py-obj">n</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">对于正整数<em class="xref py py-obj">n</em>，通过重复的矩阵平方和矩阵乘法计算功率。</span><span class="yiyi-st" id="yiyi-16">如果<code class="docutils literal"><span class="pre">n</span> <span class="pre">==</span> <span class="pre">0</span></code>，则返回与M相同形状的单位矩阵。</span><span class="yiyi-st" id="yiyi-17">如果<code class="docutils literal"><span class="pre">n</span> <span class="pre"> <span class="pre">0</span></span></code>，则计算逆，然后提高到<code class="docutils literal"><span class="pre">abs(n)</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>M</strong>：ndarray或矩阵对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">矩阵必须为正方形，即<code class="docutils literal"><span class="pre">M.shape</span> <span class="pre">==</span> <span class="pre">（m，</span> <span class="pre">m） / t4&gt;</span></code>，其中<em class="xref py py-obj">m</em>为正整数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>n</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">指数可以是任何整数或长整数，正，负或零。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>M ** n</strong>：ndarray或矩阵对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">返回值的形状和类型与<em class="xref py py-obj">M</em>相同；如果指数为正或零，那么元素的类型与<em class="xref py py-obj">M</em>的相同。如果指数为负，则元素为浮点。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>LinAlgError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">如果矩阵不是数字可逆的。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><code class="xref py py-obj docutils literal"><span class="pre">matrix</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">提供与求幂运算符（<code class="docutils literal"><span class="pre">**</span></code>，而不是<code class="docutils literal"><span class="pre">^</span></code>）等效的函数。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">linalg</span> <span class="k">as</span> <span class="n">LA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span> <span class="c1"># matrix equiv. of the imaginary unit</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># should = -i</span>
+<span class="go">array([[ 0, -1],</span>
+<span class="go">       [ 1,  0]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># matrix arg returns matrix</span>
+<span class="go">matrix([[ 0, -1],</span>
+<span class="go">        [ 1,  0]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[1, 0],</span>
+<span class="go">       [0, 1]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># should = 1/(-i) = i, but w/ f.p. elements</span>
+<span class="go">array([[ 0.,  1.],</span>
+<span class="go">       [-1.,  0.]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-33">有一些更复杂的例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">i</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="c1"># one of the three quarternion units not equal to 1</span>
+<span class="go">array([[ 0., -1.,  0.,  0.],</span>
+<span class="go">       [ 1.,  0.,  0.,  0.],</span>
+<span class="go">       [ 0.,  0.,  0.,  1.],</span>
+<span class="go">       [ 0.,  0., -1.,  0.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LA</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># = -np.eye(4)</span>
+<span class="go">array([[-1.,  0.,  0.,  0.],</span>
+<span class="go">       [ 0., -1.,  0.,  0.],</span>
+<span class="go">       [ 0.,  0., -1.,  0.],</span>
+<span class="go">       [ 0.,  0.,  0., -1.]])</span>
+</pre></div>
+</div>
+</dd></dl>

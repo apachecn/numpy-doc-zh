@@ -1,0 +1,22 @@
+
+<h1><span class="yiyi-st" id="yiyi-13"><a class="reference internal" href="#numpy-ma-mr">numpy.ma.mr</a></span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.mr_.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.mr_.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ma.mr_"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">mr_</code><em class="property"> = &lt;numpy.ma.extras.mr_class object&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将切片对象转换为沿第一轴的连接。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">这是<em class="xref py py-obj">lib.index_tricks.RClass</em>的掩码数组版本。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-17">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-18"><code class="xref py py-obj docutils literal"><span class="pre">lib.index_tricks.RClass</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-19">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">mr_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])]</span>
+<span class="go">array([1, 2, 3, 0, 0, 4, 5, 6])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,51 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.frombuffer</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.frombuffer.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.frombuffer.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ma.frombuffer"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">frombuffer</code><span class="sig-paren">(</span><em>buffer</em>, <em>dtype=float</em>, <em>count=-1</em>, <em>offset=0</em><span class="sig-paren">)</span><em class="property"> = &lt;numpy.ma.core._convert2ma instance&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将缓冲区解释为1维数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>缓冲区</strong>：buffer_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">暴露缓冲区接口的对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">返回数组的数据类型； default：float。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>count</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">要读取的项目数。</span><span class="yiyi-st" id="yiyi-23"><code class="docutils literal"><span class="pre">-1</span></code>表示缓冲区中的所有数据。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>offset</strong>：int，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">从此偏移开始读取缓冲区；默认值：0。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">如果缓冲区具有不按机器字节顺序的数据，则应将其指定为数据类型的一部分，例如：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s1">&apos;&gt;&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-28">结果数组的数据不会进行字节交换，但会被正确解释。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="s1">&apos;hello world&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&apos;S1&apos;</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="go">array([&apos;w&apos;, &apos;o&apos;, &apos;r&apos;, &apos;l&apos;, &apos;d&apos;],</span>
+<span class="go">      dtype=&apos;|S1&apos;)</span>
+</pre></div>
+</div>
+</dd></dl>

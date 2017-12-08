@@ -1,0 +1,51 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.npv</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.npv.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.npv.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.npv"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">npv</code><span class="sig-paren">(</span><em>rate</em>, <em>values</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/financial.py#L663-L706"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回现金流量系列的NPV（净现值）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>rate</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">折现率。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>值</strong>：array_like，shape（M，）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">现金流量时间序列的价值。</span><span class="yiyi-st" id="yiyi-20">现金流“事件”之间的（固定）时间间隔必须与给出<a class="reference internal" href="numpy.rate.html#numpy.rate" title="numpy.rate"><code class="xref py py-obj docutils literal"><span class="pre">rate</span></code></a>的时间间隔相同（即，如果<a class="reference internal" href="numpy.rate.html#numpy.rate" title="numpy.rate"><code class="xref py py-obj docutils literal"><span class="pre">rate</span></code></a>是每年，被理解为在每个现金流事件之间流逝）。</span><span class="yiyi-st" id="yiyi-21">按惯例，投资或“存款”是负数，收入或“提款”是正数； <em class="xref py py-obj">值</em>必须以初始投资开始，因此<em class="xref py py-obj">值[0]</em>通常为负值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：float</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">在折扣<a class="reference internal" href="numpy.rate.html#numpy.rate" title="numpy.rate"><code class="xref py py-obj docutils literal"><span class="pre">rate</span></code></a>下的输入现金流序列<em class="xref py py-obj">值</em>的NPV。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-26">返回结果：<a class="reference internal" href="#g53" id="id1">[G53]</a></span></p>
+<div class="math">
+<p></p>
+</div><p class="rubric"><span class="yiyi-st" id="yiyi-27">参考文献</span></p>
+<table class="docutils citation" frame="void" id="g53" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-28">[G53]</span></td><td><span class="yiyi-st" id="yiyi-29"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em> L.J.Gitman，“Principles of Managerial Finance，Brief，”3rd ed。，Addison-Wesley，</span><span class="yiyi-st" id="yiyi-30">346.</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">npv</span><span class="p">(</span><span class="mf">0.281</span><span class="p">,[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="go">-0.0084785916384548798</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-32">（与numpy.lib.financial.irr给出的示例进行比较）</span></p>
+</dd></dl>

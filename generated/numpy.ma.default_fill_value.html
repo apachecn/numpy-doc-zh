@@ -1,0 +1,73 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.default_fill_value</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.default_fill_value.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.default_fill_value.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.default_fill_value"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">default_fill_value</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L178-L239"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回参数对象的默认填充值。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">默认填充值取决于输入数组的数据类型或输入标量的类型：</span></p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><span class="yiyi-st" id="yiyi-17">数据类型</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-18">默认</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-19">bool</span></td>
+<td><span class="yiyi-st" id="yiyi-20">真正</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-21">int</span></td>
+<td><span class="yiyi-st" id="yiyi-22">999999</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-23">浮动</span></td>
+<td><span class="yiyi-st" id="yiyi-24">1.e20</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-25">复杂</span></td>
+<td><span class="yiyi-st" id="yiyi-26">1.e20 + 0j</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-27">目的</span></td>
+<td><span class="yiyi-st" id="yiyi-28">&apos;？&apos;</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-29">串</span></td>
+<td><span class="yiyi-st" id="yiyi-30">&apos;N / A&apos;</span></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>obj</strong>：ndarray，dtype或scalar</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">返回默认填充值的数组数据类型或标量。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-34">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-35"><strong>fill_value</strong>：标量</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-36">默认填充值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">default_fill_value</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">999999</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">default_fill_value</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">]))</span>
+<span class="go">1e+20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">default_fill_value</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">complex</span><span class="p">))</span>
+<span class="go">(1e+20+0j)</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,282 @@
+
+<h1><span class="yiyi-st" id="yiyi-19">Using the Convenience Classes</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.polynomials.classes.html">https://docs.scipy.org/doc/numpy/reference/routines.polynomials.classes.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-20">由多项式包提供的方便类是：</span></p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="43%">
+<col width="57%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><span class="yiyi-st" id="yiyi-21">名称</span></th>
+<th class="head"><span class="yiyi-st" id="yiyi-22">提供</span></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-23">多项式</span></td>
+<td><span class="yiyi-st" id="yiyi-24">电源系列</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-25">切比雪夫</span></td>
+<td><span class="yiyi-st" id="yiyi-26">切比雪夫系列</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-27">Legendre</span></td>
+<td><span class="yiyi-st" id="yiyi-28">Legendre系列</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-29">Laguerre</span></td>
+<td><span class="yiyi-st" id="yiyi-30">Laguerre系列</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-31">Hermite</span></td>
+<td><span class="yiyi-st" id="yiyi-32">Hermite系列</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33">HermiteE</span></td>
+<td><span class="yiyi-st" id="yiyi-34">HermiteE系列</span></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-35">在此上下文中的系列是相应的多项式基函数乘以系数的有限和。</span><span class="yiyi-st" id="yiyi-36">例如，功率系列看起来像</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-37">并具有系数<img alt="[1, 2, 3]" class="math" src="../_images/math/72fd1fb9acb012efda310c76f34f50bd3cf0307d.png" style="vertical-align: -4px">。</span><span class="yiyi-st" id="yiyi-38">具有相同系数的切比雪夫系列看起来像</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-39"></span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-40">其中在这种情况下，<img alt="T_n" class="math" src="../_images/math/114bd703acc57874f4251ee5452c3d0ad8003eb6.png" style="vertical-align: -2px">是度数<img alt="n" class="math" src="../_images/math/b1f5ca5a538abe6036ed478902bb5a03ef05f0c2.png" style="vertical-align: 0px">的切比雪夫函数，但可以很容易地是任何其他类的基函数。</span><span class="yiyi-st" id="yiyi-41">所有类的约定是系数<img alt="c[i]" class="math" src="../_images/math/e44617b3f45318515dc9b8be2551567c5de3f021.png" style="vertical-align: -4px">与度i的基函数一起。</span></p>
+<p><span class="yiyi-st" id="yiyi-42">所有的类都有相同的方法，特别是它们实现了Python数值运算符+， - ，*，//，％，divmod，**，==和！=。</span><span class="yiyi-st" id="yiyi-43">由于浮点舍入误差，最后两个可能有点问题。</span><span class="yiyi-st" id="yiyi-44">我们现在给出使用NumPy版本1.7.0的各种操作的快速演示。</span></p>
+<div class="section" id="basics">
+<h2><span class="yiyi-st" id="yiyi-45">Basics</span></h2>
+<p><span class="yiyi-st" id="yiyi-46">首先，我们需要一个多项式类和一个多项式实例来玩。</span><span class="yiyi-st" id="yiyi-47">类可以直接从多项式包或从相关类型的模块导入。</span><span class="yiyi-st" id="yiyi-48">这里我们从包中导入并使用常规多项式类，因为它熟悉：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">Polynomial</span> <span class="k">as</span> <span class="n">P</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">P</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
+<span class="go">Polynomial([ 1.,  2.,  3.], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-49">注意，长版本的打印输出有三个部分。</span><span class="yiyi-st" id="yiyi-50">第一是系数，第二是域，第三是窗口：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">coef</span>
+<span class="go">array([ 1.,  2.,  3.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">domain</span>
+<span class="go">array([-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">window</span>
+<span class="go">array([-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-51">打印多项式产生一个较短的形式，而没有域和窗口：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">p</span>
+<span class="go">poly([ 1.  2.  3.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-52">当我们得到拟合时，我们将处理域和窗口，目前我们忽略它们并且通过基本代数和算术运算。</span></p>
+<p><span class="yiyi-st" id="yiyi-53">加减：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">+</span> <span class="n">p</span>
+<span class="go">Polynomial([ 2.,  4.,  6.], [-1.,  1.], [-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">-</span> <span class="n">p</span>
+<span class="go">Polynomial([ 0.], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-54">乘法：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">*</span> <span class="n">p</span>
+<span class="go">Polynomial([  1.,   4.,  10.,  12.,   9.], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-55">权力：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">**</span><span class="mi">2</span>
+<span class="go">Polynomial([  1.,   4.,  10.,  12.,   9.], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-56">师：</span></p>
+<p><span class="yiyi-st" id="yiyi-57">floor division，&apos;//&apos;是多项式类的除法运算符，在这方面，多项式被视为整数。</span><span class="yiyi-st" id="yiyi-58">对于Python版本</span><span class="yiyi-st" id="yiyi-59">在某些时候，它将被弃用：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">//</span> <span class="n">P</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">Polynomial([ 5.,  3.], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-60">余：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">%</span> <span class="n">P</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">Polynomial([ 6.], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-61">Divmod：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">quo</span><span class="p">,</span> <span class="n">rem</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">P</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quo</span>
+<span class="go">Polynomial([ 5.,  3.], [-1.,  1.], [-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rem</span>
+<span class="go">Polynomial([ 6.], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-62">评价：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([  1.,   6.,  17.,  34.,  57.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([[  1.,   6.],</span>
+<span class="go">       [ 17.,  34.],</span>
+<span class="go">       [ 57.,  86.]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-63">代换：</span></p>
+<p><span class="yiyi-st" id="yiyi-64">用x替换多项式并展开结果。</span><span class="yiyi-st" id="yiyi-65">这里，我们用p代替本身，导出扩展后的新的4次多项式。</span><span class="yiyi-st" id="yiyi-66">如果多项式被认为是函数，则这是函数的组合：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">Polynomial([  6.,  16.,  36.,  36.,  27.], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-67">根：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">roots</span><span class="p">()</span>
+<span class="go">array([-0.33333333-0.47140452j, -0.33333333+0.47140452j])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-68">显式使用多项式实例并不总是方便，因此元组，列表，数组和标量在算术运算中自动转换：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="go">Polynomial([ 2.,  4.,  6.], [-1.,  1.], [-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">p</span>
+<span class="go">Polynomial([  1.,   4.,  10.,  12.,   9.], [-1.,  1.], [-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="go">Polynomial([ 0.5,  1. ,  1.5], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-69">在域，窗口或类中不同的多项式不能在算术中混合：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">Chebyshev</span> <span class="k">as</span> <span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">+</span> <span class="n">P</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="n">domain</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;&lt;string&gt;&quot;</span>, line <span class="m">213</span>, in <span class="n">__add__</span>
+<span class="gr">TypeError</span>: <span class="n">Domains differ</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">+</span> <span class="n">P</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="n">window</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;&lt;string&gt;&quot;</span>, line <span class="m">215</span>, in <span class="n">__add__</span>
+<span class="gr">TypeError</span>: <span class="n">Windows differ</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">+</span> <span class="n">T</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;&lt;string&gt;&quot;</span>, line <span class="m">211</span>, in <span class="n">__add__</span>
+<span class="gr">TypeError</span>: <span class="n">Polynomial types differ</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-70">但是不同类型可以用于替换。</span><span class="yiyi-st" id="yiyi-71">事实上，这是如何为类型，域和窗口转换完成多项式类之间的转换：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">(</span><span class="n">T</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="go">Chebyshev([ 2.5,  2. ,  1.5], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-72">其给出了Chebyshev形式的多项式<em class="xref py py-obj">p</em>。</span><span class="yiyi-st" id="yiyi-73">这是因为<img alt="T_1(x) = x" class="math" src="../_images/math/1daa9ed65f94b79075ac6a9f7fb89ebee646c021.png" style="vertical-align: -4px">而用<img alt="x" class="math" src="../_images/math/a6345e315fb341b8e67520f432c92fd4fdf86262.png" style="vertical-align: 0px">代替<img alt="x" class="math" src="../_images/math/a6345e315fb341b8e67520f432c92fd4fdf86262.png" style="vertical-align: 0px">不会改变原始多项式。</span><span class="yiyi-st" id="yiyi-74">然而，所有的乘法和除法将使用切比雪夫系列，因此结果的类型。</span></p>
+</div>
+<div class="section" id="calculus">
+<h2><span class="yiyi-st" id="yiyi-75">Calculus</span></h2>
+<p><span class="yiyi-st" id="yiyi-76">多项式实例可以进行积分和微分。</span><span class="yiyi-st" id="yiyi-77">：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">Polynomial</span> <span class="k">as</span> <span class="n">P</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">P</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">integ</span><span class="p">()</span>
+<span class="go">Polynomial([ 0.,  2.,  3.], [-1.,  1.], [-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">integ</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">Polynomial([ 0.,  0.,  1.,  1.], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-78">第一个示例集成一次<em class="xref py py-obj">p</em>，第二个示例集成两次。</span><span class="yiyi-st" id="yiyi-79">默认情况下，积分的下限和积分常数为0，但两者都可以指定。</span><span class="yiyi-st" id="yiyi-80">：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">integ</span><span class="p">(</span><span class="n">lbnd</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">Polynomial([-1.,  2.,  3.], [-1.,  1.], [-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">integ</span><span class="p">(</span><span class="n">lbnd</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">Polynomial([ 0.,  2.,  3.], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-81">在第一种情况下，积分的下限被设置为-1，积分常数为0。</span><span class="yiyi-st" id="yiyi-82">在第二个中，积分常数也设置为1。</span><span class="yiyi-st" id="yiyi-83">区分更简单，因为唯一的选择是多项式的微分次数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">P</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">deriv</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">Polynomial([ 2.,  6.], [-1.,  1.], [-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">deriv</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">Polynomial([ 6.], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="other-polynomial-constructors">
+<h2><span class="yiyi-st" id="yiyi-84">Other Polynomial Constructors</span></h2>
+<p><span class="yiyi-st" id="yiyi-85">通过指定系数构造多项式仅仅是获得多项式实例的一种方式，它们也可以通过指定它们的根，通过从其他多项式类型的转换和通过最小二乘法拟合来创建。</span><span class="yiyi-st" id="yiyi-86">拟合在其自己的章节中讨论，其他方法如下所示：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">Polynomial</span> <span class="k">as</span> <span class="n">P</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">Chebyshev</span> <span class="k">as</span> <span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">fromroots</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
+<span class="go">Polynomial([ -6.,  11.,  -6.,   1.], [-1.,  1.], [-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+<span class="go">Chebyshev([ -9.  ,  11.75,  -3.  ,   0.25], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-87">convert方法还可以转换域和窗口：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">Chebyshev([-2.4375 ,  2.96875, -0.5625 ,  0.03125], [ 0.,  1.], [-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">P</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">Polynomial([-1.875,  2.875, -1.125,  0.125], [ 0.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-88">在numpy版本&gt; = 1.7.0中，还可以使用<em class="xref py py-obj">基础</em>和<em class="xref py py-obj">cast</em>类方法。</span><span class="yiyi-st" id="yiyi-89">cast方法的工作方式类似于convert方法，而基础方法返回给定度的基础多项式：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">P</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">Polynomial([ 0.,  0.,  0.,  1.], [-1.,  1.], [-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="go">Chebyshev([ -9.  ,  11.75,  -3.  ,   0.25], [-1.,  1.], [-1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-90">类型之间的转换可能很有用，但<em>不</em>建议用于日常使用。</span><span class="yiyi-st" id="yiyi-91">从切比雪夫系列50度到相同程度的多项式系列的数值精度的损失可使数值评估的结果基本上是随机的。</span></p>
+</div>
+<div class="section" id="fitting">
+<h2><span class="yiyi-st" id="yiyi-92">Fitting</span></h2>
+<p><span class="yiyi-st" id="yiyi-93">拟合是原因，<em class="xref py py-obj">域</em>和<em class="xref py py-obj">窗口</em>属性是方便类的一部分。</span><span class="yiyi-st" id="yiyi-94">为了说明该问题，下面绘制直到5度的切比雪夫多项式的值。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">Chebyshev</span> <span class="k">as</span> <span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">i</span><span class="p">)(</span><span class="n">x</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$T_</span><span class="si">%d</span><span class="s2">$&quot;</span><span class="o">%</span><span class="n">i</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.legend.Legend object at 0x3b3ee10&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-95">（<a class="reference external" href="../reference/routines-polynomials-classes-1.py">源代码</a>，<a class="reference external" href="../reference/routines-polynomials-classes-1.png">png</a>，<a class="reference external" href="../reference/routines-polynomials-classes-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../_images/routines-polynomials-classes-1.png" src="../_images/routines-polynomials-classes-1.png">
+</div>
+<p><span class="yiyi-st" id="yiyi-96">In the range -1 <= <em="" class="xref py py-obj">x <= 1="" they="" are="" nice,="" equiripple="" functions="" lying="" between="" +="" -="" 1.="" <="" span=""><span class="yiyi-st" id="yiyi-97">The same plots over the range -2 <= <em="" class="xref py py-obj">x <= 2="" look="" very="" different:<="" span=""></=></=></span></=></=></span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">Chebyshev</span> <span class="k">as</span> <span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">basis</span><span class="p">(</span><span class="n">i</span><span class="p">)(</span><span class="n">x</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$T_</span><span class="si">%d</span><span class="s2">$&quot;</span><span class="o">%</span><span class="n">i</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="go">&lt;matplotlib.legend.Legend object at 0x3b3ee10&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-98">（<a class="reference external" href="../reference/routines-polynomials-classes-2.py">源代码</a>，<a class="reference external" href="../reference/routines-polynomials-classes-2.png">png</a>，<a class="reference external" href="../reference/routines-polynomials-classes-2.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../_images/routines-polynomials-classes-2.png" src="../_images/routines-polynomials-classes-2.png">
+</div>
+<p><span class="yiyi-st" id="yiyi-99">可以看出，“好”部分已经缩小到无关紧要。</span><span class="yiyi-st" id="yiyi-100">在使用Chebyshev多项式拟合时，我们要使用<em class="xref py py-obj">x</em>在-1和1之间的区域，这是<em class="xref py py-obj">窗口</em>指定的。</span><span class="yiyi-st" id="yiyi-101">但是，要拟合的数据不太可能具有该时间间隔中的所有数据点，因此我们使用<em class="xref py py-obj">domain</em>来指定数据点所在的时间间隔。</span><span class="yiyi-st" id="yiyi-102">当拟合完成时，首先通过线性变换将域映射到窗口，并且使用映射的数据点进行通常的最小二乘拟合。</span><span class="yiyi-st" id="yiyi-103">拟合的窗口和域是返回的系列的一部分，并且在计算值，导数等时自动使用。</span><span class="yiyi-st" id="yiyi-104">如果在调用中未指定它们，则拟合程序将使用默认窗口和包含所有数据点的最小域。</span><span class="yiyi-st" id="yiyi-105">这在下面示出用于拟合到噪声正弦曲线。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">Chebyshev</span> <span class="k">as</span> <span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&apos;o&apos;</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x2136c10&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">linspace</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x1cf2890&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">domain</span>
+<span class="go">array([ 0.        ,  6.28318531])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">window</span>
+<span class="go">array([-1.,  1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-106">（<a class="reference external" href="../reference/routines-polynomials-classes-3.py">源代码</a>，<a class="reference external" href="../reference/routines-polynomials-classes-3.png">png</a>，<a class="reference external" href="../reference/routines-polynomials-classes-3.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../_images/routines-polynomials-classes-3.png" src="../_images/routines-polynomials-classes-3.png">
+</div>
+</div>

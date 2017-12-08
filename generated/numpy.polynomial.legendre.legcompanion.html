@@ -1,0 +1,32 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.legendre.legcompanion</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.legendre.legcompanion.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.legendre.legcompanion.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.legendre.legcompanion"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.legendre.</code><code class="descname">legcompanion</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/legendre.py#L1596-L1637"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">返回c的缩放伴随矩阵。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">基底多项式被缩放，使得当<em class="xref py py-obj">c</em>是勒让德基础多项式时，伴随矩阵是对称的。</span><span class="yiyi-st" id="yiyi-18">这提供比未缩放的情况更好的特征值估计，并且对于基本多项式，如果使用<a class="reference internal" href="numpy.linalg.eigvalsh.html#numpy.linalg.eigvalsh" title="numpy.linalg.eigvalsh"><code class="xref py py-obj docutils literal"><span class="pre">numpy.linalg.eigvalsh</span></code></a>来获得它们，则特征值被保证为实数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>c</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">1-D数组从低到高排列的Legendre系数系数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>mat</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">尺寸（deg，deg）的缩放伴随矩阵。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">笔记</span></p>
+</dd></dl>

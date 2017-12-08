@@ -1,0 +1,100 @@
+
+<span id="optionally-scipy-accelerated-routines-numpy-dual"></span><h1><span class="yiyi-st" id="yiyi-16">Optionally Scipy-accelerated routines (<a class="reference internal" href="#module-numpy.dual" title="numpy.dual"><code class="xref py py-mod docutils literal"><span class="pre">numpy.dual</span></code></a>)</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.dual.html">https://docs.scipy.org/doc/numpy/reference/routines.dual.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-17">Scipy可能加速的功能的别名。</span></p>
+<p><span class="yiyi-st" id="yiyi-18"><a class="reference external" href="http://www.scipy.org">Scipy</a>可构建为使用加速或改进的库，用于FFT，线性代数和特殊函数。</span><span class="yiyi-st" id="yiyi-19">此模块允许开发人员在scipy可用时透明地支持这些加速功能，但仍然支持只安装了Numpy的用户。</span></p>
+<div class="section" id="linear-algebra">
+<h2><span class="yiyi-st" id="yiyi-20">Linear algebra</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="generated/numpy.linalg.cholesky.html#numpy.linalg.cholesky" title="numpy.linalg.cholesky"><code class="xref py py-obj docutils literal"><span class="pre">cholesky</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-22">Cholesky分解。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="generated/numpy.linalg.det.html#numpy.linalg.det" title="numpy.linalg.det"><code class="xref py py-obj docutils literal"><span class="pre">det</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-24">计算数组的行列式。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="generated/numpy.linalg.eig.html#numpy.linalg.eig" title="numpy.linalg.eig"><code class="xref py py-obj docutils literal"><span class="pre">eig</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-26">计算正方形数组的特征值和右特征向量。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="generated/numpy.linalg.eigh.html#numpy.linalg.eigh" title="numpy.linalg.eigh"><code class="xref py py-obj docutils literal"><span class="pre">eigh</span></code></a>（a [，UPLO]）</span></td>
+<td><span class="yiyi-st" id="yiyi-28">返回Hermitian或对称矩阵的特征值和特征向量。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="generated/numpy.linalg.eigvals.html#numpy.linalg.eigvals" title="numpy.linalg.eigvals"><code class="xref py py-obj docutils literal"><span class="pre">eigvals</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-30">计算一般矩阵的特征值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="generated/numpy.linalg.eigvalsh.html#numpy.linalg.eigvalsh" title="numpy.linalg.eigvalsh"><code class="xref py py-obj docutils literal"><span class="pre">eigvalsh</span></code></a>（a [，UPLO]）</span></td>
+<td><span class="yiyi-st" id="yiyi-32">计算Hermitian或真实对称矩阵的特征值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="generated/numpy.linalg.inv.html#numpy.linalg.inv" title="numpy.linalg.inv"><code class="xref py py-obj docutils literal"><span class="pre">inv</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-34">计算矩阵的（乘法）逆。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="generated/numpy.linalg.lstsq.html#numpy.linalg.lstsq" title="numpy.linalg.lstsq"><code class="xref py py-obj docutils literal"><span class="pre">lstsq</span></code></a>（a，b [，rcond]）</span></td>
+<td><span class="yiyi-st" id="yiyi-36">将最小二乘解返回到线性矩阵方程。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="generated/numpy.linalg.norm.html#numpy.linalg.norm" title="numpy.linalg.norm"><code class="xref py py-obj docutils literal"><span class="pre">norm</span></code></a>（x [，ord，axis，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-38">矩阵或向量范数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="generated/numpy.linalg.pinv.html#numpy.linalg.pinv" title="numpy.linalg.pinv"><code class="xref py py-obj docutils literal"><span class="pre">pinv</span></code></a>（a [，rcond]）</span></td>
+<td><span class="yiyi-st" id="yiyi-40">计算矩阵的（Moore-Penrose）伪逆。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="generated/numpy.linalg.solve.html#numpy.linalg.solve" title="numpy.linalg.solve"><code class="xref py py-obj docutils literal"><span class="pre">solve</span></code></a>（a，b）</span></td>
+<td><span class="yiyi-st" id="yiyi-42">求解线性矩阵方程或线性标量方程组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="generated/numpy.linalg.svd.html#numpy.linalg.svd" title="numpy.linalg.svd"><code class="xref py py-obj docutils literal"><span class="pre">svd</span></code></a>（a [，full_matrices，compute_uv]）</span></td>
+<td><span class="yiyi-st" id="yiyi-44">奇异值分解。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fft">
+<h2><span class="yiyi-st" id="yiyi-45">FFT</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="generated/numpy.fft.fft.html#numpy.fft.fft" title="numpy.fft.fft"><code class="xref py py-obj docutils literal"><span class="pre">fft</span></code></a>（a [，n，axis，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-47">计算一维离散傅里叶变换。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="generated/numpy.fft.fft2.html#numpy.fft.fft2" title="numpy.fft.fft2"><code class="xref py py-obj docutils literal"><span class="pre">fft2</span></code></a>（a [，s，axes，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-49">计算2维离散傅里叶变换</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="generated/numpy.fft.fftn.html#numpy.fft.fftn" title="numpy.fft.fftn"><code class="xref py py-obj docutils literal"><span class="pre">fftn</span></code></a>（a [，s，axes，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-51">计算N维离散傅里叶变换。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="generated/numpy.fft.ifft.html#numpy.fft.ifft" title="numpy.fft.ifft"><code class="xref py py-obj docutils literal"><span class="pre">ifft</span></code></a>（a [，n，axis，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-53">计算一维离散傅里叶逆变换。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="generated/numpy.fft.ifft2.html#numpy.fft.ifft2" title="numpy.fft.ifft2"><code class="xref py py-obj docutils literal"><span class="pre">ifft2</span></code></a>（a [，s，axes，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-55">计算二维离散傅里叶逆变换。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="generated/numpy.fft.ifftn.html#numpy.fft.ifftn" title="numpy.fft.ifftn"><code class="xref py py-obj docutils literal"><span class="pre">ifftn</span></code></a>（a [，s，axes，norm]）</span></td>
+<td><span class="yiyi-st" id="yiyi-57">计算N维离散傅里叶逆变换。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="other">
+<h2><span class="yiyi-st" id="yiyi-58">Other</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="generated/numpy.i0.html#numpy.i0" title="numpy.i0"><code class="xref py py-obj docutils literal"><span class="pre">i0</span></code></a>（x）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">修改Bessel函数的第一类，顺序为0。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

@@ -1,0 +1,61 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.info</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.info.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.info.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.info"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">info</code><span class="sig-paren">(</span><em>object=None</em>, <em>maxwidth=76</em>, <em>output=&lt;open file &apos;&lt;stdout&gt;&apos;</em>, <em>mode &apos;w&apos;&gt;</em>, <em>toplevel=&apos;numpy&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/utils.py#L442-L644"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">获取函数，类或模块的帮助信息。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>对象</strong>：object或str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入对象或名称以获取有关信息。</span><span class="yiyi-st" id="yiyi-18">如果<a class="reference external" href="https://docs.python.org/dev/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">object</span></code></a>是numpy对象，则会提供其docstring。</span><span class="yiyi-st" id="yiyi-19">如果是字符串，则搜索可用模块以查找匹配的对象。</span><span class="yiyi-st" id="yiyi-20">如果为None，则返回有关<a class="reference internal" href="#numpy.info" title="numpy.info"><code class="xref py py-obj docutils literal"><span class="pre">info</span></code></a>的信息。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>maxwidth</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">打印宽度。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>输出</strong>：文件类似对象，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">输出写入的文件样对象，默认为<code class="docutils literal"><span class="pre">stdout</span></code>。</span><span class="yiyi-st" id="yiyi-25">对象必须以“w”或“a”模式打开。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>toplevel</strong>：str，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">在此级别开始搜索。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-28">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.source.html#numpy.source" title="numpy.source"><code class="xref py py-obj docutils literal"><span class="pre">source</span></code></a>，<a class="reference internal" href="numpy.lookfor.html#numpy.lookfor" title="numpy.lookfor"><code class="xref py py-obj docutils literal"><span class="pre">lookfor</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-31">当与对象交互使用时，<code class="docutils literal"><span class="pre">np.info(obj)</span></code>等效于Python提示符下的<code class="docutils literal"><span class="pre">help(obj)</span></code>或<code class="docutils literal"><span class="pre">obj?</span></code></span><span class="yiyi-st" id="yiyi-32">在IPython提示符。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">)</span> 
+<span class="go">   polyval(p, x)</span>
+<span class="go">     Evaluate the polynomial p at x.</span>
+<span class="go">     ...</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-34">当为<a class="reference external" href="https://docs.python.org/dev/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">object</span></code></a>使用字符串时，可以获得多个结果。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&apos;fft&apos;</span><span class="p">)</span> 
+<span class="go">     *** Found in numpy ***</span>
+<span class="go">Core FFT routines</span>
+<span class="gp">...</span>
+<span class="go">     *** Found in numpy.fft ***</span>
+<span class="go"> fft(a, n=None, axis=-1)</span>
+<span class="gp">...</span>
+<span class="go">     *** Repeat reference found in numpy.fft.fftpack ***</span>
+<span class="go">     *** Total of 3 references found. ***</span>
+</pre></div>
+</div>
+</dd></dl>

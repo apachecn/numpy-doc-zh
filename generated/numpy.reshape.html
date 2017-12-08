@@ -1,0 +1,94 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.reshape</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.reshape.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.reshape.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.reshape"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">reshape</code><span class="sig-paren">(</span><em>a</em>, <em>newshape</em>, <em>order=&apos;C&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L127-L224"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">为数组提供新形状，而不更改其数据。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">形状需要被变更的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>newshape</strong>：int或tuple的整数</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">新的形状应该与原始形状兼容。</span><span class="yiyi-st" id="yiyi-20">如果是整数，则结果将是该长度的1-D数组。</span><span class="yiyi-st" id="yiyi-21">一个形状维度可以是-1。</span><span class="yiyi-st" id="yiyi-22">在这种情况下，从数组的长度和剩余维度推断该值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">使用此索引顺序读取<em class="xref py py-obj">a</em>的元素，并使用此索引顺序将元素放置到重新形成的数组中。</span><span class="yiyi-st" id="yiyi-25">&apos;C&apos;意味着使用C样索引顺序读取/写入元素，最后一个轴索引变化最快，回到第一个轴索引变化最慢。</span><span class="yiyi-st" id="yiyi-26">&apos;F&apos;意味着使用Fortran样索引顺序读取/写入元素，第一个索引变化最快，最后一个索引变化最慢。</span><span class="yiyi-st" id="yiyi-27">请注意，&apos;C&apos;和&apos;F&apos;选项不考虑底层数组的内存布局，只涉及索引的顺序。</span><span class="yiyi-st" id="yiyi-28">&apos;A&apos;意味着如果在内存中<em class="xref py py-obj">a</em>是Fortran <em>连续</em>，以类似Fortran的索引顺序读取/写入元素，否则为C样顺序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>reshaped_array</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">如果可能，这将是一个新的视图对象；否则，它将是一个副本。</span><span class="yiyi-st" id="yiyi-32">注意，不能保证返回的数组的<em>内存布局</em>（C-或Fortran-contiguous）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-33">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="numpy.ndarray.reshape.html#numpy.ndarray.reshape" title="numpy.ndarray.reshape"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.reshape</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">等效方法。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-37">在不复制数据的情况下，不能始终更改数组的形状。</span><span class="yiyi-st" id="yiyi-38">如果你想要一个错误，如果数据被复制，你应该分配新的形状到数组的shape属性：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go"># A transpose make the array non-contiguous</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span>
+<span class="go"># Taking a view makes it possible to modify the shape without modifying</span>
+<span class="go"># the initial object.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">AttributeError: incompatible shape for a non-contiguous array</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39"><em class="xref py py-obj">order</em>关键字给出了<em>从<em class="xref py py-obj">a</em>获取</em>的值，然后<em>将</em>输出数组。</span><span class="yiyi-st" id="yiyi-40">例如，假设你有一个数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0, 1],</span>
+<span class="go">       [2, 3],</span>
+<span class="go">       [4, 5]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-41">你可以认为重塑是首先拆散数组（使用给定的索引顺序），然​​后使用与分拆相同的索引排序将元素从遍历的数组插入新的数组。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="c1"># C-like index ordering</span>
+<span class="go">array([[0, 1, 2],</span>
+<span class="go">       [3, 4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="c1"># equivalent to C ravel then C reshape</span>
+<span class="go">array([[0, 1, 2],</span>
+<span class="go">       [3, 4, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">)</span> <span class="c1"># Fortran-like index ordering</span>
+<span class="go">array([[0, 4, 3],</span>
+<span class="go">       [2, 1, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">)</span>
+<span class="go">array([[0, 4, 3],</span>
+<span class="go">       [2, 1, 5]])</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-42">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">array([1, 2, 3, 4, 5, 6])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">)</span>
+<span class="go">array([1, 4, 2, 5, 3, 6])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>       <span class="c1"># the unspecified value is inferred to be 2</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [3, 4],</span>
+<span class="go">       [5, 6]])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,60 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.matlib.zeros</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matlib.zeros.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matlib.zeros.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.matlib.zeros"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.matlib.</code><code class="descname">zeros</code><span class="sig-paren">(</span><em>shape</em>, <em>dtype=None</em>, <em>order=&apos;C&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/matlib.py#L96-L138"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回给定形状和类型的矩阵，用零填充。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>shape</strong>：int或ints序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">矩阵的形状</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">矩阵的所需数据类型，默认为float。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">是否以C或Fortran连续顺序存储结果，默认值为“C”。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：matrix</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">给定形状，dtype和阶的零矩阵。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.zeros.html#numpy.zeros" title="numpy.zeros"><code class="xref py py-obj docutils literal"><span class="pre">numpy.zeros</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-27">等效数组功能。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-28"><code class="xref py py-obj docutils literal"><span class="pre">matlib.ones</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">返回一个矩阵。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-31">如果<code class="xref py py-obj docutils literal"><span class="pre">shape</span></code>具有长度一即<code class="docutils literal"><span class="pre">(N,)</span></code>或者是标量<code class="docutils literal"><span class="pre">N</span></code>，则<em class="xref py py-obj">out</em>形状矩阵<code class="docutils literal"><span class="pre">(1,N)</span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.matlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matlib</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">matrix([[ 0.,  0.,  0.],</span>
+<span class="go">        [ 0.,  0.,  0.]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matlib</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">matrix([[ 0.,  0.]])</span>
+</pre></div>
+</div>
+</dd></dl>

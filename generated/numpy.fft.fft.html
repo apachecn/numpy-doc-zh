@@ -1,0 +1,102 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fft.fft</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fft.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fft.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fft.fft"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.fft.</code><code class="descname">fft</code><span class="sig-paren">(</span><em>a</em>, <em>n=None</em>, <em>axis=-1</em>, <em>norm=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/fft/fftpack.py#L100-L192"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算一维离散傅里叶变换。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">该函数使用有效的快速傅立叶变换（FFT）算法[CT]计算一维<em>n</em>点离散傅里叶变换（DFT）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入数组，可以复杂。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>n</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输出的变换轴的长度。</span><span class="yiyi-st" id="yiyi-21">如果<em class="xref py py-obj">n</em>小于输入的长度，则输入被裁剪。</span><span class="yiyi-st" id="yiyi-22">如果它较大，输入将用零填充。</span><span class="yiyi-st" id="yiyi-23">如果未给出<em class="xref py py-obj">n</em>，则使用沿由<em class="xref py py-obj">轴</em>指定的轴的输入长度。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">用于计算FFT的轴。</span><span class="yiyi-st" id="yiyi-26">如果未给出，则使用最后一个轴。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>norm</strong>：{None，“ortho”}，可选</span></p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-28"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-29">规范化模式（参见<a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a>）。</span><span class="yiyi-st" id="yiyi-30">默认值为None。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>out</strong>：complex ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">未指定沿<em class="xref py py-obj">轴</em>指示的轴变换的截断或零填充输入，如果<em class="xref py py-obj">轴</em>指定最后一个输入。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-34">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-35"><strong>IndexError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-36">如果<em class="xref py py-obj">轴</em>大于<em class="xref py py-obj">a</em>的最后一个轴。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-37">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-39">用于定义所使用的DFT和约定。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.fft.ifft.html#numpy.fft.ifft" title="numpy.fft.ifft"><code class="xref py py-obj docutils literal"><span class="pre">ifft</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="#numpy.fft.fft" title="numpy.fft.fft"><code class="xref py py-obj docutils literal"><span class="pre">fft</span></code></a>的逆。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.fft.fft2.html#numpy.fft.fft2" title="numpy.fft.fft2"><code class="xref py py-obj docutils literal"><span class="pre">fft2</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">二维FFT。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="numpy.fft.fftn.html#numpy.fft.fftn" title="numpy.fft.fftn"><code class="xref py py-obj docutils literal"><span class="pre">fftn</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-45"><em>n</em>维FFT。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.fft.rfftn.html#numpy.fft.rfftn" title="numpy.fft.rfftn"><code class="xref py py-obj docutils literal"><span class="pre">rfftn</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-47">实输入的<em>n</em>维FFT。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="numpy.fft.fftfreq.html#numpy.fft.fftfreq" title="numpy.fft.fftfreq"><code class="xref py py-obj docutils literal"><span class="pre">fftfreq</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-49">给定FFT参数的频率仓。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-50">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-51">FFT（快速傅里叶变换）是指通过使用计算项中的对称性可以有效地计算离散傅里叶变换（DFT）的方式。</span><span class="yiyi-st" id="yiyi-52">当<em class="xref py py-obj">n</em>是2的幂时，对称性最高，因此，对于这些大小，变换是最有效的。</span></p>
+<p><span class="yiyi-st" id="yiyi-53">在<a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a>模块的文档中，使用此实现中使用的约定来定义DFT。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-54">参考文献</span></p>
+<table class="docutils citation" frame="void" id="ct" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-55"><a class="fn-backref" href="#id1">[CT]</a></span></td><td><span class="yiyi-st" id="yiyi-56">Cooley，James W.和John W. Tukey，1965，“An algorithm for the machine calculation of complex Fourier series，”<em>计算。</em></span><span class="yiyi-st" id="yiyi-57">19：297-301。</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-58">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">/</span> <span class="mi">8</span><span class="p">))</span>
+<span class="go">array([ -3.44505240e-16 +1.14383329e-17j,</span>
+<span class="go">         8.00000000e+00 -5.71092652e-15j,</span>
+<span class="go">         2.33482938e-16 +1.22460635e-16j,</span>
+<span class="go">         1.64863782e-15 +1.77635684e-15j,</span>
+<span class="go">         9.95839695e-17 +2.33482938e-16j,</span>
+<span class="go">         0.00000000e+00 +1.66837030e-15j,</span>
+<span class="go">         1.14383329e-17 +1.22460635e-16j,</span>
+<span class="go">         -1.64863782e-15 +1.77635684e-15j])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;, &lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-59">在该示例中，实数输入具有Hermitian的FFT，即，如在<a class="reference internal" href="../routines.fft.html#module-numpy.fft" title="numpy.fft"><code class="xref py py-obj docutils literal"><span class="pre">numpy.fft</span></code></a>文档中所描述的，在实部对称并且在虚部中是非对称的。</span></p>
+<p><span class="yiyi-st" id="yiyi-60">（<a class="reference external" href="../../reference/generated/numpy-fft-fft-1.py">源代码</a>）</span></p>
+</dd></dl>

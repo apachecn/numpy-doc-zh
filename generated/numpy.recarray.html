@@ -1,0 +1,358 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.recarray</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.recarray"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">recarray</code><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/__init__.py"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">构造一个允许使用属性进行字段访问的ndarray。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">数组可能具有包含字段的数据类型，类似于电子表格中的列。</span><span class="yiyi-st" id="yiyi-16">例如<code class="docutils literal"><span class="pre">[（x，</span> <span class="pre">int），</span> <span class="pre">（y，</span> <span class="pre">float）]</span>  t0 &gt;，其中数组中的每个条目是一对<code class="docutils literal"><span class="pre">（int，</span> <span class="pre">float）</span></code>。</code></span><span class="yiyi-st" id="yiyi-17">通常，使用字典查找（例如<code class="docutils literal"><span class="pre">arr[&apos;x&apos;]</span></code>和<code class="docutils literal"><span class="pre">arr[&apos;y&apos;]</span></code>）访问这些属性。</span><span class="yiyi-st" id="yiyi-18">记录数组允许使用<code class="docutils literal"><span class="pre">arr.x</span></code>和<code class="docutils literal"><span class="pre">arr.y</span></code>作为数组的成员访问字段。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>shape</strong>：tuple</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">输出数组的形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">所需的数据类型。</span><span class="yiyi-st" id="yiyi-24">默认情况下，数据类型由<em class="xref py py-obj">格式</em>，<em class="xref py py-obj">名称</em>，<em class="xref py py-obj">标题</em>，<em class="xref py py-obj">对齐</em>和<em class="xref py py-obj"></em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>格式</strong>：数据类型列表，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">包含不同列的数据类型的列表，例如<code class="docutils literal"><span class="pre">[&apos;i4&apos;，</span> <span class="pre">&apos;f8&apos;，</span> <span class="pre">&apos;i4&apos;]</span></code>。</span><span class="yiyi-st" id="yiyi-27"><em class="xref py py-obj">formats</em> does <em>not</em> support the new convention of using types directly, i.e. <code class="docutils literal"><span class="pre">(int,</span> <span class="pre">float,</span> <span class="pre">int)</span></code>. </span><span class="yiyi-st" id="yiyi-28">请注意，<em class="xref py py-obj">格式</em>必须是列表，而不是元组。</span><span class="yiyi-st" id="yiyi-29">由于<em class="xref py py-obj">格式</em>有限，建议您改为指定<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>名称</strong>：str的tuple，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">每列的名称，例如<code class="docutils literal"><span class="pre">（&apos;x&apos;，</span> <span class="pre">&apos;y&apos;，</span> <span class="pre">&apos;z&apos;）</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>buf</strong>：buffer，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">默认情况下，将创建给定形状和数据类型的新数组。</span><span class="yiyi-st" id="yiyi-34">如果指定<em class="xref py py-obj">buf</em>并且是暴露缓冲区接口的对象，则数组将使用来自现有缓冲区的内存。</span><span class="yiyi-st" id="yiyi-35">在这种情况下，<em class="xref py py-obj">偏移</em>和<a class="reference internal" href="numpy.recarray.strides.html#numpy.recarray.strides" title="numpy.recarray.strides"><code class="xref py py-obj docutils literal"><span class="pre">strides</span></code></a>关键字可用。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-36">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-37"><strong>rec</strong>：recarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-38">给定形状和类型的空数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2"><span class="yiyi-st" id="yiyi-39">其他参数：</span></th></tr>
+<tr class="field-odd field"><td>&#xA0;</td><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-40"><strong>titles</strong>：str的tuple，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-41">列名称的别名。</span><span class="yiyi-st" id="yiyi-42">例如，如果<em class="xref py py-obj">名称</em>是<code class="docutils literal"><span class="pre">（&apos;x&apos;，</span> <span class="pre">&apos;y&apos;，</span> <span class="pre">&apos;z&apos;）</span> </code>和<em class="xref py py-obj">标题</em>是<code class="docutils literal"><span class="pre">（&apos;x_coordinate&apos;，</span> <span class="pre">&apos;y_coordinate&apos;，</span> <span class="pre">&apos;z_coordinate&apos;） t9 &gt;</span></code>，则<code class="docutils literal"><span class="pre">arr[&apos;x&apos;]</span></code>等效于<code class="docutils literal"><span class="pre">arr.x</span></code>和<code class="docutils literal"><span class="pre">arr.x_coordinate</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-43"><strong>byteorder</strong>：{&apos;&apos;，&apos;=&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-44">所有字段的字节顺序。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-45"><strong>aligned</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-46">将内存中的字段与C编译器对齐。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-47"><strong>strides</strong>：ints的tuple，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-48">根据这些步长解释缓冲区（<em class="xref py py-obj">buf</em>）（strides定义每个数组元素，行，列等的字节数。</span><span class="yiyi-st" id="yiyi-49">占用内存）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-50"><strong>offset</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-51">从此偏移开始读取缓冲区（<em class="xref py py-obj">buf</em>）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-52"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;}，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-53">行主（C风格）或列主（Fortran风格）顺序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-54">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-55"><code class="xref py py-obj docutils literal"><span class="pre">rec.fromrecords</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-56">从数据构造记录数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="numpy.record.html#numpy.record" title="numpy.record"><code class="xref py py-obj docutils literal"><span class="pre">record</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-58"><a class="reference internal" href="#numpy.recarray" title="numpy.recarray"><code class="xref py py-obj docutils literal"><span class="pre">recarray</span></code></a>的基本数据类型。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="numpy.format_parser.html#numpy.format_parser" title="numpy.format_parser"><code class="xref py py-obj docutils literal"><span class="pre">format_parser</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-60">从格式，名称，标题确定数据类型。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-61">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-62">这个构造函数可以与<code class="docutils literal"><span class="pre">empty</span></code>比较：它创建一个新记录数组，但不会填充数据。</span><span class="yiyi-st" id="yiyi-63">要从数据创建记录数组，请使用以下方法之一：</span></p>
+<ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-64">使用<code class="docutils literal"><span class="pre">arr.view(np.recarray)</span></code>创建标准ndarray并将其转换为记录数组。</span></li>
+<li><span class="yiyi-st" id="yiyi-65">使用<em class="xref py py-obj">buf</em>关键字。</span></li>
+<li><span class="yiyi-st" id="yiyi-66">使用<em class="xref py py-obj">np.rec.fromrecords</em>。</span></li>
+</ol>
+<p class="rubric"><span class="yiyi-st" id="yiyi-67">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-68">创建具有两个字段<code class="docutils literal"><span class="pre">x</span></code>和<code class="docutils literal"><span class="pre">y</span></code>的数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&apos;x&apos;</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;y&apos;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([(1.0, 2), (3.0, 4)],</span>
+<span class="go">      dtype=[(&apos;x&apos;, &apos;&lt;f8&apos;), (&apos;y&apos;, &apos;&lt;i4&apos;)])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="s1">&apos;x&apos;</span><span class="p">]</span>
+<span class="go">array([ 1.,  3.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-69">数组查看数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">x</span>
+<span class="go">array([ 1.,  3.])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">y</span>
+<span class="go">array([2, 4])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-70">数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">((</span><span class="mi">2</span><span class="p">,),</span>
+<span class="gp">... </span><span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&apos;x&apos;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;y&apos;</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span> <span class="p">(</span><span class="s1">&apos;z&apos;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)])</span> 
+<span class="go">rec.array([(-1073741821, 1.2249118382103472e-301, 24547520),</span>
+<span class="go">       (3471280, 1.2134086255804012e-316, 0)],</span>
+<span class="go">      dtype=[(&apos;x&apos;, &apos;&lt;i4&apos;), (&apos;y&apos;, &apos;&lt;f8&apos;), (&apos;z&apos;, &apos;&lt;i4&apos;)])</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-71">属性</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="numpy.recarray.T.html#numpy.recarray.T" title="numpy.recarray.T"><code class="xref py py-obj docutils literal"><span class="pre">T</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-73">与self.transpose()相同，除非self是self.ndim返回</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="numpy.recarray.base.html#numpy.recarray.base" title="numpy.recarray.base"><code class="xref py py-obj docutils literal"><span class="pre">base</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-75">如果内存是来自某个其他对象的基本对象。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-76"><a class="reference internal" href="numpy.recarray.ctypes.html#numpy.recarray.ctypes" title="numpy.recarray.ctypes"><code class="xref py py-obj docutils literal"><span class="pre">ctypes</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-77">一个对象，用于简化数组与ctypes模块的交互。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-78"><a class="reference internal" href="numpy.recarray.data.html#numpy.recarray.data" title="numpy.recarray.data"><code class="xref py py-obj docutils literal"><span class="pre">data</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-79">Python缓冲区对象指向数组的数据的开始。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="numpy.recarray.dtype.html#numpy.recarray.dtype" title="numpy.recarray.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-81">数组元素的数据类型。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-82"><a class="reference internal" href="numpy.recarray.flags.html#numpy.recarray.flags" title="numpy.recarray.flags"><code class="xref py py-obj docutils literal"><span class="pre">flags</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-83">有关数组的内存布局的信息。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-84"><a class="reference internal" href="numpy.recarray.flat.html#numpy.recarray.flat" title="numpy.recarray.flat"><code class="xref py py-obj docutils literal"><span class="pre">flat</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-85">数组上的1-D迭代器。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-86"><a class="reference internal" href="numpy.recarray.imag.html#numpy.recarray.imag" title="numpy.recarray.imag"><code class="xref py py-obj docutils literal"><span class="pre">imag</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-87">数组的虚部。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-88"><a class="reference internal" href="numpy.recarray.itemsize.html#numpy.recarray.itemsize" title="numpy.recarray.itemsize"><code class="xref py py-obj docutils literal"><span class="pre">itemsize</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-89">一个数组元素的长度（以字节为单位）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-90"><a class="reference internal" href="numpy.recarray.nbytes.html#numpy.recarray.nbytes" title="numpy.recarray.nbytes"><code class="xref py py-obj docutils literal"><span class="pre">nbytes</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-91">数组的元素消耗的总字节数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-92"><a class="reference internal" href="numpy.recarray.ndim.html#numpy.recarray.ndim" title="numpy.recarray.ndim"><code class="xref py py-obj docutils literal"><span class="pre">ndim</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-93">数组尺寸数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-94"><a class="reference internal" href="numpy.recarray.real.html#numpy.recarray.real" title="numpy.recarray.real"><code class="xref py py-obj docutils literal"><span class="pre">real</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-95">数组的真实部分。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-96"><a class="reference internal" href="numpy.recarray.shape.html#numpy.recarray.shape" title="numpy.recarray.shape"><code class="xref py py-obj docutils literal"><span class="pre">shape</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-97">数组维数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-98"><a class="reference internal" href="numpy.recarray.size.html#numpy.recarray.size" title="numpy.recarray.size"><code class="xref py py-obj docutils literal"><span class="pre">size</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-99">数组中的元素数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-100"><a class="reference internal" href="numpy.recarray.strides.html#numpy.recarray.strides" title="numpy.recarray.strides"><code class="xref py py-obj docutils literal"><span class="pre">strides</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-101">遍历数组时，在每个维度中步进的字节数组。</span></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-102">方法</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-103"><a class="reference internal" href="numpy.recarray.all.html#numpy.recarray.all" title="numpy.recarray.all"><code class="xref py py-obj docutils literal"><span class="pre">all</span></code></a>（[axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-104">如果所有元素均为True，则返回True。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-105"><a class="reference internal" href="numpy.recarray.any.html#numpy.recarray.any" title="numpy.recarray.any"><code class="xref py py-obj docutils literal"><span class="pre">any</span></code></a>（[axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-106">如果<em class="xref py py-obj">a</em>的任何元素求值为True，则返回True。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-107"><a class="reference internal" href="numpy.recarray.argmax.html#numpy.recarray.argmax" title="numpy.recarray.argmax"><code class="xref py py-obj docutils literal"><span class="pre">argmax</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-108">沿给定轴的最大值的返回指数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-109"><a class="reference internal" href="numpy.recarray.argmin.html#numpy.recarray.argmin" title="numpy.recarray.argmin"><code class="xref py py-obj docutils literal"><span class="pre">argmin</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-110">沿着<em class="xref py py-obj">a</em>的给定轴的最小值的返回指数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-111"><a class="reference internal" href="numpy.recarray.argpartition.html#numpy.recarray.argpartition" title="numpy.recarray.argpartition"><code class="xref py py-obj docutils literal"><span class="pre">argpartition</span></code></a>（kth [，axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-112">返回将对此数组进行分区的索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-113"><a class="reference internal" href="numpy.recarray.argsort.html#numpy.recarray.argsort" title="numpy.recarray.argsort"><code class="xref py py-obj docutils literal"><span class="pre">argsort</span></code></a>（[axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-114">返回将此数组排序的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-115"><a class="reference internal" href="numpy.recarray.astype.html#numpy.recarray.astype" title="numpy.recarray.astype"><code class="xref py py-obj docutils literal"><span class="pre">astype</span></code></a>（dtype [，order，casting，subok，copy]）</span></td>
+<td><span class="yiyi-st" id="yiyi-116">数组的复制，强制转换为指定的类型。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-117"><a class="reference internal" href="numpy.recarray.byteswap.html#numpy.recarray.byteswap" title="numpy.recarray.byteswap"><code class="xref py py-obj docutils literal"><span class="pre">byteswap</span></code></a>（inplace）</span></td>
+<td><span class="yiyi-st" id="yiyi-118">交换数组元素的字节</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-119"><a class="reference internal" href="numpy.recarray.choose.html#numpy.recarray.choose" title="numpy.recarray.choose"><code class="xref py py-obj docutils literal"><span class="pre">choose</span></code></a>（choices [，out，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-120">使用索引数组从一组选择中构造新的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-121"><a class="reference internal" href="numpy.recarray.clip.html#numpy.recarray.clip" title="numpy.recarray.clip"><code class="xref py py-obj docutils literal"><span class="pre">clip</span></code></a>（[min，max，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-122">返回值限于<code class="docutils literal"><span class="pre">[min，</span> <span class="pre">max]</span></code>的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-123"><a class="reference internal" href="numpy.recarray.compress.html#numpy.recarray.compress" title="numpy.recarray.compress"><code class="xref py py-obj docutils literal"><span class="pre">compress</span></code></a>（condition [，axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-124">沿给定轴返回此数组的所选切片。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-125"><a class="reference internal" href="numpy.recarray.conj.html#numpy.recarray.conj" title="numpy.recarray.conj"><code class="xref py py-obj docutils literal"><span class="pre">conj</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-126">复共轭所有元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-127"><a class="reference internal" href="numpy.recarray.conjugate.html#numpy.recarray.conjugate" title="numpy.recarray.conjugate"><code class="xref py py-obj docutils literal"><span class="pre">conjugate</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-128">按元素方式返回复共轭。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-129"><a class="reference internal" href="numpy.recarray.copy.html#numpy.recarray.copy" title="numpy.recarray.copy"><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-130">返回数组的副本。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-131"><a class="reference internal" href="numpy.recarray.cumprod.html#numpy.recarray.cumprod" title="numpy.recarray.cumprod"><code class="xref py py-obj docutils literal"><span class="pre">cumprod</span></code></a>（[axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-132">返回沿给定轴的元素的累积乘积。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-133"><a class="reference internal" href="numpy.recarray.cumsum.html#numpy.recarray.cumsum" title="numpy.recarray.cumsum"><code class="xref py py-obj docutils literal"><span class="pre">cumsum</span></code></a>（[axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-134">返回沿给定轴的元素的累积和。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-135"><a class="reference internal" href="numpy.recarray.diagonal.html#numpy.recarray.diagonal" title="numpy.recarray.diagonal"><code class="xref py py-obj docutils literal"><span class="pre">diagonal</span></code></a>（[offset，axis1，axis2]）</span></td>
+<td><span class="yiyi-st" id="yiyi-136">返回指定的对角线。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-137"><a class="reference internal" href="numpy.recarray.dot.html#numpy.recarray.dot" title="numpy.recarray.dot"><code class="xref py py-obj docutils literal"><span class="pre">dot</span></code></a>（b [，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-138">两个数组的点积。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-139"><a class="reference internal" href="numpy.recarray.dump.html#numpy.recarray.dump" title="numpy.recarray.dump"><code class="xref py py-obj docutils literal"><span class="pre">dump</span></code></a>（file）</span></td>
+<td><span class="yiyi-st" id="yiyi-140">将数组的pickle转储到指定的文件。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-141"><a class="reference internal" href="numpy.recarray.dumps.html#numpy.recarray.dumps" title="numpy.recarray.dumps"><code class="xref py py-obj docutils literal"><span class="pre">dumps</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-142">以字符串形式返回数组的pickle。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-143"><a class="reference internal" href="numpy.recarray.field.html#numpy.recarray.field" title="numpy.recarray.field"><code class="xref py py-obj docutils literal"><span class="pre">field</span></code></a>（attr [，val]）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-144"><a class="reference internal" href="numpy.recarray.fill.html#numpy.recarray.fill" title="numpy.recarray.fill"><code class="xref py py-obj docutils literal"><span class="pre">fill</span></code></a>（value）</span></td>
+<td><span class="yiyi-st" id="yiyi-145">使用标量值填充数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-146"><a class="reference internal" href="numpy.recarray.flatten.html#numpy.recarray.flatten" title="numpy.recarray.flatten"><code class="xref py py-obj docutils literal"><span class="pre">flatten</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-147">将折叠的数组的副本返回到一个维度。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-148"><a class="reference internal" href="numpy.recarray.getfield.html#numpy.recarray.getfield" title="numpy.recarray.getfield"><code class="xref py py-obj docutils literal"><span class="pre">getfield</span></code></a>（dtype [，offset]）</span></td>
+<td><span class="yiyi-st" id="yiyi-149">将给定数组的字段返回为特定类型。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-150"><a class="reference internal" href="numpy.recarray.item.html#numpy.recarray.item" title="numpy.recarray.item"><code class="xref py py-obj docutils literal"><span class="pre">item</span></code></a>（\ * args）</span></td>
+<td><span class="yiyi-st" id="yiyi-151">将数组的元素复制到标准Python标量并返回。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-152"><a class="reference internal" href="numpy.recarray.itemset.html#numpy.recarray.itemset" title="numpy.recarray.itemset"><code class="xref py py-obj docutils literal"><span class="pre">itemset</span></code></a>（\ * args）</span></td>
+<td><span class="yiyi-st" id="yiyi-153">将标量插入到数组中（如果可能，将标量转换为数组的dtype）</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-154"><a class="reference internal" href="numpy.recarray.max.html#numpy.recarray.max" title="numpy.recarray.max"><code class="xref py py-obj docutils literal"><span class="pre">max</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-155">沿给定轴返回最大值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-156"><a class="reference internal" href="numpy.recarray.mean.html#numpy.recarray.mean" title="numpy.recarray.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a>（[axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-157">返回沿给定轴的数组元素的平均值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-158"><a class="reference internal" href="numpy.recarray.min.html#numpy.recarray.min" title="numpy.recarray.min"><code class="xref py py-obj docutils literal"><span class="pre">min</span></code></a>（[axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-159">沿给定轴返回最小值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-160"><a class="reference internal" href="numpy.recarray.newbyteorder.html#numpy.recarray.newbyteorder" title="numpy.recarray.newbyteorder"><code class="xref py py-obj docutils literal"><span class="pre">newbyteorder</span></code></a>（[new_order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-161">返回具有以不同字节顺序查看的相同数据的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-162"><a class="reference internal" href="numpy.recarray.nonzero.html#numpy.recarray.nonzero" title="numpy.recarray.nonzero"><code class="xref py py-obj docutils literal"><span class="pre">nonzero</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-163">返回非零元素的索引。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-164"><a class="reference internal" href="numpy.recarray.partition.html#numpy.recarray.partition" title="numpy.recarray.partition"><code class="xref py py-obj docutils literal"><span class="pre">partition</span></code></a>（kth [，axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-165">重新排列数组中的元素，使得第k个位置的元素的值在排序数组中的位置。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-166"><a class="reference internal" href="numpy.recarray.prod.html#numpy.recarray.prod" title="numpy.recarray.prod"><code class="xref py py-obj docutils literal"><span class="pre">prod</span></code></a>（[axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-167">返回给定轴上的数组元素的乘积</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-168"><a class="reference internal" href="numpy.recarray.ptp.html#numpy.recarray.ptp" title="numpy.recarray.ptp"><code class="xref py py-obj docutils literal"><span class="pre">ptp</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-169">沿给定轴的峰到峰（最大 - 最小）值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-170"><a class="reference internal" href="numpy.recarray.put.html#numpy.recarray.put" title="numpy.recarray.put"><code class="xref py py-obj docutils literal"><span class="pre">put</span></code></a>（indices，values [，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-171">对于所有<em class="xref py py-obj">n</em>，设置<code class="docutils literal"><span class="pre">a.flat [n]</span> <span class="pre">=</span> <span class="pre">在指数。</span></code></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-172"><a class="reference internal" href="numpy.recarray.ravel.html#numpy.recarray.ravel" title="numpy.recarray.ravel"><code class="xref py py-obj docutils literal"><span class="pre">ravel</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-173">返回展平的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-174"><a class="reference internal" href="numpy.recarray.repeat.html#numpy.recarray.repeat" title="numpy.recarray.repeat"><code class="xref py py-obj docutils literal"><span class="pre">repeat</span></code></a>（重复[，轴]）</span></td>
+<td><span class="yiyi-st" id="yiyi-175">重复数组的元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-176"><a class="reference internal" href="numpy.recarray.reshape.html#numpy.recarray.reshape" title="numpy.recarray.reshape"><code class="xref py py-obj docutils literal"><span class="pre">reshape</span></code></a>（shape [，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-177">返回包含具有新形状的相同数据的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-178"><a class="reference internal" href="numpy.recarray.resize.html#numpy.recarray.resize" title="numpy.recarray.resize"><code class="xref py py-obj docutils literal"><span class="pre">resize</span></code></a>（new_shape [，refcheck]）</span></td>
+<td><span class="yiyi-st" id="yiyi-179">就地更改数组的形状和大小。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-180"><a class="reference internal" href="numpy.recarray.round.html#numpy.recarray.round" title="numpy.recarray.round"><code class="xref py py-obj docutils literal"><span class="pre">round</span></code></a>（[小数，输出]）</span></td>
+<td><span class="yiyi-st" id="yiyi-181">返回<em class="xref py py-obj">a</em>，每个元素四舍五入为给定的小数位数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-182"><a class="reference internal" href="numpy.recarray.searchsorted.html#numpy.recarray.searchsorted" title="numpy.recarray.searchsorted"><code class="xref py py-obj docutils literal"><span class="pre">searchsorted</span></code></a>（v [，side，sorter]）</span></td>
+<td><span class="yiyi-st" id="yiyi-183">查找索引，其中v的元素应插入到a以维持顺序。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-184"><a class="reference internal" href="numpy.recarray.setfield.html#numpy.recarray.setfield" title="numpy.recarray.setfield"><code class="xref py py-obj docutils literal"><span class="pre">setfield</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-185">将值放入由数据类型定义的字段中的指定位置。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-186"><a class="reference internal" href="numpy.recarray.setflags.html#numpy.recarray.setflags" title="numpy.recarray.setflags"><code class="xref py py-obj docutils literal"><span class="pre">setflags</span></code></a>（[write，align，uic]）</span></td>
+<td><span class="yiyi-st" id="yiyi-187">分别设置数组标志WRITEABLE，ALIGNED和UPDATEIFCOPY。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-188"><a class="reference internal" href="numpy.recarray.sort.html#numpy.recarray.sort" title="numpy.recarray.sort"><code class="xref py py-obj docutils literal"><span class="pre">sort</span></code></a>（[axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-189">就地对数组进行排序。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-190"><a class="reference internal" href="numpy.recarray.squeeze.html#numpy.recarray.squeeze" title="numpy.recarray.squeeze"><code class="xref py py-obj docutils literal"><span class="pre">squeeze</span></code></a>（[axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-191">从<em class="xref py py-obj">a形状删除单维条目</em>。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-192"><a class="reference internal" href="numpy.recarray.std.html#numpy.recarray.std" title="numpy.recarray.std"><code class="xref py py-obj docutils literal"><span class="pre">std</span></code></a>（[axis，dtype，out，ddof，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-193">返回给定轴上的数组元素的标准偏差。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-194"><a class="reference internal" href="numpy.recarray.sum.html#numpy.recarray.sum" title="numpy.recarray.sum"><code class="xref py py-obj docutils literal"><span class="pre">sum</span></code></a>（[axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-195">返回给定轴上的数组元素的总和。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-196"><a class="reference internal" href="numpy.recarray.swapaxes.html#numpy.recarray.swapaxes" title="numpy.recarray.swapaxes"><code class="xref py py-obj docutils literal"><span class="pre">swapaxes</span></code></a>（axis1，axis2）</span></td>
+<td><span class="yiyi-st" id="yiyi-197">返回数组的视图，其中<em class="xref py py-obj">axis1</em>和<em class="xref py py-obj">axis2</em>互换。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-198"><a class="reference internal" href="numpy.recarray.take.html#numpy.recarray.take" title="numpy.recarray.take"><code class="xref py py-obj docutils literal"><span class="pre">take</span></code></a>（indices [，axis，out，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-199">返回由给定索引处的<em class="xref py py-obj">a</em>元素形成的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-200"><a class="reference internal" href="numpy.recarray.tobytes.html#numpy.recarray.tobytes" title="numpy.recarray.tobytes"><code class="xref py py-obj docutils literal"><span class="pre">tobytes</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-201">在数组中构造包含原始数据字节的Python字节。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-202"><a class="reference internal" href="numpy.recarray.tofile.html#numpy.recarray.tofile" title="numpy.recarray.tofile"><code class="xref py py-obj docutils literal"><span class="pre">tofile</span></code></a>（fid [，sep，format]）</span></td>
+<td><span class="yiyi-st" id="yiyi-203">将数组作为文本或二进制（默认）写入文件。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-204"><a class="reference internal" href="numpy.recarray.tolist.html#numpy.recarray.tolist" title="numpy.recarray.tolist"><code class="xref py py-obj docutils literal"><span class="pre">tolist</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-205">将数组返回为（可能是嵌套的）列表。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-206"><a class="reference internal" href="numpy.recarray.tostring.html#numpy.recarray.tostring" title="numpy.recarray.tostring"><code class="xref py py-obj docutils literal"><span class="pre">tostring</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-207">在数组中构造包含原始数据字节的Python字节。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-208"><a class="reference internal" href="numpy.recarray.trace.html#numpy.recarray.trace" title="numpy.recarray.trace"><code class="xref py py-obj docutils literal"><span class="pre">trace</span></code></a>（[offset，axis1，axis2，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-209">沿数组的对角线返回总和。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-210"><a class="reference internal" href="numpy.recarray.transpose.html#numpy.recarray.transpose" title="numpy.recarray.transpose"><code class="xref py py-obj docutils literal"><span class="pre">transpose</span></code></a>（\ * axes）</span></td>
+<td><span class="yiyi-st" id="yiyi-211">返回具有轴转置的数组的视图。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-212"><a class="reference internal" href="numpy.recarray.var.html#numpy.recarray.var" title="numpy.recarray.var"><code class="xref py py-obj docutils literal"><span class="pre">var</span></code></a>（[axis，dtype，out，ddof，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-213">沿给定轴返回数组元素的方差。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-214"><a class="reference internal" href="numpy.recarray.view.html#numpy.recarray.view" title="numpy.recarray.view"><code class="xref py py-obj docutils literal"><span class="pre">view</span></code></a>（[dtype，type]）</span></td>
+<td><span class="yiyi-st" id="yiyi-215">数组的新视图与相同的数据。</span></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.chebyshev.chebmul</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.chebmul.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.chebmul.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.chebyshev.chebmul"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.chebyshev.</code><code class="descname">chebmul</code><span class="sig-paren">(</span><em>c1</em>, <em>c2</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/chebyshev.py#L701-L747"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">将一个切比雪夫系列乘以另一个。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">返回两个切比雪夫系列<em class="xref py py-obj">c1</em> * <em class="xref py py-obj">c2</em>的乘积。</span><span class="yiyi-st" id="yiyi-18">参数是从最低阶“项”到最高的系数序列，例如[1,2,3]表示系列<code class="docutils literal"><span class="pre">T_0</span> <span class="pre">+</span> <span class="pre">2 * T_1</span> <span class="pre">+</span> <span class="pre">3 * T_2</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>c1，c2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">1-D数组的切比雪夫系数系数从低到高排序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">切比雪夫系数系数代表他们的产品。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.polynomial.chebyshev.chebadd.html#numpy.polynomial.chebyshev.chebadd" title="numpy.polynomial.chebyshev.chebadd"><code class="xref py py-obj docutils literal"><span class="pre">chebadd</span></code></a>，<a class="reference internal" href="numpy.polynomial.chebyshev.chebsub.html#numpy.polynomial.chebyshev.chebsub" title="numpy.polynomial.chebyshev.chebsub"><code class="xref py py-obj docutils literal"><span class="pre">chebsub</span></code></a>，<a class="reference internal" href="numpy.polynomial.chebyshev.chebdiv.html#numpy.polynomial.chebyshev.chebdiv" title="numpy.polynomial.chebyshev.chebdiv"><code class="xref py py-obj docutils literal"><span class="pre">chebdiv</span></code></a>，<a class="reference internal" href="numpy.polynomial.chebyshev.chebpow.html#numpy.polynomial.chebyshev.chebpow" title="numpy.polynomial.chebyshev.chebpow"><code class="xref py py-obj docutils literal"><span class="pre">chebpow</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-28">通常，两个C系列的（多项式）乘积导致不在Chebyshev多项式基组中的项。</span><span class="yiyi-st" id="yiyi-29">因此，为了将产品表示为C系列，通常有必要将产品“再投影”到所述基础集合上，这通常产生“非直观的”（但是正确的）结果；请参阅下面的示例部分。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">chebyshev</span> <span class="k">as</span> <span class="n">C</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span><span class="o">.</span><span class="n">chebmul</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">)</span> <span class="c1"># multiplication requires &quot;reprojection&quot;</span>
+<span class="go">array([  6.5,  12. ,  12. ,   4. ,   1.5])</span>
+</pre></div>
+</div>
+</dd></dl>

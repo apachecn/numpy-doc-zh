@@ -1,0 +1,40 @@
+
+<h1><span class="yiyi-st" id="yiyi-15">numpy.polynomial.chebyshev.Chebyshev.convert</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.Chebyshev.convert.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.Chebyshev.convert.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.polynomial.chebyshev.Chebyshev.convert"><span class="yiyi-st" id="yiyi-16"> <code class="descclassname">Chebyshev.</code><code class="descname">convert</code><span class="sig-paren">(</span><em>domain=None</em>, <em>kind=None</em>, <em>window=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/_polybase.py#L553-L591"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-17">将系列转换为不同的类型和/或域和/或窗口。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>domain</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">转换系列的域。</span><span class="yiyi-st" id="yiyi-21">如果值为None，则使用<em class="xref py py-obj">种类</em>的默认域。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>kind</strong>：class，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">要转换当前实例的多项式串联类型类。</span><span class="yiyi-st" id="yiyi-24">如果kind是None，则使用当前实例的类。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>窗口</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">转换系列的窗口。</span><span class="yiyi-st" id="yiyi-27">如果值为None，则使用<em class="xref py py-obj">种类</em>的默认窗口。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>new_series</strong>：series</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">返回的类可以是与当前实例不同的类型，和/或具有不同的域和/或不同的窗口。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-32">域和类类型之间的转换可能导致数字上定义的系列。</span></p>
+</dd></dl>

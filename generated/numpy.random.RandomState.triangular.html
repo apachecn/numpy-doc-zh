@@ -1,0 +1,67 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.triangular</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.triangular.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.triangular.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.triangular"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">triangular</code><span class="sig-paren">(</span><em>left</em>, <em>mode</em>, <em>right</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从三角分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">三角分布是连续概率分布，具有下限，模式峰值和上限右。</span><span class="yiyi-st" id="yiyi-17">与其他分布不同，这些参数直接定义了pdf的形状。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>左</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">下限。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>mode</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">分布峰值出现的值。</span><span class="yiyi-st" id="yiyi-23">该值应满足<code class="docutils literal"><span class="pre">左</span> <span class="pre"> <span class="pre">模式</span> <span class="pre"> <span class="pre">/ t5&gt;</span></span></span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>右</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">上限，应大于<em class="xref py py-obj">左</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">输出形状。</span><span class="yiyi-st" id="yiyi-28">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-29">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>samples</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">返回的样本都在区间[左，右]。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-34">三角分布的概率密度函数为</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-35">三角分布通常用于未定义的问题，其中底层分布是未知的，但是存在一些限制和模式的知识。</span><span class="yiyi-st" id="yiyi-36">通常用于模拟。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r198" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-38"><a class="fn-backref" href="#id1">[R198]</a></span></td><td><span class="yiyi-st" id="yiyi-39">维基百科，“三角分布”<a class="reference external" href="http://en.wikipedia.org/wiki/Triangular_distribution">http://en.wikipedia.org/wiki/Triangular_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-40">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-41">从分布中绘制值并绘制直方图：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">triangular</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">100000</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">（<a class="reference external" href="../../reference/generated/numpy-random-RandomState-triangular-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-triangular-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-RandomState-triangular-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-RandomState-triangular-1.png" src="../../_images/numpy-random-RandomState-triangular-1.png">
+</div>
+</dd></dl>

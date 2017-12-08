@@ -1,0 +1,117 @@
+
+<span id="routines-dtype"></span><h1><span class="yiyi-st" id="yiyi-17">Data type routines</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.dtype.html">https://docs.scipy.org/doc/numpy/reference/routines.dtype.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="generated/numpy.can_cast.html#numpy.can_cast" title="numpy.can_cast"><code class="xref py py-obj docutils literal"><span class="pre">can_cast</span></code></a>（from，totype，casting =）</span></td>
+<td><span class="yiyi-st" id="yiyi-19">返回True如果根据转换规则可以在数据类型之间进行转换，则返回True。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="generated/numpy.promote_types.html#numpy.promote_types" title="numpy.promote_types"><code class="xref py py-obj docutils literal"><span class="pre">promote_types</span></code></a>（type1，type2）</span></td>
+<td><span class="yiyi-st" id="yiyi-21">返回<code class="docutils literal"><span class="pre">type1</span></code>和<code class="docutils literal"><span class="pre">type2</span></code>可以安全转换的最小尺寸和最小标量类型的数据类型。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="generated/numpy.min_scalar_type.html#numpy.min_scalar_type" title="numpy.min_scalar_type"><code class="xref py py-obj docutils literal"><span class="pre">min_scalar_type</span></code></a>（a）</span></td>
+<td><span class="yiyi-st" id="yiyi-23">对于标量<code class="docutils literal"><span class="pre">a</span></code>，返回具有最小大小和最小标量种类的数据类型，它可以保存其值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="generated/numpy.result_type.html#numpy.result_type" title="numpy.result_type"><code class="xref py py-obj docutils literal"><span class="pre">result_type</span></code></a>（\ * arrays_and_dtypes）</span></td>
+<td><span class="yiyi-st" id="yiyi-25">返回将NumPy类型升级规则应用于参数所产生的类型。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="generated/numpy.common_type.html#numpy.common_type" title="numpy.common_type"><code class="xref py py-obj docutils literal"><span class="pre">common_type</span></code></a>（\ * arrays）</span></td>
+<td><span class="yiyi-st" id="yiyi-27">返回输入数组常见的标量类型。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="generated/numpy.obj2sctype.html#numpy.obj2sctype" title="numpy.obj2sctype"><code class="xref py py-obj docutils literal"><span class="pre">obj2sctype</span></code></a>（rep [，default]）</span></td>
+<td><span class="yiyi-st" id="yiyi-29">返回对象的Python类型的标量dtype或NumPy等价物。</span></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="creating-data-types">
+<h2><span class="yiyi-st" id="yiyi-30">Creating data types</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="generated/numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-32">创建数据类型对象。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="generated/numpy.format_parser.html#numpy.format_parser" title="numpy.format_parser"><code class="xref py py-obj docutils literal"><span class="pre">format_parser</span></code></a>（formats，names，titles [，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-34">类将格式，名称，标题描述转换为dtype。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="data-type-information">
+<h2><span class="yiyi-st" id="yiyi-35">Data type information</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="generated/numpy.finfo.html#numpy.finfo" title="numpy.finfo"><code class="xref py py-obj docutils literal"><span class="pre">finfo</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-37">浮点类型的机器限制。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="generated/numpy.iinfo.html#numpy.iinfo" title="numpy.iinfo"><code class="xref py py-obj docutils literal"><span class="pre">iinfo</span></code></a>（type）</span></td>
+<td><span class="yiyi-st" id="yiyi-39">整数类型的机器限制。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="generated/numpy.MachAr.html#numpy.MachAr" title="numpy.MachAr"><code class="xref py py-obj docutils literal"><span class="pre">MachAr</span></code></a>（[float_conv，int_conv，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-41">诊断机器参数。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="data-type-testing">
+<h2><span class="yiyi-st" id="yiyi-42">Data type testing</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="generated/numpy.issctype.html#numpy.issctype" title="numpy.issctype"><code class="xref py py-obj docutils literal"><span class="pre">issctype</span></code></a>（rep）</span></td>
+<td><span class="yiyi-st" id="yiyi-44">确定给定对象是否表示标量数据类型。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.issubdtype.html#numpy.issubdtype" title="numpy.issubdtype"><code class="xref py py-obj docutils literal"><span class="pre">issubdtype</span></code></a>（arg1，arg2）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">返回True如果第一个参数是类型层次结构中的类型代码较低/相等。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.issubsctype.html#numpy.issubsctype" title="numpy.issubsctype"><code class="xref py py-obj docutils literal"><span class="pre">issubsctype</span></code></a>（arg1，arg2）</span></td>
+<td><span class="yiyi-st" id="yiyi-48">确定第一个参数是否是第二个参数的子类。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.issubclass_.html#numpy.issubclass_" title="numpy.issubclass_"><code class="xref py py-obj docutils literal"><span class="pre">issubclass_</span></code></a>（arg1，arg2）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">确定类是否是第二个类的子类。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.find_common_type.html#numpy.find_common_type" title="numpy.find_common_type"><code class="xref py py-obj docutils literal"><span class="pre">find_common_type</span></code></a>（array_types，scalar_types）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">遵循标准强制规则确定通用类型。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="miscellaneous">
+<h2><span class="yiyi-st" id="yiyi-53">Miscellaneous</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="generated/numpy.typename.html#numpy.typename" title="numpy.typename"><code class="xref py py-obj docutils literal"><span class="pre">typename</span></code></a>（char）</span></td>
+<td><span class="yiyi-st" id="yiyi-55">返回给定数据类型代码的描述。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="generated/numpy.sctype2char.html#numpy.sctype2char" title="numpy.sctype2char"><code class="xref py py-obj docutils literal"><span class="pre">sctype2char</span></code></a>（sctype）</span></td>
+<td><span class="yiyi-st" id="yiyi-57">返回标量dtype的字符串表示形式。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-58"><a class="reference internal" href="generated/numpy.mintypecode.html#numpy.mintypecode" title="numpy.mintypecode"><code class="xref py py-obj docutils literal"><span class="pre">mintypecode</span></code></a>（typechars [，typeset，default]）</span></td>
+<td><span class="yiyi-st" id="yiyi-59">返回可以安全地转换给定类型的最小大小类型的字符。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

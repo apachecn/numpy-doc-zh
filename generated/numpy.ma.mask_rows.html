@@ -1,0 +1,53 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.mask_rows</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.mask_rows.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.mask_rows.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.mask_rows"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">mask_rows</code><span class="sig-paren">(</span><em>a</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/extras.py#L834-L877"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">屏蔽包含屏蔽值的2D数组的行。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">此函数是<code class="docutils literal"><span class="pre">mask_rowcols</span></code>的快捷方式，<em class="xref py py-obj">轴</em>等于0。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-17">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-18"><a class="reference internal" href="numpy.ma.mask_rowcols.html#numpy.ma.mask_rowcols" title="numpy.ma.mask_rowcols"><code class="xref py py-obj docutils literal"><span class="pre">mask_rowcols</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-19">屏蔽2D数组的行和/或列。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="numpy.ma.masked_where.html#numpy.ma.masked_where" title="numpy.ma.masked_where"><code class="xref py py-obj docutils literal"><span class="pre">masked_where</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-21">满足条件的掩码。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[0, 0, 0],</span>
+<span class="go">       [0, 1, 0],</span>
+<span class="go">       [0, 0, 0]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[0 0 0]</span>
+<span class="go"> [0 -- 0]</span>
+<span class="go"> [0 0 0]],</span>
+<span class="go">      mask =</span>
+<span class="go"> [[False False False]</span>
+<span class="go"> [False  True False]</span>
+<span class="go"> [False False False]],</span>
+<span class="go">      fill_value=999999)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">mask_rows</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">masked_array(data =</span>
+<span class="go"> [[0 0 0]</span>
+<span class="go"> [-- -- --]</span>
+<span class="go"> [0 0 0]],</span>
+<span class="go">      mask =</span>
+<span class="go"> [[False False False]</span>
+<span class="go"> [ True  True  True]</span>
+<span class="go"> [False False False]],</span>
+<span class="go">      fill_value=999999)</span>
+</pre></div>
+</div>
+</dd></dl>

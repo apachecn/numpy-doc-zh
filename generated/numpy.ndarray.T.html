@@ -1,0 +1,27 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ndarray.T</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.T.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.T.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="attribute">
+<dt id="numpy.ndarray.T"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">ndarray.</code><code class="descname">T</code></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">与self.transpose()相同，除非self是self.ndim返回</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-16">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">],[</span><span class="mf">3.</span><span class="p">,</span><span class="mf">4.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[ 1.,  2.],</span>
+<span class="go">       [ 3.,  4.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">T</span>
+<span class="go">array([[ 1.,  3.],</span>
+<span class="go">       [ 2.,  4.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">4.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([ 1.,  2.,  3.,  4.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">T</span>
+<span class="go">array([ 1.,  2.,  3.,  4.])</span>
+</pre></div>
+</div>
+</dd></dl>

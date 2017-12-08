@@ -1,0 +1,72 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.flatiter</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.flatiter.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.flatiter.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="class">
+<dt id="numpy.flatiter"><span class="yiyi-st" id="yiyi-13"> <em class="property">class </em><code class="descclassname">numpy.</code><code class="descname">flatiter</code><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/__init__.py"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">平面迭代器对象在数组上进行迭代。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">对于任何数组<em class="xref py py-obj">x</em>，由<code class="docutils literal"><span class="pre">x.flat</span></code>返回<a class="reference internal" href="#numpy.flatiter" title="numpy.flatiter"><code class="xref py py-obj docutils literal"><span class="pre">flatiter</span></code></a>迭代器。</span><span class="yiyi-st" id="yiyi-16">它允许迭代数组，就像它是一个1-D数组，在for循环或通过调用<a class="reference internal" href="numpy.flatiter.next.html#numpy.flatiter.next" title="numpy.flatiter.next"><code class="xref py py-obj docutils literal"><span class="pre">next</span></code></a>方法。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">迭代以行主，C风格顺序（最后索引变化最快）完成。</span><span class="yiyi-st" id="yiyi-18">迭代器也可以使用基本分片或高级索引编制索引。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-19">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="numpy.ndarray.flat.html#numpy.ndarray.flat" title="numpy.ndarray.flat"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.flat</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-21">在数组上返回一个平面迭代器。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="numpy.ndarray.flatten.html#numpy.ndarray.flatten" title="numpy.ndarray.flatten"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.flatten</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-23">返回数组的扁平副本。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-25">不能通过调用<a class="reference internal" href="#numpy.flatiter" title="numpy.flatiter"><code class="xref py py-obj docutils literal"><span class="pre">flatiter</span></code></a>构造函数直接从Python代码构建<a class="reference internal" href="#numpy.flatiter" title="numpy.flatiter"><code class="xref py py-obj docutils literal"><span class="pre">flatiter</span></code></a>迭代器。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fl</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">flat</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">fl</span><span class="p">)</span>
+<span class="go">&lt;type &apos;numpy.flatiter&apos;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">fl</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">0</span>
+<span class="go">1</span>
+<span class="go">2</span>
+<span class="go">3</span>
+<span class="go">4</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fl</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="go">array([2, 3])</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">属性</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.flatiter.coords.html#numpy.flatiter.coords" title="numpy.flatiter.coords"><code class="xref py py-obj docutils literal"><span class="pre">coords</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-29">当前坐标的N维元组。</span></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">方法</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.flatiter.copy.html#numpy.flatiter.copy" title="numpy.flatiter.copy"><code class="xref py py-obj docutils literal"><span class="pre">copy</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-32">获取迭代器的副本作为1-D数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.flatiter.next.html#numpy.flatiter.next" title="numpy.flatiter.next"><code class="xref py py-obj docutils literal"><span class="pre">next</span></code></a></span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

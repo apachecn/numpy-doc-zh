@@ -1,0 +1,120 @@
+
+<h1><span class="yiyi-st" id="yiyi-11">numpy.polynomial.polynomial.polyfit</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.polyfit.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.polyfit.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.polynomial.polyfit"><span class="yiyi-st" id="yiyi-12"> <code class="descclassname">numpy.polynomial.polynomial.</code><code class="descname">polyfit</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>deg</em>, <em>rcond=None</em>, <em>full=False</em>, <em>w=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/polynomial.py#L1196-L1412"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-13">多项式与数据的最小二乘拟合。</span></p>
+<p><span class="yiyi-st" id="yiyi-14">返回度为<em class="xref py py-obj">deg</em>的多项式的系数，其是在点<em class="xref py py-obj">x</em>给出的数据值<em class="xref py py-obj">y</em>的最小二乘拟合。</span><span class="yiyi-st" id="yiyi-15">如果<em class="xref py py-obj">y</em>是1-D，则返回的系数也将是1-D。</span><span class="yiyi-st" id="yiyi-16">如果<em class="xref py py-obj">y</em>是2-D多重拟合，对于<em class="xref py py-obj">y</em>的每一列进行一次，并且所得到的系数存储在2-D返回的相应列中。</span><span class="yiyi-st" id="yiyi-17">拟合的多项式是形式</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-18">其中<em class="xref py py-obj">n</em>是<em class="xref py py-obj">deg</em>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>x</strong>：array_like，shape（<em class="xref py py-obj">M</em>）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21"><em class="xref py py-obj">M  u&gt;样本（数据）点<code class="docutils literal"><span class="pre">（x [i]，</span> <span class="pre">y [i]）</span> 。</code></em></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>y</strong>：array_like，shape（<em class="xref py py-obj">M</em>）或（<em class="xref py py-obj">M</em>，<em class="xref py py-obj">K</em></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">y坐标。</span><span class="yiyi-st" id="yiyi-24">通过传递<em class="xref py py-obj">y</em>包含一个数据的2-D数组，可共享相同x坐标的几组采样点可以（独立地）适应一次对<a class="reference internal" href="#numpy.polynomial.polynomial.polyfit" title="numpy.polynomial.polynomial.polyfit"><code class="xref py py-obj docutils literal"><span class="pre">polyfit</span></code></a>的调用每列设置。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>deg</strong>：int或1-D array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">拟合多项式的度（s）。</span><span class="yiyi-st" id="yiyi-27">如果<em class="xref py py-obj">deg</em>是单个整数，则包括<em class="xref py py-obj">deg</em>项的所有项包括在拟合中。</span><span class="yiyi-st" id="yiyi-28">对于Numpy版本&gt; = 1.11，可以使用指定要包括的术语的度数的整数列表。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>rcond</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">相对条件编号。</span><span class="yiyi-st" id="yiyi-31">小于<em class="xref py py-obj">rcond</em>的奇异值相对于最大奇异值将被忽略。</span><span class="yiyi-st" id="yiyi-32">默认值为<code class="docutils literal"><span class="pre">len(x)*eps</span></code>，其中<em class="xref py py-obj">eps</em>是平台浮点类型的相对精度，在大多数情况下约为2e-16。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-33"><strong>full</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-34">开关确定返回值的性质。</span><span class="yiyi-st" id="yiyi-35">当<code class="docutils literal"><span class="pre">False</span></code>（默认）只返回系数；当<code class="docutils literal"><span class="pre">True</span></code>时，也返回来自奇异值分解（用于求解拟合矩阵方程）的诊断信息。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-36"><strong>w</strong>：array_like，shape（<em class="xref py py-obj">M</em>，），可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-37">重量。</span><span class="yiyi-st" id="yiyi-38">如果不是无，则通过<em class="xref py py-obj">w [i]</em>加权每个点<code class="docutils literal"><span class="pre">(x[i],y[i])</span></code>对拟合的贡献。</span><span class="yiyi-st" id="yiyi-39">理想地，选择权重使得乘积<code class="docutils literal"><span class="pre">w[i]*y[i]</span></code>的误差都具有相同的方差。</span><span class="yiyi-st" id="yiyi-40">默认值为“无”。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-41"><span class="versionmodified">版本1.5.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-42">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-43"><strong>coef</strong>：ndarray，shape（<em class="xref py py-obj">deg</em> + 1，）或（<em class="xref py py-obj">deg</em> + 1，<em class="xref py py-obj">K</em></span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-44">多项式系数从低到高排序。</span><span class="yiyi-st" id="yiyi-45">如果<em class="xref py py-obj">y</em>是2-D，则<em class="xref py py-obj">coef</em>的列<em class="xref py py-obj">k</em>中的系数表示在<em class="xref py py-obj">y  t3中的数据的多项式拟合&gt;&apos;t <em class="xref py py-obj">k</em>列。</em></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-46"><strong>[residuals，rank，singular_values，rcond]</strong>：list</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-47">只有<em class="xref py py-obj">full</em> = True时，才会返回这些值</span></p>
+<p><span class="yiyi-st" id="yiyi-48">resid – sum of squared residuals of the least squares fit rank – the numerical rank of the scaled Vandermonde matrix sv – singular values of the scaled Vandermonde matrix rcond – value of <em class="xref py py-obj">rcond</em>.</span></p>
+<p><span class="yiyi-st" id="yiyi-49">有关详细信息，请参阅<em class="xref py py-obj">linalg.lstsq</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-50">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-51"><strong>RankWarning</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-52">如果最小二乘拟合中的矩阵是秩不足，则引发。</span><span class="yiyi-st" id="yiyi-53">只有在<em class="xref py py-obj">满</em> == False时，才会发出警告。</span><span class="yiyi-st" id="yiyi-54">警告可以通过以下方式关闭：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&apos;ignore&apos;</span><span class="p">,</span> <span class="n">RankWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-55">也可以看看</span></p>
+<p><span class="yiyi-st" id="yiyi-56"><code class="xref py py-obj docutils literal"><span class="pre">chebfit</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">legfit</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">lagfit</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">hermfit</span></code>，<code class="xref py py-obj docutils literal"><span class="pre">hermefit</span></code></span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="numpy.polynomial.polynomial.polyval.html#numpy.polynomial.polynomial.polyval" title="numpy.polynomial.polynomial.polyval"><code class="xref py py-obj docutils literal"><span class="pre">polyval</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-58">评估多项式。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="numpy.polynomial.polynomial.polyvander.html#numpy.polynomial.polynomial.polyvander" title="numpy.polynomial.polynomial.polyvander"><code class="xref py py-obj docutils literal"><span class="pre">polyvander</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-60">权力的范德蒙矩阵。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-61"><code class="xref py py-obj docutils literal"><span class="pre">linalg.lstsq</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-62">从矩阵计算最小二乘拟合。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-63"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.UnivariateSpline.html#scipy.interpolate.UnivariateSpline" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.interpolate.UnivariateSpline</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-64">计算样条拟合。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-65">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-66">解决方案是多项式<em class="xref py py-obj">p</em>的系数，其使加权平方误差的和最小化</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-67">其中<img alt="w_j" class="math" src="../../_images/math/4eb155e91e0cd74d0e76874e46314e8c6ae17d8b.png" style="vertical-align: -4px">是权重。</span><span class="yiyi-st" id="yiyi-68">该问题通过设置（通常）过度确定的矩阵方程来解决：</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-69">其中<em class="xref py py-obj">V</em>是<em class="xref py py-obj">x</em>的加权伪Vandermonde矩阵，<em class="xref py py-obj">c</em>是要求解的系数，<em class="xref py py-obj">w</em>权重和<em class="xref py py-obj">y</em>是观察值。</span><span class="yiyi-st" id="yiyi-70">然后使用<em class="xref py py-obj">V</em>的奇异值分解来求解该方程。</span></p>
+<p><span class="yiyi-st" id="yiyi-71">如果<em class="xref py py-obj">V</em>的一些奇异值如此小以至于它们被忽略（并且<em class="xref py py-obj">满</em> == <code class="docutils literal"><span class="pre">False</span></code>），则<em class="xref py py-obj">RankWarning 。</em></span><span class="yiyi-st" id="yiyi-72">这意味着可能不良地确定系数值。</span><span class="yiyi-st" id="yiyi-73">拟合一个低阶多项式通常会摆脱警告（但可能不是你想要的，当然；如果你有独立的理由选择不工作的程度，你可能必须：a）重新考虑这些原因，和/或b）重新考虑您的数据的质量。</span><span class="yiyi-st" id="yiyi-74"><em class="xref py py-obj">rcond</em>参数也可以设置为小于其默认值的值，但是所得到的拟合可能是假的并且具有来自舍入误差的较大贡献。</span></p>
+<p><span class="yiyi-st" id="yiyi-75">使用双精度的多项式拟合在大约（多项式）度20处倾向于“失败”。</span><span class="yiyi-st" id="yiyi-76">使用Chebyshev或Legendre系列的拟合通常被更好地条件化，但很大程度上仍然可以取决于样本点的分布和数据的平滑性。</span><span class="yiyi-st" id="yiyi-77">如果配合的质量不足，花键可能是一个好的选择。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-78">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">polynomial</span> <span class="k">as</span> <span class="n">P</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">51</span><span class="p">)</span> <span class="c1"># x &quot;data&quot;: [-1, -0.96, ..., 0.96, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="c1"># x^3 - x + N(0,1) &quot;noise&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">,</span> <span class="n">stats</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="c1"># c[0], c[2] should be approx. 0, c[1] approx. -1, c[3] approx. 1</span>
+<span class="go">array([ 0.01909725, -1.30598256, -0.00577963,  1.02644286])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span> <span class="c1"># note the large SSR, explaining the rather poor results</span>
+<span class="go">[array([ 38.06116253]), 4, array([ 1.38446749,  1.32119158,  0.50443316,</span>
+<span class="go">0.28853036]), 1.1324274851176597e-014]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-79">同样的事情没有增加的噪音</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="p">,</span> <span class="n">stats</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="c1"># c[0], c[2] should be &quot;very close to 0&quot;, c[1] ~= -1, c[3] ~= 1</span>
+<span class="go">array([ -1.73362882e-17,  -1.00000000e+00,  -2.67471909e-16,</span>
+<span class="go">         1.00000000e+00])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stats</span> <span class="c1"># note the minuscule SSR</span>
+<span class="go">[array([  7.46346754e-31]), 4, array([ 1.38446749,  1.32119158,</span>
+<span class="go">0.50443316,  0.28853036]), 1.1324274851176597e-014]</span>
+</pre></div>
+</div>
+</dd></dl>

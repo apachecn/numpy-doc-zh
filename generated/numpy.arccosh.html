@@ -1,0 +1,62 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.arccosh</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arccosh.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.arccosh.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.arccosh"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">arccosh</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;arccosh&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">逆双曲余弦，元素方式。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">数组的形状与<em class="xref py py-obj">x</em>相同，以存储结果。</span><span class="yiyi-st" id="yiyi-20">有关详细信息，请参见<code class="xref py py-obj docutils literal"><span class="pre">doc.ufuncs</span></code>（“输出参数”部分）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>arccosh</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">数组的形状与<em class="xref py py-obj">x</em>相同。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.cosh.html#numpy.cosh" title="numpy.cosh"><code class="xref py py-obj docutils literal"><span class="pre">cosh</span></code></a>，<a class="reference internal" href="numpy.arcsinh.html#numpy.arcsinh" title="numpy.arcsinh"><code class="xref py py-obj docutils literal"><span class="pre">arcsinh</span></code></a>，<a class="reference internal" href="numpy.sinh.html#numpy.sinh" title="numpy.sinh"><code class="xref py py-obj docutils literal"><span class="pre">sinh</span></code></a>，<a class="reference internal" href="numpy.arctanh.html#numpy.arctanh" title="numpy.arctanh"><code class="xref py py-obj docutils literal"><span class="pre">arctanh</span></code></a>，<a class="reference internal" href="numpy.tanh.html#numpy.tanh" title="numpy.tanh"><code class="xref py py-obj docutils literal"><span class="pre">tanh</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="#numpy.arccosh" title="numpy.arccosh"><code class="xref py py-obj docutils literal"><span class="pre">arccosh</span></code></a>是多值函数：对于每个<em class="xref py py-obj">x</em>，存在无限多个数字<em class="xref py py-obj">z</em>，使得<em class="xref py py-obj">cosh（z）= x  t5 &gt;。</em></span><span class="yiyi-st" id="yiyi-28">约定是返回其虚部在<em class="xref py py-obj">[ -  pi，pi]</em>中的<em class="xref py py-obj">z</em>和<code class="docutils literal"><span class="pre">[0，</span> <span class="pre">inf]</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-29">对于实值输入数据类型，<a class="reference internal" href="#numpy.arccosh" title="numpy.arccosh"><code class="xref py py-obj docutils literal"><span class="pre">arccosh</span></code></a>始终返回实际输出。</span><span class="yiyi-st" id="yiyi-30">对于不能表示为实数或无穷大的每个值，它会产生<code class="docutils literal"><span class="pre">nan</span></code>并设置<em class="xref py py-obj">无效</em>浮点错误标志。</span></p>
+<p><span class="yiyi-st" id="yiyi-31">对于复值输入，<a class="reference internal" href="#numpy.arccosh" title="numpy.arccosh"><code class="xref py py-obj docutils literal"><span class="pre">arccosh</span></code></a>是一个复杂的分析函数，它具有分支切口<em class="xref py py-obj">[ -  inf，1]</em>，并从上面连续。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r2" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-33"><a class="fn-backref" href="#id1">[R2]</a></span></td><td><span class="yiyi-st" id="yiyi-34">Abramowitz和I.A.</span><span class="yiyi-st" id="yiyi-35">Stegun，“Handbook of Mathematical Functions”，10th printing，1964，pp。</span><span class="yiyi-st" id="yiyi-36"><a class="reference external" href="http://www.math.sfu.ca/~cbm/aands/">http://www.math.sfu.ca/~cbm/aands/</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r3" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-37"><a class="fn-backref" href="#id2">[R3]</a></span></td><td><span class="yiyi-st" id="yiyi-38">维基百科，“反双曲函数”，<a class="reference external" href="http://en.wikipedia.org/wiki/Arccosh">http://en.wikipedia.org/wiki/Arccosh</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arccosh</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])</span>
+<span class="go">array([ 1.65745445,  2.99322285])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">arccosh</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>

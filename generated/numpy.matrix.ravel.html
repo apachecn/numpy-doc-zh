@@ -1,0 +1,42 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.matrix.ravel</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.ravel.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.ravel.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.matrix.ravel"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">matrix.</code><code class="descname">ravel</code><span class="sig-paren">(</span><em>order=&apos;C&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/matrixlib/defmatrix.py#L1031-L1067"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回一个扁平矩阵。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">有关更多文档，请参阅<a class="reference internal" href="numpy.ravel.html#numpy.ravel" title="numpy.ravel"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ravel</span></code></a>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>订单</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;，&apos;K&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">使用此索引顺序读取<em class="xref py py-obj">m</em>的元素。</span><span class="yiyi-st" id="yiyi-20">&apos;C&apos;意味着以C样顺序索引元素，最后一个轴索引变化最快，回到第一个轴索引变化最慢。</span><span class="yiyi-st" id="yiyi-21">&apos;F&apos;意味着以类似Fortran的索引顺序索引元素，第一个索引变化最快，最后一个索引变化最慢。</span><span class="yiyi-st" id="yiyi-22">请注意，&apos;C&apos;和&apos;F&apos;选项不考虑底层数组的内存布局，只涉及轴索引的顺序。</span><span class="yiyi-st" id="yiyi-23">&apos;A&apos;意味着在内存中<em class="xref py py-obj">m</em>是Fortran <em>连续</em>时，以类似Fortran的顺序读取元素，否则类似C的顺序。</span><span class="yiyi-st" id="yiyi-24">&apos;K&apos;意味着按照它们在存储器中出现的顺序读取元素，除非当步幅为负时反转数据。</span><span class="yiyi-st" id="yiyi-25">默认情况下，将使用“C”索引顺序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>ret</strong>：matrix</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">返回扁平化为形状<em class="xref py py-obj">（1，N）</em>的矩阵，其中<em class="xref py py-obj">N</em>是原始矩阵中元素的数量。</span><span class="yiyi-st" id="yiyi-29">只有在必要时才进行复印。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.matrix.flatten.html#numpy.matrix.flatten" title="numpy.matrix.flatten"><code class="xref py py-obj docutils literal"><span class="pre">matrix.flatten</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">返回一个类似的输出矩阵，但总是一个副本</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.matrix.flat.html#numpy.matrix.flat" title="numpy.matrix.flat"><code class="xref py py-obj docutils literal"><span class="pre">matrix.flat</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">数组上的平面迭代器。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.ravel.html#numpy.ravel" title="numpy.ravel"><code class="xref py py-obj docutils literal"><span class="pre">numpy.ravel</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">相关函数返回一个ndarray</span></dd>
+</dl>
+</div>
+</dd></dl>

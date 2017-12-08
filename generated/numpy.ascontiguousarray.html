@@ -1,0 +1,54 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.ascontiguousarray</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ascontiguousarray.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ascontiguousarray.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ascontiguousarray"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">ascontiguousarray</code><span class="sig-paren">(</span><em>a</em>, <em>dtype=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L535-L569"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回内存中的连续数组（C order）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>dtype</strong>：str或dtype对象，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">返回数组的数据类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">与<em class="xref py py-obj">a</em>相同形状和内容的连续数组，如果指定，则类型为<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="numpy.asfortranarray.html#numpy.asfortranarray" title="numpy.asfortranarray"><code class="xref py py-obj docutils literal"><span class="pre">asfortranarray</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-25">将输入转换为具有列主存储器顺序的ndarray。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.require.html#numpy.require" title="numpy.require"><code class="xref py py-obj docutils literal"><span class="pre">require</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-27">返回一个满足要求的数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.ndarray.flags.html#numpy.ndarray.flags" title="numpy.ndarray.flags"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.flags</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">有关数组的内存布局的信息。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="go">array([[ 0.,  1.,  2.],</span>
+<span class="go">       [ 3.,  4.,  5.]], dtype=float32)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&apos;C_CONTIGUOUS&apos;</span><span class="p">]</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

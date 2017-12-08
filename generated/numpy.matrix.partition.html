@@ -1,0 +1,63 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.matrix.partition</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.partition.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.partition.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.matrix.partition"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">matrix.</code><code class="descname">partition</code><span class="sig-paren">(</span><em>kth</em>, <em>axis=-1</em>, <em>kind=&apos;introselect&apos;</em>, <em>order=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">重新排列数组中的元素，使得第k个位置的元素的值在排序数组中的位置。</span><span class="yiyi-st" id="yiyi-16">小于第k个元素的所有元素在此元素之前移动，并且所有等于或大于的元素都移动到其后面。</span><span class="yiyi-st" id="yiyi-17">两个分区中的元素的顺序未定义。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-18"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>kth</strong>：int或ints序列</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">分区的元素索引。</span><span class="yiyi-st" id="yiyi-22">第k个元素值将在其最终排序位置，并且所有较小元素将在其之前移动，并且所有较小元素将在其之后移动。</span><span class="yiyi-st" id="yiyi-23">分区中所有元素的顺序未定义。</span><span class="yiyi-st" id="yiyi-24">如果提供了第k个序列，它将把由其第k个索引的所有元素一次性分割到它们的排序位置。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">要排序的轴。</span><span class="yiyi-st" id="yiyi-27">默认值为-1，表示沿最后一个轴排序。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>kind</strong>：{&apos;introselect&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">选择算法。</span><span class="yiyi-st" id="yiyi-30">默认是&apos;introselect&apos;。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>order</strong>：str或str的列表，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">当<em class="xref py py-obj">a</em>是定义了字段的数组时，此参数指定首先，第二等比较哪些字段。</span><span class="yiyi-st" id="yiyi-33">单个字段可以指定为字符串，并且不是所有字段都需要指定，但是未指定的字段仍将按照它们在dtype中出现的顺序使用，以断开关系。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-34">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.partition.html#numpy.partition" title="numpy.partition"><code class="xref py py-obj docutils literal"><span class="pre">numpy.partition</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">返回数组的分区副本。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.argpartition.html#numpy.argpartition" title="numpy.argpartition"><code class="xref py py-obj docutils literal"><span class="pre">argpartition</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-38">间接分区。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="numpy.sort.html#numpy.sort" title="numpy.sort"><code class="xref py py-obj docutils literal"><span class="pre">sort</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-40">全排序。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-42">有关不同算法的说明，请参见<code class="docutils literal"><span class="pre">np.partition</span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([2, 1, 3, 4])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">partition</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">array([1, 2, 3, 4])</span>
+</pre></div>
+</div>
+</dd></dl>

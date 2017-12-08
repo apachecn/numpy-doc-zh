@@ -1,0 +1,55 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.tri</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.tri.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.tri.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.tri"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">tri</code><span class="sig-paren">(</span><em>N</em>, <em>M=None</em>, <em>k=0</em>, <em>dtype=&lt;type &apos;float&apos;&gt;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/twodim_base.py#L374-L420"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">数组，其中一个在给定的对角线和在其他地方零。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>N</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">数组中的行数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>M</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">数组中的列数。</span><span class="yiyi-st" id="yiyi-20">默认情况下，<em class="xref py py-obj">M</em>等于<em class="xref py py-obj">N</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>k</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">数组被填充的子对角线。</span><span class="yiyi-st" id="yiyi-23"><em class="xref py py-obj">k</em> = 0 is the main diagonal, while <em class="xref py py-obj">k</em> &lt; 0 is below it, and <em class="xref py py-obj">k</em> &gt; 0 is above. </span><span class="yiyi-st" id="yiyi-24">默认值为0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">返回数组的数据类型。</span><span class="yiyi-st" id="yiyi-27">默认值为float。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>tri</strong>：形状的引号（N，M）</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">Array with its lower triangle filled with ones and zero elsewhere; in other words <code class="docutils literal"><span class="pre">T[i,j]</span> <span class="pre">==</span> <span class="pre">1</span></code> for <code class="docutils literal"><span class="pre">i</span> <span class="pre">&lt;=</span> <span class="pre">j</span> <span class="pre">+</span> <span class="pre">k</span></code>, 0 otherwise.</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tri</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="go">array([[1, 1, 1, 0, 0],</span>
+<span class="go">       [1, 1, 1, 1, 0],</span>
+<span class="go">       [1, 1, 1, 1, 1]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tri</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[ 0.,  0.,  0.,  0.,  0.],</span>
+<span class="go">       [ 1.,  0.,  0.,  0.,  0.],</span>
+<span class="go">       [ 1.,  1.,  0.,  0.,  0.]])</span>
+</pre></div>
+</div>
+</dd></dl>

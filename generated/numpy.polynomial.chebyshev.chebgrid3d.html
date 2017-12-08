@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.chebyshev.chebgrid3d</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.chebgrid3d.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.chebyshev.chebgrid3d.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.chebyshev.chebgrid3d"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.chebyshev.</code><code class="descname">chebgrid3d</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>z</em>, <em>c</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/chebyshev.py#L1355-L1411"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">在x，y和z的笛卡尔乘积上评估3-D切比雪夫系列。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">此函数返回值：</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-18">where the points <em class="xref py py-obj">(a, b, c)</em> consist of all triples formed by taking <em class="xref py py-obj">a</em> from <em class="xref py py-obj">x</em>, <em class="xref py py-obj">b</em> from <em class="xref py py-obj">y</em>, and <em class="xref py py-obj">c</em> from <em class="xref py py-obj">z</em>. </span><span class="yiyi-st" id="yiyi-19">The resulting points form a grid with <em class="xref py py-obj">x</em> in the first dimension, <em class="xref py py-obj">y</em> in the second, and <em class="xref py py-obj">z</em> in the third.</span></p>
+<p><span class="yiyi-st" id="yiyi-20">只有当它们是元组或列表时，参数<em class="xref py py-obj">x</em>，<em class="xref py py-obj">y</em>和<em class="xref py py-obj">z</em>才会转换为数组，否则它们将被视为标量。</span><span class="yiyi-st" id="yiyi-21">在任一情况下，<em class="xref py py-obj">x</em>，<em class="xref py py-obj">y</em>和<em class="xref py py-obj">z</em>或其元素必须支持与自身和<em class="xref py py-obj"> c</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-22">如果<em class="xref py py-obj">c</em>具有少于三个维度，则将其隐含地附加到其形状以使其成为3-D。</span><span class="yiyi-st" id="yiyi-23">结果的形状将是c.shape [3：] + x.shape + y.shape + z.shape。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>x，y，z</strong>：array_like，兼容对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">在笛卡尔乘积<em class="xref py py-obj">x</em>，<em class="xref py py-obj">y</em>和<em class="xref py py-obj">z</em>中的点处评估三维系列。</span><span class="yiyi-st" id="yiyi-27">如果<em class="xref py py-obj">x</em>，`y`或<em class="xref py py-obj">z</em>是一个列表或元组，它首先被转换为一个ndarray，否则它保持不变，如果不是ndarray，它被当作一个标量。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>c</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">使得阶数i，j的系数包含在<code class="docutils literal"><span class="pre">c[i,j]</span></code>中的系数的数组。</span><span class="yiyi-st" id="yiyi-30">如果<em class="xref py py-obj">c</em>具有大于2的维度，则剩余索引枚举多组系数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>值</strong>：ndarray，兼容对象</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-33">在<em class="xref py py-obj">x</em>和<em class="xref py py-obj">y</em>的笛卡尔乘积中的点处的二维多项式的值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-34">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.polynomial.chebyshev.chebval.html#numpy.polynomial.chebyshev.chebval" title="numpy.polynomial.chebyshev.chebval"><code class="xref py py-obj docutils literal"><span class="pre">chebval</span></code></a>，<a class="reference internal" href="numpy.polynomial.chebyshev.chebval2d.html#numpy.polynomial.chebyshev.chebval2d" title="numpy.polynomial.chebyshev.chebval2d"><code class="xref py py-obj docutils literal"><span class="pre">chebval2d</span></code></a>，<a class="reference internal" href="numpy.polynomial.chebyshev.chebgrid2d.html#numpy.polynomial.chebyshev.chebgrid2d" title="numpy.polynomial.chebyshev.chebgrid2d"><code class="xref py py-obj docutils literal"><span class="pre">chebgrid2d</span></code></a>，<a class="reference internal" href="numpy.polynomial.chebyshev.chebval3d.html#numpy.polynomial.chebyshev.chebval3d" title="numpy.polynomial.chebyshev.chebval3d"><code class="xref py py-obj docutils literal"><span class="pre">chebval3d</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">笔记</span></p>
+</dd></dl>

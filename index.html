@@ -1,0 +1,113 @@
+
+<span id="reference"></span><h1><span class="yiyi-st" id="yiyi-12">NumPy参考</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/index.html">https://docs.scipy.org/doc/numpy/reference/index.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-13">发布：</span></th><td class="field-body"><span class="yiyi-st" id="yiyi-14">1.11</span></td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">日期：</span></th><td class="field-body"><span class="yiyi-st" id="yiyi-16">2017年2月12日</span></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="module-numpy"></span><p><span class="yiyi-st" id="yiyi-17">本参考手册详细介绍了NumPy中包含的函数、模块和对象，描述它们是什么以及它们做什么。</span><span class="yiyi-st" id="yiyi-18">要学习如何使用NumPy，参见<a class="reference internal" href="../user/index.html#user"><span class="std std-ref">NumPy用户指南</span></a>。</span></p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="arrays.html">数组对象</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="arrays.ndarray.html">N维数组（<code class="docutils literal"><span class="pre">ndarray</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="arrays.scalars.html">Scalars</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-21"><a class="reference internal" href="arrays.dtypes.html">数据类型对象（<code class="docutils literal"><span class="pre">dtype</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="arrays.indexing.html">索引</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="arrays.nditer.html">迭代数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="arrays.classes.html">标准数组子类</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="maskedarray.html">掩码数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="arrays.interface.html">数组接口</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="arrays.datetime.html">Datetimes和Timedeltas</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="ufuncs.html">通用函数（<code class="docutils literal"><span class="pre">ufunc</span></code>）</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="ufuncs.html#broadcasting">广播</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="ufuncs.html#output-type-determination">输出类型确定</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="ufuncs.html#use-of-internal-buffers">使用内部缓冲区</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="ufuncs.html#error-handling">错误处理</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="ufuncs.html#casting-rules">铸造规则</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="ufuncs.html#overriding-ufunc-behavior">覆盖Ufunc行为</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="ufuncs.html#ufunc"><code class="docutils literal"><span class="pre">ufunc</span></code></a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="ufuncs.html#available-ufuncs">Available ufuncs</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-68"><a class="reference internal" href="routines.html">例程</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="routines.array-creation.html">数组创建例程</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="routines.array-manipulation.html">数组操作例程</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="routines.bitwise.html">二进制操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="routines.char.html">字符串操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="routines.ctypeslib.html">C类型外部函数接口（<code class="docutils literal"><span class="pre">numpy.ctypeslib</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="routines.datetime.html">日期时间支持函数</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-44"><a class="reference internal" href="routines.dtype.html">数据类型例程</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="routines.dual.html">可选Scipy加速例程（<code class="docutils literal"><span class="pre">numpy.dual</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="routines.emath.html">具有自动域的数学函数（<code class="docutils literal"><span class="pre">numpy.emath</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="routines.err.html">浮点错误处理</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-48"><a class="reference internal" href="routines.fft.html">离散傅里叶变换（<code class="docutils literal"><span class="pre">numpy.fft</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="routines.financial.html">财务功能</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-50"><a class="reference internal" href="routines.functional.html">功能编程</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="routines.help.html">NumPy特定的帮助功能</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="routines.indexing.html">索引例程</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-53"><a class="reference internal" href="routines.io.html">输入和输出</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="routines.linalg.html">线性代数（<code class="docutils literal"><span class="pre">numpy.linalg</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-55"><a class="reference internal" href="routines.logic.html">逻辑功能</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="routines.ma.html">屏蔽数组操作</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-57"><a class="reference internal" href="routines.math.html">数学函数</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-58"><a class="reference internal" href="routines.matlib.html">矩阵库（<code class="docutils literal"><span class="pre">numpy.matlib</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="routines.other.html">其他例程</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-60"><a class="reference internal" href="routines.padding.html">填充数组</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="routines.polynomials.html">多项式</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-62"><a class="reference internal" href="routines.random.html">随机抽样（<code class="docutils literal"><span class="pre">numpy.random</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="routines.set.html">设置例程</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-64"><a class="reference internal" href="routines.sort.html">排序，搜索和计数</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="routines.statistics.html">统计</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-66"><a class="reference internal" href="routines.testing.html">测试支持（<code class="docutils literal"><span class="pre">numpy.testing</span></code>）</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="routines.window.html">窗口函数</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="distutils.html">包装（<code class="docutils literal"><span class="pre">numpy.distutils</span></code>）</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="distutils.html#modules-in-numpy-distutils">在<code class="docutils literal"><span class="pre">numpy.distutils</span></code></a>中的模块</span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-70"><a class="reference internal" href="distutils.html#building-installable-c-libraries">构建可安装的C库</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-71"><a class="reference internal" href="distutils.html#conversion-of-src-files">转换<code class="docutils literal"><span class="pre">.src</span></code>文件</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-82"><a class="reference internal" href="c-api.html">NumPy C-API</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-73"><a class="reference internal" href="c-api.types-and-structures.html">Python类型和C结构</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="c-api.config.html">系统配置</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-75"><a class="reference internal" href="c-api.dtype.html">数据类型API</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-76"><a class="reference internal" href="c-api.array.html">数组API</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-77"><a class="reference internal" href="c-api.iterator.html">数组迭代器API</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-78"><a class="reference internal" href="c-api.ufunc.html">UFunc API</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-79"><a class="reference internal" href="c-api.generalized-ufuncs.html">通用通用函数API</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="c-api.coremath.html">NumPy核心库</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-81"><a class="reference internal" href="c-api.deprecations.html">C API弃用</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-86"><a class="reference internal" href="internals.html">NumPy内部</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-83"><a class="reference internal" href="internals.code-explanations.html">NumPy C代码说明</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-84"><a class="reference internal" href="internals.html#internal-organization-of-numpy-arrays">numpy数组</a>的内部组织</span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-85"><a class="reference internal" href="internals.html#multidimensional-array-indexing-order-issues">多维数组索引订单问题</a></span></li>
+</ul>
+</li>
+<li class="toctree-l1"><span class="yiyi-st" id="yiyi-89"><a class="reference internal" href="swig.html">NumPy和SWIG</a></span><ul>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-87"><a class="reference internal" href="swig.interface-file.html">numpy.i：NumPy的SWIG接口文件</a></span></li>
+<li class="toctree-l2"><span class="yiyi-st" id="yiyi-88"><a class="reference internal" href="swig.testing.html">测试numpy.i类型版</a></span></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="acknowledgements">
+<h2><span class="yiyi-st" id="yiyi-90">致谢</span></h2>
+<p><span class="yiyi-st" id="yiyi-91">本手册的大部分来自Travis E. Oliphant的书<a class="reference external" href="http://www.tramy.us/">Guide of NumPy</a>（在2008年8月慷ously地进入公共领域）。</span><span class="yiyi-st" id="yiyi-92">在<a class="reference external" href="http://scipy.org/Developer_Zone/DocMarathon2008">NumPy文档Marathon</a>之前和期间，许多函数的参考文档由NumPy的众多贡献者和开发人员编写。</span></p>
+<p><span class="yiyi-st" id="yiyi-93">请帮助改进NumPy的文档！</span><span class="yiyi-st" id="yiyi-94">关于如何加入正在进行的文档马拉松的说明可以<a class="reference external" href="http://scipy.org/Developer_Zone/DocMarathon2008">在scipy.org网站上</a>找到。</span></p>
+</div>

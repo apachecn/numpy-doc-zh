@@ -1,0 +1,76 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.empty_like</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.empty_like.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.empty_like.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ma.empty_like"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">empty_like</code><span class="sig-paren">(</span><em>a</em>, <em>dtype=None</em>, <em>order=&apos;K&apos;</em>, <em>subok=True</em><span class="sig-paren">)</span><em class="property"> = &lt;numpy.ma.core._convert2ma instance&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回具有与给定数组相同的形状和类型的新数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18"><em class="xref py py-obj">a的形状和数据类型定义返回的数组的这些相同的属性。</em></span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">覆盖结果的数据类型。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-21"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;或&apos;K&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">覆盖结果的内存布局。</span><span class="yiyi-st" id="yiyi-24">&apos;C&apos;表示C阶，&apos;F&apos;表示F阶，&apos;A&apos;表示如果<code class="docutils literal"><span class="pre">a</span></code>是Fortran连续的&apos;F&apos;，否则为&apos;C&apos;。</span><span class="yiyi-st" id="yiyi-25">&apos;K&apos;表示尽可能接近<code class="docutils literal"><span class="pre">a</span></code>的布局。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-26"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>subok</strong>：bool，可选。</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">如果为True，那么新创建的数组将使用子类类型&apos;a&apos;，否则将是一个基类数组。</span><span class="yiyi-st" id="yiyi-29">默认为True。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-30">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-31"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-32">具有与<em class="xref py py-obj">a</em>相同形状和类型的未初始化（任意）数据的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-33">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-34"><code class="xref py py-obj docutils literal"><span class="pre">ones_like</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-35">返回具有输入的形状和类型的数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-36"><code class="xref py py-obj docutils literal"><span class="pre">zeros_like</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-37">返回具有输入的形状和类型的零数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="numpy.ma.empty.html#numpy.ma.empty" title="numpy.ma.empty"><code class="xref py py-obj docutils literal"><span class="pre">empty</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-39">返回一个新的未初始化数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.ma.ones.html#numpy.ma.ones" title="numpy.ma.ones"><code class="xref py py-obj docutils literal"><span class="pre">ones</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-41">将新的数组设置值返回为1。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.ma.zeros.html#numpy.ma.zeros" title="numpy.ma.zeros"><code class="xref py py-obj docutils literal"><span class="pre">zeros</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">将新的数组设置值返回为零。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-45">此函数<em>不</em>初始化返回的数组；可以使用<em class="xref py py-obj">zeros_like</em>或<em class="xref py py-obj">ones_like</em>来代替。</span><span class="yiyi-st" id="yiyi-46">它可能会稍微快于设置数组值的函数。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-47">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>                         <span class="c1"># a is array-like</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([[-1073741821, -1073741821,           3],    #random</span>
+<span class="go">       [          0,           0, -1073741821]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">],[</span><span class="mf">4.</span><span class="p">,</span><span class="mf">5.</span><span class="p">,</span><span class="mf">6.</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([[ -2.00000715e+000,   1.48219694e-323,  -2.00000572e+000],#random</span>
+<span class="go">       [  4.38791518e-305,  -2.00000715e+000,   4.17269252e-309]])</span>
+</pre></div>
+</div>
+</dd></dl>

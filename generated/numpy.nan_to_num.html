@@ -1,0 +1,56 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.nan_to_num</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.nan_to_num.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.nan_to_num.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.nan_to_num"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">nan_to_num</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/type_check.py#L312-L373"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">用零和inf替换nan为有限数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回一个数组或标量，用非常大的数字代替非零（正）无穷大的数字（NaN），用非常小（或负数）的数字代替负无穷大。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入数据。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">具有与<em class="xref py py-obj">x</em>相同形状的新数组和具有最大精度的<em class="xref py py-obj">x</em>中的元素的dtype。</span><span class="yiyi-st" id="yiyi-22">如果<em class="xref py py-obj">x</em>不精确，则NaN由零替换，并且无穷大（无穷大）由适合输出dtype的最大（最小或最大负）浮点值替换。</span><span class="yiyi-st" id="yiyi-23">如果<em class="xref py py-obj">x</em>不是不准确，则返回<em class="xref py py-obj">x</em>的副本。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.isinf.html#numpy.isinf" title="numpy.isinf"><code class="xref py py-obj docutils literal"><span class="pre">isinf</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-26">显示哪些元素是负无穷大或负无穷大。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.isneginf.html#numpy.isneginf" title="numpy.isneginf"><code class="xref py py-obj docutils literal"><span class="pre">isneginf</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28">显示哪些元素为负无穷大。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-29"><a class="reference internal" href="numpy.isposinf.html#numpy.isposinf" title="numpy.isposinf"><code class="xref py py-obj docutils literal"><span class="pre">isposinf</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-30">显示哪些元素为正无穷。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.isnan.html#numpy.isnan" title="numpy.isnan"><code class="xref py py-obj docutils literal"><span class="pre">isnan</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">显示哪些元素不是数字（NaN）。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.isfinite.html#numpy.isfinite" title="numpy.isfinite"><code class="xref py py-obj docutils literal"><span class="pre">isfinite</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">显示哪些元素是有限的（不是NaN，而不是无穷大）</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-36">Numpy使用IEEE标准二进制浮点运算（IEEE 754）。</span><span class="yiyi-st" id="yiyi-37">这意味着不是数字不等于无穷大。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="o">-</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([  1.79769313e+308,  -1.79769313e+308,   0.00000000e+000,</span>
+<span class="go">        -1.28000000e+002,   1.28000000e+002])</span>
+</pre></div>
+</div>
+</dd></dl>

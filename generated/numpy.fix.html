@@ -1,0 +1,52 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fix</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fix.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fix.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fix"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">fix</code><span class="sig-paren">(</span><em>x</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/ufunclike.py#L12-L52"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">向零舍入到最接近的整数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">将元素的浮点数组向零舍入到最接近的整数。</span><span class="yiyi-st" id="yiyi-16">舍入值作为浮点返回。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">要舍入的浮点数组</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>y</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">输出数组</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray的浮点数</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">舍入数的数组</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.trunc.html#numpy.trunc" title="numpy.trunc"><code class="xref py py-obj docutils literal"><span class="pre">trunc</span></code></a>，<a class="reference internal" href="numpy.floor.html#numpy.floor" title="numpy.floor"><code class="xref py py-obj docutils literal"><span class="pre">floor</span></code></a>，<a class="reference internal" href="numpy.ceil.html#numpy.ceil" title="numpy.ceil"><code class="xref py py-obj docutils literal"><span class="pre">ceil</span></code></a></span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.around.html#numpy.around" title="numpy.around"><code class="xref py py-obj docutils literal"><span class="pre">around</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28">舍入为给定的小数位数</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="go">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fix</span><span class="p">([</span><span class="mf">2.1</span><span class="p">,</span> <span class="mf">2.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.9</span><span class="p">])</span>
+<span class="go">array([ 2.,  2., -2., -2.])</span>
+</pre></div>
+</div>
+</dd></dl>

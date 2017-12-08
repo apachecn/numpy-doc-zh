@@ -1,0 +1,61 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.sin</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.sin.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.sin.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.sin"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">sin</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;sin&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">三角正弦，元素。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">角度，以弧度（<img alt="2 \pi" class="math" src="../../_images/math/f3886c4ca9a1ad47c0e7657603167e7ce146c41e.png" style="vertical-align: 0px"> rad等于360度）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>y</strong>：array_like</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20">x的每个元素的正弦。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-21">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="numpy.arcsin.html#numpy.arcsin" title="numpy.arcsin"><code class="xref py py-obj docutils literal"><span class="pre">arcsin</span></code></a>，<a class="reference internal" href="numpy.sinh.html#numpy.sinh" title="numpy.sinh"><code class="xref py py-obj docutils literal"><span class="pre">sinh</span></code></a>，<a class="reference internal" href="numpy.cos.html#numpy.cos" title="numpy.cos"><code class="xref py py-obj docutils literal"><span class="pre">cos</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-24">正弦是三角学的基本功能之一（三角形的数学研究）。</span><span class="yiyi-st" id="yiyi-25">考虑以原点为中心的半径为1的圆。</span><span class="yiyi-st" id="yiyi-26">光线从<img alt="+x" class="math" src="../../_images/math/09eebf681f60c452ad1907021adeb5797dccd06b.png" style="vertical-align: -2px">轴进入，在原点处形成一个角度（从该轴逆时针测量），并离开原点。</span><span class="yiyi-st" id="yiyi-27">出射光线与单位圆的交点的<img alt="y" class="math" src="../../_images/math/013cfbc6835b6f55ad2d0c6d5311c9fd9d709449.png" style="vertical-align: -3px">坐标是该角度的正弦。</span><span class="yiyi-st" id="yiyi-28">其范围从<img alt="x=3\pi / 2" class="math" src="../../_images/math/9fc4b3e3c4da54352a8f4698afb620f73040dade.png" style="vertical-align: -4px">的-1到<img alt="\pi / 2." class="math" src="../../_images/math/3eb913a18be9465256048200c180b1c8966d561f.png" style="vertical-align: -4px">的+1. 函数具有零，其中角度是<img alt="\pi" class="math" src="../../_images/math/7321e712e2b80bb4b00be0d9faaa525e3f53cde4.png" style="vertical-align: 0px">的倍数。</span><span class="yiyi-st" id="yiyi-29"><img alt="\pi" class="math" src="../../_images/math/7321e712e2b80bb4b00be0d9faaa525e3f53cde4.png" style="vertical-align: 0px">和<img alt="2\pi" class="math" src="../../_images/math/c3c8d7517be66786e0112ecf67911ec0fd915350.png" style="vertical-align: 0px">之间的角度的正弦为负。</span><span class="yiyi-st" id="yiyi-30">正弦和相关函数的众多属性包括在任何标准三角文本中。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-32">打印一个角度的正弦：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">2.</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-33">打印以度为单位给出的角度数组的正弦：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">,</span> <span class="mf">45.</span><span class="p">,</span> <span class="mf">60.</span><span class="p">,</span> <span class="mf">90.</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.</span> <span class="p">)</span>
+<span class="go">array([ 0.        ,  0.5       ,  0.70710678,  0.8660254 ,  1.        ])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-34">绘制正弦函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">201</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&apos;Angle [rad]&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&apos;sin(x)&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&apos;tight&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-35">（<a class="reference external" href="../../reference/generated/numpy-sin-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-sin-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-sin-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-sin-1.png" src="../../_images/numpy-sin-1.png">
+</div>
+</dd></dl>

@@ -1,0 +1,56 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.unravel_index</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.unravel_index.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.unravel_index.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.unravel_index"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">unravel_index</code><span class="sig-paren">(</span><em>indices</em>, <em>dims</em>, <em>order=&apos;C&apos;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将平面索引的平面索引或数组转换为坐标数组的元组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>indices</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">整数数组，其元素是尺寸为<code class="docutils literal"><span class="pre">dims</span></code>的数组的展平版本的索引。</span><span class="yiyi-st" id="yiyi-18">在1.6.0版之前，此函数只接受一个索引值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>dims</strong>：ints的tuple</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">用于解开<code class="docutils literal"><span class="pre">indices</span></code>的数组的形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">确定索引是否应被视为以行为主（C风格）或列主（Fortran风格）顺序的索引。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-23"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>unraveled_coords</strong>：ndarray的元组</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">元组中的每个数组具有与<code class="docutils literal"><span class="pre">indices</span></code>数组相同的形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.ravel_multi_index.html#numpy.ravel_multi_index" title="numpy.ravel_multi_index"><code class="xref py py-obj docutils literal"><span class="pre">ravel_multi_index</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">([</span><span class="mi">22</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">37</span><span class="p">],</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="go">(array([3, 6, 6]), array([4, 5, 1]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">([</span><span class="mi">31</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">)</span>
+<span class="go">(array([3, 6, 6]), array([4, 5, 1]))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="mi">1621</span><span class="p">,</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">))</span>
+<span class="go">(3, 1, 4, 1)</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,82 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.exp</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.exp.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.exp.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.exp"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">exp</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;exp&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算输入数组中所有元素的指数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20">输出数组，<em class="xref py py-obj">x</em>的逐个元素的指数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-21">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="numpy.expm1.html#numpy.expm1" title="numpy.expm1"><code class="xref py py-obj docutils literal"><span class="pre">expm1</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-23">对数组中的所有元素计算<code class="docutils literal"><span class="pre">exp（x）</span> <span class="pre"> - </span> <span class="pre">1</span> </code></span></dd>
+<dt><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="numpy.exp2.html#numpy.exp2" title="numpy.exp2"><code class="xref py py-obj docutils literal"><span class="pre">exp2</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-25">对数组中的所有元素计算<code class="docutils literal"><span class="pre">2**x</span></code>。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">无理数<code class="docutils literal"><span class="pre">e</span></code>也称为欧拉数。</span><span class="yiyi-st" id="yiyi-28">它约为2.718281，并且是自然对数<code class="docutils literal"><span class="pre">ln</span></code>的基数（这意味着如果<img alt="x = \ln y = \log_e y" class="math" src="../../_images/math/1376cd9d35e0587c834b5aca56fe6dddea650e22.png" style="vertical-align: -4px">，则<img alt="e^x = y" class="math" src="../../_images/math/de9e39842b5af56c05ea0e9e91dbe6c5cd22aed4.png" style="vertical-align: -3px">。</span><span class="yiyi-st" id="yiyi-29">对于实际输入，<code class="docutils literal"><span class="pre">exp(x)</span></code>始终为正。</span></p>
+<p><span class="yiyi-st" id="yiyi-30">对于复杂的参数，<code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">ib</span>  t0 &gt;，我们可以写<img alt="e^x = e^a e^{ib}" class="math" src="../../_images/math/f79d95cb6c4d2c3e2639108fdd70dbad131454c4.png" style="vertical-align: 0px">。</code></span><span class="yiyi-st" id="yiyi-31">第一项，<img alt="e^a" class="math" src="../../_images/math/eeaf4c567f496bf60a38e3f1a7ea1e801c3c8dfc.png" style="vertical-align: 0px">，是已知的（它是真正的参数，如上所述）。</span><span class="yiyi-st" id="yiyi-32">第二项，<img alt="e^{ib}" class="math" src="../../_images/math/bfbd957da16a86a9a5e686c5ce7c57c317c9f79d.png" style="vertical-align: 0px">是<img alt="\cos b + i \sin b" class="math" src="../../_images/math/a1ecd80fb91f6e4a72d30663702d279822af8ca4.png" style="vertical-align: -2px">，幅度为1的函数和周期相​​位。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r18" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-34"><a class="fn-backref" href="#id1">[R18]</a></span></td><td><span class="yiyi-st" id="yiyi-35">维基百科，“指数函数”，<a class="reference external" href="http://en.wikipedia.org/wiki/Exponential_function">http://en.wikipedia.org/wiki/Exponential_function</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r19" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-36"><a class="fn-backref" href="#id2">[R19]</a></span></td><td><span class="yiyi-st" id="yiyi-37">Abramovitz和I.</span><span class="yiyi-st" id="yiyi-38">A.Stegun，“Handbook of Mathematical Functions with Formula，Graphs，and Mathematical Tables，Dover，1964，p。 69，<a class="reference external" href="http://www.math.sfu.ca/~cbm/aands/page_69.htm">http://www.math.sfu.ca/~cbm/aands/page_69.htm</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-40">在复平面中绘制<code class="docutils literal"><span class="pre">exp(x)</span></code>的幅度和相位：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="c1"># a + ib over complex plane</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">out</span><span class="p">),</span>
+<span class="gp">... </span>           <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&apos;Magnitude of exp(x)&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">out</span><span class="p">),</span>
+<span class="gp">... </span>           <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&apos;Phase (angle) of exp(x)&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-41">（<a class="reference external" href="../../reference/generated/numpy-exp-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-exp-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-exp-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-exp-1.png" src="../../_images/numpy-exp-1.png">
+</div>
+</dd></dl>

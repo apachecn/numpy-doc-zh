@@ -1,0 +1,35 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.DataSource.open</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.DataSource.open.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.DataSource.open.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.DataSource.open"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">DataSource.</code><code class="descname">open</code><span class="sig-paren">(</span><em>path</em>, <em>mode=&apos;r&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/_datasource.py#L461-L501"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">打开并返回类似文件的对象。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">如果<em class="xref py py-obj">path</em>是一个URL，它将被下载，存储在<a class="reference internal" href="numpy.DataSource.html#numpy.DataSource" title="numpy.DataSource"><code class="xref py py-obj docutils literal"><span class="pre">DataSource</span></code></a>目录中并从那里打开。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>路径</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">要打开的本地文件路径或URL。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>mode</strong>：{&apos;r&apos;，&apos;w&apos;，&apos;a&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">模式打开<em class="xref py py-obj">路径</em>。</span><span class="yiyi-st" id="yiyi-22">模式&apos;r&apos;用于阅读，&apos;w&apos;用于写入，&apos;a&apos;用于附加。</span><span class="yiyi-st" id="yiyi-23">可用模式取决于<em class="xref py py-obj">路径</em>指定的对象类型。</span><span class="yiyi-st" id="yiyi-24">默认值为&apos;r&apos;。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>out</strong>：文件对象</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-27">文件对象。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

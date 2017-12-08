@@ -1,0 +1,100 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.eigh</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.eigh.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.eigh.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.eigh"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">eigh</code><span class="sig-paren">(</span><em>a</em>, <em>UPLO=&apos;L&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L1141-L1249"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回Hermitian或对称矩阵的特征值和特征向量。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回两个对象，一个包含<em class="xref py py-obj">a</em>的特征值的1-D数组，以及对应的特征向量（在列中）的2-D方组数组或矩阵（取决于输入类型）。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：（...，M，M）数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">Hermitian /对称矩阵，其特征值和特征向量将被计算。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>UPLO</strong>：{&apos;L&apos;，&apos;U&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">指定是使用<em class="xref py py-obj">a</em>（&apos;L&apos;，默认值）或上三角形部分（&apos;U&apos;）的下三角形部分进行计算。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>w</strong>：（...，M）ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">特征值按升序排列，每个根据其多样性重复。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>v</strong>：{（...，M，M）ndarray，（...，M，M）</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">列<code class="docutils literal"><span class="pre">v [：，</span> <span class="pre">i]</span></code>是对应于特征值<code class="docutils literal"><span class="pre">w[i]</span></code>的归一化特征向量。</span><span class="yiyi-st" id="yiyi-26">如果<em class="xref py py-obj">a</em>是一个矩阵对象，将返回一个矩阵对象。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>LinAlgError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">如果特征值计算不收敛。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.linalg.eigvalsh.html#numpy.linalg.eigvalsh" title="numpy.linalg.eigvalsh"><code class="xref py py-obj docutils literal"><span class="pre">eigvalsh</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">对称或Hermitian数组的特征值。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.linalg.eig.html#numpy.linalg.eig" title="numpy.linalg.eig"><code class="xref py py-obj docutils literal"><span class="pre">eig</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">非对称数组的特征值和右特征向量。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.linalg.eigvals.html#numpy.linalg.eigvals" title="numpy.linalg.eigvals"><code class="xref py py-obj docutils literal"><span class="pre">eigvals</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">非对称数组的特征值。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-38"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">广播规则适用，有关详细信息，请参阅<code class="xref py py-obj docutils literal"><span class="pre">numpy.linalg</span></code>文档。</span></p>
+<p><span class="yiyi-st" id="yiyi-40">使用LAPACK例程_syevd，_heevd来计算特征值/特征向量</span></p>
+<p><span class="yiyi-st" id="yiyi-41">真对称或复杂Hermitian矩阵的特征值总是真实的。</span><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="#r38" id="id1">[R38]</a>（列）特征向量的数组<em class="xref py py-obj">v</em>是酉的，并且<em class="xref py py-obj">a</em>，<em class="xref py py-obj">w</em>和<em class="xref py py-obj">v</em>满足方程<code class="docutils literal"><span class="pre">dot（a，</span> <span class="pre">v [：，</span> <span class="pre">i]）</span> <span class="pre">=  t9 &gt; <span class="pre">w [i]</span> <span class="pre">*</span> <span class="pre">v [：，</span> <span class="pre">i]</span></span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r38" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-44">[R38]</span></td><td><span class="yiyi-st" id="yiyi-45"><em>（<a class="fn-backref" href="#id1">1</a>，<a class="fn-backref" href="#id2">2</a>）</em> G. Strang，<em>线性代数及其应用</em>，第2版，Orlando，FL ，Academic Press，Inc.，1980，</span><span class="yiyi-st" id="yiyi-46">222.</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-47">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">linalg</span> <span class="k">as</span> <span class="n">LA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="n">j</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[ 1.+0.j,  0.-2.j],</span>
+<span class="go">       [ 0.+2.j,  5.+0.j]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">LA</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">;</span> <span class="n">v</span>
+<span class="go">array([ 0.17157288,  5.82842712])</span>
+<span class="go">array([[-0.92387953+0.j        , -0.38268343+0.j        ],</span>
+<span class="go">       [ 0.00000000+0.38268343j,  0.00000000-0.92387953j]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># verify 1st e-val/vec pair</span>
+<span class="go">array([2.77555756e-17 + 0.j, 0. + 1.38777878e-16j])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="c1"># verify 2nd e-val/vec pair</span>
+<span class="go">array([ 0.+0.j,  0.+0.j])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># what happens if input is a matrix object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
+<span class="go">matrix([[ 1.+0.j,  0.-2.j],</span>
+<span class="go">        [ 0.+2.j,  5.+0.j]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">LA</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">w</span><span class="p">;</span> <span class="n">v</span>
+<span class="go">array([ 0.17157288,  5.82842712])</span>
+<span class="go">matrix([[-0.92387953+0.j        , -0.38268343+0.j        ],</span>
+<span class="go">        [ 0.00000000+0.38268343j,  0.00000000-0.92387953j]])</span>
+</pre></div>
+</div>
+</dd></dl>

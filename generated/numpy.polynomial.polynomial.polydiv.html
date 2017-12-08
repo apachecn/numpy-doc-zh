@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.polynomial.polydiv</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.polydiv.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.polydiv.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.polynomial.polydiv"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.polynomial.</code><code class="descname">polydiv</code><span class="sig-paren">(</span><em>c1</em>, <em>c2</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/polynomial.py#L369-L423"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">将一个多项式除以另一个多项式。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">返回两个多项式<em class="xref py py-obj">c1</em> / <em class="xref py py-obj">c2</em>的商与余数。</span><span class="yiyi-st" id="yiyi-18">参数是从最低阶项到最高阶的系数序列，例如[1,2,3]表示<code class="docutils literal"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">2 * / t3&gt; <span class="pre">+</span> <span class="pre">3 * x ** 2</span></span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>c1，c2</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">1-D从低到高排序的多项式系数的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>[quo，rem]</strong>：ndarrays</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">表示商和余数的系数序列。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.polynomial.polynomial.polyadd.html#numpy.polynomial.polynomial.polyadd" title="numpy.polynomial.polynomial.polyadd"><code class="xref py py-obj docutils literal"><span class="pre">polyadd</span></code></a>，<a class="reference internal" href="numpy.polynomial.polynomial.polysub.html#numpy.polynomial.polynomial.polysub" title="numpy.polynomial.polynomial.polysub"><code class="xref py py-obj docutils literal"><span class="pre">polysub</span></code></a>，<a class="reference internal" href="numpy.polynomial.polynomial.polymul.html#numpy.polynomial.polynomial.polymul" title="numpy.polynomial.polynomial.polymul"><code class="xref py py-obj docutils literal"><span class="pre">polymul</span></code></a>，<a class="reference internal" href="numpy.polynomial.polynomial.polypow.html#numpy.polynomial.polynomial.polypow" title="numpy.polynomial.polynomial.polypow"><code class="xref py py-obj docutils literal"><span class="pre">polypow</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-27">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="k">import</span> <span class="n">polynomial</span> <span class="k">as</span> <span class="n">P</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span><span class="o">.</span><span class="n">polydiv</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">)</span>
+<span class="go">(array([ 3.]), array([-8., -4.]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">P</span><span class="o">.</span><span class="n">polydiv</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span><span class="n">c1</span><span class="p">)</span>
+<span class="go">(array([ 0.33333333]), array([ 2.66666667,  1.33333333]))</span>
+</pre></div>
+</div>
+</dd></dl>

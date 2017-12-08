@@ -1,0 +1,48 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.matrix.flatten</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.flatten.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.flatten.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.matrix.flatten"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">matrix.</code><code class="descname">flatten</code><span class="sig-paren">(</span><em>order=&apos;C&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/matrixlib/defmatrix.py#L514-L549"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回矩阵的扁平副本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">矩阵的所有<em class="xref py py-obj">N</em>元素被放置在单个行中。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>订单</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;，&apos;K&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">&apos;C&apos;表示以行主（C风格）顺序展平。</span><span class="yiyi-st" id="yiyi-20">&apos;F&apos;表示以列大（Fortran风格）顺序展平。</span><span class="yiyi-st" id="yiyi-21">&apos;A&apos;表示如果<em class="xref py py-obj">m</em>在内存中为Fortran <em>连续</em>，则以行为主的顺序展开，否则为行主要顺序。</span><span class="yiyi-st" id="yiyi-22">&apos;K&apos;意味着按照元素在内存中出现的顺序展平<em class="xref py py-obj">m</em>。</span><span class="yiyi-st" id="yiyi-23">默认值为“C”。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-24">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-25"><strong>y</strong>：matrix</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-26">矩阵的副本，展平为<em class="xref py py-obj">（1，N）</em>矩阵，其中<em class="xref py py-obj">N</em>是原始矩阵中元素的数量。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.ravel.html#numpy.ravel" title="numpy.ravel"><code class="xref py py-obj docutils literal"><span class="pre">ravel</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-29">返回展平的数组。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.matrix.flat.html#numpy.matrix.flat" title="numpy.matrix.flat"><code class="xref py py-obj docutils literal"><span class="pre">flat</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">矩阵上的1-D平面迭代器。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="go">matrix([[1, 2, 3, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="s1">&apos;F&apos;</span><span class="p">)</span>
+<span class="go">matrix([[1, 3, 2, 4]])</span>
+</pre></div>
+</div>
+</dd></dl>

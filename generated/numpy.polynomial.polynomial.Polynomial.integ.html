@@ -1,0 +1,39 @@
+
+<h1><span class="yiyi-st" id="yiyi-15">numpy.polynomial.polynomial.Polynomial.integ</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.Polynomial.integ.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.polynomial.Polynomial.integ.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.polynomial.polynomial.Polynomial.integ"><span class="yiyi-st" id="yiyi-16"> <code class="descclassname">Polynomial.</code><code class="descname">integ</code><span class="sig-paren">(</span><em>m=1</em>, <em>k=[]</em>, <em>lbnd=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/_polybase.py#L622-L653"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-17">整合。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">返回一个系列实例，它是当前系列的定积分。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>m</strong>：非负整数</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">要执行的集成数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>k</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">积分常数。</span><span class="yiyi-st" id="yiyi-24">第一常数应用于第一积分，第二常数应用于第二积分，等等。</span><span class="yiyi-st" id="yiyi-25">值列表的长度必须小于或等于<em class="xref py py-obj">m</em>，任何缺失值都设置为零。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>lbnd</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">定积分的下限。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>new_series</strong>：series</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">代表积分的新系列。</span><span class="yiyi-st" id="yiyi-31">域与集成系列的域相同。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

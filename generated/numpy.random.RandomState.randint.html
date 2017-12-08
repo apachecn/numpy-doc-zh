@@ -1,0 +1,66 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.randint</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.randint.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.randint.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.randint"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">randint</code><span class="sig-paren">(</span><em>low</em>, <em>high=None</em>, <em>size=None</em>, <em>dtype=&apos;l&apos;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">将随机整数从<em class="xref py py-obj">低</em>（包括）返回到<em class="xref py py-obj">高</em>（不包含）。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">在“半开”区间[<em class="xref py py-obj">低</em>，<em class="xref py py-obj">高</em>中从指定dtype的“离散均匀”分布中返回随机整数。</span><span class="yiyi-st" id="yiyi-17">如果<em class="xref py py-obj">高</em>为无（默认值），则结果来自[0，<em class="xref py py-obj">低</em>]。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>低</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">从分布中绘制的最低（有符号）整数（除非<code class="docutils literal"><span class="pre">high=None</span></code>，在此情况下此参数是<em>最高</em>这样的整数）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>高</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">如果提供，则从分布中抽取一个大于最大（有符号）整数的值（如果<code class="docutils literal"><span class="pre">high=None</span></code>），请参阅上述行为。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">输出形状。</span><span class="yiyi-st" id="yiyi-25">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-26">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">所需的dtype的结果。</span><span class="yiyi-st" id="yiyi-29">所有的类型由它们的名称，即“int64”，“int”等来确定，因此字节序不可用，并且取决于平台，特定的精度可以具有不同的C类型。</span><span class="yiyi-st" id="yiyi-30">默认值为“np.int”。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-31"><span class="versionmodified">版本1.11.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-32">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-33"><strong>out</strong>：int或ndarray的整数</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-34"><em class="xref py py-obj">size</em>从合适的分布中随机整数的数组，或者如果<em class="xref py py-obj">size</em>未提供，则单个这样的随机int。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-35">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-36"><code class="xref py py-obj docutils literal"><span class="pre">random.random_integers</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-37">类似于<a class="reference internal" href="numpy.random.randint.html#numpy.random.randint" title="numpy.random.randint"><code class="xref py py-obj docutils literal"><span class="pre">randint</span></code></a>，仅适用于封闭区间[<em class="xref py py-obj">low</em>，<em class="xref py py-obj">high</em>]，1是<em class="xref py py-obj">high  t5 &gt;被省略。</em></span><span class="yiyi-st" id="yiyi-38">特别地，这另一个是用于生成均匀分布的离散非整数的一个。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">array([1, 0, 0, 0, 1, 1, 0, 0, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">生成0到4之间的2 x 4数组（包括0和4）</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">array([[4, 0, 2, 1],</span>
+<span class="go">       [3, 2, 2, 0]])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,92 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.ravel</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ravel.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ravel.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ravel"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">ravel</code><span class="sig-paren">(</span><em>a</em>, <em>order=&apos;C&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L1383-L1487"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回一个连续的扁平数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回包含输入元素的1-D数组。</span><span class="yiyi-st" id="yiyi-16">只有在需要时才进行复印。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">从NumPy 1.10开始，返回的数组将具有与输入数组相同的类型。</span><span class="yiyi-st" id="yiyi-18">（例如，将为掩蔽的数组输入返回掩蔽的数组）</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">输入数组。</span><span class="yiyi-st" id="yiyi-22"><em class="xref py py-obj">a</em>中的元素按照<em class="xref py py-obj">顺序</em>指定的顺序读取，并打包为1-D数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>订单</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;，&apos;K&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">使用此索引顺序读取<em class="xref py py-obj">a</em>的元素。</span><span class="yiyi-st" id="yiyi-25">&apos;C&apos;意味着以row-major，C风格顺序索引元素，最后一个轴索引变化最快，回到第一个轴索引变化最慢。</span><span class="yiyi-st" id="yiyi-26">&apos;F&apos;意味着以列大，Fortran风格顺序索引元素，第一个索引变化最快，最后一个索引变化最慢。</span><span class="yiyi-st" id="yiyi-27">请注意，&apos;C&apos;和&apos;F&apos;选项不考虑底层数组的内存布局，只涉及轴索引的顺序。</span><span class="yiyi-st" id="yiyi-28">&apos;A&apos;意味着在内存中<em class="xref py py-obj">a</em>是Fortran <em>连续</em>时，以类似Fortran的顺序读取元素，否则类似C的顺序。</span><span class="yiyi-st" id="yiyi-29">&apos;K&apos;意味着按照它们在存储器中出现的顺序读取元素，除非当步幅为负时反转数据。</span><span class="yiyi-st" id="yiyi-30">默认情况下，将使用“C”索引顺序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>y</strong>：array_like</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-33">如果<em class="xref py py-obj">a</em>是矩阵，则y是1-D ndarray，否则y是与<em class="xref py py-obj">a</em>相同子类型的数组。</span><span class="yiyi-st" id="yiyi-34">返回的数组的形状为<code class="docutils literal"><span class="pre">(a.size,)</span></code>。</span><span class="yiyi-st" id="yiyi-35">矩阵是特殊情况下的向后兼容性。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-36">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.ndarray.flat.html#numpy.ndarray.flat" title="numpy.ndarray.flat"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.flat</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-38">1-D迭代器。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-39"><a class="reference internal" href="numpy.ndarray.flatten.html#numpy.ndarray.flatten" title="numpy.ndarray.flatten"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.flatten</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-40">数组的元素的1-D数组副本。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="numpy.ndarray.reshape.html#numpy.ndarray.reshape" title="numpy.ndarray.reshape"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.reshape</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-42">更改数组的形状，而不更改其数据。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-44">在行主，C样式顺序中，在二维中，行索引变化最慢，列索引最快。</span><span class="yiyi-st" id="yiyi-45">这可以被推广到多个维度，其中行主要顺序意味着沿着第一轴的索引变化最慢，并且索引沿着最后最快。</span><span class="yiyi-st" id="yiyi-46">相反，列主键，Fortran风格索引排序。</span></p>
+<p><span class="yiyi-st" id="yiyi-47">当在尽可能多的情况下需要视图时，<code class="docutils literal"><span class="pre">arr.reshape(-1)</span></code>可能是优选的。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-49">它等效于<code class="docutils literal"><span class="pre">reshape（-1，</span> <span class="pre">order = order）</span></code>。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="go">[1 2 3 4 5 6]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">[1 2 3 4 5 6]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;F&apos;</span><span class="p">))</span>
+<span class="go">[1 4 2 5 3 6]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-50">当<code class="docutils literal"><span class="pre">order</span></code>为&apos;A&apos;时，它将保留数组的&apos;C&apos;或&apos;F&apos;顺序：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+<span class="go">[1 4 2 5 3 6]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&apos;A&apos;</span><span class="p">))</span>
+<span class="go">[1 2 3 4 5 6]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-51">当<code class="docutils literal"><span class="pre">order</span></code>为&apos;K&apos;时，它将保留既不是“C”也不是“F”的顺序，但不会反转轴：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span> <span class="n">a</span>
+<span class="go">array([2, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&apos;C&apos;</span><span class="p">)</span>
+<span class="go">array([2, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&apos;K&apos;</span><span class="p">)</span>
+<span class="go">array([2, 1, 0])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span> <span class="n">a</span>
+<span class="go">array([[[ 0,  2,  4],</span>
+<span class="go">        [ 1,  3,  5]],</span>
+<span class="go">       [[ 6,  8, 10],</span>
+<span class="go">        [ 7,  9, 11]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&apos;C&apos;</span><span class="p">)</span>
+<span class="go">array([ 0,  2,  4,  1,  3,  5,  6,  8, 10,  7,  9, 11])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s1">&apos;K&apos;</span><span class="p">)</span>
+<span class="go">array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])</span>
+</pre></div>
+</div>
+</dd></dl>

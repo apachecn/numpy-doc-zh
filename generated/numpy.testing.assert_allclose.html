@@ -1,0 +1,68 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.assert_allclose</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_allclose.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_allclose.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.assert_allclose"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.</code><code class="descname">assert_allclose</code><span class="sig-paren">(</span><em>actual</em>, <em>desired</em>, <em>rtol=1e-07</em>, <em>atol=0</em>, <em>equal_nan=False</em>, <em>err_msg=&apos;&apos;</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/utils.py#L1337-L1392"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">如果两个对象不等于所需的容差，则引发AssertionError。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">测试等效于<code class="docutils literal"><span class="pre">allclose（actual，</span> <span class="pre">desired，</span> <span class="pre">rtol，</span> <span class="pre">atol）</span></code> 。</span><span class="yiyi-st" id="yiyi-16">它将<em class="xref py py-obj">实际</em>与<em class="xref py py-obj">所需</em>之间的差异与<code class="docutils literal"><span class="pre">atol</span> <span class="pre">+</span> <span class="pre">rtol</span> <span class="pre">*</span> <span class="pre">abs（所需）</span></code>。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-17"><span class="versionmodified">版本1.5.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>actual</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">数组获得。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>所需</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">需要数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>rtol</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">相对公差。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>atol</strong>：float，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">绝对公差。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>equal_nan</strong>：bool，可选。</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">如果为True，NaNs将比较相等。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>err_msg</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">出现故障时打印的错误消息。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>verbose</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">如果为True，则冲突的值将附加到错误消息。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-33">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-34"><strong>AssertionError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-35">如果实际和期望的不等于指定的精度。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-36">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-37"><a class="reference internal" href="numpy.testing.assert_array_almost_equal_nulp.html#numpy.testing.assert_array_almost_equal_nulp" title="numpy.testing.assert_array_almost_equal_nulp"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_almost_equal_nulp</span></code></a>，<a class="reference internal" href="numpy.testing.assert_array_max_ulp.html#numpy.testing.assert_array_max_ulp" title="numpy.testing.assert_array_max_ulp"><code class="xref py py-obj docutils literal"><span class="pre">assert_array_max_ulp</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">assert_allclose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,182 @@
+
+<h1><span class="yiyi-st" id="yiyi-22">Hermite Module, “Physicists’” (<code class="xref py py-mod docutils literal"><span class="pre">numpy.polynomial.hermite</span></code>)</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/routines.polynomials.hermite.html">https://docs.scipy.org/doc/numpy/reference/routines.polynomials.hermite.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-23"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-24">该模块提供了许多对处理Hermite系列有用的对象（主要是函数），包括封装了常用算术运算的<a class="reference internal" href="generated/numpy.polynomial.hermite.Hermite.html#numpy.polynomial.hermite.Hermite" title="numpy.polynomial.hermite.Hermite"><code class="xref py py-obj docutils literal"><span class="pre">Hermite</span></code></a>类。</span><span class="yiyi-st" id="yiyi-25">（关于此模块如何表示和使用这样的多项式的一般信息在其“父”子包的文档字符串中，<code class="xref py py-obj docutils literal"><span class="pre">numpy.polynomial</span></code>）。</span></p>
+<div class="section" id="hermite-class">
+<h2><span class="yiyi-st" id="yiyi-26">Hermite Class</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="generated/numpy.polynomial.hermite.Hermite.html#numpy.polynomial.hermite.Hermite" title="numpy.polynomial.hermite.Hermite"><code class="xref py py-obj docutils literal"><span class="pre">Hermite</span></code></a>（coef [，domain，window]）</span></td>
+<td><span class="yiyi-st" id="yiyi-28">一个Hermite系列类。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="basics">
+<h2><span class="yiyi-st" id="yiyi-29">Basics</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermval.html#numpy.polynomial.hermite.hermval" title="numpy.polynomial.hermite.hermval"><code class="xref py py-obj docutils literal"><span class="pre">hermval</span></code></a>（x，c [，张量]）</span></td>
+<td><span class="yiyi-st" id="yiyi-31">在点x评估Hermite系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermval2d.html#numpy.polynomial.hermite.hermval2d" title="numpy.polynomial.hermite.hermval2d"><code class="xref py py-obj docutils literal"><span class="pre">hermval2d</span></code></a>（x，y，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-33">在点（x，y）评估2-D Hermite系列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-34"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermval3d.html#numpy.polynomial.hermite.hermval3d" title="numpy.polynomial.hermite.hermval3d"><code class="xref py py-obj docutils literal"><span class="pre">hermval3d</span></code></a>（x，y，z，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-35">在点（x，y，z）评估3-D Hermite系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-36"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermgrid2d.html#numpy.polynomial.hermite.hermgrid2d" title="numpy.polynomial.hermite.hermgrid2d"><code class="xref py py-obj docutils literal"><span class="pre">hermgrid2d</span></code></a>（x，y，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-37">用x和y的笛卡尔积计算2-D Hermite系列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermgrid3d.html#numpy.polynomial.hermite.hermgrid3d" title="numpy.polynomial.hermite.hermgrid3d"><code class="xref py py-obj docutils literal"><span class="pre">hermgrid3d</span></code></a>（x，y，z，c）</span></td>
+<td><span class="yiyi-st" id="yiyi-39">在x，y和z的笛卡尔乘积上评估3-D Hermite系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermroots.html#numpy.polynomial.hermite.hermroots" title="numpy.polynomial.hermite.hermroots"><code class="xref py py-obj docutils literal"><span class="pre">hermroots</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-41">计算Hermite系列的根。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermfromroots.html#numpy.polynomial.hermite.hermfromroots" title="numpy.polynomial.hermite.hermfromroots"><code class="xref py py-obj docutils literal"><span class="pre">hermfromroots</span></code></a>（根）</span></td>
+<td><span class="yiyi-st" id="yiyi-43">生成具有给定根的Hermite系列。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fitting">
+<h2><span class="yiyi-st" id="yiyi-44">Fitting</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermfit.html#numpy.polynomial.hermite.hermfit" title="numpy.polynomial.hermite.hermfit"><code class="xref py py-obj docutils literal"><span class="pre">hermfit</span></code></a>（x，y，deg [，rcond，full，w]）</span></td>
+<td><span class="yiyi-st" id="yiyi-46">Hermite系列的最小二乘拟合数据。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermvander.html#numpy.polynomial.hermite.hermvander" title="numpy.polynomial.hermite.hermvander"><code class="xref py py-obj docutils literal"><span class="pre">hermvander</span></code></a>（x，deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-48">给定程度的伪Vandermonde矩阵。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermvander2d.html#numpy.polynomial.hermite.hermvander2d" title="numpy.polynomial.hermite.hermvander2d"><code class="xref py py-obj docutils literal"><span class="pre">hermvander2d</span></code></a>（x，y，deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-50">给定度的伪Vandermonde矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-51"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermvander3d.html#numpy.polynomial.hermite.hermvander3d" title="numpy.polynomial.hermite.hermvander3d"><code class="xref py py-obj docutils literal"><span class="pre">hermvander3d</span></code></a>（x，y，z，deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-52">给定度的伪Vandermonde矩阵。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="calculus">
+<h2><span class="yiyi-st" id="yiyi-53">Calculus</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermder.html#numpy.polynomial.hermite.hermder" title="numpy.polynomial.hermite.hermder"><code class="xref py py-obj docutils literal"><span class="pre">hermder</span></code></a>（c [，m，scl，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-55">区分一个Hermite系列。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermint.html#numpy.polynomial.hermite.hermint" title="numpy.polynomial.hermite.hermint"><code class="xref py py-obj docutils literal"><span class="pre">hermint</span></code></a>（c [，m，k，lbnd，scl，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-57">集成Hermite系列。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="algebra">
+<h2><span class="yiyi-st" id="yiyi-58">Algebra</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermadd.html#numpy.polynomial.hermite.hermadd" title="numpy.polynomial.hermite.hermadd"><code class="xref py py-obj docutils literal"><span class="pre">hermadd</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-60">添加一个Hermite系列到另一个。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-61"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermsub.html#numpy.polynomial.hermite.hermsub" title="numpy.polynomial.hermite.hermsub"><code class="xref py py-obj docutils literal"><span class="pre">hermsub</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-62">从另一个减去一个Hermite系列。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-63"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermmul.html#numpy.polynomial.hermite.hermmul" title="numpy.polynomial.hermite.hermmul"><code class="xref py py-obj docutils literal"><span class="pre">hermmul</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-64">将一个Hermite系列乘以另一个。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-65"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermmulx.html#numpy.polynomial.hermite.hermmulx" title="numpy.polynomial.hermite.hermmulx"><code class="xref py py-obj docutils literal"><span class="pre">hermmulx</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-66">将一个Hermite系列乘以x。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-67"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermdiv.html#numpy.polynomial.hermite.hermdiv" title="numpy.polynomial.hermite.hermdiv"><code class="xref py py-obj docutils literal"><span class="pre">hermdiv</span></code></a>（c1，c2）</span></td>
+<td><span class="yiyi-st" id="yiyi-68">将一个Hermite系列除以另一个。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-69"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermpow.html#numpy.polynomial.hermite.hermpow" title="numpy.polynomial.hermite.hermpow"><code class="xref py py-obj docutils literal"><span class="pre">hermpow</span></code></a>（c，pow [，maxpower]）</span></td>
+<td><span class="yiyi-st" id="yiyi-70">把一个Hermite系列提升到一个力量。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="quadrature">
+<h2><span class="yiyi-st" id="yiyi-71">Quadrature</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-72"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermgauss.html#numpy.polynomial.hermite.hermgauss" title="numpy.polynomial.hermite.hermgauss"><code class="xref py py-obj docutils literal"><span class="pre">hermgauss</span></code></a>（deg）</span></td>
+<td><span class="yiyi-st" id="yiyi-73">高斯 - 赫米特正交。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermweight.html#numpy.polynomial.hermite.hermweight" title="numpy.polynomial.hermite.hermweight"><code class="xref py py-obj docutils literal"><span class="pre">hermweight</span></code></a>（x）</span></td>
+<td><span class="yiyi-st" id="yiyi-75">Hermite多项式的权重函数。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="miscellaneous">
+<h2><span class="yiyi-st" id="yiyi-76">Miscellaneous</span></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-77"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermcompanion.html#numpy.polynomial.hermite.hermcompanion" title="numpy.polynomial.hermite.hermcompanion"><code class="xref py py-obj docutils literal"><span class="pre">hermcompanion</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-78">返回c的缩放伴随矩阵。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-79"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermdomain.html#numpy.polynomial.hermite.hermdomain" title="numpy.polynomial.hermite.hermdomain"><code class="xref py py-obj docutils literal"><span class="pre">hermdomain</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-80"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermzero.html#numpy.polynomial.hermite.hermzero" title="numpy.polynomial.hermite.hermzero"><code class="xref py py-obj docutils literal"><span class="pre">hermzero</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-81"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermone.html#numpy.polynomial.hermite.hermone" title="numpy.polynomial.hermite.hermone"><code class="xref py py-obj docutils literal"><span class="pre">hermone</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-82"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermx.html#numpy.polynomial.hermite.hermx" title="numpy.polynomial.hermite.hermx"><code class="xref py py-obj docutils literal"><span class="pre">hermx</span></code></a></span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-83"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermtrim.html#numpy.polynomial.hermite.hermtrim" title="numpy.polynomial.hermite.hermtrim"><code class="xref py py-obj docutils literal"><span class="pre">hermtrim</span></code></a>（c [，tol]）</span></td>
+<td><span class="yiyi-st" id="yiyi-84">从多项式中删除“小”“拖尾”系数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-85"><a class="reference internal" href="generated/numpy.polynomial.hermite.hermline.html#numpy.polynomial.hermite.hermline" title="numpy.polynomial.hermite.hermline"><code class="xref py py-obj docutils literal"><span class="pre">hermline</span></code></a>（off，scl）</span></td>
+<td><span class="yiyi-st" id="yiyi-86">Hermite系列，其图形为直线。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-87"><a class="reference internal" href="generated/numpy.polynomial.hermite.herm2poly.html#numpy.polynomial.hermite.herm2poly" title="numpy.polynomial.hermite.herm2poly"><code class="xref py py-obj docutils literal"><span class="pre">herm2poly</span></code></a>（c）</span></td>
+<td><span class="yiyi-st" id="yiyi-88">将Hermite系列转换为多项式。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-89"><a class="reference internal" href="generated/numpy.polynomial.hermite.poly2herm.html#numpy.polynomial.hermite.poly2herm" title="numpy.polynomial.hermite.poly2herm"><code class="xref py py-obj docutils literal"><span class="pre">poly2herm</span></code></a>（pol）</span></td>
+<td><span class="yiyi-st" id="yiyi-90">将多项式转换为Hermite系列。</span></td>
+</tr>
+</tbody>
+</table>
+</div>

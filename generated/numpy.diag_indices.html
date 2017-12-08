@@ -1,0 +1,72 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.diag_indices</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.diag_indices.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.diag_indices.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.diag_indices"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">diag_indices</code><span class="sig-paren">(</span><em>n</em>, <em>ndim=2</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/index_tricks.py#L779-L844"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回索引以访问数组的主对角线。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">这返回可用于访问数组<em class="xref py py-obj">a</em>的主对角线的索引的元组，其中<code class="docutils literal"><span class="pre">a.ndim</span> <span class="pre">&gt; =</span> <span class="pre">2</span></code>尺寸和形状（n，n，...，n）。</span><span class="yiyi-st" id="yiyi-16">For <code class="docutils literal"><span class="pre">a.ndim</span> <span class="pre">=</span> <span class="pre">2</span></code> this is the usual diagonal, for <code class="docutils literal"><span class="pre">a.ndim</span> <span class="pre">&gt;</span> <span class="pre">2</span></code> this is the set of indices to access <code class="docutils literal"><span class="pre">a[i,</span> <span class="pre">i,</span> <span class="pre">...,</span> <span class="pre">i]</span></code> for <code class="docutils literal"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">[0..n-1]</span></code>.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>n</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">可以使用返回索引的数组的每个维度的大小。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>ndim</strong>：int，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">维度数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-22">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="numpy.diag_indices_from.html#numpy.diag_indices_from" title="numpy.diag_indices_from"><code class="xref py py-obj docutils literal"><span class="pre">diag_indices_from</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-25"><span class="versionmodified">版本1.4.0中的新功能。</span></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-27">创建一组索引以访问（4，4）数组的对角线：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">di</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag_indices</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">di</span>
+<span class="go">(array([0, 1, 2, 3]), array([0, 1, 2, 3]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[ 0,  1,  2,  3],</span>
+<span class="go">       [ 4,  5,  6,  7],</span>
+<span class="go">       [ 8,  9, 10, 11],</span>
+<span class="go">       [12, 13, 14, 15]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="n">di</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[100,   1,   2,   3],</span>
+<span class="go">       [  4, 100,   6,   7],</span>
+<span class="go">       [  8,   9, 100,  11],</span>
+<span class="go">       [ 12,  13,  14, 100]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-28">现在，我们创建索引来操纵3-D数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag_indices</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d3</span>
+<span class="go">(array([0, 1]), array([0, 1]), array([0, 1]))</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-29">并使用它将零的数组的对角线设置为1：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="n">d3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[[1, 0],</span>
+<span class="go">        [0, 0]],</span>
+<span class="go">       [[0, 0],</span>
+<span class="go">        [0, 1]]])</span>
+</pre></div>
+</div>
+</dd></dl>

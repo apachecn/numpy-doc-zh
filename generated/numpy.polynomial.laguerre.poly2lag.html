@@ -1,0 +1,43 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.laguerre.poly2lag</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.laguerre.poly2lag.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.laguerre.poly2lag.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.laguerre.poly2lag"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.laguerre.</code><code class="descname">poly2lag</code><span class="sig-paren">(</span><em>pol</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/laguerre.py#L80-L123"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">将多项式转换为Laguerre系列。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">将表示从最低程度到最高程度排序的多项式系数（相对于“标准”基础）的数组转换为从最低到最高程度排序的等效Laguerre系数的系数的数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>pol</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">包含多项式系数的1-D数组</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-21">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-22"><strong>c</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-23">1-D数组，包含等效Laguerre系数的系数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.polynomial.laguerre.lag2poly.html#numpy.polynomial.laguerre.lag2poly" title="numpy.polynomial.laguerre.lag2poly"><code class="xref py py-obj docutils literal"><span class="pre">lag2poly</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">在多项式基组之间进行转换的简单方法是使用类实例的convert方法。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial.laguerre</span> <span class="k">import</span> <span class="n">poly2lag</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">poly2lag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">array([ 23., -63.,  58., -18.])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,48 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.MaskedArray.byteswap</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.byteswap.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.MaskedArray.byteswap.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ma.MaskedArray.byteswap"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">MaskedArray.</code><code class="descname">byteswap</code><span class="sig-paren">(</span><em>inplace</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">交换数组元素的字节</span></p>
+<p><span class="yiyi-st" id="yiyi-16">通过返回一个字节交换的数组，可选地在位置交换，在低端和大端数据表示之间切换。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>inplace</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">如果<code class="docutils literal"><span class="pre">True</span></code>，则就地交换字节，默认值为<code class="docutils literal"><span class="pre">False</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">字节交换数组。</span><span class="yiyi-st" id="yiyi-23">如果<em class="xref py py-obj">inplace</em>是<code class="docutils literal"><span class="pre">True</span></code>，则这是一个视图。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-24">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">8755</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">map</span><span class="p">(</span><span class="nb">hex</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="go">[&apos;0x1&apos;, &apos;0x100&apos;, &apos;0x2233&apos;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">byteswap</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([  256,     1, 13090], dtype=int16)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">map</span><span class="p">(</span><span class="nb">hex</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="go">[&apos;0x100&apos;, &apos;0x1&apos;, &apos;0x3322&apos;]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-25">数组的字符串不交换</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;ceg&apos;</span><span class="p">,</span> <span class="s1">&apos;fac&apos;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">byteswap</span><span class="p">()</span>
+<span class="go">array([&apos;ceg&apos;, &apos;fac&apos;],</span>
+<span class="go">      dtype=&apos;|S3&apos;)</span>
+</pre></div>
+</div>
+</dd></dl>

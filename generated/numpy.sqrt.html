@@ -1,0 +1,56 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.sqrt</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.sqrt.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.sqrt.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.sqrt"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">sqrt</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;sqrt&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">按元素方式返回数组的正平方根。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">需要平方根的值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">替代数组对象，其中放置结果；如果提供，它必须具有与<em class="xref py py-obj">x</em>相同的形状</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">与<em class="xref py py-obj">x</em>形状相同的数组，包含<em class="xref py py-obj">x</em>中每个元素的正平方根。</span><span class="yiyi-st" id="yiyi-23">如果<em class="xref py py-obj">x</em>中的任何元素是复杂的，则返回一个复数数组（并计算负实数的平方根）。</span><span class="yiyi-st" id="yiyi-24">如果<em class="xref py py-obj">x</em>中的所有元素都是实数，则<em class="xref py py-obj">y</em>，负数元素返回<code class="docutils literal"><span class="pre">nan</span></code>。</span><span class="yiyi-st" id="yiyi-25">如果提供<em class="xref py py-obj">out</em>，则<em class="xref py py-obj">y</em>是对它的引用。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-27"><code class="xref py py-obj docutils literal"><span class="pre">lib.scimath.sqrt</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28">在给定负数reals时返回复数的版本。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-30"><em>sqrt</em>与常规约定一致，因为其分支切割真实的“间隔”[<em class="xref py py-obj">-inf</em>，0），并从上面连续。</span><span class="yiyi-st" id="yiyi-31">分支切口是复平面中的曲线，在该平面上给定的复函数不能是连续的。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span>
+<span class="go">array([ 1.,  2.,  3.])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="n">J</span><span class="p">])</span>
+<span class="go">array([ 2.+0.j,  0.+1.j,  1.+2.j])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+<span class="go">array([  2.,  NaN,  Inf])</span>
+</pre></div>
+</div>
+</dd></dl>

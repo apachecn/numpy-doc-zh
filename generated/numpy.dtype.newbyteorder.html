@@ -1,0 +1,70 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.dtype.newbyteorder</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.newbyteorder.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.newbyteorder.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.dtype.newbyteorder"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">dtype.</code><code class="descname">newbyteorder</code><span class="sig-paren">(</span><em>new_order=&apos;S&apos;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">返回一个具有不同字节顺序的新dtype。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">还在数据类型的所有字段和子数组中进行更改。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>new_order</strong>：string，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">字节命令强制；下面的字节顺序规范中的值。</span><span class="yiyi-st" id="yiyi-20">默认值（&apos;S&apos;）导致交换当前字节顺序。</span><span class="yiyi-st" id="yiyi-21"><em class="xref py py-obj">new_order</em>代码可以是以下任何一种：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-22">&apos;s&apos; - 将dtype从当前值切换到对端字节序</span></li>
+<li><span class="yiyi-st" id="yiyi-23">{&apos;</span></li>
+<li><span class="yiyi-st" id="yiyi-24">{&apos;&gt;&apos;，&apos;B&apos;}  -  big endian</span></li>
+<li><span class="yiyi-st" id="yiyi-25">{&apos;=&apos;，&apos;N&apos;}  - 本地顺序</span></li>
+<li><span class="yiyi-st" id="yiyi-26">{&apos;|&apos;，&apos;I&apos;}  - 忽略（字节顺序没有改变）</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-27">对于这些备选项，代码对<em class="xref py py-obj">new_order</em>的第一个字母执行不区分大小写的检查。</span><span class="yiyi-st" id="yiyi-28">例如，&apos;&gt;&apos;或&apos;B&apos;或&apos;b&apos;或&apos;brian&apos;中的任何一个都有效以指定big-endian。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-29">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-30"><strong>new_dtype</strong>：dtype</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-31">新的dtype对象，给定的更改为字节顺序。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-33">还在数据类型的所有字段和子数组中进行更改。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys_is_le</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">byteorder</span> <span class="o">==</span> <span class="s1">&apos;little&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">native_code</span> <span class="o">=</span> <span class="n">sys_is_le</span> <span class="ow">and</span> <span class="s1">&apos;&lt;&apos;</span> <span class="ow">or</span> <span class="s1">&apos;&gt;&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">swapped_code</span> <span class="o">=</span> <span class="n">sys_is_le</span> <span class="ow">and</span> <span class="s1">&apos;&gt;&apos;</span> <span class="ow">or</span> <span class="s1">&apos;&lt;&apos;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">native_dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">native_code</span><span class="o">+</span><span class="s1">&apos;i2&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">swapped_dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">swapped_code</span><span class="o">+</span><span class="s1">&apos;i2&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">native_dt</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s1">&apos;S&apos;</span><span class="p">)</span> <span class="o">==</span> <span class="n">swapped_dt</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">native_dt</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">()</span> <span class="o">==</span> <span class="n">swapped_dt</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">native_dt</span> <span class="o">==</span> <span class="n">swapped_dt</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s1">&apos;S&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">native_dt</span> <span class="o">==</span> <span class="n">swapped_dt</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s1">&apos;=&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">native_dt</span> <span class="o">==</span> <span class="n">swapped_dt</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s1">&apos;N&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">native_dt</span> <span class="o">==</span> <span class="n">native_dt</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s1">&apos;|&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;&lt;i2&apos;</span><span class="p">)</span> <span class="o">==</span> <span class="n">native_dt</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s1">&apos;&lt;&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;&lt;i2&apos;</span><span class="p">)</span> <span class="o">==</span> <span class="n">native_dt</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s1">&apos;L&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;&gt;i2&apos;</span><span class="p">)</span> <span class="o">==</span> <span class="n">native_dt</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s1">&apos;&gt;&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&apos;&gt;i2&apos;</span><span class="p">)</span> <span class="o">==</span> <span class="n">native_dt</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s1">&apos;B&apos;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>

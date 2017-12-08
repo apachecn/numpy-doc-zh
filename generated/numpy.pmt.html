@@ -1,0 +1,86 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.pmt</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.pmt.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.pmt.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.pmt"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">pmt</code><span class="sig-paren">(</span><em>rate</em>, <em>nper</em>, <em>pv</em>, <em>fv=0</em>, <em>when=&apos;end&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/financial.py#L126-L216"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算贷款本金加利息的付款。</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-15">给定：</span></dt>
+<dd><ul class="first last simple">
+<li><span class="yiyi-st" id="yiyi-16">当前值<a class="reference internal" href="numpy.pv.html#numpy.pv" title="numpy.pv"><code class="xref py py-obj docutils literal"><span class="pre">pv</span></code></a>（例如，借用的金额）</span></li>
+<li><span class="yiyi-st" id="yiyi-17">未来值<a class="reference internal" href="numpy.fv.html#numpy.fv" title="numpy.fv"><code class="xref py py-obj docutils literal"><span class="pre">fv</span></code></a>（例如，0）</span></li>
+<li><span class="yiyi-st" id="yiyi-18">每个期间复利一次利息<a class="reference internal" href="numpy.rate.html#numpy.rate" title="numpy.rate"><code class="xref py py-obj docutils literal"><span class="pre">rate</span></code></a>，其中有</span></li>
+<li><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="numpy.nper.html#numpy.nper" title="numpy.nper"><code class="xref py py-obj docutils literal"><span class="pre">nper</span></code></a>总计</span></li>
+<li><span class="yiyi-st" id="yiyi-20">（<em class="xref py py-obj">= {&apos;begin&apos;，1}）或结束（<em class="xref py py-obj">，</em> = {&apos;end&apos;，0} }）</em></span></li>
+</ul>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-21">返回：</span></dt>
+<dd><span class="yiyi-st" id="yiyi-22">（固定）定期付款。</span></dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>rate</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">利率（每期）</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>nper</strong> : array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">复合周期数</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>pv</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">目前价值</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>fv</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">未来值（默认值= 0）</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>当</strong>：{{&apos;begin&apos;，1}，{&apos;end&apos;，0}}，{string，int}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">付款到期时（“开始”（1）或“结束”（0））</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-34">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-35"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-36">抵押贷款加利息。</span><span class="yiyi-st" id="yiyi-37">如果所有输入是标量，则返回标量浮点。</span><span class="yiyi-st" id="yiyi-38">如果任何输入是array_like，返回每个输入元素的支付。</span><span class="yiyi-st" id="yiyi-39">如果多个输入是array_like，它们都必须具有相同的形状。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-40">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-41">通过求解以下等式来计算支付：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">fv</span> <span class="o">+</span>
+<span class="n">pv</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span><span class="o">**</span><span class="n">nper</span> <span class="o">+</span>
+<span class="n">pmt</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="o">*</span><span class="n">when</span><span class="p">)</span><span class="o">/</span><span class="n">rate</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span><span class="o">**</span><span class="n">nper</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">或<code class="docutils literal"><span class="pre">费率</span> <span class="pre">==</span> <span class="pre">0</span></code>：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">fv</span> <span class="o">+</span> <span class="n">pv</span> <span class="o">+</span> <span class="n">pmt</span> <span class="o">*</span> <span class="n">nper</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">对于<code class="docutils literal"><span class="pre">pmt</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-44">请注意，计算每月抵押付款只是此功能的一个用途。</span><span class="yiyi-st" id="yiyi-45">例如，pmt返回定期存款，在初始存款，固定，定期复利利率和期间总数的情况下，必须达到指定的未来余额。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-46">参考文献</span></p>
+<table class="docutils citation" frame="void" id="wrw" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-47"><a class="fn-backref" href="#id1">[WRW]</a></span></td><td><span class="yiyi-st" id="yiyi-48">Wheeler，D.A.，E.Rathke和R.Weir（Eds。）</span><span class="yiyi-st" id="yiyi-49">（2009年5月）。</span><span class="yiyi-st" id="yiyi-50">Office应用程序的打开文档格式（OpenDocument）v1.2，第2部分：重新计算公式（OpenFormula）格式 - 注释版本，预稿12。</span><span class="yiyi-st" id="yiyi-51">促进结构性信息标准组织（OASIS）。</span><span class="yiyi-st" id="yiyi-52">Billerica，MA，USA。</span><span class="yiyi-st" id="yiyi-53">[ODT文件]。</span><span class="yiyi-st" id="yiyi-54">可用：<a class="reference external" href="http://www.oasis-open.org/committees/documents.php">http://www.oasis-open.org/committees/documents.php</a>？wg_abbrev = office-formulaOpenDocument-formula-20090508.odt</span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-55">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-56">在15年期间以7.5％的年利率偿还20万美元贷款需要的每月付款是多少？</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">pmt</span><span class="p">(</span><span class="mf">0.075</span><span class="o">/</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="o">*</span><span class="mi">15</span><span class="p">,</span> <span class="mi">200000</span><span class="p">)</span>
+<span class="go">-1854.0247200054619</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-57">为了偿还（即未来值为0）今天获得的20万美元，需要每月支付1,854.02美元。</span><span class="yiyi-st" id="yiyi-58">请注意，此示例说明了使用默认值为0的<a class="reference internal" href="numpy.fv.html#numpy.fv" title="numpy.fv"><code class="xref py py-obj docutils literal"><span class="pre">fv</span></code></a>。</span></p>
+</dd></dl>

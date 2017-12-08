@@ -1,0 +1,76 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.piecewise</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.piecewise.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.piecewise.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.piecewise"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">piecewise</code><span class="sig-paren">(</span><em>x</em>, <em>condlist</em>, <em>funclist</em>, <em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L1037-L1158"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">评估分段定义的函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">给定一组条件和相应的函数，对条件为真的每个函数求值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>x</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">输入域。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>condlist</strong>：bool数组的列表</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">每个布尔数组对应于<em class="xref py py-obj">funclist</em>中的函数。</span><span class="yiyi-st" id="yiyi-21">在<em class="xref py py-obj">condlist [i]</em>为真的情况下，使用<em class="xref py py-obj">funclist [i]（x）</em>作为输出值。</span></p>
+<p><span class="yiyi-st" id="yiyi-22"><em class="xref py py-obj">condlist</em>中的每个布尔数组选择一个<em class="xref py py-obj">x</em>，因此应与<em class="xref py py-obj">x</em>形状相同。</span></p>
+<p><span class="yiyi-st" id="yiyi-23"><em class="xref py py-obj">condlist</em>的长度必须对应于<em class="xref py py-obj">funclist</em>的长度。</span><span class="yiyi-st" id="yiyi-24">如果给出一个额外的函数，即如果<code class="docutils literal"><span class="pre">len（funclist）</span> <span class="pre"> - </span> <span class="pre">len（condlist）</span> <span class="pre">==  t4 &gt; <span class="pre">1</span></span></code>，那么该额外函数是默认值，在所有条件为假的情况下使用。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>funclist</strong>：可调用项列表，f（x，* args，** kw）或标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">每个函数在<em class="xref py py-obj">x</em>上计算，无论其对应的条件为True。</span><span class="yiyi-st" id="yiyi-27">它应该使用数组作为输入，并给出一个数组或标量值作为输出。</span><span class="yiyi-st" id="yiyi-28">如果不是可调用的，而是提供标量，则常数函数（<code class="docutils literal"><span class="pre">&#x3BB;</span> <span class="pre">x：</span> <span class="pre">标量</span></code>）假定。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>args</strong>：tuple，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">任何给予<a class="reference internal" href="#numpy.piecewise" title="numpy.piecewise"><code class="xref py py-obj docutils literal"><span class="pre">piecewise</span></code></a>的进一步的参数在执行时传递给函数，即如果调用<code class="docutils literal"><span class="pre">分段（...，</span> <span class="pre">...， t5&gt; <span class="pre">1，</span> <span class="pre">&apos;a&apos;）</span></span></code>，则每个函数称为<code class="docutils literal"><span class="pre">f（x，</span> <span class="pre">1，</span> <span class="pre">&apos;a&apos;）</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>kw</strong>：dict，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">用于调用<a class="reference internal" href="#numpy.piecewise" title="numpy.piecewise"><code class="xref py py-obj docutils literal"><span class="pre">piecewise</span></code></a>的关键字参数在执行时传递给函数，即如果调用<code class="docutils literal"><span class="pre">分段（...，</span> <span class="pre">...， t5&gt; <span class="pre">lambda = 1）</span></span></code>，则每个函数被称为<code class="docutils literal"><span class="pre">f（x，</span> <span class="pre">lambda = 1）</span> / t7&gt;。</code></span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-33">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-34"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-35">输出与x具有相同的形状和类型，并且通过调用<em class="xref py py-obj">x</em>的适当部分的<em class="xref py py-obj">funclist</em>中的函数找到，由<em class="xref py py-obj">中的布尔数组定义。 condlist</em>。</span><span class="yiyi-st" id="yiyi-36">未被任何条件覆盖的部分的默认值为0。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-37">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-38"><a class="reference internal" href="numpy.choose.html#numpy.choose" title="numpy.choose"><code class="xref py py-obj docutils literal"><span class="pre">choose</span></code></a>，<a class="reference internal" href="numpy.select.html#numpy.select" title="numpy.select"><code class="xref py py-obj docutils literal"><span class="pre">select</span></code></a>，<a class="reference internal" href="numpy.where.html#numpy.where" title="numpy.where"><code class="xref py py-obj docutils literal"><span class="pre">where</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-39">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-40">这类似于选择或选择，除了对<em class="xref py py-obj">x</em>的元素评估满足<em class="xref py py-obj">condlist</em>的相应条件的函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-41">其结果是：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>      <span class="o">|--</span>
+      <span class="o">|</span><span class="n">funclist</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">x</span><span class="p">[</span><span class="n">condlist</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">out</span> <span class="o">=</span> <span class="o">|</span><span class="n">funclist</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="n">x</span><span class="p">[</span><span class="n">condlist</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+      <span class="o">|...</span>
+      <span class="o">|</span><span class="n">funclist</span><span class="p">[</span><span class="n">n2</span><span class="p">](</span><span class="n">x</span><span class="p">[</span><span class="n">condlist</span><span class="p">[</span><span class="n">n2</span><span class="p">]])</span>
+      <span class="o">|--</span>
+</pre></div>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-42">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-43">Define the sigma function, which is -1 for <code class="docutils literal"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">0</span></code> and +1 for <code class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>.</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">piecewise</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">array([-1., -1., -1.,  1.,  1.,  1.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-44">Define the absolute value, which is <code class="docutils literal"><span class="pre">-x</span></code> for <code class="docutils literal"><span class="pre">x</span> <span class="pre">&lt;0</span></code> and <code class="docutils literal"><span class="pre">x</span></code> for <code class="docutils literal"><span class="pre">x</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>.</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">piecewise</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">])</span>
+<span class="go">array([ 2.5,  1.5,  0.5,  0.5,  1.5,  2.5])</span>
+</pre></div>
+</div>
+</dd></dl>

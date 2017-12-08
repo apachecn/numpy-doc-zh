@@ -1,0 +1,56 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.broadcast_to</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.broadcast_to.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.broadcast_to.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.broadcast_to"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">broadcast_to</code><span class="sig-paren">(</span><em>array</em>, <em>shape</em>, <em>subok=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/stride_tricks.py#L77-L115"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将数组广播到新形状。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>数组</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">数组广播。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>shape</strong>：tuple</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">所需数组的形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>subok</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">如果为True，则子类将被传递，否则返回的数组将被强制为基类数组（默认）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>broadcast</strong>：数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">具有给定形状的原始数组的只读视图。</span><span class="yiyi-st" id="yiyi-25">它通常不连续。</span><span class="yiyi-st" id="yiyi-26">此外，广播数组的多于一个元件可以指单个存储器位置。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">如果数组根据NumPy的广播规则与新形状不兼容。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-30">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-31"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">array([[1, 2, 3],</span>
+<span class="go">       [1, 2, 3],</span>
+<span class="go">       [1, 2, 3]])</span>
+</pre></div>
+</div>
+</dd></dl>

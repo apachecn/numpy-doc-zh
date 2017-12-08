@@ -1,0 +1,93 @@
+
+<h1><span class="yiyi-st" id="yiyi-19">Testing the numpy.i Typemaps</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/swig.testing.html">https://docs.scipy.org/doc/numpy/reference/swig.testing.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<div class="section" id="introduction">
+<h2><span class="yiyi-st" id="yiyi-20">Introduction</span></h2>
+<p><span class="yiyi-st" id="yiyi-21">为<code class="docutils literal"><span class="pre">numpy.i</span></code> <a class="reference external" href="http://www.swig.org">SWIG</a>接口文件编写测试是一种组合性头痛。</span><span class="yiyi-st" id="yiyi-22">目前，支持12种不同的数据类型，每种类型具有74个不同的参数签名，支持“开箱即用”的总共888个类型映射。</span><span class="yiyi-st" id="yiyi-23">这些类型映射中的每一个反过来可能需要几个单元测试，以便验证正确和不正确输入的预期行为。</span><span class="yiyi-st" id="yiyi-24">目前，这将导致在<code class="docutils literal"><span class="pre">进行</span> <span class="pre">测试</span></code>时在<code class="docutils literal"><span class="pre">numpy/tools/swig</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-25">为了促进这种许多类似的单元测试，采用一些高级编程技术，包括C和<a class="reference external" href="http://www.swig.org">SWIG</a>宏以及Python继承。</span><span class="yiyi-st" id="yiyi-26">本文档的目的是描述用于验证<code class="docutils literal"><span class="pre">numpy.i</span></code>类型映射是否按预期工作的测试基础结构。</span></p>
+</div>
+<div class="section" id="testing-organization">
+<h2><span class="yiyi-st" id="yiyi-27">Testing Organization</span></h2>
+<p><span class="yiyi-st" id="yiyi-28">支持三个独立的测试框架，分别用于一维，二维和三维数组。</span><span class="yiyi-st" id="yiyi-29">对于一维数组，有两个C ++文件，一个头和一个源，命名为：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Vector</span><span class="o">.</span><span class="n">h</span>
+<span class="n">Vector</span><span class="o">.</span><span class="n">cxx</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-30">其包含用于具有一维数组作为函数参数的各种函数的原型和代码。</span><span class="yiyi-st" id="yiyi-31">文件：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Vector</span><span class="o">.</span><span class="n">i</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-32">is a <a class="reference external" href="http://www.swig.org">SWIG</a> interface file that defines a python module <code class="docutils literal"><span class="pre">Vector</span></code> that wraps the functions in <code class="docutils literal"><span class="pre">Vector.h</span></code> while utilizing the typemaps in <code class="docutils literal"><span class="pre">numpy.i</span></code> to correctly handle the C arrays.</span></p>
+<p><span class="yiyi-st" id="yiyi-33"><code class="docutils literal"><span class="pre">Makefile</span></code>调用<code class="docutils literal"><span class="pre">swig</span></code>以生成<code class="docutils literal"><span class="pre">Vector.py</span></code>和<code class="docutils literal"><span class="pre">Vector_wrap.cxx</span></code>，并执行<code class="docutils literal"><span class="pre">setup.py</span></code>脚本，它编译<code class="docutils literal"><span class="pre">Vector_wrap.cxx</span></code>并将扩展模块<code class="docutils literal"><span class="pre">_Vector.so</span></code>或<code class="docutils literal"><span class="pre">_Vector.dylib</span></code>平台。</span><span class="yiyi-st" id="yiyi-34">此扩展模块和代理文件<code class="docutils literal"><span class="pre">Vector.py</span></code>都放置在<code class="docutils literal"><span class="pre">build</span></code>目录下的子目录中。</span></p>
+<p><span class="yiyi-st" id="yiyi-35">实际测试使用一个名为的Python脚本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">testVector</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-36">它使用标准的Python库模块<code class="docutils literal"><span class="pre">unittest</span></code>，它对每个支持的数据类型执行<code class="docutils literal"><span class="pre">Vector.h</span></code>中定义的每个函数的几个测试。</span></p>
+<p><span class="yiyi-st" id="yiyi-37">二维数组以完全相同的方式测试。</span><span class="yiyi-st" id="yiyi-38">以上描述适用，但使用<code class="docutils literal"><span class="pre">Matrix</span></code>替换<code class="docutils literal"><span class="pre">Vector</span></code>。</span><span class="yiyi-st" id="yiyi-39">对于三维测试，将<code class="docutils literal"><span class="pre">Tensor</span></code>替换为<code class="docutils literal"><span class="pre">Vector</span></code>。</span><span class="yiyi-st" id="yiyi-40">对于四维测试，用<code class="docutils literal"><span class="pre">SuperTensor</span></code>替换<code class="docutils literal"><span class="pre">Vector</span></code>。</span><span class="yiyi-st" id="yiyi-41">对于平面原位数组测试，用<code class="docutils literal"><span class="pre">Flat</span></code>替换<code class="docutils literal"><span class="pre">Vector</span></code>。</span><span class="yiyi-st" id="yiyi-42">对于以下描述，我们将引用<code class="docutils literal"><span class="pre">Vector</span></code>测试，但相同的信息适用于<code class="docutils literal"><span class="pre">Matrix</span></code>，<code class="docutils literal"><span class="pre">Tensor</span></code>和<code class="docutils literal"><span class="pre">SuperTensor</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-43">命令<code class="docutils literal"><span class="pre">make</span> <span class="pre">test</span></code>将确保所有测试软件都已构建，然后运行所有三个测试脚本。</span></p>
+</div>
+<div class="section" id="testing-header-files">
+<h2><span class="yiyi-st" id="yiyi-44">Testing Header Files</span></h2>
+<p><span class="yiyi-st" id="yiyi-45"><code class="docutils literal"><span class="pre">Vector.h</span></code>是一个C ++头文件，它定义了一个名为<code class="docutils literal"><span class="pre">TEST_FUNC_PROTOS</span></code>的C宏，它接受两个参数：<code class="docutils literal"><span class="pre">TYPE</span></code>，这是一个数据类型名称<code class="docutils literal"><span class="pre">unsigned</span> <span class="pre">int</span></code>；和<code class="docutils literal"><span class="pre">SNAME</span></code>，这是相同数据类型的短名称，不含空格，例如<code class="docutils literal"><span class="pre">uint</span></code>。</span><span class="yiyi-st" id="yiyi-46">此宏定义了几个具有前缀<code class="docutils literal"><span class="pre">SNAME</span></code>的函数原型，并且至少有一个参数是类型<code class="docutils literal"><span class="pre">TYPE</span></code>的数组。</span><span class="yiyi-st" id="yiyi-47">具有返回参数的函数返回<code class="docutils literal"><span class="pre">TYPE</span></code>值。</span></p>
+<p><span class="yiyi-st" id="yiyi-48"><code class="docutils literal"><span class="pre">numpy.i</span></code>支持的所有数据类型都将实现<code class="docutils literal"><span class="pre">TEST_FUNC_PROTOS</span></code>：</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-49"><code class="docutils literal"><span class="pre">签名</span> <span class="pre">char</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-50"><code class="docutils literal"><span class="pre">无符号</span> <span class="pre">char</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-51"><code class="docutils literal"><span class="pre">short</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-52"><code class="docutils literal"><span class="pre">无符号</span> <span class="pre">短</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-53"><code class="docutils literal"><span class="pre">int</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-54"><code class="docutils literal"><span class="pre">无符号</span> <span class="pre">int</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-55"><code class="docutils literal"><span class="pre">long</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-56"><code class="docutils literal"><span class="pre">无符号</span> <span class="pre">长</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-57"><code class="docutils literal"><span class="pre">long</span> <span class="pre">long</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-58"><code class="docutils literal"><span class="pre">无符号</span> <span class="pre">长</span> <span class="pre">长</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-59"><code class="docutils literal"><span class="pre">float</span></code></span></li>
+<li><span class="yiyi-st" id="yiyi-60"><code class="docutils literal"><span class="pre">double</span></code></span></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="testing-source-files">
+<h2><span class="yiyi-st" id="yiyi-61">Testing Source Files</span></h2>
+<p><span class="yiyi-st" id="yiyi-62"><code class="docutils literal"><span class="pre">Vector.cxx</span></code>是一个C ++源文件，用于实现<code class="docutils literal"><span class="pre">Vector.h</span></code>中指定的每个函数原型的可编译代码。</span><span class="yiyi-st" id="yiyi-63">它定义具有相同参数的C宏<code class="docutils literal"><span class="pre">TEST_FUNCS</span></code>，其工作方式与<code class="docutils literal"><span class="pre">TEST_FUNC_PROTOS</span></code>在<code class="docutils literal"><span class="pre">Vector.h</span></code>中相同。</span><span class="yiyi-st" id="yiyi-64"><code class="docutils literal"><span class="pre">TEST_FUNCS</span></code>针对上述12种数据类型中的每一种实现。</span></p>
+</div>
+<div class="section" id="testing-swig-interface-files">
+<h2><span class="yiyi-st" id="yiyi-65">Testing SWIG Interface Files</span></h2>
+<p><span class="yiyi-st" id="yiyi-66"><code class="docutils literal"><span class="pre">Vector.i</span></code>是一个定义python模块<code class="docutils literal"><span class="pre">Vector</span></code>的<a class="reference external" href="http://www.swig.org">SWIG</a>接口文件。</span><span class="yiyi-st" id="yiyi-67">它遵循本章中所述的使用<code class="docutils literal"><span class="pre">numpy.i</span></code>的约定。</span><span class="yiyi-st" id="yiyi-68">它定义了具有单个参数<code class="docutils literal"><span class="pre">TYPE</span></code>的<a class="reference external" href="http://www.swig.org">SWIG</a>宏<code class="docutils literal"><span class="pre">%apply_numpy_typemaps</span></code>。</span><span class="yiyi-st" id="yiyi-69">它使用<a class="reference external" href="http://www.swig.org">SWIG</a>指令<code class="docutils literal"><span class="pre">%apply</span></code>将提供的类型映射应用于<code class="docutils literal"><span class="pre">Vector.h</span></code>中的参数签名。</span><span class="yiyi-st" id="yiyi-70">然后对由<code class="docutils literal"><span class="pre">numpy.i</span></code>支持的所有数据类型实现此宏。</span><span class="yiyi-st" id="yiyi-71">然后，它会在<code class="docutils literal"><span class="pre">Vector.h</span></code>中包含所有的函数原型，<code class="docutils literal"><span class="pre">％include</span> <span class="pre">“Vector.h”使用<code class="docutils literal"><span class="pre">numpy.i</span></code>中的类型映射。</span></code></span></p>
+</div>
+<div class="section" id="testing-python-scripts">
+<h2><span class="yiyi-st" id="yiyi-72">Testing Python Scripts</span></h2>
+<p><span class="yiyi-st" id="yiyi-73">在<code class="docutils literal"><span class="pre">make</span></code>用于构建测试扩展模块后，可以运行<code class="docutils literal"><span class="pre">testVector.py</span></code>来执行测试。</span><span class="yiyi-st" id="yiyi-74">与使用<code class="docutils literal"><span class="pre">unittest</span></code>以促进单元测试的其他脚本一样，<code class="docutils literal"><span class="pre">testVector.py</span></code>定义继承自<code class="docutils literal"><span class="pre">unittest.TestCase</span></code>的类：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">VectorTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-75">但是，这个类不是直接运行的。</span><span class="yiyi-st" id="yiyi-76">相反，它用作几个其他Python类的基类，每个特定于特定数据类型。</span><span class="yiyi-st" id="yiyi-77"><code class="docutils literal"><span class="pre">VectorTestCase</span></code>类存储两个用于键入信息的字符串：</span></p>
+<blockquote>
+<div><dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-78"><strong>self.typeStr</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-79">与<code class="docutils literal"><span class="pre">Vector.h</span></code>和<code class="docutils literal"><span class="pre">Vector.cxx</span></code>中使用的<code class="docutils literal"><span class="pre">SNAME</span></code>前缀之一匹配的字符串。</span><span class="yiyi-st" id="yiyi-80">例如，<code class="docutils literal"><span class="pre">&quot;double&quot;</span></code>。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-81"><strong>self.typeCode</strong></span></dt>
+<dd><span class="yiyi-st" id="yiyi-82">表示numpy中的数据类型的短（通常为单字符）字符串，对应于<code class="docutils literal"><span class="pre">self.typeStr</span></code>。</span><span class="yiyi-st" id="yiyi-83">例如，如果<code class="docutils literal"><span class="pre">self.typeStr</span></code>是<code class="docutils literal"><span class="pre">&quot;double&quot;</span></code>，则<code class="docutils literal"><span class="pre">self.typeCode</span></code>应为<code class="docutils literal"><span class="pre">&quot;d&quot;</span></code>。</span></dd>
+</dl>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-84">由<code class="docutils literal"><span class="pre">VectorTestCase</span></code>类定义的每个测试通过访问<code class="docutils literal"><span class="pre">Vector</span></code>模块的字典来提取它试图测试的python函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">length</span> <span class="o">=</span> <span class="n">Vector</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">typeStr</span> <span class="o">+</span> <span class="s2">&quot;Length&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-85">在双精度测试的情况下，这将返回python函数<code class="docutils literal"><span class="pre">Vector.doubleLength</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-86">然后，我们为每个支持的数据类型定义一个新的测试用例类，其短定义如下：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">doubleTestCase</span><span class="p">(</span><span class="n">VectorTestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">methodName</span><span class="o">=</span><span class="s2">&quot;runTest&quot;</span><span class="p">):</span>
+        <span class="n">VectorTestCase</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">methodName</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">typeStr</span>  <span class="o">=</span> <span class="s2">&quot;double&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">typeCode</span> <span class="o">=</span> <span class="s2">&quot;d&quot;</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-87">将这12个类中的每一个收集到<code class="docutils literal"><span class="pre">unittest.TestSuite</span></code>中，然后执行。</span><span class="yiyi-st" id="yiyi-88">错误和失败被汇总在一起并作为退出参数返回。</span><span class="yiyi-st" id="yiyi-89">任何非零结果表明至少一个测试未通过。</span></p>
+</div>

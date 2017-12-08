@@ -1,0 +1,78 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.savez</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.savez.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.savez.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.savez"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">savez</code><span class="sig-paren">(</span><em>file</em>, <em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/npyio.py#L497-L574"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将多个数组以未压缩的<code class="docutils literal"><span class="pre">.npz</span></code>格式保存到单个文件中。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">如果传入的参数中没有关键字，则<code class="docutils literal"><span class="pre">.npz</span></code>文件中的相应变量名称为“arr_0”，“arr_1”等。</span><span class="yiyi-st" id="yiyi-16">如果给出关键字参数，则<code class="docutils literal"><span class="pre">.npz</span></code>文件中的相应变量名称将匹配关键字名称。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>文件</strong>：str或文件</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">要保存数据的文件名（字符串）或打开文件（类文件对象）。</span><span class="yiyi-st" id="yiyi-20">如果file是一个字符串，则<code class="docutils literal"><span class="pre">.npz</span></code>扩展名将附加到文件名之后（如果尚未存在）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>args</strong>：参数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">数组保存到文件。</span><span class="yiyi-st" id="yiyi-23">由于Python不可能知道<a class="reference internal" href="#numpy.savez" title="numpy.savez"><code class="xref py py-obj docutils literal"><span class="pre">savez</span></code></a>之外的数组的名称，因此数组将以名称“arr_0”，“arr_1”等保存。</span><span class="yiyi-st" id="yiyi-24">这些参数可以是任何表达式。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>kwds</strong>：关键字参数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">数组保存到文件。</span><span class="yiyi-st" id="yiyi-27">数组将保存在带有关键字名称的文件中。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first last"><span class="yiyi-st" id="yiyi-29">没有</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.save.html#numpy.save" title="numpy.save"><code class="xref py py-obj docutils literal"><span class="pre">save</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">将单个数组保存为NumPy格式的二进制文件。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.savetxt.html#numpy.savetxt" title="numpy.savetxt"><code class="xref py py-obj docutils literal"><span class="pre">savetxt</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">将数组作为纯文本保存到文件。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-35"><a class="reference internal" href="numpy.savez_compressed.html#numpy.savez_compressed" title="numpy.savez_compressed"><code class="xref py py-obj docutils literal"><span class="pre">savez_compressed</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-36">将几个数组保存到压缩的<code class="docutils literal"><span class="pre">.npz</span></code>存档中</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-38"><code class="docutils literal"><span class="pre">.npz</span></code>文件格式是以其包含的变量命名的文件的压缩存档。</span><span class="yiyi-st" id="yiyi-39">归档不会压缩，归档中的每个文件都包含<code class="docutils literal"><span class="pre">.npy</span></code>格式的一个变量。</span><span class="yiyi-st" id="yiyi-40">有关<code class="docutils literal"><span class="pre">.npy</span></code>格式的说明，请参阅<code class="xref py py-obj docutils literal"><span class="pre">numpy.lib.format</span></code>或Numpy增强提议<a class="reference external" href="http://docs.scipy.org/doc/numpy/neps/npy-format.html">http://docs.scipy.org/doc/numpy /neps/npy-format.html</a></span></p>
+<p><span class="yiyi-st" id="yiyi-41">当使用<a class="reference internal" href="numpy.load.html#numpy.load" title="numpy.load"><code class="xref py py-obj docutils literal"><span class="pre">load</span></code></a>打开保存的<code class="docutils literal"><span class="pre">.npz</span></code>文件时，会返回<em class="xref py py-obj">NpzFile</em>对象。</span><span class="yiyi-st" id="yiyi-42">这是一个类似字典的对象，可以查询其数组（具有<code class="docutils literal"><span class="pre">.files</span></code>属性）的列表，以及数组本身。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-43">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryFile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">outfile</span> <span class="o">=</span> <span class="n">TemporaryFile</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-44">使用<a class="reference internal" href="#numpy.savez" title="numpy.savez"><code class="xref py py-obj docutils literal"><span class="pre">savez</span></code></a>与* args，数组以默认名称保存。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">outfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># Only needed here to simulate closing &amp; reopening file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">npzfile</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">npzfile</span><span class="o">.</span><span class="n">files</span>
+<span class="go">[&apos;arr_1&apos;, &apos;arr_0&apos;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">npzfile</span><span class="p">[</span><span class="s1">&apos;arr_0&apos;</span><span class="p">]</span>
+<span class="go">array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">使用<a class="reference internal" href="#numpy.savez" title="numpy.savez"><code class="xref py py-obj docutils literal"><span class="pre">savez</span></code></a>与** kwds，数组与关键字名称一起保存。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">outfile</span> <span class="o">=</span> <span class="n">TemporaryFile</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">outfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">npzfile</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">outfile</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">npzfile</span><span class="o">.</span><span class="n">files</span>
+<span class="go">[&apos;y&apos;, &apos;x&apos;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">npzfile</span><span class="p">[</span><span class="s1">&apos;x&apos;</span><span class="p">]</span>
+<span class="go">array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span>
+</pre></div>
+</div>
+</dd></dl>

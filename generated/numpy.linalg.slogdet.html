@@ -1,0 +1,78 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linalg.slogdet</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.slogdet.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.slogdet.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linalg.slogdet"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.linalg.</code><code class="descname">slogdet</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/linalg/linalg.py#L1631-L1721"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算数组的行列式的符号和（自然）对数。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">如果数组具有非常小或非常大的行列式，则调用<a class="reference internal" href="numpy.linalg.det.html#numpy.linalg.det" title="numpy.linalg.det"><code class="xref py py-obj docutils literal"><span class="pre">det</span></code></a>可能会溢出或下溢。</span><span class="yiyi-st" id="yiyi-16">这个例程对于这样的问题更加鲁棒，因为它计算行列式的对数而不是行列式本身。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：（...，M，M）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输入数组，必须是正方形的2-D数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>符号</strong>：（...）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">表示行列式的符号的数字。</span><span class="yiyi-st" id="yiyi-23">对于实数矩阵，这是1,0或-1。</span><span class="yiyi-st" id="yiyi-24">对于复数矩阵，这是一个绝对值为1的复数（即它在单位圆上），否则为0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>logdet</strong>：（...）array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">行列式的绝对值的自然对数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27">如果行列式为零，则<em class="xref py py-obj">符号</em>将为0，<em class="xref py py-obj">logdet</em>将为</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-28">-Inf。</span><span class="yiyi-st" id="yiyi-29">在所有情况下，行列式等于<code class="docutils literal"><span class="pre">符号</span> <span class="pre">*</span> <span class="pre">np.exp（logdet）</span></code>。</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.linalg.det.html#numpy.linalg.det" title="numpy.linalg.det"><code class="xref py py-obj docutils literal"><span class="pre">det</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-33"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-34">广播规则适用，有关详细信息，请参阅<code class="xref py py-obj docutils literal"><span class="pre">numpy.linalg</span></code>文档。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-35"><span class="versionmodified">新版本1.6.0 ..</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-36">行列式通过使用LAPACK例程z / dgetrf的LU因式分解来计算。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-37">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-38">The determinant of a 2-D array <code class="docutils literal"><span class="pre">[[a,</span> <span class="pre">b],</span> <span class="pre">[c,</span> <span class="pre">d]]</span></code> is <code class="docutils literal"><span class="pre">ad</span> <span class="pre">-</span> <span class="pre">bc</span></code>:</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">logdet</span><span class="p">)</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">slogdet</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">logdet</span><span class="p">)</span>
+<span class="go">(-1, 0.69314718055994529)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sign</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logdet</span><span class="p">)</span>
+<span class="go">-2.0</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">计算矩阵堆栈的对数决定因素：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span> <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 2, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sign</span><span class="p">,</span> <span class="n">logdet</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">slogdet</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">logdet</span><span class="p">)</span>
+<span class="go">(array([-1., -1., -1.]), array([ 0.69314718,  1.09861229,  2.07944154]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sign</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logdet</span><span class="p">)</span>
+<span class="go">array([-2., -3., -8.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">该例程在普通<a class="reference internal" href="numpy.linalg.det.html#numpy.linalg.det" title="numpy.linalg.det"><code class="xref py py-obj docutils literal"><span class="pre">det</span></code></a>不执行的情况下成功：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">slogdet</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="go">(1, -1151.2925464970228)</span>
+</pre></div>
+</div>
+</dd></dl>

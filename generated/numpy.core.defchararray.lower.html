@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.core.defchararray.lower</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.lower.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.lower.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.core.defchararray.lower"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.core.defchararray.</code><code class="descname">lower</code><span class="sig-paren">(</span><em>a</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/defchararray.py#L915-L948"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">返回一个数组，将元素转换为小写。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">逐个调用<em class="xref py py-obj">str.lower</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">对于8位字符串，此方法依赖于区域设置。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a</strong>：array_like，{str，unicode}</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输入数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：ndarray，{str，unicode}</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">输出str或unicode的数组，取决于输入类型</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-23">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-24"><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str.lower" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">str.lower</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-25">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;A1B C&apos;</span><span class="p">,</span> <span class="s1">&apos;1BCA&apos;</span><span class="p">,</span> <span class="s1">&apos;BCA1&apos;</span><span class="p">]);</span> <span class="n">c</span>
+<span class="go">array([&apos;A1B C&apos;, &apos;1BCA&apos;, &apos;BCA1&apos;],</span>
+<span class="go">      dtype=&apos;|S5&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="go">array([&apos;a1b c&apos;, &apos;1bca&apos;, &apos;bca1&apos;],</span>
+<span class="go">      dtype=&apos;|S5&apos;)</span>
+</pre></div>
+</div>
+</dd></dl>

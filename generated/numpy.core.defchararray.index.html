@@ -1,0 +1,34 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.core.defchararray.index</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.index.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.index.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.core.defchararray.index"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.core.defchararray.</code><code class="descname">index</code><span class="sig-paren">(</span><em>a</em>, <em>sub</em>, <em>start=0</em>, <em>end=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/defchararray.py#L657-L682"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">像<a class="reference internal" href="numpy.core.defchararray.find.html#numpy.core.defchararray.find" title="numpy.core.defchararray.find"><code class="xref py py-obj docutils literal"><span class="pre">find</span></code></a>，但在找不到子字符串时引发<em class="xref py py-obj">ValueError</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">逐个调用<em class="xref py py-obj">str.index</em>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like of str或unicode</span></p>
+<p><span class="yiyi-st" id="yiyi-18"><strong>sub</strong>：str或unicode</span></p>
+<p><span class="yiyi-st" id="yiyi-19"><strong>start，end</strong>：int，可选</span></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-22">输出数组的整数。</span><span class="yiyi-st" id="yiyi-23">如果未找到<em class="xref py py-obj">sub</em>，则返回-1。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-24">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-25"><a class="reference internal" href="numpy.core.defchararray.find.html#numpy.core.defchararray.find" title="numpy.core.defchararray.find"><code class="xref py py-obj docutils literal"><span class="pre">find</span></code></a>，<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str.find" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">str.find</span></code></a></span></p>
+</div>
+</dd></dl>

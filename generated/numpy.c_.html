@@ -1,0 +1,19 @@
+
+<h1><span class="yiyi-st" id="yiyi-12"><a class="reference internal" href="#numpy-c">numpy.c</a></span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.c_.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.c_.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.c_"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">c_</code><em class="property"> = &lt;numpy.lib.index_tricks.CClass object&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">将切片对象转换为沿第二轴的连接。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">这是<code class="docutils literal"><span class="pre">np.r _ [&apos; -  1,2,0&apos;，</span> <span class="pre">索引</span> <span class="pre">表达式]</span></code> ，这是有用的，因为其常见的发生。</span><span class="yiyi-st" id="yiyi-16">特别地，数组在被升级到至少2-D之后将沿着它们的最后轴被堆叠，其中1被后置为形状（由1-D数组组成的列向量）。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">有关详细文档，请参见<a class="reference internal" href="numpy.r_.html#numpy.r_" title="numpy.r_"><code class="xref py py-obj docutils literal"><span class="pre">r_</span></code></a>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-18">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]]),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])]</span>
+<span class="go">array([[1, 2, 3, 0, 0, 4, 5, 6]])</span>
+</pre></div>
+</div>
+</dd></dl>

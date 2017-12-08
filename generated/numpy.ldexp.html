@@ -1,0 +1,59 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.ldexp</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ldexp.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ldexp.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ldexp"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">ldexp</code><span class="sig-paren">(</span><em>x1</em>, <em>x2</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;ldexp&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">元素方式返回x1 * 2 ** x2。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">尾数<em class="xref py py-obj">x1</em>和两个指数<em class="xref py py-obj">x2</em>用于构建浮点数<code class="docutils literal"><span class="pre">x1</span> <span class="pre">*</span> <span class="pre">2 ** x2</span></code>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>x1</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">乘数的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>x2</strong>：array_like，int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">数组的两个指数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">输出结果的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>y</strong>：ndarray或scalar</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25"><code class="docutils literal"><span class="pre">x1</span> <span class="pre">*</span> <span class="pre">2 ** x2</span></code>的结果。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-26">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-27"><a class="reference internal" href="numpy.frexp.html#numpy.frexp" title="numpy.frexp"><code class="xref py py-obj docutils literal"><span class="pre">frexp</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-28">从<code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">y1</span> <span class="pre">*</span> <span class="pre">2 ** y2的返回（y1，y2） / t5&gt;</span></code>，与<a class="reference internal" href="#numpy.ldexp" title="numpy.ldexp"><code class="xref py py-obj docutils literal"><span class="pre">ldexp</span></code></a>相反。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-30">不支持复杂的dtypes，它们会引发一个TypeError。</span></p>
+<p><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="#numpy.ldexp" title="numpy.ldexp"><code class="xref py py-obj docutils literal"><span class="pre">ldexp</span></code></a>可用作<a class="reference internal" href="numpy.frexp.html#numpy.frexp" title="numpy.frexp"><code class="xref py py-obj docutils literal"><span class="pre">frexp</span></code></a>的逆，如果单独使用，更清楚地使用表达式<code class="docutils literal"><span class="pre">x1</span> <span class="pre">*</span> <span class="pre">2 ** x2</span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ldexp</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">array([  5.,  10.,  20.,  40.], dtype=float32)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">ldexp</span><span class="p">(</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">frexp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="go">array([ 0.,  1.,  2.,  3.,  4.,  5.])</span>
+</pre></div>
+</div>
+</dd></dl>

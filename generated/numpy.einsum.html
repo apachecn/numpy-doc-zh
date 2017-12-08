@@ -1,0 +1,207 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.einsum</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.einsum.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.einsum"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">einsum</code><span class="sig-paren">(</span><em>subscripts</em>, <em>*operands</em>, <em>out=None</em>, <em>dtype=None</em>, <em>order=&apos;K&apos;</em>, <em>casting=&apos;safe&apos;</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">评估操作数上的爱因斯坦求和约定。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">使用爱因斯坦求和约定，许多常见的多维数组操作可以以简单的方式表示。</span><span class="yiyi-st" id="yiyi-16">该函数提供了一种计算这种求和的方法。</span><span class="yiyi-st" id="yiyi-17">理解此函数的最佳方法是尝试下面的示例，它们显示了可以实现多少常见NumPy函数作为对<a class="reference internal" href="#numpy.einsum" title="numpy.einsum"><code class="xref py py-obj docutils literal"><span class="pre">einsum</span></code></a>的调用。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>下标</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">指定求和的下标。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>操作数</strong>：array_like的列表</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">这些是操作的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">如果提供，计算将在此数组中完成。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">如果提供，强制计算使用指定的数据类型。</span><span class="yiyi-st" id="yiyi-27">请注意，您可能还必须提供更宽松的<em class="xref py py-obj">投射</em>参数，以允许转换。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>订单</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;，&apos;K&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">控制输出的内存布局。</span><span class="yiyi-st" id="yiyi-30">&apos;C&apos;意味着它应该是C连续的。</span><span class="yiyi-st" id="yiyi-31">&apos;F&apos;意味着它应该是Fortran连续，&apos;A&apos;意味着如果输入全部是&apos;F&apos;，则它应该是&apos;F&apos;，否则&apos;C&apos;。</span><span class="yiyi-st" id="yiyi-32">&apos;K&apos;意味着它应该尽可能接近输入的布局，包括任意排列的轴。</span><span class="yiyi-st" id="yiyi-33">默认值为“K”。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-34"><strong>投射</strong>：{&apos;no&apos;，&apos;equiv&apos;，&apos;safe&apos;，&apos;same_kind&apos;，&apos;unsafe&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-35">控制可能发生的数据转换类型。</span><span class="yiyi-st" id="yiyi-36">不建议将此设置为“不安全”，因为它会对累积产生不利影响。</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="yiyi-st" id="yiyi-37">&apos;no&apos;意味着不应该转换数据类型。</span></li>
+<li><span class="yiyi-st" id="yiyi-38">&apos;equiv&apos;意味着只允许字节顺序改变。</span></li>
+<li><span class="yiyi-st" id="yiyi-39">“安全”意味着只允许保留值的转换。</span></li>
+<li><span class="yiyi-st" id="yiyi-40">&apos;same_kind&apos;表示只允许一种类型中的安全类型转换，例如float64到float32。</span></li>
+<li><span class="yiyi-st" id="yiyi-41">“不安全”表示可以进行任何数据转换。</span></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-42">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-43"><strong>输出</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-44">基于爱因斯坦求和约定的计算。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-45">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-46"><a class="reference internal" href="numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-obj docutils literal"><span class="pre">dot</span></code></a>，<a class="reference internal" href="numpy.inner.html#numpy.inner" title="numpy.inner"><code class="xref py py-obj docutils literal"><span class="pre">inner</span></code></a>，<a class="reference internal" href="numpy.outer.html#numpy.outer" title="numpy.outer"><code class="xref py py-obj docutils literal"><span class="pre">outer</span></code></a>，<a class="reference internal" href="numpy.tensordot.html#numpy.tensordot" title="numpy.tensordot"><code class="xref py py-obj docutils literal"><span class="pre">tensordot</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-47">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-48"><span class="versionmodified">版本1.6.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-49">下标字符串是逗号分隔的下标标签列表，其中每个标签引用相应操作数的维。</span><span class="yiyi-st" id="yiyi-50">一个操作数中的重复下标标签采用对角线。</span><span class="yiyi-st" id="yiyi-51">例如，<code class="docutils literal"><span class="pre">np.einsum（&apos;ii&apos;，</span> <span class="pre">a）</span></code>等效于<code class="docutils literal"><span class="pre">np.trace(a)</span></code></span></p>
+<p><span class="yiyi-st" id="yiyi-52">每当重复标签时，它被求和，因此<code class="docutils literal"><span class="pre">np.einsum（&apos;i，i&apos;，</span> <span class="pre">a，</span> <span class="pre">b） / t0&gt;等效于<code class="docutils literal"><span class="pre">np.inner(a,b)</span></code>。</span></code></span><span class="yiyi-st" id="yiyi-53">If a label appears only once, it is not summed, so <code class="docutils literal"><span class="pre">np.einsum(&apos;i&apos;,</span> <span class="pre">a)</span></code> produces a view of <code class="docutils literal"><span class="pre">a</span></code> with no changes.</span></p>
+<p><span class="yiyi-st" id="yiyi-54">输出中的标签顺序默认为字母顺序。</span><span class="yiyi-st" id="yiyi-55">这意味着<code class="docutils literal"><span class="pre">np.einsum（&apos;ij&apos;，</span> <span class="pre">a）</span></code>不影响2D数组，而<code class="docutils literal"><span class="pre">.einsum（&apos;ji&apos;，</span> <span class="pre">a）</span></code>接受其转置。</span></p>
+<p><span class="yiyi-st" id="yiyi-56">输出也可以通过指定输出下标标签来控制。</span><span class="yiyi-st" id="yiyi-57">这指定标签顺序，并且允许在需要时禁止或强制求和。</span><span class="yiyi-st" id="yiyi-58">调用<code class="docutils literal"><span class="pre">np.einsum（&apos;i-&gt;&apos;，</span> <span class="pre">a）</span></code>就像<code class="docutils literal"><span class="pre">np.sum <span class="pre">axis = -1）</span></span></code>和<code class="docutils literal"><span class="pre">np.einsum（&apos;ii-&gt; i&apos;，</span> <span class="pre">/ t8&gt;</span></code>就像<code class="docutils literal"><span class="pre">np.diag(a)</span></code>。</span><span class="yiyi-st" id="yiyi-59">区别在于<a class="reference internal" href="#numpy.einsum" title="numpy.einsum"><code class="xref py py-obj docutils literal"><span class="pre">einsum</span></code></a>默认不允许广播。</span></p>
+<p><span class="yiyi-st" id="yiyi-60">要启用和控制广播，请使用省略号。</span><span class="yiyi-st" id="yiyi-61">通过在每个项的左侧添加省略号来完成默认NumPy风格广播，例如<code class="docutils literal"><span class="pre">np.einsum（&apos;... ii-＆gt； ... i&apos;，</span> <span class="pre">a）</span></code>。</span><span class="yiyi-st" id="yiyi-62">要沿着第一个和最后一个轴进行跟踪，你可以做<code class="docutils literal"><span class="pre">np.einsum（&apos;i ... i&apos;，</span> <span class="pre">a）</span> 或者用最左边的索引而不是最右边的索引来做矩阵矩阵乘积，你可以做<code class="docutils literal"><span class="pre">np.einsum（&apos;ij ...，jk ...-&gt; ik ...&apos; </span> <span class="pre">a，</span> <span class="pre">b）</span></code>。</code></span></p>
+<p><span class="yiyi-st" id="yiyi-63">当只有一个操作数，没有轴被求和，并且没有提供输出参数时，将返回操作数中的视图，而不是返回一个新的数组。</span><span class="yiyi-st" id="yiyi-64">因此，将对角线视为<code class="docutils literal"><span class="pre">np.einsum（&apos;ii-&gt; i&apos;，</span> <span class="pre">a）</span></code>产生视图。</span></p>
+<p><span class="yiyi-st" id="yiyi-65">提供下标和操作数的替代方式是<code class="docutils literal"><span class="pre">einsum（op0，</span> <span class="pre">sublist0，</span> <span class="pre">op1，</span> <span class="pre">sublist1， t4&gt; <span class="pre">...，</span> <span class="pre">[sublistout]）</span></span></code>。</span><span class="yiyi-st" id="yiyi-66">以下示例使用两个参数方法进行相应的<a class="reference internal" href="#numpy.einsum" title="numpy.einsum"><code class="xref py py-obj docutils literal"><span class="pre">einsum</span></code></a>调用。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-67"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-68">从输入数组可写时，从einsum返回的视图现在可写。</span><span class="yiyi-st" id="yiyi-69">例如，<code class="docutils literal"><span class="pre">np.einsum（&apos;ijk ...-＆gt； kji ...&apos;，</span> <span class="pre">a）</span></code>现在将具有相同的效果作为<code class="docutils literal"><span class="pre">np.wapaxes（a，</span> <span class="pre">0，</span> <span class="pre">2）</span></code>和<code class="docutils literal"><span class="pre">np.einsum &apos;i&apos;，</span> <span class="pre">a）</span></code>将返回2D数组的对角线的可写视图。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-70">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;ii&apos;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="go">60</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">60</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">60</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;ii-&gt;i&apos;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="go">array([ 0,  6, 12, 18, 24])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">array([ 0,  6, 12, 18, 24])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([ 0,  6, 12, 18, 24])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;ij,j&apos;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([ 30,  80, 130, 180, 230])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">array([ 30,  80, 130, 180, 230])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([ 30,  80, 130, 180, 230])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;...j,j&apos;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([ 30,  80, 130, 180, 230])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;ji&apos;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="go">array([[0, 3],</span>
+<span class="go">       [1, 4],</span>
+<span class="go">       [2, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">array([[0, 3],</span>
+<span class="go">       [1, 4],</span>
+<span class="go">       [2, 5]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">T</span>
+<span class="go">array([[0, 3],</span>
+<span class="go">       [1, 4],</span>
+<span class="go">       [2, 5]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;..., ...&apos;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="go">array([[ 0,  3,  6],</span>
+<span class="go">       [ 9, 12, 15]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="bp">Ellipsis</span><span class="p">],</span> <span class="n">c</span><span class="p">,</span> <span class="p">[</span><span class="bp">Ellipsis</span><span class="p">])</span>
+<span class="go">array([[ 0,  3,  6],</span>
+<span class="go">       [ 9, 12, 15]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="go">array([[ 0,  3,  6],</span>
+<span class="go">       [ 9, 12, 15]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;i,i&apos;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">30</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">30</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="go">30</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;i,j&apos;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([[0, 1, 2, 3, 4],</span>
+<span class="go">       [0, 2, 4, 6, 8]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">array([[0, 1, 2, 3, 4],</span>
+<span class="go">       [0, 2, 4, 6, 8]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([[0, 1, 2, 3, 4],</span>
+<span class="go">       [0, 2, 4, 6, 8]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;i...-&gt;...&apos;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="go">array([50, 55, 60, 65, 70])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="bp">Ellipsis</span><span class="p">],</span> <span class="p">[</span><span class="bp">Ellipsis</span><span class="p">])</span>
+<span class="go">array([50, 55, 60, 65, 70])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([50, 55, 60, 65, 70])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">60.</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">24.</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;ijk,jil-&gt;kl&apos;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([[ 4400.,  4730.],</span>
+<span class="go">       [ 4532.,  4874.],</span>
+<span class="go">       [ 4664.,  5018.],</span>
+<span class="go">       [ 4796.,  5162.],</span>
+<span class="go">       [ 4928.,  5306.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="go">array([[ 4400.,  4730.],</span>
+<span class="go">       [ 4532.,  4874.],</span>
+<span class="go">       [ 4664.,  5018.],</span>
+<span class="go">       [ 4796.,  5162.],</span>
+<span class="go">       [ 4928.,  5306.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+<span class="go">array([[ 4400.,  4730.],</span>
+<span class="go">       [ 4532.,  4874.],</span>
+<span class="go">       [ 4664.,  5018.],</span>
+<span class="go">       [ 4796.,  5162.],</span>
+<span class="go">       [ 4928.,  5306.]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;ki,jk-&gt;ij&apos;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([[10, 28, 46, 64],</span>
+<span class="go">       [13, 40, 67, 94]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;ki,...k-&gt;i...&apos;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([[10, 28, 46, 64],</span>
+<span class="go">       [13, 40, 67, 94]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;k...,jk&apos;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([[10, 28, 46, 64],</span>
+<span class="go">       [13, 40, 67, 94]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># since version 1.10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&apos;ii-&gt;i&apos;</span><span class="p">,</span> <span class="n">a</span><span class="p">)[:]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([[ 1.,  0.,  0.],</span>
+<span class="go">       [ 0.,  1.,  0.],</span>
+<span class="go">       [ 0.,  0.,  1.]])</span>
+</pre></div>
+</div>
+</dd></dl>

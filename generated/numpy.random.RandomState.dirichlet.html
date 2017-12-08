@@ -1,0 +1,63 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.random.RandomState.dirichlet</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.dirichlet.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.dirichlet.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.random.RandomState.dirichlet"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">RandomState.</code><code class="descname">dirichlet</code><span class="sig-paren">(</span><em>alpha</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">从Dirichlet分布绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">从Dirichlet分布绘制尺寸k的<em class="xref py py-obj">尺寸</em>样本。</span><span class="yiyi-st" id="yiyi-17">Dirichlet分布随机变量可以看作是Beta分布的多元泛化。</span><span class="yiyi-st" id="yiyi-18">Dirichlet pdf是贝叶斯推理中多项式的共轭前缀。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-20"><strong>alpha</strong>：数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">分布参数（k维的样本维度k）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">输出形状。</span><span class="yiyi-st" id="yiyi-24">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-25">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>samples</strong>：ndarray，</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">绘制的样本，形状（大小，alpha.ndim）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-30">使用以下属性进行计算：对于每个维，从形状<em class="xref py py-obj">alpha_i</em>的标准伽马生成器绘制随机样本y_i，然后<img alt="X = \frac{1}{\sum_{i=1}^k{y_i}} (y_1, \ldots, y_n)" class="math" src="../../_images/math/43509cf81e2686a12a6296cb15db9f9220c409c1.png" style="vertical-align: -12px">是Dirichlet分布。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r143" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-32"><a class="fn-backref" href="#id1">[R143]</a></span></td><td><span class="yiyi-st" id="yiyi-33">David McKay，“Information Theory，Inference and Learning Algorithms”，第23章，<a class="reference external" href="http://www.inference.phy.cam.ac.uk/mackay/">http://www.inference.phy.cam.ac.uk/mackay/</a></span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r144" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-34"><a class="fn-backref" href="#id2">[R144]</a></span></td><td><span class="yiyi-st" id="yiyi-35">维基百科，“Dirichlet分布”，<a class="reference external" href="http://en.wikipedia.org/wiki/Dirichlet_distribution">http://en.wikipedia.org/wiki/Dirichlet_distribution</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-36">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-37">以维基百科中引用的示例为例，如果想要将字符串（每个初始长度为1.0）切割成不同长度的K个字节，则可以使用该分布，其中每个字段平均具有指定的平均长度，但允许一些变化相对尺寸的碎片。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">dirichlet</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">left</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&apos;g&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">left</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&apos;r&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Lengths of Strings&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>

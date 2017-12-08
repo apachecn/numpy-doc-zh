@@ -1,0 +1,33 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.masked_invalid</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.masked_invalid.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.masked_invalid.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.ma.masked_invalid"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">masked_invalid</code><span class="sig-paren">(</span><em>a</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/ma/core.py#L2305-L2344"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">屏蔽发生无效值的数组（NaN或inf）。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">此函数是<code class="docutils literal"><span class="pre">masked_where</span></code>的快捷方式，其中<em class="xref py py-obj">条件</em> =〜（np.isfinite（a））。</span><span class="yiyi-st" id="yiyi-17">任何预先存在的面具都是守恒的。</span><span class="yiyi-st" id="yiyi-18">仅适用于数组，其中NaN或infs有意义（即浮点类型），但接受任何array_like对象。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-19">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-20"><a class="reference internal" href="numpy.ma.masked_where.html#numpy.ma.masked_where" title="numpy.ma.masked_where"><code class="xref py py-obj docutils literal"><span class="pre">masked_where</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-21">满足条件的掩码。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy.ma</span> <span class="k">as</span> <span class="nn">ma</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">PINF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">array([  0.,   1.,  NaN,  Inf,   4.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">masked_array(data = [0.0 1.0 -- -- 4.0],</span>
+<span class="go">      mask = [False False  True  True False],</span>
+<span class="go">      fill_value=1e+20)</span>
+</pre></div>
+</div>
+</dd></dl>

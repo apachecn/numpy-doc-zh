@@ -1,0 +1,121 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.matmul</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matmul.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matmul.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.matmul"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">matmul</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>out=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">两个数组的矩阵乘积。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">行为取决于参数以下面的方式。</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-16">如果两个参数都是2-D，则它们像常规矩阵一样相乘。</span></li>
+<li><span class="yiyi-st" id="yiyi-17">如果任一参数是N-D，N&gt; 2，则将其视为存在于最后两个索引中的矩阵的堆栈并且相应地进行广播。</span></li>
+<li><span class="yiyi-st" id="yiyi-18">如果第一个参数是1-D，则通过在其维度前面添加1来将其提升为矩阵。</span><span class="yiyi-st" id="yiyi-19">在矩阵乘法之后，去除前缀1。</span></li>
+<li><span class="yiyi-st" id="yiyi-20">如果第二个参数是1-D，则通过向其维度添加1来将其提升为矩阵。</span><span class="yiyi-st" id="yiyi-21">在矩阵乘法之后，去除附加的1。</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-22">不允许乘以标量乘法，请改用<code class="docutils literal"><span class="pre">*</span></code>。</span><span class="yiyi-st" id="yiyi-23">注意，将一堆矩阵乘以一个向量将产生一个向量栈，但是matmul不会这样认出它。</span></p>
+<p><span class="yiyi-st" id="yiyi-24"><code class="docutils literal"><span class="pre">matmul</span></code>与两个重要方面不同于<code class="docutils literal"><span class="pre">dot</span></code>。</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-25">不允许乘以标量乘法。</span></li>
+<li><span class="yiyi-st" id="yiyi-26">矩阵的栈被一起广播，如同矩阵是元素一样。</span></li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">警告</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-28">此功能是初步的，包括在Numpy 1.10中用于测试和文档。</span><span class="yiyi-st" id="yiyi-29">它的语义不会改变，但可选参数的数量和顺序将会改变。</span></p>
+</div>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-30"><span class="versionmodified">版本1.10.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-31">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-32"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">第一个参数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-34"><strong>b</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-35">第二个参数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-36"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-37">输出参数。</span><span class="yiyi-st" id="yiyi-38">这必须有返回的确切的类型，如果没有使用。</span><span class="yiyi-st" id="yiyi-39">特别地，它必须具有正确的类型，必须是C连续的，并且其dtype必须是将为<em class="xref py py-obj">dot（a，b）</em>返回的dtype。</span><span class="yiyi-st" id="yiyi-40">这是一个性能特性。</span><span class="yiyi-st" id="yiyi-41">因此，如果不满足这些条件，则引发异常，而不是试图灵活。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-42">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-43"><strong>输出</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-44">返回<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>的点积。</span><span class="yiyi-st" id="yiyi-45">如果<em class="xref py py-obj">a</em>和<em class="xref py py-obj">b</em>都是1-D数组，则返回标量；否则返回一个数组。</span><span class="yiyi-st" id="yiyi-46">如果给出<em class="xref py py-obj">out</em>，则返回。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-47">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-48"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-49">如果<em class="xref py py-obj">a</em>的最后一个尺寸与<em class="xref py py-obj">b</em>的倒数第二个尺寸不同。</span></p>
+<p><span class="yiyi-st" id="yiyi-50">如果标量值被传递。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-51">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-52"><a class="reference internal" href="numpy.vdot.html#numpy.vdot" title="numpy.vdot"><code class="xref py py-obj docutils literal"><span class="pre">vdot</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-53">复共轭点积。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-54"><a class="reference internal" href="numpy.tensordot.html#numpy.tensordot" title="numpy.tensordot"><code class="xref py py-obj docutils literal"><span class="pre">tensordot</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-55">任意轴上的和。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-56"><a class="reference internal" href="numpy.einsum.html#numpy.einsum" title="numpy.einsum"><code class="xref py py-obj docutils literal"><span class="pre">einsum</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-57">爱因斯坦求和约定。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-58"><a class="reference internal" href="numpy.dot.html#numpy.dot" title="numpy.dot"><code class="xref py py-obj docutils literal"><span class="pre">dot</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-59">具有不同广播规则的替代矩阵产品。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-60">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-61">matmul函数实现了在PEP465之后的Python 3.5中引入的<em class="xref py py-obj">@</em>运算符的语义。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-62">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-63">对于2-D数组，它是矩阵积：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([[4, 1],</span>
+<span class="go">       [2, 2]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-64">对于与1-D混合的2-D，结果是通常的。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="go">array([1, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="go">array([1, 2])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-65">广播对于数组的栈是常规的</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 2, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">98</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">98</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-66">Vector，vector返回标量内积，但两个参数都不是复共轭：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">([</span><span class="mi">2</span><span class="n">j</span><span class="p">,</span> <span class="mi">3</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="n">j</span><span class="p">,</span> <span class="mi">3</span><span class="n">j</span><span class="p">])</span>
+<span class="go">(-13+0j)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-67">标量乘法会引发错误。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Scalar operands are not allowed, use &apos;*&apos; instead</span>
+</pre></div>
+</div>
+</dd></dl>

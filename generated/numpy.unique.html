@@ -1,0 +1,100 @@
+
+<h1><span class="yiyi-st" id="yiyi-9">numpy.unique</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.unique.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.unique.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.unique"><span class="yiyi-st" id="yiyi-10"> <code class="descclassname">numpy.</code><code class="descname">unique</code><span class="sig-paren">(</span><em>ar</em>, <em>return_index=False</em>, <em>return_inverse=False</em>, <em>return_counts=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/arraysetops.py#L96-L216"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-11">查找数组的唯一元素。</span></p>
+<p><span class="yiyi-st" id="yiyi-12">返回数组的排序的唯一元素。</span><span class="yiyi-st" id="yiyi-13">除了唯一元素外，还有三个可选输出：提供唯一值的输入数组的索引，重建输入数组的唯一数组的索引，以及输入数组中每个唯一值的出现次数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-14">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-15"><strong>ar</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-16">输入数组。</span><span class="yiyi-st" id="yiyi-17">如果它不是1-D，它将被展平。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>return_index</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">如果为True，还返回导致唯一数组的<em class="xref py py-obj">ar</em>的索引。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>return_inverse</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">如果为True，还返回可用于重构<em class="xref py py-obj">ar</em>的唯一数组的索引。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>return_counts</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">如果为True，还返回<em class="xref py py-obj">ar</em>中每个唯一值的出现次数。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-24"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-25">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-26"><strong>unique</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">排序的唯一值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>unique_indices</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">（扁平）原数组中唯一值的第一次出现的索引。</span><span class="yiyi-st" id="yiyi-30">仅当<em class="xref py py-obj">return_index</em>为True时提供。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-31"><strong>unique_inverse</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-32">从唯一数组重建（扁平化）原数组的索引。</span><span class="yiyi-st" id="yiyi-33">仅在<em class="xref py py-obj">return_inverse</em>为True时提供。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-34"><strong>unique_counts</strong>：ndarray，可选</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-35">原始数组中每个唯一值的出现次数。</span><span class="yiyi-st" id="yiyi-36">仅在<em class="xref py py-obj">return_counts</em>为True时提供。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-37"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-38">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-39"><code class="xref py py-obj docutils literal"><span class="pre">numpy.lib.arraysetops</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-40">具有用于对数组执行设置操作的多个其他功能的模块。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-41">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">array([1, 2, 3])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">array([1, 2, 3])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">返回给出唯一值的原数组的索引：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&apos;a&apos;</span><span class="p">,</span> <span class="s1">&apos;b&apos;</span><span class="p">,</span> <span class="s1">&apos;b&apos;</span><span class="p">,</span> <span class="s1">&apos;c&apos;</span><span class="p">,</span> <span class="s1">&apos;a&apos;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span>
+<span class="go">array([&apos;a&apos;, &apos;b&apos;, &apos;c&apos;],</span>
+<span class="go">       dtype=&apos;|S1&apos;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span>
+<span class="go">array([0, 1, 3])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+<span class="go">array([&apos;a&apos;, &apos;b&apos;, &apos;c&apos;],</span>
+<span class="go">       dtype=&apos;|S1&apos;)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">从唯一值重新构建输入数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span>
+<span class="go">array([1, 2, 3, 4, 6])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span>
+<span class="go">array([0, 1, 4, 3, 1, 2, 1])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+<span class="go">array([1, 2, 6, 4, 2, 3, 2])</span>
+</pre></div>
+</div>
+</dd></dl>

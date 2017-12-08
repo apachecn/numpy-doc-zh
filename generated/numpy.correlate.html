@@ -1,0 +1,77 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.correlate</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.correlate.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.correlate.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.correlate"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">correlate</code><span class="sig-paren">(</span><em>a</em>, <em>v</em>, <em>mode=&apos;valid&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L851-L916"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">两个1维序列的互相关。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">该函数计算信号处理文本中通常定义的相关性：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c_</span><span class="p">{</span><span class="n">av</span><span class="p">}[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum_n</span> <span class="n">a</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">conj</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-16">其中a和v序列在必要时被填零，conj是共轭。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>a，v</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">输入序列。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>mode</strong>：{&apos;valid&apos;，&apos;same&apos;，&apos;full&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">请参阅<a class="reference internal" href="numpy.convolve.html#numpy.convolve" title="numpy.convolve"><code class="xref py py-obj docutils literal"><span class="pre">convolve</span></code></a>文档字符串。</span><span class="yiyi-st" id="yiyi-22">请注意，默认值为“有效”，与使用“full”的<a class="reference internal" href="numpy.convolve.html#numpy.convolve" title="numpy.convolve"><code class="xref py py-obj docutils literal"><span class="pre">convolve</span></code></a>不同。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>old_behavior</strong>：bool</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">在NumPy 1.10中删除了<em class="xref py py-obj">old_behavior</em>。</span><span class="yiyi-st" id="yiyi-25">如果你需要旧的行为，使用<em class="xref py py-obj">multiarray.correlate</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28"><em class="xref py py-obj">a</em>和<em class="xref py py-obj">v</em>的离散互相关。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-29">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="numpy.convolve.html#numpy.convolve" title="numpy.convolve"><code class="xref py py-obj docutils literal"><span class="pre">convolve</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-31">离散，两个一维序列的线性卷积。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-32"><code class="xref py py-obj docutils literal"><span class="pre">multiarray.correlate</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-33">老，没有共轭，correlate的版本。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-35">上述相关性的定义不是唯一的，并且有时相关性可能被不同地定义。</span><span class="yiyi-st" id="yiyi-36">另一个常见的定义是：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="s1">&apos;_</span><span class="si">{av}</span><span class="s1">[k] = sum_n a[n] conj(v[n+k])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-37">其通过<code class="docutils literal"><span class="pre">c&apos;_ {av} [k]</span> <span class="pre">=</span> <span class="pre">c_与<code class="docutils literal"><span class="pre">c_{av}[k]</span></code></span></code>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-38">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="go">array([ 3.5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="s2">&quot;same&quot;</span><span class="p">)</span>
+<span class="go">array([ 2. ,  3.5,  3. ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="s2">&quot;full&quot;</span><span class="p">)</span>
+<span class="go">array([ 0.5,  2. ,  3.5,  3. ,  0. ])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">使用复杂序列：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">([</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="n">j</span><span class="p">],</span> <span class="s1">&apos;full&apos;</span><span class="p">)</span>
+<span class="go">array([ 0.5-0.5j,  1.0+0.j ,  1.5-1.5j,  3.0-1.j ,  0.0+0.j ])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">注意，当两个输入序列改变位置时，你得到时间反转的复共轭结果，即<code class="docutils literal"><span class="pre">c_ {va} [k]</span> <span class="pre">=</span> <span class="pre">c ^ {*} _ {av} [ -  k]</span></code>：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="n">j</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="p">],</span> <span class="s1">&apos;full&apos;</span><span class="p">)</span>
+<span class="go">array([ 0.0+0.j ,  3.0+1.j ,  1.5+1.5j,  1.0+0.j ,  0.5+0.5j])</span>
+</pre></div>
+</div>
+</dd></dl>

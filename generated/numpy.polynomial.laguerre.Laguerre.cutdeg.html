@@ -1,0 +1,34 @@
+
+<h1><span class="yiyi-st" id="yiyi-15">numpy.polynomial.laguerre.Laguerre.cutdeg</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.laguerre.Laguerre.cutdeg.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.laguerre.Laguerre.cutdeg.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.polynomial.laguerre.Laguerre.cutdeg"><span class="yiyi-st" id="yiyi-16"> <code class="descclassname">Laguerre.</code><code class="descname">cutdeg</code><span class="sig-paren">(</span><em>deg</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/_polybase.py#L476-L499"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-17">截断到给定程度的系列。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">通过丢弃高阶项将序列的次数减少到<em class="xref py py-obj">deg</em>。</span><span class="yiyi-st" id="yiyi-19">如果<em class="xref py py-obj">deg</em>大于当前度数，则返回当前系列的副本。</span><span class="yiyi-st" id="yiyi-20">这在最小二乘中是有用的，其中高次项的系数可以非常小。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-21"><span class="versionmodified">版本1.5.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>deg</strong>：非负整数</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">通过舍弃高阶项将系列减小到度<em class="xref py py-obj">deg</em>。</span><span class="yiyi-st" id="yiyi-25"><em class="xref py py-obj">deg</em>的值必须为非负整数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>new_series</strong>：series</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">程度降低的新系列实例。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

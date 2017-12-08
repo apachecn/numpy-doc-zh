@@ -1,0 +1,48 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.ma.anom</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.anom.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ma.anom.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ma.anom"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">numpy.ma.</code><code class="descname">anom</code><span class="sig-paren">(</span><em>self</em>, <em>axis=None</em>, <em>dtype=None</em><span class="sig-paren">)</span><em class="property"> = &lt;numpy.ma.core._frommethod instance&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">沿给定轴计算异常（与算术平均值的偏差）。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">返回异常的数组，具有与输入相同的形状，其中算术平均值沿给定轴计算。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">在其上采取异常的轴。</span><span class="yiyi-st" id="yiyi-20">默认值是使用扁平数组的平均值作为参考。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-22">用于计算方差的类型。</span><span class="yiyi-st" id="yiyi-23">对于整数类型的数组</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-24">默认为float32；对于float类型的数组，它与数组类型相同。</span></p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.ma.mean.html#numpy.ma.mean" title="numpy.ma.mean"><code class="xref py py-obj docutils literal"><span class="pre">mean</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-27">计算数组的平均值。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">anom</span><span class="p">()</span>
+<span class="go">masked_array(data = [-1.  0.  1.],</span>
+<span class="go">             mask = False,</span>
+<span class="go">       fill_value = 1e+20)</span>
+</pre></div>
+</div>
+</dd></dl>

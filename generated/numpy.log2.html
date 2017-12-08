@@ -1,0 +1,52 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.log2</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.log2.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.log2.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.log2"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">log2</code><span class="sig-paren">(</span><em>x</em><span class="optional">[</span>, <em>out</em><span class="optional">]</span><span class="sig-paren">)</span><em class="property"> = &lt;ufunc &apos;log2&apos;&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14"><em class="xref py py-obj">x</em>的基础2对数。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>x</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-18">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-19"><strong>y</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-20"><em class="xref py py-obj">x</em>的基础2对数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-21">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-22"><a class="reference internal" href="numpy.log.html#numpy.log" title="numpy.log"><code class="xref py py-obj docutils literal"><span class="pre">log</span></code></a>，<a class="reference internal" href="numpy.log10.html#numpy.log10" title="numpy.log10"><code class="xref py py-obj docutils literal"><span class="pre">log10</span></code></a>，<a class="reference internal" href="numpy.log1p.html#numpy.log1p" title="numpy.log1p"><code class="xref py py-obj docutils literal"><span class="pre">log1p</span></code></a>，<code class="xref py py-obj docutils literal"><span class="pre">emath.log2</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-23">笔记</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-24"><span class="versionmodified">版本1.3.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-25">对数是多值函数：对于每个<em class="xref py py-obj">x</em>，存在无限数量的<em class="xref py py-obj">z</em>，使得<em class="xref py py-obj">2 ** z = x</em>。</span><span class="yiyi-st" id="yiyi-26">约定是返回其虚部在<em class="xref py py-obj">[ -  pi，pi]</em>中的<em class="xref py py-obj">z</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-27">对于实值输入数据类型，<a class="reference internal" href="#numpy.log2" title="numpy.log2"><code class="xref py py-obj docutils literal"><span class="pre">log2</span></code></a>始终返回实际输出。</span><span class="yiyi-st" id="yiyi-28">对于不能表示为实数或无穷大的每个值，它会产生<code class="docutils literal"><span class="pre">nan</span></code>并设置<em class="xref py py-obj">无效</em>浮点错误标志。</span></p>
+<p><span class="yiyi-st" id="yiyi-29">对于复值输入，<a class="reference internal" href="#numpy.log2" title="numpy.log2"><code class="xref py py-obj docutils literal"><span class="pre">log2</span></code></a>是具有分支切<em class="xref py py-obj">[ -  inf，0]</em>并且从上面连续的复杂分析函数。</span><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="#numpy.log2" title="numpy.log2"><code class="xref py py-obj docutils literal"><span class="pre">log2</span></code></a>将浮点负零作为无穷小负数处理，符合C99标准。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-31">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">array([-Inf,   0.,   1.,   4.])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="o">+</span><span class="mf">1.</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">+</span><span class="mf">0.</span><span class="n">j</span><span class="p">,</span> <span class="mf">4.</span><span class="n">j</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+<span class="go">array([ 0.+2.26618007j,  0.+0.j        ,  1.+0.j        ,  2.+2.26618007j])</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,78 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.tile</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.tile.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.tile.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.tile"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">tile</code><span class="sig-paren">(</span><em>A</em>, <em>reps</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/shape_base.py#L785-L873"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">通过重复A由reps指定的次数构造数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">如果<em class="xref py py-obj">reps</em>具有长度<code class="docutils literal"><span class="pre">d</span></code>，则结果将具有<code class="docutils literal"><span class="pre">max（d，</span> <span class="pre">A.ndim） t5 &gt;</span></code>。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">如果<code class="docutils literal"><span class="pre">A.ndim</span> <span class="pre"> <span class="pre">d</span></span></code>，则<em class="xref py py-obj">A</em>前置新轴。</span><span class="yiyi-st" id="yiyi-17">因此，形状（3，）数组被提升为（1，3）用于2-D复制，或形状（1,1,3）用于3-D复制。</span><span class="yiyi-st" id="yiyi-18">如果这不是所需的行为，请在调用此函数之前将<em class="xref py py-obj">A</em>提升为d维。</span></p>
+<p><span class="yiyi-st" id="yiyi-19">If <code class="docutils literal"><span class="pre">A.ndim</span> <span class="pre">&gt;</span> <span class="pre">d</span></code>, <em class="xref py py-obj">reps</em> is promoted to <em class="xref py py-obj">A</em>.ndim by pre-pending 1’s to it. </span><span class="yiyi-st" id="yiyi-20">因此，对于形状（2,3,4,5）的<em class="xref py py-obj">A</em>，（2,2）的<em class="xref py py-obj">reps</em>被视为（1,1,2,2） 。</span></p>
+<p><span class="yiyi-st" id="yiyi-21">注意：虽然磁贴可以用于广播，但强烈建议使用numpy的广播操作和功能。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>A</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>reps</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">沿每个轴的重复次数<em class="xref py py-obj">A</em>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-27">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-28"><strong>c</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-29">平铺输出数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-30">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-31"><a class="reference internal" href="numpy.repeat.html#numpy.repeat" title="numpy.repeat"><code class="xref py py-obj docutils literal"><span class="pre">repeat</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-32">重复数组的元素。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-33"><a class="reference internal" href="numpy.broadcast_to.html#numpy.broadcast_to" title="numpy.broadcast_to"><code class="xref py py-obj docutils literal"><span class="pre">broadcast_to</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-34">将数组广播到新形状</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([0, 1, 2, 0, 1, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">array([[0, 1, 2, 0, 1, 2],</span>
+<span class="go">       [0, 1, 2, 0, 1, 2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">array([[[0, 1, 2, 0, 1, 2]],</span>
+<span class="go">       [[0, 1, 2, 0, 1, 2]]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([[1, 2, 1, 2],</span>
+<span class="go">       [3, 4, 3, 4]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [3, 4],</span>
+<span class="go">       [1, 2],</span>
+<span class="go">       [3, 4]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">c</span><span class="p">,(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">array([[1, 2, 3, 4],</span>
+<span class="go">       [1, 2, 3, 4],</span>
+<span class="go">       [1, 2, 3, 4],</span>
+<span class="go">       [1, 2, 3, 4]])</span>
+</pre></div>
+</div>
+</dd></dl>

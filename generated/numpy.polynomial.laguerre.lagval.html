@@ -1,0 +1,63 @@
+
+<h1><span class="yiyi-st" id="yiyi-14">numpy.polynomial.laguerre.lagval</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.laguerre.lagval.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.laguerre.lagval.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.polynomial.laguerre.lagval"><span class="yiyi-st" id="yiyi-15"> <code class="descclassname">numpy.polynomial.laguerre.</code><code class="descname">lagval</code><span class="sig-paren">(</span><em>x</em>, <em>c</em>, <em>tensor=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/laguerre.py#L853-L945"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-16">在x点评估Laguerre系列。</span></p>
+<p><span class="yiyi-st" id="yiyi-17">如果<em class="xref py py-obj">c</em>长度<em class="xref py py-obj">n + 1</em>，则此函数返回值：</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-18">仅当参数<em class="xref py py-obj">x</em>是元组或列表时，才将其转换为数组，否则将其视为标量。</span><span class="yiyi-st" id="yiyi-19">在任一情况下，<em class="xref py py-obj">x</em>或其元素必须支持与它们自身和<em class="xref py py-obj">c</em>的元素的乘法和加法。</span></p>
+<p><span class="yiyi-st" id="yiyi-20">如果<em class="xref py py-obj">c</em>是1-D数组，则<em class="xref py py-obj">p（x）</em>将具有与<em class="xref py py-obj">x</em>相同的形状。</span><span class="yiyi-st" id="yiyi-21">如果<em class="xref py py-obj">c</em>是多维的，则结果的形状取决于<em class="xref py py-obj">张量</em>的值。</span><span class="yiyi-st" id="yiyi-22">如果<em class="xref py py-obj">张量</em>为真，形状将为c.shape [1：] + x.shape。</span><span class="yiyi-st" id="yiyi-23">如果<em class="xref py py-obj">张量</em>为假，则形状将为c.shape [1：]。</span><span class="yiyi-st" id="yiyi-24">注意，标量具有形状（，）。</span></p>
+<p><span class="yiyi-st" id="yiyi-25">系数中的尾随零将用于评估，因此如果效率是关注的，则应避免使用它们。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>x</strong>：array_like，兼容对象</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">如果<em class="xref py py-obj">x</em>是一个列表或元组，它被转换为一个ndarray，否则它保持不变并被当作标量。</span><span class="yiyi-st" id="yiyi-29">在任一情况下，<em class="xref py py-obj">x</em>或其元素必须支持与其自身和<em class="xref py py-obj">c</em>的元素的加法和乘法。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-30"><strong>c</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-31">系数的数组被排序，使得阶数n的系数包含在c [n]中。</span><span class="yiyi-st" id="yiyi-32">如果<em class="xref py py-obj">c</em>是多维的，其余索引枚举多个多项式。</span><span class="yiyi-st" id="yiyi-33">在二维情况下，系数可以被认为是存储在<em class="xref py py-obj">c</em>的列中。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-34"><strong>张量</strong>：boolean，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-35">如果为真，则系数数组的形状用右边的1扩展，每个维度的<em class="xref py py-obj">x</em>一个。对于此操作，标量的维度为0。</span><span class="yiyi-st" id="yiyi-36">结果是<em class="xref py py-obj">c</em>中的每个系数列被计算<em class="xref py py-obj">x</em>的每个元素。</span><span class="yiyi-st" id="yiyi-37">如果为False，则在<em class="xref py py-obj">c</em>的列上广播<em class="xref py py-obj">x</em>以进行评估。</span><span class="yiyi-st" id="yiyi-38">当<em class="xref py py-obj">c</em>是多维的时，此关键字很有用。</span><span class="yiyi-st" id="yiyi-39">默认值为True。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-40"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-41">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-42"><strong>值</strong>：ndarray，algebra_like</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-43">返回值的形状如上所述。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-44">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="numpy.polynomial.laguerre.lagval2d.html#numpy.polynomial.laguerre.lagval2d" title="numpy.polynomial.laguerre.lagval2d"><code class="xref py py-obj docutils literal"><span class="pre">lagval2d</span></code></a>，<a class="reference internal" href="numpy.polynomial.laguerre.laggrid2d.html#numpy.polynomial.laguerre.laggrid2d" title="numpy.polynomial.laguerre.laggrid2d"><code class="xref py py-obj docutils literal"><span class="pre">laggrid2d</span></code></a>，<a class="reference internal" href="numpy.polynomial.laguerre.lagval3d.html#numpy.polynomial.laguerre.lagval3d" title="numpy.polynomial.laguerre.lagval3d"><code class="xref py py-obj docutils literal"><span class="pre">lagval3d</span></code></a>，<a class="reference internal" href="numpy.polynomial.laguerre.laggrid3d.html#numpy.polynomial.laguerre.laggrid3d" title="numpy.polynomial.laguerre.laggrid3d"><code class="xref py py-obj docutils literal"><span class="pre">laggrid3d</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-46">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-47">评估使用Clenshaw递归，也称为合成分割。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-48">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.polynomial.laguerre</span> <span class="k">import</span> <span class="n">lagval</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coef</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lagval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">coef</span><span class="p">)</span>
+<span class="go">-0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lagval</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]],</span> <span class="n">coef</span><span class="p">)</span>
+<span class="go">array([[-0.5, -4. ],</span>
+<span class="go">       [-4.5, -2. ]])</span>
+</pre></div>
+</div>
+</dd></dl>

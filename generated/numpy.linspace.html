@@ -1,0 +1,97 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.linspace</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.linspace"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">linspace</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em>, <em>num=50</em>, <em>endpoint=True</em>, <em>retstep=False</em>, <em>dtype=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/function_base.py#L9-L125"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">在指定的间隔内返回均匀间隔的数字。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">返回在间隔[<em class="xref py py-obj">开始</em>，<em class="xref py py-obj">停止</em>]上计算的<em class="xref py py-obj">num</em>个均匀间隔的样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">可以可选地排除间隔的端点。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>start</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">序列的起始值。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>停止</strong>：标量</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">除非<em class="xref py py-obj">endpoint</em>设置为False，否则序列的结束值。</span><span class="yiyi-st" id="yiyi-22">在这种情况下，序列由除了最后的<code class="docutils literal"><span class="pre">num</span> <span class="pre">+</span> <span class="pre">1</span></code>个均匀间隔的样本组成， <em class="xref py py-obj">停止</em>被排除。</span><span class="yiyi-st" id="yiyi-23">请注意，当<em class="xref py py-obj">端点</em>为False时，步长会发生变化。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>num</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">要生成的样本数。</span><span class="yiyi-st" id="yiyi-26">默认值为50。</span><span class="yiyi-st" id="yiyi-27">必须为非负数。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>endpoint</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">如果为真，则<em class="xref py py-obj">停止</em>是最后一个样本。</span><span class="yiyi-st" id="yiyi-30">否则，不包括在内。</span><span class="yiyi-st" id="yiyi-31">默认值为True。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>retstep</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">如果为真，返回（<em class="xref py py-obj">样本</em>，<em class="xref py py-obj">步骤</em>），其中<em class="xref py py-obj">步长</em>是样本之间的间距。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-34"><strong>dtype</strong>：dtype，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-35">输出数组的类型。</span><span class="yiyi-st" id="yiyi-36">如果未给出<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>，则从其他输入参数推断数据类型。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-37"><span class="versionmodified">版本1.9.0中的新功能。</span></span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-38">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-39"><strong>samples</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-40">There are <em class="xref py py-obj">num</em> equally spaced samples in the closed interval <code class="docutils literal"><span class="pre">[start,</span> <span class="pre">stop]</span></code> or the half-open interval <code class="docutils literal"><span class="pre">[start,</span> <span class="pre">stop)</span></code> (depending on whether <em class="xref py py-obj">endpoint</em> is True or False).</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-41"><strong>步骤</strong>：float</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-42">仅在<em class="xref py py-obj">retstep</em>为True时返回</span></p>
+<p><span class="yiyi-st" id="yiyi-43">样本之间的间距大小。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-44">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-45"><a class="reference internal" href="numpy.arange.html#numpy.arange" title="numpy.arange"><code class="xref py py-obj docutils literal"><span class="pre">arange</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-46">与<a class="reference internal" href="#numpy.linspace" title="numpy.linspace"><code class="xref py py-obj docutils literal"><span class="pre">linspace</span></code></a>类似，但使用步长（而不是样本数）。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-47"><a class="reference internal" href="numpy.logspace.html#numpy.logspace" title="numpy.logspace"><code class="xref py py-obj docutils literal"><span class="pre">logspace</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-48">样本均匀分布在对数空间中。</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-49">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">    array([ 2.  ,  2.25,  2.5 ,  2.75,  3.  ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">    array([ 2. ,  2.2,  2.4,  2.6,  2.8])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">retstep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">    (array([ 2.  ,  2.25,  2.5 ,  2.75,  3.  ]), 0.25)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-50">图形图：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&apos;o&apos;</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&apos;o&apos;</span><span class="p">)</span>
+<span class="go">[&lt;matplotlib.lines.Line2D object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">(-0.5, 1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-51">（<a class="reference external" href="../../reference/generated/numpy-linspace-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-linspace-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-linspace-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-linspace-1.png" src="../../_images/numpy-linspace-1.png">
+</div>
+</dd></dl>

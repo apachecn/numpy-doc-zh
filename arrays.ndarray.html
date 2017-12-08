@@ -1,0 +1,765 @@
+
+<span id="arrays-ndarray"></span><h1><span class="yiyi-st" id="yiyi-29">N维数组（<code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code>）</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html">https://docs.scipy.org/doc/numpy/reference/arrays.ndarray.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<p><span class="yiyi-st" id="yiyi-30"><a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>是（通常大小固定的）一个多维容器，由相同类型和大小的元素组成。</span><span class="yiyi-st" id="yiyi-31">数组中的维度和元素数量由其<a class="reference internal" href="generated/numpy.ndarray.shape.html#numpy.ndarray.shape" title="numpy.ndarray.shape"><code class="xref py py-attr docutils literal"><span class="pre">shape</span></code></a>定义，它是由<em>N</em>个正整数组成的<a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#tuple" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">元组</span></code></a>，每个整数指定每个维度的大小。</span><span class="yiyi-st" id="yiyi-32">数组中元素的类型由单独的<a class="reference internal" href="arrays.dtypes.html#arrays-dtypes"><span class="std std-ref">数据类型对象 (dtype)</span></a>指定，每个ndarray与其中一个对象相关联。</span></p>
+<p><span class="yiyi-st" id="yiyi-33">与Python中的其他容器对象一样，<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>的内容可以通过<a class="reference internal" href="arrays.indexing.html#arrays-indexing"><span class="std std-ref">索引或切片</span></a>（例如使用<em>N</em>个整数）、以及<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>的方法和属性访问和修改数组。</span></p>
+<p id="index-0"><span class="yiyi-st" id="yiyi-34">不同的<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarrays</span></code></a>可以共享相同的数据，使得在一个<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>中进行的改变在另一个中可见。</span><span class="yiyi-st" id="yiyi-35">也就是说，ndarray可以是到另一个ndarray的<em>“view”</em>，并且其引用的数据由<em>“base”</em> ndarray处理。</span><span class="yiyi-st" id="yiyi-36">ndarrays还可以是由Python <a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">strings</span></code></a>或实现<code class="xref py py-class docutils literal"><span class="pre">buffer</span></code>或<a class="reference internal" href="arrays.interface.html#arrays-interface"><span class="std std-ref">array</span></a>接口的对象拥有的内存的视图。</span></p>
+<div class="admonition-example admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-37">例</span></p>
+<p><span class="yiyi-st" id="yiyi-38">尺寸为2&#xD7;3的二维数组，由4字节整数元素组成：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">&lt;type &apos;numpy.ndarray&apos;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(2, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype(&apos;int32&apos;)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-39">数组可以使用类似Python容器的语法进行索引：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># The element of x in the *second* row, *third* column, namely, 6.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-40">例如，<a class="reference internal" href="arrays.indexing.html#arrays-indexing"><span class="std std-ref">切片</span></a>可以生成数组的视图：</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([2, 5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9</span> <span class="c1"># this also changes the corresponding element in x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([9, 5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[1, 9, 3],</span>
+<span class="go">       [4, 5, 6]])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="constructing-arrays">
+<h2><span class="yiyi-st" id="yiyi-41">构造数组</span></h2>
+<p><span class="yiyi-st" id="yiyi-42">新数组可以使用<a class="reference internal" href="routines.array-creation.html#routines-array-creation"><span class="std std-ref">数组创建例程</span></a>中详述的例程以及使用低级<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>构造函数构建：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-43"><a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-obj docutils literal"><span class="pre">ndarray</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-44">数组对象，表示一个多维、同质、元素大小固定的数组。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="indexing-arrays">
+<span id="arrays-ndarray-indexing"></span><h2><span class="yiyi-st" id="yiyi-45">索引数组</span></h2>
+<p><span class="yiyi-st" id="yiyi-46">数组可以使用扩展的Python切片语法<code class="docutils literal"><span class="pre">array[selection]</span></code>来索引。</span><span class="yiyi-st" id="yiyi-47">类似的语法也用于访问<span class="xref std std-ref">结构化数组</span>中的字段。</span></p>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-48">另见</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-49"><a class="reference internal" href="arrays.indexing.html#arrays-indexing"><span class="std std-ref">数组索引</span></a>。</span></p>
+</div>
+</div>
+<div class="section" id="internal-memory-layout-of-an-ndarray">
+<h2><span class="yiyi-st" id="yiyi-50">ndarray的内存布局</span></h2>
+<p><span class="yiyi-st" id="yiyi-51">类<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>的实例由计算机存储器的一维连续段（由该数组、或一些其他对象拥有）组成，结合索引方案映射<em>N</em>个整数为块中元素的位置。</span><span class="yiyi-st" id="yiyi-52">索引可以变化的范围由数组的<a class="reference internal" href="generated/numpy.ndarray.shape.html#numpy.ndarray.shape" title="numpy.ndarray.shape"><code class="xref py py-obj docutils literal"><span class="pre">shape</span></code></a>指定。</span><span class="yiyi-st" id="yiyi-53">每个元素占用多少字节以及如何解释字节由与数组相关联的<a class="reference internal" href="arrays.dtypes.html#arrays-dtypes"><span class="std std-ref">数据类型对象</span></a>定义。</span></p>
+<p id="index-1"><span class="yiyi-st" id="yiyi-54">存储器段本质上是1维的，并且将<em>N</em>维数组的元素组织为1维的内存块有许多不同方案。</span><span class="yiyi-st" id="yiyi-55">NumPy是灵活的，<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>对象可以适应任何<em>strided索引方案</em>。</span><span class="yiyi-st" id="yiyi-56">在一个strided方案中，N维索引<img alt="(n_0, n_1, ..., n_{N-1})" class="math" src="../_images/math/55e2912fdc1638596e19ae6361f2d2db30450efc.png" style="vertical-align: -4px">对应于偏移量（以字节为单位）：</span></p>
+<div class="math">
+<p><img alt="n_{\mathrm{offset}} = \sum_{k=0}^{N-1} s_k n_k" src="../_images/math/17fdc8233ee40cccdfeba940091cd2630850581a.png"></p>
+</div><p><span class="yiyi-st" id="yiyi-57">从与数组相关联的存储器块的开始。</span><span class="yiyi-st" id="yiyi-58">这里，<img alt="s_k" class="math" src="../_images/math/d5ab8e6081db79a4afcf29b7616b48025de0e80c.png" style="vertical-align: -2px">是指定数组的<a class="reference internal" href="generated/numpy.ndarray.strides.html#numpy.ndarray.strides" title="numpy.ndarray.strides"><code class="xref py py-obj docutils literal"><span class="pre">strides</span></code></a>的整数。</span><span class="yiyi-st" id="yiyi-59"><a class="reference internal" href="../glossary.html#term-column-major"><span class="xref std std-term">column-major</span></a>顺序（例如在Fortran语言和<em>Matlab</em>中使用）和<a class="reference internal" href="../glossary.html#term-row-major"><span class="xref std std-term">row-major</span></a>方案仅仅是特定种类的跨距方案，并且对应于可以通过步幅<em>寻址的存储器</em>：</span></p>
+<div class="math">
+<p><img alt="s_k^{\mathrm{column}} = \mathrm{itemsize} \prod_{j=0}^{k-1} d_j ,
+\quad  s_k^{\mathrm{row}} = \mathrm{itemsize} \prod_{j=k+1}^{N-1} d_j ." src="../_images/math/c28fa0657966b37e188e72dbfdb5dbb3a0707d63.png"></p>
+</div><p id="index-2"><span class="yiyi-st" id="yiyi-60">其中<img alt="d_j" class="math" src="../_images/math/c375e8b96fc69dad77ee104906be2a9df776ad66.png" style="vertical-align: -4px"> <em class="xref py py-obj">= self.shape [j]</em>。</span></p>
+<p><span class="yiyi-st" id="yiyi-61">C和Fortran顺序都是<a class="reference external" href="https://docs.python.org/dev/glossary.html#term-contiguous" title="(in Python v3.7)"><span class="xref std std-term">contiguous</span></a>，<em>即</em> <span class="xref std std-term">单段</span>的存储器布局，其中可以访问存储器块的每个部分通过指数的一些组合。</span></p>
+<p><span class="yiyi-st" id="yiyi-62">虽然具有相应标志设置的C风格和Fortran风格的连续数组可以用上述步幅来解决，但实际的步幅可能不同。</span><span class="yiyi-st" id="yiyi-63">这可能发生在两种情况下：</span></p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><span class="yiyi-st" id="yiyi-64">如果<code class="docutils literal"><span class="pre">self.shape [k]</span> <span class="pre">==</span> <span class="pre">1</span></code>，则对于任何法定索引<code class="docutils literal"><span class="pre">[k]</span> <span class="pre">==</span> <span class="pre">0</span></code>。</span><span class="yiyi-st" id="yiyi-65">这意味着在偏移<img alt="n_k = 0" class="math" src="../_images/math/9fed4bdf69e096e1239bd758fe79e8076f28d793.png" style="vertical-align: -2px">的公式中，因此<img alt="s_k n_k = 0" class="math" src="../_images/math/36e9c492db6f4ad8e065f978a3d4a33a3c6df086.png" style="vertical-align: -2px">和<img alt="s_k" class="math" src="../_images/math/d5ab8e6081db79a4afcf29b7616b48025de0e80c.png" style="vertical-align: -2px"> <em class="xref py py-obj">= self.strides [k]</em>的值是任意的。</span></li>
+<li><span class="yiyi-st" id="yiyi-66">如果数组没有元素（<code class="docutils literal"><span class="pre">self.size</span> <span class="pre">==</span> <span class="pre">0</span></code>），则没有法律索引和步长从不使用。</span><span class="yiyi-st" id="yiyi-67">任何没有元素的数组都可以被认为是C风格和Fortran风格的连续。</span></li>
+</ol>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-68">点1.意味着<code class="docutils literal"><span class="pre">self</span></code>和<code class="docutils literal"><span class="pre">self.squeeze()</span></code>始终具有相同的邻接和<span class="xref std std-term">对齐</span>标志值。</span><span class="yiyi-st" id="yiyi-69">这也意味着，即使一个高维的数组可以是C风格和Fortran风格的连续的同时。</span></p>
+<p id="index-3"><span class="yiyi-st" id="yiyi-70">如果所有元素的内存偏移和基本偏移本身是<em class="xref py py-obj">self.itemsize</em>的倍数，则认为数组是对齐的。</span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-71">注意</span></p>
+<p><span class="yiyi-st" id="yiyi-72">默认情况下，点（1）和（2）尚未应用。</span><span class="yiyi-st" id="yiyi-73">从NumPy 1.8.0开始，只有在构建NumPy时定义了环境变量<code class="docutils literal"><span class="pre">NPY_RELAXED_STRIDES_CHECKING=1</span></code>，它们才会一致应用。</span><span class="yiyi-st" id="yiyi-74">最终这将成为默认值。</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-75">你可以通过查看<code class="docutils literal"><span class="pre">np.ones（（10,1），</span> <span class="pre">order =&apos;C&apos;）的值建立NumPy时是否启用此选项。flags .f_contiguous</span></code>。</span><span class="yiyi-st" id="yiyi-76">如果这是<code class="docutils literal"><span class="pre">True</span></code>，则您的NumPy已启用宽松检查。</span></p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-77">警告</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-78"><em>不</em>一般认为<code class="docutils literal"><span class="pre">self.strides [-1]</span> <span class="pre">==</span> <span class="pre">self.itemsize</span> / t1&gt;用于C型连续数组或<code class="docutils literal"><span class="pre">self.strides [0]</span> <span class="pre">==</span> <span class="pre">self.itemsize</span>  Fortran风格的连续数组是真的。</code></code></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-79">除非另有规定，否则新<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarrays</span></code></a>中的数据处于<a class="reference internal" href="../glossary.html#term-row-major"><span class="xref std std-term">row-major</span></a>（C）顺序，但是例如<a class="reference internal" href="arrays.indexing.html#arrays-indexing"><span class="std std-ref">basic array slicing</span></a> <a class="reference internal" href="../glossary.html#term-view"><span class="xref std std-term">views</span></a>。</span></p>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-80">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-81">NumPy中的几个算法可以处理任意跨度的数组。</span><span class="yiyi-st" id="yiyi-82">然而，一些算法需要单段数组。</span><span class="yiyi-st" id="yiyi-83">当将不规则跨度的数组传递到这样的算法中时，自动地进行复制。</span></p>
+</div>
+</div>
+<div class="section" id="array-attributes">
+<span id="arrays-ndarray-attributes"></span><h2><span class="yiyi-st" id="yiyi-84">Array attributes</span></h2>
+<p><span class="yiyi-st" id="yiyi-85">数组属性反映数组本身固有的信息。</span><span class="yiyi-st" id="yiyi-86">通常，通过其属性访问数组允许您获取并有时设置数组的固有属性，而不创建新的数组。</span><span class="yiyi-st" id="yiyi-87">暴露的属性是数组的核心部分，只有其中的一些可以有意义地重置，而不创建新的数组。</span><span class="yiyi-st" id="yiyi-88">下面给出每个属性的信息。</span></p>
+<div class="section" id="memory-layout">
+<h3><span class="yiyi-st" id="yiyi-89">Memory layout</span></h3>
+<p><span class="yiyi-st" id="yiyi-90">以下属性包含有关数组的内存布局的信息：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-91"><a class="reference internal" href="generated/numpy.ndarray.flags.html#numpy.ndarray.flags" title="numpy.ndarray.flags"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.flags</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-92">有关数组的内存布局的信息。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-93"><a class="reference internal" href="generated/numpy.ndarray.shape.html#numpy.ndarray.shape" title="numpy.ndarray.shape"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.shape</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-94">数组维数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-95"><a class="reference internal" href="generated/numpy.ndarray.strides.html#numpy.ndarray.strides" title="numpy.ndarray.strides"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.strides</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-96">遍历数组时，在每个维度中步进的字节数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-97"><a class="reference internal" href="generated/numpy.ndarray.ndim.html#numpy.ndarray.ndim" title="numpy.ndarray.ndim"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.ndim</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-98">数组维数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-99"><a class="reference internal" href="generated/numpy.ndarray.data.html#numpy.ndarray.data" title="numpy.ndarray.data"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.data</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-100">Python缓冲区对象指向数组的数据的开始。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-101"><a class="reference internal" href="generated/numpy.ndarray.size.html#numpy.ndarray.size" title="numpy.ndarray.size"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.size</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-102">数组中的元素数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-103"><a class="reference internal" href="generated/numpy.ndarray.itemsize.html#numpy.ndarray.itemsize" title="numpy.ndarray.itemsize"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.itemsize</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-104">一个数组元素的长度（以字节为单位）。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-105"><a class="reference internal" href="generated/numpy.ndarray.nbytes.html#numpy.ndarray.nbytes" title="numpy.ndarray.nbytes"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.nbytes</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-106">数组的元素消耗的总字节数。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-107"><a class="reference internal" href="generated/numpy.ndarray.base.html#numpy.ndarray.base" title="numpy.ndarray.base"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.base</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-108">如果内存是来自某个其他对象的基本对象。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="data-type">
+<h3><span class="yiyi-st" id="yiyi-109">Data type</span></h3>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-110">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-111"><a class="reference internal" href="arrays.dtypes.html#arrays-dtypes"><span class="std std-ref">Data type objects</span></a></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-112">与数组相关联的数据类型对象可以在<a class="reference internal" href="generated/numpy.ndarray.dtype.html#numpy.ndarray.dtype" title="numpy.ndarray.dtype"><code class="xref py py-attr docutils literal"><span class="pre">dtype</span></code></a>属性中找到：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-113"><a class="reference internal" href="generated/numpy.ndarray.dtype.html#numpy.ndarray.dtype" title="numpy.ndarray.dtype"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.dtype</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-114">数组元素的数据类型。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="other-attributes">
+<h3><span class="yiyi-st" id="yiyi-115">Other attributes</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-116"><a class="reference internal" href="generated/numpy.ndarray.T.html#numpy.ndarray.T" title="numpy.ndarray.T"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.T</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-117">与self.transpose()相同，除非self是self.ndim返回</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-118"><a class="reference internal" href="generated/numpy.ndarray.real.html#numpy.ndarray.real" title="numpy.ndarray.real"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.real</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-119">数组的真实部分。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-120"><a class="reference internal" href="generated/numpy.ndarray.imag.html#numpy.ndarray.imag" title="numpy.ndarray.imag"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.imag</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-121">数组的虚部。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-122"><a class="reference internal" href="generated/numpy.ndarray.flat.html#numpy.ndarray.flat" title="numpy.ndarray.flat"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.flat</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-123">数组上的1-D迭代器。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-124"><a class="reference internal" href="generated/numpy.ndarray.ctypes.html#numpy.ndarray.ctypes" title="numpy.ndarray.ctypes"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.ctypes</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-125">一个对象，用于简化数组与ctypes模块的交互。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="array-interface">
+<span id="arrays-ndarray-array-interface"></span><h3><span class="yiyi-st" id="yiyi-126">Array interface</span></h3>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-127">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-128"><a class="reference internal" href="arrays.interface.html#arrays-interface"><span class="std std-ref">The Array Interface</span></a>。</span></p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%">
+<col width="57%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-129"><a class="reference internal" href="arrays.interface.html#__array_interface__" title="__array_interface__"><code class="xref py py-obj docutils literal"><span class="pre">__array_interface__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-130">数组接口的Python端</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-131"><code class="xref py py-obj docutils literal"><span class="pre">__array_struct__</span></code></span></td>
+<td><span class="yiyi-st" id="yiyi-132">C组的数组接口</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="ctypes-foreign-function-interface">
+<h3><span class="yiyi-st" id="yiyi-133"><a class="reference external" href="https://docs.python.org/dev/library/ctypes.html#module-ctypes" title="(in Python v3.7)"><code class="xref py py-mod docutils literal"><span class="pre">ctypes</span></code></a> foreign function interface</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-134"><a class="reference internal" href="generated/numpy.ndarray.ctypes.html#numpy.ndarray.ctypes" title="numpy.ndarray.ctypes"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.ctypes</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-135">一个对象，用于简化数组与ctypes模块的交互。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="array-methods">
+<span id="array-ndarray-methods"></span><h2><span class="yiyi-st" id="yiyi-136">Array methods</span></h2>
+<p><span class="yiyi-st" id="yiyi-137"><a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>对象有许多以某种方式对数组进行操作的方法，通常返回数组结果。</span><span class="yiyi-st" id="yiyi-138">下面简要解释这些方法。</span><span class="yiyi-st" id="yiyi-139">（每个方法的docstring有一个更完整的描述。）</span></p>
+<p><span class="yiyi-st" id="yiyi-140">For the following methods there are also corresponding functions in <a class="reference internal" href="index.html#module-numpy" title="numpy"><code class="xref py py-mod docutils literal"><span class="pre">numpy</span></code></a>: <a class="reference internal" href="generated/numpy.all.html#numpy.all" title="numpy.all"><code class="xref py py-func docutils literal"><span class="pre">all</span></code></a>, <a class="reference internal" href="generated/numpy.any.html#numpy.any" title="numpy.any"><code class="xref py py-func docutils literal"><span class="pre">any</span></code></a>, <a class="reference internal" href="generated/numpy.argmax.html#numpy.argmax" title="numpy.argmax"><code class="xref py py-func docutils literal"><span class="pre">argmax</span></code></a>, <a class="reference internal" href="generated/numpy.argmin.html#numpy.argmin" title="numpy.argmin"><code class="xref py py-func docutils literal"><span class="pre">argmin</span></code></a>, <a class="reference internal" href="generated/numpy.argpartition.html#numpy.argpartition" title="numpy.argpartition"><code class="xref py py-func docutils literal"><span class="pre">argpartition</span></code></a>, <a class="reference internal" href="generated/numpy.argsort.html#numpy.argsort" title="numpy.argsort"><code class="xref py py-func docutils literal"><span class="pre">argsort</span></code></a>, <a class="reference internal" href="generated/numpy.choose.html#numpy.choose" title="numpy.choose"><code class="xref py py-func docutils literal"><span class="pre">choose</span></code></a>, <a class="reference internal" href="generated/numpy.clip.html#numpy.clip" title="numpy.clip"><code class="xref py py-func docutils literal"><span class="pre">clip</span></code></a>, <a class="reference internal" href="generated/numpy.compress.html#numpy.compress" title="numpy.compress"><code class="xref py py-func docutils literal"><span class="pre">compress</span></code></a>, <a class="reference internal" href="generated/numpy.copy.html#numpy.copy" title="numpy.copy"><code class="xref py py-func docutils literal"><span class="pre">copy</span></code></a>, <a class="reference internal" href="generated/numpy.cumprod.html#numpy.cumprod" title="numpy.cumprod"><code class="xref py py-func docutils literal"><span class="pre">cumprod</span></code></a>, <a class="reference internal" href="generated/numpy.cumsum.html#numpy.cumsum" title="numpy.cumsum"><code class="xref py py-func docutils literal"><span class="pre">cumsum</span></code></a>, <a class="reference internal" href="generated/numpy.diagonal.html#numpy.diagonal" title="numpy.diagonal"><code class="xref py py-func docutils literal"><span class="pre">diagonal</span></code></a>, <a class="reference internal" href="generated/numpy.imag.html#numpy.imag" title="numpy.imag"><code class="xref py py-func docutils literal"><span class="pre">imag</span></code></a>, <a class="reference internal" href="generated/numpy.amax.html#numpy.amax" title="numpy.amax"><code class="xref py py-func docutils literal"><span class="pre">max</span></code></a>, <a class="reference internal" href="generated/numpy.mean.html#numpy.mean" title="numpy.mean"><code class="xref py py-func docutils literal"><span class="pre">mean</span></code></a>, <a class="reference internal" href="generated/numpy.amin.html#numpy.amin" title="numpy.amin"><code class="xref py py-func docutils literal"><span class="pre">min</span></code></a>, <a class="reference internal" href="generated/numpy.nonzero.html#numpy.nonzero" title="numpy.nonzero"><code class="xref py py-func docutils literal"><span class="pre">nonzero</span></code></a>, <a class="reference internal" href="generated/numpy.partition.html#numpy.partition" title="numpy.partition"><code class="xref py py-func docutils literal"><span class="pre">partition</span></code></a>, <a class="reference internal" href="generated/numpy.prod.html#numpy.prod" title="numpy.prod"><code class="xref py py-func docutils literal"><span class="pre">prod</span></code></a>, <a class="reference internal" href="generated/numpy.ptp.html#numpy.ptp" title="numpy.ptp"><code class="xref py py-func docutils literal"><span class="pre">ptp</span></code></a>, <a class="reference internal" href="generated/numpy.put.html#numpy.put" title="numpy.put"><code class="xref py py-func docutils literal"><span class="pre">put</span></code></a>, <a class="reference internal" href="generated/numpy.ravel.html#numpy.ravel" title="numpy.ravel"><code class="xref py py-func docutils literal"><span class="pre">ravel</span></code></a>, <a class="reference internal" href="generated/numpy.real.html#numpy.real" title="numpy.real"><code class="xref py py-func docutils literal"><span class="pre">real</span></code></a>, <a class="reference internal" href="generated/numpy.repeat.html#numpy.repeat" title="numpy.repeat"><code class="xref py py-func docutils literal"><span class="pre">repeat</span></code></a>, <a class="reference internal" href="generated/numpy.reshape.html#numpy.reshape" title="numpy.reshape"><code class="xref py py-func docutils literal"><span class="pre">reshape</span></code></a>, <a class="reference internal" href="generated/numpy.around.html#numpy.around" title="numpy.around"><code class="xref py py-func docutils literal"><span class="pre">round</span></code></a>, <a class="reference internal" href="generated/numpy.searchsorted.html#numpy.searchsorted" title="numpy.searchsorted"><code class="xref py py-func docutils literal"><span class="pre">searchsorted</span></code></a>, <a class="reference internal" href="generated/numpy.sort.html#numpy.sort" title="numpy.sort"><code class="xref py py-func docutils literal"><span class="pre">sort</span></code></a>, <a class="reference internal" href="generated/numpy.squeeze.html#numpy.squeeze" title="numpy.squeeze"><code class="xref py py-func docutils literal"><span class="pre">squeeze</span></code></a>, <a class="reference internal" href="generated/numpy.std.html#numpy.std" title="numpy.std"><code class="xref py py-func docutils literal"><span class="pre">std</span></code></a>, <a class="reference internal" href="generated/numpy.sum.html#numpy.sum" title="numpy.sum"><code class="xref py py-func docutils literal"><span class="pre">sum</span></code></a>, <a class="reference internal" href="generated/numpy.swapaxes.html#numpy.swapaxes" title="numpy.swapaxes"><code class="xref py py-func docutils literal"><span class="pre">swapaxes</span></code></a>, <a class="reference internal" href="generated/numpy.take.html#numpy.take" title="numpy.take"><code class="xref py py-func docutils literal"><span class="pre">take</span></code></a>, <a class="reference internal" href="generated/numpy.trace.html#numpy.trace" title="numpy.trace"><code class="xref py py-func docutils literal"><span class="pre">trace</span></code></a>, <a class="reference internal" href="generated/numpy.transpose.html#numpy.transpose" title="numpy.transpose"><code class="xref py py-func docutils literal"><span class="pre">transpose</span></code></a>, <a class="reference internal" href="generated/numpy.var.html#numpy.var" title="numpy.var"><code class="xref py py-func docutils literal"><span class="pre">var</span></code></a>.</span></p>
+<div class="section" id="array-conversion">
+<h3><span class="yiyi-st" id="yiyi-141">Array conversion</span></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-142"><a class="reference internal" href="generated/numpy.ndarray.item.html#numpy.ndarray.item" title="numpy.ndarray.item"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.item</span></code></a>（\ * args）</span></td>
+<td><span class="yiyi-st" id="yiyi-143">提取数组中的元素</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-144"><a class="reference internal" href="generated/numpy.ndarray.tolist.html#numpy.ndarray.tolist" title="numpy.ndarray.tolist"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.tolist</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-145">将数组返回为（可能是嵌套的）列表。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-146"><a class="reference internal" href="generated/numpy.ndarray.itemset.html#numpy.ndarray.itemset" title="numpy.ndarray.itemset"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.itemset</span></code></a>（\ * args）</span></td>
+<td><span class="yiyi-st" id="yiyi-147">在指定位置插入标量值（修改原始数组）</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-148"><a class="reference internal" href="generated/numpy.ndarray.tostring.html#numpy.ndarray.tostring" title="numpy.ndarray.tostring"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.tostring</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-149">在数组中构造包含原始数据字节的Python字节。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-150"><a class="reference internal" href="generated/numpy.ndarray.tobytes.html#numpy.ndarray.tobytes" title="numpy.ndarray.tobytes"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.tobytes</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-151">在数组中构造包含原始数据字节的Python字节。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-152"><a class="reference internal" href="generated/numpy.ndarray.tofile.html#numpy.ndarray.tofile" title="numpy.ndarray.tofile"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.tofile</span></code></a>（fid [，sep，format]）</span></td>
+<td><span class="yiyi-st" id="yiyi-153">将数组作为文本或二进制（默认）写入文件。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-154"><a class="reference internal" href="generated/numpy.ndarray.dump.html#numpy.ndarray.dump" title="numpy.ndarray.dump"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.dump</span></code></a>（file）</span></td>
+<td><span class="yiyi-st" id="yiyi-155">将数组的pickle转储到指定的文件。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-156"><a class="reference internal" href="generated/numpy.ndarray.dumps.html#numpy.ndarray.dumps" title="numpy.ndarray.dumps"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.dumps</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-157">以字符串形式返回数组的pickle。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-158"><a class="reference internal" href="generated/numpy.ndarray.astype.html#numpy.ndarray.astype" title="numpy.ndarray.astype"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.astype</span></code></a>（dtype [，order，casting，...]）</span></td>
+<td><span class="yiyi-st" id="yiyi-159">数组的复制，强制转换为指定的类型。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-160"><a class="reference internal" href="generated/numpy.ndarray.byteswap.html#numpy.ndarray.byteswap" title="numpy.ndarray.byteswap"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.byteswap</span></code></a>（inplace）</span></td>
+<td><span class="yiyi-st" id="yiyi-161">交换数组元素的字节</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-162"><a class="reference internal" href="generated/numpy.ndarray.copy.html#numpy.ndarray.copy" title="numpy.ndarray.copy"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.copy</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-163">返回数组的副本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-164"><a class="reference internal" href="generated/numpy.ndarray.view.html#numpy.ndarray.view" title="numpy.ndarray.view"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.view</span></code></a>（[dtype，type]）</span></td>
+<td><span class="yiyi-st" id="yiyi-165">数组的新视图与相同的数据。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-166"><a class="reference internal" href="generated/numpy.ndarray.getfield.html#numpy.ndarray.getfield" title="numpy.ndarray.getfield"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.getfield</span></code></a>（dtype [，offset]）</span></td>
+<td><span class="yiyi-st" id="yiyi-167">将给定数组的字段返回为特定类型。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-168"><a class="reference internal" href="generated/numpy.ndarray.setflags.html#numpy.ndarray.setflags" title="numpy.ndarray.setflags"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.setflags</span></code></a>（[write，align，uic]）</span></td>
+<td><span class="yiyi-st" id="yiyi-169">分别设置数组标志WRITEABLE，ALIGNED和UPDATEIFCOPY。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-170"><a class="reference internal" href="generated/numpy.ndarray.fill.html#numpy.ndarray.fill" title="numpy.ndarray.fill"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.fill</span></code></a>（value）</span></td>
+<td><span class="yiyi-st" id="yiyi-171">使用标量值填充数组。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="shape-manipulation">
+<h3><span class="yiyi-st" id="yiyi-172">Shape manipulation</span></h3>
+<p><span class="yiyi-st" id="yiyi-173">对于重塑，调整大小和转置，单个元组参数可以替换为<code class="docutils literal"><span class="pre">n</span></code>整数，这将被解释为n元组。</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-174"><a class="reference internal" href="generated/numpy.ndarray.reshape.html#numpy.ndarray.reshape" title="numpy.ndarray.reshape"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.reshape</span></code></a>（shape [，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-175">返回包含具有新形状的相同数据的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-176"><a class="reference internal" href="generated/numpy.ndarray.resize.html#numpy.ndarray.resize" title="numpy.ndarray.resize"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.resize</span></code></a>（new_shape [，refcheck]）</span></td>
+<td><span class="yiyi-st" id="yiyi-177">就地更改数组的形状和大小。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-178"><a class="reference internal" href="generated/numpy.ndarray.transpose.html#numpy.ndarray.transpose" title="numpy.ndarray.transpose"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.transpose</span></code></a>（\ * axes）</span></td>
+<td><span class="yiyi-st" id="yiyi-179">返回具有轴转置的数组的视图。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-180"><a class="reference internal" href="generated/numpy.ndarray.swapaxes.html#numpy.ndarray.swapaxes" title="numpy.ndarray.swapaxes"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.swapaxes</span></code></a>（axis1，axis2）</span></td>
+<td><span class="yiyi-st" id="yiyi-181">返回数组的视图，其中<em class="xref py py-obj">axis1</em>和<em class="xref py py-obj">axis2</em>互换。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-182"><a class="reference internal" href="generated/numpy.ndarray.flatten.html#numpy.ndarray.flatten" title="numpy.ndarray.flatten"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.flatten</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-183">将折叠的数组的副本返回到一个维度。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-184"><a class="reference internal" href="generated/numpy.ndarray.ravel.html#numpy.ndarray.ravel" title="numpy.ndarray.ravel"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.ravel</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-185">返回展平的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-186"><a class="reference internal" href="generated/numpy.ndarray.squeeze.html#numpy.ndarray.squeeze" title="numpy.ndarray.squeeze"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.squeeze</span></code></a>（[axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-187">从<em class="xref py py-obj">a形状删除单维条目</em>。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="item-selection-and-manipulation">
+<h3><span class="yiyi-st" id="yiyi-188">Item selection and manipulation</span></h3>
+<p><span class="yiyi-st" id="yiyi-189">对于采用<em>轴</em>关键字的数组方法，默认为<code class="xref py py-const docutils literal"><span class="pre">None</span></code>。</span><span class="yiyi-st" id="yiyi-190">如果axis <em>None</em>，则数组被视为1-D数组。</span><span class="yiyi-st" id="yiyi-191"><em>axis</em>的任何其他值表示操作应沿其进行的维度。</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-192"><a class="reference internal" href="generated/numpy.ndarray.take.html#numpy.ndarray.take" title="numpy.ndarray.take"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.take</span></code></a>（indices [，axis，out，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-193">返回由给定索引处的<em class="xref py py-obj">a</em>元素组成的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-194"><a class="reference internal" href="generated/numpy.ndarray.put.html#numpy.ndarray.put" title="numpy.ndarray.put"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.put</span></code></a>（indices，values [，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-195">对于所有<em class="xref py py-obj">n</em>，设置<code class="docutils literal"><span class="pre">a.flat [n]</span> <span class="pre">=</span> <span class="pre">在指数。</span></code></span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-196"><a class="reference internal" href="generated/numpy.ndarray.repeat.html#numpy.ndarray.repeat" title="numpy.ndarray.repeat"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.repeat</span></code></a>（repeat[，axis]）</span></td>
+<td><span class="yiyi-st" id="yiyi-197">重复数组的元素。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-198"><a class="reference internal" href="generated/numpy.ndarray.choose.html#numpy.ndarray.choose" title="numpy.ndarray.choose"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.choose</span></code></a>（choices [，out，mode]）</span></td>
+<td><span class="yiyi-st" id="yiyi-199">使用索引数组从一组选择中构造新的数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-200"><a class="reference internal" href="generated/numpy.ndarray.sort.html#numpy.ndarray.sort" title="numpy.ndarray.sort"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.sort</span></code></a>（[axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-201">就地对数组进行排序。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-202"><a class="reference internal" href="generated/numpy.ndarray.argsort.html#numpy.ndarray.argsort" title="numpy.ndarray.argsort"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.argsort</span></code></a>（[axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-203">返回将此数组排序的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-204"><a class="reference internal" href="generated/numpy.ndarray.partition.html#numpy.ndarray.partition" title="numpy.ndarray.partition"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.partition</span></code></a>（kth [，axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-205">重新排列数组中的元素，使得第k个位置的元素的值在排序数组中的位置。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-206"><a class="reference internal" href="generated/numpy.ndarray.argpartition.html#numpy.ndarray.argpartition" title="numpy.ndarray.argpartition"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.argpartition</span></code></a>（kth [，axis，kind，order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-207">返回将对此数组进行分区的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-208"><a class="reference internal" href="generated/numpy.ndarray.searchsorted.html#numpy.ndarray.searchsorted" title="numpy.ndarray.searchsorted"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.searchsorted</span></code></a>（v [，side，sorter]）</span></td>
+<td><span class="yiyi-st" id="yiyi-209">查找索引，其中v的元素应插入到a以维持顺序。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-210"><a class="reference internal" href="generated/numpy.ndarray.nonzero.html#numpy.ndarray.nonzero" title="numpy.ndarray.nonzero"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.nonzero</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-211">返回非零元素的索引。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-212"><a class="reference internal" href="generated/numpy.ndarray.compress.html#numpy.ndarray.compress" title="numpy.ndarray.compress"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.compress</span></code></a>（condition [，axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-213">沿给定轴返回此数组的所选切片。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-214"><a class="reference internal" href="generated/numpy.ndarray.diagonal.html#numpy.ndarray.diagonal" title="numpy.ndarray.diagonal"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.diagonal</span></code></a>（[offset，axis1，axis2]）</span></td>
+<td><span class="yiyi-st" id="yiyi-215">返回指定的对角线。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="calculation">
+<h3><span class="yiyi-st" id="yiyi-216">Calculation</span></h3>
+<p id="index-4"><span class="yiyi-st" id="yiyi-217">这些方法中的许多采用名为<em>axis</em>的参数。</span><span class="yiyi-st" id="yiyi-218">在这种情况下，</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-219">如果<em>axis</em>为<em>None</em>（默认值），则将数组视为1-D数组，并对整个数组执行该操作。</span><span class="yiyi-st" id="yiyi-220">如果self是一个0维数组或数组标量，这个行为也是默认的。</span><span class="yiyi-st" id="yiyi-221">（数组标量是类型/类float32，float64等的实例，而0维数组是一个包含正好一个数组标量的ndarray实例。</span></li>
+<li><span class="yiyi-st" id="yiyi-222">如果<em>axis</em>是整数，则在给定轴上进行该操作（对于可以沿给定轴创建的每个1-D子阵列）。</span></li>
+</ul>
+<div class="admonition-example-of-the-axis-argument admonition">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-223"><em>轴</em>参数示例</span></p>
+<p><span class="yiyi-st" id="yiyi-224">尺寸为3&#xD7;3&#xD7;3的三维数组，在其三个轴中的每一个上求和</span></p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[[ 0,  1,  2],</span>
+<span class="go">        [ 3,  4,  5],</span>
+<span class="go">        [ 6,  7,  8]],</span>
+<span class="go">       [[ 9, 10, 11],</span>
+<span class="go">        [12, 13, 14],</span>
+<span class="go">        [15, 16, 17]],</span>
+<span class="go">       [[18, 19, 20],</span>
+<span class="go">        [21, 22, 23],</span>
+<span class="go">        [24, 25, 26]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[27, 30, 33],</span>
+<span class="go">       [36, 39, 42],</span>
+<span class="go">       [45, 48, 51]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># for sum, axis is the first keyword, so we may omit it,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># specifying only its value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">(array([[27, 30, 33],</span>
+<span class="go">        [36, 39, 42],</span>
+<span class="go">        [45, 48, 51]]),</span>
+<span class="go"> array([[ 9, 12, 15],</span>
+<span class="go">        [36, 39, 42],</span>
+<span class="go">        [63, 66, 69]]),</span>
+<span class="go"> array([[ 3, 12, 21],</span>
+<span class="go">        [30, 39, 48],</span>
+<span class="go">        [57, 66, 75]]))</span>
+</pre></div>
+</div>
+</div>
+<p><span class="yiyi-st" id="yiyi-225">参数<em>dtype</em>指定应进行归约运算（如求和）的数据类型。</span><span class="yiyi-st" id="yiyi-226">默认减少数据类型与<em>self</em>的数据类型相同。</span><span class="yiyi-st" id="yiyi-227">为了避免溢出，使用较大的数据类型执行减少是有用的。</span></p>
+<p><span class="yiyi-st" id="yiyi-228">对于多个方法，还可以提供可选的<em>out</em>参数，结果将放置到给定的输出数组中。</span><span class="yiyi-st" id="yiyi-229"><em>out</em>参数必须是<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>，并且具有相同数量的元素。</span><span class="yiyi-st" id="yiyi-230">它可以具有不同的数据类型，在这种情况下将执行转换。</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-231"><a class="reference internal" href="generated/numpy.ndarray.argmax.html#numpy.ndarray.argmax" title="numpy.ndarray.argmax"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.argmax</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-232">沿给定轴的最大值的返回指数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-233"><a class="reference internal" href="generated/numpy.ndarray.min.html#numpy.ndarray.min" title="numpy.ndarray.min"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.min</span></code></a>（[axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-234">沿给定轴返回最小值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-235"><a class="reference internal" href="generated/numpy.ndarray.argmin.html#numpy.ndarray.argmin" title="numpy.ndarray.argmin"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.argmin</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-236">沿着<em class="xref py py-obj">a</em>的给定轴的最小值的返回指数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-237"><a class="reference internal" href="generated/numpy.ndarray.ptp.html#numpy.ndarray.ptp" title="numpy.ndarray.ptp"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.ptp</span></code></a>（[axis，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-238">沿给定轴的峰到峰（最大 - 最小）值。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-239"><a class="reference internal" href="generated/numpy.ndarray.clip.html#numpy.ndarray.clip" title="numpy.ndarray.clip"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.clip</span></code></a>（[min，max，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-240">返回值限于<code class="docutils literal"><span class="pre">[min，</span> <span class="pre">max]</span></code>的数组。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-241"><a class="reference internal" href="generated/numpy.ndarray.conj.html#numpy.ndarray.conj" title="numpy.ndarray.conj"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.conj</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-242">复共轭所有元素。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-243"><a class="reference internal" href="generated/numpy.ndarray.round.html#numpy.ndarray.round" title="numpy.ndarray.round"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.round</span></code></a>（[decimals，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-244">返回<em class="xref py py-obj">a</em>，每个元素四舍五入为给定的小数位数。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-245"><a class="reference internal" href="generated/numpy.ndarray.trace.html#numpy.ndarray.trace" title="numpy.ndarray.trace"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.trace</span></code></a>（[offset，axis1，axis2，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-246">沿数组的对角线返回总和。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-247"><a class="reference internal" href="generated/numpy.ndarray.sum.html#numpy.ndarray.sum" title="numpy.ndarray.sum"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.sum</span></code></a>（[axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-248">返回给定轴上的数组元素的总和。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-249"><a class="reference internal" href="generated/numpy.ndarray.cumsum.html#numpy.ndarray.cumsum" title="numpy.ndarray.cumsum"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.cumsum</span></code></a>（[axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-250">返回沿给定轴的元素的累积和。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-251"><a class="reference internal" href="generated/numpy.ndarray.mean.html#numpy.ndarray.mean" title="numpy.ndarray.mean"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.mean</span></code></a>（[axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-252">返回沿给定轴的数组元素的平均值。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-253"><a class="reference internal" href="generated/numpy.ndarray.var.html#numpy.ndarray.var" title="numpy.ndarray.var"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.var</span></code></a>（[axis，dtype，out，ddof，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-254">沿给定轴返回数组元素的方差。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-255"><a class="reference internal" href="generated/numpy.ndarray.std.html#numpy.ndarray.std" title="numpy.ndarray.std"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.std</span></code></a>（[axis，dtype，out，ddof，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-256">返回给定轴上的数组元素的标准偏差。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-257"><a class="reference internal" href="generated/numpy.ndarray.prod.html#numpy.ndarray.prod" title="numpy.ndarray.prod"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.prod</span></code></a>（[axis，dtype，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-258">返回给定轴上的数组元素的乘积</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-259"><a class="reference internal" href="generated/numpy.ndarray.cumprod.html#numpy.ndarray.cumprod" title="numpy.ndarray.cumprod"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.cumprod</span></code></a>（[axis，dtype，out]）</span></td>
+<td><span class="yiyi-st" id="yiyi-260">返回沿给定轴的元素的累积乘积。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-261"><a class="reference internal" href="generated/numpy.ndarray.all.html#numpy.ndarray.all" title="numpy.ndarray.all"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.all</span></code></a>（[axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-262">如果所有元素均为True，则返回True。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-263"><a class="reference internal" href="generated/numpy.ndarray.any.html#numpy.ndarray.any" title="numpy.ndarray.any"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.any</span></code></a>（[axis，out，keepdims]）</span></td>
+<td><span class="yiyi-st" id="yiyi-264">如果<em class="xref py py-obj">a</em>的任何元素求值为True，则返回True。</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="arithmetic-matrix-multiplication-and-comparison-operations">
+<h2><span class="yiyi-st" id="yiyi-265">Arithmetic, matrix multiplication, and comparison operations</span></h2>
+<p id="index-5"><span class="yiyi-st" id="yiyi-266">对<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarrays</span></code></a>的算术和比较操作被定义为逐元素操作，并且通常产生<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>对象作为结果。</span></p>
+<p><span class="yiyi-st" id="yiyi-267">Each of the arithmetic operations (<code class="docutils literal"><span class="pre">+</span></code>, <code class="docutils literal"><span class="pre">-</span></code>, <code class="docutils literal"><span class="pre">*</span></code>, <code class="docutils literal"><span class="pre">/</span></code>, <code class="docutils literal"><span class="pre">//</span></code>, <code class="docutils literal"><span class="pre">%</span></code>, <code class="docutils literal"><span class="pre">divmod()</span></code>, <code class="docutils literal"><span class="pre">**</span></code> or <code class="docutils literal"><span class="pre">pow()</span></code>, <code class="docutils literal"><span class="pre">&lt;&lt;</span></code>, <code class="docutils literal"><span class="pre">&gt;&gt;</span></code>, <code class="docutils literal"><span class="pre">&amp;</span></code>, <code class="docutils literal"><span class="pre">^</span></code>, <code class="docutils literal"><span class="pre">|</span></code>, <code class="docutils literal"><span class="pre">~</span></code>) and the comparisons (<code class="docutils literal"><span class="pre">==</span></code>, <code class="docutils literal"><span class="pre">&lt;</span></code>, <code class="docutils literal"><span class="pre">&gt;</span></code>, <code class="docutils literal"><span class="pre">&lt;=</span></code>, <code class="docutils literal"><span class="pre">&gt;=</span></code>, <code class="docutils literal"><span class="pre">!=</span></code>) is equivalent to the corresponding <span class="xref std std-term">universal function</span> (or <a class="reference internal" href="../glossary.html#term-ufunc"><span class="xref std std-term">ufunc</span></a> for short) in NumPy. </span><span class="yiyi-st" id="yiyi-268">有关详细信息，请参阅<a class="reference internal" href="ufuncs.html#ufuncs"><span class="std std-ref">Universal Functions</span></a>部分。</span></p>
+<p><span class="yiyi-st" id="yiyi-269">比较运算符：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-270"><a class="reference internal" href="generated/numpy.ndarray.__lt__.html#numpy.ndarray.__lt__" title="numpy.ndarray.__lt__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__lt__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-271">x.__lt__(y) <==> x<y< span=""></y<></==></span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-272"><a class="reference internal" href="generated/numpy.ndarray.__le__.html#numpy.ndarray.__le__" title="numpy.ndarray.__le__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__le__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-273">x。_ le __（y）x</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-274"><a class="reference internal" href="generated/numpy.ndarray.__gt__.html#numpy.ndarray.__gt__" title="numpy.ndarray.__gt__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__gt__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-275">x .__ gt__（y）x&gt; y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-276"><a class="reference internal" href="generated/numpy.ndarray.__ge__.html#numpy.ndarray.__ge__" title="numpy.ndarray.__ge__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__ge__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-277">x ._ge__（y）x&gt; = y</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-278"><a class="reference internal" href="generated/numpy.ndarray.__eq__.html#numpy.ndarray.__eq__" title="numpy.ndarray.__eq__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__eq__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-279">x .__ eq __（y）x == y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-280"><a class="reference internal" href="generated/numpy.ndarray.__ne__.html#numpy.ndarray.__ne__" title="numpy.ndarray.__ne__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__ne__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-281">x .__ ne __（y）x！= y</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-282">数组的真值（<code class="xref py py-func docutils literal"><span class="pre">bool</span></code>）：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-283"><a class="reference internal" href="generated/numpy.ndarray.__nonzero__.html#numpy.ndarray.__nonzero__" title="numpy.ndarray.__nonzero__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__nonzero__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-284">x .__ nonzero __()x！= 0</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-285">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-286">数组的真值测试调用<a class="reference internal" href="generated/numpy.ndarray.__nonzero__.html#numpy.ndarray.__nonzero__" title="numpy.ndarray.__nonzero__"><code class="xref py py-meth docutils literal"><span class="pre">ndarray.__nonzero__</span></code></a>，如果数组中的元素数大于1，则会引发错误，因为此数组的真值是不确定的。</span><span class="yiyi-st" id="yiyi-287">使用<a class="reference internal" href="generated/numpy.ndarray.any.html#numpy.ndarray.any" title="numpy.ndarray.any"><code class="xref py py-meth docutils literal"><span class="pre">.any()</span></code></a>和<a class="reference internal" href="generated/numpy.ndarray.all.html#numpy.ndarray.all" title="numpy.ndarray.all"><code class="xref py py-meth docutils literal"><span class="pre">.all()</span></code></a>来清楚这些情况下的含义。</span><span class="yiyi-st" id="yiyi-288">（如果元素数为0，则数组的计算结果为<code class="docutils literal"><span class="pre">False</span></code>。）</span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-289">一元操作：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-290"><a class="reference internal" href="generated/numpy.ndarray.__neg__.html#numpy.ndarray.__neg__" title="numpy.ndarray.__neg__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__neg__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-291">x .__ neg __()-x</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-292"><a class="reference internal" href="generated/numpy.ndarray.__pos__.html#numpy.ndarray.__pos__" title="numpy.ndarray.__pos__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__pos__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-293">x .__ pos __()+ x</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-294"><a class="reference internal" href="generated/numpy.ndarray.__abs__.html#numpy.ndarray.__abs__" title="numpy.ndarray.__abs__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__abs__</span></code></a>()abs（x）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-295"><a class="reference internal" href="generated/numpy.ndarray.__invert__.html#numpy.ndarray.__invert__" title="numpy.ndarray.__invert__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__invert__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-296">x .__反转__()〜x</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-297">算术：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-298"><a class="reference internal" href="generated/numpy.ndarray.__add__.html#numpy.ndarray.__add__" title="numpy.ndarray.__add__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__add__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-299">x .__ add __（y）x + y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-300"><a class="reference internal" href="generated/numpy.ndarray.__sub__.html#numpy.ndarray.__sub__" title="numpy.ndarray.__sub__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__sub__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-301">x .__ sub __（y）x-y</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-302"><a class="reference internal" href="generated/numpy.ndarray.__mul__.html#numpy.ndarray.__mul__" title="numpy.ndarray.__mul__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__mul__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-303">x。_ mul __（y）x * y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-304"><a class="reference internal" href="generated/numpy.ndarray.__div__.html#numpy.ndarray.__div__" title="numpy.ndarray.__div__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__div__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-305">x .__ div __（y）x / y</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-306"><a class="reference internal" href="generated/numpy.ndarray.__truediv__.html#numpy.ndarray.__truediv__" title="numpy.ndarray.__truediv__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__truediv__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-307">x。_ truediv __（y）x / y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-308"><a class="reference internal" href="generated/numpy.ndarray.__floordiv__.html#numpy.ndarray.__floordiv__" title="numpy.ndarray.__floordiv__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__floordiv__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-309">x .__ floordiv __（y）x // y</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-310"><a class="reference internal" href="generated/numpy.ndarray.__mod__.html#numpy.ndarray.__mod__" title="numpy.ndarray.__mod__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__mod__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-311">x .__ mod __（y）x％y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-312"><a class="reference internal" href="generated/numpy.ndarray.__divmod__.html#numpy.ndarray.__divmod__" title="numpy.ndarray.__divmod__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__divmod__</span></code></a>（y）divmod（x，y）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-313"><a class="reference internal" href="generated/numpy.ndarray.__pow__.html#numpy.ndarray.__pow__" title="numpy.ndarray.__pow__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__pow__</span></code></a>（y [，z]）pow（x，y [，z]）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-314"><a class="reference internal" href="generated/numpy.ndarray.__lshift__.html#numpy.ndarray.__lshift__" title="numpy.ndarray.__lshift__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__lshift__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-315">x .__ lshift __（y）x</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-316"><a class="reference internal" href="generated/numpy.ndarray.__rshift__.html#numpy.ndarray.__rshift__" title="numpy.ndarray.__rshift__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__rshift__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-317">x .__ rshift__（y）x &gt;&gt; y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-318"><a class="reference internal" href="generated/numpy.ndarray.__and__.html#numpy.ndarray.__and__" title="numpy.ndarray.__and__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__and__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-319">x。和__（y）x＆y</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-320"><a class="reference internal" href="generated/numpy.ndarray.__or__.html#numpy.ndarray.__or__" title="numpy.ndarray.__or__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__or__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-321">x .__或__（y）x | y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-322"><a class="reference internal" href="generated/numpy.ndarray.__xor__.html#numpy.ndarray.__xor__" title="numpy.ndarray.__xor__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__xor__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-323">x .__ xor __（y）x ^ y</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-324">注意</span></p>
+<ul class="last simple">
+<li><span class="yiyi-st" id="yiyi-325"><a class="reference external" href="https://docs.python.org/dev/library/functions.html#pow" title="(in Python v3.7)"><code class="xref py py-func docutils literal"><span class="pre">pow</span></code></a>的任何第三个参数被默认忽略，因为底层的<a class="reference internal" href="generated/numpy.power.html#numpy.power" title="numpy.power"><code class="xref py py-func docutils literal"><span class="pre">ufunc</span></code></a>只有两个参数。</span></li>
+<li><span class="yiyi-st" id="yiyi-326">三个分区运算符都被定义； <code class="xref py py-obj docutils literal"><span class="pre">div</span></code>在默认情况下处于活动状态，<code class="xref py py-obj docutils literal"><span class="pre">truediv</span></code>在<a class="reference external" href="https://docs.python.org/dev/library/__future__.html#module-__future__" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">__future__</span></code></a></span></li>
+<li><span class="yiyi-st" id="yiyi-327">因为<a class="reference internal" href="generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>是内置类型（用C编写），所以不直接定义<code class="docutils literal"><span class="pre">__r{op}__</span></code>特殊方法。</span></li>
+<li><span class="yiyi-st" id="yiyi-328">可以使用<code class="xref py py-func docutils literal"><span class="pre">set_numeric_ops</span></code>修改用于实现数组的许多算术特殊方法的函数。</span></li>
+</ul>
+</div>
+<p><span class="yiyi-st" id="yiyi-329">算术，就地：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-330"><a class="reference internal" href="generated/numpy.ndarray.__iadd__.html#numpy.ndarray.__iadd__" title="numpy.ndarray.__iadd__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__iadd__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-331">x .__ iadd __（y）x + = y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-332"><a class="reference internal" href="generated/numpy.ndarray.__isub__.html#numpy.ndarray.__isub__" title="numpy.ndarray.__isub__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__isub__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-333">x .__ isub __（y）x- = y</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-334"><a class="reference internal" href="generated/numpy.ndarray.__imul__.html#numpy.ndarray.__imul__" title="numpy.ndarray.__imul__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__imul__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-335">x .__ imul __（y）x * = y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-336"><a class="reference internal" href="generated/numpy.ndarray.__idiv__.html#numpy.ndarray.__idiv__" title="numpy.ndarray.__idiv__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__idiv__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-337">x。_ idiv __（y）x / = y</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-338"><a class="reference internal" href="generated/numpy.ndarray.__itruediv__.html#numpy.ndarray.__itruediv__" title="numpy.ndarray.__itruediv__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__itruediv__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-339">x .__ itruediv __（y）x / = y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-340"><a class="reference internal" href="generated/numpy.ndarray.__ifloordiv__.html#numpy.ndarray.__ifloordiv__" title="numpy.ndarray.__ifloordiv__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__ifloordiv__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-341">x ._ ifloordiv __（y）x // = y</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-342"><a class="reference internal" href="generated/numpy.ndarray.__imod__.html#numpy.ndarray.__imod__" title="numpy.ndarray.__imod__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__imod__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-343">x。_ imod __（y）x％= y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-344"><a class="reference internal" href="generated/numpy.ndarray.__ipow__.html#numpy.ndarray.__ipow__" title="numpy.ndarray.__ipow__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__ipow__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-345">x。_ ipow __（y）x ** = y</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-346"><a class="reference internal" href="generated/numpy.ndarray.__ilshift__.html#numpy.ndarray.__ilshift__" title="numpy.ndarray.__ilshift__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__ilshift__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-347">x .__ ilshift __（y）x</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-348"><a class="reference internal" href="generated/numpy.ndarray.__irshift__.html#numpy.ndarray.__irshift__" title="numpy.ndarray.__irshift__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__irshift__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-349">x .__ irshift __（y）x &gt;&gt; = y</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-350"><a class="reference internal" href="generated/numpy.ndarray.__iand__.html#numpy.ndarray.__iand__" title="numpy.ndarray.__iand__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__iand__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-351">x .__ iand __（y）x＆= y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-352"><a class="reference internal" href="generated/numpy.ndarray.__ior__.html#numpy.ndarray.__ior__" title="numpy.ndarray.__ior__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__ior__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-353">x .__ ior __（y）x | = y</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-354"><a class="reference internal" href="generated/numpy.ndarray.__ixor__.html#numpy.ndarray.__ixor__" title="numpy.ndarray.__ixor__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__ixor__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-355">x。_ ixor __（y）x ^ = y</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-356">警告</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-357">就地操作将使用由两个操作数的数据类型确定的精度来执行计算，但是将静默地对结果进行向下转换（如果必要的话），以便它可以适应数组。</span><span class="yiyi-st" id="yiyi-358">因此，对于混合精度计算，<code class="docutils literal"><span class="pre">A</span> <span class="pre">{op} =</span> <span class="pre">B</span></code>可以不同于<code class="docutils literal"><span class="pre"> A</span> <span class="pre">=</span> <span class="pre">A</span> <span class="pre">{op}</span> <span class="pre">B</span></code>。</span><span class="yiyi-st" id="yiyi-359">例如，假设<code class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">ones（（3,3））</span></code>。</span><span class="yiyi-st" id="yiyi-360">Then, <code class="docutils literal"><span class="pre">a</span> <span class="pre">+=</span> <span class="pre">3j</span></code> is different than <code class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">3j</span></code>: while they both perform the same computation, <code class="docutils literal"><span class="pre">a</span> <span class="pre">+=</span> <span class="pre">3</span></code> casts the result to fit back in <code class="docutils literal"><span class="pre">a</span></code>, whereas <code class="docutils literal"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">3j</span></code> re-binds the name <code class="docutils literal"><span class="pre">a</span></code> to the result.</span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-361">矩阵乘法：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-362"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__matmul__</span></code></span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-363">注意</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-364">在PEP465之后的Python 3.5中引入了矩阵运算符<code class="docutils literal"><span class="pre">@</span></code>和<code class="docutils literal"><span class="pre">@=</span></code>。</span><span class="yiyi-st" id="yiyi-365">NumPy 1.10.0具有用于测试目的的<code class="docutils literal"><span class="pre">@</span></code>的初步实现。</span><span class="yiyi-st" id="yiyi-366">更多文档可以在<a class="reference internal" href="generated/numpy.matmul.html#numpy.matmul" title="numpy.matmul"><code class="xref py py-func docutils literal"><span class="pre">matmul</span></code></a>文档中找到。</span></p>
+</div>
+</div>
+<div class="section" id="special-methods">
+<h2><span class="yiyi-st" id="yiyi-367">Special methods</span></h2>
+<p><span class="yiyi-st" id="yiyi-368">对于标准库函数：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-369"><a class="reference internal" href="generated/numpy.ndarray.__copy__.html#numpy.ndarray.__copy__" title="numpy.ndarray.__copy__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__copy__</span></code></a>（[order]）</span></td>
+<td><span class="yiyi-st" id="yiyi-370">返回数组的副本。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-371"><a class="reference internal" href="generated/numpy.ndarray.__deepcopy__.html#numpy.ndarray.__deepcopy__" title="numpy.ndarray.__deepcopy__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__deepcopy__</span></code></a>（() - &gt;数组的深度副本。）</span></td>
+<td><span class="yiyi-st" id="yiyi-372">在数组上调用copy.deepcopy时使用。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-373"><a class="reference internal" href="generated/numpy.ndarray.__reduce__.html#numpy.ndarray.__reduce__" title="numpy.ndarray.__reduce__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__reduce__</span></code></a>()</span></td>
+<td><span class="yiyi-st" id="yiyi-374">酸洗。</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-375"><a class="reference internal" href="generated/numpy.ndarray.__setstate__.html#numpy.ndarray.__setstate__" title="numpy.ndarray.__setstate__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__setstate__</span></code></a>（version，shape，dtype，...）</span></td>
+<td><span class="yiyi-st" id="yiyi-376">用于取出。</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-377">基本定制：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-378"><a class="reference internal" href="generated/numpy.ndarray.__new__.html#numpy.ndarray.__new__" title="numpy.ndarray.__new__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__new__</span></code></a>（（S，...）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-379"><a class="reference internal" href="generated/numpy.ndarray.__array__.html#numpy.ndarray.__array__" title="numpy.ndarray.__array__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__array__</span></code></a>（...）</span></td>
+<td><span class="yiyi-st" id="yiyi-380">如果未指定dtype，则返回对self的新引用，如果dtype与数组的当前dtype不同，则返回提供的数据类型的新数组。</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-381"><a class="reference internal" href="generated/numpy.ndarray.__array_wrap__.html#numpy.ndarray.__array_wrap__" title="numpy.ndarray.__array_wrap__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__array_wrap__</span></code></a>（...）</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-382">容器自定义:(参见<a class="reference internal" href="arrays.indexing.html#arrays-indexing"><span class="std std-ref">Indexing</span></a>）</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-383"><a class="reference internal" href="generated/numpy.ndarray.__len__.html#numpy.ndarray.__len__" title="numpy.ndarray.__len__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__len__</span></code></a>()len（x）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-384"><a class="reference internal" href="generated/numpy.ndarray.__getitem__.html#numpy.ndarray.__getitem__" title="numpy.ndarray.__getitem__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__getitem__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-385">x .__ getitem __（y）x [y]</span></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-386"><a class="reference internal" href="generated/numpy.ndarray.__setitem__.html#numpy.ndarray.__setitem__" title="numpy.ndarray.__setitem__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__setitem__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-387">x .__ setitem __（i，y）x [i] = y</span></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-388"><a class="reference internal" href="generated/numpy.ndarray.__contains__.html#numpy.ndarray.__contains__" title="numpy.ndarray.__contains__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__contains__</span></code></a></span></td>
+<td><span class="yiyi-st" id="yiyi-389">x .__在x中包含__（y）y</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-390">转换；操作<code class="xref py py-func docutils literal"><span class="pre">complex</span></code>，<code class="xref py py-func docutils literal"><span class="pre">int</span></code>，<code class="xref py py-func docutils literal"><span class="pre">long</span></code>，<code class="xref py py-func docutils literal"><span class="pre">float</span></code>，<a class="reference external" href="https://docs.python.org/dev/library/functions.html#oct" title="(in Python v3.7)"><code class="xref py py-func docutils literal"><span class="pre">oct</span></code></a>和<a class="reference external" href="https://docs.python.org/dev/library/functions.html#hex" title="(in Python v3.7)"><code class="xref py py-func docutils literal"><span class="pre">hex</span></code></a>。</span><span class="yiyi-st" id="yiyi-391">它们只对具有一个元素的数组工作，并返回相应的标量。</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-392"><a class="reference internal" href="generated/numpy.ndarray.__int__.html#numpy.ndarray.__int__" title="numpy.ndarray.__int__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__int__</span></code></a>()int（x）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-393"><a class="reference internal" href="generated/numpy.ndarray.__long__.html#numpy.ndarray.__long__" title="numpy.ndarray.__long__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__long__</span></code></a>()long（x）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-394"><a class="reference internal" href="generated/numpy.ndarray.__float__.html#numpy.ndarray.__float__" title="numpy.ndarray.__float__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__float__</span></code></a>()float（x）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-395"><a class="reference internal" href="generated/numpy.ndarray.__oct__.html#numpy.ndarray.__oct__" title="numpy.ndarray.__oct__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__oct__</span></code></a>()oct（x）</span></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-396"><a class="reference internal" href="generated/numpy.ndarray.__hex__.html#numpy.ndarray.__hex__" title="numpy.ndarray.__hex__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__hex__</span></code></a>()hex（x）</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><span class="yiyi-st" id="yiyi-397">字符串表示：</span></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%">
+<col width="90%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><span class="yiyi-st" id="yiyi-398"><a class="reference internal" href="generated/numpy.ndarray.__str__.html#numpy.ndarray.__str__" title="numpy.ndarray.__str__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__str__</span></code></a>()str（x）</span></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><span class="yiyi-st" id="yiyi-399"><a class="reference internal" href="generated/numpy.ndarray.__repr__.html#numpy.ndarray.__repr__" title="numpy.ndarray.__repr__"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.__repr__</span></code></a>()repr（x）</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>

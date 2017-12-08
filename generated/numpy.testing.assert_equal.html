@@ -1,0 +1,53 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.assert_equal</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_equal.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_equal.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.assert_equal"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.</code><code class="descname">assert_equal</code><span class="sig-paren">(</span><em>actual</em>, <em>desired</em>, <em>err_msg=&apos;&apos;</em>, <em>verbose=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/utils.py#L269-L381"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">如果两个对象不相等，则引发AssertionError。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">给定两个对象（标量，列表，元组，字典或numpy数组），检查这些对象的所有元素是否相等。</span><span class="yiyi-st" id="yiyi-16">在第一个冲突值引发异常。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>actual</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">要检查的对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>所需</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">预期对象。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>err_msg</strong>：str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">出现故障时打印的错误消息。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>verbose</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">如果为True，则冲突的值将附加到错误消息。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>AssertionError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">如果实际和期望不相等。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_equal</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="gp">...</span>
+<span class="go">&lt;type &apos;exceptions.AssertionError&apos;&gt;:</span>
+<span class="go">Items are not equal:</span>
+<span class="go">item=1</span>
+<span class="go"> ACTUAL: 5</span>
+<span class="go"> DESIRED: 6</span>
+</pre></div>
+</div>
+</dd></dl>

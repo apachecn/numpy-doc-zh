@@ -1,0 +1,38 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.DataSource.exists</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.DataSource.exists.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.DataSource.exists.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.DataSource.exists"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">DataSource.</code><code class="descname">exists</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/_datasource.py#L402-L459"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">测试路径是否存在。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">测试<em class="xref py py-obj">路径</em>是否存在（按此顺序）：</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-17">一个本地文件。</span></li>
+<li><span class="yiyi-st" id="yiyi-18">已远程URL已下载并本地存储在<a class="reference internal" href="numpy.DataSource.html#numpy.DataSource" title="numpy.DataSource"><code class="xref py py-obj docutils literal"><span class="pre">DataSource</span></code></a>目录中。</span></li>
+<li><span class="yiyi-st" id="yiyi-19">未被下载但是有效且可访问的远程URL。</span></li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>路径</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">可以是本地文件或远程URL。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>out</strong>：bool</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-25">如果<em class="xref py py-obj">路径</em>存在，则为真。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-26">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-27">如果<em class="xref py py-obj">路径</em>是网址，则<a class="reference internal" href="#numpy.DataSource.exists" title="numpy.DataSource.exists"><code class="xref py py-obj docutils literal"><span class="pre">exists</span></code></a>将返回True，如果它存储在本地的<a class="reference internal" href="numpy.DataSource.html#numpy.DataSource" title="numpy.DataSource"><code class="xref py py-obj docutils literal"><span class="pre">DataSource</span></code></a>目录中，或者是有效的远程URL。</span><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.DataSource.html#numpy.DataSource" title="numpy.DataSource"><code class="xref py py-obj docutils literal"><span class="pre">DataSource</span></code></a>不区分两者，如果文件存在于任一位置，则可访问该文件。</span></p>
+</dd></dl>

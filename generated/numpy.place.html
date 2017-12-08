@@ -1,0 +1,46 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.place</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.place.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.place.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.place"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">place</code><span class="sig-paren">(</span><em>arr</em>, <em>mask</em>, <em>vals</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L1963-L2002"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">基于条件和输入值更改数组的元素。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">Similar to <code class="docutils literal"><span class="pre">np.copyto(arr,</span> <span class="pre">vals,</span> <span class="pre">where=mask)</span></code>, the difference is that <a class="reference internal" href="#numpy.place" title="numpy.place"><code class="xref py py-obj docutils literal"><span class="pre">place</span></code></a> uses the first N elements of <em class="xref py py-obj">vals</em>, where N is the number of True values in <em class="xref py py-obj">mask</em>, while <a class="reference internal" href="numpy.copyto.html#numpy.copyto" title="numpy.copyto"><code class="xref py py-obj docutils literal"><span class="pre">copyto</span></code></a> uses the elements where <em class="xref py py-obj">mask</em> is True.</span></p>
+<p><span class="yiyi-st" id="yiyi-16">请注意，<a class="reference internal" href="numpy.extract.html#numpy.extract" title="numpy.extract"><code class="xref py py-obj docutils literal"><span class="pre">extract</span></code></a>与<a class="reference internal" href="#numpy.place" title="numpy.place"><code class="xref py py-obj docutils literal"><span class="pre">place</span></code></a>完全相反。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>arr</strong>：ndarray</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">数组将数据放入。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>掩码</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">布尔掩码数组。</span><span class="yiyi-st" id="yiyi-22">必须与<em class="xref py py-obj">a</em>具有相同的大小。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>vals</strong>：1-D序列</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">要放入<em class="xref py py-obj">a</em>的值。</span><span class="yiyi-st" id="yiyi-25">仅使用前N个元素，其中N是<em class="xref py py-obj">掩码</em>中的真值的数目。</span><span class="yiyi-st" id="yiyi-26">如果<em class="xref py py-obj">vals</em>小于N，则将重复。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-27">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-28"><a class="reference internal" href="numpy.copyto.html#numpy.copyto" title="numpy.copyto"><code class="xref py py-obj docutils literal"><span class="pre">copyto</span></code></a>, <a class="reference internal" href="numpy.put.html#numpy.put" title="numpy.put"><code class="xref py py-obj docutils literal"><span class="pre">put</span></code></a>, <a class="reference internal" href="numpy.take.html#numpy.take" title="numpy.take"><code class="xref py py-obj docutils literal"><span class="pre">take</span></code></a>, <a class="reference internal" href="numpy.extract.html#numpy.extract" title="numpy.extract"><code class="xref py py-obj docutils literal"><span class="pre">extract</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">arr</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arr</span>
+<span class="go">array([[ 0,  1,  2],</span>
+<span class="go">       [44, 55, 44]])</span>
+</pre></div>
+</div>
+</dd></dl>

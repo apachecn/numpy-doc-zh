@@ -1,0 +1,58 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.fromfunction</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fromfunction.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.fromfunction.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.fromfunction"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">fromfunction</code><span class="sig-paren">(</span><em>function</em>, <em>shape</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/numeric.py#L2009-L2062"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">通过在每个坐标上执行函数来构造数组。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">The resulting array therefore has a value <code class="docutils literal"><span class="pre">fn(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> at coordinate <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code>.</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>函数</strong>：callable</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">该函数用N个参数调用，其中N是<code class="xref py py-obj docutils literal"><span class="pre">shape</span></code>的秩。</span><span class="yiyi-st" id="yiyi-19">每个参数表示沿着特定轴变化的数组的坐标。</span><span class="yiyi-st" id="yiyi-20">例如，如果<code class="xref py py-obj docutils literal"><span class="pre">shape</span></code>为<code class="docutils literal"><span class="pre">（2，</span> <span class="pre">2）</span></code>，则参数依次为（0,0 ），（0,1），（1,0），（1,1）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-21"><strong>shape</strong>：（N，）ints的元组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">输出数组的形状，也决定了传递给<em class="xref py py-obj">函数</em>的坐标数组的形状。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">传递给<em class="xref py py-obj">函数</em>的坐标数组的数据类型。</span><span class="yiyi-st" id="yiyi-25">默认情况下，<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>是float。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>fromfunction</strong>：any</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">调用<em class="xref py py-obj">函数</em>的结果直接返回。</span><span class="yiyi-st" id="yiyi-29">因此，<a class="reference internal" href="#numpy.fromfunction" title="numpy.fromfunction"><code class="xref py py-obj docutils literal"><span class="pre">fromfunction</span></code></a>的形状完全由<em class="xref py py-obj">函数</em>确定。</span><span class="yiyi-st" id="yiyi-30">如果<em class="xref py py-obj">函数</em>返回标量值，则<a class="reference internal" href="#numpy.fromfunction" title="numpy.fromfunction"><code class="xref py py-obj docutils literal"><span class="pre">fromfunction</span></code></a>的形状将匹配<code class="xref py py-obj docutils literal"><span class="pre">shape</span></code>参数。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-31">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-32"><a class="reference internal" href="numpy.indices.html#numpy.indices" title="numpy.indices"><code class="xref py py-obj docutils literal"><span class="pre">indices</span></code></a>，<a class="reference internal" href="numpy.meshgrid.html#numpy.meshgrid" title="numpy.meshgrid"><code class="xref py py-obj docutils literal"><span class="pre">meshgrid</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-33">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-34">除<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>之外的关键字传递到<em class="xref py py-obj">函数</em>。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-35">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fromfunction</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="go">array([[ True, False, False],</span>
+<span class="go">       [False,  True, False],</span>
+<span class="go">       [False, False,  True]], dtype=bool)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">fromfunction</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="go">array([[0, 1, 2],</span>
+<span class="go">       [1, 2, 3],</span>
+<span class="go">       [2, 3, 4]])</span>
+</pre></div>
+</div>
+</dd></dl>

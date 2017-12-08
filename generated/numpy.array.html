@@ -1,0 +1,97 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.array</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.array.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.array"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">array</code><span class="sig-paren">(</span><em>object</em>, <em>dtype=None</em>, <em>copy=True</em>, <em>order=None</em>, <em>subok=False</em>, <em>ndmin=0</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">创建数组。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>object</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">数组，暴露数组接口的任何对象，__array__方法返回数组的对象或任何（嵌套）序列。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-18"><strong>dtype</strong>：数据类型，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">数组的所需数据类型。</span><span class="yiyi-st" id="yiyi-20">如果未给出，则类型将被确定为在序列中保存对象所需的最小类型。</span><span class="yiyi-st" id="yiyi-21">这个参数只能用于&apos;upcast&apos;数组。</span><span class="yiyi-st" id="yiyi-22">对于向下转换，使用.astype（t）方法。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>copy</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">如果为true（默认），则复制对象。</span><span class="yiyi-st" id="yiyi-25">Otherwise, a copy will only be made if __array__ returns a copy, if obj is a nested sequence, or if a copy is needed to satisfy any of the other requirements (<a class="reference internal" href="numpy.dtype.html#numpy.dtype" title="numpy.dtype"><code class="xref py py-obj docutils literal"><span class="pre">dtype</span></code></a>, <em class="xref py py-obj">order</em>, etc. </span><span class="yiyi-st" id="yiyi-26">）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-27"><strong>order</strong>：{&apos;C&apos;，&apos;F&apos;，&apos;A&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-28">指定数组的顺序。</span><span class="yiyi-st" id="yiyi-29">如果顺序是&apos;C&apos;，那么数组将是C连续的顺序（last-index变化最快）。</span><span class="yiyi-st" id="yiyi-30">如果顺序是&apos;F&apos;，则返回的数组将是Fortran连续的顺序（first-index变化最快）。</span><span class="yiyi-st" id="yiyi-31">如果顺序是“A”（默认），则返回的数组可以是任何顺序（C-，Fortran连续，或甚至不连续），除非需要副本，在这种情况下它将是C连续的。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-32"><strong>subok</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-33">如果为True，则子类将被传递，否则返回的数组将被强制为基类数组（默认）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-34"><strong>ndmin</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-35">指定生成的数组应具有的最小维数。</span><span class="yiyi-st" id="yiyi-36">将根据需要预先成形以满足该要求。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-37">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-38"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-39">满足指定要求的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-40">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-41"><a class="reference internal" href="numpy.empty.html#numpy.empty" title="numpy.empty"><code class="xref py py-obj docutils literal"><span class="pre">empty</span></code></a>, <a class="reference internal" href="numpy.empty_like.html#numpy.empty_like" title="numpy.empty_like"><code class="xref py py-obj docutils literal"><span class="pre">empty_like</span></code></a>, <a class="reference internal" href="numpy.zeros.html#numpy.zeros" title="numpy.zeros"><code class="xref py py-obj docutils literal"><span class="pre">zeros</span></code></a>, <a class="reference internal" href="numpy.zeros_like.html#numpy.zeros_like" title="numpy.zeros_like"><code class="xref py py-obj docutils literal"><span class="pre">zeros_like</span></code></a>, <a class="reference internal" href="numpy.ones.html#numpy.ones" title="numpy.ones"><code class="xref py py-obj docutils literal"><span class="pre">ones</span></code></a>, <a class="reference internal" href="numpy.ones_like.html#numpy.ones_like" title="numpy.ones_like"><code class="xref py py-obj docutils literal"><span class="pre">ones_like</span></code></a>, <code class="xref py py-obj docutils literal"><span class="pre">fill</span></code></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-42">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">array([1, 2, 3])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">上传：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="go">array([ 1.,  2.,  3.])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-44">多个维度：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [3, 4]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">最小尺寸2：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">ndmin</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([[1, 2, 3]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">提供类型：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="go">array([ 1.+0.j,  2.+0.j,  3.+0.j])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-47">由多个元素组成的数据类型：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)],</span><span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s1">&apos;a&apos;</span><span class="p">,</span><span class="s1">&apos;&lt;i4&apos;</span><span class="p">),(</span><span class="s1">&apos;b&apos;</span><span class="p">,</span><span class="s1">&apos;&lt;i4&apos;</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="s1">&apos;a&apos;</span><span class="p">]</span>
+<span class="go">array([1, 3])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-48">从子类创建数组：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s1">&apos;1 2; 3 4&apos;</span><span class="p">))</span>
+<span class="go">array([[1, 2],</span>
+<span class="go">       [3, 4]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s1">&apos;1 2; 3 4&apos;</span><span class="p">),</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">matrix([[1, 2],</span>
+<span class="go">        [3, 4]])</span>
+</pre></div>
+</div>
+</dd></dl>

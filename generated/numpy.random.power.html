@@ -1,0 +1,119 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.random.power</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.power.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.power.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.random.power"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.random.</code><code class="descname">power</code><span class="sig-paren">(</span><em>a</em>, <em>size=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从具有正指数a-1的功率分布中在[0，1]中绘制样本。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">也称为功函数分布。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：float</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">参数，&gt; 0</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>size</strong>：int或tuple的整数，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">输出形状。</span><span class="yiyi-st" id="yiyi-21">如果给定形状是例如<code class="docutils literal"><span class="pre">（m，</span> <span class="pre">n，</span> <span class="pre">k）</span></code>，则<code class="docutils literal"><span class="pre"> m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code></span><span class="yiyi-st" id="yiyi-22">默认值为None，在这种情况下返回单个值。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-23">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-24"><strong>samples</strong>：ndarray或scalar</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">返回的样本位于[0，1]。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-26">上升：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-27"><strong>ValueError</strong></span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-28">如果一个</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-29">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-30">概率密度函数是</span></p>
+<div class="math">
+<p></p>
+</div><p><span class="yiyi-st" id="yiyi-31">幂函数分布只是帕累托分布的逆。</span><span class="yiyi-st" id="yiyi-32">它也可以被看作是Beta分布的一种特殊情况。</span></p>
+<p><span class="yiyi-st" id="yiyi-33">例如，它用于对保险索赔的超额报告建模。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-34">参考文献</span></p>
+<table class="docutils citation" frame="void" id="r257" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-35"><a class="fn-backref" href="#id1">[R257]</a></span></td><td><span class="yiyi-st" id="yiyi-36">Christian Kleiber，Samuel Kotz，“经济学和精算科学中的统计大小分布”，Wiley，2003。</span></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r258" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><span class="yiyi-st" id="yiyi-37"><a class="fn-backref" href="#id2">[R258]</a></span></td><td><span class="yiyi-st" id="yiyi-38">Heckert，N.A。和Filliben，James J.</span><span class="yiyi-st" id="yiyi-39">“NIST Handbook 148：Dataplot Reference Manual，Volume 2：Let subcommands and Library Functions”，National Institute of Standards and Technology Handbook Series，2003年6月。<a class="reference external" href="http://www.itl.nist.gov/div898/software/dataplot/refman2/auxillar/powpdf.pdf">http://www.itl.nist.gov/div898/software/ dataplot / refman2 / auxillar / powpdf.pdf</a></span></td></tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-40">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-41">从分布绘制样本：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mf">5.</span> <span class="c1"># shape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">samples</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">samples</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-42">显示样本的直方图，以及概率密度函数：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="mf">1.</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">normed_y</span> <span class="o">=</span> <span class="n">samples</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">bins</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">normed_y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-43">（<a class="reference external" href="../../reference/generated/numpy-random-power-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-random-power-1_00_00.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-power-1_00_00.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-random-power-1_00_00.png" src="../../_images/numpy-random-power-1_00_00.png">
+</div>
+<p><span class="yiyi-st" id="yiyi-44">将功率函数分布与帕累托逆矩阵进行比较。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">stats</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rvs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rvsp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">pareto</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">powpdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">powerlaw</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rvs</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">powpdf</span><span class="p">,</span><span class="s1">&apos;r-&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&apos;np.random.power(5)&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="mf">1.</span><span class="o">+</span><span class="n">rvsp</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">powpdf</span><span class="p">,</span><span class="s1">&apos;r-&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&apos;inverse of 1 + np.random.pareto(5)&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="mf">1.</span><span class="o">+</span><span class="n">rvsp</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">powpdf</span><span class="p">,</span><span class="s1">&apos;r-&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&apos;inverse of stats.pareto(5)&apos;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure" id="id3">
+<img alt="../../_images/numpy-random-power-1_01_00.png" src="../../_images/numpy-random-power-1_01_00.png">
+<p class="caption"><span class="yiyi-st" id="yiyi-45"><span class="caption-text">（<a class="reference external" href="../../reference/generated/numpy-random-power-1_01_00.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-power-1_01_00.pdf">pdf</a>）</span></span></p>
+</div>
+<div class="figure" id="id4">
+<img alt="../../_images/numpy-random-power-1_01_01.png" src="../../_images/numpy-random-power-1_01_01.png">
+<p class="caption"><span class="yiyi-st" id="yiyi-46"><span class="caption-text">（<a class="reference external" href="../../reference/generated/numpy-random-power-1_01_01.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-power-1_01_01.pdf">pdf</a>）</span></span></p>
+</div>
+<div class="figure" id="id5">
+<img alt="../../_images/numpy-random-power-1_01_02.png" src="../../_images/numpy-random-power-1_01_02.png">
+<p class="caption"><span class="yiyi-st" id="yiyi-47"><span class="caption-text">（<a class="reference external" href="../../reference/generated/numpy-random-power-1_01_02.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-random-power-1_01_02.pdf">pdf</a>）</span></span></p>
+</div>
+</dd></dl>

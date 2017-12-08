@@ -1,0 +1,45 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.ogrid</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ogrid.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ogrid.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="data">
+<dt id="numpy.ogrid"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">ogrid</code><em class="property"> = &lt;numpy.lib.index_tricks.nd_grid object&gt;</em></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14"><em class="xref py py-obj">nd_grid</em>实例，返回一个开放的多维“网格”。</span></p>
+<p><span class="yiyi-st" id="yiyi-15"><code class="xref py py-obj docutils literal"><span class="pre">numpy.lib.index_tricks.nd_grid</span></code>的一个实例，在索引时返回一个开放的（即非完全填充的）网格，返回的每个数组只有一个维度大于1。</span><span class="yiyi-st" id="yiyi-16">输出数组的维数和数量等于索引维数。</span><span class="yiyi-st" id="yiyi-17">如果step不是复数，则不包括stop。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">然而，如果step是<strong>复数</strong>（例如5j），则其magnitude的整数部分解释为指定在start和stop之间创建的点的数量，并<strong>包含</strong>stop值 。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-19">返回：</span></th><td class="field-body"><span class="yiyi-st" id="yiyi-20"><em class="xref py py-obj">ndarrays</em>网格，只有一个维度</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-21">另见</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-22"><code class="xref py py-obj docutils literal"><span class="pre">np.lib.index_tricks.nd_grid</span></code></span></dt>
+<dd><span class="yiyi-st" id="yiyi-23"><a class="reference internal" href="#numpy.ogrid" title="numpy.ogrid"><code class="xref py py-obj docutils literal"><span class="pre">ogrid</span></code></a>和<a class="reference internal" href="numpy.mgrid.html#numpy.mgrid" title="numpy.mgrid"><code class="xref py py-obj docutils literal"><span class="pre">mgrid</span></code></a>对象的类</span></dd>
+<dt><span class="yiyi-st" id="yiyi-24"><a class="reference internal" href="numpy.mgrid.html#numpy.mgrid" title="numpy.mgrid"><code class="xref py py-obj docutils literal"><span class="pre">mgrid</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-25">类似<a class="reference internal" href="#numpy.ogrid" title="numpy.ogrid"><code class="xref py py-obj docutils literal"><span class="pre">ogrid</span></code></a>，但返回密集的（或填满的）网格</span></dd>
+<dt><span class="yiyi-st" id="yiyi-26"><a class="reference internal" href="numpy.r_.html#numpy.r_" title="numpy.r_"><code class="xref py py-obj docutils literal"><span class="pre">r_</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-27">数组级联</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-28">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">ogrid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ogrid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="n">j</span><span class="p">]</span>
+<span class="go">array([-1. , -0.5,  0. ,  0.5,  1. ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ogrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<span class="go">[array([[0],</span>
+<span class="go">        [1],</span>
+<span class="go">        [2],</span>
+<span class="go">        [3],</span>
+<span class="go">        [4]]), array([[0, 1, 2, 3, 4]])]</span>
+</pre></div>
+</div>
+</dd></dl>

@@ -1,0 +1,42 @@
+
+<h1><span class="yiyi-st" id="yiyi-15">numpy.polynomial.hermite.Hermite.basis</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.hermite.Hermite.basis.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.polynomial.hermite.Hermite.basis.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.polynomial.hermite.Hermite.basis"><span class="yiyi-st" id="yiyi-16"> <code class="descclassname">Hermite.</code><code class="descname">basis</code><span class="sig-paren">(</span><em>deg</em>, <em>domain=None</em>, <em>window=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/polynomial/_polybase.py#L886-L923"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-17">度数<em class="xref py py-obj">deg</em>的系数基准多项式。</span></p>
+<p><span class="yiyi-st" id="yiyi-18">返回表示度<em class="xref py py-obj">deg</em>的基本多项式的系列。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-19"><span class="versionmodified">版本1.7.0中的新功能。</span></span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-20">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-21"><strong>deg</strong>：int</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-22">系列的基本多项式的程度。</span><span class="yiyi-st" id="yiyi-23">必须&gt; = 0。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-24"><strong>domain</strong>：{None，array_like}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-25">如果给定，数组必须是<code class="docutils literal"><span class="pre">[beg，</span> <span class="pre">end]</span></code>的形式，其中<code class="docutils literal"><span class="pre">beg</span></code>和<code class="docutils literal"><span class="pre">end</span></code>是域的端点。</span><span class="yiyi-st" id="yiyi-26">如果给出了None，则使用类域。</span><span class="yiyi-st" id="yiyi-27">默认值为None。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-28"><strong>窗口</strong>：{None，array_like}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-29">如果给定，则结果数组必须是如果形式<code class="docutils literal"><span class="pre">[beg，</span> <span class="pre">end]</span></code>，其中<code class="docutils literal"><span class="pre">beg</span></code>和<code class="docutils literal"><span class="pre">end</span></code>是窗口的端点。</span><span class="yiyi-st" id="yiyi-30">如果给出了None，则使用类窗口。</span><span class="yiyi-st" id="yiyi-31">默认值为None。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-32">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-33"><strong>new_series</strong>：series</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-34">系数为<em class="xref py py-obj">deg</em>项的系数设置为1，所有其他为零。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>

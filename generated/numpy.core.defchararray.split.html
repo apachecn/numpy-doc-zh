@@ -1,0 +1,40 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.core.defchararray.split</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.split.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.core.defchararray.split.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.core.defchararray.split"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.core.defchararray.</code><code class="descname">split</code><span class="sig-paren">(</span><em>a</em>, <em>sep=None</em>, <em>maxsplit=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/defchararray.py#L1287-L1318"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">对于<em class="xref py py-obj">a</em>中的每个元素，使用<em class="xref py py-obj">sep</em>作为定界符字符串返回字符串中的单词列表。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">逐个调用<em class="xref py py-obj">str.rsplit</em>。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like of str或unicode</span></p>
+<p><span class="yiyi-st" id="yiyi-18"><strong>sep</strong>：str或unicode，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">如果未指定<em class="xref py py-obj">sep</em>或<em class="xref py py-obj">无</em>，则任何空格字符串都是分隔符。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>maxsplit</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">如果给定<em class="xref py py-obj">maxsplit</em>，则最多会执行<em class="xref py py-obj">​​ maxsplit</em>拆分。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-22">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-23"><strong>out</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-24">列表对象的数组</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-25">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-26"><a class="reference external" href="https://docs.python.org/dev/library/stdtypes.html#str.split" title="(in Python v3.7)"><code class="xref py py-obj docutils literal"><span class="pre">str.split</span></code></a>，<a class="reference internal" href="numpy.core.defchararray.rsplit.html#numpy.core.defchararray.rsplit" title="numpy.core.defchararray.rsplit"><code class="xref py py-obj docutils literal"><span class="pre">rsplit</span></code></a></span></p>
+</div>
+</dd></dl>

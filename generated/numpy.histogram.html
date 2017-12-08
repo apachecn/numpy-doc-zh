@@ -1,0 +1,166 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.histogram</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.histogram.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.histogram.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.histogram"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">histogram</code><span class="sig-paren">(</span><em>a</em>, <em>bins=10</em>, <em>range=None</em>, <em>normed=False</em>, <em>weights=None</em>, <em>density=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/lib/function_base.py#L267-L657"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">计算一组数据的直方图。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-15">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-16"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-17">输入数据。</span><span class="yiyi-st" id="yiyi-18">在扁平数组上计算直方图。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>bins</strong>：int或标量序列或str，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">如果<em class="xref py py-obj">bins</em>是一个int，它定义了在给定范围（默认为10）中等宽单元格的数量。</span><span class="yiyi-st" id="yiyi-21">如果<em class="xref py py-obj">bin</em>是序列，则它定义了块边缘，包括最右边缘，允许非均匀的块宽度。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-22"><span class="versionmodified">版本1.11.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-23">如果<em class="xref py py-obj">bins</em>是以下列表中的字符串，则<a class="reference internal" href="#numpy.histogram" title="numpy.histogram"><code class="xref py py-obj docutils literal"><span class="pre">histogram</span></code></a>将使用所选方法来计算最佳bin宽度，因此计算bin数（参见<em class="xref py py-obj">t4&gt;关于估计器的更多细节）从落入请求范围内的数据。</em></span><span class="yiyi-st" id="yiyi-24">尽管区间宽度对于该范围中的实际数据将是最佳的，但是将计算区间的数目以填充整个范围，包括空白部分。</span><span class="yiyi-st" id="yiyi-25">为了可视化，建议使用&apos;auto&apos;选项。</span><span class="yiyi-st" id="yiyi-26">不支持自动bin大小选择的加权数据。</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-27">&apos;汽车&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-28">最大的“sturges”和“fd”估计。</span><span class="yiyi-st" id="yiyi-29">提供良好的全方位性能</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-30">&apos;fd&apos;（Freedman Diaconis Estimator）</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-31">鲁棒（弹性到异常值）估计器，考虑数据变异性和数据大小。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-32">&apos;doane&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-33">Sturges估计器的改进版本，与非正态数据集更好地工作。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-34">&apos;scott&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-35">较不鲁棒的估计器，其考虑到数据变异性和数据大小。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-36">&apos;白饭&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-37">估计器不考虑变化性，只考虑数据大小。</span><span class="yiyi-st" id="yiyi-38">通常高估需要的箱数。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-39">&apos;sturges&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-40">R的默认方法，只考虑数据大小。</span><span class="yiyi-st" id="yiyi-41">只对高斯数据最优，低估了大型非高斯数据集的二进制数。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-42">&apos;sqrt&apos;</span></dt>
+<dd><p class="first last"><span class="yiyi-st" id="yiyi-43">平方根（数据大小）估计器，由Excel和其他程序使用它的速度和简单性。</span></p>
+</dd>
+</dl>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-44"><strong>范围</strong>：（float，float），可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-45">仓的下限和上限。</span><span class="yiyi-st" id="yiyi-46">如果不提供，范围只是<code class="docutils literal"><span class="pre">（a.min()，</span> <span class="pre">a.max()）</span></code>。</span><span class="yiyi-st" id="yiyi-47">忽略范围之外的值。</span><span class="yiyi-st" id="yiyi-48">范围的第一个元素必须小于或等于第二个元素。</span><span class="yiyi-st" id="yiyi-49"><em class="xref py py-obj">范围</em>也会影响自动bin计算。</span><span class="yiyi-st" id="yiyi-50">虽然基于<em class="xref py py-obj">范围</em>内的实际数据计算bin宽度是最优的，但是bin计数将填充整个范围，包括不包含数据的部分。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-51"><strong>normed</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-52">此关键字在Numpy 1.6中已被弃用，原因是混乱/错误行为。</span><span class="yiyi-st" id="yiyi-53">它将在Numpy 2.0中删除。</span><span class="yiyi-st" id="yiyi-54">请改用<code class="docutils literal"><span class="pre">density</span></code>关键字。</span><span class="yiyi-st" id="yiyi-55">如果<code class="docutils literal"><span class="pre">False</span></code>，结果将包含每个bin中的样本数。</span><span class="yiyi-st" id="yiyi-56">如果<code class="docutils literal"><span class="pre">True</span></code>，则结果是在bin处的概率<em>密度</em>函数的值，被归一化，使得在该范围上的<em>积分</em>是1。</span><span class="yiyi-st" id="yiyi-57">注意，后一种行为被认为是具有不相等的bin宽度的bug；请改用<code class="docutils literal"><span class="pre">density</span></code>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-58"><strong>权重</strong>：array_like，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-59">一个权重数组，形状与<em class="xref py py-obj">a</em>相同。</span><span class="yiyi-st" id="yiyi-60"><em class="xref py py-obj">a</em>中的每个值仅将其关联的权重贡献给bin计数（而不是1）。</span><span class="yiyi-st" id="yiyi-61">如果<em class="xref py py-obj">density</em>为True，则权重被归一化，使得该范围上的密度的积分保持为1。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-62"><strong>密度</strong>：bool，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-63">如果<code class="docutils literal"><span class="pre">False</span></code>，结果将包含每个bin中的样本数。</span><span class="yiyi-st" id="yiyi-64">如果<code class="docutils literal"><span class="pre">True</span></code>，则结果是在bin处的概率<em>密度</em>函数的值，被归一化，使得在该范围上的<em>积分</em>是1。</span><span class="yiyi-st" id="yiyi-65">注意，直方图值的总和不会等于1，除非选择单位宽度的二进制位；它不是概率<em>质量</em>函数。</span></p>
+<p><span class="yiyi-st" id="yiyi-66">覆盖<code class="docutils literal"><span class="pre">normed</span></code>关键字（如果给定）。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-67">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-68"><strong>hist</strong>：数组</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-69">直方图的值。</span><span class="yiyi-st" id="yiyi-70">有关可能的语义的描述，请参见<em class="xref py py-obj">密度</em>和<em class="xref py py-obj">权重</em>。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-71"><strong>bin_edges</strong>：dtype float的数组</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-72">返回bin边<code class="docutils literal"><span class="pre">(length(hist)+1)</span></code>。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-73">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-74"><a class="reference internal" href="numpy.histogramdd.html#numpy.histogramdd" title="numpy.histogramdd"><code class="xref py py-obj docutils literal"><span class="pre">histogramdd</span></code></a>，<a class="reference internal" href="numpy.bincount.html#numpy.bincount" title="numpy.bincount"><code class="xref py py-obj docutils literal"><span class="pre">bincount</span></code></a>，<a class="reference internal" href="numpy.searchsorted.html#numpy.searchsorted" title="numpy.searchsorted"><code class="xref py py-obj docutils literal"><span class="pre">searchsorted</span></code></a>，<a class="reference internal" href="numpy.digitize.html#numpy.digitize" title="numpy.digitize"><code class="xref py py-obj docutils literal"><span class="pre">digitize</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-75">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-76">除了最后一个（最右边的）bin都是半开的。</span><span class="yiyi-st" id="yiyi-77">换句话说，如果<em class="xref py py-obj">bin</em>是：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-78">那么第一个仓是<code class="docutils literal"><span class="pre">[1，</span> <span class="pre">2）</span></code>（包括1，但不包括2），第二个<code class="docutils literal"><span class="pre">，</span> <span class="pre">3）</span></code>。</span><span class="yiyi-st" id="yiyi-79">然而，最后一个仓是<code class="docutils literal"><span class="pre">[3，</span> <span class="pre">4]</span></code>，其中<em>包括</em> 4。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-80"><span class="versionmodified">版本1.11.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-81">估计箱的最佳数量的方法在文献中是充分的，并且受到直方图可视化的选择R的启发。</span><span class="yiyi-st" id="yiyi-82">注意，具有与<img alt="n^{1/3}" class="math" src="../../_images/math/c7d0f69434fe8fb83b3d847860ce222ee5323ef5.png" style="vertical-align: 0px">成比例的二进制数的数目是渐近最优的，这就是为什么其出现在大多数估计器中的原因。</span><span class="yiyi-st" id="yiyi-83">这些是简单的插入方法，为块数量提供良好的起点。</span><span class="yiyi-st" id="yiyi-84">在下面的等式中，<img alt="h" class="math" src="../../_images/math/8df9e36fd35706e719b27fb3992ef573de0c1d93.png" style="vertical-align: 0px">是binwidth，<img alt="n_h" class="math" src="../../_images/math/d23a211a3a5b47439bdbdc706965925cb0f95544.png" style="vertical-align: -2px">是bin的个数。</span><span class="yiyi-st" id="yiyi-85">使用数据的<a class="reference internal" href="numpy.ptp.html#numpy.ptp" title="numpy.ptp"><code class="xref py py-obj docutils literal"><span class="pre">ptp</span></code></a>将计算bin数的所有估计值重新转换为bin宽度。</span><span class="yiyi-st" id="yiyi-86">最终bin计数从<a href="#id1"><span class="problematic" id="id2">``</span></a> np.round（np.ceil（range / h））获得。</span></p>
+<dl class="docutils">
+<dt><span class="yiyi-st" id="yiyi-87">&apos;Auto&apos;（&apos;Sturges&apos;和&apos;FD&apos;估计量的最大值）</span></dt>
+<dd><span class="yiyi-st" id="yiyi-88">一个妥协，得到一个好的价值。</span><span class="yiyi-st" id="yiyi-89">对于小数据集，通常选择Sturges值，而较大的数据集通常默认为FD。</span><span class="yiyi-st" id="yiyi-90">避免了对于小数据集和大数据集的FD和Sturges的过分保守的行为。</span><span class="yiyi-st" id="yiyi-91">切换点通常<img alt="a.size \approx 1000" class="math" src="../../_images/math/aaf420152d0d851794fa73716ff3e543e36e1386.png" style="vertical-align: -1px">。</span></dd>
+<dt><span class="yiyi-st" id="yiyi-92">&apos;FD&apos;（Freedman Diaconis Estimator）</span></dt>
+<dd><div class="first math">
+<p></p>
+</div><p class="last"><span class="yiyi-st" id="yiyi-93">binwidth与四分位距（IQR）成正比，与a.size的立方根成反比。</span><span class="yiyi-st" id="yiyi-94">对于小型数据集可能过于保守，但对大型数据集非常有用。</span><span class="yiyi-st" id="yiyi-95">IQR对异常值非常鲁棒。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-96">&apos;Scott&apos;</span></dt>
+<dd><div class="first math">
+<p></p>
+</div><p class="last"><span class="yiyi-st" id="yiyi-97">binwidth与数据的标准偏差成比例，并且与<code class="docutils literal"><span class="pre">x.size</span></code>的立方根成反比。</span><span class="yiyi-st" id="yiyi-98">对于小型数据集可能过于保守，但对大型数据集非常有用。</span><span class="yiyi-st" id="yiyi-99">标准偏差对异常值不是非常鲁棒。</span><span class="yiyi-st" id="yiyi-100">值在没有异常值的情况下与Freedman-Diaconis估计量非常相似。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-101">&apos;白饭&apos;</span></dt>
+<dd><div class="first math">
+<p></p>
+</div><p class="last"><span class="yiyi-st" id="yiyi-102">二进制数的数量仅与<code class="docutils literal"><span class="pre">a.size</span></code>的立方根成正比。</span><span class="yiyi-st" id="yiyi-103">它倾向于高估仓的数量，并且不考虑数据变异性。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-104">“Sturges”</span></dt>
+<dd><div class="first math">
+<p></p>
+</div><p class="last"><span class="yiyi-st" id="yiyi-105">仓的数量是<code class="docutils literal"><span class="pre">a.size</span></code>的基础2对数。</span><span class="yiyi-st" id="yiyi-106">该估计量假定数据的正态性，并且对于较大的非正态数据集过于保守。</span><span class="yiyi-st" id="yiyi-107">这是R的<code class="docutils literal"><span class="pre">hist</span></code>方法中的默认方法。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-108">&apos;Doane&apos;</span></dt>
+<dd><div class="first math">
+<p></p>
+</div><p class="last"><span class="yiyi-st" id="yiyi-109">Sturges公式的改进版本，对非正态数据集产生更好的估计。</span><span class="yiyi-st" id="yiyi-110">该估计器尝试解释数据的偏斜。</span></p>
+</dd>
+<dt><span class="yiyi-st" id="yiyi-111">&apos;Sqrt&apos;</span></dt>
+<dd><div class="first math">
+<p></p>
+</div><p class="last"><span class="yiyi-st" id="yiyi-112">最简单和最快的估计。</span><span class="yiyi-st" id="yiyi-113">只考虑数据大小。</span></p>
+</dd>
+</dl>
+<p class="rubric"><span class="yiyi-st" id="yiyi-114">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">(array([0, 2, 1]), array([0, 1, 2, 3]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">(array([ 0.25,  0.25,  0.25,  0.25]), array([0, 1, 2, 3, 4]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="go">(array([1, 4, 1]), array([0, 1, 2, 3]))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hist</span><span class="p">,</span> <span class="n">bin_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hist</span>
+<span class="go">array([ 0.5,  0. ,  0.5,  0. ,  0. ,  0.5,  0. ,  0.5,  0. ,  0.5])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hist</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="go">2.4999999999999996</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">hist</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">bin_edges</span><span class="p">))</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-115"><span class="versionmodified">版本1.11.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-116">自动仓选择方法示例，使用2个具有2000点的峰值随机数据：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># deterministic random data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span>
+<span class="gp">... </span>               <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&apos;auto&apos;</span><span class="p">)</span>  <span class="c1"># plt.hist passes it&apos;s arguments to np.histogram</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram with &apos;auto&apos; bins&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-117">（<a class="reference external" href="../../reference/generated/numpy-histogram-1.py">源代码</a>，<a class="reference external" href="../../reference/generated/numpy-histogram-1.png">png</a>，<a class="reference external" href="../../reference/generated/numpy-histogram-1.pdf">pdf</a>）</span></p>
+<div class="figure">
+<img alt="../../_images/numpy-histogram-1.png" src="../../_images/numpy-histogram-1.png">
+</div>
+</dd></dl>

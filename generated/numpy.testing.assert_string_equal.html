@@ -1,0 +1,39 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.testing.assert_string_equal</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_string_equal.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.testing.assert_string_equal.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.testing.assert_string_equal"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.testing.</code><code class="descname">assert_string_equal</code><span class="sig-paren">(</span><em>actual</em>, <em>desired</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/testing/utils.py#L995-L1062"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">测试两个字符串是否相等。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">如果给定的字符串相等，<a class="reference internal" href="#numpy.testing.assert_string_equal" title="numpy.testing.assert_string_equal"><code class="xref py py-obj docutils literal"><span class="pre">assert_string_equal</span></code></a>什么也不做。</span><span class="yiyi-st" id="yiyi-16">如果它们不相等，则会引发一个AssertionError，并显示字符串之间的差异。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>actual</strong>：str</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">用于测试与预期字符串的相等性的字符串。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>所需</strong>：str</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-21">预期字符串。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_string_equal</span><span class="p">(</span><span class="s1">&apos;abc&apos;</span><span class="p">,</span> <span class="s1">&apos;abc&apos;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_string_equal</span><span class="p">(</span><span class="s1">&apos;abc&apos;</span><span class="p">,</span> <span class="s1">&apos;abcd&apos;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="c">...</span>
+<span class="gr">AssertionError</span>: <span class="n">Differences in strings:</span>
+<span class="go">- abc+ abcd?    +</span>
+</pre></div>
+</div>
+</dd></dl>

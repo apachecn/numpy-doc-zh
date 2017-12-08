@@ -1,0 +1,41 @@
+
+<h1><span class="yiyi-st" id="yiyi-13">numpy.matrix.min</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.min.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.min.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.matrix.min"><span class="yiyi-st" id="yiyi-14"> <code class="descclassname">matrix.</code><code class="descname">min</code><span class="sig-paren">(</span><em>axis=None</em>, <em>out=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/matrixlib/defmatrix.py#L823-L856"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-15">沿轴返回最小值。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><span class="yiyi-st" id="yiyi-17"><strong>请参阅`amin&apos;了解完整说明。</strong></span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-18">也可以看看</span></p>
+<p class="last"><span class="yiyi-st" id="yiyi-19"><a class="reference internal" href="numpy.amin.html#numpy.amin" title="numpy.amin"><code class="xref py py-obj docutils literal"><span class="pre">amin</span></code></a>，<a class="reference internal" href="numpy.ndarray.min.html#numpy.ndarray.min" title="numpy.ndarray.min"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.min</span></code></a></span></p>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-20">笔记</span></p>
+<p><span class="yiyi-st" id="yiyi-21">这与<a class="reference internal" href="numpy.ndarray.min.html#numpy.ndarray.min" title="numpy.ndarray.min"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.min</span></code></a>相同，但返回<a class="reference internal" href="numpy.matrix.html#numpy.matrix" title="numpy.matrix"><code class="xref py py-obj docutils literal"><span class="pre">matrix</span></code></a>对象，其中<a class="reference internal" href="numpy.ndarray.min.html#numpy.ndarray.min" title="numpy.ndarray.min"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.min</span></code></a>将返回一个ndarray。</span></p>
+<p class="rubric"><span class="yiyi-st" id="yiyi-22">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)));</span> <span class="n">x</span>
+<span class="go">matrix([[  0,  -1,  -2,  -3],</span>
+<span class="go">        [ -4,  -5,  -6,  -7],</span>
+<span class="go">        [ -8,  -9, -10, -11]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="go">-11</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">matrix([[ -8,  -9, -10, -11]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">matrix([[ -3],</span>
+<span class="go">        [ -7],</span>
+<span class="go">        [-11]])</span>
+</pre></div>
+</div>
+</dd></dl>

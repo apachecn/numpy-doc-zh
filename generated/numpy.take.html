@@ -1,0 +1,85 @@
+
+<h1><span class="yiyi-st" id="yiyi-12">numpy.take</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.take.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.take.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="function">
+<dt id="numpy.take"><span class="yiyi-st" id="yiyi-13"> <code class="descclassname">numpy.</code><code class="descname">take</code><span class="sig-paren">(</span><em>a</em>, <em>indices</em>, <em>axis=None</em>, <em>out=None</em>, <em>mode=&apos;raise&apos;</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/numpy/numpy/blob/v1.11.3/numpy/core/fromnumeric.py#L55-L123"><span class="viewcode-link">[source]</span></a></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-14">从轴沿一个数组中取元素。</span></p>
+<p><span class="yiyi-st" id="yiyi-15">此函数与“花式”索引（使用数组索引数组）相同；然而，如果你需要沿给定轴的元素，它可以更容易使用。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-16">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-17"><strong>a</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-18">源数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-19"><strong>indices</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-20">要提取的值的索引。</span></p>
+<div class="versionadded">
+<p><span class="yiyi-st" id="yiyi-21"><span class="versionmodified">版本1.8.0中的新功能。</span></span></p>
+</div>
+<p><span class="yiyi-st" id="yiyi-22">还允许索引的标量。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-23"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-24">要选择值的轴。</span><span class="yiyi-st" id="yiyi-25">默认情况下，使用扁平输入数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-26"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-27">如果提供，结果将放置在此数组中。</span><span class="yiyi-st" id="yiyi-28">它应该是合适的形状和类型。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-29"><strong>mode</strong>：{&apos;raise&apos;，&apos;wrap&apos;，&apos;clip&apos;}，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-30">指定超越界限索引的行为。</span></p>
+<ul class="simple">
+<li><span class="yiyi-st" id="yiyi-31">&apos;raise&apos; - 引发错误（默认）</span></li>
+<li><span class="yiyi-st" id="yiyi-32">&apos;wrap&apos; -  wrap around</span></li>
+<li><span class="yiyi-st" id="yiyi-33">&apos;clip&apos; - 剪辑到范围</span></li>
+</ul>
+<p><span class="yiyi-st" id="yiyi-34">“剪切”模式意味着所有过大的索引都被替换为沿着该轴的最后一个元素的索引。</span><span class="yiyi-st" id="yiyi-35">请注意，这将禁用使用负数的索引。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-36">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-37"><strong>子阵列</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-38">返回的数组与<em class="xref py py-obj">a</em>具有相同的类型。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title"><span class="yiyi-st" id="yiyi-39">也可以看看</span></p>
+<dl class="last docutils">
+<dt><span class="yiyi-st" id="yiyi-40"><a class="reference internal" href="numpy.compress.html#numpy.compress" title="numpy.compress"><code class="xref py py-obj docutils literal"><span class="pre">compress</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-41">使用布尔掩码获取元素</span></dd>
+<dt><span class="yiyi-st" id="yiyi-42"><a class="reference internal" href="numpy.ndarray.take.html#numpy.ndarray.take" title="numpy.ndarray.take"><code class="xref py py-obj docutils literal"><span class="pre">ndarray.take</span></code></a></span></dt>
+<dd><span class="yiyi-st" id="yiyi-43">等效法</span></dd>
+</dl>
+</div>
+<p class="rubric"><span class="yiyi-st" id="yiyi-44">例子</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
+<span class="go">array([4, 3, 6])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-45">在此示例中，如果<em class="xref py py-obj">a</em>是一个ndarray，则可以使用“花式”索引。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+<span class="go">array([4, 3, 6])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-46">如果<a class="reference internal" href="numpy.indices.html#numpy.indices" title="numpy.indices"><code class="xref py py-obj docutils literal"><span class="pre">indices</span></code></a>不是一维的，则输出也具有这些维度。</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="go">array([[4, 3],</span>
+<span class="go">       [5, 7]])</span>
+</pre></div>
+</div>
+</dd></dl>

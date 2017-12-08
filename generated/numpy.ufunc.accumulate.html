@@ -1,0 +1,83 @@
+
+<h1><span class="yiyi-st" id="yiyi-11">numpy.ufunc.accumulate</span></h1>
+        <blockquote>
+        <p>原文：<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ufunc.accumulate.html">https://docs.scipy.org/doc/numpy/reference/generated/numpy.ufunc.accumulate.html</a></p>
+        <p>译者：<a href="https://github.com/wizardforcel">飞龙</a> <a href="http://usyiyi.cn/">UsyiyiCN</a></p>
+        <p>校对：（虚位以待）</p>
+        </blockquote>
+    
+<dl class="method">
+<dt id="numpy.ufunc.accumulate"><span class="yiyi-st" id="yiyi-12"> <code class="descclassname">ufunc.</code><code class="descname">accumulate</code><span class="sig-paren">(</span><em>array</em>, <em>axis=0</em>, <em>dtype=None</em>, <em>out=None</em><span class="sig-paren">)</span></span></dt>
+<dd><p><span class="yiyi-st" id="yiyi-13">累加将运算符应用于所有元素的结果。</span></p>
+<p><span class="yiyi-st" id="yiyi-14">对于一维数组，accumulate产生的结果等效于：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">identity</span>        <span class="c1"># op = the ufunc being applied to A&apos;s  elements</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">op</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+<span class="k">return</span> <span class="n">r</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-15">例如，add.accumulate()等效于np.cumsum()。</span></p>
+<p><span class="yiyi-st" id="yiyi-16">对于多维数组，只沿一个轴应用累加（默认为轴零；参见下面的示例），因此如果想要在多个轴上累积，则需要重复使用。</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name">
+<col class="field-body">
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><span class="yiyi-st" id="yiyi-17">参数：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-18"><strong>数组</strong>：array_like</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-19">要执行的数组。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-20"><strong>axis</strong>：int，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-21">沿其应用积累的轴；默认为零。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-22"><strong>dtype</strong>：数据类型代码，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-23">数据类型用于表示中间结果。</span><span class="yiyi-st" id="yiyi-24">默认为输出数组的数据类型（如果提供）或输入数组的数据类型（如果未提供输出数组）。</span></p>
+</div></blockquote>
+<p><span class="yiyi-st" id="yiyi-25"><strong>out</strong>：ndarray，可选</span></p>
+<blockquote>
+<div><p><span class="yiyi-st" id="yiyi-26">存储结果的位置。</span><span class="yiyi-st" id="yiyi-27">如果未提供，则返回新分配的数组。</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><span class="yiyi-st" id="yiyi-28">返回：</span></th><td class="field-body"><p class="first"><span class="yiyi-st" id="yiyi-29"><strong>r</strong>：ndarray</span></p>
+<blockquote class="last">
+<div><p><span class="yiyi-st" id="yiyi-30">累加值。</span><span class="yiyi-st" id="yiyi-31">如果提供<em class="xref py py-obj">out</em>，则<em class="xref py py-obj">r</em>是对<em class="xref py py-obj">out</em>的引用。</span></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric"><span class="yiyi-st" id="yiyi-32">例子</span></p>
+<p><span class="yiyi-st" id="yiyi-33">1-D数组示例：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">accumulate</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="go">array([ 2,  5, 10])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="o">.</span><span class="n">accumulate</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="go">array([ 2,  6, 30])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-34">2-D数组示例：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">I</span>
+<span class="go">array([[ 1.,  0.],</span>
+<span class="go">       [ 0.,  1.]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-35">沿轴0（行），向下列累积：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">accumulate</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">array([[ 1.,  0.],</span>
+<span class="go">       [ 1.,  1.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">accumulate</span><span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="c1"># no axis specified = axis zero</span>
+<span class="go">array([[ 1.,  0.],</span>
+<span class="go">       [ 1.,  1.]])</span>
+</pre></div>
+</div>
+<p><span class="yiyi-st" id="yiyi-36">沿轴1（列），通过行累积：</span></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">accumulate</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[ 1.,  1.],</span>
+<span class="go">       [ 0.,  1.]])</span>
+</pre></div>
+</div>
+</dd></dl>
